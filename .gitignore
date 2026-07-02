@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.env
+auth-storage/
+test-results/
+allure-results/
+allure-report/
+reports/
+playwright-report/
+*.log

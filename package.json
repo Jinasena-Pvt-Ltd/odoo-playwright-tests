@@ -1,0 +1,31 @@
+{
+  "name": "playwright-hr",
+  "version": "1.0.0",
+  "description": "Playwright E2E test framework for Odoo 17 HR modules",
+  "scripts": {
+    "test": "playwright test",
+    "test:hr": "playwright test --grep \"@module:hr\"",
+    "test:payroll": "playwright test --grep \"@module:payroll\"",
+    "test:leave": "playwright test --grep \"@module:leave\"",
+    "test:attendance": "playwright test --grep \"@module:attendance\"",
+    "test:all": "playwright test --grep \"@e2e\"",
+    "test:config": "playwright test --grep \"@step:config\"",
+    "test:business": "playwright test --grep \"@step:business\"",
+    "test:validations": "playwright test --grep \"@step:validations\"",
+    "test:permissions": "playwright test --grep \"@step:permissions\"",
+    "test:edge": "playwright test --grep \"@step:edge\"",
+    "test:smoke": "playwright test --grep \"@smoke\"",
+    "report": "playwright show-report",
+    "report:allure": "allure serve allure-results",
+    "lint": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.50.0",
+    "@types/node": "^25.9.1",
+    "allure-playwright": "^3.0.0",
+    "typescript": "^5.7.0"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.0"
+  }
+}
