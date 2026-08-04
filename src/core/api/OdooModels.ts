@@ -1,5 +1,6 @@
 export type OdooId = number;
-export type OdooDomain = Array<string | Array<string | number | boolean | null>>;
+export type OdooDomainValue = string | number | boolean | null | (string | number | boolean | null)[];
+export type OdooDomain = Array<string | OdooDomainValue[]>;
 
 export interface OdooRecord {
   id: OdooId;

@@ -17,6 +17,7 @@ export default defineConfig({
 
   reporter: [
     ['html', { outputFolder: 'playwright-report' }],
+    ['json', { outputFile: 'test-results/results.json' }],
     ['allure-playwright', { outputFolder: 'allure-results' }],
     ['./src/core/reporters/ValidationTableReporter.ts', { outputDir: 'reports/validation-table' }],
   ],
