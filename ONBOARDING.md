@@ -1,12 +1,11 @@
 # Odoo Playwright Test — Team Onboarding Guide
-
 ## Human Onboarding Guide
 
 ---
 
 ### The Framework in Three Sentences
 
-We drive a real Odoo 17 instance with three logged-in user roles (admin, manager, employee). All test data is created and destroyed via the Odoo JSON-RPC API — never through the browser UI. Tests for every domain follow the same 8-step workflow so that reports, tag filtering, and team onboarding are always predictable.
+We drive a real Odoo 17 instance with role-based user sessions configured per project. All tests interact through the browser UI — page objects, form fills, and assertions against real rendered elements. Tests for every domain follow the same 8-step workflow so that reports, tag filtering, and team onboarding are always predictable.
 
 ---
 
@@ -52,11 +51,93 @@ Every `test.describe()` must carry **both** `@module:<domain>` and `@step:<step>
 
 ---
 
+### Working in the Shared Repo
+
+All modules live on `main` — do not create branches per module. The `@module` tag system, `npm test`, and the master report only work when every module is on the same branch.
+
+**Ownership:** Each team member owns their `src/modules/<domain>/` folder. Do not modify another module's files. `src/core/` is shared infrastructure — changes there need team agreement.
+
+**After scaffolding your module (`/add-module <domain>`), do two things:**
+1. Add to `package.json` scripts: `"test:<domain>": "playwright test --grep \"@module:<domain>\""`
+2. Add to the tag table in `CLAUDE.md`: `| \`@module:<domain>\` | <Domain> module |`
+
+**Running tests:**
+```bash
+npm run test:<domain>    # your module only — daily workflow
+npm test                 # all modules — run before raising a PR
+```
+
+**PR workflow:**
+- Scope each PR to `src/modules/<domain>/` — one module per PR
+- Run `npm run lint` and `/review-tests src/modules/<domain>/tests/` before pushing
+- Never commit `auth-storage/`, `playwright-report/`, `test-results/`, or `reports/` — all gitignored
+
+---
+
+### Claude Hooks — Auto-Commit on Every Turn
+
+The repo ships three bash hooks in `.claude/hooks/` that fire automatically during Claude Code sessions:
+
+| Hook | Event | What it does |
+|------|-------|--------------|
+| `capture_prompt.sh` | `UserPromptSubmit` | Saves your prompt text and resets the file-tracking list for this turn |
+| `track_file.sh` | `PostToolUse` (Write/Edit) | Records every file Claude touches during a turn |
+| `commit_and_push.sh` | `Stop` | Commits all changed files with a `[claude]` message and pushes to your configured branch |
+
+**One-time setup — tell the hook which branch to push to:**
+
+```bash
+# Run this once after cloning. Replace 'main' with your actual branch name.
+echo "main" > .claude/hooks/branch.txt
+```
+
+The file `.claude/hooks/branch.txt` is gitignored — each team member sets their own. If the file is missing the hook falls back to `git branch --show-current`.
+
+> **Why this matters:** every Claude turn that edits files is automatically committed and pushed. You always have a full history of what Claude changed and why, without needing to remember to commit manually.
+
+---
+
+### Master Report
+
+The master report is auto-generated from spec files — **never hand-edit it**.
+
+```bash
+npm run report:generate   # regenerate from spec files (no test run needed)
+npm run test:report       # run tests then regenerate with real results
+```
+
+**How it works:**
+- `scripts/generate-report.js` scans every `*.spec.ts` under `src/modules/`, parses each `test()` declaration, and emits a full HTML report
+- When `test-results/results.json` exists (written automatically after any `playwright test` run), the report shows real ✅/❌/⏭ status and — for failures — the full error message in the test detail drawer
+- Without results, all tests show as ⬜ pending
+
+**Authored data files** (hand-maintained, committed):
+
+| File | What it contains |
+|------|-----------------|
+| `scripts/report-data/callouts.json` | Per-module SaaS/routing warning banners |
+| `scripts/report-data/findings.json` | Odoo behaviour findings table (17 rows) |
+| `scripts/report-data/skip-analysis.json` | Skip reason analysis table (13 rows) |
+
+Edit these JSON files to add new findings or update skip reasons — the generator picks them up on next run.
+
+**Security Audit section:** the report automatically reads the latest `reports/snapshots/ugd_snapshot_*.json` and renders a filtered user-group snapshot scoped to the modules present in the report.
+
+**Auto-update hook:** the Stop hook regenerates the report automatically whenever a `*.spec.ts` file is changed during a Claude turn.
+
+**Running against a single role** (faster — useful during development):
+```bash
+npx playwright test --project=setup --project=<role>
+```
+Use this during development. Run all configured roles only before raising a PR.
+
+---
+
 ### Three Non-Negotiable Rules
 
 1. **Never import `test` from `@playwright/test`** — always `../../../../core/fixtures/index`
 2. **Never hardcode record names** — always `uniqueName('...')` or `uniqueEmail('...')`
-3. **Every `rpc.create()` must have `rpc.archive()`** — same test or `afterEach`
+3. **Tests must use the browser UI** — interact through page objects and form fills, not the RPC API
 
 ---
 
@@ -65,15 +146,15 @@ Every `test.describe()` must carry **both** `@module:<domain>` and `@step:<step>
 | Mistake | Fix |
 |---------|-----|
 | `import { test } from '@playwright/test'` | Use `from '../../../../core/fixtures/index'` |
-| `rpc.create(..., { name: 'My Record' })` | Use `uniqueName('My Record')` |
-| Filling a form in `beforeAll` to set up data | Use `rpc.create()` |
-| No `rpc.archive()` after `rpc.create()` | Always add cleanup |
+| Skipping UI steps because "RPC is faster" | Tests must use the browser — RPC is not a substitute |
+| Hardcoding names in form fills | Use `uniqueName('...')` so test data is identifiable and unique |
+| Creating test data in `beforeAll` via form | Use a dedicated config test in `01-config/` or the UI `beforeEach` |
 | `expect(btn).toBeVisible()` for config-dependent UI | `isVisible({timeout:3_000}).catch(()=>false)` + `test.skip()` |
 | `test.skip(true)` with no reason | Always: `test.skip(true, 'reason')` |
 | Spec at `tests/` root | Must be inside `01-config/` through `08-archive/` |
 
----
 
+---
 ---
 
 ## Instructions for Claude
@@ -91,8 +172,8 @@ Check whether this is a fresh/bare directory or an existing project:
 
 If `src/core/` does NOT exist, the repo has not been cloned yet. Tell the user to run:
 ```bash
-git clone https://github.com/Jinasena-Pvt-Ltd/odoo-playwright-tests.git
-cd odoo-playwright-tests
+git clone <your-repo-url>
+cd <repo-folder>
 ```
 Then continue from Step 3.
 
@@ -161,6 +242,8 @@ Create each file at the project root exactly as shown.
     "test:edge": "playwright test --grep \"@step:edge\"",
     "test:archive": "playwright test --grep \"@step:archive\"",
     "report": "playwright show-report",
+    "report:generate": "node scripts/generate-report.js",
+    "test:report": "playwright test && node scripts/generate-report.js",
     "report:allure": "allure serve allure-results",
     "lint": "tsc --noEmit"
   },
@@ -198,6 +281,7 @@ export default defineConfig({
 
   reporter: [
     ['html', { outputFolder: 'playwright-report' }],
+    ['json', { outputFile: 'test-results/results.json' }],  // feeds master report with real pass/fail
     ['allure-playwright', { outputFolder: 'allure-results' }],
     ['./src/core/reporters/ValidationTableReporter.ts', { outputDir: 'reports/validation-table' }],
   ],
@@ -310,9 +394,9 @@ Write this exactly to `CLAUDE.md` in the project root:
 
 E2E test framework for **Odoo 17** built with Playwright and TypeScript.
 Tests cover any Odoo module following a consistent 8-step structure across all domains.
-Three user roles are tested independently: admin, manager, and employee.
+Multiple user roles are tested independently — configure roles in `.env` and `playwright.config.ts`.
 
-**Tech stack:** Playwright 1.50, TypeScript 5.7, Allure reporting, Odoo RPC API
+**Tech stack:** Playwright 1.50, TypeScript 5.7, Allure reporting
 
 ---
 
@@ -342,9 +426,12 @@ npm run test:chained       # Step 6: chained flow tests
 npm run test:edge          # Step 7: edge case tests
 npm run test:archive       # Step 8: archive tests
 npm run report             # Open Playwright HTML report
+npm run report:generate    # Regenerate master report from spec files (no test run)
+npm run test:report        # Run tests then regenerate master report
 npm run lint               # TypeScript type-check
 HEADLESS=false npm test    # Run with browser visible
 SLOW_MO=500 npm test       # Slow down actions by 500ms
+npx playwright test --project=setup --project=<role>  # Single role — faster during development
 ```
 
 ---
@@ -402,9 +489,7 @@ When adding a new domain, register `@module:<domain>` in this table and add `"te
 
 ### Role-Based Projects
 
-- **admin** → `auth-storage/admin.json`
-- **manager** → `auth-storage/manager.json`
-- **employee** → `auth-storage/employee.json`
+Each project name maps to a saved auth state in `auth-storage/<role>.json`. Roles are defined in `playwright.config.ts` and credentials in `.env`. Add or remove roles to match your Odoo instance's user setup.
 
 ---
 
@@ -429,13 +514,16 @@ export class <Domain>FormPage extends BaseFormPage {
 }
 ```
 
-### RPC Usage — never UI for data setup
+### UI-First Tests — always interact through the browser
 
 ```typescript
-test('example', async ({ rpc }) => {
-  const id = await rpc.create<number>('<odoo.model>', { name: uniqueName('Record') });
-  // ... test ...
-  await rpc.archive('<odoo.model>', [id]);
+test('example', async ({ page }) => {
+  const formPage = new <Domain>FormPage(page);
+  await formPage.navigate();
+  await formPage.name.setValue(uniqueName('Record'));
+  await formPage.save();
+  // assert against rendered UI
+  await expect(page.locator('.o_form_status_indicator')).toBeVisible();
 });
 ```
 
@@ -491,9 +579,18 @@ Every domain follows the **same 8-step structure**:
 
 ## Report Convention
 
+The master report is **auto-generated** from spec files — never hand-edited.
+
+```bash
+npm run report:generate          # regenerate from spec files (no test run needed)
+npm run test:report              # run tests then regenerate with real pass/fail results
+```
+
 - **Master report:** `reports/master-report-YYYY-MM-DD.html` — all domains, section anchors `#<domain>-<step>`
-- **Per-domain report:** `reports/<domain>-report-YYYY-MM-DD.html`
-- **Commit:** `git add -f reports/<file>` (reports/ is gitignored)
+- **Generator:** `scripts/generate-report.js` — scans `src/modules/**/*.spec.ts`, parses every `test()` declaration, infers RPC/UI type from fixture params
+- **Results:** when `test-results/results.json` exists (written automatically by `playwright test`), the report shows real ✅/❌/⏭ status; otherwise tests show as ⬜ pending
+- **Auto-update hook:** the Stop hook regenerates the report automatically whenever a `*.spec.ts` file is changed during a Claude turn — the updated report is committed alongside the spec change
+- **Commit:** `git add -f reports/master-report-*.html` (reports/ is gitignored)
 
 ---
 
@@ -606,22 +703,13 @@ export const <MODULE>_VALIDATION_CASES: typeof <MODULE>_MANDATORY_FIELDS = [];
 /**
  * Step <N> — <Step Label> for the <module> module.
  */
-import { test } from '../../../../core/fixtures/index';
-import { OdooRPC } from '../../../../core/api/OdooRPC';
-
-async function isModuleInstalled(rpc: OdooRPC): Promise<boolean> {
-  const r = await rpc.searchRead<{ id: number }>(
-    'ir.model', [['model', '=', 'module.primary.model']], ['id'], { limit: 1 },
-  );
-  return r.length > 0;
-}
+import { test, expect } from '../../../../core/fixtures/index';
+import { <Module>FormPage } from '../../pages/<Module>Page';
 
 test.describe('<Module> <Step Label> @module:<module> @step:<step>', () => {
-  test('placeholder — replace with real test @smoke', async ({ rpc }) => {
-    if (!await isModuleInstalled(rpc)) {
-      test.skip(true, '<Module> not installed — update isModuleInstalled() model name');
-      return;
-    }
+  test('placeholder — replace with real test @smoke', async ({ page }) => {
+    const formPage = new <Module>FormPage(page);
+    await formPage.navigate();
     test.skip(true, 'Not yet implemented');
   });
 });
@@ -684,16 +772,15 @@ import { uniqueName } from '../../../../core/utils/RandomDataGenerator';
 import { today } from '../../../../core/utils/DateHelper';
 
 test.describe('<Suite Name> @module:<module> @step:<step>', () => {
-  test('<data-layer behavior>', async ({ rpc }) => {
-    const name = uniqueName('<Base Name>');
-    const id = await rpc.create<number>('<odoo.model>', { name });
-    const records = await rpc.searchRead<{ id: number; name: string }>('<odoo.model>', [['id', '=', id]], ['id', 'name']);
-    expect(records).toHaveLength(1);
-    expect(records[0].name).toBe(name);
-    await rpc.archive('<odoo.model>', [id]);
+  test('<UI behavior> @smoke', async ({ page }) => {
+    const formPage = new <RelevantFormPage>(page);
+    await formPage.navigate();
+    await formPage.name.setValue(uniqueName('<Base Name>'));
+    await formPage.save();
+    await expect(page.locator('.o_form_view')).toBeVisible();
   });
 
-  test('<UI behavior> @smoke', async ({ page }) => {
+  test('<validation behavior>', async ({ page }) => {
     const formPage = new <RelevantFormPage>(page);
     await formPage.navigate();
     const visible = await page.locator('button', { hasText: '<Button>' }).isVisible({ timeout: 3_000 }).catch(() => false);
@@ -704,8 +791,8 @@ test.describe('<Suite Name> @module:<module> @step:<step>', () => {
 
 ## Conventions
 1. `test`/`expect` from `../../../../core/fixtures/index` — exactly 4 `../` segments
-2. All created records use `uniqueName()` or `uniqueEmail()`
-3. All `rpc.create()` in test body have matching `rpc.archive()`
+2. All form inputs use `uniqueName()` or `uniqueEmail()` — never hardcoded strings
+3. All tests interact through page objects and the browser UI — no direct RPC calls
 4. `test.skip(true, 'reason')` — reason string is mandatory
 5. Tags on `describe` block: `@module:<module> @step:<step>`
 6. Page imports use relative paths (`../../pages/...`)
@@ -796,12 +883,10 @@ grep -r "<test name>" src/modules --include="*.spec.ts" -l
 - Re-run setup: `npx playwright test --project=setup`
 - Verify Odoo user group membership
 
-**C — RPC / Data Failure** (`Odoo RPC error`, `HTTP 500`)
-- Check `.env` credentials and model names
-- Find orphaned `[TEST]` records:
-  ```typescript
-  await rpc.searchRead('<model>', [['name', 'like', '[TEST]']], ['id', 'name'], { context: { active_test: false } });
-  ```
+**C — Data / State Failure** (orphaned `[TEST]` records, unexpected form state)
+- Check `.env` credentials and `ODOO_BASE_URL`
+- Search for leftover test records in Odoo directly via the UI using the `[TEST]` name prefix
+- Reset test state by archiving or deleting orphaned records before re-running
 
 **D — State / Version Mismatch** (unexpected status values)
 - Use array containment: `expect(['Status A', 'Status B']).toContain(status)`
@@ -834,22 +919,18 @@ File path/glob or auto-detect from `git status --short`.
 - `[FAIL]` page objects imported via `@modules/` alias — must use relative paths
 
 ### 2. Unique Naming
-- `[FAIL]` hardcoded string literal for `name`/`login`/`email` in `rpc.create()`
+- `[FAIL]` hardcoded string literal for record names, emails, or references in form fills
 - `[FAIL]` `uniqueName()`/`uniqueEmail()` used but not imported from `../../../../core/utils/RandomDataGenerator`
 
-### 3. RPC Cleanup
-- `[FAIL]` `rpc.create()` in test body with no corresponding `rpc.archive()` in teardown
-- `[FAIL]` `rpc.unlink()` used for cleanup — use `rpc.archive()` only
-- `[WARN]` cleanup not wrapped in `.catch(() => {})` when record may not have been created
+### 3. UI Interaction
+- `[FAIL]` test uses `rpc.create()` / `rpc.searchRead()` / `rpc.archive()` instead of browser UI interactions
+- `[FAIL]` test bypasses the UI to set up or assert data state via RPC
+- `[PASS]` test uses page objects and form fills for all create/edit/assert actions
 
 ### 4. Graceful Skip
 - `[FAIL]` `expect(visible).toBe(true)` on config-dependent element — use `test.skip(true, 'reason')`
 - `[FAIL]` `test.skip(true)` without reason string
 - `[WARN]` non-descriptive reason (`'TODO'`, `'skip'`)
-
-### 5. No UI Data Setup
-- `[FAIL]` test data created by filling a form — use `rpc.create()`
-- `[PASS]` if the form IS the subject of the test
 
 ### 6. Tag Convention
 - `[FAIL]` `test.describe()` missing `@module:<name>` or `@step:<name>`
@@ -864,7 +945,7 @@ File path/glob or auto-detect from `git status --short`.
 - `[WARN]` `test.beforeAll` used to create records
 
 ### 9. TypeScript Generics
-- `[FAIL]` `rpc.create()` or `rpc.searchRead()` without type parameter
+- `[FAIL]` page object methods called without necessary type annotations on return values
 
 ### 10. Timeout/Selector Practices
 - `[WARN]` `page.waitForTimeout()` — prefer event-based waits

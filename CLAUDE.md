@@ -81,6 +81,7 @@ src/
 | Tag | Purpose |
 |-----|---------|
 | `@module:<domain>` | The Odoo module being tested |
+| `@module:security-audit` | Daily user group & CRUD permission audit |
 | `@step:config` | Step 1 — configuration/setup |
 | `@step:business` | Step 2 — business logic |
 | `@step:reporting` | Step 3 — views and exports |
@@ -185,9 +186,18 @@ Every domain follows the **same 8-step structure**:
 
 ## Report Convention
 
-- **Master report:** `reports/master-report-YYYY-MM-DD.html` — all domains, section anchors `#<domain>-<step>`
-- **Per-domain report:** `reports/<domain>-report-YYYY-MM-DD.html`
-- **Commit:** `git add -f reports/<file>` (reports/ is gitignored)
+The master report is **auto-generated** — never hand-edit it.
+
+```bash
+npm run report:generate   # regenerate from spec files (no test run needed)
+npm run test:report       # run tests then regenerate with real pass/fail results
+```
+
+- **Generator:** `scripts/generate-report.js` — scans `src/modules/**/*.spec.ts`
+- **Master report:** `reports/master-report-YYYY-MM-DD.html` — section anchors `#<domain>-<step>`
+- **Results:** uses `test-results/results.json` when present for real ✅/❌/⏭ status; otherwise ⬜ pending
+- **Auto-hook:** Stop hook regenerates the report whenever a `*.spec.ts` file changes
+- **Commit:** `git add -f reports/master-report-*.html` (reports/ is gitignored)
 
 ---
 
