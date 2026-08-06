@@ -30,7 +30,7 @@ cp .env.example .env
 
 ### 4. Open the team onboarding guide in Claude Code
 
-**[https://claude.ai/claude-code/onboard/CB5_H9Us8J0L](https://claude.ai/claude-code/onboard/CB5_H9Us8J0L)**
+**[https://claude.ai/claude-code/onboard/DvLm8e3KuZwg](https://claude.ai/claude-code/onboard/DvLm8e3KuZwg)** 
 
 Claude will load the conventions, skill commands, and project context automatically.
 
