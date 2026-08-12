@@ -60,7 +60,6 @@ const STEP_META = {
   reporting:   { icon: '📋',  label: 'Reporting'        },
   permissions: { icon: '🔐', label: 'Permissions'       },
   validations: { icon: '🧪', label: 'Field Validations' },
-  chained:     { icon: '🔗', label: 'Chained Flows'     },
   edge:        { icon: '⚡',  label: 'Edge Cases'        },
   archive:     { icon: '🗄️', label: 'Archive'            },
 };
@@ -68,13 +67,13 @@ const STEP_META = {
 const STEP_FOLDER_MAP = {
   '01-config': 'config', '02-business': 'business', '03-reporting': 'reporting',
   '04-permissions': 'permissions', '05-validations': 'validations',
-  '06-chained-flows': 'chained', '07-edge-cases': 'edge', '08-archive': 'archive',
+  '06-edge-cases': 'edge', '07-archive': 'archive',
 };
 
 // Module display order — entries not listed here are sorted alphabetically after.
 // Populate with your project's module keys to control sidebar/card ordering.
 const KNOWN_ORDER = [];
-const STEP_ORDER  = ['config','business','reporting','permissions','validations','chained','edge','archive'];
+const STEP_ORDER  = ['config','business','reporting','permissions','validations','edge','archive'];
 
 // ── Authored data loader ──────────────────────────────────────────────────────
 

@@ -31,11 +31,9 @@ src/modules/<module>/
     │   └── <module>.permissions.spec.ts
     ├── 05-validations/
     │   └── <module>.validations.spec.ts
-    ├── 06-chained-flows/
-    │   └── <module>.chained.spec.ts
-    ├── 07-edge-cases/
+    ├── 06-edge-cases/
     │   └── <module>.edge-cases.spec.ts
-    └── 08-archive/
+    └── 07-archive/
         └── <module>.archive.spec.ts
 ```
 
@@ -146,9 +144,9 @@ export const <MODULE>_VALIDATION_CASES: typeof <MODULE>_MANDATORY_FIELDS = [];
 // }
 ```
 
-### Spec Files (all 8)
+### Spec Files (all 7)
 
-Generate all 8 spec files using this template, substituting the step name and number from the table below:
+Generate all 7 spec files using this template, substituting the step name and number from the table below:
 
 ```typescript
 /**
@@ -182,9 +180,8 @@ Step table:
 | 03-reporting | reporting | Reporting | 3 |
 | 04-permissions | permissions | User Permissions | 4 |
 | 05-validations | validations | Field Validations | 5 |
-| 06-chained-flows | chained | Chained Flows | 6 |
-| 07-edge-cases | edge | Edge Cases | 7 |
-| 08-archive | archive | Archive & Cleanup | 8 |
+| 06-edge-cases | edge | Edge Cases | 6 |
+| 07-archive | archive | Archive & Cleanup | 7 |
 
 ## After Scaffolding
 
@@ -216,7 +213,7 @@ Fix any TypeScript errors (common: unused imports, missing type annotations).
 npx playwright test --grep "@module:<module>" --project=admin
 ```
 
-All 8 tests should be reported as **skipped**, not failed. If any fail, the TypeScript scaffold has a compile error — re-run `npm run lint` to find it.
+All 7 tests should be reported as **skipped**, not failed. If any fail, the TypeScript scaffold has a compile error — re-run `npm run lint` to find it.
 
 ## Output
 
@@ -224,4 +221,4 @@ After creating all files, list:
 1. The complete directory tree of every file created
 2. The `package.json` script line to add
 3. The `CLAUDE.md` tag table row to add
-4. Confirm that `npm run lint` passes and the placeholder run shows 8 skipped tests
+4. Confirm that `npm run lint` passes and the placeholder run shows 7 skipped tests

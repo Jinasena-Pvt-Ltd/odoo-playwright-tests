@@ -3,7 +3,7 @@
 ## Project Overview
 
 E2E test framework for **Odoo 17** built with Playwright and TypeScript.
-Tests cover any Odoo module following a consistent 8-step structure across all domains.
+Tests cover any Odoo module following a consistent 7-step structure across all domains.
 Three user roles are tested independently: admin, manager, and employee.
 
 **Tech stack:** Playwright 1.50, TypeScript 5.7, Allure reporting, Odoo RPC API
@@ -32,9 +32,8 @@ npm run test:business      # Step 2: business logic tests
 npm run test:reporting     # Step 3: reporting tests
 npm run test:permissions   # Step 4: permission tests
 npm run test:validations   # Step 5: validation tests
-npm run test:chained       # Step 6: chained flow tests
-npm run test:edge          # Step 7: edge case tests
-npm run test:archive       # Step 8: archive tests
+npm run test:edge          # Step 6: edge case tests
+npm run test:archive       # Step 7: archive tests
 npm run report             # Open Playwright HTML report
 npm run lint               # TypeScript type-check
 HEADLESS=false npm test    # Run with browser visible
@@ -65,9 +64,8 @@ src/
             ├── 03-reporting/      <domain>.reports.spec.ts
             ├── 04-permissions/    <domain>.permissions.spec.ts
             ├── 05-validations/    <domain>.validations.spec.ts
-            ├── 06-chained-flows/  <domain>.chained.spec.ts
-            ├── 07-edge-cases/     <domain>.edge-cases.spec.ts
-            └── 08-archive/        <domain>.archive.spec.ts
+            ├── 06-edge-cases/     <domain>.edge-cases.spec.ts
+            └── 07-archive/        <domain>.archive.spec.ts
 ```
 
 **Inheritance:** `BasePage → BaseFormPage → <Domain>FormPage`
@@ -87,10 +85,9 @@ src/
 | `@step:reporting` | Step 3 — views and exports |
 | `@step:permissions` | Step 4 — role-based access |
 | `@step:validations` | Step 5 — field/form validations |
-| `@step:chained` | Step 6 — multi-step flows |
-| `@step:edge` | Step 7 — edge cases |
-| `@step:archive` | Step 8 — soft-delete and reactivation |
-| `@e2e` | Full end-to-end flows (06-chained-flows only) |
+| `@step:edge` | Step 6 — edge cases |
+| `@step:archive` | Step 7 — soft-delete and reactivation |
+| `@e2e` | Full end-to-end flows (02-business only) |
 | `@smoke` | Critical path smoke tests |
 
 When adding a new domain, register `@module:<domain>` in this table and add `"test:<domain>"` to `package.json`.
@@ -167,18 +164,17 @@ if (!visible) test.skip(true, 'Confirm not available in this configuration');
 
 ## Generalized Test Flow
 
-Every domain follows the **same 8-step structure**:
+Every domain follows the **same 7-step structure**:
 
 | Step | Folder | `@step` Tag | Purpose |
 |------|--------|-------------|---------|
 | 1 | `01-config/` | `@step:config` | System settings, master data, module prerequisites |
-| 2 | `02-business/` | `@step:business` | Core CRUD and business logic |
+| 2 | `02-business/` | `@step:business` | Core CRUD, business logic, and multi-step workflows |
 | 3 | `03-reporting/` | `@step:reporting` | Views, filters, exports |
 | 4 | `04-permissions/` | `@step:permissions` | Role-based access |
 | 5 | `05-validations/` | `@step:validations` | Required fields, constraints |
-| 6 | `06-chained-flows/` | `@step:chained` | Multi-step workflows |
-| 7 | `07-edge-cases/` | `@step:edge` | Unusual inputs, boundaries |
-| 8 | `08-archive/` | `@step:archive` | Soft-delete, reactivation |
+| 6 | `06-edge-cases/` | `@step:edge` | Unusual inputs, boundaries |
+| 7 | `07-archive/` | `@step:archive` | Soft-delete, reactivation |
 
 **To add a new domain:** `/add-module <domain>`
 

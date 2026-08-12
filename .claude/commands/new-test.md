@@ -25,9 +25,8 @@ Map step names to folders using this exact table:
 | reporting | 03-reporting |
 | permissions | 04-permissions |
 | validations | 05-validations |
-| chained | 06-chained-flows |
-| edge | 07-edge-cases |
-| archive | 08-archive |
+| edge | 06-edge-cases |
+| archive | 07-archive |
 
 If a file already exists at that path, name the new file `<module>.<step>-<slug>.spec.ts` where `<slug>` is a kebab-case version of the description.
 
@@ -103,7 +102,7 @@ test.describe('<Descriptive Suite Name> @module:<module> @step:<step>', () => {
 6. Use `hrMasterData` fixture (not inline `rpc.create`) for any pre-existing employee/contract needed as a test prerequisite
 7. Graceful skips use `test.skip(true, 'reason')` with the visibility check inline — not `test.skip(condition)` shorthand
 8. Tags go on the `describe` block: `@module:<module> @step:<step>`. Add `@smoke` to the single most critical `test()` in the suite
-9. `@e2e` tag is reserved for `06-chained-flows` suites only
+9. `@e2e` tag is reserved for multi-step `02-business` suites only
 10. Page object imports use relative paths (`../../pages/...`), NOT `@modules/` aliases
 
 ## Output
