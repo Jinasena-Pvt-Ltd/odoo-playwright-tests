@@ -44,22 +44,21 @@ Once the onboarding guide is loaded in Claude:
 /add-module <your-domain>
 ```
 
-This generates the full 8-step folder structure, page objects, data files, and spec stubs for your Odoo module.
+This generates the full 7-step folder structure, page objects, data files, and spec stubs for your Odoo module.
 
 ---
 
-## The 8-Step Structure
+## The 7-Step Structure
 
 | Step | Folder | Purpose |
 |------|--------|---------|
 | 1 | `01-config/` | System settings, master data, prerequisites |
-| 2 | `02-business/` | Core CRUD and business logic |
+| 2 | `02-business/` | Core CRUD, business logic, and multi-step cross-record workflows |
 | 3 | `03-reporting/` | Views, filters, exports |
 | 4 | `04-permissions/` | Role-based access |
 | 5 | `05-validations/` | Required fields, constraint errors |
-| 6 | `06-chained-flows/` | Multi-step cross-record workflows |
-| 7 | `07-edge-cases/` | Unusual inputs, boundaries |
-| 8 | `08-archive/` | Soft-delete, reactivation |
+| 6 | `06-edge-cases/` | Unusual inputs, boundaries |
+| 7 | `07-archive/` | Soft-delete, reactivation |
 
 ---
 
