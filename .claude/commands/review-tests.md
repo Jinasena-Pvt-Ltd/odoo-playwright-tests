@@ -53,7 +53,7 @@ For each file, evaluate every item below. Report each as:
 ### 6. Tag Convention
 - `[FAIL]` if the `test.describe()` block does not include both `@module:<name>` and `@step:<name>` tags.
 - `[FAIL]` if tags appear only on individual `test()` calls and not on the `describe` block — tags on `describe` are inherited by all tests inside.
-- `[WARN]` if `@e2e` is used on a non-`06-chained-flows` spec.
+- `[WARN]` if `@e2e` is used on a non-`02-business` spec.
 - `[INFO]` if no test in the suite has `@smoke` — consider marking the most critical test.
 
 ### 7. Import Path Depth
@@ -72,8 +72,8 @@ For each file, evaluate every item below. Report each as:
 - `[WARN]` if CSS selectors use positional indexes like `:nth-child()` to target dynamic content — use text-based filters instead.
 - `[INFO]` if `page.locator()` is used directly in a test instead of a page object method.
 
-### 11. 8-Step Folder Convention
-- `[FAIL]` if a spec file lives outside one of the 8 numbered step folders (`01-config`, `02-business`, `03-reporting`, `04-permissions`, `05-validations`, `06-chained-flows`, `07-edge-cases`, `08-archive`). Every spec must be placed in the correct numbered folder — no loose spec files at `tests/` root or in non-standard folder names.
+### 11. 7-Step Folder Convention
+- `[FAIL]` if a spec file lives outside one of the 7 numbered step folders (`01-config`, `02-business`, `03-reporting`, `04-permissions`, `05-validations`, `06-edge-cases`, `07-archive`). Every spec must be placed in the correct numbered folder — no loose spec files at `tests/` root or in non-standard folder names.
 - `[WARN]` if the folder number does not match the `@step:` tag (e.g. a file in `02-business/` tagged `@step:config`).
 - `[INFO]` if a step folder is empty or contains only placeholder/skip-all tests — note it for the author to fill in.
 

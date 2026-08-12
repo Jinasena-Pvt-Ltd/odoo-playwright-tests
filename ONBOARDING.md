@@ -5,7 +5,7 @@
 
 ### The Framework in Three Sentences
 
-We drive a real Odoo 17 instance with role-based user sessions configured per project. All tests interact through the browser UI — page objects, form fills, and assertions against real rendered elements. Tests for every domain follow the same 8-step workflow so that reports, tag filtering, and team onboarding are always predictable.
+We drive a real Odoo 17 instance with role-based user sessions configured per project. All tests interact through the browser UI — page objects, form fills, and assertions against real rendered elements. Tests for every domain follow the same 7-step workflow so that reports, tag filtering, and team onboarding are always predictable.
 
 ---
 
@@ -22,18 +22,17 @@ npx playwright test --project=admin --grep "@smoke"   # must be green or amber o
 
 ---
 
-### The 8-Step Workflow
+### The 7-Step Workflow
 
 | Step | Folder | Tag | What it tests |
 |------|--------|-----|---------------|
 | 1 | `01-config/` | `@step:config` | System settings, master data, prerequisites |
-| 2 | `02-business/` | `@step:business` | Core CRUD and business logic |
+| 2 | `02-business/` | `@step:business` | Core CRUD, business logic, and multi-step cross-record workflows |
 | 3 | `03-reporting/` | `@step:reporting` | Views, filters, exports |
 | 4 | `04-permissions/` | `@step:permissions` | Role-based access |
 | 5 | `05-validations/` | `@step:validations` | Required fields, constraint errors |
-| 6 | `06-chained-flows/` | `@step:chained` | Multi-step cross-record workflows |
-| 7 | `07-edge-cases/` | `@step:edge` | Unusual inputs, boundaries |
-| 8 | `08-archive/` | `@step:archive` | Soft-delete, reactivation |
+| 6 | `06-edge-cases/` | `@step:edge` | Unusual inputs, boundaries |
+| 7 | `07-archive/` | `@step:archive` | Soft-delete, reactivation |
 
 Every `test.describe()` must carry **both** `@module:<domain>` and `@step:<step>`.
 
@@ -151,7 +150,7 @@ Use this during development. Run all configured roles only before raising a PR.
 | Creating test data in `beforeAll` via form | Use a dedicated config test in `01-config/` or the UI `beforeEach` |
 | `expect(btn).toBeVisible()` for config-dependent UI | `isVisible({timeout:3_000}).catch(()=>false)` + `test.skip()` |
 | `test.skip(true)` with no reason | Always: `test.skip(true, 'reason')` |
-| Spec at `tests/` root | Must be inside `01-config/` through `08-archive/` |
+| Spec at `tests/` root | Must be inside `01-config/` through `07-archive/` |
 
 
 ---
@@ -238,7 +237,6 @@ Create each file at the project root exactly as shown.
     "test:reporting": "playwright test --grep \"@step:reporting\"",
     "test:permissions": "playwright test --grep \"@step:permissions\"",
     "test:validations": "playwright test --grep \"@step:validations\"",
-    "test:chained": "playwright test --grep \"@step:chained\"",
     "test:edge": "playwright test --grep \"@step:edge\"",
     "test:archive": "playwright test --grep \"@step:archive\"",
     "report": "playwright show-report",
@@ -393,7 +391,7 @@ Write this exactly to `CLAUDE.md` in the project root:
 ## Project Overview
 
 E2E test framework for **Odoo 17** built with Playwright and TypeScript.
-Tests cover any Odoo module following a consistent 8-step structure across all domains.
+Tests cover any Odoo module following a consistent 7-step structure across all domains.
 Multiple user roles are tested independently — configure roles in `.env` and `playwright.config.ts`.
 
 **Tech stack:** Playwright 1.50, TypeScript 5.7, Allure reporting
@@ -422,9 +420,8 @@ npm run test:business      # Step 2: business logic tests
 npm run test:reporting     # Step 3: reporting tests
 npm run test:permissions   # Step 4: permission tests
 npm run test:validations   # Step 5: validation tests
-npm run test:chained       # Step 6: chained flow tests
-npm run test:edge          # Step 7: edge case tests
-npm run test:archive       # Step 8: archive tests
+npm run test:edge          # Step 6: edge case tests
+npm run test:archive       # Step 7: archive tests
 npm run report             # Open Playwright HTML report
 npm run report:generate    # Regenerate master report from spec files (no test run)
 npm run test:report        # Run tests then regenerate master report
@@ -458,9 +455,8 @@ src/
             ├── 03-reporting/      <domain>.reports.spec.ts
             ├── 04-permissions/    <domain>.permissions.spec.ts
             ├── 05-validations/    <domain>.validations.spec.ts
-            ├── 06-chained-flows/  <domain>.chained.spec.ts
-            ├── 07-edge-cases/     <domain>.edge-cases.spec.ts
-            └── 08-archive/        <domain>.archive.spec.ts
+            ├── 06-edge-cases/     <domain>.edge-cases.spec.ts
+            └── 07-archive/        <domain>.archive.spec.ts
 ```
 
 **Inheritance:** `BasePage → BaseFormPage → <Domain>FormPage`
@@ -479,10 +475,9 @@ src/
 | `@step:reporting` | Step 3 — views and exports |
 | `@step:permissions` | Step 4 — role-based access |
 | `@step:validations` | Step 5 — field/form validations |
-| `@step:chained` | Step 6 — multi-step flows |
-| `@step:edge` | Step 7 — edge cases |
-| `@step:archive` | Step 8 — soft-delete and reactivation |
-| `@e2e` | Full end-to-end flows (06-chained-flows only) |
+| `@step:edge` | Step 6 — edge cases |
+| `@step:archive` | Step 7 — soft-delete and reactivation |
+| `@e2e` | Full end-to-end flows (02-business only) |
 | `@smoke` | Critical path smoke tests |
 
 When adding a new domain, register `@module:<domain>` in this table and add `"test:<domain>"` to `package.json`.
@@ -560,18 +555,17 @@ if (!visible) test.skip(true, 'Confirm not available in this configuration');
 
 ## Generalized Test Flow
 
-Every domain follows the **same 8-step structure**:
+Every domain follows the **same 7-step structure**:
 
 | Step | Folder | `@step` Tag | Purpose |
 |------|--------|-------------|---------|
 | 1 | `01-config/` | `@step:config` | System settings, master data, module prerequisites |
-| 2 | `02-business/` | `@step:business` | Core CRUD and business logic |
+| 2 | `02-business/` | `@step:business` | Core CRUD, business logic, and multi-step workflows |
 | 3 | `03-reporting/` | `@step:reporting` | Views, filters, exports |
 | 4 | `04-permissions/` | `@step:permissions` | Role-based access |
 | 5 | `05-validations/` | `@step:validations` | Required fields, constraints |
-| 6 | `06-chained-flows/` | `@step:chained` | Multi-step workflows |
-| 7 | `07-edge-cases/` | `@step:edge` | Unusual inputs, boundaries |
-| 8 | `08-archive/` | `@step:archive` | Soft-delete, reactivation |
+| 6 | `06-edge-cases/` | `@step:edge` | Unusual inputs, boundaries |
+| 7 | `07-archive/` | `@step:archive` | Soft-delete, reactivation |
 
 **To add a new domain:** `/add-module <domain>`
 
@@ -638,9 +632,8 @@ src/modules/<module>/
     ├── 03-reporting/ <module>.reports.spec.ts
     ├── 04-permissions/<module>.permissions.spec.ts
     ├── 05-validations/<module>.validations.spec.ts
-    ├── 06-chained-flows/<module>.chained.spec.ts
-    ├── 07-edge-cases/<module>.edge-cases.spec.ts
-    └── 08-archive/   <module>.archive.spec.ts
+    ├── 06-edge-cases/<module>.edge-cases.spec.ts
+    └── 07-archive/   <module>.archive.spec.ts
 ```
 
 ## File Contents
@@ -697,7 +690,7 @@ export const <MODULE>_VALIDATION_CASES: typeof <MODULE>_MANDATORY_FIELDS = [];
 // TODO: Add business calculation functions specific to this module.
 ```
 
-### Spec Files (all 8)
+### Spec Files (all 7)
 
 ```typescript
 /**
@@ -724,16 +717,15 @@ Step table:
 | 03-reporting | reporting | Reporting | 3 |
 | 04-permissions | permissions | User Permissions | 4 |
 | 05-validations | validations | Field Validations | 5 |
-| 06-chained-flows | chained | Chained Flows | 6 |
-| 07-edge-cases | edge | Edge Cases | 7 |
-| 08-archive | archive | Archive & Cleanup | 8 |
+| 06-edge-cases | edge | Edge Cases | 6 |
+| 07-archive | archive | Archive & Cleanup | 7 |
 
 ## After Scaffolding
 
 1. Add to `package.json` scripts: `"test:<module>": "playwright test --grep \"@module:<module>\""`
 2. Add to `CLAUDE.md` tag table: `| \`@module:<module>\` | <Module> module |`
 3. Run `npm run lint` — must be zero errors
-4. Run `npx playwright test --grep "@module:<module>" --project=admin` — all 8 must show as skipped
+4. Run `npx playwright test --grep "@module:<module>" --project=admin` — all 7 must show as skipped
 ````
 
 ---
@@ -756,9 +748,8 @@ Parse as: `<module> <step> "<test description>"`
 | reporting | 03-reporting |
 | permissions | 04-permissions |
 | validations | 05-validations |
-| chained | 06-chained-flows |
-| edge | 07-edge-cases |
-| archive | 08-archive |
+| edge | 06-edge-cases |
+| archive | 07-archive |
 
 Create: `src/modules/<module>/tests/<step-folder>/<module>.<step>.spec.ts`
 If file exists, use `<module>.<step>-<slug>.spec.ts`.
@@ -935,7 +926,7 @@ File path/glob or auto-detect from `git status --short`.
 ### 6. Tag Convention
 - `[FAIL]` `test.describe()` missing `@module:<name>` or `@step:<name>`
 - `[FAIL]` tags only on `test()` not on `describe`
-- `[WARN]` `@e2e` on non-`06-chained-flows` spec
+- `[WARN]` `@e2e` on non-`02-business` spec
 
 ### 7. Import Path Depth
 - `[FAIL]` wrong number of `../` segments — must be exactly 4 for `src/modules/<module>/tests/<step>/`
@@ -951,8 +942,8 @@ File path/glob or auto-detect from `git status --short`.
 - `[WARN]` `page.waitForTimeout()` — prefer event-based waits
 - `[WARN]` positional CSS selectors (`:nth-child()`) on dynamic content
 
-### 11. 8-Step Folder Convention
-- `[FAIL]` spec file outside `01-config` through `08-archive` folders
+### 11. 7-Step Folder Convention
+- `[FAIL]` spec file outside `01-config` through `07-archive` folders
 - `[WARN]` folder number mismatches `@step:` tag
 - `[INFO]` folder contains only placeholder/skip-all tests
 
