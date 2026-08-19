@@ -8,11 +8,13 @@ import { Many2OneField } from '../../../core/components/Many2OneField';
 
 export class PurchaseFormPage extends BaseFormPage {
   readonly name: CharField;
+  readonly vendor: Many2OneField;
 
   constructor(page: Page) {
     super(page);
     this.name = new CharField(page, 'name');
-    // TODO: Add field components for this module's primary Odoo model
+    this.vendor = new Many2OneField(page, 'partner_id');
+    // TODO: Add remaining field components for this module's primary Odoo model
   }
 
   // TODO: Replace with the correct Odoo URL for this module

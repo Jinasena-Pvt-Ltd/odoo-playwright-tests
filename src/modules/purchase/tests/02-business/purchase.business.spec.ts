@@ -1,37 +1,29 @@
 /**
  * Step 2 — Business Logic for the purchase module.
- * TODO: Replace the placeholder test with real test cases.
  */
-import { test } from '../../../../core/fixtures/index';
-import { OdooRPC } from '../../../../core/api/OdooRPC';
-
-/**
- * Returns true if the primary Odoo model for this module exists on the instance.
- * TODO: Replace 'module.primary.model' with the real Odoo model name (e.g. 'purchase.order').
- */
-async function isModuleInstalled(rpc: OdooRPC): Promise<boolean> {
-  const r = await rpc.searchRead<{ id: number }>(
-    'ir.model', [['model', '=', 'module.primary.model']], ['id'], { limit: 1 },
-  );
-  return r.length > 0;
-}
+import { test, expect } from '../../../../core/fixtures/index';
+import { PurchaseFormPage } from '../../pages/PurchasePage';
+import { uniqueName } from '../../../../core/utils/RandomDataGenerator';
 
 test.describe('Purchase Business Logic @module:purchase @step:business', () => {
 
-  test('placeholder — replace with real test @smoke', async ({ rpc }) => {
-    if (!await isModuleInstalled(rpc)) {
-      test.skip(true, 'Purchase module not installed on this instance — update isModuleInstalled() model name');
-      return;
+  test('creates an RFQ and saves @smoke', async ({ page, rpc }) => {
+    const vendorName = uniqueName('Test Vendor');
+    const vendorId = await rpc.create<{ name: string }>('res.partner', { name: vendorName });
+
+    const formPage = new PurchaseFormPage(page);
+    await formPage.navigate();
+    await formPage.vendor.setValue(vendorName);
+    await formPage.save();
+
+    // A saved RFQ leaves edit mode and is assigned a real sequence number
+    // (e.g. "P00001") in place of the "New" placeholder shown before save.
+    await expect(page.locator('.o_field_widget[name="name"]')).not.toContainText('New');
+
+    const [, orderId] = page.url().match(/\/purchase\/(\d+)/) ?? [];
+    if (orderId) {
+      await rpc.archive('purchase.order', [Number(orderId)]);
     }
-    // TODO: Implement this test.
-    // Conventions:
-    //   1. Use rpc.create() for all test data setup — never UI
-    //   2. Use uniqueName() for every record name
-    //   3. Archive all records in teardown: await rpc.archive(model, [id])
-    //   4. Wrap config-dependent assertions in graceful skip:
-    //      const visible = await page.locator('button', { hasText: 'X' })
-    //        .isVisible({ timeout: 3_000 }).catch(() => false);
-    //      if (!visible) test.skip(true, 'X not available in this configuration');
-    test.skip(true, 'Not yet implemented — replace this placeholder with real test logic');
+    await rpc.archive('res.partner', [vendorId]);
   });
 });
