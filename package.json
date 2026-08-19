@@ -13,6 +13,7 @@
     "test:validations": "playwright test --grep \"@step:validations\"",
     "test:edge": "playwright test --grep \"@step:edge\"",
     "test:archive": "playwright test --grep \"@step:archive\"",
+    "test:sales": "playwright test --grep \"@module:sales\"",
     "report": "playwright show-report",
     "report:generate": "node scripts/generate-report.js",
     "test:report": "playwright test && node scripts/generate-report.js",

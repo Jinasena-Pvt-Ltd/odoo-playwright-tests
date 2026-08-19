@@ -79,6 +79,7 @@ src/
 | Tag | Purpose |
 |-----|---------|
 | `@module:<domain>` | The Odoo module being tested |
+| `@module:sales` | Sales module |
 | `@module:security-audit` | Daily user group & CRUD permission audit |
 | `@step:config` | Step 1 — configuration/setup |
 | `@step:business` | Step 2 — business logic |
