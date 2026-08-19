@@ -16,6 +16,7 @@ export default defineConfig({
   expect: { timeout: 10_000 },
 
   reporter: [
+    ['list'],
     ['html', { outputFolder: 'playwright-report' }],
     ['json', { outputFile: 'test-results/results.json' }],
     ['allure-playwright', { outputFolder: 'allure-results' }],
