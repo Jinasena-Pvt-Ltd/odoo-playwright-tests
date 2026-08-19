@@ -2,18 +2,23 @@ import { test } from './core/fixtures/index';
 import { PurchaseFormPage } from './modules/purchase/pages/PurchasePage';
 
 test('check purchase model', async ({ rpc, page }) => {
-  await page.goto((process.env.ODOO_BASE_URL ?? '') + '/web/login');
-  await page.waitForSelector('.o_main_navbar', { timeout: 20000 }).catch(() => {});
-  await page.goto((process.env.ODOO_BASE_URL ?? '') + '/odoo');
+  const formPage = new PurchaseFormPage(page);
+  await formPage.navigate(); // boots the SPA session (lands on Employees, per hardcoded boot flow)
+
+  const homeMenuBtn = page.locator('a.o_menu_toggle, [aria-label="Home menu"]').first();
+  await homeMenuBtn.click({ timeout: 5000 });
+  await page.waitForTimeout(800);
+  const searchBox = page.getByPlaceholder('Search...').first();
+  await searchBox.fill('Purchase');
+  await page.waitForTimeout(800);
+  const options = page.getByRole('option');
+  const count = await options.count();
+  for (let i = 0; i < count; i++) {
+    console.log('option:', await options.nth(i).innerText());
+  }
+  await options.first().click();
   await page.waitForTimeout(1500);
-  const homeMenuBtn = page.locator('.o_menu_toggle, a.o_menu_brand, [aria-label="Home menu"]').first();
-  await homeMenuBtn.click({ timeout: 5000 }).catch(() => {});
-  await page.waitForTimeout(1000);
-  const searchBox = page.locator('input[placeholder*="Search"]').first();
-  await searchBox.fill('Purchase').catch(() => {});
-  await page.waitForTimeout(1000);
-  const html = await page.locator('.o_home_menu, .o_apps').first().innerText().catch(() => 'NONE');
-  console.log('apps text:', html);
+  console.log('URL after clicking Purchase app:', page.url(), await page.title());
   return;
   const menus = await rpc.searchRead<{ id: number; name: string; action: string }>(
     'ir.ui.menu', [['name', 'ilike', 'purchase']], ['id', 'name', 'action'],
