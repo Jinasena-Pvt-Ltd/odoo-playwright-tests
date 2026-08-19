@@ -49,7 +49,6 @@ export default defineConfig({
         ...devices['Desktop Chrome'],
         storageState: 'auth-storage/admin.json',
       },
-      dependencies: ['setup'],
     },
     {
       name: 'manager',
