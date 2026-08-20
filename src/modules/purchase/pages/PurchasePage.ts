@@ -3,6 +3,8 @@ import { BaseFormPage } from '../../../core/base/BaseFormPage';
 import { BaseListPage } from '../../../core/base/BaseListPage';
 import { CharField } from '../../../core/components/CharField';
 import { Many2OneField } from '../../../core/components/Many2OneField';
+import { DeliveryFormPage } from './DeliveryPage';
+import { VendorBillFormPage } from './VendorBillPage';
 
 // TODO: Add typed field components matching the Odoo purchase model fields.
 
@@ -30,6 +32,33 @@ export class PurchaseFormPage extends BaseFormPage {
     const baseURL = process.env.ODOO_BASE_URL ?? 'http://localhost:8069';
     await this.page.goto(`${baseURL}/web#action=436&model=purchase.order&view_type=form&cids=2&menu_id=271&id=${id}`);
     await this.waitForOdooReady();
+  }
+
+  /** Returns the current record's id from the URL (works for both the legacy /web#...&id= route and any /odoo/.../<id> route). */
+  getRecordId(): number {
+    const [, idParam] = this.page.url().match(/[?&#]id=(\d+)/) ?? [];
+    if (idParam) return Number(idParam);
+    const [, pathId] = this.page.url().match(/\/(\d+)(?:[/?#]|$)/) ?? [];
+    return pathId ? Number(pathId) : 0;
+  }
+
+  /** RFQ -> Purchase Order. */
+  async confirmOrder(): Promise<void> {
+    await this.page.getByRole('button', { name: 'Confirm Order', exact: true }).click();
+    await this.waitForOdooReady();
+  }
+
+  /** Opens the delivery (stock.picking) created for this Purchase Order via its smart button. */
+  async openDelivery(): Promise<DeliveryFormPage> {
+    await this.clickSmartButton('Receipt');
+    return new DeliveryFormPage(this.page);
+  }
+
+  /** Creates a vendor bill for this Purchase Order via the "Create Bill" button. */
+  async createVendorBill(): Promise<VendorBillFormPage> {
+    await this.page.getByRole('button', { name: 'Create Bill', exact: true }).click();
+    await this.waitForOdooReady();
+    return new VendorBillFormPage(this.page);
   }
 }
 

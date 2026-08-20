@@ -141,6 +141,41 @@ export interface HrPayslipRun extends OdooRecord {
   slip_ids: OdooId[];
 }
 
+// x_purchase_request (Studio-customized Purchase Requisition MGMT app)
+export interface PurchaseRequisition extends OdooRecord {
+  x_name: string;
+  x_studio_type: 'Local' | 'Import';
+  x_studio_warehouse: [OdooId, string] | false;
+  x_studio_requested_delivery_date: string | false;
+  x_studio_requested_by: [OdooId, string] | false;
+  x_studio_status: string;
+}
+
+// purchase.order
+export interface PurchaseOrder extends OdooRecord {
+  name: string;
+  partner_id: [OdooId, string] | false;
+  state: 'draft' | 'sent' | 'to approve' | 'purchase' | 'done' | 'cancel';
+  amount_total: number;
+}
+
+// stock.picking
+export interface StockPicking extends OdooRecord {
+  name: string;
+  state: 'draft' | 'waiting' | 'confirmed' | 'assigned' | 'done' | 'cancel';
+  origin: string | false;
+}
+
+// account.move (vendor bill when move_type = 'in_invoice')
+export interface AccountMove extends OdooRecord {
+  name: string;
+  move_type: 'in_invoice' | 'out_invoice' | 'entry';
+  state: 'draft' | 'posted' | 'cancel';
+  payment_state: 'not_paid' | 'in_payment' | 'paid' | 'partial' | 'reversed';
+  invoice_origin: string | false;
+  amount_total: number;
+}
+
 // RPC response envelope
 export interface OdooRPCResponse<T = unknown> {
   jsonrpc: '2.0';
