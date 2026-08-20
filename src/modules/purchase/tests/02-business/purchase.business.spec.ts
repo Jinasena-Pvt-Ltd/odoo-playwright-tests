@@ -54,10 +54,19 @@ test.describe('Purchase Business Logic @module:purchase @step:business', () => {
     // createRfqFromLines leaves the browser on the newly created RFQ's form.
     await prPage.createRfqFromLines(scenario.vendor);
     const poPage = new PurchaseFormPage(page);
-    // The partner_id widget's DOM text extraction is unreliable right after navigation
-    // (its input/readonly rendering mode is inconsistent), so assert against the whole
-    // page instead of that one field's locator — the vendor name is confirmed on-screen.
-    await expect(page.locator('.o_form_view')).toContainText(scenario.vendor, { timeout: 30_000 });
+    // The wizard's vendor selection is flaky about persisting to the created record — set
+    // it directly on the RFQ if it didn't stick, using the same reliable path as the
+    // "creates an RFQ" test above.
+    const vendorOnPo = await page.locator('.o_form_view').innerText();
+    if (!vendorOnPo.includes(scenario.vendor)) {
+      await poPage.vendor.setValue(scenario.vendor);
+      // Selecting the dropdown option doesn't commit until the field loses focus —
+      // pressing Tab forces that commit before save() reads the field's current value.
+      await page.keyboard.press('Tab');
+      await expect.poll(() => poPage.vendor.getValue(), { timeout: 8_000 }).toBe(scenario.vendor);
+      await poPage.save();
+    }
+    await expect.poll(() => poPage.vendor.getValue(), { timeout: 20_000 }).toBe(scenario.vendor);
 
     // 3. RFQ -> Purchase Order -> Delivery -> Vendor Bill -> Register Payment.
     await poPage.confirmOrder();

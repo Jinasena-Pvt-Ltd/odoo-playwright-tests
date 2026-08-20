@@ -102,17 +102,23 @@ export class PurchaseRequisitionFormPage extends BaseFormPage {
     await modal.waitFor({ state: 'visible', timeout: 8_000 });
 
     // The "Select All" button is unreliable (it doesn't consistently check the boxes),
-    // so check each requisition line's checkbox individually instead.
-    const lineCheckboxes = modal.locator('.o_list_table .o_data_row input[type="checkbox"]');
-    const lineCount = await lineCheckboxes.count();
+    // so check each requisition line's checkbox individually instead. Each row's "Select"
+    // checkbox renders disabled until the row's cell is clicked into edit mode first.
+    const lineRows = modal.locator('.o_list_table .o_data_row');
+    const lineCount = await lineRows.count();
     for (let i = 0; i < lineCount; i++) {
-      await lineCheckboxes.nth(i).check();
+      const selectCell = lineRows.nth(i).locator('td[name="x_select"]');
+      await selectCell.click();
+      await selectCell.locator('input[type="checkbox"]').check();
     }
     await expect.poll(async () => modal.locator('.o_list_table .o_data_row input[type="checkbox"]:checked').count())
       .toBe(lineCount);
 
     const vendorField = new Many2OneField(this.page, 'x_supplier_id');
     await vendorField.setValue(vendorName);
+    // Selecting the dropdown option doesn't commit until the field loses focus — pressing
+    // Tab forces that commit before "Create RFQ" reads the field's current value.
+    await this.page.keyboard.press('Tab');
     // Many2One fields in edit mode store their value in an <input>, whose value never
     // shows up via the wrapping div's textContent — read it through getValue() instead.
     await expect.poll(() => vendorField.getValue(), { timeout: 8_000 }).toBe(vendorName);
