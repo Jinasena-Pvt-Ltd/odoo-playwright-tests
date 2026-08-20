@@ -51,7 +51,7 @@ export class PurchaseRequisitionFormPage extends BaseFormPage {
    * (used between lines) keeps the modal open with a fresh blank line, so "Add a line"
    * is only clicked when the modal isn't already open.
    */
-  async addProductLine(productName: string, quantity: number): Promise<void> {
+  async addProductLine(productName: string, quantity: number, isLastLine = false): Promise<void> {
     const modal = this.page.locator('.modal');
     if (!(await modal.isVisible({ timeout: 1_000 }).catch(() => false))) {
       await this.page.getByRole('button', { name: 'Add a line' }).first().click();
@@ -70,14 +70,8 @@ export class PurchaseRequisitionFormPage extends BaseFormPage {
     const quantityInput = modal.locator('.o_field_widget[name="x_studio_quantity"] input').first();
     await quantityInput.fill(String(quantity));
 
-    await modal.getByRole('button', { name: 'Save & New' }).click();
-  }
-
-  async finishAddingLines(): Promise<void> {
-    const modal = this.page.locator('.modal');
-    if (await modal.isVisible({ timeout: 2_000 }).catch(() => false)) {
-      await modal.getByRole('button', { name: 'Save & Close' }).click();
-    }
+    const saveButtonName = isLastLine ? 'Save & Close' : 'Save & New';
+    await modal.getByRole('button', { name: saveButtonName }).click();
   }
 
   async confirm(): Promise<void> {
@@ -86,22 +80,12 @@ export class PurchaseRequisitionFormPage extends BaseFormPage {
   }
 
   async requestApproval(): Promise<void> {
-    const visible = await this.page.getByRole('button', { name: /Request for Approval|Request Approval/i }).first().isVisible({ timeout: 3_000 }).catch(() => false);
-    if (visible) {
-      await this.page.getByRole('button', { name: /Request for Approval|Request Approval/i }).first().click();
-    } else {
-      await this.clickStatusButton('To Be Approved');
-    }
+    await this.page.getByRole('button', { name: 'Request approval', exact: true }).click();
     await this.waitForOdooReady();
   }
 
   async approve(): Promise<void> {
-    const visible = await this.page.getByRole('button', { name: 'Approve', exact: true }).isVisible({ timeout: 3_000 }).catch(() => false);
-    if (visible) {
-      await this.page.getByRole('button', { name: 'Approve', exact: true }).click();
-    } else {
-      await this.clickStatusButton('Approved');
-    }
+    await this.page.getByRole('button', { name: 'Approve' }).first().click();
     await this.waitForOdooReady();
   }
 

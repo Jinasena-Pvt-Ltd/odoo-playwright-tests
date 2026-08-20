@@ -40,10 +40,9 @@ test.describe('Purchase Business Logic @module:purchase @step:business', () => {
     await prPage.warehouse.setValue(scenario.warehouse);
     await prPage.setRequestedDeliveryDate(scenario.requestedDeliveryDay);
     await prPage.requestedBy.setValue(scenario.requestedBy);
-    for (const line of scenario.lines) {
-      await prPage.addProductLine(line.product, line.quantity);
+    for (const [index, line] of scenario.lines.entries()) {
+      await prPage.addProductLine(line.product, line.quantity, index === scenario.lines.length - 1);
     }
-    await prPage.finishAddingLines();
     await prPage.save();
 
     await prPage.confirm();
