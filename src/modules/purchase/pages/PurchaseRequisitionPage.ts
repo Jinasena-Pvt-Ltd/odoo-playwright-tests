@@ -46,16 +46,25 @@ export class PurchaseRequisitionFormPage extends BaseFormPage {
       .click();
   }
 
-  /** Adds one product line via the "Create Order Lines" modal dialog. */
+  /**
+   * Adds one product line via the "Create Order Lines" modal dialog. "Save & New"
+   * (used between lines) keeps the modal open with a fresh blank line, so "Add a line"
+   * is only clicked when the modal isn't already open.
+   */
   async addProductLine(productName: string, quantity: number): Promise<void> {
-    await this.page.getByRole('button', { name: 'Add a line' }).first().click();
     const modal = this.page.locator('.modal');
-    await modal.waitFor({ state: 'visible', timeout: 5_000 });
+    if (!(await modal.isVisible({ timeout: 1_000 }).catch(() => false))) {
+      await this.page.getByRole('button', { name: 'Add a line' }).first().click();
+      await modal.waitFor({ state: 'visible', timeout: 5_000 });
+    }
 
+    // pressSequentially fires per-keystroke events, reliably triggering the autocomplete
+    // search — this instance's product lookup can take several seconds to respond.
     const productInput = modal.locator('.o_field_widget[name^="x_studio_many2one"] input').first();
-    await productInput.fill(productName);
+    await productInput.click();
+    await productInput.pressSequentially(productName, { delay: 30 });
     const productOption = this.page.locator('.o-dropdown--menu .o_menu_item, .ui-autocomplete .ui-menu-item').filter({ hasText: productName }).first();
-    await productOption.waitFor({ state: 'visible', timeout: 8_000 });
+    await productOption.waitFor({ state: 'visible', timeout: 15_000 });
     await productOption.click();
 
     const quantityInput = modal.locator('.o_field_widget[name="x_studio_quantity"] input').first();
