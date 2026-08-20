@@ -109,7 +109,9 @@ export class PurchaseRequisitionFormPage extends BaseFormPage {
     await this.waitForOdooReady();
 
     await this.page.waitForSelector('.o_list_view', { timeout: 15_000 });
-    await this.page.locator('.o_list_table .o_data_row').first().click();
+    // The row's reference cell renders as a link (e.g. "PO-00059") — click that directly
+    // rather than the row itself, since clicking elsewhere in the row didn't navigate.
+    await this.page.locator('.o_list_table .o_data_row a').first().click();
     await this.waitForOdooReady();
 
     const [, orderId] = this.page.url().match(/[?&#]id=(\d+)/) ?? [];
