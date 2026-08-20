@@ -41,8 +41,7 @@ export class PurchaseRequisitionFormPage extends BaseFormPage {
     const input = this.fieldWidget('x_studio_requested_delivery_date').locator('input').first();
     await input.click();
     await this.page
-      .locator('.o_datetime_picker td.o_date_item_cell:not(.o_out_of_range)')
-      .filter({ hasText: new RegExp(`^${day}$`) })
+      .getByRole('button', { name: String(day), exact: true })
       .first()
       .click();
   }
