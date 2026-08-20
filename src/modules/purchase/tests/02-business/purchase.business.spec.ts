@@ -50,24 +50,20 @@ test.describe('Purchase Business Logic @module:purchase @step:business', () => {
     await prPage.approve();
     await expect(page.locator('.o_statusbar_status')).toContainText('Approved');
 
-    // 2. Create RFQ from the approved requisition, then open it.
-    const rfqId = await prPage.createRfqFromLines();
+    // 2. Create RFQ from the approved requisition (selects vendor + all lines in the wizard), then open it.
+    const rfqId = await prPage.createRfqFromLines(scenario.vendor);
 
     const poPage = new PurchaseFormPage(page);
     if (rfqId) {
       await poPage.openById(rfqId);
     } else {
-      // The "Create RFQ" button didn't navigate away from the requisition — fall back
-      // to opening the newest Purchase Order from the Purchase app's list (default sort).
+      // The wizard didn't navigate the app to the new PO — fall back to opening the
+      // newest Purchase Order from the Purchase app's list (default sort).
       const poListPage = new PurchaseListPage(page);
       await poListPage.navigate();
       await poListPage.openNewest();
     }
-    const visibleVendorField = await poPage.vendor.getValue().catch(() => '');
-    if (!visibleVendorField) {
-      await poPage.vendor.setValue(scenario.vendor);
-      await poPage.save();
-    }
+    await expect(poPage.vendor.getValue()).resolves.toContain(scenario.vendor);
 
     // 3. RFQ -> Purchase Order -> Delivery -> Vendor Bill -> Register Payment.
     await poPage.confirmOrder();

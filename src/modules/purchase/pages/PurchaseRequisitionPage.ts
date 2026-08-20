@@ -89,16 +89,26 @@ export class PurchaseRequisitionFormPage extends BaseFormPage {
     await this.waitForOdooReady();
   }
 
-  /** Creates an RFQ covering all product lines on this approved requisition, and returns its id (0 if the app stayed on the requisition instead of navigating to the new RFQ). */
-  async createRfqFromLines(): Promise<number> {
+  /**
+   * Opens the "Create RFQ" wizard, selects the vendor, selects all requisition lines,
+   * and confirms — creating (or updating) a purchase.order. Returns its id, or 0 if the
+   * app didn't navigate to it (falls back to opening the newest PO from the Purchase app).
+   */
+  async createRfqFromLines(vendorName: string): Promise<number> {
     await this.page.getByRole('button', { name: 'Create RFQ', exact: true }).click();
+
+    const modal = this.page.locator('.modal');
+    await modal.waitFor({ state: 'visible', timeout: 8_000 });
+
+    const vendorField = new Many2OneField(this.page, 'x_supplier_id');
+    await vendorField.setValue(vendorName);
+
+    await modal.getByRole('button', { name: 'Select All', exact: true }).click();
+    await modal.getByRole('button', { name: 'Create RFQ', exact: true }).click();
     await this.waitForOdooReady();
 
-    console.log('[DEBUG] URL after Create RFQ:', this.page.url());
-
     // Only treat the id as a real Purchase Order id if the URL's model param actually
-    // says purchase.order — "Create RFQ" may route through an intermediate wizard whose
-    // transient id is NOT a purchase.order id.
+    // says purchase.order — the requisition form itself also uses an "id=" URL param.
     const isPurchaseOrderUrl = /model=purchase\.order/.test(this.page.url());
     const [, orderId] = isPurchaseOrderUrl ? (this.page.url().match(/[?&#]id=(\d+)/) ?? []) : [];
     return orderId ? Number(orderId) : 0;
