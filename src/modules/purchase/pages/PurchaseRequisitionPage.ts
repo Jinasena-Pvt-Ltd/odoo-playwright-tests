@@ -1,4 +1,4 @@
-import { Page } from '@playwright/test';
+import { Page, expect } from '@playwright/test';
 import { BaseFormPage } from '../../../core/base/BaseFormPage';
 import { BaseListPage } from '../../../core/base/BaseListPage';
 import { SelectionField } from '../../../core/components/SelectionField';
@@ -101,17 +101,22 @@ export class PurchaseRequisitionFormPage extends BaseFormPage {
     const modal = this.page.locator('.modal');
     await modal.waitFor({ state: 'visible', timeout: 8_000 });
 
+    // Select the lines first — this may trigger a re-render of the wizard that would
+    // otherwise clobber a vendor value set beforehand.
+    await modal.getByRole('button', { name: 'Select All', exact: true }).click();
+
     const vendorField = new Many2OneField(this.page, 'x_supplier_id');
     await vendorField.setValue(vendorName);
-
-    await modal.getByRole('button', { name: 'Select All', exact: true }).click();
+    // Many2One fields in edit mode store their value in an <input>, whose value never
+    // shows up via the wrapping div's textContent — read it through getValue() instead.
+    await expect.poll(() => vendorField.getValue(), { timeout: 8_000 }).toBe(vendorName);
     await modal.getByRole('button', { name: 'Create RFQ', exact: true }).click();
     await this.waitForOdooReady();
 
     await this.page.waitForSelector('.o_list_view', { timeout: 15_000 });
-    // The row has multiple links (a priority star, then the "PO-000xx" reference) —
-    // target the reference link specifically by its text pattern.
-    await this.page.locator('.o_list_table .o_data_row a').filter({ hasText: /^PO-/ }).first().click();
+    // The reference cell (e.g. "PO-00061") is a plain <td name="name">, not a link —
+    // the whole cell is clickable via a "cursor-pointer" class, not an <a> tag.
+    await this.page.locator('.o_list_table .o_data_row td[name="name"]').first().click();
     await this.waitForOdooReady();
 
     const [, orderId] = this.page.url().match(/[?&#]id=(\d+)/) ?? [];
