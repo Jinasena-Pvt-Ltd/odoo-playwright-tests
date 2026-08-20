@@ -94,9 +94,13 @@ export class PurchaseRequisitionFormPage extends BaseFormPage {
     await this.page.getByRole('button', { name: 'Create RFQ', exact: true }).click();
     await this.waitForOdooReady();
 
-    // Bug-prone: a naive /id=(\d+)/ match also hits "menu_id=573" in this app's URLs.
-    // Require the id param to be preceded by a URL delimiter, not by "_".
-    const [, orderId] = this.page.url().match(/[?&#]id=(\d+)/) ?? [];
+    console.log('[DEBUG] URL after Create RFQ:', this.page.url());
+
+    // Only treat the id as a real Purchase Order id if the URL's model param actually
+    // says purchase.order — "Create RFQ" may route through an intermediate wizard whose
+    // transient id is NOT a purchase.order id.
+    const isPurchaseOrderUrl = /model=purchase\.order/.test(this.page.url());
+    const [, orderId] = isPurchaseOrderUrl ? (this.page.url().match(/[?&#]id=(\d+)/) ?? []) : [];
     return orderId ? Number(orderId) : 0;
   }
 }
