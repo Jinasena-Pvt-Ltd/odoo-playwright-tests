@@ -91,8 +91,9 @@ export class PurchaseRequisitionFormPage extends BaseFormPage {
 
   /**
    * Opens the "Create RFQ" wizard, selects the vendor, selects all requisition lines,
-   * and confirms — creating (or updating) a purchase.order. Returns its id, or 0 if the
-   * app didn't navigate to it (falls back to opening the newest PO from the Purchase app).
+   * and confirms — creating a purchase.order. The wizard lands on the Purchase Orders
+   * LIST view rather than the new record's form (confirmed live), so this opens the
+   * newest row (the one just created) and returns its id.
    */
   async createRfqFromLines(vendorName: string): Promise<number> {
     await this.page.getByRole('button', { name: 'Create RFQ', exact: true }).click();
@@ -107,10 +108,11 @@ export class PurchaseRequisitionFormPage extends BaseFormPage {
     await modal.getByRole('button', { name: 'Create RFQ', exact: true }).click();
     await this.waitForOdooReady();
 
-    // Only treat the id as a real Purchase Order id if the URL's model param actually
-    // says purchase.order — the requisition form itself also uses an "id=" URL param.
-    const isPurchaseOrderUrl = /model=purchase\.order/.test(this.page.url());
-    const [, orderId] = isPurchaseOrderUrl ? (this.page.url().match(/[?&#]id=(\d+)/) ?? []) : [];
+    await this.page.waitForSelector('.o_list_view', { timeout: 15_000 });
+    await this.page.locator('.o_list_table .o_data_row').first().click();
+    await this.waitForOdooReady();
+
+    const [, orderId] = this.page.url().match(/[?&#]id=(\d+)/) ?? [];
     return orderId ? Number(orderId) : 0;
   }
 }
