@@ -89,9 +89,8 @@ export class PurchaseRequisitionFormPage extends BaseFormPage {
     await this.waitForOdooReady();
   }
 
-  /** Selects all product lines and creates an RFQ, then opens it and returns its id. */
+  /** Creates an RFQ covering all product lines on this approved requisition, and returns its id. */
   async createRfqFromLines(): Promise<number> {
-    await this.page.locator('.o_list_table thead .o_list_record_selector input[type="checkbox"]').check();
     await this.page.getByRole('button', { name: 'Create RFQ', exact: true }).click();
     await this.waitForOdooReady();
 
