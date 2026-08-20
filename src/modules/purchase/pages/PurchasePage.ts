@@ -81,4 +81,10 @@ export class PurchaseListPage extends BaseListPage {
   async openPurchase(name: string): Promise<void> {
     await this.clickRowByText(name);
   }
+
+  /** Opens the topmost row (the list's default sort is newest-first). */
+  async openNewest(): Promise<void> {
+    await this.page.locator('.o_list_table .o_data_row').first().click();
+    await this.waitForOdooReady();
+  }
 }

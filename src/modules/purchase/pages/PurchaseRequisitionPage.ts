@@ -89,12 +89,14 @@ export class PurchaseRequisitionFormPage extends BaseFormPage {
     await this.waitForOdooReady();
   }
 
-  /** Creates an RFQ covering all product lines on this approved requisition, and returns its id. */
+  /** Creates an RFQ covering all product lines on this approved requisition, and returns its id (0 if the app stayed on the requisition instead of navigating to the new RFQ). */
   async createRfqFromLines(): Promise<number> {
     await this.page.getByRole('button', { name: 'Create RFQ', exact: true }).click();
     await this.waitForOdooReady();
 
-    const [, orderId] = this.page.url().match(/id=(\d+)/) ?? [];
+    // Bug-prone: a naive /id=(\d+)/ match also hits "menu_id=573" in this app's URLs.
+    // Require the id param to be preceded by a URL delimiter, not by "_".
+    const [, orderId] = this.page.url().match(/[?&#]id=(\d+)/) ?? [];
     return orderId ? Number(orderId) : 0;
   }
 }

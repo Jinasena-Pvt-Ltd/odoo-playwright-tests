@@ -2,7 +2,7 @@
  * Step 2 — Business Logic for the purchase module.
  */
 import { test, expect } from '../../../../core/fixtures/index';
-import { PurchaseFormPage } from '../../pages/PurchasePage';
+import { PurchaseFormPage, PurchaseListPage } from '../../pages/PurchasePage';
 import { PurchaseRequisitionFormPage } from '../../pages/PurchaseRequisitionPage';
 import { uniqueName } from '../../../../core/utils/RandomDataGenerator';
 import { PURCHASE_TEST_CONFIG } from '../../data/purchase.master-data';
@@ -56,6 +56,12 @@ test.describe('Purchase Business Logic @module:purchase @step:business', () => {
     const poPage = new PurchaseFormPage(page);
     if (rfqId) {
       await poPage.openById(rfqId);
+    } else {
+      // The "Create RFQ" button didn't navigate away from the requisition — fall back
+      // to opening the newest Purchase Order from the Purchase app's list (default sort).
+      const poListPage = new PurchaseListPage(page);
+      await poListPage.navigate();
+      await poListPage.openNewest();
     }
     const visibleVendorField = await poPage.vendor.getValue().catch(() => '');
     if (!visibleVendorField) {
