@@ -101,9 +101,15 @@ export class PurchaseRequisitionFormPage extends BaseFormPage {
     const modal = this.page.locator('.modal');
     await modal.waitFor({ state: 'visible', timeout: 8_000 });
 
-    // Select the lines first — this may trigger a re-render of the wizard that would
-    // otherwise clobber a vendor value set beforehand.
-    await modal.getByRole('button', { name: 'Select All', exact: true }).click();
+    // The "Select All" button is unreliable (it doesn't consistently check the boxes),
+    // so check each requisition line's checkbox individually instead.
+    const lineCheckboxes = modal.locator('.o_list_table .o_data_row input[type="checkbox"]');
+    const lineCount = await lineCheckboxes.count();
+    for (let i = 0; i < lineCount; i++) {
+      await lineCheckboxes.nth(i).check();
+    }
+    await expect.poll(async () => modal.locator('.o_list_table .o_data_row input[type="checkbox"]:checked').count())
+      .toBe(lineCount);
 
     const vendorField = new Many2OneField(this.page, 'x_supplier_id');
     await vendorField.setValue(vendorName);
@@ -111,6 +117,16 @@ export class PurchaseRequisitionFormPage extends BaseFormPage {
     // shows up via the wrapping div's textContent — read it through getValue() instead.
     await expect.poll(() => vendorField.getValue(), { timeout: 8_000 }).toBe(vendorName);
     await modal.getByRole('button', { name: 'Create RFQ', exact: true }).click();
+
+    // The wizard rejects the submission if the checkbox selection didn't stick, showing
+    // an "Invalid Operation" dialog on top of the wizard — surface that clearly instead
+    // of silently hanging on a list view that never gets its new row.
+    const errorDialog = this.page.locator('.modal', { hasText: 'Invalid Operation' });
+    if (await errorDialog.isVisible({ timeout: 3_000 }).catch(() => false)) {
+      const message = await errorDialog.innerText();
+      throw new Error(`Create RFQ wizard rejected the submission: ${message}`);
+    }
+
     await this.waitForOdooReady();
 
     await this.page.waitForSelector('.o_list_view', { timeout: 15_000 });
