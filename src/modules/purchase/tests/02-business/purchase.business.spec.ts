@@ -35,7 +35,8 @@ test.describe('Purchase Business Logic @module:purchase @step:business', () => {
     // 1. Purchase Requisition — created from the "Purchase Requisition MGMT" app.
     const prPage = new PurchaseRequisitionFormPage(page);
     await prPage.navigate();
-    await prPage.type.selectByLabel('Local');
+    // "Local" is already the default selected value for a new requisition.
+    await expect(prPage.fieldWidget('x_studio_type')).toContainText('Local');
     await prPage.warehouse.setValue(scenario.warehouse);
     await prPage.setRequestedDeliveryDate(scenario.requestedDeliveryDay);
     await prPage.requestedBy.setValue(scenario.requestedBy);
