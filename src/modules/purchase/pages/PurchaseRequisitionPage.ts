@@ -17,10 +17,13 @@ export class PurchaseRequisitionFormPage extends BaseFormPage {
 
   static async openApp(page: Page): Promise<void> {
     await page.locator('a.o_menu_toggle, [aria-label="Home menu"]').first().click();
-    await page.getByRole('option', { name: 'Purchase Requisition MGMT', exact: true }).click();
+    // Text-based matching is unreliable here (the tile's caption wraps across lines),
+    // so target the app tile by its known menu/action id instead — confirmed against
+    // the live instance: "Purchase Requisition MGMT" is menu_id=573, action_id=813.
+    await page.locator('a[href="#menu_id=573&action_id=813"]').click();
+    // The app opens directly on its default submenu ("Purchase Requisitions - Inventory
+    // Items"), so no extra submenu click is needed.
     await page.waitForSelector('.o_list_view, .o_kanban_view', { state: 'visible', timeout: 15_000 });
-    await page.getByRole('menuitem', { name: 'Purchase Requisitions - Inventory Items', exact: true }).click();
-    await page.waitForSelector('.o_list_view', { state: 'visible', timeout: 15_000 });
   }
 
   async navigate(): Promise<void> {
