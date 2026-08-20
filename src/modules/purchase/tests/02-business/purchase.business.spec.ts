@@ -54,7 +54,10 @@ test.describe('Purchase Business Logic @module:purchase @step:business', () => {
     // createRfqFromLines leaves the browser on the newly created RFQ's form.
     await prPage.createRfqFromLines(scenario.vendor);
     const poPage = new PurchaseFormPage(page);
-    await expect(poPage.vendor.getValue()).resolves.toContain(scenario.vendor);
+    // A direct locator assertion (unlike `expect(getValue()).resolves...`) uses Playwright's
+    // configured expect timeout and auto-retries, so a mismatch fails fast instead of
+    // hanging for the whole test timeout.
+    await expect(poPage.fieldWidget('partner_id')).toContainText(scenario.vendor);
 
     // 3. RFQ -> Purchase Order -> Delivery -> Vendor Bill -> Register Payment.
     await poPage.confirmOrder();
