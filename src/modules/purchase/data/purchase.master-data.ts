@@ -7,9 +7,10 @@ export const PURCHASE_TEST_CONFIG = {
     requestedBy: 'Apsara Madubashini - BR-KU',
     vendor: 'A C PAUL & CO LTD',
     lines: [
-      { product: '02BB 023', quantity: 10, unitPrice: 100 },
-      { product: '02BB 025', quantity: 15, unitPrice: 150 },
+      { product: '02BB 023', quantity: 10, unitPrice: 500 },
+      { product: '02BB 025', quantity: 15, unitPrice: 600 },
     ],
+    quotationFilePath: 'D:\\My Documents\\#Dummy Documents\\Quotation.pdf',
     requestedDeliveryDay: 22, // 22/08/2026 — see setRequestedDeliveryDate(day)
   },
 } as const;

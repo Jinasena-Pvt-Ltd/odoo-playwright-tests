@@ -42,6 +42,16 @@ export class PurchaseFormPage extends BaseFormPage {
     return pathId ? Number(pathId) : 0;
   }
 
+  /** Uploads the vendor's quotation file under the "Documents" tab. */
+  async uploadQuotation(filePath: string): Promise<void> {
+    await this.page.getByRole('tab', { name: 'Documents', exact: true }).click();
+    const fileChooserPromise = this.page.waitForEvent('filechooser');
+    await this.page.getByRole('button', { name: 'Upload your file', exact: true }).click();
+    const fileChooser = await fileChooserPromise;
+    await fileChooser.setFiles(filePath);
+    await this.waitForOdooReady();
+  }
+
   /**
    * Sets the unit price on every order line, in row order. An RFQ created from a
    * requisition has zero-priced lines (the real vendor quote isn't known yet), and

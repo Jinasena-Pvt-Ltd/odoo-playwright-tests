@@ -68,6 +68,10 @@ test.describe('Purchase Business Logic @module:purchase @step:business', () => {
     }
     await expect.poll(() => poPage.vendor.getValue(), { timeout: 20_000 }).toBe(scenario.vendor);
 
+    // Prior to confirming, the vendor's quotation must be attached under the
+    // "Documents" tab.
+    await poPage.uploadQuotation(scenario.quotationFilePath);
+
     // 3. RFQ -> Purchase Order -> Delivery -> Vendor Bill -> Register Payment.
     // The RFQ's lines come over with no unit price (the real vendor quote isn't known
     // yet) — Confirm Order silently no-ops on a zero-total order, so fill them in first.
@@ -76,16 +80,20 @@ test.describe('Purchase Business Logic @module:purchase @step:business', () => {
     // confirmation proof — the statusbar always lists all three lifecycle labels
     // regardless of which is active, so checking its text would be a false positive.
     await poPage.confirmOrder();
+    const poId = poPage.getRecordId();
 
     const deliveryPage = await poPage.openDelivery();
     await deliveryPage.validate();
+
+    // openDelivery() navigated away from the PO via its smart button — return to it
+    // before continuing the flow there.
+    await poPage.openById(poId);
 
     const billPage = await poPage.createVendorBill();
     await billPage.confirm();
     await billPage.registerPayment();
 
     // Cleanup — archive the created chain via RPC (teardown only, never as test actions).
-    const poId = poPage.getRecordId();
     if (poId) {
       await rpc.archive('purchase.order', [poId]);
     }

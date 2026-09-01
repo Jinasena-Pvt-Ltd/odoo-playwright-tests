@@ -15,7 +15,7 @@ export class DeliveryFormPage extends BaseFormPage {
   async validate(): Promise<void> {
     // "Supplier Invoice Number" is a required field on this delivery — Validate is a
     // no-op without it.
-    await this.supplierInvoiceNumber.setValue(uniqueName('INV'));
+    await this.supplierInvoiceNumber.setValue(uniqueName('Sup_Inv'));
     await this.page.getByRole('button', { name: 'Validate', exact: true }).click();
     const dialogVisible = await this.page.locator('.modal').isVisible({ timeout: 3_000 }).catch(() => false);
     if (dialogVisible) {
