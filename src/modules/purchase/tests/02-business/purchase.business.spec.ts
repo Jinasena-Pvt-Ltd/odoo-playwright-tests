@@ -22,10 +22,8 @@ test.describe('Purchase Business Logic @module:purchase @step:business', () => {
     // (e.g. "P00001") in place of the "New" placeholder shown before save.
     await expect(page.locator('.o_field_widget[name="name"]')).not.toContainText('New');
 
-    const orderId = formPage.getRecordId();
-    if (orderId) {
-      await rpc.archive('purchase.order', [orderId]);
-    }
+    // This instance's purchase.order model has no "active" field (a Studio
+    // customization), so the standard archive() teardown isn't applicable to it.
     await rpc.archive('res.partner', [vendorId]);
   });
 
@@ -96,9 +94,8 @@ test.describe('Purchase Business Logic @module:purchase @step:business', () => {
     await billPage.confirm();
     await billPage.registerPayment();
 
-    // Cleanup — archive the created chain via RPC (teardown only, never as test actions).
-    if (poId) {
-      await rpc.archive('purchase.order', [poId]);
-    }
+    // Cleanup — this instance's purchase.order model has no "active" field (a Studio
+    // customization), so the standard archive() teardown isn't applicable here. The
+    // order is left in place, identifiable by its "[TEST]" data for manual cleanup.
   });
 });
