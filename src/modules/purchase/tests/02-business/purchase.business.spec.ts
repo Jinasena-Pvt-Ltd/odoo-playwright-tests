@@ -81,6 +81,7 @@ test.describe('Purchase Business Logic @module:purchase @step:business', () => {
     // regardless of which is active, so checking its text would be a false positive.
     await poPage.confirmOrder();
     const poId = poPage.getRecordId();
+    expect(poId, 'PO record id could not be read from the URL').toBeGreaterThan(0);
 
     const deliveryPage = await poPage.openDelivery();
     await deliveryPage.validate();
@@ -88,6 +89,8 @@ test.describe('Purchase Business Logic @module:purchase @step:business', () => {
     // openDelivery() navigated away from the PO via its smart button — return to it
     // before continuing the flow there.
     await poPage.openById(poId);
+    await expect(page.getByRole('button', { name: 'Create Bill', exact: true }))
+      .toBeVisible({ timeout: 15_000 });
 
     const billPage = await poPage.createVendorBill();
     await billPage.confirm();
