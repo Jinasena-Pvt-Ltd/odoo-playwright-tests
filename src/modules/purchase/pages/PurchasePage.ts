@@ -59,6 +59,7 @@ export class PurchaseFormPage extends BaseFormPage {
    * Confirm Order silently no-ops on a zero-total order without any visible error.
    */
   async setLineUnitPrices(prices: number[]): Promise<void> {
+    await this.page.getByRole('tab', { name: 'Products', exact: true }).click();
     const priceCells = this.page.locator('.o_list_table .o_data_row td[name="price_unit"]');
     for (let i = 0; i < prices.length; i++) {
       await priceCells.nth(i).click();
