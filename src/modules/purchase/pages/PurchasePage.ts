@@ -45,11 +45,11 @@ export class PurchaseFormPage extends BaseFormPage {
   /** Uploads the vendor's quotation file under the "Documents" tab (the "Quotation 1" slot). */
   async uploadQuotation(filePath: string): Promise<void> {
     await this.page.getByRole('tab', { name: 'Documents', exact: true }).click();
-    const fileChooserPromise = this.page.waitForEvent('filechooser');
-    // Two "Upload your file" buttons exist (Quotation 1 and Quotation 2) — use the first.
-    await this.page.getByRole('button', { name: 'Upload your file', exact: true }).first().click();
-    const fileChooser = await fileChooserPromise;
-    await fileChooser.setFiles(filePath);
+    // Clicking "Upload your file" opens a native OS file dialog that blocks Playwright's
+    // click action from ever resolving — set the file directly on the underlying hidden
+    // <input type="file"> instead, bypassing the dialog entirely. Two upload slots exist
+    // (Quotation 1 and Quotation 2); use the first.
+    await this.page.locator('input[type="file"]').first().setInputFiles(filePath);
     await this.waitForOdooReady();
   }
 
