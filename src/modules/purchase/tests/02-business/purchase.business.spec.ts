@@ -69,8 +69,13 @@ test.describe('Purchase Business Logic @module:purchase @step:business', () => {
     await expect.poll(() => poPage.vendor.getValue(), { timeout: 20_000 }).toBe(scenario.vendor);
 
     // 3. RFQ -> Purchase Order -> Delivery -> Vendor Bill -> Register Payment.
+    // The RFQ's lines come over with no unit price (the real vendor quote isn't known
+    // yet) — Confirm Order silently no-ops on a zero-total order, so fill them in first.
+    await poPage.setLineUnitPrices(scenario.lines.map((line) => line.unitPrice));
+    // confirmOrder() already waits for the "Confirm Order" button to disappear as
+    // confirmation proof — the statusbar always lists all three lifecycle labels
+    // regardless of which is active, so checking its text would be a false positive.
     await poPage.confirmOrder();
-    await expect(page.locator('.o_statusbar_status')).toContainText('Purchase Order');
 
     const deliveryPage = await poPage.openDelivery();
     await deliveryPage.validate();

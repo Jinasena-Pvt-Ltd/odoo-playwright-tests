@@ -1,4 +1,4 @@
-import { Page } from '@playwright/test';
+import { Page, expect } from '@playwright/test';
 import { BaseFormPage } from '../../../core/base/BaseFormPage';
 import { BaseListPage } from '../../../core/base/BaseListPage';
 import { CharField } from '../../../core/components/CharField';
@@ -42,10 +42,35 @@ export class PurchaseFormPage extends BaseFormPage {
     return pathId ? Number(pathId) : 0;
   }
 
+  /**
+   * Sets the unit price on every order line, in row order. An RFQ created from a
+   * requisition has zero-priced lines (the real vendor quote isn't known yet), and
+   * Confirm Order silently no-ops on a zero-total order without any visible error.
+   */
+  async setLineUnitPrices(prices: number[]): Promise<void> {
+    const priceCells = this.page.locator('.o_list_table .o_data_row td[name="price_unit"]');
+    for (let i = 0; i < prices.length; i++) {
+      await priceCells.nth(i).click();
+      await priceCells.nth(i).locator('input').fill(String(prices[i]));
+      await this.page.keyboard.press('Tab');
+    }
+    await this.waitForOdooReady();
+  }
+
   /** RFQ -> Purchase Order. */
   async confirmOrder(): Promise<void> {
-    await this.page.getByRole('button', { name: 'Confirm Order', exact: true }).click();
+    const confirmButton = this.page.getByRole('button', { name: 'Confirm Order', exact: true });
+    // The button goes disabled while the price edits above are still saving — clicking
+    // during that window doesn't register, so wait for it to re-enable first.
+    await expect(confirmButton).toBeEnabled({ timeout: 10_000 });
+    await confirmButton.click();
     await this.waitForOdooReady();
+    // The statusbar always lists all three lifecycle labels (RFQ / RFQ Sent / Purchase
+    // Order) regardless of which is active, so checking its text is a false positive.
+    // The "Confirm Order" button also stays visible after confirming (it doesn't
+    // disappear) — instead wait for "Create Bill", which only appears once confirmed.
+    await this.page.getByRole('button', { name: 'Create Bill', exact: true })
+      .waitFor({ state: 'visible', timeout: 15_000 });
   }
 
   /** Opens the delivery (stock.picking) created for this Purchase Order via its smart button. */
