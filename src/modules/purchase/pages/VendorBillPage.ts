@@ -2,7 +2,6 @@ import { Page } from '@playwright/test';
 import { BaseFormPage } from '../../../core/base/BaseFormPage';
 import { CharField } from '../../../core/components/CharField';
 import { DateField } from '../../../core/components/DateField';
-import { uniqueName } from '../../../core/utils/RandomDataGenerator';
 import { today } from '../../../core/utils/DateHelper';
 
 /** account.move form (move_type = 'in_invoice'), reached via a Purchase Order's "Create Bill" button. */
@@ -22,7 +21,7 @@ export class VendorBillFormPage extends BaseFormPage {
     // Both the Bill/Refund date and "Supplier's Invoice Number (Bill Reference)" are
     // required — Confirm raises "Invalid Operation" / silently no-ops without them.
     await this.billDate.setValue(today());
-    await this.supplierInvoiceNumber.setValue(uniqueName('Sup_Inv'));
+    await this.supplierInvoiceNumber.setValue('SUP_INV_12345');
     const confirmButton = this.page.getByRole('button', { name: 'Confirm', exact: true });
     await confirmButton.click();
     await this.waitForOdooReady();
