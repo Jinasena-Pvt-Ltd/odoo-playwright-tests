@@ -67,7 +67,7 @@ test.describe('Purchase Business Logic @module:purchase @step:business', () => {
     await rpc.archive('res.partner', [vendorId]);
   });
 
-  test('completes the Inventory Credit Purchase cycle: PR -> RFQ -> PO -> Delivery -> Vendor Bill -> Payment @e2e', async ({ page }, testInfo) => {
+  test('Purchase-Inv-Credit: PR -> RFQ -> PO -> Delivery -> Vendor Bill -> Payment @e2e', async ({ page }, testInfo) => {
     const scenario = PURCHASE_TEST_CONFIG.inventoryCreditPurchase;
     const steps = createStepRunner(page, testInfo);
     const prPage = new PurchaseRequisitionFormPage(page);
