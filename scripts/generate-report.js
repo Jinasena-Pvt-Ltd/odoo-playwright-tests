@@ -246,7 +246,10 @@ function loadResults(filePath) {
 
 function getStatus(test, map) {
   if (map) {
-    const r = map[test.name];
+    // results.json keys specs by their literal title (tags included), but `test.name`
+    // has tags stripped for display — look up by `rawName` instead so real
+    // pass/fail/skipped statuses actually match instead of falling back to "pending".
+    const r = map[test.rawName] || map[test.name];
     if (r) return r.status;
   }
   if (test.isSkip)      return 'skipped';
