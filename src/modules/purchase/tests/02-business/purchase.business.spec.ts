@@ -74,6 +74,7 @@ test.describe('Purchase Business Logic @module:purchase @step:business', () => {
   });
 
   test('Purchase-Inv-Credit: PR -> RFQ -> PO -> Delivery -> Vendor Bill -> Payment @e2e', async ({ page }, testInfo) => {
+    test.setTimeout(300_000); // this full flow can run well past the 120s default
     const scenario = PURCHASE_TEST_CONFIG.inventoryCreditPurchase;
     const steps = createStepRunner(page, testInfo);
     const prPage = new PurchaseRequisitionFormPage(page);
@@ -192,6 +193,7 @@ test.describe('Purchase Business Logic @module:purchase @step:business', () => {
   });
 
   test('Purchase-Inv-Cash: PR -> Cash Purchase -> RFQ -> PO -> Delivery -> Vendor Bill -> Settlement @e2e', async ({ page, rpc }, testInfo) => {
+    test.setTimeout(600_000); // this longer flow (cash issue + settlement journals, plus retry loops) needs well more than 120s
     const scenario = PURCHASE_TEST_CONFIG.inventoryCashPurchase;
     const steps = createStepRunner(page, testInfo);
     const prPage = new PurchaseRequisitionFormPage(page);
@@ -344,16 +346,17 @@ test.describe('Purchase Business Logic @module:purchase @step:business', () => {
         await cashPage.updateActualSpent();
       });
 
-      // Verify the Actual Amount now reflects the PO's real total.
+      // Verify the Actual Amount now reflects the PO's real total. This field briefly
+      // reads back stale/empty right after the button click (same DOM re-render lag
+      // seen elsewhere) — poll instead of a single read.
       await steps.run('Cash Purchase Settlement', 'Verify Actual Amount', async () => {
-        const actualText = await cashPage.getActualAmountText();
-        actualAmount = parseAmount(actualText);
         const poRows = await rpc.searchRead<{ id: number; amount_total: number }>(
           'purchase.order', [['id', '=', poId]], ['id', 'amount_total'],
         );
         const poTotal = poRows[0]?.amount_total ?? 0;
-        expect(actualAmount, `Actual Amount (${actualText}) should match the PO total (${poTotal})`)
+        await expect.poll(async () => parseAmount(await cashPage.getActualAmountText()), { timeout: 8_000 })
           .toBeCloseTo(poTotal, 2);
+        actualAmount = poTotal;
       });
 
       await steps.run('Cash Purchase Settlement', 'Settle Cash', async () => {

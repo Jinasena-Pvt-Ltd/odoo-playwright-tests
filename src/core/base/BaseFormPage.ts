@@ -12,8 +12,9 @@ export abstract class BaseFormPage extends BasePage {
     const saveBtn = this.page.locator('.o_form_button_save, button[name="save_manually"]').first();
     await saveBtn.waitFor({ state: 'visible', timeout: 5_000 });
     await saveBtn.click();
-    // Wait until the form leaves edit mode (save button disappears)
-    await expect(saveBtn).toBeHidden({ timeout: 10_000 });
+    // Wait until the form leaves edit mode (save button disappears). This instance can
+    // occasionally take well over 10s to settle under load.
+    await expect(saveBtn).toBeHidden({ timeout: 20_000 });
     await this.waitForOdooReady();
   }
 

@@ -137,9 +137,28 @@ export class PurchaseFormPage extends BaseFormPage {
 
   /** Creates a vendor bill for this Purchase Order via the "Create Bill" button. */
   async createVendorBill(): Promise<VendorBillFormPage> {
-    await this.page.getByRole('button', { name: 'Create Bill', exact: true }).click();
-    await this.waitForOdooReady();
-    return new VendorBillFormPage(this.page);
+    const createBillButton = this.page.getByRole('button', { name: 'Create Bill', exact: true });
+    const errorDialog = this.page.locator('.modal', { hasText: 'Invalid Operation' });
+
+    for (let attempt = 0; attempt < 3; attempt++) {
+      await createBillButton.click();
+      await this.waitForOdooReady();
+      // "Create Bill" can reject with "Invalid Operation" — most often "no invoiceable
+      // line" — because the delivery's received quantity hasn't finished propagating
+      // server-side yet, right after validating it. Retry a couple times before
+      // surfacing it as a real failure.
+      if (!(await errorDialog.isVisible({ timeout: 3_000 }).catch(() => false))) {
+        return new VendorBillFormPage(this.page);
+      }
+      // Two "Close" buttons exist on this dialog (the header's "X" icon and the
+      // primary footer button) — use the footer one specifically.
+      const closeButton = errorDialog.locator('.o-default-button', { hasText: 'Close' });
+      await closeButton.click();
+      await this.page.waitForTimeout(2_000);
+    }
+
+    const message = await errorDialog.innerText();
+    throw new Error(`Create Bill was rejected: ${message}`);
   }
 }
 

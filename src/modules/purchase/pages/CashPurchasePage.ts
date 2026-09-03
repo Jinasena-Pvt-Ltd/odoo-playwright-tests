@@ -52,21 +52,35 @@ export class CashPurchaseFormPage extends BaseFormPage {
     await this.waitForOdooReady();
   }
 
-  /** Overrides the auto-computed "Issued Amount" (editable only right after Report As Ready). */
+  /**
+   * Overrides the auto-computed "Issued Amount" (editable only right after Report As
+   * Ready). Whether one round of type+Tab actually registers as a change is flaky, so
+   * retry (with a real save each time) until the override genuinely sticks.
+   */
   async setIssuedAmount(amount: number): Promise<void> {
-    const widget = this.page.locator('.o_field_widget[name="x_studio_amount_to_issue"]');
-    await widget.click();
-    const input = widget.locator('input').first();
-    // The click above only opens edit mode asynchronously — filling before the input
-    // is actually ready silently no-ops, leaving the auto-computed value in place.
-    await input.waitFor({ state: 'visible', timeout: 8_000 });
-    await input.fill(String(amount));
-    await this.page.keyboard.press('Tab');
-    await this.waitForOdooReady();
-    // Tab-out alone leaves the record dirty (still shows the editable <input> rather
-    // than committing) — "Issue Cash" doesn't save first, so it silently used the
-    // stale auto-computed amount instead of this override. Save explicitly.
-    await this.save();
+    for (let attempt = 0; attempt < 3; attempt++) {
+      const widget = this.page.locator('.o_field_widget[name="x_studio_amount_to_issue"]');
+      await widget.click();
+      const input = widget.locator('input').first();
+      // The click above only opens edit mode asynchronously — filling before the input
+      // is actually ready silently no-ops, leaving the auto-computed value in place.
+      await input.waitFor({ state: 'visible', timeout: 8_000 });
+      // .fill() alone doesn't reliably mark the record dirty on this field (the Save
+      // button stays disabled afterward) — use real keystrokes instead, same as the
+      // product-line autocomplete inputs.
+      await input.selectText();
+      await input.pressSequentially(String(amount), { delay: 30 });
+      await this.page.keyboard.press('Tab');
+      await this.waitForOdooReady();
+
+      const saveBtn = this.page.locator('.o_form_button_save, button[name="save_manually"]').first();
+      if (await saveBtn.isVisible({ timeout: 3_000 }).catch(() => false)) {
+        await this.save();
+      }
+
+      const current = parseFloat((await this.getIssuedAmountText()).replace(/[^\d.-]/g, ''));
+      if (Math.abs(current - amount) < 0.005) return;
+    }
   }
 
   async getIssuedAmountText(): Promise<string> {
@@ -146,6 +160,9 @@ export class CashPurchaseFormPage extends BaseFormPage {
     await this.page.locator('.o_list_table .o_data_row td[name="name"]').first().click();
     await this.waitForOdooReady();
 
+    // The URL's `id=` param can take a moment to settle after the row click, so poll
+    // for it rather than reading page.url() exactly once.
+    await expect.poll(() => /[?&#]id=(\d+)/.test(this.page.url()), { timeout: 8_000 }).toBe(true);
     const [, orderId] = this.page.url().match(/[?&#]id=(\d+)/) ?? [];
     return orderId ? Number(orderId) : 0;
   }

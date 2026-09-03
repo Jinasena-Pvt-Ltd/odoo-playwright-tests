@@ -61,10 +61,21 @@ export class PurchaseRequisitionFormPage extends BaseFormPage {
     // pressSequentially fires per-keystroke events, reliably triggering the autocomplete
     // search — this instance's product lookup can take several seconds to respond.
     const productInput = modal.locator('.o_field_widget[name^="x_studio_many2one"] input').first();
-    await productInput.click();
-    await productInput.pressSequentially(productName, { delay: 30 });
     const productOption = this.page.locator('.o-dropdown--menu .o_menu_item, .ui-autocomplete .ui-menu-item').filter({ hasText: productName }).first();
-    await productOption.waitFor({ state: 'visible', timeout: 15_000 });
+
+    // This instance's product search is occasionally very slow to respond (seen up to
+    // 30s+, especially on the 2nd+ line added within a session) or the dropdown never
+    // opens at all — retry by re-typing rather than waiting even longer on one attempt.
+    let found = false;
+    for (let attempt = 0; attempt < 3 && !found; attempt++) {
+      await productInput.click();
+      await productInput.fill('');
+      await productInput.pressSequentially(productName, { delay: 30 });
+      found = await productOption.waitFor({ state: 'visible', timeout: 15_000 }).then(() => true).catch(() => false);
+    }
+    if (!found) {
+      throw new Error(`Product "${productName}" never appeared in the search dropdown after 3 attempts`);
+    }
     await productOption.click();
 
     const quantityInput = modal.locator('.o_field_widget[name="x_studio_quantity"] input').first();
