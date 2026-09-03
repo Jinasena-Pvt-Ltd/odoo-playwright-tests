@@ -33,7 +33,17 @@ export class PurchaseFormPage extends BaseFormPage {
     // Going straight from another `/web#...` page (e.g. a delivery) to this one only
     // changes the URL hash — Odoo's SPA router doesn't reliably react to that. Force a
     // full reload of the app shell first, then navigate to the target record.
-    await this.page.goto(`${baseURL}/odoo`);
+    // This instance's "/odoo" route occasionally answers with a transient HTTP 404
+    // (server-side blip, not a real missing route — Odoo's SPA shell still renders
+    // its default app underneath), so retry the reload once if the app shell never
+    // shows up.
+    let shellLoaded = false;
+    for (let attempt = 0; attempt < 2 && !shellLoaded; attempt++) {
+      await this.page.goto(`${baseURL}/odoo`);
+      shellLoaded = await this.page.waitForSelector('.o_action_manager, .o_home_menu', { timeout: 10_000 })
+        .then(() => true)
+        .catch(() => false);
+    }
     await this.waitForOdooReady();
     await this.page.goto(`${baseURL}/web#action=436&model=purchase.order&view_type=form&cids=2&menu_id=271&id=${id}`);
     await this.waitForOdooReady();

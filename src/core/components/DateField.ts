@@ -9,7 +9,9 @@ export class DateField {
   /** Sets the field value. Accepts ISO date string (YYYY-MM-DD) or display format (MM/DD/YYYY) */
   async setValue(date: string): Promise<void> {
     const input = this.page.locator(`.o_field_widget[name="${this.fieldName}"] input`).first();
-    await input.waitFor({ state: 'visible', timeout: 5_000 });
+    // This instance occasionally has multi-second UI rendering lag — 5s was too tight
+    // and caused a one-off flaky timeout on the vendor bill's Bill Date field.
+    await input.waitFor({ state: 'visible', timeout: 15_000 });
     await input.fill('');
     await input.type(this.toDisplayFormat(date));
     // Close the datepicker by pressing Escape or Tab
