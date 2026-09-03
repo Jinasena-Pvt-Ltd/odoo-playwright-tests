@@ -63,6 +63,10 @@ export class CashPurchaseFormPage extends BaseFormPage {
     await input.fill(String(amount));
     await this.page.keyboard.press('Tab');
     await this.waitForOdooReady();
+    // Tab-out alone leaves the record dirty (still shows the editable <input> rather
+    // than committing) — "Issue Cash" doesn't save first, so it silently used the
+    // stale auto-computed amount instead of this override. Save explicitly.
+    await this.save();
   }
 
   async getIssuedAmountText(): Promise<string> {
@@ -109,8 +113,11 @@ export class CashPurchaseFormPage extends BaseFormPage {
 
   private async openLatestJournalEntry(): Promise<JournalEntryFormPage> {
     await this.page.waitForSelector('.o_list_view', { timeout: 15_000 });
-    await this.page.locator('.o_list_table .o_data_row').first().click();
-    await this.waitForOdooReady();
+    // Clicking anywhere in the row doesn't navigate — same clickable-cell pattern as
+    // other Studio lists; the "Number" column ("/" for an unposted entry) carries the
+    // `name` field.
+    await this.page.locator('.o_list_table .o_data_row td[name="name"]').first().click();
+    await this.page.waitForSelector('.o_form_view', { timeout: 15_000 });
     return new JournalEntryFormPage(this.page);
   }
 
