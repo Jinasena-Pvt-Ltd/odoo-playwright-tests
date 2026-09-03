@@ -11,10 +11,10 @@ export class DeliveryFormPage extends BaseFormPage {
   }
 
   /** Validates the delivery, confirming the "Immediate Transfer" dialog if it appears. */
-  async validate(): Promise<void> {
+  async validate(supplierInvoiceNumber = 'SUP_INV_12345'): Promise<void> {
     // "Supplier Invoice Number" is a required field on this delivery — Validate is a
     // no-op without it.
-    await this.supplierInvoiceNumber.setValue('SUP_INV_12345');
+    await this.supplierInvoiceNumber.setValue(supplierInvoiceNumber);
     await this.page.getByRole('button', { name: 'Validate', exact: true }).click();
     const dialogVisible = await this.page.locator('.modal').isVisible({ timeout: 3_000 }).catch(() => false);
     if (dialogVisible) {

@@ -144,6 +144,46 @@ export class PurchaseRequisitionFormPage extends BaseFormPage {
     const [, orderId] = this.page.url().match(/[?&#]id=(\d+)/) ?? [];
     return orderId ? Number(orderId) : 0;
   }
+
+  /**
+   * Opens the "Convert to Cash Purchase" wizard, selects all requisition lines, and
+   * confirms — creating an x_purchase_request_cas record. Lands on that model's list
+   * view (same pattern as createRfqFromLines), so this opens the newest row and
+   * returns its id.
+   */
+  async convertToCashPurchase(): Promise<number> {
+    await this.page.getByRole('button', { name: 'Convert to Cash Purchase', exact: true }).click();
+
+    const modal = this.page.locator('.modal');
+    await modal.waitFor({ state: 'visible', timeout: 8_000 });
+
+    // Same "Select All" unreliability as the Create RFQ wizard — check each line
+    // individually instead.
+    const lineRows = modal.locator('.o_list_table .o_data_row');
+    const lineCount = await lineRows.count();
+    for (let i = 0; i < lineCount; i++) {
+      const selectCell = lineRows.nth(i).locator('td[name="x_select"]');
+      await selectCell.click();
+      await selectCell.locator('input[type="checkbox"]').check();
+    }
+    await expect.poll(async () => modal.locator('.o_list_table .o_data_row input[type="checkbox"]:checked').count())
+      .toBe(lineCount);
+
+    await modal.getByRole('button', { name: 'Create Cash Purchase', exact: true }).click();
+    await this.waitForOdooReady();
+
+    await this.page.waitForSelector('.o_list_view', { timeout: 15_000 });
+    // This model's reference field is `x_name`, not `name` — the list cell carries
+    // that as its `name` attribute, same clickable-cell pattern as other Studio lists.
+    await this.page.locator('.o_list_table .o_data_row td[name="x_name"]').first().click();
+    await this.waitForOdooReady();
+
+    // The URL's `id=` param can take a moment to settle after the row click, so poll
+    // for it rather than reading page.url() exactly once.
+    await expect.poll(() => /[?&#]id=(\d+)/.test(this.page.url()), { timeout: 8_000 }).toBe(true);
+    const [, cashPurchaseId] = this.page.url().match(/[?&#]id=(\d+)/) ?? [];
+    return cashPurchaseId ? Number(cashPurchaseId) : 0;
+  }
 }
 
 export class PurchaseRequisitionListPage extends BaseListPage {

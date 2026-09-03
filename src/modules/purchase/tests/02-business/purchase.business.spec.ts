@@ -5,8 +5,14 @@ import { Page, TestInfo } from '@playwright/test';
 import { test, expect } from '../../../../core/fixtures/index';
 import { PurchaseFormPage } from '../../pages/PurchasePage';
 import { PurchaseRequisitionFormPage } from '../../pages/PurchaseRequisitionPage';
+import { CashPurchaseFormPage } from '../../pages/CashPurchasePage';
 import { uniqueName } from '../../../../core/utils/RandomDataGenerator';
 import { PURCHASE_TEST_CONFIG } from '../../data/purchase.master-data';
+
+/** Parses a displayed amount like "15,000.0000 Rs" into a plain number. */
+function parseAmount(text: string): number {
+  return parseFloat(text.replace(/[^\d.-]/g, ''));
+}
 
 /** Records OK/Error per named step and prints a brief summary at the end of the run. */
 function createStepRunner(page: Page, testInfo: TestInfo) {
@@ -180,6 +186,187 @@ test.describe('Purchase Business Logic @module:purchase @step:business', () => {
       // Cleanup — this instance's purchase.order model has no "active" field (a Studio
       // customization), so the standard archive() teardown isn't applicable here. The
       // order is left in place, identifiable by its "[TEST]" data for manual cleanup.
+    } finally {
+      steps.printSummary();
+    }
+  });
+
+  test('Purchase-Inv-Cash: PR -> Cash Purchase -> RFQ -> PO -> Delivery -> Vendor Bill -> Settlement @e2e', async ({ page, rpc }, testInfo) => {
+    const scenario = PURCHASE_TEST_CONFIG.inventoryCashPurchase;
+    const steps = createStepRunner(page, testInfo);
+    const prPage = new PurchaseRequisitionFormPage(page);
+    const cashPage = new CashPurchaseFormPage(page);
+    let cashPurchaseId = 0;
+    let poId = 0;
+    let actualAmount = 0;
+    let poPage!: PurchaseFormPage;
+    let billPage!: Awaited<ReturnType<PurchaseFormPage['createVendorBill']>>;
+    let journalPage!: Awaited<ReturnType<CashPurchaseFormPage['issueCash']>>;
+
+    try {
+      // 1. Purchase Requisition — same products/quantities as Purchase-Inv-Credit.
+      await steps.run('Purchase Requisition', 'Create', async () => {
+        await prPage.navigate();
+        await expect(prPage.fieldWidget('x_studio_type')).toContainText('Local');
+      });
+
+      await steps.run('Purchase Requisition', 'Fill fields', async () => {
+        await prPage.warehouse.setValue(scenario.warehouse);
+        await prPage.setRequestedDeliveryDate(scenario.requestedDeliveryDay);
+        await prPage.requestedBy.setValue(scenario.requestedBy);
+        for (const [index, line] of scenario.lines.entries()) {
+          await prPage.addProductLine(line.product, line.quantity, index === scenario.lines.length - 1);
+        }
+      });
+
+      await steps.run('Purchase Requisition', 'Save', async () => {
+        await prPage.save();
+      });
+
+      await steps.run('Purchase Requisition', 'Confirm', async () => {
+        await prPage.confirm();
+      });
+
+      await steps.run('Purchase Requisition', 'Request Approval', async () => {
+        await prPage.requestApproval();
+      });
+
+      await steps.run('Purchase Requisition', 'Approve', async () => {
+        await prPage.approve();
+        await expect(page.locator('.o_statusbar_status')).toContainText('Approved');
+      });
+
+      // 2. Convert to Cash Purchase — selects all requisition lines in the wizard.
+      await steps.run('Purchase Requisition', 'Convert to Cash Purchase', async () => {
+        cashPurchaseId = await prPage.convertToCashPurchase();
+        expect(cashPurchaseId, 'Cash Purchase record id could not be read from the URL').toBeGreaterThan(0);
+      });
+
+      await steps.run('Cash Purchase', 'Set Vendor', async () => {
+        await cashPage.vendor.setValue(scenario.vendor);
+        await page.keyboard.press('Tab');
+        await expect.poll(() => cashPage.vendor.getValue(), { timeout: 8_000 }).toBe(scenario.vendor);
+      });
+
+      await steps.run('Cash Purchase', 'Set Unit Prices', async () => {
+        await cashPage.setLineUnitPrices(scenario.lines.map((line) => line.cashUnitPrice));
+      });
+
+      await steps.run('Cash Purchase', 'Report As Ready', async () => {
+        await cashPage.reportAsReady();
+      });
+
+      // The auto-computed Issued Amount is overridden with a higher value, per the flow.
+      // The field briefly reads back empty right after Tab-out (re-rendering from an
+      // editable input to a read-only span) — poll instead of a single read.
+      await steps.run('Cash Purchase', 'Set Issued Amount', async () => {
+        await cashPage.setIssuedAmount(scenario.issuedAmount);
+        await expect.poll(async () => parseAmount(await cashPage.getIssuedAmountText()), { timeout: 8_000 })
+          .toBeCloseTo(scenario.issuedAmount, 2);
+      });
+
+      await steps.run('Cash Purchase', 'Issue Cash', async () => {
+        journalPage = await cashPage.issueCash();
+      });
+
+      // Verify the issue journal's amount matches the Issued Amount, then post it.
+      await steps.run('Cash Purchase', 'Verify & Post Issue Journal', async () => {
+        const debitText = await journalPage.getTotalDebit();
+        expect(parseAmount(debitText), `Issue journal amount (${debitText}) should match Issued Amount (${scenario.issuedAmount})`)
+          .toBeCloseTo(scenario.issuedAmount, 2);
+        await journalPage.post();
+      });
+
+      await steps.run('Cash Purchase', 'Reopen Cash Purchase', async () => {
+        await cashPage.openById(cashPurchaseId);
+      });
+
+      // Creates the RFQ (purchase.order) for this Cash Purchase and opens it.
+      await steps.run('Cash Purchase', 'Create PO', async () => {
+        poId = await cashPage.createPO(scenario.vendor);
+        expect(poId, 'PO record id could not be read from the URL').toBeGreaterThan(0);
+        poPage = new PurchaseFormPage(page);
+      });
+
+      // 3. RFQ — actual purchase prices may differ slightly from the cash purchase estimate.
+      await steps.run('RFQ', 'Change Unit Prices', async () => {
+        await poPage.setLineUnitPrices(scenario.lines.map((line) => line.poUnitPrice));
+      });
+
+      await steps.run('RFQ', 'Print RFQ', async () => {
+        await poPage.printRfq();
+      });
+
+      await steps.run('RFQ', 'Upload Quotation', async () => {
+        await poPage.uploadQuotation(scenario.quotationFilePath);
+      });
+
+      await steps.run('RFQ', 'Receive Quotation', async () => {
+        await poPage.receiveQuotation();
+      });
+
+      await steps.run('RFQ', 'Confirm Order', async () => {
+        await poPage.confirmOrder();
+      });
+
+      await steps.run('Delivery', 'Validate', async () => {
+        const deliveryPage = await poPage.receiveProducts();
+        await deliveryPage.validate(scenario.supplierInvoiceNumber);
+      });
+
+      await steps.run('Vendor Bill', 'Reopen Purchase Order', async () => {
+        await poPage.openById(poId);
+        await expect(page.getByRole('button', { name: 'Create Bill', exact: true }))
+          .toBeVisible({ timeout: 15_000 });
+      });
+
+      await steps.run('Vendor Bill', 'Create', async () => {
+        billPage = await poPage.createVendorBill();
+      });
+
+      await steps.run('Vendor Bill', 'Confirm', async () => {
+        await billPage.confirm(scenario.supplierInvoiceNumber);
+      });
+
+      // Cash purchases are already paid via the cash journal — Register Payment must
+      // NOT be offered here, unlike the credit flow.
+      await steps.run('Vendor Bill', 'Verify No Register Payment', async () => {
+        const registerPaymentVisible = await page.getByRole('button', { name: 'Register Payment', exact: true })
+          .isVisible({ timeout: 3_000 }).catch(() => false);
+        expect(registerPaymentVisible, 'Register Payment should not be offered on a cash purchase bill').toBe(false);
+      });
+
+      await steps.run('Cash Purchase Settlement', 'Reopen Cash Purchase', async () => {
+        await cashPage.openById(cashPurchaseId);
+      });
+
+      await steps.run('Cash Purchase Settlement', 'Update Actual Spent', async () => {
+        await cashPage.updateActualSpent();
+      });
+
+      // Verify the Actual Amount now reflects the PO's real total.
+      await steps.run('Cash Purchase Settlement', 'Verify Actual Amount', async () => {
+        const actualText = await cashPage.getActualAmountText();
+        actualAmount = parseAmount(actualText);
+        const poRows = await rpc.searchRead<{ id: number; amount_total: number }>(
+          'purchase.order', [['id', '=', poId]], ['id', 'amount_total'],
+        );
+        const poTotal = poRows[0]?.amount_total ?? 0;
+        expect(actualAmount, `Actual Amount (${actualText}) should match the PO total (${poTotal})`)
+          .toBeCloseTo(poTotal, 2);
+      });
+
+      await steps.run('Cash Purchase Settlement', 'Settle Cash', async () => {
+        journalPage = await cashPage.settleCash();
+      });
+
+      // Verify the settlement journal's amount matches the Actual Amount, then post it.
+      await steps.run('Cash Purchase Settlement', 'Verify & Post Settle Journal', async () => {
+        const debitText = await journalPage.getTotalDebit();
+        expect(parseAmount(debitText), `Settlement journal amount (${debitText}) should match Actual Amount (${actualAmount})`)
+          .toBeCloseTo(actualAmount, 2);
+        await journalPage.post();
+      });
     } finally {
       steps.printSummary();
     }

@@ -106,6 +106,35 @@ export class PurchaseFormPage extends BaseFormPage {
     return new DeliveryFormPage(this.page);
   }
 
+  /** Opens the delivery via the "Receive Products" button (an alternative to the "Receipt" smart button). */
+  async receiveProducts(): Promise<DeliveryFormPage> {
+    await this.page.getByRole('button', { name: 'Receive Products', exact: true }).click();
+    await this.waitForOdooReady();
+    return new DeliveryFormPage(this.page);
+  }
+
+  /**
+   * Prints the RFQ (triggers a PDF download) — this transitions the RFQ to "RFQ Sent"
+   * and reveals the "Receive Quotation" button, needed before Confirm Order on the
+   * Cash Purchase flow.
+   */
+  async printRfq(): Promise<void> {
+    const [download] = await Promise.all([
+      this.page.waitForEvent('download', { timeout: 10_000 }).catch(() => null),
+      this.page.getByRole('button', { name: 'Print RFQ', exact: true }).click(),
+    ]);
+    void download;
+    await this.waitForOdooReady();
+    await this.page.getByRole('button', { name: 'Receive Quotation', exact: true })
+      .waitFor({ state: 'visible', timeout: 15_000 });
+  }
+
+  /** Marks the vendor's quotation as received (only available after printRfq()). */
+  async receiveQuotation(): Promise<void> {
+    await this.page.getByRole('button', { name: 'Receive Quotation', exact: true }).click();
+    await this.waitForOdooReady();
+  }
+
   /** Creates a vendor bill for this Purchase Order via the "Create Bill" button. */
   async createVendorBill(): Promise<VendorBillFormPage> {
     await this.page.getByRole('button', { name: 'Create Bill', exact: true }).click();

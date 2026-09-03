@@ -17,17 +17,20 @@ export class VendorBillFormPage extends BaseFormPage {
   }
 
   /** Posts the bill (Draft -> Posted). */
-  async confirm(): Promise<void> {
+  async confirm(supplierInvoiceNumber = 'SUP_INV_12345'): Promise<void> {
     // Both the Bill/Refund date and "Supplier's Invoice Number (Bill Reference)" are
     // required — Confirm raises "Invalid Operation" / silently no-ops without them.
     await this.billDate.setValue(today());
-    await this.supplierInvoiceNumber.setValue('SUP_INV_12345');
+    await this.supplierInvoiceNumber.setValue(supplierInvoiceNumber);
     const confirmButton = this.page.getByRole('button', { name: 'Confirm', exact: true });
     await confirmButton.click();
     await this.waitForOdooReady();
-    // Confirm silently no-ops without the required field above — wait for "Register
-    // Payment" (only present once posted) as proof it actually confirmed.
-    await this.page.getByRole('button', { name: 'Register Payment', exact: true })
+    // Confirm silently no-ops without the required fields above — wait for "Reset to
+    // Draft" (only present once posted) as proof it actually confirmed. Unlike
+    // "Register Payment", this is universal: cash-purchase bills correctly omit
+    // Register Payment (payment was already made via the cash journal), so that
+    // button can't be used as the success signal here.
+    await this.page.getByRole('button', { name: 'Reset to Draft', exact: true })
       .waitFor({ state: 'visible', timeout: 15_000 });
   }
 
