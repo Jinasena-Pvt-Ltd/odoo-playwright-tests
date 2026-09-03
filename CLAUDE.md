@@ -58,9 +58,11 @@ src/
         ├── pages/                 FormPage, ListPage, KanbanPage
         ├── data/                  <domain>.master-data.ts, <domain>.validation-cases.ts
         ├── calculations/          Business calculation helpers
+        ├── notes/                 <domain>.notes.md — free-form domain notes, gotchas, context
+        ├── documentation/         <slug>.<lang>.html — illustrated manuals from tour2playwright (created on demand, not part of the base scaffold)
         └── tests/
             ├── 01-config/         <domain>.config.spec.ts
-            ├── 02-business/       <domain>.business.spec.ts
+            ├── 02-business/       <domain>.business.spec.ts, plus any <domain>.<slug>-tour.spec.ts from tour2playwright
             ├── 03-reporting/      <domain>.reports.spec.ts
             ├── 04-permissions/    <domain>.permissions.spec.ts
             ├── 05-validations/    <domain>.validations.spec.ts
@@ -194,6 +196,17 @@ npm run test:report       # run tests then regenerate with real pass/fail result
 - **Results:** uses `test-results/results.json` when present for real ✅/❌/⏭ status; otherwise ⬜ pending
 - **Auto-hook:** Stop hook regenerates the report whenever a `*.spec.ts` file changes
 - **Commit:** `git add -f reports/master-report-*.html` (reports/ is gitignored)
+
+### Tour → Test → Manual Pipeline
+
+A vendored tool at `tools/tour2playwright/` turns an Odoo Tour Recorder JSON export into a real, committed Playwright spec plus a self-contained HTML manual (embedded screenshots, ready to paste into Odoo Knowledge) — written directly into the target module's own structure, not a separate output tree:
+
+- `npm run build -- <domain> <export.json>` (from `tools/tour2playwright/`) writes the spec to `src/modules/<domain>/tests/02-business/<domain>.<slug>-tour.spec.ts`, tagged `@module:<domain> @step:business @e2e` and importing from `../../../../core/fixtures/index` like any hand-written spec — it shows up in `npm test`, the master report, and `/review-tests` with no special-casing.
+- It **executes via the main suite's own runner and auth** (`npx playwright test <path> --project=admin`, reusing `auth-storage/admin.json`) — the tool has zero npm dependencies of its own and no separate login flow.
+- The manual lands at `src/modules/<domain>/documentation/<slug>.<lang>.html`.
+- It reads credentials from this repo's root `.env` (no separate `.env` of its own).
+
+See `tools/tour2playwright/HANDOVER.md` for full detail; use the `tour2playwright` subagent (`.claude/agents/tour2playwright.md`) to run it — hand it a tour export path and a target module and it does the rest.
 
 ---
 

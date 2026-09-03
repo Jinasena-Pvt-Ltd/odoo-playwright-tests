@@ -132,6 +132,21 @@ Use this during development. Run all configured roles only before raising a PR.
 
 ---
 
+### Tours → Tests → Manuals
+
+If you have an Odoo Tour Recorder JSON export, hand it to Claude along with the target module — the `tour2playwright` agent (`.claude/agents/tour2playwright.md`) turns it into a real Playwright spec and an illustrated HTML manual, written **directly into that module's own structure**, not a separate output tree.
+
+**What it produces:**
+- `src/modules/<domain>/tests/02-business/<domain>.<slug>-tour.spec.ts` — tagged `@module:<domain> @step:business @e2e`, importing from `../../../../core/fixtures/index` like any hand-written spec. It's a real, committed test: it shows up in `npm test`, the master report, and passes `/review-tests` with no special-casing.
+- `src/modules/<domain>/documentation/<slug>.<lang>.html` — a self-contained HTML manual per language, screenshots embedded as base64. Open it in a browser, select all, and paste it straight into Odoo Knowledge with formatting and images intact.
+- A scratch `tools/tour2playwright/generated/REVIEW.md` (gitignored, local) listing every step the translator couldn't map with full confidence — treat the generated spec as a strong first draft, not ground truth.
+
+**How it runs:** the spec executes via the **main suite's own runner and auth** (`npx playwright test <path> --project=admin`, reusing `auth-storage/admin.json`) — there's no separate login flow, no separate `.env`, and no separate `npm install`; the tool has zero dependencies of its own. It reads credentials from this repo's root `.env` — the same one the rest of the suite uses. Because it runs against the same Odoo instance the test suite already exercises, the same care applies: the generated spec performs real clicks and can create real records.
+
+**Precondition:** the target module must already exist (`/add-module <domain>` first if not), and `auth-storage/admin.json` must exist (`npx playwright test --project=setup` once, per First-Day Setup).
+
+---
+
 ### Three Non-Negotiable Rules
 
 1. **Never import `test` from `@playwright/test`** — always `../../../../core/fixtures/index`
@@ -191,7 +206,8 @@ Regardless of project state, create (or overwrite if outdated):
 4. `.claude/commands/new-page.md`
 5. `.claude/commands/debug-test.md`
 6. `.claude/commands/review-tests.md`
-7. `ONBOARDING.md` — this file itself (skip if already present)
+7. `.claude/agents/tour2playwright.md` — from the **Agent Files** section
+8. `ONBOARDING.md` — this file itself (skip if already present)
 
 ### Step 4 — Final checks
 
@@ -957,6 +973,77 @@ File path/glob or auto-detect from `git status --short`.
 ### Suggestions (WARN/INFO)
 ```
 If clean: `All convention checks passed for <file>.`
+````
+
+---
+
+## Agent Files
+
+Write this file to `.claude/agents/<filename>` exactly as shown.
+
+---
+
+### `.claude/agents/tour2playwright.md`
+
+````markdown
+---
+name: tour2playwright
+description: Use when the user provides an Odoo Tour Recorder JSON export (a tour.json file) and wants a Playwright regression test and/or an illustrated user manual generated from it, written directly into the target module's own structure. Proactively invoke when the user mentions a tour export, a recorded tour, or asks to convert/generate tests or manuals from one.
+tools: Read, Write, Edit, Glob, Grep, Bash
+model: sonnet
+---
+
+You run the `tour2playwright` pipeline (`tools/tour2playwright/`) to turn an Odoo Tour
+Recorder JSON export into a real, committed Playwright spec plus an illustrated HTML
+manual — both written directly into the target module's own structure, not a separate
+output tree. The user should only ever have to hand you a tour export file path and
+tell you which module it belongs to (ask if they haven't said).
+
+## Before running anything
+
+1. Confirm the target module already exists at `src/modules/<domain>/`. If it doesn't,
+   tell the user to scaffold it first with `/add-module <domain>` — never auto-create it.
+2. Confirm `auth-storage/admin.json` exists. If not, run `npx playwright test --project=setup`
+   from the repo root first (a normal First-Day-Setup step) — the generated spec runs via
+   the main suite's own `admin` project and reuses that session.
+3. There is no separate `.env` or `npm install` for this tool — it has zero dependencies
+   and reads the repo-root `.env` directly.
+
+## Running the pipeline
+
+From `tools/tour2playwright/`, run:
+```bash
+npm run build -- <domain> <path-to-export.json>
+```
+This writes the spec into `src/modules/<domain>/tests/02-business/<domain>.<slug>-tour.spec.ts`,
+runs it via `npx playwright test <path> --project=admin` from the repo root (capturing
+screenshots into `tools/tour2playwright/generated/screenshots/`, which is scratch/gitignored),
+then writes the HTML manual into `src/modules/<domain>/documentation/<slug>.<lang>.html`.
+
+Use `npm run gen -- <domain> <path>` / `npm run manual -- <domain> <path>` separately only
+if the user explicitly wants to inspect the spec before running it.
+
+## After it finishes
+
+1. **Run `npm run lint` then `npm run report:generate` from the repo root** — the generated
+   spec is now a real part of the module, exactly like a hand-written one, so it must
+   type-check and should show up correctly in the master report.
+2. Report back:
+   - The spec's path and how many steps it has
+   - Whether the run passed, and where the Playwright HTML report is
+   - The manual's path(s) per language, and remind the user to open the `.html` in a
+     browser and paste it directly into Odoo Knowledge — screenshots are embedded, so
+     formatting and images should carry over as-is
+   - **Always read and summarize `tools/tour2playwright/generated/REVIEW.md`** if it exists
+     — this lists every step the translator couldn't map with confidence. Treat the
+     generated spec as a strong first draft, not ground truth; tell the user exactly
+     what needs manual review, and fix flagged steps directly in the committed spec
+     when asked.
+
+Never commit anything under `tools/tour2playwright/generated/` — it's gitignored, local,
+regenerate-on-demand scratch space (screenshots + REVIEW.md), not a source artifact. The
+spec and the HTML manual, by contrast, ARE meant to be committed — they're real source
+under `src/modules/<domain>/`.
 ````
 
 ---

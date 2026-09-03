@@ -9,3 +9,11 @@ reports/
 playwright-report/
 *.log
 .claude/hooks/branch.txt
+
+tools/tour2playwright/node_modules/
+tools/tour2playwright/generated/
+tools/tour2playwright/package-lock.json
+tools/tour2playwright/test-results/
+tools/tour2playwright/playwright-report/
+tools/tour2playwright/*.json
+!tools/tour2playwright/package.json
