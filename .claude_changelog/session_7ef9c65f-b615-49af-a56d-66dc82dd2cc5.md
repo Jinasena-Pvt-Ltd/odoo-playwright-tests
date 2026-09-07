@@ -1305,3 +1305,22 @@ add the fix
 **Files touched:**
 - Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\pages\SalesPage.ts
 
+
+---
+
+## Change -- 2026-09-07T09:58:33Z
+
+**Prompt:**
+```
+<task-notification>
+<task-id>bcizqn590</task-id>
+<tool-use-id>toolu_01134kwM6EnLqM5WJU3bymxP</tool-use-id>
+<output-file>C:\Users\Urliyas\AppData\Local\Temp\claude\c--Users-Urliyas-Documents-GitHub-odoo-playwright-tests\7ef9c65f-b615-49af-a56d-66dc82dd2cc5\tasks\bcizqn590.output</output-file>
+<status>completed</status>
+<summary>Background command "cd "c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests" &amp;&amp; HEADLESS=false npx playwright test --grep "blocks save when Customer is left blank" --project=admin --reporter=list --trace=on 2&gt;&amp;1" completed (exit code 0)</summary>
+</task-notification>
+```
+
+**Files touched:**
+- Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\05-validations\sales.validations.spec.ts
+
