@@ -124,6 +124,53 @@ export abstract class BasePage {
     await this.page.waitForSelector('.o_main_navbar', { state: 'visible', timeout: 45_000 });
   }
 
+  /**
+   * Navigate via Odoo's classic hash-fragment router: `#action=<id>&model=<model>&view_type=<type>`.
+   *
+   * WHY THIS EXISTS (separate from navigateTo()):
+   *   navigateTo()'s pushState+popstate trick assumes the OWL client router listens for
+   *   `popstate` and understands `/odoo/<path>` URLs. On this Jinasena SaaS instance it does
+   *   not — post-login the app already renders classic hash URLs like
+   *   `#action=514&model=sale.order&view_type=list&menu_id=330`, and that router only reacts
+   *   to the `hash` actually changing (confirmed empirically: pushState to any `/odoo/...`
+   *   path here left the current view completely untouched, even for the "Employees" anchor
+   *   navigateTo() relies on as its known-good fallback).
+   *
+   * Use this instead of navigateTo() for any module where the target action id/model/menu id
+   * are known (discoverable via `ir.actions.act_window` / `ir.ui.menu` search_read, or by
+   * inspecting the real `#action=...` URL after clicking the app in a live browser).
+   */
+  async navigateToAction(params: {
+    actionId: number;
+    model: string;
+    viewType?: 'list' | 'form' | 'kanban';
+    menuId?: number;
+    resId?: number;
+  }): Promise<void> {
+    const { actionId, model, viewType = 'form', menuId, resId } = params;
+
+    const navbarVisible = await this.page.locator('.o_main_navbar').isVisible({ timeout: 2_000 }).catch(() => false);
+    if (!navbarVisible) {
+      await this._bootOdooSpa();
+    }
+
+    const parts = [`action=${actionId}`, `model=${model}`, `view_type=${viewType}`];
+    if (resId) parts.push(`id=${resId}`);
+    if (menuId) parts.push(`menu_id=${menuId}`);
+    const hash = parts.join('&');
+
+    const currentHash = this.page.url().split('#')[1] ?? '';
+    if (currentHash === hash) {
+      // Already on the target hash — force a reload of the view via a round-trip through
+      // a neutral hash so the router still fires a change event.
+      await this.page.evaluate(() => { window.location.hash = ''; });
+      await this.page.waitForTimeout(200);
+    }
+
+    await this.page.evaluate((h) => { window.location.hash = h; }, hash);
+    await this.waitForOdooReady();
+  }
+
   /** Waits until Odoo's action manager has rendered and the loading spinner is gone */
   async waitForOdooReady(): Promise<void> {
     // Primary: wait for a concrete view element (form / list / kanban / settings).
