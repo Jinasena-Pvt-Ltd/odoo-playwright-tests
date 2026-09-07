@@ -1292,3 +1292,16 @@ canu check the branch?
 **Files touched:**
 - Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\pages\SalesPage.ts
 
+
+---
+
+## Change -- 2026-09-07T09:51:05Z
+
+**Prompt:**
+```
+add the fix
+```
+
+**Files touched:**
+- Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\pages\SalesPage.ts
+

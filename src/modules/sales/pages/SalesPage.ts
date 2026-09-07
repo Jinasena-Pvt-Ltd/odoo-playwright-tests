@@ -82,25 +82,46 @@ abstract class SalesBaseFormPage extends BaseFormPage {
    * Types into a Many2one field and selects the matching option only if it exists.
    * Returns false (without throwing) when the reference master-data record cannot
    * be found — callers should treat that as a config-dependent skip, not a failure.
+   *
+   * Retries once: this SaaS instance's autocomplete dropdown occasionally doesn't render
+   * (or doesn't finish its search) within the first attempt's window, which previously
+   * caused test.skip("not found") for records that do genuinely exist (confirmed via RPC
+   * for every SALES_TEST_CONFIG reference) — a timing issue, not a missing-data one. The
+   * retry re-clears and re-types the value rather than just re-waiting, since a stalled
+   * search occasionally needs a fresh keystroke to kick off again.
    */
-  async selectIfExists(fieldName: string, value: string): Promise<boolean> {
+  async selectIfExists(fieldName: string, value: string, attempts = 2): Promise<boolean> {
     const widget = this.page.locator(`.o_field_widget[name="${fieldName}"]`).first();
     const input = widget.locator('input').first();
     await input.waitFor({ state: 'visible', timeout: 10_000 });
-    await input.fill(value);
-    const dropdown = this.page.locator(
-      '.o_field_many2one_dropdown, .ui-autocomplete, .o-dropdown--menu, .o-autocomplete--dropdown-menu',
-    ).first();
-    const opened = await dropdown.waitFor({ state: 'visible', timeout: 8_000 }).then(() => true).catch(() => false);
-    if (!opened) return false;
-    const match = dropdown
-      .locator('.o_menu_item, .ui-menu-item, li, .o-autocomplete--dropdown-item')
-      .filter({ hasText: value })
-      .first();
-    const found = await match.isVisible({ timeout: 3_000 }).catch(() => false);
-    if (!found) return false;
-    await match.click();
-    return true;
+
+    for (let attempt = 1; attempt <= attempts; attempt++) {
+      await input.click();
+      await input.fill('');
+      await input.fill(value);
+
+      const dropdown = this.page.locator(
+        '.o_field_many2one_dropdown, .ui-autocomplete, .o-dropdown--menu, .o-autocomplete--dropdown-menu',
+      ).first();
+      const opened = await dropdown.waitFor({ state: 'visible', timeout: 10_000 }).then(() => true).catch(() => false);
+
+      if (opened) {
+        const match = dropdown
+          .locator('.o_menu_item, .ui-menu-item, li, .o-autocomplete--dropdown-item')
+          .filter({ hasText: value })
+          .first();
+        const found = await match.isVisible({ timeout: 5_000 }).catch(() => false);
+        if (found) {
+          await match.click();
+          return true;
+        }
+      }
+
+      if (attempt < attempts) {
+        await this.page.waitForTimeout(500);
+      }
+    }
+    return false;
   }
 }
 
