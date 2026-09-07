@@ -213,6 +213,7 @@ export class SalesFormPage extends SalesBaseFormPage {
     await tab.waitFor({ state: 'visible', timeout: 20_000 });
     await tab.click();
     await this.page.locator('[name="team_id"]').waitFor({ state: 'visible', timeout: 20_000 });
+    await this.page.waitForTimeout(300);
   }
 
   /** Fills Sales Team and Warehouse on the Other Info tab. Returns false if either is missing. */
@@ -231,27 +232,53 @@ export class SalesFormPage extends SalesBaseFormPage {
     await tab.waitFor({ state: 'visible', timeout: 10_000 });
     await tab.click();
     await this.page.locator('.o_field_one2many').waitFor({ state: 'visible', timeout: 10_000 });
+    // Brief settle: the "Add a product" link can render a moment after the tab body does.
+    await this.page.waitForTimeout(300);
   }
 
-  /** Adds a single order line. Returns false (without throwing) if the product cannot be found. */
-  async addOrderLine(line: OrderLineInput): Promise<boolean> {
-    const addLink = this.page.locator('.o_field_x2many_list_row_add a')
-      .filter({ hasText: /add a product/i }).first();
-    await addLink.waitFor({ state: 'visible', timeout: 10_000 });
-    await addLink.click();
+  /**
+   * Adds a single order line. Returns false (without throwing) if the product cannot be found.
+   *
+   * Retries the whole "click Add a product → row appears → type → dropdown match" sequence
+   * up to twice: on this SaaS instance, the newly-inserted editable row (and its product
+   * autocomplete) occasionally isn't fully settled by the time we query for it right after
+   * the click — confirmed empirically that the product genuinely exists and the dropdown
+   * does open reliably in isolation, so this is a rendering-timing issue, not a data gap.
+   */
+  async addOrderLine(line: OrderLineInput, attempts = 2): Promise<boolean> {
+    for (let attempt = 1; attempt <= attempts; attempt++) {
+      const addLink = this.page.locator('.o_field_x2many_list_row_add a')
+        .filter({ hasText: /add a product/i }).first();
+      await addLink.waitFor({ state: 'visible', timeout: 10_000 });
+      await addLink.click();
+      await this.page.waitForTimeout(300);
 
-    const row = this.page.locator('.o_data_row.o_selected_row').first();
-    const productInput = row.locator('[name="product_id"] input').first();
-    await productInput.waitFor({ state: 'visible', timeout: 8_000 });
-    await productInput.pressSequentially(line.product, { delay: 50 });
+      const row = this.page.locator('.o_data_row.o_selected_row').first();
+      const productInput = row.locator('[name="product_id"] input').first();
+      const rowReady = await productInput.waitFor({ state: 'visible', timeout: 10_000 }).then(() => true).catch(() => false);
+      if (!rowReady) {
+        if (attempt < attempts) { await this.page.waitForTimeout(500); continue; }
+        return false;
+      }
 
-    const dropdown = this.page.locator('.o-autocomplete--dropdown-menu');
-    const opened = await dropdown.waitFor({ state: 'visible', timeout: 8_000 }).then(() => true).catch(() => false);
-    if (!opened) return false;
-    const match = dropdown.locator('li, .o-autocomplete--dropdown-item').filter({ hasText: line.product }).first();
-    const found = await match.isVisible({ timeout: 3_000 }).catch(() => false);
-    if (!found) return false;
-    await match.click({ force: true });
+      await productInput.pressSequentially(line.product, { delay: 50 });
+
+      const dropdown = this.page.locator('.o-autocomplete--dropdown-menu');
+      const opened = await dropdown.waitFor({ state: 'visible', timeout: 10_000 }).then(() => true).catch(() => false);
+      const match = dropdown.locator('li, .o-autocomplete--dropdown-item').filter({ hasText: line.product }).first();
+      const found = opened && await match.isVisible({ timeout: 5_000 }).catch(() => false);
+      if (!found) {
+        if (attempt < attempts) { await this.page.waitForTimeout(500); continue; }
+        return false;
+      }
+      await match.click({ force: true });
+      return this.finishOrderLine(row, line);
+    }
+    return false;
+  }
+
+  /** Fills quantity/price/discount/tax on an already-selected order line row. */
+  private async finishOrderLine(row: Locator, line: OrderLineInput): Promise<boolean> {
 
     const qty = row.locator('[name="product_uom_qty"] input').first();
     await qty.waitFor({ state: 'visible', timeout: 8_000 });

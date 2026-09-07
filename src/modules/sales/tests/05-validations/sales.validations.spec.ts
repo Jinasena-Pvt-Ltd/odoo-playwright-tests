@@ -28,14 +28,11 @@ test.describe('Sales Field Validations @module:sales @step:validations', () => {
 
     await formPage.setQuotationType(SALES_TEST_CONFIG.quotationType);
     const otherInfoOk = await formPage.fillOtherInfo(SALES_TEST_CONFIG.salesTeam, SALES_TEST_CONFIG.warehouse);
-    console.log('DEBUG otherInfoOk =', otherInfoOk);
     if (!otherInfoOk) {
       test.skip(true, 'Reference Sales Team/Warehouse not found in this Odoo environment');
       return;
     }
-    const linesOk = await buildLinesOrSkip(formPage);
-    console.log('DEBUG linesOk =', linesOk);
-    if (!linesOk) {
+    if (!(await buildLinesOrSkip(formPage))) {
       test.skip(true, 'Reference products not found in this Odoo environment');
       return;
     }
