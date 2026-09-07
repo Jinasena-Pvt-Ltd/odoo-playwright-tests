@@ -43,7 +43,13 @@ abstract class SalesBaseFormPage extends BaseFormPage {
   /** Returns the current display text of a field, whether editable or read-only. */
   async readFieldText(fieldName: string): Promise<string> {
     const widget = this.page.locator(`.o_field_widget[name="${fieldName}"]`).first();
-    return ((await widget.textContent().catch(() => '')) ?? '').trim().replace(/\s+/g, ' ');
+    // Explicit timeout is required: with none, .textContent() on a locator matching zero
+    // elements (e.g. a field not present on the currently active tab) waits using
+    // Playwright's actionTimeout, which is unbounded in this project's config — it would
+    // otherwise block until the whole test's global timeout kills it (observed: a 120s
+    // hang on exactly this call for "company_id", which isn't rendered outside the
+    // "Other Info" tab).
+    return ((await widget.textContent({ timeout: 3_000 }).catch(() => '')) ?? '').trim().replace(/\s+/g, ' ');
   }
 
   /**
