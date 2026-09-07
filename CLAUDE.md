@@ -83,6 +83,7 @@ src/
 | Tag | Purpose |
 |-----|---------|
 | `@module:<domain>` | The Odoo module being tested |
+| `@module:sales` | Sales module |
 | `@step:config` | Step 1 — configuration/setup |
 | `@step:business` | Step 2 — business logic |
 | `@step:reporting` | Step 3 — views and exports |
