@@ -4,9 +4,9 @@
 
 E2E test framework for **Odoo 17** built with Playwright and TypeScript.
 Tests cover any Odoo module following a consistent 7-step structure across all domains.
-Three user roles are tested independently: admin, manager, and employee.
+Multiple user roles are tested independently — configure roles in `.env` and `playwright.config.ts`.
 
-**Tech stack:** Playwright 1.50, TypeScript 5.7, Allure reporting, Odoo RPC API
+**Tech stack:** Playwright 1.50, TypeScript 5.7, Allure reporting
 
 ---
 
@@ -35,9 +35,12 @@ npm run test:validations   # Step 5: validation tests
 npm run test:edge          # Step 6: edge case tests
 npm run test:archive       # Step 7: archive tests
 npm run report             # Open Playwright HTML report
+npm run report:generate    # Regenerate master report from spec files (no test run)
+npm run test:report        # Run tests then regenerate master report
 npm run lint               # TypeScript type-check
 HEADLESS=false npm test    # Run with browser visible
 SLOW_MO=500 npm test       # Slow down actions by 500ms
+npx playwright test --project=setup --project=<role>  # Single role — faster during development
 ```
 
 ---
@@ -58,6 +61,7 @@ src/
         ├── pages/                 FormPage, ListPage, KanbanPage
         ├── data/                  <domain>.master-data.ts, <domain>.validation-cases.ts
         ├── calculations/          Business calculation helpers
+        ├── notes/                 <domain>.notes.md — free-form domain notes, gotchas, context
         └── tests/
             ├── 01-config/         <domain>.config.spec.ts
             ├── 02-business/       <domain>.business.spec.ts
@@ -79,7 +83,6 @@ src/
 | Tag | Purpose |
 |-----|---------|
 | `@module:<domain>` | The Odoo module being tested |
-| `@module:security-audit` | Daily user group & CRUD permission audit |
 | `@step:config` | Step 1 — configuration/setup |
 | `@step:business` | Step 2 — business logic |
 | `@step:reporting` | Step 3 — views and exports |
@@ -94,9 +97,7 @@ When adding a new domain, register `@module:<domain>` in this table and add `"te
 
 ### Role-Based Projects
 
-- **admin** → `auth-storage/admin.json`
-- **manager** → `auth-storage/manager.json`
-- **employee** → `auth-storage/employee.json`
+Each project name maps to a saved auth state in `auth-storage/<role>.json`. Roles are defined in `playwright.config.ts` and credentials in `.env`. Add or remove roles to match your Odoo instance's user setup.
 
 ---
 
@@ -121,13 +122,16 @@ export class <Domain>FormPage extends BaseFormPage {
 }
 ```
 
-### RPC Usage — never UI for data setup
+### UI-First Tests — always interact through the browser
 
 ```typescript
-test('example', async ({ rpc }) => {
-  const id = await rpc.create<number>('<odoo.model>', { name: uniqueName('Record') });
-  // ... test ...
-  await rpc.archive('<odoo.model>', [id]);
+test('example', async ({ page }) => {
+  const formPage = new <Domain>FormPage(page);
+  await formPage.navigate();
+  await formPage.name.setValue(uniqueName('Record'));
+  await formPage.save();
+  // assert against rendered UI
+  await expect(page.locator('.o_form_status_indicator')).toBeVisible();
 });
 ```
 
@@ -182,18 +186,19 @@ Every domain follows the **same 7-step structure**:
 
 ## Report Convention
 
-The master report is **auto-generated** — never hand-edit it.
+The master report is **auto-generated** from spec files — never hand-edited.
 
 ```bash
-npm run report:generate   # regenerate from spec files (no test run needed)
-npm run test:report       # run tests then regenerate with real pass/fail results
+npm run report:generate          # regenerate from spec files (no test run needed)
+npm run test:report              # run tests then regenerate with real pass/fail results
 ```
 
-- **Generator:** `scripts/generate-report.js` — scans `src/modules/**/*.spec.ts`
-- **Master report:** `reports/master-report-YYYY-MM-DD.html` — section anchors `#<domain>-<step>`
-- **Results:** uses `test-results/results.json` when present for real ✅/❌/⏭ status; otherwise ⬜ pending
-- **Auto-hook:** Stop hook regenerates the report whenever a `*.spec.ts` file changes
-- **Commit:** `git add -f reports/master-report-*.html` (reports/ is gitignored)
+- **Master report:** `reports/master-report-YYYY-MM-DD.html` — all domains, section anchors `#<domain>-<step>`
+- **Generator:** `scripts/generate-report.js` — scans `src/modules/**/*.spec.ts`, parses every `test()` declaration, infers RPC/UI type from fixture params
+- **Results:** when `test-results/results.json` exists (written automatically by `playwright test`), the report shows real ✅/❌/⏭ status; otherwise tests show as ⬜ pending
+- **Summary artifact:** each run also writes `reports/summary.json` — a stats snapshot consumed by `report:consolidate` to roll up every module branch into one overview
+- **Auto-update hook:** the Stop hook regenerates the report automatically whenever a `*.spec.ts` file is changed during a Claude turn — the updated report is committed alongside the spec change
+- **Commit:** `git add -f reports/master-report-*.html reports/summary.json` (reports/ is gitignored)
 
 ---
 
