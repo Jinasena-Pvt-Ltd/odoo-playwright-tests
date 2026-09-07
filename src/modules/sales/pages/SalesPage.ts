@@ -268,6 +268,10 @@ export class SalesFormPage extends SalesBaseFormPage {
       const match = dropdown.locator('li, .o-autocomplete--dropdown-item').filter({ hasText: line.product }).first();
       const found = opened && await match.isVisible({ timeout: 5_000 }).catch(() => false);
       if (!found) {
+        // Discard this half-filled row before retrying — otherwise the next "Add a
+        // product" click leaves TWO incomplete rows in edit state (observed: a stray
+        // empty row that permanently blocked Save from ever completing).
+        await this.discardIncompleteRow(row);
         if (attempt < attempts) { await this.page.waitForTimeout(500); continue; }
         return false;
       }
@@ -275,6 +279,14 @@ export class SalesFormPage extends SalesBaseFormPage {
       return this.finishOrderLine(row, line);
     }
     return false;
+  }
+
+  /** Cancels an unsaved, incomplete one2many list row via Escape (Odoo discards it). */
+  private async discardIncompleteRow(row: Locator): Promise<void> {
+    const stillEditing = await row.isVisible({ timeout: 1_000 }).catch(() => false);
+    if (!stillEditing) return;
+    await this.page.keyboard.press('Escape').catch(() => {});
+    await row.waitFor({ state: 'hidden', timeout: 3_000 }).catch(() => {});
   }
 
   /** Fills quantity/price/discount/tax on an already-selected order line row. */

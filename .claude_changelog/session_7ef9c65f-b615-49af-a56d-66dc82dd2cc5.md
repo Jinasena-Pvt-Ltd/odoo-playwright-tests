@@ -1346,3 +1346,23 @@ add the fix
 - Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\pages\SalesPage.ts
 - Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\05-validations\sales.validations.spec.ts
 
+
+---
+
+## Change -- 2026-09-07T10:12:11Z
+
+**Prompt:**
+```
+<task-notification>
+<task-id>b52mt0xwx</task-id>
+<tool-use-id>toolu_011pkgUE9W86qPkFE1y9ymwt</tool-use-id>
+<output-file>C:\Users\Urliyas\AppData\Local\Temp\claude\c--Users-Urliyas-Documents-GitHub-odoo-playwright-tests\7ef9c65f-b615-49af-a56d-66dc82dd2cc5\tasks\b52mt0xwx.output</output-file>
+<status>failed</status>
+<summary>Background command "cd "c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests" &amp;&amp; rm -rf test-results &amp;&amp; HEADLESS=false npx playwright test --grep "@module:sales" --project=admin --reporter=list 2&gt;&amp;1" failed with exit code 1</summary>
+</task-notification>
+```
+
+**Files touched:**
+- Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\pages\SalesPage.ts
+- Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\core\base\BaseFormPage.ts
+
