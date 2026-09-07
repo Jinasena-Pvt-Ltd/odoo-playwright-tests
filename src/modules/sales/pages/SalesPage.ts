@@ -5,6 +5,7 @@ import { CharField } from '../../../core/components/CharField';
 import { Many2OneField } from '../../../core/components/Many2OneField';
 import { MonetaryField } from '../../../core/components/MonetaryField';
 import { DateField } from '../../../core/components/DateField';
+import { BooleanToggle } from '../../../core/components/BooleanToggle';
 import { parseAmount } from '../calculations/SalesCalculations';
 
 /**
@@ -180,9 +181,11 @@ export class SalesFormPage extends SalesBaseFormPage {
   async openOtherInfoTab(): Promise<void> {
     const tab = this.page.locator('.o_notebook .nav-link, .o_notebook .nav-item a')
       .filter({ hasText: /other\s*info/i }).first();
-    await tab.waitFor({ state: 'visible', timeout: 10_000 });
+    // Generous timeouts: this SaaS instance can be slow enough under load that the
+    // default 10s occasionally isn't enough, observed as a hard test-timeout failure.
+    await tab.waitFor({ state: 'visible', timeout: 20_000 });
     await tab.click();
-    await this.page.locator('[name="team_id"]').waitFor({ state: 'visible', timeout: 10_000 });
+    await this.page.locator('[name="team_id"]').waitFor({ state: 'visible', timeout: 20_000 });
   }
 
   /** Fills Sales Team and Warehouse on the Other Info tab. Returns false if either is missing. */
@@ -535,7 +538,13 @@ export class SalesListPage extends BaseListPage {
  */
 export class SalesCustomerFormPage extends SalesBaseFormPage {
   readonly customerName: CharField;
-  readonly customerGroup: Many2OneField;
+  /**
+   * `x_studio_customer_group` (the Many2one Studio field the legacy tests keyed off of)
+   * exists on the res.partner model but is NOT placed on this instance's contact form view
+   * (confirmed empirically — zero matching elements render, on any tab). The actual
+   * UI-editable trigger for "this customer needs a bank guarantee" is this boolean instead.
+   */
+  readonly mandatoryBankGuarantee: BooleanToggle;
   readonly creditLimit: MonetaryField;
   readonly bankGuaranteeAmount: MonetaryField;
   readonly bankGuaranteeExpiryDate: DateField;
@@ -543,10 +552,10 @@ export class SalesCustomerFormPage extends SalesBaseFormPage {
   constructor(page: Page) {
     super(page);
     this.customerName = new CharField(page, 'name');
-    this.customerGroup = new Many2OneField(page, 'x_customer_group_id');
+    this.mandatoryBankGuarantee = new BooleanToggle(page, 'x_studio_mandatory_bank_guarantee');
     this.creditLimit = new MonetaryField(page, 'credit_limit');
-    this.bankGuaranteeAmount = new MonetaryField(page, 'x_bank_guarantee_amount');
-    this.bankGuaranteeExpiryDate = new DateField(page, 'x_bank_guarantee_expiry_date');
+    this.bankGuaranteeAmount = new MonetaryField(page, 'x_studio_bank_guarantee_amount');
+    this.bankGuaranteeExpiryDate = new DateField(page, 'x_studio_expiry_date');
   }
 
   async navigate(): Promise<void> {
@@ -554,10 +563,6 @@ export class SalesCustomerFormPage extends SalesBaseFormPage {
   }
   async openById(id: number): Promise<void> {
     await this.navigateToAction({ ...CONTACTS_ACTION, viewType: 'form', resId: id });
-  }
-
-  async selectCustomerGroupIfExists(name: string): Promise<boolean> {
-    return this.selectIfExists('x_customer_group_id', name);
   }
 
   async openSalesPurchaseTab(): Promise<void> {
@@ -579,9 +584,9 @@ export class SalesCustomerFormPage extends SalesBaseFormPage {
 
   /** True only if both Bank Guarantee fields render as editable inputs in this environment. */
   async hasBankGuaranteeFields(): Promise<boolean> {
-    const amountVisible = await this.page.locator('.o_field_widget[name="x_bank_guarantee_amount"] input')
+    const amountVisible = await this.page.locator('.o_field_widget[name="x_studio_bank_guarantee_amount"] input')
       .isVisible({ timeout: 3_000 }).catch(() => false);
-    const expiryVisible = await this.page.locator('.o_field_widget[name="x_bank_guarantee_expiry_date"] input')
+    const expiryVisible = await this.page.locator('.o_field_widget[name="x_studio_expiry_date"] input')
       .isVisible({ timeout: 3_000 }).catch(() => false);
     return amountVisible && expiryVisible;
   }

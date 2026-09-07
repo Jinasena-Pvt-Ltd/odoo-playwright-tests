@@ -166,10 +166,12 @@ test.describe('Sales Business Logic @module:sales @step:business', () => {
       return;
     }
 
-    // A very large quantity keeps this test independent of the customer's actual
-    // current overdue balance — the total should exceed any realistic credit limit.
+    // A very large quantity AND an explicit high unit price (rather than relying on the
+    // product's catalog price, which can be 0 in this pricelist — confirmed empirically)
+    // keeps this test independent of the customer's actual current overdue balance: the
+    // total should exceed any realistic credit limit regardless of product configuration.
     const added = await formPage.addOrderLines([
-      { product: SALES_TEST_CONFIG.product1, quantity: 100_000, discount: 0 },
+      { product: SALES_TEST_CONFIG.product1, quantity: 100_000, discount: 0, unitPrice: 999_999 },
     ]);
     if (added === 0) {
       test.skip(true, 'Reference product not found in this Odoo environment');
