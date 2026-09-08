@@ -16,6 +16,10 @@ export abstract class BaseFormPage extends BasePage {
     // (10s -> 20s -> 40s): this SaaS instance has repeatedly shown save taking far
     // longer than expected under load, independent of record complexity (observed on
     // both single-line and multi-line forms) — this is instance latency, not a race.
+    // Not pushed higher than 40s: the global test timeout is 120s (playwright.config.ts),
+    // and earlier steps in a full test already consume a meaningful share of that: going
+    // higher here risks the whole test being killed by the global timeout instead,
+    // which is a less informative failure than this one.
     await expect(saveBtn).toBeHidden({ timeout: 40_000 });
     await this.waitForOdooReady();
   }
