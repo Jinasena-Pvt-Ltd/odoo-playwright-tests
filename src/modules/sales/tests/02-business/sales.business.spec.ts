@@ -32,6 +32,7 @@ test.describe('Sales Business Logic @module:sales @step:business', () => {
     }
 
     await formPage.setQuotationType(SALES_TEST_CONFIG.quotationType);
+    await formPage.setOrderPaymentType(SALES_TEST_CONFIG.orderPaymentType);
 
     const otherInfoOk = await formPage.fillOtherInfo(SALES_TEST_CONFIG.salesTeam, SALES_TEST_CONFIG.warehouse);
     if (!otherInfoOk) {
@@ -65,6 +66,7 @@ test.describe('Sales Business Logic @module:sales @step:business', () => {
     }
 
     await formPage.setQuotationType(SALES_TEST_CONFIG.quotationType);
+    await formPage.setOrderPaymentType(SALES_TEST_CONFIG.orderPaymentType);
     const otherInfoOk = await formPage.fillOtherInfo(SALES_TEST_CONFIG.salesTeam, SALES_TEST_CONFIG.warehouse);
     if (!otherInfoOk) {
       test.skip(true, 'Reference Sales Team/Warehouse not found in this Odoo environment');
@@ -119,6 +121,7 @@ test.describe('Sales Business Logic @module:sales @step:business', () => {
     }
 
     await formPage.setQuotationType(SALES_TEST_CONFIG.quotationType);
+    await formPage.setOrderPaymentType(SALES_TEST_CONFIG.orderPaymentType);
     const otherInfoOk = await formPage.fillOtherInfo(SALES_TEST_CONFIG.salesTeam, SALES_TEST_CONFIG.warehouse);
     if (!otherInfoOk) {
       test.skip(true, 'Reference Sales Team/Warehouse not found in this Odoo environment');
@@ -162,6 +165,7 @@ test.describe('Sales Business Logic @module:sales @step:business', () => {
     }
 
     await formPage.setQuotationType(SALES_TEST_CONFIG.quotationType);
+    await formPage.setOrderPaymentType(SALES_TEST_CONFIG.orderPaymentType);
     const otherInfoOk = await formPage.fillOtherInfo(SALES_TEST_CONFIG.salesTeam, SALES_TEST_CONFIG.warehouse);
     if (!otherInfoOk) {
       test.skip(true, 'Reference Sales Team/Warehouse not found in this Odoo environment');

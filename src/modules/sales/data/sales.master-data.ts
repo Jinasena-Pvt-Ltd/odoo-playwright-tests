@@ -16,6 +16,11 @@ import { today } from '../../../core/utils/DateHelper';
  */
 export const SALES_TEST_CONFIG = {
   quotationType: 'Sales',
+  // Separate field from Quotation Type (x_studio_order_payment_method) — confirmed via
+  // live DOM inspection they are two independently-required Studio fields, not one
+  // (a prior assumption that merged them was wrong; see SalesFormPage.setQuotationType
+  // doc comment). Options on this instance: "Cash" or "Credit".
+  orderPaymentType: 'Cash',
   salesTeam: 'Colombo Sales Centre',
   warehouse: 'JAM Warehouse Ekala- (JM-EK)',
   product: 'BALL BEARING 6202-2RS',

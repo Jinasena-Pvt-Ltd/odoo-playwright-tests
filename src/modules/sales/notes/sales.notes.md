@@ -11,12 +11,22 @@ pre-convention Playwright suite written directly against a specific Jinasena
 Odoo SaaS instance. Its business-logic coverage was ported into the current
 7-step structure; the folder itself has been deleted. Key carry-over notes:
 
-- **Quotation Type / "Order Payment Type"** is a custom selection widget (not
-  a standard `sale.order` field name we could rely on) — `SalesFormPage.setQuotationType()`
-  locates it by visible label instead of a `[name=...]` attribute. Legacy
-  step-05.2 ("blank Order Payment Type") and step-05.3 ("blank Quotation Type")
-  turned out to test the exact same field/widget — they were merged into one
-  validation test instead of shipping a literal duplicate.
+- **Quotation Type** and **"Order Payment Type"** are custom Studio selection
+  widgets (not standard `sale.order` field names we could rely on) —
+  `SalesFormPage.setQuotationType()`/`setOrderPaymentType()` locate them by
+  visible label instead of a `[name=...]` attribute.
+  **CORRECTED (2026-09-08):** these were originally assumed to be the same
+  field (legacy step-05.2/05.3 were merged into one validation test on that
+  assumption). Confirmed via live DOM inspection they are two entirely
+  separate, independently-required fields — "Order Payment Type" is
+  `x_studio_order_payment_method` (`<select>`: "", "Cash", "Credit"). The
+  original merge left "Order Payment Type" unfilled everywhere, which silently
+  blocked every save with "Invalid fields: Order Payment Type" — surfacing
+  only as a mysterious multi-second save timeout, since Odoo never sends a
+  save request at all when a required field is invalid (confirmed via network
+  logging: zero requests fire in that state). Fixed by adding
+  `setOrderPaymentType()`, calling it everywhere `setQuotationType()` is
+  called, and splitting the merged validation test back into two.
 - **Bank Guarantee / Customer Group fields** (`x_customer_group_id`,
   `x_bank_guarantee_amount`, `x_bank_guarantee_expiry_date`) are Odoo Studio
   custom fields on `res.partner`. Technical names are a best guess based on
@@ -87,3 +97,21 @@ separate, real concern from data existence.
 Teardown archives the Customer (via `BaseFormPage.archiveRecord()`, respecting
 `SKIP_ARCHIVE`) but does nothing for Sales Team/Warehouse/Product, since those are no
 longer created by this fixture.
+
+**Caveat on the "pricelist hang" diagnosis above:** a meaningful share of this session's
+save/order-line flakiness turned out to be a genuinely unstable local internet
+connection during testing (confirmed by the user), not purely server-side pricelist
+computation or client-side races. The specific fresh-product-under-pricelist hang was
+still reproduced multiple times with clean, fast, working connectivity elsewhere in the
+same session, so that finding stands — but treat any *other* one-off "instance is slow"
+observation from this session with more skepticism than the notes above might imply.
+
+## `save()` fails fast on a blocked/invalid required field (2026-09-08)
+
+`BaseFormPage.save()` now checks for `.o_field_widget.o_field_invalid` ~3s after
+clicking Save and throws immediately (naming the field when Odoo exposes a `name`
+attribute on it) instead of waiting the full timeout. Root cause this fixed: Odoo never
+sends a save request at all while a required field is invalid (confirmed via network
+logging — zero `call_kw` requests fire), so the old behavior of just waiting longer for
+`.o_form_button_save` to hide could never succeed and only produced a confusing
+multi-second timeout. This is what led to discovering the Order Payment Type bug above.

@@ -187,7 +187,21 @@ export class SalesFormPage extends SalesBaseFormPage {
     return value.trim() === '';
   }
 
-  /** Sets the "Quotation Type" (a.k.a. "Order Payment Type" in some instances) widget. */
+  /**
+   * Sets the "Quotation Type" widget (a custom selection widget, not a standard
+   * `[name=...]` attribute we can rely on).
+   *
+   * CORRECTION (2026-09-08): "Quotation Type" and "Order Payment Type" were previously
+   * assumed to be the same field/widget (based on legacy test naming) and only this one
+   * was ever filled. Confirmed live via DOM inspection that they are two entirely
+   * separate, independently-required Studio fields — "Order Payment Type" is
+   * `x_studio_order_payment_method`, a plain `<select>` with options "", "Cash",
+   * "Credit". Leaving it unset silently blocked every save with "Invalid fields: Order
+   * Payment Type", surfacing only as a mysterious save timeout (fixed generically in
+   * BaseFormPage.save(), which now fails fast on this instead of hanging). Every caller
+   * of setQuotationType() must also call setOrderPaymentType() unless the field being
+   * deliberately left blank is Order Payment Type itself.
+   */
   async setQuotationType(value: string): Promise<void> {
     const field = this.page.getByLabel(/^quotation\s*type$/i).first();
     await field.waitFor({ state: 'visible', timeout: 10_000 });
@@ -201,6 +215,13 @@ export class SalesFormPage extends SalesBaseFormPage {
     const dropdown = this.page.locator('.o-autocomplete--dropdown-menu');
     await dropdown.waitFor({ state: 'visible', timeout: 8_000 });
     await dropdown.locator('li, .o-autocomplete--dropdown-item').filter({ hasText: value }).first().click();
+  }
+
+  /** Sets the separate "Order Payment Type" (`x_studio_order_payment_method`) select. */
+  async setOrderPaymentType(value: string): Promise<void> {
+    const field = this.page.getByLabel(/^order\s*payment\s*type$/i).first();
+    await field.waitFor({ state: 'visible', timeout: 10_000 });
+    await field.selectOption({ label: value });
   }
 
   // ── Other Info tab ───────────────────────────────────────────────────────────

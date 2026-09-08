@@ -29,6 +29,7 @@ test.describe('Sales Field Validations @module:sales @step:validations', () => {
     expect(await formPage.isCustomerFieldEmpty()).toBe(true);
 
     await formPage.setQuotationType(SALES_TEST_CONFIG.quotationType);
+    await formPage.setOrderPaymentType(SALES_TEST_CONFIG.orderPaymentType);
     const otherInfoOk = await formPage.fillOtherInfo(SALES_TEST_CONFIG.salesTeam, SALES_TEST_CONFIG.warehouse);
     if (!otherInfoOk) {
       test.skip(true, 'Reference Sales Team/Warehouse not found in this Odoo environment');
@@ -43,7 +44,7 @@ test.describe('Sales Field Validations @module:sales @step:validations', () => {
     expect(blocked).toBe(true);
   });
 
-  test('blocks save when Quotation Type (Order Payment Type) is left blank', async ({ page, salesMasterData }) => {
+  test('blocks save when Quotation Type is left blank', async ({ page, salesMasterData }) => {
     const formPage = new SalesFormPage(page);
     await formPage.navigate();
 
@@ -53,7 +54,37 @@ test.describe('Sales Field Validations @module:sales @step:validations', () => {
       return;
     }
 
-    // Quotation Type intentionally left blank — this is the field under test.
+    // Quotation Type intentionally left blank — this is the field under test. Order
+    // Payment Type is a genuinely separate required field (confirmed via live DOM
+    // inspection — see SalesFormPage.setQuotationType doc comment) and must be filled
+    // here so the save is blocked specifically by Quotation Type, not by both at once.
+    await formPage.setOrderPaymentType(SALES_TEST_CONFIG.orderPaymentType);
+    const otherInfoOk = await formPage.fillOtherInfo(SALES_TEST_CONFIG.salesTeam, SALES_TEST_CONFIG.warehouse);
+    if (!otherInfoOk) {
+      test.skip(true, 'Reference Sales Team/Warehouse not found in this Odoo environment');
+      return;
+    }
+    if (!(await buildLinesOrSkip(formPage))) {
+      test.skip(true, 'Reference product not found in this Odoo environment');
+      return;
+    }
+
+    const { blocked } = await formPage.attemptSaveExpectingBlock();
+    expect(blocked).toBe(true);
+  });
+
+  test('blocks save when Order Payment Type is left blank', async ({ page, salesMasterData }) => {
+    const formPage = new SalesFormPage(page);
+    await formPage.navigate();
+
+    const customerFound = await formPage.selectCustomerIfExists(salesMasterData.customerName);
+    if (!customerFound) {
+      test.skip(true, `Could not select fixture-created customer "${salesMasterData.customerName}" — transient UI issue, not a missing-data problem`);
+      return;
+    }
+
+    // Order Payment Type intentionally left blank — this is the field under test.
+    await formPage.setQuotationType(SALES_TEST_CONFIG.quotationType);
     const otherInfoOk = await formPage.fillOtherInfo(SALES_TEST_CONFIG.salesTeam, SALES_TEST_CONFIG.warehouse);
     if (!otherInfoOk) {
       test.skip(true, 'Reference Sales Team/Warehouse not found in this Odoo environment');
@@ -78,6 +109,7 @@ test.describe('Sales Field Validations @module:sales @step:validations', () => {
       return;
     }
     await formPage.setQuotationType(SALES_TEST_CONFIG.quotationType);
+    await formPage.setOrderPaymentType(SALES_TEST_CONFIG.orderPaymentType);
     await formPage.openOtherInfoTab();
 
     const readOnly = await formPage.isFieldReadOnly('payment_term_id');
@@ -112,6 +144,7 @@ test.describe('Sales Field Validations @module:sales @step:validations', () => {
       return;
     }
     await formPage.setQuotationType(SALES_TEST_CONFIG.quotationType);
+    await formPage.setOrderPaymentType(SALES_TEST_CONFIG.orderPaymentType);
     await formPage.openOtherInfoTab();
 
     const readOnly = await formPage.isFieldReadOnly('user_id');
@@ -145,6 +178,7 @@ test.describe('Sales Field Validations @module:sales @step:validations', () => {
       return;
     }
     await formPage.setQuotationType(SALES_TEST_CONFIG.quotationType);
+    await formPage.setOrderPaymentType(SALES_TEST_CONFIG.orderPaymentType);
     await formPage.openOtherInfoTab();
 
     const readOnly = await formPage.isFieldReadOnly('team_id');
@@ -179,6 +213,7 @@ test.describe('Sales Field Validations @module:sales @step:validations', () => {
       return;
     }
     await formPage.setQuotationType(SALES_TEST_CONFIG.quotationType);
+    await formPage.setOrderPaymentType(SALES_TEST_CONFIG.orderPaymentType);
 
     const readOnly = await formPage.isFieldReadOnly('company_id');
     const value = await formPage.readFieldText('company_id');
@@ -211,6 +246,7 @@ test.describe('Sales Field Validations @module:sales @step:validations', () => {
       return;
     }
     await formPage.setQuotationType(SALES_TEST_CONFIG.quotationType);
+    await formPage.setOrderPaymentType(SALES_TEST_CONFIG.orderPaymentType);
     await formPage.openOtherInfoTab();
 
     const readOnly = await formPage.isFieldReadOnly('warehouse_id');
