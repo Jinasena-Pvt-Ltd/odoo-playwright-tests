@@ -317,7 +317,13 @@ export class SalesFormPage extends SalesBaseFormPage {
     await this.page.waitForTimeout(300);
 
     const qty = row.locator('[name="product_uom_qty"] input').first();
-    await qty.waitFor({ state: 'visible', timeout: 20_000 });
+    // A freshly-created product being priced for the first time under a customer's
+    // specific pricelist appears to trigger a genuinely slower one-time server-side
+    // computation than an established product with cached pricing (confirmed: swapping
+    // in old, long-existing products made the same test pass reliably where fresh
+    // fixture-created products consistently timed out here) — a generous timeout
+    // rather than a client-side race is the right accommodation for that.
+    await qty.waitFor({ state: 'visible', timeout: 45_000 });
     await qty.click();
     await qty.fill(String(line.quantity));
     await qty.press('Tab');

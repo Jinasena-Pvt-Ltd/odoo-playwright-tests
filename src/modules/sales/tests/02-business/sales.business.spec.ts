@@ -39,8 +39,8 @@ test.describe('Sales Business Logic @module:sales @step:business', () => {
     }
 
     const added = await formPage.addOrderLines([
-      { product: 'CENTRIC TYPE PUMPING UNIT EPC 10CJ 024S', quantity: 1, discount: 10 },
-      { product: 'BALL BEARING 6202-2RS', quantity: 2, discount: 10 },
+      { product: salesMasterData.product1Name, quantity: 1, discount: 10 },
+      { product: salesMasterData.product2Name, quantity: 2, discount: 10 },
     ]);
     if (added === 0) {
       test.skip(true, 'Could not select fixture-created products — transient UI issue, not a missing-data problem');
