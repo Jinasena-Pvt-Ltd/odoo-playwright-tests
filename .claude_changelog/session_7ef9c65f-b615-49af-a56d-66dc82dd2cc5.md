@@ -1753,3 +1753,16 @@ ok.Thank you. plz fix the other parts
 **Files touched:**
 - Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\core\base\BaseFormPage.ts
 
+
+---
+
+## Change -- 2026-09-08T08:02:47Z
+
+**Prompt:**
+```
+fixed it
+```
+
+**Files touched:**
+- Write: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\probe_save.tmp.js
+
