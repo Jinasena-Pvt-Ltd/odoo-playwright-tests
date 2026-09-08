@@ -1,11 +1,12 @@
 /**
  * Step 6 — Edge Cases for the sales module.
  *
- * NOTE: Customer and Products are created fresh each run by the `salesMasterData`
- * worker fixture (see src/core/fixtures/salesMasterData.fixtures.ts) — no pre-existing
- * config needed for those. Sales Team/Warehouse remain pre-existing environment config
- * (see sales.master-data.ts for why) and are still selected via Many2one lookups, so
- * tests still gracefully skip if those two are absent.
+ * NOTE: Customer is created fresh each run by the `salesMasterData` worker fixture (see
+ * src/core/fixtures/salesMasterData.fixtures.ts). Product/Sales Team/Warehouse remain
+ * pre-existing environment config (see sales.master-data.ts for why — pricing a
+ * brand-new product under a customer's pricelist was found to hang on this instance)
+ * and are still selected via Many2one lookups, so tests still gracefully skip if that
+ * reference data is absent.
  */
 import { test, expect } from '../../../../core/fixtures/index';
 import { SalesFormPage } from '../../pages/SalesPage';
@@ -29,10 +30,10 @@ test.describe('Sales Edge Cases @module:sales @step:edge', () => {
     }
 
     const added = await formPage.addOrderLines([
-      { product: salesMasterData.product1Name, quantity: 0, discount: 10 },
+      { product: SALES_TEST_CONFIG.product, quantity: 0, discount: 10 },
     ]);
     if (added === 0) {
-      test.skip(true, 'Could not select fixture-created product — transient UI issue, not a missing-data problem');
+      test.skip(true, 'Reference product not found in this Odoo environment');
       return;
     }
 
@@ -63,10 +64,10 @@ test.describe('Sales Edge Cases @module:sales @step:edge', () => {
     }
 
     const added = await formPage.addOrderLines([
-      { product: salesMasterData.product1Name, quantity: 1, discount: 10, unitPrice: 0 },
+      { product: SALES_TEST_CONFIG.product, quantity: 1, discount: 10, unitPrice: 0 },
     ]);
     if (added === 0) {
-      test.skip(true, 'Could not select fixture-created product — transient UI issue, not a missing-data problem');
+      test.skip(true, 'Reference product not found in this Odoo environment');
       return;
     }
 

@@ -1,12 +1,10 @@
 import { test as base, chromium } from '@playwright/test';
 import { RUN_TAG, uniqueName } from '../utils/RandomDataGenerator';
-import { SalesCustomerFormPage, ProductFormPage } from '../../modules/sales/pages/SalesPage';
+import { SalesCustomerFormPage } from '../../modules/sales/pages/SalesPage';
 
 export interface SalesMasterData {
   runTag: string;
   customerName: string;
-  product1Name: string;
-  product2Name: string;
 }
 
 export type SalesMasterDataWorkerFixtures = {
@@ -33,49 +31,26 @@ export const test = base.extend<{}, SalesMasterDataWorkerFixtures>({
       const context = await browser.newContext({ storageState: 'auth-storage/admin.json' });
       const page = await context.newPage();
 
-      const created: Array<{ label: string; resId: number }> = [];
-
       // ── Customer ──────────────────────────────────────────────────────────────
+      // Products are deliberately NOT created here anymore — a freshly-created product
+      // being priced for the first time under a customer's pricelist was found to hang
+      // (or take far longer than any reasonable timeout) on this instance, confirmed by
+      // swapping in an established, already-priced product and seeing it work reliably.
+      // Tests now reference a real pre-existing product via SALES_TEST_CONFIG.product
+      // (see sales.master-data.ts) instead of a fixture-created one.
       const customerPage = new SalesCustomerFormPage(page);
       await customerPage.navigate();
       const customerName = uniqueName('Test Customer');
+      let customerResId: number | null = null;
       try {
         await customerPage.customerName.setValue(customerName);
         await customerPage.save();
+        customerResId = currentResId(page.url());
       } catch (err) {
         console.error(`  ✘ Customer creation failed: ${(err as Error).message}`);
         throw err;
       }
-      const customerResId = currentResId(page.url());
-      if (customerResId) created.push({ label: 'Customer', resId: customerResId });
       console.log(`  ✔ Customer created     → id=${customerResId}  "${customerName}"`);
-
-      // ── Products ──────────────────────────────────────────────────────────────
-      async function createProduct(baseName: string): Promise<string> {
-        const productPage = new ProductFormPage(page);
-        await productPage.navigate();
-        const name = uniqueName(baseName);
-        // Not required at the model level, but this instance's view enforces both as
-        // required anyway (see ProductFormPage doc comment) — derive a compact unique
-        // value from the same name rather than introducing a separate code generator.
-        const code = name.replace(/[^A-Za-z0-9]/g, '');
-        try {
-          await productPage.productName.setValue(name);
-          await productPage.internalReference.setValue(code);
-          await productPage.barcode.setValue(code);
-          await productPage.save();
-        } catch (err) {
-          console.error(`  ✘ Product creation failed ("${baseName}"): ${(err as Error).message}`);
-          throw err;
-        }
-        const resId = currentResId(page.url());
-        if (resId) created.push({ label: `Product (${baseName})`, resId });
-        console.log(`  ✔ Product created      → id=${resId}  "${name}"`);
-        return name;
-      }
-
-      const product1Name = await createProduct('Test Product 1');
-      const product2Name = await createProduct('Test Product 2');
 
       await context.close();
       await browser.close();
@@ -85,7 +60,7 @@ export const test = base.extend<{}, SalesMasterDataWorkerFixtures>({
       }
       console.log('  ─────────────────────────────────────────');
 
-      await use({ runTag: RUN_TAG, customerName, product1Name, product2Name });
+      await use({ runTag: RUN_TAG, customerName });
 
       // ── Teardown ──────────────────────────────────────────────────────────────
       console.log('\n╔══════════════════════════════════════════╗');
@@ -97,29 +72,21 @@ export const test = base.extend<{}, SalesMasterDataWorkerFixtures>({
         return;
       }
 
-      const teardownBrowser = await chromium.launch();
-      const teardownContext = await teardownBrowser.newContext({ storageState: 'auth-storage/admin.json' });
-      const teardownPage = await teardownContext.newPage();
-
-      for (const record of [...created].reverse()) {
+      if (customerResId) {
+        const teardownBrowser = await chromium.launch();
+        const teardownContext = await teardownBrowser.newContext({ storageState: 'auth-storage/admin.json' });
+        const teardownPage = await teardownContext.newPage();
         try {
-          if (record.label.startsWith('Product')) {
-            const productPage = new ProductFormPage(teardownPage);
-            await productPage.openById(record.resId);
-            await productPage.archiveRecord();
-          } else {
-            const customerPage = new SalesCustomerFormPage(teardownPage);
-            await customerPage.openById(record.resId);
-            await customerPage.archiveRecord();
-          }
-          console.log(`  ✔ Archived ${record.label} id=${record.resId}`);
+          const customerPage = new SalesCustomerFormPage(teardownPage);
+          await customerPage.openById(customerResId);
+          await customerPage.archiveRecord();
+          console.log(`  ✔ Archived Customer id=${customerResId}`);
         } catch (err) {
-          console.warn(`  ✘ Could not archive ${record.label} id=${record.resId}: ${(err as Error).message}`);
+          console.warn(`  ✘ Could not archive Customer id=${customerResId}: ${(err as Error).message}`);
         }
+        await teardownContext.close();
+        await teardownBrowser.close();
       }
-
-      await teardownContext.close();
-      await teardownBrowser.close();
       console.log('');
     },
     { scope: 'worker' },

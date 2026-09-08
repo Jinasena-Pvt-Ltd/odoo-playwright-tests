@@ -1661,3 +1661,22 @@ i can manually create the sales order.without  create new product use the old av
 **Files touched:**
 - Write: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\probe_real.tmp.js
 
+
+---
+
+## Change -- 2026-09-08T06:19:43Z
+
+**Prompt:**
+```
+Edit the test and use only this product [02BB 023] BALL BEARING 6202-2RS. remove the creatation  of a new  product
+```
+
+**Files touched:**
+- Write: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\core\fixtures\salesMasterData.fixtures.ts
+- Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\pages\SalesPage.ts
+- Write: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\data\sales.master-data.ts
+- Write: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\02-business\sales.business.spec.ts
+- Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\05-validations\sales.validations.spec.ts
+- Write: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\06-edge-cases\sales.edge-cases.spec.ts
+- Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\notes\sales.notes.md
+

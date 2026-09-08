@@ -52,12 +52,23 @@ Odoo SaaS instance. Its business-logic coverage was ported into the current
 
 ## Self-sufficient master data (2026-09-08)
 
-Customer and Products no longer require pre-existing environment config — the
-`salesMasterData` worker-scoped fixture (`src/core/fixtures/salesMasterData.fixtures.ts`)
-creates a fresh Customer and two Products via the browser UI once per test-run worker,
-using `navigateToAction()` and the same page objects tests already use
-(`SalesCustomerFormPage`, the new `ProductFormPage` in `SalesPage.ts`). Tests consume the
-generated names via the `salesMasterData` fixture instead of `SALES_TEST_CONFIG`.
+Customer no longer requires pre-existing environment config — the `salesMasterData`
+worker-scoped fixture (`src/core/fixtures/salesMasterData.fixtures.ts`) creates a fresh
+Customer via the browser UI once per test-run worker, using `navigateToAction()` and the
+same `SalesCustomerFormPage` page object tests already use. Tests consume the generated
+name via the `salesMasterData` fixture instead of `SALES_TEST_CONFIG`.
+
+**Product is deliberately NOT fixture-created — reverted after testing (2026-09-08).**
+The fixture originally also created two fresh Products the same way, but pricing a
+brand-new product for the first time under a customer's specific pricelist ("JAM
+General Pricelist (LKR)") was found to hang or take far longer than any reasonable
+timeout on this instance. Confirmed directly: the exact same order-line flow with an
+established, already-priced product (`SALES_TEST_CONFIG.product`, currently `BALL
+BEARING 6202-2RS`) works reliably; only fresh, never-before-priced products triggered
+the hang. This looks like server-side pricelist computation behavior, not a client-side
+timing race — worth checking Odoo's backend logs for that pricelist's rule configuration
+if it needs revisiting. Until then, Product joins Sales Team/Warehouse/Quotation Type as
+pre-existing config in `sales.master-data.ts`.
 
 Sales Team and Warehouse remain pre-existing environment config by deliberate choice —
 creating a Warehouse in Odoo triggers real side effects (auto-generated stock
@@ -66,13 +77,13 @@ repo, so it isn't safe to create-and-tear-down every run. Quotation Type stays s
 too — it's a fixed Studio enum value, not a creatable record.
 
 The fixture throws (failing the whole worker's tests with a clear setup error) if
-Customer/Product creation itself fails — this is deliberate: the whole point of the
-change is to guarantee the data exists, so silently swallowing a creation failure would
-just relocate the old "maybe it's there" uncertainty to a new place. Downstream tests
-keep their `if (!found) test.skip(...)` guards around the Many2one selection step
-itself, since `selectIfExists`'s occasional dropdown-render flakiness on this slow
-instance is a separate, real concern from data existence.
+Customer creation itself fails — this is deliberate: the whole point of the change is to
+guarantee the data exists, so silently swallowing a creation failure would just relocate
+the old "maybe it's there" uncertainty to a new place. Downstream tests keep their
+`if (!found) test.skip(...)` guards around the Many2one selection step itself, since
+`selectIfExists`'s occasional dropdown-render flakiness on this slow instance is a
+separate, real concern from data existence.
 
-Teardown archives the Customer and Products (via `BaseFormPage.archiveRecord()`,
-respecting `SKIP_ARCHIVE`) but does nothing for Sales Team/Warehouse, since those are
-no longer created by this fixture in the first place.
+Teardown archives the Customer (via `BaseFormPage.archiveRecord()`, respecting
+`SKIP_ARCHIVE`) but does nothing for Sales Team/Warehouse/Product, since those are no
+longer created by this fixture.
