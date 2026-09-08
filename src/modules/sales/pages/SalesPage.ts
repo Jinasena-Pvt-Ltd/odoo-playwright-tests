@@ -348,6 +348,17 @@ export class SalesFormPage extends SalesBaseFormPage {
       await this.applyTaxToRow(lastRow, line.tax);
     }
 
+    // Explicitly commit/deselect this row before returning. Without this, the row can
+    // remain in `.o_selected_row` (edit) state, and the NEXT "Add a product" click
+    // occasionally re-enters this same still-selected row instead of creating a new
+    // one — observed as a second line silently overwriting/replacing the first rather
+    // than being appended alongside it. Clicking the (already-active) Order Lines tab
+    // header blurs/commits the row without risking a discard, unlike Escape.
+    const orderLinesTab = this.page.locator('.o_notebook .nav-link, .o_notebook .nav-item a')
+      .filter({ hasText: /order\s*lines/i }).first();
+    await orderLinesTab.click().catch(() => {});
+    await row.waitFor({ state: 'hidden', timeout: 3_000 }).catch(() => {});
+
     return true;
   }
 
