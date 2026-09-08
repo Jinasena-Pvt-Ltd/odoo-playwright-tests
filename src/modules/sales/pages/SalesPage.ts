@@ -91,7 +91,7 @@ abstract class SalesBaseFormPage extends BaseFormPage {
    * retry re-clears and re-types the value rather than just re-waiting, since a stalled
    * search occasionally needs a fresh keystroke to kick off again.
    */
-  async selectIfExists(fieldName: string, value: string, attempts = 2): Promise<boolean> {
+  async selectIfExists(fieldName: string, value: string, attempts = 3): Promise<boolean> {
     const widget = this.page.locator(`.o_field_widget[name="${fieldName}"]`).first();
     const input = widget.locator('input').first();
     await input.waitFor({ state: 'visible', timeout: 10_000 });
