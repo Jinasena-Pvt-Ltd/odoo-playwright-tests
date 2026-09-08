@@ -1484,3 +1484,16 @@ can you fix it?
 - Edit: C:\Users\Urliyas\.claude\plans\lets-edit-the-tests-purrfect-stearns.md
 - Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\pages\SalesPage.ts
 
+
+---
+
+## Change -- 2026-09-08T05:05:51Z
+
+**Prompt:**
+```
+you u skipped it?Plz fix the 1st test and run againg
+```
+
+**Files touched:**
+- Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\pages\SalesPage.ts
+

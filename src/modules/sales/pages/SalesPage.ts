@@ -246,7 +246,7 @@ export class SalesFormPage extends SalesBaseFormPage {
    * the click — confirmed empirically that the product genuinely exists and the dropdown
    * does open reliably in isolation, so this is a rendering-timing issue, not a data gap.
    */
-  async addOrderLine(line: OrderLineInput, attempts = 2): Promise<boolean> {
+  async addOrderLine(line: OrderLineInput, attempts = 3): Promise<boolean> {
     for (let attempt = 1; attempt <= attempts; attempt++) {
       const addLink = this.page.locator('.o_field_x2many_list_row_add a')
         .filter({ hasText: /add a product/i }).first();
@@ -277,7 +277,23 @@ export class SalesFormPage extends SalesBaseFormPage {
         return false;
       }
       await match.click({ force: true });
-      return this.finishOrderLine(row, line);
+
+      // The click can also silently fail to actually commit the row (observed: the
+      // dropdown match resolves and gets clicked, but the row's other cells — qty,
+      // price — never populate, and finishOrderLine's wait times out). Previously that
+      // exception propagated straight out of addOrderLine with no retry at all. Now it
+      // is caught here so the same "discard and retry the whole attempt" recovery
+      // applies to this failure mode too, not just "product not found in dropdown".
+      try {
+        return await this.finishOrderLine(row, line);
+      } catch (err) {
+        await this.discardIncompleteRow(row);
+        if (attempt < attempts) {
+          await this.page.waitForTimeout(500);
+          continue;
+        }
+        throw err;
+      }
     }
     return false;
   }
