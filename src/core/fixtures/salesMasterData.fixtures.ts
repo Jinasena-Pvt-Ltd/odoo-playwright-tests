@@ -55,8 +55,14 @@ export const test = base.extend<{}, SalesMasterDataWorkerFixtures>({
         const productPage = new ProductFormPage(page);
         await productPage.navigate();
         const name = uniqueName(baseName);
+        // Not required at the model level, but this instance's view enforces both as
+        // required anyway (see ProductFormPage doc comment) — derive a compact unique
+        // value from the same name rather than introducing a separate code generator.
+        const code = name.replace(/[^A-Za-z0-9]/g, '');
         try {
           await productPage.productName.setValue(name);
+          await productPage.internalReference.setValue(code);
+          await productPage.barcode.setValue(code);
           await productPage.save();
         } catch (err) {
           console.error(`  ✘ Product creation failed ("${baseName}"): ${(err as Error).message}`);

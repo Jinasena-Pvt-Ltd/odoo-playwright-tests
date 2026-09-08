@@ -667,10 +667,20 @@ export class SalesCustomerFormPage extends SalesBaseFormPage {
  */
 export class ProductFormPage extends SalesBaseFormPage {
   readonly productName: CharField;
+  /**
+   * Not required at the model level (confirmed via fields_get), but this instance's
+   * view enforces both as required anyway (Studio view-level customization, matching
+   * the pattern seen on every other form in this environment) — save is blocked with
+   * "Invalid fields: Internal Reference, Barcode" without them.
+   */
+  readonly internalReference: CharField;
+  readonly barcode: CharField;
 
   constructor(page: Page) {
     super(page);
     this.productName = new CharField(page, 'name');
+    this.internalReference = new CharField(page, 'default_code');
+    this.barcode = new CharField(page, 'barcode');
   }
 
   async navigate(): Promise<void> {
