@@ -20,7 +20,7 @@ export abstract class BaseFormPage extends BasePage {
     // via network-request logging that ZERO requests fire in that case, so waiting
     // longer never helps. Detect that quickly and fail with a clear, actionable error
     // instead of a mysterious multi-second timeout.
-    const invalidField = this.page.locator('.o_field_invalid').first();
+    const invalidField = this.page.locator('.o_field_widget.o_field_invalid, .o_field_invalid').first();
     const blockedByInvalidField = await invalidField
       .waitFor({ state: 'visible', timeout: 3_000 })
       .then(() => true)
