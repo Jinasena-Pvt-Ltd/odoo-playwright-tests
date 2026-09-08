@@ -292,16 +292,20 @@ export class SalesFormPage extends SalesBaseFormPage {
 
   /** Fills quantity/price/discount/tax on an already-selected order line row. */
   private async finishOrderLine(row: Locator, line: OrderLineInput): Promise<boolean> {
+    // Brief settle: right after the product match is clicked, Odoo still needs a
+    // moment to populate the row's other cells (qty/uom/price defaults) — querying
+    // immediately occasionally raced ahead of that on this instance under load.
+    await this.page.waitForTimeout(300);
 
     const qty = row.locator('[name="product_uom_qty"] input').first();
-    await qty.waitFor({ state: 'visible', timeout: 8_000 });
+    await qty.waitFor({ state: 'visible', timeout: 15_000 });
     await qty.click();
     await qty.fill(String(line.quantity));
     await qty.press('Tab');
 
     if (line.unitPrice !== undefined) {
       const priceInput = row.locator('[name="price_unit"] input').first();
-      await priceInput.waitFor({ state: 'visible', timeout: 8_000 });
+      await priceInput.waitFor({ state: 'visible', timeout: 15_000 });
       await priceInput.click();
       await priceInput.fill(String(line.unitPrice));
       await priceInput.press('Tab');
@@ -309,7 +313,7 @@ export class SalesFormPage extends SalesBaseFormPage {
 
     if (line.discount !== undefined) {
       const discInput = row.locator('[name="discount"] input').first();
-      await discInput.waitFor({ state: 'visible', timeout: 5_000 });
+      await discInput.waitFor({ state: 'visible', timeout: 10_000 });
       await discInput.click();
       await discInput.fill(String(line.discount));
       await discInput.press('Tab');
