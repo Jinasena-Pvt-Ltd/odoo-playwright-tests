@@ -308,13 +308,16 @@ export class SalesFormPage extends SalesBaseFormPage {
 
   /** Fills quantity/price/discount/tax on an already-selected order line row. */
   private async finishOrderLine(row: Locator, line: OrderLineInput): Promise<boolean> {
-    // Brief settle: right after the product match is clicked, Odoo still needs a
-    // moment to populate the row's other cells (qty/uom/price defaults) — querying
-    // immediately occasionally raced ahead of that on this instance under load.
+    // Selecting a product triggers an onchange RPC (price/UoM/tax defaults) before
+    // Odoo finishes populating the row's other cells — wait for that to actually
+    // finish (loading indicator gone) rather than just padding a fixed delay, which
+    // only papered over the race under recording overhead (video/trace) without
+    // addressing why it was racing in the first place.
+    await this.page.locator('.o_loading_indicator').waitFor({ state: 'hidden', timeout: 15_000 }).catch(() => {});
     await this.page.waitForTimeout(300);
 
     const qty = row.locator('[name="product_uom_qty"] input').first();
-    await qty.waitFor({ state: 'visible', timeout: 15_000 });
+    await qty.waitFor({ state: 'visible', timeout: 20_000 });
     await qty.click();
     await qty.fill(String(line.quantity));
     await qty.press('Tab');
