@@ -12,14 +12,32 @@ export abstract class BaseFormPage extends BasePage {
     const saveBtn = this.page.locator('.o_form_button_save, button[name="save_manually"]').first();
     await saveBtn.waitFor({ state: 'visible', timeout: 5_000 });
     await saveBtn.click();
+
+    // Diagnosed root cause of most "save never completes" failures: when a required
+    // field is blank (e.g. a Many2one that silently failed to get set earlier in the
+    // test, due to the same intermittent dropdown flakiness selectIfExists already
+    // works around elsewhere), Odoo blocks the save entirely client-side — confirmed
+    // via network-request logging that ZERO requests fire in that case, so waiting
+    // longer never helps. Detect that quickly and fail with a clear, actionable error
+    // instead of a mysterious multi-second timeout.
+    const invalidField = this.page.locator('.o_field_invalid').first();
+    const blockedByInvalidField = await invalidField
+      .waitFor({ state: 'visible', timeout: 3_000 })
+      .then(() => true)
+      .catch(() => false);
+    if (blockedByInvalidField) {
+      const fieldName = await invalidField.getAttribute('name').catch(() => null);
+      throw new Error(
+        `save() blocked: required field "${fieldName ?? '(unknown)'}" is invalid/blank — ` +
+        'Odoo will never send a save request while this is true, so waiting longer would not help. ' +
+        'This usually means an earlier Many2one selection silently failed.',
+      );
+    }
+
     // Wait until the form leaves edit mode (save button disappears). Bumped repeatedly
-    // (10s -> 20s -> 40s): this SaaS instance has repeatedly shown save taking far
-    // longer than expected under load, independent of record complexity (observed on
-    // both single-line and multi-line forms) — this is instance latency, not a race.
-    // Not pushed higher than 40s: the global test timeout is 120s (playwright.config.ts),
-    // and earlier steps in a full test already consume a meaningful share of that: going
-    // higher here risks the whole test being killed by the global timeout instead,
-    // which is a less informative failure than this one.
+    // (10s -> 20s -> 40s): this SaaS instance has shown save taking far longer than
+    // expected under load in cases where the above check does NOT fire (a genuinely
+    // valid form) — this remaining wait covers real instance latency, not a race.
     await expect(saveBtn).toBeHidden({ timeout: 40_000 });
     await this.waitForOdooReady();
   }
