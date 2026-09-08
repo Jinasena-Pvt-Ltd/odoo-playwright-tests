@@ -282,12 +282,26 @@ export class SalesFormPage extends SalesBaseFormPage {
         return false;
       }
 
-      await productInput.pressSequentially(line.product, { delay: 50 });
-
       const dropdown = this.page.locator('.o-autocomplete--dropdown-menu');
-      const opened = await dropdown.waitFor({ state: 'visible', timeout: 10_000 }).then(() => true).catch(() => false);
-      const match = dropdown.locator('li, .o-autocomplete--dropdown-item').filter({ hasText: line.product }).first();
-      const found = opened && await match.isVisible({ timeout: 5_000 }).catch(() => false);
+      let found = false;
+      let match = dropdown.locator('li, .o-autocomplete--dropdown-item').filter({ hasText: line.product }).first();
+
+      // In-place retype retry BEFORE the more expensive "discard row and re-add" cycle:
+      // mirrors the pattern already proven in selectIfExists() — a debounced search
+      // occasionally doesn't fire (or the dropdown doesn't render) from the first
+      // keystroke batch, and simply clearing + retyping resolves it without needing to
+      // throw away and recreate the whole row.
+      for (let typeAttempt = 1; typeAttempt <= 2 && !found; typeAttempt++) {
+        if (typeAttempt > 1) {
+          await productInput.fill('');
+          await this.page.waitForTimeout(300);
+        }
+        await productInput.pressSequentially(line.product, { delay: 50 });
+        const opened = await dropdown.waitFor({ state: 'visible', timeout: 10_000 }).then(() => true).catch(() => false);
+        match = dropdown.locator('li, .o-autocomplete--dropdown-item').filter({ hasText: line.product }).first();
+        found = opened && await match.isVisible({ timeout: 5_000 }).catch(() => false);
+      }
+
       if (!found) {
         // Discard this half-filled row before retrying — otherwise the next "Add a
         // product" click leaves TWO incomplete rows in edit state (observed: a stray

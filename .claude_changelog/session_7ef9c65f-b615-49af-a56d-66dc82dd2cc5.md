@@ -1845,3 +1845,16 @@ fixed it
 **Files touched:**
 - Write: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\probe_line.tmp.js
 
+
+---
+
+## Change -- 2026-09-08T11:04:09Z
+
+**Prompt:**
+```
+plz pass the skipped test
+```
+
+**Files touched:**
+- Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\pages\SalesPage.ts
+
