@@ -1642,3 +1642,22 @@ i can manually create the sales order.without  create new product use the old av
 - Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\02-business\sales.business.spec.ts
 - Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\pages\SalesPage.ts
 
+
+---
+
+## Change -- 2026-09-08T06:00:01Z
+
+**Prompt:**
+```
+<task-notification>
+<task-id>bt186a26r</task-id>
+<tool-use-id>toolu_01HVAic435x8tiqYK3Lj3jTV</tool-use-id>
+<output-file>C:\Users\Urliyas\AppData\Local\Temp\claude\c--Users-Urliyas-Documents-GitHub-odoo-playwright-tests\7ef9c65f-b615-49af-a56d-66dc82dd2cc5\tasks\bt186a26r.output</output-file>
+<status>completed</status>
+<summary>Background command "cd "c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests" &amp;&amp; rm -rf test-results 2&gt;&amp;1; HEADLESS=false npx playwright test --grep "creates a valid quotation" --project=admin 2&gt;&amp;1" completed (exit code 0)</summary>
+</task-notification>
+```
+
+**Files touched:**
+- Write: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\probe_real.tmp.js
+
