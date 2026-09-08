@@ -1680,3 +1680,17 @@ Edit the test and use only this product [02BB 023] BALL BEARING 6202-2RS. remove
 - Write: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\06-edge-cases\sales.edge-cases.spec.ts
 - Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\notes\sales.notes.md
 
+
+---
+
+## Change -- 2026-09-08T07:43:44Z
+
+**Prompt:**
+```
+ok.Thank you. plz fix the other parts
+```
+
+**Files touched:**
+- Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\core\base\BaseFormPage.ts
+- Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\pages\SalesPage.ts
+

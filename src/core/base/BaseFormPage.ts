@@ -12,10 +12,11 @@ export abstract class BaseFormPage extends BasePage {
     const saveBtn = this.page.locator('.o_form_button_save, button[name="save_manually"]').first();
     await saveBtn.waitFor({ state: 'visible', timeout: 5_000 });
     await saveBtn.click();
-    // Wait until the form leaves edit mode (save button disappears). 20s (not the
-    // previous 10s): this SaaS instance can take noticeably longer to persist a save
-    // when the form has multiple order lines (observed, not assumed).
-    await expect(saveBtn).toBeHidden({ timeout: 20_000 });
+    // Wait until the form leaves edit mode (save button disappears). Bumped repeatedly
+    // (10s -> 20s -> 40s): this SaaS instance has repeatedly shown save taking far
+    // longer than expected under load, independent of record complexity (observed on
+    // both single-line and multi-line forms) — this is instance latency, not a race.
+    await expect(saveBtn).toBeHidden({ timeout: 40_000 });
     await this.waitForOdooReady();
   }
 

@@ -357,6 +357,11 @@ export class SalesFormPage extends SalesBaseFormPage {
     let added = 0;
     for (const line of lines) {
       if (await this.addOrderLine(line)) added++;
+      // Settle before clicking "Add a product" again — the previous line's onchange
+      // (price/uom/tax recompute) can still be wrapping up, and clicking too soon
+      // occasionally raced ahead of it on this instance (observed: a 2nd line silently
+      // failing to add with no error, when clicked immediately after the 1st).
+      await this.page.waitForTimeout(500);
     }
     return added;
   }
