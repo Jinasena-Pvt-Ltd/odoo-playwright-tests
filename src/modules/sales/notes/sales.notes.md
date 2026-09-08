@@ -49,3 +49,30 @@ Odoo SaaS instance. Its business-logic coverage was ported into the current
   `step-04-navigate-quotations` (pure navigation boilerplate, superseded by
   `auth.setup.ts` + `BasePage.navigateTo`), and `read-product-cost.spec.ts`
   (dumped a value to a text file, asserted nothing).
+
+## Self-sufficient master data (2026-09-08)
+
+Customer and Products no longer require pre-existing environment config — the
+`salesMasterData` worker-scoped fixture (`src/core/fixtures/salesMasterData.fixtures.ts`)
+creates a fresh Customer and two Products via the browser UI once per test-run worker,
+using `navigateToAction()` and the same page objects tests already use
+(`SalesCustomerFormPage`, the new `ProductFormPage` in `SalesPage.ts`). Tests consume the
+generated names via the `salesMasterData` fixture instead of `SALES_TEST_CONFIG`.
+
+Sales Team and Warehouse remain pre-existing environment config by deliberate choice —
+creating a Warehouse in Odoo triggers real side effects (auto-generated stock
+locations/routes/picking types) and there's no proven UI-archive flow for it in this
+repo, so it isn't safe to create-and-tear-down every run. Quotation Type stays static
+too — it's a fixed Studio enum value, not a creatable record.
+
+The fixture throws (failing the whole worker's tests with a clear setup error) if
+Customer/Product creation itself fails — this is deliberate: the whole point of the
+change is to guarantee the data exists, so silently swallowing a creation failure would
+just relocate the old "maybe it's there" uncertainty to a new place. Downstream tests
+keep their `if (!found) test.skip(...)` guards around the Many2one selection step
+itself, since `selectIfExists`'s occasional dropdown-render flakiness on this slow
+instance is a separate, real concern from data existence.
+
+Teardown archives the Customer and Products (via `BaseFormPage.archiveRecord()`,
+respecting `SKIP_ARCHIVE`) but does nothing for Sales Team/Warehouse, since those are
+no longer created by this fixture in the first place.

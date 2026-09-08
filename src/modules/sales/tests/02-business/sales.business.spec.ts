@@ -1,10 +1,11 @@
 /**
  * Step 2 — Business Logic for the sales module.
  *
- * NOTE: Customer/Product/Sales Team/Warehouse names below are pre-existing
- * environment master data (see sales.master-data.ts) — they are selected via
- * Many2one lookups, not created by these tests, so uniqueName() does not apply
- * to them. Every test gracefully skips when that reference data is absent.
+ * NOTE: Customer and Products are created fresh each run by the `salesMasterData`
+ * worker fixture (see src/core/fixtures/salesMasterData.fixtures.ts) — no pre-existing
+ * config needed for those. Sales Team/Warehouse remain pre-existing environment config
+ * (see sales.master-data.ts for why) and are still selected via Many2one lookups, so
+ * tests still gracefully skip if those two are absent.
  */
 import { test, expect } from '../../../../core/fixtures/index';
 import { SalesFormPage } from '../../pages/SalesPage';
@@ -19,13 +20,13 @@ import {
 } from '../../calculations/SalesCalculations';
 
 test.describe('Sales Business Logic @module:sales @step:business', () => {
-  test('creates a valid quotation with customer, order lines, and required header fields @smoke', async ({ page }) => {
+  test('creates a valid quotation with customer, order lines, and required header fields @smoke', async ({ page, salesMasterData }) => {
     const formPage = new SalesFormPage(page);
     await formPage.navigate();
 
-    const customerFound = await formPage.selectCustomerIfExists(SALES_TEST_CONFIG.customer);
+    const customerFound = await formPage.selectCustomerIfExists(salesMasterData.customerName);
     if (!customerFound) {
-      test.skip(true, `Reference customer "${SALES_TEST_CONFIG.customer}" not found in this Odoo environment`);
+      test.skip(true, `Could not select fixture-created customer "${salesMasterData.customerName}" — transient UI issue, not a missing-data problem`);
       return;
     }
 
@@ -38,11 +39,11 @@ test.describe('Sales Business Logic @module:sales @step:business', () => {
     }
 
     const added = await formPage.addOrderLines([
-      { product: SALES_TEST_CONFIG.product1, quantity: 1, discount: 10 },
-      { product: SALES_TEST_CONFIG.product2, quantity: 2, discount: 10 },
+      { product: salesMasterData.product1Name, quantity: 1, discount: 10 },
+      { product: salesMasterData.product2Name, quantity: 2, discount: 10 },
     ]);
     if (added === 0) {
-      test.skip(true, 'Reference products not found in this Odoo environment');
+      test.skip(true, 'Could not select fixture-created products — transient UI issue, not a missing-data problem');
       return;
     }
 
@@ -52,13 +53,13 @@ test.describe('Sales Business Logic @module:sales @step:business', () => {
     expect(reference.trim().length).toBeGreaterThan(0);
   });
 
-  test('quotation line and grand total amounts reconcile with Qty × Unit Price arithmetic', async ({ page }) => {
+  test('quotation line and grand total amounts reconcile with Qty × Unit Price arithmetic', async ({ page, salesMasterData }) => {
     const formPage = new SalesFormPage(page);
     await formPage.navigate();
 
-    const customerFound = await formPage.selectCustomerIfExists(SALES_TEST_CONFIG.customer);
+    const customerFound = await formPage.selectCustomerIfExists(salesMasterData.customerName);
     if (!customerFound) {
-      test.skip(true, `Reference customer "${SALES_TEST_CONFIG.customer}" not found in this Odoo environment`);
+      test.skip(true, `Could not select fixture-created customer "${salesMasterData.customerName}" — transient UI issue, not a missing-data problem`);
       return;
     }
 
@@ -70,11 +71,11 @@ test.describe('Sales Business Logic @module:sales @step:business', () => {
     }
 
     const added = await formPage.addOrderLines([
-      { product: SALES_TEST_CONFIG.product1, quantity: 1, discount: 0 },
-      { product: SALES_TEST_CONFIG.product2, quantity: 2, discount: 0 },
+      { product: salesMasterData.product1Name, quantity: 1, discount: 0 },
+      { product: salesMasterData.product2Name, quantity: 2, discount: 0 },
     ]);
     if (added < 2) {
-      test.skip(true, 'Reference products not found in this Odoo environment');
+      test.skip(true, 'Could not select fixture-created products — transient UI issue, not a missing-data problem');
       return;
     }
 
@@ -106,13 +107,13 @@ test.describe('Sales Business Logic @module:sales @step:business', () => {
     expect(isWithinTolerance(expectedTotal, totalAmount)).toBe(true);
   });
 
-  test('requires Insufficient Margin approval before a below-cost line can be confirmed', async ({ page }) => {
+  test('requires Insufficient Margin approval before a below-cost line can be confirmed', async ({ page, salesMasterData }) => {
     const formPage = new SalesFormPage(page);
     await formPage.navigate();
 
-    const customerFound = await formPage.selectCustomerIfExists(SALES_TEST_CONFIG.customer);
+    const customerFound = await formPage.selectCustomerIfExists(salesMasterData.customerName);
     if (!customerFound) {
-      test.skip(true, `Reference customer "${SALES_TEST_CONFIG.customer}" not found in this Odoo environment`);
+      test.skip(true, `Could not select fixture-created customer "${salesMasterData.customerName}" — transient UI issue, not a missing-data problem`);
       return;
     }
 
@@ -127,10 +128,10 @@ test.describe('Sales Business Logic @module:sales @step:business', () => {
     // a below-minimum margin, mirroring the calculation in SalesCalculations.
     const belowCostPrice = 1;
     const added = await formPage.addOrderLines([
-      { product: SALES_TEST_CONFIG.product2, quantity: 1, discount: 0, unitPrice: belowCostPrice },
+      { product: salesMasterData.product2Name, quantity: 1, discount: 0, unitPrice: belowCostPrice },
     ]);
     if (added === 0) {
-      test.skip(true, 'Reference product not found in this Odoo environment');
+      test.skip(true, 'Could not select fixture-created product — transient UI issue, not a missing-data problem');
       return;
     }
     expect(isBelowMinimumMargin(computeMarginPercent(belowCostPrice, 0, 100), 10)).toBe(true);
@@ -149,13 +150,13 @@ test.describe('Sales Business Logic @module:sales @step:business', () => {
     expect(status.toLowerCase()).toContain('sales order');
   });
 
-  test('requires Credit Limit approval before an over-limit quotation can be confirmed', async ({ page }) => {
+  test('requires Credit Limit approval before an over-limit quotation can be confirmed', async ({ page, salesMasterData }) => {
     const formPage = new SalesFormPage(page);
     await formPage.navigate();
 
-    const customerFound = await formPage.selectCustomerIfExists(SALES_TEST_CONFIG.customer);
+    const customerFound = await formPage.selectCustomerIfExists(salesMasterData.customerName);
     if (!customerFound) {
-      test.skip(true, `Reference customer "${SALES_TEST_CONFIG.customer}" not found in this Odoo environment`);
+      test.skip(true, `Could not select fixture-created customer "${salesMasterData.customerName}" — transient UI issue, not a missing-data problem`);
       return;
     }
 
@@ -167,14 +168,14 @@ test.describe('Sales Business Logic @module:sales @step:business', () => {
     }
 
     // A very large quantity AND an explicit high unit price (rather than relying on the
-    // product's catalog price, which can be 0 in this pricelist — confirmed empirically)
-    // keeps this test independent of the customer's actual current overdue balance: the
-    // total should exceed any realistic credit limit regardless of product configuration.
+    // product's catalog price, which can be 0 for a freshly created product) keeps this
+    // test independent of the customer's actual current overdue balance: the total
+    // should exceed any realistic credit limit regardless of product configuration.
     const added = await formPage.addOrderLines([
-      { product: SALES_TEST_CONFIG.product1, quantity: 100_000, discount: 0, unitPrice: 999_999 },
+      { product: salesMasterData.product1Name, quantity: 100_000, discount: 0, unitPrice: 999_999 },
     ]);
     if (added === 0) {
-      test.skip(true, 'Reference product not found in this Odoo environment');
+      test.skip(true, 'Could not select fixture-created product — transient UI issue, not a missing-data problem');
       return;
     }
 

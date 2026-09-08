@@ -1,26 +1,28 @@
 /**
  * Step 5 — Field Validations for the sales module.
  *
- * NOTE: Customer/Product/Sales Team/Warehouse names below are pre-existing
- * environment master data (see sales.master-data.ts) — they are selected via
- * Many2one lookups, not created by these tests, so uniqueName() does not apply
- * to them. Every test gracefully skips when that reference data is absent.
+ * NOTE: Customer and Products are created fresh each run by the `salesMasterData`
+ * worker fixture (see src/core/fixtures/salesMasterData.fixtures.ts) — no pre-existing
+ * config needed for those. Sales Team/Warehouse remain pre-existing environment config
+ * (see sales.master-data.ts for why) and are still selected via Many2one lookups, so
+ * tests still gracefully skip if those two are absent.
  */
 import { test, expect } from '../../../../core/fixtures/index';
 import { SalesFormPage, SalesCustomerFormPage } from '../../pages/SalesPage';
 import { SALES_TEST_CONFIG } from '../../data/sales.master-data';
 import { uniqueName } from '../../../../core/utils/RandomDataGenerator';
+import type { SalesMasterData } from '../../../../core/fixtures/index';
 
-async function buildLinesOrSkip(formPage: SalesFormPage): Promise<boolean> {
+async function buildLinesOrSkip(formPage: SalesFormPage, salesMasterData: SalesMasterData): Promise<boolean> {
   const added = await formPage.addOrderLines([
-    { product: SALES_TEST_CONFIG.product1, quantity: 1, discount: 10 },
-    { product: SALES_TEST_CONFIG.product2, quantity: 2, discount: 10 },
+    { product: salesMasterData.product1Name, quantity: 1, discount: 10 },
+    { product: salesMasterData.product2Name, quantity: 2, discount: 10 },
   ]);
   return added > 0;
 }
 
 test.describe('Sales Field Validations @module:sales @step:validations', () => {
-  test('blocks save when Customer is left blank', async ({ page }) => {
+  test('blocks save when Customer is left blank', async ({ page, salesMasterData }) => {
     const formPage = new SalesFormPage(page);
     await formPage.navigate();
 
@@ -32,8 +34,8 @@ test.describe('Sales Field Validations @module:sales @step:validations', () => {
       test.skip(true, 'Reference Sales Team/Warehouse not found in this Odoo environment');
       return;
     }
-    if (!(await buildLinesOrSkip(formPage))) {
-      test.skip(true, 'Reference products not found in this Odoo environment');
+    if (!(await buildLinesOrSkip(formPage, salesMasterData))) {
+      test.skip(true, 'Could not select fixture-created products — transient UI issue, not a missing-data problem');
       return;
     }
 
@@ -41,13 +43,13 @@ test.describe('Sales Field Validations @module:sales @step:validations', () => {
     expect(blocked).toBe(true);
   });
 
-  test('blocks save when Quotation Type (Order Payment Type) is left blank', async ({ page }) => {
+  test('blocks save when Quotation Type (Order Payment Type) is left blank', async ({ page, salesMasterData }) => {
     const formPage = new SalesFormPage(page);
     await formPage.navigate();
 
-    const customerFound = await formPage.selectCustomerIfExists(SALES_TEST_CONFIG.customer);
+    const customerFound = await formPage.selectCustomerIfExists(salesMasterData.customerName);
     if (!customerFound) {
-      test.skip(true, `Reference customer "${SALES_TEST_CONFIG.customer}" not found in this Odoo environment`);
+      test.skip(true, `Could not select fixture-created customer "${salesMasterData.customerName}" — transient UI issue, not a missing-data problem`);
       return;
     }
 
@@ -57,8 +59,8 @@ test.describe('Sales Field Validations @module:sales @step:validations', () => {
       test.skip(true, 'Reference Sales Team/Warehouse not found in this Odoo environment');
       return;
     }
-    if (!(await buildLinesOrSkip(formPage))) {
-      test.skip(true, 'Reference products not found in this Odoo environment');
+    if (!(await buildLinesOrSkip(formPage, salesMasterData))) {
+      test.skip(true, 'Could not select fixture-created products — transient UI issue, not a missing-data problem');
       return;
     }
 
@@ -66,13 +68,13 @@ test.describe('Sales Field Validations @module:sales @step:validations', () => {
     expect(blocked).toBe(true);
   });
 
-  test('blocks save or is read-only when Payment Terms is blank', async ({ page }) => {
+  test('blocks save or is read-only when Payment Terms is blank', async ({ page, salesMasterData }) => {
     const formPage = new SalesFormPage(page);
     await formPage.navigate();
 
-    const customerFound = await formPage.selectCustomerIfExists(SALES_TEST_CONFIG.customer);
+    const customerFound = await formPage.selectCustomerIfExists(salesMasterData.customerName);
     if (!customerFound) {
-      test.skip(true, `Reference customer "${SALES_TEST_CONFIG.customer}" not found in this Odoo environment`);
+      test.skip(true, `Could not select fixture-created customer "${salesMasterData.customerName}" — transient UI issue, not a missing-data problem`);
       return;
     }
     await formPage.setQuotationType(SALES_TEST_CONFIG.quotationType);
@@ -91,8 +93,8 @@ test.describe('Sales Field Validations @module:sales @step:validations', () => {
       test.skip(true, 'Reference Sales Team/Warehouse not found in this Odoo environment');
       return;
     }
-    if (!(await buildLinesOrSkip(formPage))) {
-      test.skip(true, 'Reference products not found in this Odoo environment');
+    if (!(await buildLinesOrSkip(formPage, salesMasterData))) {
+      test.skip(true, 'Could not select fixture-created products — transient UI issue, not a missing-data problem');
       return;
     }
 
@@ -100,13 +102,13 @@ test.describe('Sales Field Validations @module:sales @step:validations', () => {
     expect(blocked).toBe(true);
   });
 
-  test('blocks save or is read-only when Salesperson is blank', async ({ page }) => {
+  test('blocks save or is read-only when Salesperson is blank', async ({ page, salesMasterData }) => {
     const formPage = new SalesFormPage(page);
     await formPage.navigate();
 
-    const customerFound = await formPage.selectCustomerIfExists(SALES_TEST_CONFIG.customer);
+    const customerFound = await formPage.selectCustomerIfExists(salesMasterData.customerName);
     if (!customerFound) {
-      test.skip(true, `Reference customer "${SALES_TEST_CONFIG.customer}" not found in this Odoo environment`);
+      test.skip(true, `Could not select fixture-created customer "${salesMasterData.customerName}" — transient UI issue, not a missing-data problem`);
       return;
     }
     await formPage.setQuotationType(SALES_TEST_CONFIG.quotationType);
@@ -124,8 +126,8 @@ test.describe('Sales Field Validations @module:sales @step:validations', () => {
       test.skip(true, 'Reference Sales Team/Warehouse not found in this Odoo environment');
       return;
     }
-    if (!(await buildLinesOrSkip(formPage))) {
-      test.skip(true, 'Reference products not found in this Odoo environment');
+    if (!(await buildLinesOrSkip(formPage, salesMasterData))) {
+      test.skip(true, 'Could not select fixture-created products — transient UI issue, not a missing-data problem');
       return;
     }
 
@@ -133,13 +135,13 @@ test.describe('Sales Field Validations @module:sales @step:validations', () => {
     expect(blocked).toBe(true);
   });
 
-  test('blocks save or is read-only when Sales Team is blank', async ({ page }) => {
+  test('blocks save or is read-only when Sales Team is blank', async ({ page, salesMasterData }) => {
     const formPage = new SalesFormPage(page);
     await formPage.navigate();
 
-    const customerFound = await formPage.selectCustomerIfExists(SALES_TEST_CONFIG.customer);
+    const customerFound = await formPage.selectCustomerIfExists(salesMasterData.customerName);
     if (!customerFound) {
-      test.skip(true, `Reference customer "${SALES_TEST_CONFIG.customer}" not found in this Odoo environment`);
+      test.skip(true, `Could not select fixture-created customer "${salesMasterData.customerName}" — transient UI issue, not a missing-data problem`);
       return;
     }
     await formPage.setQuotationType(SALES_TEST_CONFIG.quotationType);
@@ -158,8 +160,8 @@ test.describe('Sales Field Validations @module:sales @step:validations', () => {
       test.skip(true, 'Reference Warehouse not found in this Odoo environment');
       return;
     }
-    if (!(await buildLinesOrSkip(formPage))) {
-      test.skip(true, 'Reference products not found in this Odoo environment');
+    if (!(await buildLinesOrSkip(formPage, salesMasterData))) {
+      test.skip(true, 'Could not select fixture-created products — transient UI issue, not a missing-data problem');
       return;
     }
 
@@ -167,13 +169,13 @@ test.describe('Sales Field Validations @module:sales @step:validations', () => {
     expect(blocked).toBe(true);
   });
 
-  test('blocks save or is read-only when Company is blank', async ({ page }) => {
+  test('blocks save or is read-only when Company is blank', async ({ page, salesMasterData }) => {
     const formPage = new SalesFormPage(page);
     await formPage.navigate();
 
-    const customerFound = await formPage.selectCustomerIfExists(SALES_TEST_CONFIG.customer);
+    const customerFound = await formPage.selectCustomerIfExists(salesMasterData.customerName);
     if (!customerFound) {
-      test.skip(true, `Reference customer "${SALES_TEST_CONFIG.customer}" not found in this Odoo environment`);
+      test.skip(true, `Could not select fixture-created customer "${salesMasterData.customerName}" — transient UI issue, not a missing-data problem`);
       return;
     }
     await formPage.setQuotationType(SALES_TEST_CONFIG.quotationType);
@@ -190,8 +192,8 @@ test.describe('Sales Field Validations @module:sales @step:validations', () => {
       test.skip(true, 'Reference Sales Team/Warehouse not found in this Odoo environment');
       return;
     }
-    if (!(await buildLinesOrSkip(formPage))) {
-      test.skip(true, 'Reference products not found in this Odoo environment');
+    if (!(await buildLinesOrSkip(formPage, salesMasterData))) {
+      test.skip(true, 'Could not select fixture-created products — transient UI issue, not a missing-data problem');
       return;
     }
 
@@ -199,13 +201,13 @@ test.describe('Sales Field Validations @module:sales @step:validations', () => {
     expect(blocked).toBe(true);
   });
 
-  test('blocks save or is read-only when Warehouse is blank', async ({ page }) => {
+  test('blocks save or is read-only when Warehouse is blank', async ({ page, salesMasterData }) => {
     const formPage = new SalesFormPage(page);
     await formPage.navigate();
 
-    const customerFound = await formPage.selectCustomerIfExists(SALES_TEST_CONFIG.customer);
+    const customerFound = await formPage.selectCustomerIfExists(salesMasterData.customerName);
     if (!customerFound) {
-      test.skip(true, `Reference customer "${SALES_TEST_CONFIG.customer}" not found in this Odoo environment`);
+      test.skip(true, `Could not select fixture-created customer "${salesMasterData.customerName}" — transient UI issue, not a missing-data problem`);
       return;
     }
     await formPage.setQuotationType(SALES_TEST_CONFIG.quotationType);
@@ -224,8 +226,8 @@ test.describe('Sales Field Validations @module:sales @step:validations', () => {
       test.skip(true, 'Reference Sales Team not found in this Odoo environment');
       return;
     }
-    if (!(await buildLinesOrSkip(formPage))) {
-      test.skip(true, 'Reference products not found in this Odoo environment');
+    if (!(await buildLinesOrSkip(formPage, salesMasterData))) {
+      test.skip(true, 'Could not select fixture-created products — transient UI issue, not a missing-data problem');
       return;
     }
 

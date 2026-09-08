@@ -1366,3 +1366,24 @@ add the fix
 - Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\pages\SalesPage.ts
 - Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\core\base\BaseFormPage.ts
 
+
+---
+
+## Change -- 2026-09-08T03:06:11Z
+
+**Prompt:**
+```
+can you fix it?
+```
+
+**Files touched:**
+- Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\pages\SalesPage.ts
+- Write: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\core\fixtures\salesMasterData.fixtures.ts
+- Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\core\fixtures\salesMasterData.fixtures.ts
+- Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\core\fixtures\index.ts
+- Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\data\sales.master-data.ts
+- Write: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\02-business\sales.business.spec.ts
+- Write: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\05-validations\sales.validations.spec.ts
+- Write: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\06-edge-cases\sales.edge-cases.spec.ts
+- Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\notes\sales.notes.md
+

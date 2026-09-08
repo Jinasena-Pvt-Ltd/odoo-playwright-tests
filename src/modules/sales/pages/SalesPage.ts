@@ -16,6 +16,7 @@ import { parseAmount } from '../calculations/SalesCalculations';
  */
 const SALE_ORDER_ACTION = { actionId: 514, model: 'sale.order', menuId: 330 } as const;
 const CONTACTS_ACTION = { actionId: 1218, model: 'res.partner', menuId: 670 } as const;
+const PRODUCT_ACTION = { actionId: 509, model: 'product.template', menuId: 342 } as const;
 
 export interface OrderLineInput {
   product: string;
@@ -655,5 +656,27 @@ export class SalesCustomerFormPage extends SalesBaseFormPage {
     const expiryVisible = await this.page.locator('.o_field_widget[name="x_studio_expiry_date"] input')
       .isVisible({ timeout: 3_000 }).catch(() => false);
     return amountVisible && expiryVisible;
+  }
+}
+
+/**
+ * Minimal Product (product.template) creation form — used by the salesMasterData
+ * fixture to create fresh sellable products instead of depending on a pre-existing
+ * catalog entry. Odoo 17 defaults `sale_ok = True` for new products, so no extra
+ * field beyond `name` is set.
+ */
+export class ProductFormPage extends SalesBaseFormPage {
+  readonly productName: CharField;
+
+  constructor(page: Page) {
+    super(page);
+    this.productName = new CharField(page, 'name');
+  }
+
+  async navigate(): Promise<void> {
+    await this.navigateToAction({ ...PRODUCT_ACTION, viewType: 'form' });
+  }
+  async openById(id: number): Promise<void> {
+    await this.navigateToAction({ ...PRODUCT_ACTION, viewType: 'form', resId: id });
   }
 }
