@@ -1609,3 +1609,16 @@ const { chromium } = require('playwright');
 **Files touched:**
 - Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\pages\SalesPage.ts
 
+
+---
+
+## Change -- 2026-09-08T05:52:06Z
+
+**Prompt:**
+```
+i can manually create the sales order.without  create new product use the old available product
+```
+
+**Files touched:**
+- Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\02-business\sales.business.spec.ts
+
