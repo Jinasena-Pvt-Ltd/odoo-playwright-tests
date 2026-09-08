@@ -16,7 +16,7 @@ import { uniqueName } from '../../../../core/utils/RandomDataGenerator';
 async function buildLinesOrSkip(formPage: SalesFormPage): Promise<boolean> {
   const added = await formPage.addOrderLines([
     { product: SALES_TEST_CONFIG.product, quantity: 1, discount: 10 },
-    { product: SALES_TEST_CONFIG.product, quantity: 2, discount: 10 },
+    { product: SALES_TEST_CONFIG.product2, quantity: 2, discount: 10 },
   ]);
   return added > 0;
 }

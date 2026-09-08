@@ -41,7 +41,7 @@ test.describe('Sales Business Logic @module:sales @step:business', () => {
 
     const added = await formPage.addOrderLines([
       { product: SALES_TEST_CONFIG.product, quantity: 1, discount: 10 },
-      { product: SALES_TEST_CONFIG.product, quantity: 2, discount: 10 },
+      { product: SALES_TEST_CONFIG.product2, quantity: 2, discount: 10 },
     ]);
     if (added === 0) {
       test.skip(true, 'Reference product not found in this Odoo environment');
@@ -73,7 +73,7 @@ test.describe('Sales Business Logic @module:sales @step:business', () => {
 
     const added = await formPage.addOrderLines([
       { product: SALES_TEST_CONFIG.product, quantity: 1, discount: 0 },
-      { product: SALES_TEST_CONFIG.product, quantity: 2, discount: 0 },
+      { product: SALES_TEST_CONFIG.product2, quantity: 2, discount: 0 },
     ]);
     if (added < 2) {
       test.skip(true, 'Reference product not found in this Odoo environment');

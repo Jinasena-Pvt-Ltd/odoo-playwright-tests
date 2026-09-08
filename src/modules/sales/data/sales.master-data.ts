@@ -19,6 +19,10 @@ export const SALES_TEST_CONFIG = {
   salesTeam: 'Colombo Sales Centre',
   warehouse: 'JAM Warehouse Ekala- (JM-EK)',
   product: 'BALL BEARING 6202-2RS',
+  // A second, DISTINCT product — needed wherever a test adds two order lines. Using the
+  // same product for both lines was found to make Odoo merge/reuse the existing row
+  // instead of creating a second one, silently dropping the second line.
+  product2: 'CENTRIC TYPE PUMPING UNIT EPC 10CJ 024S',
 } as const;
 
 export function getSalesDates() {
