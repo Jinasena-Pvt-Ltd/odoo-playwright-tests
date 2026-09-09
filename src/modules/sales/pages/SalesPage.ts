@@ -521,13 +521,24 @@ export class SalesFormPage extends SalesBaseFormPage {
         await this.clickStatusButtonByRole(requestLabel);
         await this.statusButton(approveLabel).first().waitFor({ state: 'visible', timeout: 30_000 });
         await this.clickStatusButtonByRole(approveLabel);
-        const approveGone = await this.statusButton(approveLabel).first().waitFor({ state: 'hidden', timeout: 20_000 }).then(() => true).catch(() => false);
-        if (!approveGone && await this.isApprovalBlockedByPermissions()) {
-          throw new ApprovalPermissionError(
-            `Cannot complete "${approveLabel}" — the current test user is not a member of the ` +
-            'Studio-configured approver group for this rule (confirmed via a "missing approvals" ' +
-            'notification), so this environment cannot fully exercise this approval workflow.',
-          );
+        // Race the button disappearing (real success) against the "missing approvals"
+        // toast appearing (permission denial) — the toast auto-dismisses within a few
+        // seconds, so it must be checked immediately, not after the full 20s hidden-wait
+        // (which was found to let the toast vanish before this method ever looked for it).
+        const outcome = await Promise.race([
+          this.statusButton(approveLabel).first().waitFor({ state: 'hidden', timeout: 20_000 }).then(() => 'gone' as const),
+          this.page.locator('.o_notification').filter({ hasText: /approvals? .* (missing|not.*approved)/i }).first()
+            .waitFor({ state: 'visible', timeout: 20_000 }).then(() => 'blocked' as const),
+        ]).catch(() => 'timeout' as const);
+        if (outcome !== 'gone') {
+          const stillBlocked = outcome === 'blocked' || await this.isApprovalBlockedByPermissions();
+          if (stillBlocked) {
+            throw new ApprovalPermissionError(
+              `Cannot complete "${approveLabel}" — the current test user is not a member of the ` +
+              'Studio-configured approver group for this rule (confirmed via a "missing approvals" ' +
+              'notification), so this environment cannot fully exercise this approval workflow.',
+            );
+          }
         }
       }
     }

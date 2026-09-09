@@ -216,6 +216,12 @@ test.describe('Sales Business Logic @module:sales @step:business', () => {
       }
     } else {
       await formPage.clickStatusButtonByRole(/^confirm$/i);
+      // Unlike confirmOrder() (which already waits out the post-confirm transition),
+      // a direct Confirm click here was found to leave the statusbar still reporting
+      // "Quotation" for a moment afterward — asserting immediately raced Odoo's own
+      // re-render (confirmed live: the order had, in fact, become "Sales Order" by the
+      // time of the failure screenshot, just not yet at assertion time).
+      await formPage.waitForStatus('Sales Order');
     }
 
     const status = await formPage.getCurrentStatus();
