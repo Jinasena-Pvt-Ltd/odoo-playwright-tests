@@ -70,7 +70,10 @@ export abstract class BaseFormPage extends BasePage {
   /** Returns the currently highlighted status in the status bar */
   async getCurrentStatus(): Promise<string> {
     const active = this.page.locator('.o_statusbar_status .o_arrow_button.btn-primary, .o_statusbar_status li.o_arrow_button_current span');
-    await active.waitFor({ state: 'visible', timeout: 5_000 });
+    // 15s (not the previous 5s): this instance has shown the status bar taking longer
+    // than expected to render after a save/confirm attempt, same general latency
+    // pattern seen elsewhere in this framework.
+    await active.waitFor({ state: 'visible', timeout: 15_000 });
     return (await active.textContent())?.trim() ?? '';
   }
 

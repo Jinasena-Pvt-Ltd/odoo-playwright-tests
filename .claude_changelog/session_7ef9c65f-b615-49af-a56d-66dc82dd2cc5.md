@@ -1858,3 +1858,23 @@ plz pass the skipped test
 **Files touched:**
 - Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\pages\SalesPage.ts
 
+
+---
+
+## Change -- 2026-09-09T02:40:37Z
+
+**Prompt:**
+```
+<task-notification>
+<task-id>bp0bo467n</task-id>
+<tool-use-id>toolu_0119bH4kBR1E6auZNV9XXx7N</tool-use-id>
+<output-file>C:\Users\Urliyas\AppData\Local\Temp\claude\c--Users-Urliyas-Documents-GitHub-odoo-playwright-tests\7ef9c65f-b615-49af-a56d-66dc82dd2cc5\tasks\bp0bo467n.output</output-file>
+<status>failed</status>
+<summary>Background command "cd "c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests" &amp;&amp; HEADLESS=false npx playwright test --grep "@module:sales" --project=admin 2&gt;&amp;1" failed with exit code 1</summary>
+</task-notification>
+```
+
+**Files touched:**
+- Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\pages\SalesPage.ts
+- Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\core\base\BaseFormPage.ts
+

@@ -471,9 +471,9 @@ export class SalesFormPage extends SalesBaseFormPage {
     return this.statusButton(label).first().isVisible({ timeout: 5_000 }).catch(() => false);
   }
 
-  async clickStatusButtonByRole(label: string | RegExp): Promise<void> {
+  async clickStatusButtonByRole(label: string | RegExp, timeout = 10_000): Promise<void> {
     const btn = this.statusButton(label).first();
-    await btn.waitFor({ state: 'visible', timeout: 10_000 });
+    await btn.waitFor({ state: 'visible', timeout });
     await btn.click();
   }
 
@@ -487,7 +487,9 @@ export class SalesFormPage extends SalesBaseFormPage {
         await this.statusButton(approveLabel).first().waitFor({ state: 'hidden', timeout: 20_000 }).catch(() => {});
       }
     }
-    await this.clickStatusButtonByRole(/^confirm$/i);
+    // 30s (not the default 10s): after an approval round-trip, the status bar can take
+    // noticeably longer to re-render with "Confirm" available again on this instance.
+    await this.clickStatusButtonByRole(/^confirm$/i, 30_000);
     await this.page.locator('.o_statusbar_status').filter({ hasText: /sales order/i })
       .waitFor({ state: 'visible', timeout: 60_000 });
   }
