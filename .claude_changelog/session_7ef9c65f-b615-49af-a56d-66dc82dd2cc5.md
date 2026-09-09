@@ -2332,3 +2332,17 @@ can i get the screen short about pass test run?
 **Files touched:**
 - Write: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\_screenshot_report.spec.ts
 
+
+---
+
+## Change -- 2026-09-09T09:45:43Z
+
+**Prompt:**
+```
+without archived other skipped can fixded and run with headed
+```
+
+**Files touched:**
+- Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\core\fixtures\salesMasterData.fixtures.ts
+- Write: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\_probe_credit.spec.ts
+
