@@ -8,6 +8,10 @@ import { DateField } from '../../../core/components/DateField';
 import { BooleanToggle } from '../../../core/components/BooleanToggle';
 import { parseAmount } from '../calculations/SalesCalculations';
 
+/** Thrown by SalesFormPage.confirmOrder() when an approval step cannot be completed
+ * because the current test user lacks membership in the required Studio approver group. */
+export class ApprovalPermissionError extends Error {}
+
 /**
  * Action/menu ids for this Odoo instance's hash-fragment router (see
  * BasePage.navigateToAction — the path-based navigateTo()/`/odoo/<path>` convention does
@@ -90,7 +94,7 @@ abstract class SalesBaseFormPage extends BaseFormPage {
    * retry re-clears and re-types the value rather than just re-waiting, since a stalled
    * search occasionally needs a fresh keystroke to kick off again.
    */
-  async selectIfExists(fieldName: string, value: string, attempts = 3): Promise<boolean> {
+  async selectIfExists(fieldName: string, value: string, attempts = 4): Promise<boolean> {
     const widget = this.page.locator(`.o_field_widget[name="${fieldName}"]`).first();
     const input = widget.locator('input').first();
     await input.waitFor({ state: 'visible', timeout: 10_000 });
@@ -98,7 +102,11 @@ abstract class SalesBaseFormPage extends BaseFormPage {
     for (let attempt = 1; attempt <= attempts; attempt++) {
       await input.click();
       await input.fill('');
-      await input.fill(value);
+      // Odoo's autocomplete debounces its search (~300ms) — typing via pressSequentially
+      // instead of a single fill() reliably re-triggers that debounce on every attempt,
+      // whereas a single fill() was occasionally ignored on retries (stale search state).
+      await input.pressSequentially(value, { delay: 30 });
+      await this.page.waitForTimeout(400);
 
       const dropdown = this.page.locator(
         '.o_field_many2one_dropdown, .ui-autocomplete, .o-dropdown--menu, .o-autocomplete--dropdown-menu',
@@ -113,12 +121,18 @@ abstract class SalesBaseFormPage extends BaseFormPage {
         const found = await match.isVisible({ timeout: 5_000 }).catch(() => false);
         if (found) {
           await match.click();
-          return true;
+          // Verify the click actually committed a value (the dropdown can close from
+          // a re-render mid-click, silently leaving the field blank) — if not, fall
+          // through and retry instead of returning a false positive.
+          const committed = await input.inputValue().catch(() => '');
+          if (committed.trim().length > 0) {
+            return true;
+          }
         }
       }
 
       if (attempt < attempts) {
-        await this.page.waitForTimeout(500);
+        await this.page.waitForTimeout(600);
       }
     }
     return false;
@@ -132,11 +146,17 @@ abstract class SalesBaseFormPage extends BaseFormPage {
  * handled via `setQuotationType()` rather than a typed field component.
  */
 export class SalesFormPage extends SalesBaseFormPage {
-  private static readonly APPROVAL_PAIRS: [string, string][] = [
+  // Request-label matchers use a fuzzy regex (word-boundary-free on the noun) rather than
+  // an exact string: confirmed live that this instance's actual button reads "Request
+  // Insufficient Marginn Approval" — a genuine typo baked into this Studio config, not a
+  // framework bug — which silently failed to match the exact string "...Margin Approval"
+  // (the literal substring never appears once "Margin" is followed by an extra "n").
+  // A tolerant regex survives this and any similar typo in the other approval labels.
+  private static readonly APPROVAL_PAIRS: [string | RegExp, string][] = [
     ['Request RUG Approval', 'Approve RUG'],
     ['Request Overdue Approval', 'Approve Overdue'],
     ['Request Over Commission Approval', 'Approve Over Commission'],
-    ['Request Insufficient Margin Approval', 'Approve Insufficient Margin'],
+    [/request\s+insufficient\s+margin\w*\s+approval/i, 'Approve Insufficient Margin'],
     ['Request Credit Limit Approval', 'Approve Credit Limit'],
     ['Request Bank Guarantee Approval', 'Approve Bank Guarantee'],
     ['Request Temporary Credit Approval', 'Approve Temporary Credit'],
@@ -477,6 +497,23 @@ export class SalesFormPage extends SalesBaseFormPage {
     await btn.click();
   }
 
+  /**
+   * True when clicking an "Approve ..." button was rejected because the current test user
+   * is not a member of the Studio-configured approver security group for that rule.
+   * Confirmed live via RPC: `studio.approval.rule.check_approval` returns
+   * `{ approved: false, rules: [{ can_validate: false, ... }] }` for the `admin` test user
+   * against e.g. "Sales / Jin - Sales - Sales Margin Approvers", and Odoo surfaces this as
+   * a toast ("The following approvals are missing: <group name>") rather than an error —
+   * the approve button stays visible/clickable but never actually approves anything. This
+   * is a genuine environment/permissions limitation, not a bug: no amount of retrying or
+   * waiting longer will make it succeed, so callers must catch `ApprovalPermissionError`
+   * and skip rather than fail.
+   */
+  private async isApprovalBlockedByPermissions(): Promise<boolean> {
+    const notification = this.page.locator('.o_notification').filter({ hasText: /approvals? .* (missing|not.*approved)/i }).first();
+    return notification.isVisible({ timeout: 2_000 }).catch(() => false);
+  }
+
   /** Handles every visible approval request/approve pair, then clicks Confirm and waits for "Sales Order". */
   async confirmOrder(): Promise<void> {
     for (const [requestLabel, approveLabel] of SalesFormPage.APPROVAL_PAIRS) {
@@ -484,7 +521,14 @@ export class SalesFormPage extends SalesBaseFormPage {
         await this.clickStatusButtonByRole(requestLabel);
         await this.statusButton(approveLabel).first().waitFor({ state: 'visible', timeout: 30_000 });
         await this.clickStatusButtonByRole(approveLabel);
-        await this.statusButton(approveLabel).first().waitFor({ state: 'hidden', timeout: 20_000 }).catch(() => {});
+        const approveGone = await this.statusButton(approveLabel).first().waitFor({ state: 'hidden', timeout: 20_000 }).then(() => true).catch(() => false);
+        if (!approveGone && await this.isApprovalBlockedByPermissions()) {
+          throw new ApprovalPermissionError(
+            `Cannot complete "${approveLabel}" — the current test user is not a member of the ` +
+            'Studio-configured approver group for this rule (confirmed via a "missing approvals" ' +
+            'notification), so this environment cannot fully exercise this approval workflow.',
+          );
+        }
       }
     }
     // 30s (not the default 10s): after an approval round-trip, the status bar can take

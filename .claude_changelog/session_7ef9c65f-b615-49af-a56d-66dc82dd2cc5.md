@@ -1954,3 +1954,120 @@ const { chromium } = require('playwright');
 **Files touched:**
 - Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\data\sales.master-data.ts
 
+
+---
+
+## Change -- 2026-09-09T03:39:47Z
+
+**Prompt:**
+```
+<task-notification>
+<task-id>banunukq9</task-id>
+<tool-use-id>toolu_016A3ZnwFAbzsxTrXSjE2QaK</tool-use-id>
+<output-file>C:\Users\Urliyas\AppData\Local\Temp\claude\c--Users-Urliyas-Documents-GitHub-odoo-playwright-tests\7ef9c65f-b615-49af-a56d-66dc82dd2cc5\tasks\banunukq9.output</output-file>
+<status>completed</status>
+<summary>Background command "cd "c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests" &amp;&amp; node -e "
+require('dotenv').config();
+const { chromium } = require('playwright');
+(async () =&gt; {
+  const browser = await chromium.launch({ headless: false });
+  const context = await browser.newContext({ storageState: 'auth-storage/admin.json' });
+  const page = await context.newPage();
+  const base = process.env.ODOO_BASE_URL.replace(/\/\$/,'');
+  await page.goto(base + '/web/login');
+  const state = await Promise.race([
+    page.locator('.o_main_navbar').waitFor({state:'visible', timeout:20000}).then(()=&gt;'ready'),
+    page.getByRole('textbox',{name:'Email'}).waitFor({state:'visible', timeout:20000}).then(()=&gt;'login'),
+  ]).catch(()=&gt;'login');
+  if (state === 'login') {
+    await page.getByRole('textbox',{name:'Email'}).fill(process.env.ADMIN_EMAIL);
+    await page.getByRole('textbox',{name:'Password'}).fill(process.env.ADMIN_PASSWORD);
+    await page.getByRole('button',{name:'Log in'}).click();
+    await page.waitForSelector('.o_main_navbar', {timeout:45000});
+  }
+  await page.evaluate(() =&gt; { window.location.hash = 'action=514&amp;model=sale.order&amp;view_type=form&amp;cids=2&amp;menu_id=330'; });
+  await page.waitForTimeout(3000);
+
+  async function selectIfExists(fieldName, value) {
+    const widget = page.locator(\`.o_field_widget[name=\"\${fieldName}\"]\`).first();
+    const input = widget.locator('input').first();
+    await input.waitFor({ state: 'visible', timeout: 10000 });
+    await input.click(); await input.fill(''); await input.fill(value);
+    const dropdown = page.locator('.o_field_many2one_dropdown, .ui-autocomplete, .o-dropdown--menu, .o-autocomplete--dropdown-menu').first();
+    const opened = await dropdown.waitFor({ state: 'visible', timeout: 10000 }).then(() =&gt; true).catch(() =&gt; false);
+    if (!opened) return false;
+    const match = dropdown.locator('.o_menu_item, .ui-menu-item, li, .o-autocomplete--dropdown-item').filter({ hasText: value }).first();
+    const found = await match.isVisible({ timeout: 5000 }).catch(() =&gt; false);
+    if (!found) return false;
+    await match.click(); return true;
+  }
+  console.log('customer:', await selectIfExists('partner_id', 'Test Customer - Playwright 1'));
+  const field = page.getByLabel(/^quotation\s*type\$/i).first();
+  await field.waitFor({ state: 'visible', timeout: 10000 });
+  await field.selectOption({ label: 'Sales' });
+  const optField = page.getByLabel(/^order\s*payment\s*type\$/i).first();
+  await optField.selectOption({ label: 'Cash' });
+
+  const tab = page.locator('.o_notebook .nav-link, .o_notebook .nav-item a').filter({ hasText: /other\s*info/i }).first();
+  await tab.waitFor({ state: 'visible', timeout: 20000 }); await tab.click();
+  await page.locator('[name=\"team_id\"]').waitFor({ state: 'visible', timeout: 20000 });
+  await page.waitForTimeout(300);
+  console.log('team:', await selectIfExists('team_id', 'Colombo Sales Centre'));
+  console.log('warehouse:', await selectIfExists('warehouse_id', 'JAM Warehouse Ekala- (JM-EK)'));
+
+  const olTab = page.locator('.o_notebook .nav-link, .o_notebook .nav-item a').filter({ hasText: /order\s*lines/i }).first();
+  await olTab.waitFor({ state: 'visible', timeout: 10000 }); await olTab.click();
+  await page.locator('.o_field_one2many').waitFor({ state: 'visible', timeout: 10000 });
+  await page.waitForTimeout(300);
+
+  const addLink = page.locator('.o_field_x2many_list_row_add a').filter({hasText:/add a product/i}).first();
+  await addLink.waitFor({state:'visible', timeout:10000}); await addLink.click();
+  await page.waitForTimeout(300);
+  const row = page.locator('.o_data_row.o_selected_row').first();
+  const productInput = row.locator('[name=\"product_id\"] input').first();
+  await productInput.waitFor({state:'visible', timeout:10000});
+  await productInput.pressSequentially('BALL BEARING 6202-2RS', {delay:50});
+  const dropdown = page.locator('.o-autocomplete--dropdown-menu');
+  await dropdown.waitFor({state:'visible', timeout:10000});
+  await dropdown.locator('li, .o-autocomplete--dropdown-item').filter({hasText:'BALL BEARING 6202-2RS'}).first().click({force:true});
+  await page.waitForTimeout(1000);
+  const qty = row.locator('[name=\"product_uom_qty\"] input').first();
+  await qty.waitFor({state:'visible', timeout:10000});
+  await qty.click(); await qty.fill('0'); await qty.press('Tab');
+  await page.waitForTimeout(500);
+
+  const saveBtn = page.locator('.o_form_button_save, button[name=\"save_manually\"]').first();
+  await saveBtn.click();
+  await page.waitForTimeout(4000);
+  console.log('saved, url:', page.url());
+
+  const confirmBtn = page.locator('.o_statusbar_buttons, .o_control_panel').getByRole('button', {name: /^confirm\$/i}).first();
+  const confirmVisible = await confirmBtn.isVisible({timeout:5000}).catch(()=&gt;false);
+  console.log('confirm visible:', confirmVisible);
+  if (confirmVisible) {
+    await confirmBtn.click();
+    await page.waitForTimeout(2000);
+    const dialogVisible = await page.locator('.modal').isVisible({timeout:3000}).catch(()=&gt;false);
+    console.log('dialog appeared after confirm click:', dialogVisible);
+    if (dialogVisible) {
+      const dialogText = await page.locator('.modal .modal-body, .modal .modal-title').allTextContents();
+      console.log('dialog text:', JSON.stringify(dialogText));
+    }
+    const notif = await page.locator('.o_notification').first().textContent().catch(()=&gt;null);
+    console.log('notification:', notif);
+  }
+  await browser.close();
+})().catch(e=&gt;{console.error('FATAL',e);process.exit(1);});
+"
+" completed (exit code 0)</summary>
+</task-notification>
+```
+
+**Files touched:**
+- Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\pages\SalesPage.ts
+- Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\core\base\BaseFormPage.ts
+- Write: C:\Users\Urliyas\AppData\Local\Temp\claude\c--Users-Urliyas-Documents-GitHub-odoo-playwright-tests\7ef9c65f-b615-49af-a56d-66dc82dd2cc5\scratchpad\probe_approve.js
+- Write: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\_probe.spec.ts
+- Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\_probe.spec.ts
+- Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\02-business\sales.business.spec.ts
+

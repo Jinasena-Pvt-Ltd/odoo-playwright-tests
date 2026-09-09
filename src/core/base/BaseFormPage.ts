@@ -69,17 +69,38 @@ export abstract class BaseFormPage extends BasePage {
 
   /** Returns the currently highlighted status in the status bar */
   async getCurrentStatus(): Promise<string> {
-    const active = this.page.locator('.o_statusbar_status .o_arrow_button.btn-primary, .o_statusbar_status li.o_arrow_button_current span');
+    // This instance renders the statusbar as an ARIA radiogroup (`role="radiogroup"`,
+    // one `role="radio"` per stage, the active one `checked`) — confirmed via a live
+    // failure's accessibility snapshot (`radio "Quotation" [checked] [disabled]`), NOT
+    // the classic `.o_arrow_button.btn-primary`/`li.o_arrow_button_current` markup this
+    // method previously assumed. Both selectors are kept so this still works against a
+    // classic-markup Odoo instance too.
+    const legacyActive = this.page.locator('.o_statusbar_status .o_arrow_button.btn-primary, .o_statusbar_status li.o_arrow_button_current span');
+    const ariaActive = this.page.getByRole('radiogroup', { name: /statusbar/i }).getByRole('radio', { checked: true });
+
+    const active = (await legacyActive.isVisible({ timeout: 1_000 }).catch(() => false))
+      ? legacyActive
+      : ariaActive;
+
     // 15s (not the previous 5s): this instance has shown the status bar taking longer
     // than expected to render after a save/confirm attempt, same general latency
     // pattern seen elsewhere in this framework.
-    await active.waitFor({ state: 'visible', timeout: 15_000 });
-    return (await active.textContent())?.trim() ?? '';
+    await active.first().waitFor({ state: 'visible', timeout: 15_000 });
+    if (active === ariaActive) {
+      return (await active.first().getAttribute('aria-label').catch(() => null))
+        ?? (await active.first().textContent())?.trim() ?? '';
+    }
+    return (await active.first().textContent())?.trim() ?? '';
   }
 
   async waitForStatus(status: string): Promise<void> {
-    const selector = `.o_statusbar_status .o_arrow_button.btn-primary:has-text("${status}"), .o_statusbar_status li.o_arrow_button_current span:has-text("${status}")`;
-    await this.page.waitForSelector(selector, { timeout: 15_000 });
+    const legacySelector = `.o_statusbar_status .o_arrow_button.btn-primary:has-text("${status}"), .o_statusbar_status li.o_arrow_button_current span:has-text("${status}")`;
+    const legacy = this.page.locator(legacySelector).waitFor({ state: 'visible', timeout: 15_000 });
+    const aria = this.page
+      .getByRole('radiogroup', { name: /statusbar/i })
+      .getByRole('radio', { name: status, checked: true })
+      .waitFor({ state: 'visible', timeout: 15_000 });
+    await Promise.any([legacy, aria]);
   }
 
   // ── Field access ─────────────────────────────────────────────────────────────

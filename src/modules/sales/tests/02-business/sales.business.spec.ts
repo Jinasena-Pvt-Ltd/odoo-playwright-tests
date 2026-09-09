@@ -9,7 +9,7 @@
  * reference data is absent.
  */
 import { test, expect } from '../../../../core/fixtures/index';
-import { SalesFormPage } from '../../pages/SalesPage';
+import { SalesFormPage, ApprovalPermissionError } from '../../pages/SalesPage';
 import { SALES_TEST_CONFIG } from '../../data/sales.master-data';
 import {
   computeLineNetAmount,
@@ -149,7 +149,15 @@ test.describe('Sales Business Logic @module:sales @step:business', () => {
     }
     expect(await formPage.isConfirmVisible()).toBe(false);
 
-    await formPage.confirmOrder();
+    try {
+      await formPage.confirmOrder();
+    } catch (err) {
+      if (err instanceof ApprovalPermissionError) {
+        test.skip(true, err.message);
+        return;
+      }
+      throw err;
+    }
     const status = await formPage.getCurrentStatus();
     expect(status.toLowerCase()).toContain('sales order');
   });
@@ -197,7 +205,15 @@ test.describe('Sales Business Logic @module:sales @step:business', () => {
     expect(confirmVisible).not.toBe(approvalVisible);
 
     if (approvalVisible) {
-      await formPage.confirmOrder();
+      try {
+        await formPage.confirmOrder();
+      } catch (err) {
+        if (err instanceof ApprovalPermissionError) {
+          test.skip(true, err.message);
+          return;
+        }
+        throw err;
+      }
     } else {
       await formPage.clickStatusButtonByRole(/^confirm$/i);
     }
