@@ -1878,3 +1878,79 @@ plz pass the skipped test
 - Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\pages\SalesPage.ts
 - Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\core\base\BaseFormPage.ts
 
+
+---
+
+## Change -- 2026-09-09T03:02:04Z
+
+**Prompt:**
+```
+<task-notification>
+<task-id>bqhys0soc</task-id>
+<tool-use-id>toolu_01BdzeyVxxn5y4Gvi7Z5ZGA1</tool-use-id>
+<output-file>C:\Users\Urliyas\AppData\Local\Temp\claude\c--Users-Urliyas-Documents-GitHub-odoo-playwright-tests\7ef9c65f-b615-49af-a56d-66dc82dd2cc5\tasks\bqhys0soc.output</output-file>
+<status>completed</status>
+<summary>Background command "cd "c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests" &amp;&amp; node -e "
+require('dotenv').config();
+const { chromium } = require('playwright');
+(async () =&gt; {
+  const browser = await chromium.launch({ headless: false });
+  const context = await browser.newContext({ storageState: 'auth-storage/admin.json' });
+  const page = await context.newPage();
+  const base = process.env.ODOO_BASE_URL.replace(/\/\$/,'');
+  await page.goto(base + '/web/login');
+  const state = await Promise.race([
+    page.locator('.o_main_navbar').waitFor({state:'visible', timeout:20000}).then(()=&gt;'ready'),
+    page.getByRole('textbox',{name:'Email'}).waitFor({state:'visible', timeout:20000}).then(()=&gt;'login'),
+  ]).catch(()=&gt;'login');
+  if (state === 'login') {
+    await page.getByRole('textbox',{name:'Email'}).fill(process.env.ADMIN_EMAIL);
+    await page.getByRole('textbox',{name:'Password'}).fill(process.env.ADMIN_PASSWORD);
+    await page.getByRole('button',{name:'Log in'}).click();
+    await page.waitForSelector('.o_main_navbar', {timeout:45000});
+  }
+  await page.evaluate(() =&gt; { window.location.hash = 'action=514&amp;model=sale.order&amp;view_type=form&amp;cids=2&amp;menu_id=330'; });
+  await page.waitForTimeout(3000);
+
+  const addLink = page.locator('.o_field_x2many_list_row_add a').filter({hasText:/add a product/i}).first();
+  await addLink.waitFor({state:'visible', timeout:10000});
+  await addLink.click();
+  await page.waitForTimeout(300);
+  const row = page.locator('.o_data_row.o_selected_row').first();
+  const productInput = row.locator('[name=\"product_id\"] input').first();
+  await productInput.waitFor({state:'visible', timeout:10000});
+  await productInput.pressSequentially('BALL BEARING 6004', {delay:50});
+  const dropdown = page.locator('.o-autocomplete--dropdown-menu');
+  await dropdown.waitFor({state:'visible', timeout:10000});
+  const match = dropdown.locator('li, .o-autocomplete--dropdown-item').filter({hasText:'BALL BEARING 6004'}).first();
+  await match.waitFor({state:'visible', timeout:5000});
+  await match.click({force:true});
+  await page.waitForTimeout(1000);
+  const qty = row.locator('[name=\"product_uom_qty\"] input').first();
+  await qty.waitFor({state:'visible', timeout:10000});
+  await qty.click(); await qty.fill('2'); await qty.press('Tab');
+  await page.waitForTimeout(500);
+
+  const saveBtn = page.locator('.o_form_button_save, button[name=\"save_manually\"]').first();
+  await saveBtn.click();
+  for (let i=0;i&lt;8;i++){
+    await page.waitForTimeout(2000);
+    const stillVisible = await saveBtn.isVisible({timeout:500}).catch(()=&gt;false);
+    console.log((i+1)*2+'s: save visible=', stillVisible);
+    if (!stillVisible) break;
+  }
+  const invalid = await page.locator('.o_field_widget.o_field_invalid').count();
+  console.log('invalid fields:', invalid);
+  const notif = await page.locator('.o_notification').first().textContent().catch(()=&gt;null);
+  console.log('notif:', notif);
+  console.log('final url:', page.url());
+  await browser.close();
+})().catch(e=&gt;{console.error('FATAL',e);process.exit(1);});
+"
+" completed (exit code 0)</summary>
+</task-notification>
+```
+
+**Files touched:**
+- Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\data\sales.master-data.ts
+

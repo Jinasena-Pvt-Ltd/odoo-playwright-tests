@@ -27,7 +27,13 @@ export const SALES_TEST_CONFIG = {
   // A second, DISTINCT product — needed wherever a test adds two order lines. Using the
   // same product for both lines was found to make Odoo merge/reuse the existing row
   // instead of creating a second one, silently dropping the second line.
-  product2: 'CENTRIC TYPE PUMPING UNIT EPC 10CJ 024S',
+  // NOT "CENTRIC TYPE PUMPING UNIT EPC 10CJ 024S" (tried first): that product sits in
+  // the generic "All" product category, which has no matching Analytic Account for this
+  // order's Analytic Plan — adding it triggers a real Odoo error dialog ("Oh snap! ...
+  // required analytic plan(s) have no matching account ... Product Group"), confirmed
+  // live. This product shares BALL BEARING 6202-2RS's properly-configured category
+  // (RM-GE-02-JAM) and was confirmed live to save with no such error.
+  product2: 'BALL BEARING 6004',
 } as const;
 
 export function getSalesDates() {
