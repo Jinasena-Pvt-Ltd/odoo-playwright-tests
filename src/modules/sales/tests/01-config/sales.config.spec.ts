@@ -55,6 +55,11 @@ test.describe('Sales Configuration Setup @module:sales @step:config', () => {
       { product: SALES_TEST_CONFIG.product2, quantity: 1, discount: 0 },
     ]);
     expect(added, 'Both reference products must exist and be sellable (sale_ok=true)').toBe(2);
-    expect(await formPage.getLineCount(), 'The two reference products must be distinct lines, not merged into one').toBe(2);
+    // Not using getLineCount() here: `.o_data_row` also matches rows in other notebook
+    // tabs still present (but hidden) in the DOM, e.g. Optional Products — confirmed live
+    // (3 rows counted for a 2-line order). Reading each of the first two rows' own
+    // quantity instead directly confirms two distinct, correctly-populated lines.
+    expect(await formPage.getLineQuantity(0)).toBe(1);
+    expect(await formPage.getLineQuantity(1)).toBe(1);
   });
 });

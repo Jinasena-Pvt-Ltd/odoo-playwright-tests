@@ -28,33 +28,59 @@ export abstract class BaseListPage extends BasePage {
     await this.waitForOdooReady();
   }
 
+  /**
+   * Opens the combined Filters/Group By/Favorites panel. Confirmed live via DOM inspection:
+   * the searchview's `[role="search"]` landmark ("search role count: 3" in a live probe)
+   * is NOT the single button this method previously assumed — `getByRole('search').first()`
+   * actually resolved to `.o_cp_searchview` (the outer wrapper), and its first button is the
+   * currently-applied filter's own facet chip label, not the dropdown toggle. Clicking it
+   * silently edited/reopened that chip instead of opening the panel, so a filter/group label
+   * that didn't exist yet would hang for the full test timeout waiting on a menu that was
+   * never opened. The actual toggle is the `.o_searchview_dropdown_toggler` button — a
+   * sibling of the facet chip, not a descendant of the inner `.o_searchview` search box.
+   */
+  private async openSearchPanel(): Promise<void> {
+    await this.page.locator('.o_searchview_dropdown_toggler').first().click();
+    await this.page.locator('.o_search_bar_menu, .dropdown-menu.show').first()
+      .waitFor({ state: 'visible', timeout: 5_000 });
+  }
+
   async applyFilter(filterLabel: string): Promise<void> {
-    // Odoo 17 SaaS (Jinasena): the searchview has a SINGLE nameless icon-only toggle
-    // button inside the outer [role="search"] container (button[ref=e67] in the snapshot).
-    // The element's role is set via attribute — CSS "search > button" won't match it.
-    // Use getByRole: outer search (first) → its only button → click.
-    await this.page.getByRole('search').first().getByRole('button').first().click();
-    // Wait for the panel to render before searching for items.
-    await this.page.waitForTimeout(400);
+    await this.openSearchPanel();
     // Use exact matching: the Odoo top navbar also has .o_menu_item elements (e.g. "Departments").
     // Partial hasText would match "Departments" when looking for "Archived" filter — exact avoids this.
     const exact = new RegExp(`^\\s*${filterLabel.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\s*$`);
-    await this.page.locator('.o_menu_item, .dropdown-item').filter({ hasText: exact }).first().click();
+    // Bounded wait before click: previously, a label that doesn't exist in this action's
+    // search panel (e.g. no "Archived" filter configured) silently hung for the entire test
+    // timeout instead of failing with a clear, actionable error.
+    const item = this.page.locator('.o_menu_item, .dropdown-item').filter({ hasText: exact }).first();
+    await item.waitFor({ state: 'visible', timeout: 5_000 });
+    await item.click();
     await this.waitForOdooReady();
   }
 
+  /** Same as applyFilter/groupBy's target lookup, but reports availability instead of throwing. */
+  async isFilterOrGroupAvailable(label: string): Promise<boolean> {
+    await this.openSearchPanel();
+    const exact = new RegExp(`^\\s*${label.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\s*$`);
+    const available = await this.page.locator('.o_menu_item, .dropdown-item').filter({ hasText: exact })
+      .first().isVisible({ timeout: 3_000 }).catch(() => false);
+    await this.page.keyboard.press('Escape').catch(() => {});
+    return available;
+  }
+
   async groupBy(groupLabel: string): Promise<void> {
-    // Same single toggle button opens the combined Filters + Group By panel.
-    await this.page.getByRole('search').first().getByRole('button').first().click();
-    await this.page.waitForTimeout(400);
+    await this.openSearchPanel();
     // Exact match prevents "Department" from matching the navbar "Departments" menu item.
     const exact = new RegExp(`^\\s*${groupLabel.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\s*$`);
-    await this.page.locator('.o_menu_item, .dropdown-item').filter({ hasText: exact }).first().click();
+    const item = this.page.locator('.o_menu_item, .dropdown-item').filter({ hasText: exact }).first();
+    await item.waitFor({ state: 'visible', timeout: 5_000 });
+    await item.click();
     // Odoo keeps the search panel open after selecting a Group By item (so users can add more).
     // The open panel overlays the list view and intercepts pointer events on group headers.
     // Press Escape to dismiss it before continuing.
     await this.page.keyboard.press('Escape').catch(() => {});
-    await this.page.waitForSelector('[role="menu"].o_search_bar_menu', { state: 'hidden', timeout: 3_000 }).catch(() => {});
+    await this.page.waitForSelector('.o_search_bar_menu', { state: 'hidden', timeout: 3_000 }).catch(() => {});
     await this.waitForOdooReady();
   }
 
@@ -95,9 +121,13 @@ export abstract class BaseListPage extends BasePage {
   // ── Pagination ────────────────────────────────────────────────────────────────
 
   async getTotalRecordCount(): Promise<number> {
-    const pager = this.page.locator('.o_pager .o_pager_counter, .o_pager_value');
+    // Both `.o_pager_counter` and `.o_pager_value` match live on this instance (nested,
+    // not alternatives) — confirmed via a strict-mode violation error naming both.
+    // `.first()` picks whichever renders first in DOM order; either contains the same
+    // "1-80 / N" text this method parses.
+    const pager = this.page.locator('.o_pager .o_pager_counter, .o_pager_value').first();
     const text = (await pager.textContent()) ?? '';
-    const match = text.match(/of\s+(\d+)/);
+    const match = text.match(/\/\s*(\d+)/) ?? text.match(/of\s+(\d+)/);
     return match ? parseInt(match[1], 10) : 0;
   }
 

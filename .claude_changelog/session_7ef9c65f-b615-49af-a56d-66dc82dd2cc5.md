@@ -2146,3 +2146,28 @@ yes. 5 skipped fix and run with headed
 - Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\04-permissions\sales.permissions.spec.ts
 - Write: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\07-archive\sales.archive.spec.ts
 
+
+---
+
+## Change -- 2026-09-09T05:54:45Z
+
+**Prompt:**
+```
+<task-notification>
+<task-id>brsmox2nx</task-id>
+<tool-use-id>toolu_01NEioJ9ap9a1vqNwLCUHb3E</tool-use-id>
+<output-file>C:\Users\Urliyas\AppData\Local\Temp\claude\c--Users-Urliyas-Documents-GitHub-odoo-playwright-tests\7ef9c65f-b615-49af-a56d-66dc82dd2cc5\tasks\brsmox2nx.output</output-file>
+<status>failed</status>
+<summary>Background command "$env:HEADLESS='false'; npx playwright test --project=setup --project=admin src/modules/sales *&gt; out_all_headed.txt; Write-Output "EXIT=$LASTEXITCODE"" failed with exit code 1</summary>
+</task-notification>
+```
+
+**Files touched:**
+- Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\03-reporting\sales.reports.spec.ts
+- Write: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\07-archive\sales.archive.spec.ts
+- Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\01-config\sales.config.spec.ts
+- Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\core\base\BaseListPage.ts
+- Write: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\_probe4.spec.ts
+- Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\_probe4.spec.ts
+- Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\07-archive\sales.archive.spec.ts
+
