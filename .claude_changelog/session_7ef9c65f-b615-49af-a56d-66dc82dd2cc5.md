@@ -2299,3 +2299,17 @@ can't thosefix?
 **Files touched:**
 - Write: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\_add_active_field.spec.ts
 
+
+---
+
+## Change -- 2026-09-09T08:57:29Z
+
+**Prompt:**
+```
+can i get the screen short about pass test run?
+```
+
+**Files touched:**
+- Write: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\_screenshot_report.spec.ts
+- Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\_screenshot_report.spec.ts
+
