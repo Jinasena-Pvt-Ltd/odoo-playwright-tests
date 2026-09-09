@@ -294,10 +294,26 @@ export class SalesFormPage extends SalesBaseFormPage {
       await addLink.click();
       await this.page.waitForTimeout(300);
 
-      const row = this.page.locator('.o_data_row.o_selected_row').first();
+      // .last() (not .first()): a previous row occasionally hasn't finished being
+      // deselected by the time the next "Add a product" click fires — confirmed live —
+      // so BOTH rows can transiently carry `.o_selected_row` at once. `.first()` then
+      // grabbed the OLD, already-populated row instead of the new empty one: typing into
+      // its (non-empty, no-longer-autocompleting) product input silently did nothing,
+      // while a page-wide dropdown locator picked up the truly-new row's own
+      // auto-opened-but-untyped-into dropdown — two different rows, silently mismatched.
+      // The newest row is always the last one appended to the list.
+      const row = this.page.locator('.o_data_row.o_selected_row').last();
       const productInput = row.locator('[name="product_id"] input').first();
       const rowReady = await productInput.waitFor({ state: 'visible', timeout: 10_000 }).then(() => true).catch(() => false);
       if (!rowReady) {
+        if (attempt < attempts) { await this.page.waitForTimeout(500); continue; }
+        return false;
+      }
+      // Defensive check on top of .last(): a genuinely fresh row's product input must be
+      // empty. If it isn't, the wrong row was still somehow picked — fail this attempt
+      // fast (and retry) rather than silently typing into an already-populated field.
+      const alreadyHasValue = ((await productInput.inputValue().catch(() => '')) || '').trim().length > 0;
+      if (alreadyHasValue) {
         if (attempt < attempts) { await this.page.waitForTimeout(500); continue; }
         return false;
       }
