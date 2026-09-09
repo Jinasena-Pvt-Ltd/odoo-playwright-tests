@@ -2286,3 +2286,16 @@ fix the 3 skipped and test run with headed
 **Files touched:**
 - Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\pages\SalesPage.ts
 
+
+---
+
+## Change -- 2026-09-09T08:49:12Z
+
+**Prompt:**
+```
+can't thosefix?
+```
+
+**Files touched:**
+- Write: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\_add_active_field.spec.ts
+
