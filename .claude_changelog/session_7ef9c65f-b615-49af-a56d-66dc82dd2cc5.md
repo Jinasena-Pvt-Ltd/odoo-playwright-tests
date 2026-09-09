@@ -2126,3 +2126,23 @@ fixed and run the skipped test with headed
 - Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\core\components\MonetaryField.ts
 - Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\02-business\sales.business.spec.ts
 
+
+---
+
+## Change -- 2026-09-09T05:27:38Z
+
+**Prompt:**
+```
+yes. 5 skipped fix and run with headed
+```
+
+**Files touched:**
+- Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\core\base\BaseFormPage.ts
+- Write: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\01-config\sales.config.spec.ts
+- Write: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\03-reporting\sales.reports.spec.ts
+- Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\03-reporting\sales.reports.spec.ts
+- Write: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\04-permissions\sales.permissions.spec.ts
+- Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\pages\SalesPage.ts
+- Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\04-permissions\sales.permissions.spec.ts
+- Write: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\07-archive\sales.archive.spec.ts
+

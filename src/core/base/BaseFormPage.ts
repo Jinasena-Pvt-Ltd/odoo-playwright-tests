@@ -219,6 +219,11 @@ export abstract class BaseFormPage extends BasePage {
     await this.confirmDialog();
   }
 
+  /** Unarchive (reactivate) the current record via the Action menu — no confirmation dialog. */
+  async unarchiveRecord(): Promise<void> {
+    await this.clickActionMenuItem('Unarchive');
+  }
+
   /** Duplicates the current record via the Action menu */
   async duplicateRecord(): Promise<void> {
     await this.clickActionMenuItem('Duplicate');

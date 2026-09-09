@@ -514,31 +514,36 @@ export class SalesFormPage extends SalesBaseFormPage {
     return notification.isVisible({ timeout: 2_000 }).catch(() => false);
   }
 
+  /**
+   * Clicks the given "Approve ..." button and reports whether Odoo actually rejected it
+   * for lack of security-group membership (see isApprovalBlockedByPermissions above),
+   * without throwing. Used directly by permission tests that want to assert the denial
+   * itself, as opposed to confirmOrder() which treats the same denial as fatal.
+   */
+  async attemptApprovalAndCheckIfDenied(approveLabel: string | RegExp): Promise<boolean> {
+    await this.clickStatusButtonByRole(approveLabel);
+    const outcome = await Promise.race([
+      this.statusButton(approveLabel).first().waitFor({ state: 'hidden', timeout: 20_000 }).then(() => 'gone' as const),
+      this.page.locator('.o_notification').filter({ hasText: /approvals? .* (missing|not.*approved)/i }).first()
+        .waitFor({ state: 'visible', timeout: 20_000 }).then(() => 'blocked' as const),
+    ]).catch(() => 'timeout' as const);
+    if (outcome === 'gone') return false;
+    return outcome === 'blocked' || this.isApprovalBlockedByPermissions();
+  }
+
   /** Handles every visible approval request/approve pair, then clicks Confirm and waits for "Sales Order". */
   async confirmOrder(): Promise<void> {
     for (const [requestLabel, approveLabel] of SalesFormPage.APPROVAL_PAIRS) {
       if (await this.isStatusButtonVisible(requestLabel)) {
         await this.clickStatusButtonByRole(requestLabel);
         await this.statusButton(approveLabel).first().waitFor({ state: 'visible', timeout: 30_000 });
-        await this.clickStatusButtonByRole(approveLabel);
-        // Race the button disappearing (real success) against the "missing approvals"
-        // toast appearing (permission denial) — the toast auto-dismisses within a few
-        // seconds, so it must be checked immediately, not after the full 20s hidden-wait
-        // (which was found to let the toast vanish before this method ever looked for it).
-        const outcome = await Promise.race([
-          this.statusButton(approveLabel).first().waitFor({ state: 'hidden', timeout: 20_000 }).then(() => 'gone' as const),
-          this.page.locator('.o_notification').filter({ hasText: /approvals? .* (missing|not.*approved)/i }).first()
-            .waitFor({ state: 'visible', timeout: 20_000 }).then(() => 'blocked' as const),
-        ]).catch(() => 'timeout' as const);
-        if (outcome !== 'gone') {
-          const stillBlocked = outcome === 'blocked' || await this.isApprovalBlockedByPermissions();
-          if (stillBlocked) {
-            throw new ApprovalPermissionError(
-              `Cannot complete "${approveLabel}" — the current test user is not a member of the ` +
-              'Studio-configured approver group for this rule (confirmed via a "missing approvals" ' +
-              'notification), so this environment cannot fully exercise this approval workflow.',
-            );
-          }
+        const denied = await this.attemptApprovalAndCheckIfDenied(approveLabel);
+        if (denied) {
+          throw new ApprovalPermissionError(
+            `Cannot complete "${approveLabel}" — the current test user is not a member of the ` +
+            'Studio-configured approver group for this rule (confirmed via a "missing approvals" ' +
+            'notification), so this environment cannot fully exercise this approval workflow.',
+          );
         }
       }
     }
