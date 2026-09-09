@@ -178,8 +178,19 @@ function parseTests(content) {
     const pm     = look.match(/async\s*\(\{([^}]*)\}/);
     const params = pm ? pm[1] : '';
 
-    // Body — next 50 lines
-    const bodyLines = lines.slice(i + 1, i + 51);
+    // Body — up to (but not including) the next top-level `test(`/`test.skip(`/`test.only(`
+    // declaration, or end of file if this is the last test. A fixed-size window here
+    // previously let a short test's "body" spill into a NEXT test's code — a test with no
+    // skip call of its own could inherit `hasBodySkip: true` from a nearby sibling test
+    // purely because that sibling's `test.skip(true, ...)` call happened to fall within
+    // the fixed window. Confirmed live: this silently mis-reported several passing tests
+    // (e.g. any test followed within ~50 lines by another test's conditional skip) as
+    // skipped in the generated report despite a real "passed" result in results.json.
+    let bodyEnd = lines.length;
+    for (let j = i + 1; j < lines.length; j++) {
+      if (/^\s*test(?:\.(skip|only))?\s*\(\s*(['"`])/.test(lines[j])) { bodyEnd = j; break; }
+    }
+    const bodyLines = lines.slice(i + 1, bodyEnd);
     const body      = bodyLines.join('\n');
 
     // Extract skip reason from body: test.skip(true, 'reason')
@@ -233,7 +244,14 @@ function loadResults(filePath) {
           // Use full stack when available; fall back to message only
           error = (stack || msg).replace(/\[[0-9;]*m/g, '').trim();
         }
-        map[spec.title] = { status, error };
+        // Stripped of tags (matching `test.name`'s construction in parseTests) — a raw
+        // key here previously never matched any tagged test (e.g. "... @smoke"), since
+        // Playwright's own spec.title keeps the tag text but parseTests() strips it from
+        // `name`. That silently dropped the real pass/fail result for every tagged test,
+        // falling back to static analysis instead (confirmed live: 3 tests that actually
+        // passed were mis-reported as skipped this way).
+        const key = spec.title.replace(/@\S+/g, '').trim();
+        map[key] = { status, error };
       }
       for (const sub of (s.suites || [])) walk(sub);
     }

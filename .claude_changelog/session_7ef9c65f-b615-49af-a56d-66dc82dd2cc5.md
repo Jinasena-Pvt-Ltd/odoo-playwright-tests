@@ -2367,3 +2367,16 @@ without archived other skipped can fixded and run with headed
 - Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\core\fixtures\salesMasterData.fixtures.ts
 - Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\04-permissions\sales.permissions.spec.ts
 
+
+---
+
+## Change -- 2026-09-09T10:34:46Z
+
+**Prompt:**
+```
+but before only maintain4 skipped,23 passes
+```
+
+**Files touched:**
+- Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\scripts\generate-report.js
+
