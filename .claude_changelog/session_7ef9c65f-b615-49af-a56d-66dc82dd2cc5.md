@@ -2232,3 +2232,19 @@ yes. 5 skipped fix and run with headed
 **Files touched:**
 - Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\01-config\sales.config.spec.ts
 
+
+---
+
+## Change -- 2026-09-09T07:40:46Z
+
+**Prompt:**
+```
+fix the 3 skipped and test run with headed
+```
+
+**Files touched:**
+- Write: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\_investigate.spec.ts
+- Write: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\_check_groups.spec.ts
+- Write: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\04-permissions\sales.permissions.spec.ts
+- Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\notes\sales.notes.md
+

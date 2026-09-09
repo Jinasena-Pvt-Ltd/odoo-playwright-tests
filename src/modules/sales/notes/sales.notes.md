@@ -4,6 +4,29 @@ Free-form domain notes for the sales module: Odoo quirks, SaaS-specific
 constraints, decisions, and anything future contributors on this branch
 should know that doesn't belong in test code or CLAUDE.md.
 
+## Live environment changes made for testing (2026-09-09)
+
+- **Admin added to "Sales / Jin - Sales - Sales Margin Approvers" (group id 131).**
+  The `admin` test account (uid 749, distinct from any personal Jinasena login) was not
+  originally a member, so it could request but never grant Insufficient Margin approval
+  (confirmed via `studio.approval.rule.check_approval` returning `can_validate: false`).
+  Added via direct RPC (`res.groups.write` with `users: [[4, 749]]`) so the 02-business
+  Insufficient Margin test can exercise the full request→approve→confirm flow. This is a
+  real, live change to the shared Odoo instance's security config, not a test-local
+  fixture — if that test starts failing after an environment reset, check this first.
+  The 04-permissions test was retargeted from Insufficient Margin (no longer blocked) to
+  Credit Limit approval, since admin is confirmed NOT a member of "Sales / Jin - Sales -
+  Credit Limit Approvers" (group id 125) — that rule still demonstrates real enforcement.
+- **Sales Orders cannot be archived in this environment — confirmed at the model level,
+  not a UI/Studio hiding of the button.** `sale.order.fields_get()` shows this model has
+  no `active` field at all here, which is why Archive/Unarchive never appear in the cog
+  menu (form or list) and why the search panel never offers an "Archived" filter — Odoo
+  only adds those when the model has `active`. Restoring this would mean adding an
+  `active` field to the live `sale.order` schema, a structural change with wide blast
+  radius (affects every default query across the system) — deliberately NOT done as part
+  of this test suite. The 07-archive tests check for the "Archive" action's availability
+  and skip with this exact explanation rather than assume it exists.
+
 ## Migrated from legacy_tests/ (2026-09-07)
 
 The original `legacy_tests/` folder (20 spec files + `helpers.ts`) was a
