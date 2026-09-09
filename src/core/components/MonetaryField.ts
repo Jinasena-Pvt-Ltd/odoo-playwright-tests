@@ -18,14 +18,24 @@ export class MonetaryField {
       const raw = await input.inputValue();
       return this.parseAmount(raw);
     }
-    const widget = this.page.locator(`.o_field_widget[name="${this.fieldName}"]`).first();
-    const text = (await widget.textContent())?.trim() ?? '0';
+    const text = await this.getRawText();
     return this.parseAmount(text);
   }
 
   async getRawText(): Promise<string> {
+    // Odoo's tax-totals widget (used for amount_untaxed/amount_tax/amount_total on the
+    // Sale Order form) renders its readonly value as a bare `<span name="...">` with no
+    // `.o_field_widget` wrapper class — confirmed live (0 matches for the compound
+    // selector, vs. 1 for the bare attribute), unlike most other monetary fields on the
+    // form. `.o_field_widget[name=...]` is tried first since it's more specific/reliable
+    // where it does apply; the bare `[name=...]` is the fallback for this widget's markup.
     const widget = this.page.locator(`.o_field_widget[name="${this.fieldName}"]`).first();
-    return (await widget.textContent())?.trim() ?? '';
+    if (await widget.isVisible({ timeout: 2_000 }).catch(() => false)) {
+      return (await widget.textContent())?.trim() ?? '';
+    }
+    const bare = this.page.locator(`[name="${this.fieldName}"]`).first();
+    await bare.waitFor({ state: 'visible', timeout: 15_000 });
+    return (await bare.textContent())?.trim() ?? '';
   }
 
   private parseAmount(text: string): number {

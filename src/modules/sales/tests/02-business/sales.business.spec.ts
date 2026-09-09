@@ -107,14 +107,25 @@ test.describe('Sales Business Logic @module:sales @step:business', () => {
       expect(isWithinTolerance(expectedNet, line.netAmount)).toBe(true);
     }
 
-    await page.locator('.o_field_widget[name="amount_untaxed"]').first().waitFor({ state: 'visible', timeout: 30_000 });
-
     const expectedUntaxed = computeUntaxedAmount(lines.map((l) => ({ netAmount: l.netAmount })));
-    const untaxedAmount = await formPage.untaxedAmount.getValue();
-    expect(isWithinTolerance(expectedUntaxed, untaxedAmount)).toBe(true);
 
-    const taxAmount = await formPage.taxAmount.getValue();
-    const expectedTotal = computeGrandTotal(untaxedAmount, taxAmount);
+    // This instance's tax-totals widget only renders separate "Untaxed"/"Taxes" rows
+    // when a tax actually applies to the order — confirmed live via DOM inspection: with
+    // no tax on either line, only a single "Total" row exists (no `[name="amount_untaxed"]`
+    // or `[name="amount_tax"]` element at all, not merely a slow render). So the untaxed
+    // breakdown is only checked when that row is actually present; the grand Total is
+    // always checked, since it always renders.
+    const untaxedWidgetPresent = await page.locator('[name="amount_untaxed"]').first()
+      .isVisible({ timeout: 3_000 }).catch(() => false);
+
+    let expectedTotal = expectedUntaxed;
+    if (untaxedWidgetPresent) {
+      const untaxedAmount = await formPage.untaxedAmount.getValue();
+      expect(isWithinTolerance(expectedUntaxed, untaxedAmount)).toBe(true);
+      const taxAmount = await formPage.taxAmount.getValue();
+      expectedTotal = computeGrandTotal(untaxedAmount, taxAmount);
+    }
+
     const totalAmount = await formPage.totalAmount.getValue();
     expect(isWithinTolerance(expectedTotal, totalAmount)).toBe(true);
   });
