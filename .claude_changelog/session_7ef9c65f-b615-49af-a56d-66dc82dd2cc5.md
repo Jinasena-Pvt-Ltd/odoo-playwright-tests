@@ -2091,3 +2091,16 @@ const { chromium } = require('playwright');
 - Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\pages\SalesPage.ts
 - Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\02-business\sales.business.spec.ts
 
+
+---
+
+## Change -- 2026-09-09T04:44:42Z
+
+**Prompt:**
+```
+fixed and run the skipped test with headed
+```
+
+**Files touched:**
+- Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\02-business\sales.business.spec.ts
+

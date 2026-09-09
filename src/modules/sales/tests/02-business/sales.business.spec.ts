@@ -56,6 +56,13 @@ test.describe('Sales Business Logic @module:sales @step:business', () => {
   });
 
   test('quotation line and grand total amounts reconcile with Qty × Unit Price arithmetic', async ({ page, salesMasterData }) => {
+    // Bumped from the default 120s: a 2-line order triggers two full onchange recompute
+    // cascades (price/tax/discount per line, then order-level totals), and this instance
+    // was observed to take the entire 120s just getting to the totals widgets, timing out
+    // mid-read with no clear error (MonetaryField.getValue()'s textContent() call has no
+    // explicit timeout of its own, so it silently consumed the whole test budget).
+    test.setTimeout(180_000);
+
     const formPage = new SalesFormPage(page);
     await formPage.navigate();
 
@@ -99,6 +106,8 @@ test.describe('Sales Business Logic @module:sales @step:business', () => {
       const expectedNet = computeLineNetAmount(line.qty, line.unitPrice);
       expect(isWithinTolerance(expectedNet, line.netAmount)).toBe(true);
     }
+
+    await page.locator('.o_field_widget[name="amount_untaxed"]').first().waitFor({ state: 'visible', timeout: 30_000 });
 
     const expectedUntaxed = computeUntaxedAmount(lines.map((l) => ({ netAmount: l.netAmount })));
     const untaxedAmount = await formPage.untaxedAmount.getValue();
