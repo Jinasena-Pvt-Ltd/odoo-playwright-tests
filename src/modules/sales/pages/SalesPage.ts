@@ -550,8 +550,12 @@ export class SalesFormPage extends SalesBaseFormPage {
     // 30s (not the default 10s): after an approval round-trip, the status bar can take
     // noticeably longer to re-render with "Confirm" available again on this instance.
     await this.clickStatusButtonByRole(/^confirm$/i, 30_000);
-    await this.page.locator('.o_statusbar_status').filter({ hasText: /sales order/i })
-      .waitFor({ state: 'visible', timeout: 60_000 });
+    // waitForStatus() (not a raw hasText filter): confirmed live that the statusbar's
+    // text can contain "Sales Order" for a moment before that stage's radio is actually
+    // marked checked — a hasText wait resolves on the text alone and returns too early,
+    // so a getCurrentStatus() call immediately after this method still read back the
+    // still-checked "Quotation" radio. waitForStatus() checks the checked radio itself.
+    await this.waitForStatus('Sales Order');
   }
 
   // ── Downstream document workflow ──────────────────────────────────────────────
