@@ -209,8 +209,30 @@ export abstract class BaseFormPage extends BasePage {
   async clickActionMenuItem(label: string): Promise<void> {
     const cog = this.page.locator('.o_cp_action_menus button, .o_form_status_bar .o_status_bar_additional_actions button').first();
     await cog.click();
-    await this.page.locator('.dropdown-item, .o_menu_item').filter({ hasText: label }).first().click();
+    // Scoped to the cog's own opened dropdown, not the bare `.dropdown-item, .o_menu_item`
+    // classes: those also match unrelated, always-present-but-hidden menus on this
+    // instance (e.g. a rich-text editor's Format toolbar), confirmed live — an unscoped
+    // click on a label absent from THIS menu would silently hit one of those instead, or
+    // (with no bounded wait) simply hang for the full test timeout.
+    const menu = this.page.locator('.o_cp_action_menus .dropdown-menu, .o_cp_action_menus [role="menu"]').first();
+    await menu.waitFor({ state: 'visible', timeout: 5_000 });
+    const item = menu.locator('.dropdown-item, .o_menu_item').filter({ hasText: label }).first();
+    await item.waitFor({ state: 'visible', timeout: 5_000 });
+    await item.click();
     await this.waitForOdooReady();
+  }
+
+  /** True if the cog Action menu currently offers an item with this exact label. */
+  async isActionMenuItemAvailable(label: string): Promise<boolean> {
+    const cog = this.page.locator('.o_cp_action_menus button, .o_form_status_bar .o_status_bar_additional_actions button').first();
+    await cog.click();
+    const menu = this.page.locator('.o_cp_action_menus .dropdown-menu, .o_cp_action_menus [role="menu"]').first();
+    await menu.waitFor({ state: 'visible', timeout: 5_000 }).catch(() => {});
+    const exact = new RegExp(`^\\s*${label.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\s*$`, 'i');
+    const available = await menu.locator('.dropdown-item, .o_menu_item').filter({ hasText: exact })
+      .first().isVisible({ timeout: 2_000 }).catch(() => false);
+    await this.page.keyboard.press('Escape').catch(() => {});
+    return available;
   }
 
   /** Archive the current record via the Action menu */
