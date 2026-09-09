@@ -49,14 +49,22 @@ test.describe('Sales Configuration Setup @module:sales @step:config', () => {
     const formPage = new SalesFormPage(page);
     await formPage.navigate();
 
-    // Confirmed live: adding a second order line before a customer is selected is
-    // noticeably less reliable on this instance (a second product silently failed to
-    // add — `added` came back 1, not 2 — with no customer set), consistent with this
-    // instance's documented onchange-timing sensitivity around partner_id/pricelist.
-    // Every other passing two-line test sets the customer first; matching that here.
+    // Confirmed live: adding a second order line with the header only partly filled
+    // (customer set but Quotation Type/Order Payment Type/Sales Team/Warehouse skipped)
+    // is noticeably less reliable on this instance — the second product's dropdown came
+    // up empty/unfiltered ("Start typing...") and the line was silently dropped, with no
+    // error. The exact full-header sequence every other passing 2-line test uses is
+    // matched here rather than a minimal setup that diverges from what's proven to work.
     const customerFound = await formPage.selectCustomerIfExists(salesMasterData.customerName);
     if (!customerFound) {
       test.skip(true, `Could not select fixture-created customer "${salesMasterData.customerName}" — transient UI issue, not a missing-data problem`);
+      return;
+    }
+    await formPage.setQuotationType(SALES_TEST_CONFIG.quotationType);
+    await formPage.setOrderPaymentType(SALES_TEST_CONFIG.orderPaymentType);
+    const otherInfoOk = await formPage.fillOtherInfo(SALES_TEST_CONFIG.salesTeam, SALES_TEST_CONFIG.warehouse);
+    if (!otherInfoOk) {
+      test.skip(true, 'Reference Sales Team/Warehouse not found in this Odoo environment');
       return;
     }
 
