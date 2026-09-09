@@ -2346,3 +2346,24 @@ without archived other skipped can fixded and run with headed
 - Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\core\fixtures\salesMasterData.fixtures.ts
 - Write: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\_probe_credit.spec.ts
 
+
+---
+
+## Change -- 2026-09-09T10:02:47Z
+
+**Prompt:**
+```
+<task-notification>
+<task-id>bmj2zw91v</task-id>
+<tool-use-id>toolu_013nr1rfYSbAZjPPa3sypiJG</tool-use-id>
+<output-file>C:\Users\Urliyas\AppData\Local\Temp\claude\c--Users-Urliyas-Documents-GitHub-odoo-playwright-tests\7ef9c65f-b615-49af-a56d-66dc82dd2cc5\tasks\bmj2zw91v.output</output-file>
+<status>completed</status>
+<summary>Background command "$env:HEADLESS='false'; npx playwright test --project=setup --project=admin src/modules/sales *&gt; out_credfix.txt; Write-Output "EXIT=$LASTEXITCODE"" completed (exit code 0)</summary>
+</task-notification>
+```
+
+**Files touched:**
+- Write: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\_probe_creditcheck.spec.ts
+- Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\core\fixtures\salesMasterData.fixtures.ts
+- Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\04-permissions\sales.permissions.spec.ts
+

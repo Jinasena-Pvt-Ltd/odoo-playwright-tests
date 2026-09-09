@@ -41,8 +41,17 @@ test.describe('Sales User Permissions @module:sales @step:permissions', () => {
     }
 
     // A very large quantity AND an explicit high unit price (same technique as the
-    // 02-business Credit Limit test) keeps this independent of the customer's actual
-    // current overdue balance: the total should exceed any realistic credit limit.
+    // 02-business Credit Limit test). NOTE: confirmed live this order's own size does
+    // NOT reliably trigger the requirement on its own — Odoo's credit check here is
+    // computed from partner_credit_warning, which reflects the customer's outstanding/
+    // overdue AR balance (unpaid invoices), not the current draft order's total. A fresh
+    // fixture-created customer has zero invoices, so partner_credit_warning came back
+    // empty even against a ~99.9 billion order and an explicit non-zero Credit Limit on
+    // the customer (both tried live). Forcing this deterministically would require
+    // creating and posting real unpaid invoices against the customer first — out of
+    // proportion for this test, and more live data mutation on a shared instance than
+    // is warranted. So this remains environment/business-data-dependent, same as the
+    // archive-related skips, just for a different underlying reason.
     const added = await formPage.addOrderLines([
       { product: SALES_TEST_CONFIG.product, quantity: 100_000, discount: 0, unitPrice: 999_999 },
     ]);

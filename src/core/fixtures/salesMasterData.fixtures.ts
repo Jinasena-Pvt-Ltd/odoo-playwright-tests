@@ -46,16 +46,6 @@ export const test = base.extend<{}, SalesMasterDataWorkerFixtures>({
         await customerPage.customerName.setValue(customerName);
         await customerPage.save();
         customerResId = currentResId(page.url());
-
-        // A fresh customer's Credit Limit defaults to 0/unset, which Odoo treats as "no
-        // limit enforced" — confirmed live: the Credit Limit approval tests (both
-        // 02-business and 04-permissions) intermittently found no approval requirement
-        // even for a deliberately enormous order total, because there was no limit to
-        // exceed in the first place. Setting an explicit small limit here makes that
-        // requirement trigger deterministically for every test that uses this customer.
-        await customerPage.openSalesPurchaseTab();
-        await customerPage.creditLimit.setValue(1_000);
-        await customerPage.save();
       } catch (err) {
         console.error(`  ✘ Customer creation failed: ${(err as Error).message}`);
         throw err;
