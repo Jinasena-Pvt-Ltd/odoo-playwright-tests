@@ -2380,3 +2380,17 @@ but before only maintain4 skipped,23 passes
 **Files touched:**
 - Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\scripts\generate-report.js
 
+
+---
+
+## Change -- 2026-09-09T10:39:56Z
+
+**Prompt:**
+```
+try to fix once againg
+```
+
+**Files touched:**
+- Write: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\_probe_invoice.spec.ts
+- Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\_probe_invoice.spec.ts
+
