@@ -654,7 +654,9 @@ export class SalesFormPage extends SalesBaseFormPage {
     const opsTab = this.page.locator('.o_notebook .nav-link, .o_notebook .nav-item a')
       .filter({ hasText: /operations/i }).first();
     await opsTab.waitFor({ state: 'visible', timeout: 10_000 });
-    await opsTab.click();
+    console.log('[DEBUG] opsTab visible, clicking');
+    await opsTab.click({ timeout: 10_000 });
+    console.log('[DEBUG] opsTab clicked, waiting one2many');
     await this.page.locator('.o_field_one2many').waitFor({ state: 'visible', timeout: 10_000 });
     console.log('[DEBUG] operations tab open');
 
