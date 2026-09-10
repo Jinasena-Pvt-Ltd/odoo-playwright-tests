@@ -302,16 +302,17 @@ export class SalesFormPage extends SalesBaseFormPage {
    * confirmed empirically that the product genuinely exists and the dropdown does open
    * reliably in isolation, so this is a rendering-timing issue, not a data gap.
    *
-   * Bumped 3 -> 6 (2026-09-10): confirmed live, at length, that this is an inherent
-   * per-attempt flakiness in the single "add one order line" sequence itself, not
-   * something specific to a second row on the same page — moving a failing add to a
-   * freshly-reloaded page with only one prior line just relocated the same failure to
-   * a different call, it didn't remove it. Across 5 isolated runs the 3-attempt version
-   * failed ~40% of the time; doubling the retry budget is the direct, honest way to
-   * raise the effective success rate of this call without pretending a structural
-   * change fixes a per-attempt race that was never structural.
+   * CONFIRMED LIVE (2026-09-10): raising `attempts` here does NOT help — when this fails,
+   * it tends to fail identically across every in-place retry (same page, same row state),
+   * not as an independent per-attempt coin flip. Pushing attempts 3 -> 6 only multiplied
+   * the worst-case duration (several sub-waits per attempt) until the test itself timed
+   * out, without improving the actual success rate. The only technique that changed the
+   * OUTCOME (not just relocated it) was a full save+reload — see
+   * addOrderLines()'s reload-and-retry fallback, which is the real recovery path for a
+   * line that fails all in-place attempts. Keep `attempts` modest here; it exists for
+   * genuine transient single-shot renders, not as a substitute for a fresh page state.
    */
-  async addOrderLine(line: OrderLineInput, attempts = 6): Promise<boolean> {
+  async addOrderLine(line: OrderLineInput, attempts = 3): Promise<boolean> {
     for (let attempt = 1; attempt <= attempts; attempt++) {
       const addLink = this.page.locator('.o_field_x2many_list_row_add a')
         .filter({ hasText: /add a product/i }).first();
@@ -494,12 +495,34 @@ export class SalesFormPage extends SalesBaseFormPage {
     return true;
   }
 
-  /** Opens the Order Lines tab and adds every line. Returns the number successfully added. */
+  /**
+   * Opens the Order Lines tab and adds every line. Returns the number successfully added.
+   *
+   * If a line fails all of addOrderLine()'s in-place retries, this saves progress so far
+   * and reloads the page before trying that line once more. CONFIRMED LIVE (2026-09-10):
+   * when addOrderLine() fails, retrying in place (same page, same row state) tends to
+   * fail identically every time — it is not an independent per-attempt coin flip, so
+   * more in-place attempts don't help (tried, only inflated worst-case duration past the
+   * test timeout with no improvement). A full save+reload is the one thing that's been
+   * observed to change the outcome, because it gives the row a genuinely fresh render
+   * rather than repeating whatever transient state caused the failure. Saving first
+   * (rather than a bare reload) is essential — this method runs on a still-unsaved new
+   * record whenever it's the first thing called after filling header fields, and a raw
+   * reload on a record with no id yet would silently discard everything entered so far.
+   */
   async addOrderLines(lines: OrderLineInput[]): Promise<number> {
     await this.openOrderLinesTab();
     let added = 0;
     for (const line of lines) {
-      if (await this.addOrderLine(line)) added++;
+      let ok = await this.addOrderLine(line);
+      if (!ok) {
+        await this.save();
+        await this.page.reload();
+        await this.waitForOdooReady();
+        await this.openOrderLinesTab();
+        ok = await this.addOrderLine(line);
+      }
+      if (ok) added++;
       // Settle before clicking "Add a product" again — the previous line's onchange
       // (price/uom/tax recompute) can still be wrapping up, and clicking too soon
       // occasionally raced ahead of it on this instance (observed: a 2nd line silently
