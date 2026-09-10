@@ -46,6 +46,12 @@ test.describe('Sales Configuration Setup @module:sales @step:config', () => {
   });
 
   test('reference products exist, are sellable, and are distinct from each other', async ({ page, salesMasterData }) => {
+    // Bumped from the default 120s: addOrderLine()'s retry budget was raised 3 -> 6
+    // attempts to counter a confirmed inherent ~40% per-attempt flake in this
+    // instance's product autocomplete — worst case (both lines needing several
+    // retries) can now approach the default timeout under real instance load.
+    test.setTimeout(180_000);
+
     const formPage = new SalesFormPage(page);
     await formPage.navigate();
 
