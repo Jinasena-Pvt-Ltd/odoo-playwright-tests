@@ -2635,3 +2635,17 @@ don't need the search archived fix it.what's ther reason for can't select the cr
 **Files touched:**
 - Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\pages\SalesPage.ts
 
+
+---
+
+## Change -- 2026-09-10T10:31:52Z
+
+**Prompt:**
+```
+plz arrange the plan to fix failure one and 4 skipped
+```
+
+**Files touched:**
+- Write: C:\Users\Urliyas\.claude\plans\lets-edit-the-tests-purrfect-stearns.md
+- Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\pages\SalesPage.ts
+

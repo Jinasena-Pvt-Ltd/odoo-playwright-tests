@@ -362,6 +362,20 @@ export class SalesFormPage extends SalesBaseFormPage {
       // typing..." placeholder item is gone as the real signal that text was received.
       for (let typeAttempt = 1; typeAttempt <= 3 && !found; typeAttempt++) {
         await productInput.click();
+        // Wait for the browser's actual focus state, not a guessed delay: live evidence
+        // (dropdown auto-opens with default/untyped results immediately on row creation)
+        // shows Odoo's own focus-and-bind cycle for the new row's autocomplete can still
+        // be settling when Playwright's click() resolves, so keystrokes sent immediately
+        // after occasionally land nowhere. Best-effort — if it never confirms focus,
+        // fall through to the existing retry loop rather than block indefinitely.
+        const inputHandle = await productInput.elementHandle();
+        if (inputHandle) {
+          await this.page.waitForFunction(
+            (el) => document.activeElement === el,
+            inputHandle,
+            { timeout: 3_000 },
+          ).catch(() => {});
+        }
         await this.page.keyboard.press('Control+A');
         await this.page.keyboard.press('Delete');
         await this.page.waitForTimeout(150);
