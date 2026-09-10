@@ -605,6 +605,7 @@ export class SalesFormPage extends SalesBaseFormPage {
 
   /** Opens the linked delivery, sets Done quantities to Demand, validates, and returns to the Sales Order. */
   async processDelivery(): Promise<string> {
+    console.log('[DEBUG] processDelivery start');
     const soUrl = this.page.url();
 
     let clicked = false;
@@ -626,6 +627,7 @@ export class SalesFormPage extends SalesBaseFormPage {
     }
 
     await this.page.waitForURL((url) => url.href !== soUrl, { timeout: 30_000 });
+    console.log('[DEBUG] navigated away from SO, url=', this.page.url());
 
     if (await this.page.locator('.o_list_view').isVisible({ timeout: 3_000 }).catch(() => false)) {
       await this.page.locator('.o_list_view .o_data_row').first().click();
@@ -633,6 +635,7 @@ export class SalesFormPage extends SalesBaseFormPage {
     }
 
     const deliveryUrl = this.page.url();
+    console.log('[DEBUG] deliveryUrl=', deliveryUrl);
     const deliveryRef = ((await this.page.locator('[name="name"] .o_field_char, [name="name"] span')
       .first().textContent().catch(() => '')) ?? '').trim() || 'WH/OUT/xxxxx';
 
@@ -646,15 +649,18 @@ export class SalesFormPage extends SalesBaseFormPage {
       await checkAvail.click();
       await checkAvail.waitFor({ state: 'hidden', timeout: 15_000 }).catch(() => {});
     }
+    console.log('[DEBUG] past check availability');
 
     const opsTab = this.page.locator('.o_notebook .nav-link, .o_notebook .nav-item a')
       .filter({ hasText: /operations/i }).first();
     await opsTab.waitFor({ state: 'visible', timeout: 10_000 });
     await opsTab.click();
     await this.page.locator('.o_field_one2many').waitFor({ state: 'visible', timeout: 10_000 });
+    console.log('[DEBUG] operations tab open');
 
     const rows = this.page.locator('.o_data_row');
     const rowCount = await rows.count();
+    console.log('[DEBUG] rowCount=', rowCount);
     for (let i = 0; i < rowCount; i++) {
       const row = rows.nth(i);
       const demandText = ((await row.locator('[name="product_uom_qty"]').textContent().catch(() => '0')) ?? '0').trim();
@@ -673,6 +679,7 @@ export class SalesFormPage extends SalesBaseFormPage {
       await qtyDone.fill(demand);
       await qtyDone.press('Tab');
     }
+    console.log('[DEBUG] qty filled for all rows');
 
     // Non-anchored regex: confirmed live the accessible name check-availability/validate
     // buttons match /validate/i but not /^validate/i (a live button-text dump showed
@@ -682,6 +689,7 @@ export class SalesFormPage extends SalesBaseFormPage {
     const validateBtn = this.page.locator('.o_statusbar_buttons, .o_control_panel').getByRole('button', { name: /validate/i });
     await validateBtn.waitFor({ state: 'visible', timeout: 10_000 });
     await validateBtn.click();
+    console.log('[DEBUG] validate clicked');
 
     const immDialog = this.page.locator('.modal, .o_dialog').filter({ hasText: /immediate transfer/i });
     if (await immDialog.isVisible({ timeout: 3_000 }).catch(() => false)) {
@@ -692,6 +700,7 @@ export class SalesFormPage extends SalesBaseFormPage {
     if (await boDialog.isVisible({ timeout: 3_000 }).catch(() => false)) {
       await boDialog.getByRole('button', { name: /create backorder/i }).click();
     }
+    console.log('[DEBUG] past immediate/backorder dialogs');
 
     // stock.picking's statusbar is the same ARIA radiogroup markup as sale.order's (not
     // the classic `.o_statusbar_status` this previously assumed — confirmed live via a
@@ -718,6 +727,7 @@ export class SalesFormPage extends SalesBaseFormPage {
       ]);
     };
     const isDone = await checkIsDone(10_000);
+    console.log('[DEBUG] isDone=', isDone);
     if (!isDone) {
       await this.page.goto(deliveryUrl);
       await this.page.locator('.o_form_view').waitFor({ state: 'visible', timeout: 15_000 });
