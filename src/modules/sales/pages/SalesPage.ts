@@ -296,13 +296,22 @@ export class SalesFormPage extends SalesBaseFormPage {
   /**
    * Adds a single order line. Returns false (without throwing) if the product cannot be found.
    *
-   * Retries the whole "click Add a product → row appears → type → dropdown match" sequence
-   * up to twice: on this SaaS instance, the newly-inserted editable row (and its product
-   * autocomplete) occasionally isn't fully settled by the time we query for it right after
-   * the click — confirmed empirically that the product genuinely exists and the dropdown
-   * does open reliably in isolation, so this is a rendering-timing issue, not a data gap.
+   * Retries the whole "click Add a product → row appears → type → dropdown match" sequence:
+   * on this SaaS instance, the newly-inserted editable row (and its product autocomplete)
+   * occasionally isn't fully settled by the time we query for it right after the click —
+   * confirmed empirically that the product genuinely exists and the dropdown does open
+   * reliably in isolation, so this is a rendering-timing issue, not a data gap.
+   *
+   * Bumped 3 -> 6 (2026-09-10): confirmed live, at length, that this is an inherent
+   * per-attempt flakiness in the single "add one order line" sequence itself, not
+   * something specific to a second row on the same page — moving a failing add to a
+   * freshly-reloaded page with only one prior line just relocated the same failure to
+   * a different call, it didn't remove it. Across 5 isolated runs the 3-attempt version
+   * failed ~40% of the time; doubling the retry budget is the direct, honest way to
+   * raise the effective success rate of this call without pretending a structural
+   * change fixes a per-attempt race that was never structural.
    */
-  async addOrderLine(line: OrderLineInput, attempts = 3): Promise<boolean> {
+  async addOrderLine(line: OrderLineInput, attempts = 6): Promise<boolean> {
     for (let attempt = 1; attempt <= attempts; attempt++) {
       const addLink = this.page.locator('.o_field_x2many_list_row_add a')
         .filter({ hasText: /add a product/i }).first();
