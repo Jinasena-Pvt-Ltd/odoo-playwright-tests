@@ -655,9 +655,13 @@ export class SalesFormPage extends SalesBaseFormPage {
       const demandText = ((await row.locator('[name="product_uom_qty"]').textContent().catch(() => '0')) ?? '0').trim();
       const demand = demandText.replace(/,/g, '');
       if (!demand || demand === '0' || demand === '0.00') continue;
-      const qtyDone = row.locator('[name="qty_done"] input').first();
+      // Confirmed live: this Odoo version names the delivered-quantity cell "quantity",
+      // not the older "qty_done" — a row-cell name dump showed
+      // ["product_id","product_packaging_id","product_uom_qty","quantity","product_uom",...]
+      // with no "qty_done" anywhere. The old name silently matched nothing, every time.
+      const qtyDone = row.locator('[name="quantity"] input').first();
       if (!(await qtyDone.isVisible({ timeout: 1_500 }).catch(() => false))) {
-        await row.locator('[name="qty_done"]').click();
+        await row.locator('[name="quantity"]').click();
         await qtyDone.waitFor({ state: 'visible', timeout: 5_000 });
       }
       await qtyDone.click();
@@ -665,13 +669,18 @@ export class SalesFormPage extends SalesBaseFormPage {
       await qtyDone.press('Tab');
     }
 
-    const validateBtn = this.page.locator('.o_control_panel').getByRole('button', { name: /^validate/i });
+    // Non-anchored regex: confirmed live the accessible name check-availability/validate
+    // buttons match /validate/i but not /^validate/i (a live button-text dump showed
+    // "Validate" present among the control panel's buttons, yet the anchored version
+    // never matched it — likely due to leading icon/whitespace content in the accessible
+    // name that a `^`-anchored pattern can't skip past).
+    const validateBtn = this.page.locator('.o_control_panel').getByRole('button', { name: /validate/i });
     await validateBtn.waitFor({ state: 'visible', timeout: 10_000 });
     await validateBtn.click();
 
     const immDialog = this.page.locator('.modal, .o_dialog').filter({ hasText: /immediate transfer/i });
     if (await immDialog.isVisible({ timeout: 3_000 }).catch(() => false)) {
-      await immDialog.getByRole('button', { name: /^validate/i }).click();
+      await immDialog.getByRole('button', { name: /validate/i }).click();
     }
 
     const boDialog = this.page.locator('.modal, .o_dialog').filter({ hasText: /backorder/i });
@@ -679,12 +688,23 @@ export class SalesFormPage extends SalesBaseFormPage {
       await boDialog.getByRole('button', { name: /create backorder/i }).click();
     }
 
-    const doneLocator = this.page.locator('.o_statusbar_status').filter({ hasText: /done/i });
-    const isDone = await doneLocator.isVisible({ timeout: 10_000 }).catch(() => false);
+    // stock.picking's statusbar is the same ARIA radiogroup markup as sale.order's (not
+    // the classic `.o_statusbar_status` this previously assumed — confirmed live via a
+    // radio-role dump: ["Done","Ready","Waiting","Draft",""]), so the same dual-selector
+    // approach BaseFormPage.getCurrentStatus()/waitForStatus() use is applied here too.
+    const legacyDone = this.page.locator('.o_statusbar_status').filter({ hasText: /done/i });
+    const ariaDone = this.page.getByRole('radiogroup', { name: /statusbar/i }).getByRole('radio', { name: /^done$/i, checked: true });
+    const isDone = await Promise.race([
+      legacyDone.waitFor({ state: 'visible', timeout: 10_000 }).then(() => true),
+      ariaDone.waitFor({ state: 'visible', timeout: 10_000 }).then(() => true),
+    ]).catch(() => false);
     if (!isDone) {
       await this.page.goto(deliveryUrl);
       await this.page.locator('.o_form_view').waitFor({ state: 'visible', timeout: 15_000 });
-      await doneLocator.waitFor({ state: 'visible', timeout: 30_000 });
+      await Promise.race([
+        legacyDone.waitFor({ state: 'visible', timeout: 30_000 }),
+        ariaDone.waitFor({ state: 'visible', timeout: 30_000 }),
+      ]);
     }
 
     const breadcrumb = this.page.locator('.o_breadcrumb a, .o_breadcrumb .o_back_button').first();
