@@ -2584,3 +2584,16 @@ continue,fixed and run with headed
 **Files touched:**
 - Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\pages\SalesPage.ts
 
+
+---
+
+## Change -- 2026-09-10T08:28:50Z
+
+**Prompt:**
+```
+don't need the search archived fix it.what's ther reason for can't select the created customer fix it.why can't fix the sales teamor warehouse.fix it.if u want to time ,plz give the time.fixed the all skipped 5
+```
+
+**Files touched:**
+- Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\pages\SalesPage.ts
+

@@ -94,10 +94,14 @@ abstract class SalesBaseFormPage extends BaseFormPage {
    * retry re-clears and re-types the value rather than just re-waiting, since a stalled
    * search occasionally needs a fresh keystroke to kick off again.
    */
-  async selectIfExists(fieldName: string, value: string, attempts = 4): Promise<boolean> {
+  async selectIfExists(fieldName: string, value: string, attempts = 6): Promise<boolean> {
     const widget = this.page.locator(`.o_field_widget[name="${fieldName}"]`).first();
     const input = widget.locator('input').first();
     await input.waitFor({ state: 'visible', timeout: 10_000 });
+    // Brief settle before the very first attempt — this field is frequently reached
+    // right after a tab switch or page navigation, and typing into it while the widget
+    // is still mounting was one contributor to the "click landed, nothing typed" flake.
+    await this.page.waitForTimeout(300);
 
     for (let attempt = 1; attempt <= attempts; attempt++) {
       await input.click();
@@ -124,7 +128,19 @@ abstract class SalesBaseFormPage extends BaseFormPage {
           // Verify the click actually committed a value (the dropdown can close from
           // a re-render mid-click, silently leaving the field blank) — if not, fall
           // through and retry instead of returning a false positive.
-          const committed = await input.inputValue().catch(() => '');
+          let committed = await input.inputValue().catch(() => '');
+          if (!committed.trim()) {
+            // Mouse click can occasionally land on a stale/repositioned element right as
+            // the dropdown re-renders — a keyboard-driven selection (re-open, arrow down
+            // to the first result, Enter) doesn't depend on the item's on-screen position
+            // and has proven more robust elsewhere in this suite for the same class of
+            // "click resolved but nothing happened" flake.
+            await input.click();
+            await this.page.keyboard.press('ArrowDown');
+            await this.page.keyboard.press('Enter');
+            await this.page.waitForTimeout(300);
+            committed = await input.inputValue().catch(() => '');
+          }
           if (committed.trim().length > 0) {
             return true;
           }
