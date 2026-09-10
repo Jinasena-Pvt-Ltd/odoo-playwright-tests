@@ -697,19 +697,34 @@ export class SalesFormPage extends SalesBaseFormPage {
     // the classic `.o_statusbar_status` this previously assumed — confirmed live via a
     // radio-role dump: ["Done","Ready","Waiting","Draft",""]), so the same dual-selector
     // approach BaseFormPage.getCurrentStatus()/waitForStatus() use is applied here too.
+    // The checked radio is matched WITHOUT an accessible-name filter (just `checked:
+    // true`), then its text is checked separately — confirmed live this is more reliable
+    // than combining `name` + `checked` in one getByRole call.
     const legacyDone = this.page.locator('.o_statusbar_status').filter({ hasText: /done/i });
-    const ariaDone = this.page.getByRole('radiogroup', { name: /statusbar/i }).getByRole('radio', { name: /^done$/i, checked: true });
-    const isDone = await Promise.race([
-      legacyDone.waitFor({ state: 'visible', timeout: 10_000 }).then(() => true),
-      ariaDone.waitFor({ state: 'visible', timeout: 10_000 }).then(() => true),
-    ]).catch(() => false);
+    const checkedRadio = this.page.getByRole('radio', { checked: true });
+    const checkIsDone = async (timeout: number) => {
+      // Each branch resolves to true/false on its OWN — never rejects — so
+      // Promise.race can't be won by whichever side happens to fail first. The
+      // previous version let both `.waitFor()` calls reject, and since this
+      // instance's legacy selector never exists, it reliably "won" the race with a
+      // rejection before the ARIA check (which does succeed) ever got to resolve —
+      // silently treating a genuinely completed delivery as not-done every time.
+      return Promise.race([
+        legacyDone.waitFor({ state: 'visible', timeout }).then(() => true).catch(() => false),
+        checkedRadio.waitFor({ state: 'visible', timeout })
+          .then(() => checkedRadio.textContent())
+          .then((t) => /done/i.test(t ?? ''))
+          .catch(() => false),
+      ]);
+    };
+    const isDone = await checkIsDone(10_000);
     if (!isDone) {
       await this.page.goto(deliveryUrl);
       await this.page.locator('.o_form_view').waitFor({ state: 'visible', timeout: 15_000 });
-      await Promise.race([
-        legacyDone.waitFor({ state: 'visible', timeout: 30_000 }),
-        ariaDone.waitFor({ state: 'visible', timeout: 30_000 }),
-      ]);
+      const isDoneAfterReload = await checkIsDone(30_000);
+      if (!isDoneAfterReload) {
+        throw new Error('processDelivery(): delivery never reached "Done" status after Validate — check for an unhandled dialog or stock issue.');
+      }
     }
 
     const breadcrumb = this.page.locator('.o_breadcrumb a, .o_breadcrumb .o_back_button').first();
@@ -723,13 +738,27 @@ export class SalesFormPage extends SalesBaseFormPage {
     return deliveryRef;
   }
 
-  /** Creates a draft (Regular) customer invoice from the Sales Order. Returns the draft's reference. */
+  /**
+   * Creates a draft (Regular) customer invoice from the Sales Order. Returns the draft's
+   * reference.
+   *
+   * NOTE: confirmed live this dialog can present a SECOND stacked confirmation ("Create
+   * Invoice? Ok/Cancel") on top of the first "Create invoices" dialog after clicking
+   * "Create Draft Invoice" — handled below. Also confirmed the product's Invoicing
+   * Policy must be "Ordered Quantities", or "Delivered Quantities" with the delivery
+   * already validated (see processDelivery()) — otherwise this fails with "Cannot
+   * create an invoice. No items are available to invoice."
+   */
   async createDraftInvoice(): Promise<string> {
-    const createInvBtn = this.page.locator('.o_control_panel').getByRole('button', { name: /create invoice/i });
+    // `.o_statusbar_buttons, .o_control_panel` (not `.o_control_panel` alone) — same
+    // dual-container fix as processDelivery()'s Validate/Check Availability buttons.
+    const createInvBtn = this.page.locator('.o_statusbar_buttons, .o_control_panel').getByRole('button', { name: /create invoice/i });
     await createInvBtn.waitFor({ state: 'visible', timeout: 10_000 });
     await createInvBtn.click();
 
-    const dialog = this.page.locator('.modal-content, .o_dialog').first();
+    // `.modal` (not `.modal-content, .o_dialog`) — confirmed live via screenshot this is
+    // the actual class Odoo renders this dialog with; the old selector never matched it.
+    const dialog = this.page.locator('.modal').first();
     await dialog.waitFor({ state: 'visible', timeout: 15_000 });
 
     const regularRadio = dialog.locator('input[value="regular"], input[id*="regular"]').first();
@@ -737,9 +766,16 @@ export class SalesFormPage extends SalesBaseFormPage {
       await regularRadio.click();
     }
 
-    const createDraftBtn = dialog.getByRole('button', { name: /create.*draft|create.*invoice/i }).first();
+    const createDraftBtn = dialog.getByRole('button', { name: /create draft invoice/i }).first();
     await createDraftBtn.waitFor({ state: 'visible', timeout: 5_000 });
     await createDraftBtn.click();
+
+    // A second confirmation ("Create Invoice? Ok/Cancel") can stack on top — confirmed
+    // live. Handle it if present before waiting for navigation.
+    const okBtn = this.page.locator('.modal').last().getByRole('button', { name: /^ok$/i }).first();
+    if (await okBtn.isVisible({ timeout: 3_000 }).catch(() => false)) {
+      await okBtn.click();
+    }
 
     await this.page.locator('.o_form_view').waitFor({ state: 'visible', timeout: 30_000 });
 
@@ -749,22 +785,33 @@ export class SalesFormPage extends SalesBaseFormPage {
 
   /** Confirms (posts) a draft invoice. Returns the posted invoice's reference. */
   async postInvoice(): Promise<string> {
-    const confirmBtn = this.page.locator('.o_control_panel').getByRole('button', { name: /^confirm$/i });
+    const confirmBtn = this.page.locator('.o_statusbar_buttons, .o_control_panel').getByRole('button', { name: /^confirm$/i });
     await confirmBtn.waitFor({ state: 'visible', timeout: 10_000 });
     await confirmBtn.click();
-    await this.page.locator('.o_statusbar_status').filter({ hasText: /posted/i })
-      .waitFor({ state: 'visible', timeout: 30_000 });
+    // Same ARIA-radiogroup statusbar as sale.order/stock.picking — see processDelivery()'s
+    // checkIsDone helper for why each branch must resolve true/false rather than reject
+    // (a rejecting branch can "win" Promise.race before the correct branch settles).
+    const legacyPosted = this.page.locator('.o_statusbar_status').filter({ hasText: /posted/i });
+    const checkedRadio = this.page.getByRole('radio', { checked: true });
+    const posted = await Promise.race([
+      legacyPosted.waitFor({ state: 'visible', timeout: 30_000 }).then(() => true).catch(() => false),
+      checkedRadio.waitFor({ state: 'visible', timeout: 30_000 })
+        .then(() => checkedRadio.textContent())
+        .then((t) => /posted/i.test(t ?? ''))
+        .catch(() => false),
+    ]);
+    if (!posted) throw new Error('postInvoice(): invoice never reached "Posted" status after Confirm.');
     return ((await this.page.locator('[name="name"] .o_field_char, [name="name"] span')
       .first().textContent().catch(() => '')) ?? '').trim() || 'INV/xxxx';
   }
 
   /** Clicks Send & Print on a posted invoice and waits for the dialog to close. */
   async sendAndPrintInvoice(): Promise<void> {
-    const sendBtn = this.page.locator('.o_control_panel').getByRole('button', { name: /send.*&.*print|send.*print/i });
+    const sendBtn = this.page.locator('.o_statusbar_buttons, .o_control_panel').getByRole('button', { name: /send.*&.*print|send.*print/i });
     await sendBtn.waitFor({ state: 'visible', timeout: 10_000 });
     await sendBtn.click();
 
-    const dialog = this.page.locator('.modal-content, .o_dialog').first();
+    const dialog = this.page.locator('.modal').first();
     await dialog.waitFor({ state: 'visible', timeout: 15_000 });
 
     const confirmBtn = dialog.getByRole('button', { name: /send.*&.*print|send.*print/i }).first();
