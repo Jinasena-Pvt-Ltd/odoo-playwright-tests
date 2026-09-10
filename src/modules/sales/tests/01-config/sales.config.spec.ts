@@ -70,11 +70,30 @@ test.describe('Sales Configuration Setup @module:sales @step:config', () => {
 
     await formPage.openOrderLinesTab();
 
-    const added = await formPage.addOrderLines([
+    // Added and saved ONE LINE AT A TIME (not both via a single addOrderLines([a, b])
+    // call) — confirmed live, repeatedly, that adding a second order line on the same
+    // still-open page as the first is a genuine, unresolved intermittent race in this
+    // instance's product autocomplete: across 5 isolated runs even after adding an
+    // explicit document.activeElement focus-readiness check before typing, the second
+    // row's autocomplete still ended up empty ~40% of the time. Saving after the first
+    // line and adding the second on a freshly-reloaded page sidesteps whatever
+    // transient render/focus state causes that race, at the cost of one extra
+    // save/reload round-trip — acceptable here since this test only verifies the two
+    // reference products exist and are distinct, not order-line-add performance.
+    const addedFirst = await formPage.addOrderLines([
       { product: SALES_TEST_CONFIG.product, quantity: 1, discount: 0 },
+    ]);
+    expect(addedFirst, 'Reference product 1 must exist and be sellable (sale_ok=true)').toBe(1);
+    await formPage.save();
+    const recordId = Number(new URLSearchParams(page.url().split('#')[1]).get('id'));
+
+    await formPage.openById(recordId);
+    await formPage.openOrderLinesTab();
+    const addedSecond = await formPage.addOrderLines([
       { product: SALES_TEST_CONFIG.product2, quantity: 1, discount: 0 },
     ]);
-    expect(added, 'Both reference products must exist and be sellable (sale_ok=true)').toBe(2);
+    expect(addedSecond, 'Reference product 2 must exist, be sellable (sale_ok=true), and be distinct from product 1').toBe(1);
+
     // Not using getLineCount() here: `.o_data_row` also matches rows in other notebook
     // tabs still present (but hidden) in the DOM, e.g. Optional Products — confirmed live
     // (3 rows counted for a 2-line order). Reading each of the first two rows' own
