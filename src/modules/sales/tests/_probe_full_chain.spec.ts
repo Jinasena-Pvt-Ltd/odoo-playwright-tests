@@ -2,8 +2,8 @@ import { test } from '../../../core/fixtures/index';
 import { SalesFormPage } from '../pages/SalesPage';
 import { SALES_TEST_CONFIG } from '../data/sales.master-data';
 
-test('probe full invoice chain 2', async ({ page, salesMasterData }) => {
-  test.setTimeout(180_000);
+test('probe delivery step by step 2', async ({ page, salesMasterData }) => {
+  test.setTimeout(150_000);
   const formPage = new SalesFormPage(page);
   await formPage.navigate();
   await formPage.selectCustomerIfExists(salesMasterData.customerName);
@@ -12,45 +12,65 @@ test('probe full invoice chain 2', async ({ page, salesMasterData }) => {
   await formPage.fillOtherInfo(SALES_TEST_CONFIG.salesTeam, SALES_TEST_CONFIG.warehouse);
   await formPage.addOrderLines([{ product: SALES_TEST_CONFIG.product, quantity: 1, discount: 0 }]);
   await formPage.save();
-
-  console.log('--- confirming ---');
   await formPage.confirmOrder();
+  console.log('t0: confirmed');
 
-  console.log('--- processing delivery ---');
-  const deliveryRef = await formPage.processDelivery();
-  console.log('delivery done:', deliveryRef, 'back on SO url:', page.url());
+  const soUrl = page.url();
+  const statBtn = page.locator('.oe_button_box button, button.oe_stat_button, button.o_stat_button, .o_cp_stat_buttons button')
+    .filter({ hasText: /delivery/i }).first();
+  await statBtn.click();
+  await page.waitForURL((url) => url.href !== soUrl, { timeout: 30_000 });
+  const deliveryUrl = page.url();
+  console.log('t2: on delivery', deliveryUrl);
 
-  console.log('--- creating invoice ---');
-  const createInvoiceBtn = page.locator('.o_statusbar_buttons, .o_control_panel').getByRole('button', { name: /create invoice/i }).first();
-  await createInvoiceBtn.waitFor({ state: 'visible', timeout: 15_000 });
-  await createInvoiceBtn.click();
-  await page.waitForTimeout(1000);
-  const dialog = page.locator('.modal').first();
-  if (await dialog.isVisible({ timeout: 3000 }).catch(() => false)) {
-    await dialog.getByRole('button', { name: /create draft invoice/i }).click();
+  const opsTab = page.locator('.o_notebook .nav-link, .o_notebook .nav-item a').filter({ hasText: /operations/i }).first();
+  await opsTab.waitFor({ state: 'visible', timeout: 10_000 });
+  await opsTab.click();
+  await page.locator('.o_field_one2many').waitFor({ state: 'visible', timeout: 10_000 });
+
+  const row = page.locator('.o_data_row').first();
+  const qtyDone = row.locator('[name="quantity"] input').first();
+  if (!(await qtyDone.isVisible({ timeout: 1500 }).catch(() => false))) {
+    await row.locator('[name="quantity"]').click();
+    await qtyDone.waitFor({ state: 'visible', timeout: 5000 });
+  }
+  await qtyDone.click();
+  await qtyDone.fill('1.0000');
+  await qtyDone.press('Tab');
+  console.log('t6: filled qty');
+
+  const validateBtn = page.locator('.o_statusbar_buttons, .o_control_panel').getByRole('button', { name: /validate/i });
+  await validateBtn.waitFor({ state: 'visible', timeout: 10_000 });
+  await validateBtn.click();
+  console.log('t8: clicked validate');
+
+  await page.waitForTimeout(2000);
+  const modalTexts = await page.locator('.modal').allTextContents();
+  console.log('t9: modals=', JSON.stringify(modalTexts));
+
+  const immDialog = page.locator('.modal, .o_dialog').filter({ hasText: /immediate transfer/i });
+  const immVisible = await immDialog.isVisible({ timeout: 3000 }).catch(() => false);
+  console.log('t10: immediate transfer dialog=', immVisible);
+  if (immVisible) {
+    await immDialog.getByRole('button', { name: /validate/i }).click();
+    console.log('t10b: clicked validate in imm dialog');
     await page.waitForTimeout(2000);
   }
 
-  const errModal = page.locator('.modal').filter({ hasText: /invalid operation/i });
-  const hasErr = await errModal.isVisible({ timeout: 3000 }).catch(() => false);
-  console.log('invoice error modal:', hasErr);
-  if (hasErr) {
-    console.log('error text:', (await errModal.textContent())?.slice(0, 300));
-    return;
+  const boDialog = page.locator('.modal, .o_dialog').filter({ hasText: /backorder/i });
+  const boVisible = await boDialog.isVisible({ timeout: 3000 }).catch(() => false);
+  console.log('t11: backorder dialog=', boVisible);
+  if (boVisible) {
+    await boDialog.getByRole('button', { name: /create backorder/i }).click();
+    console.log('t11b: clicked create backorder');
+    await page.waitForTimeout(2000);
   }
 
-  const smartButtons = await page.locator('.o_button_box button, .oe_stat_button, .o_stat_button').allTextContents();
-  console.log('smart buttons after invoice:', JSON.stringify(smartButtons));
-  const invoiceSmartBtn = page.locator('.o_button_box button, .oe_stat_button, .o_stat_button').filter({ hasText: /invoice/i }).first();
-  const invoiceSmartVisible = await invoiceSmartBtn.isVisible({ timeout: 5000 }).catch(() => false);
-  console.log('invoice smart button visible:', invoiceSmartVisible);
-  if (invoiceSmartVisible) {
-    await invoiceSmartBtn.click();
-    await page.waitForTimeout(2000);
-    console.log('url after clicking invoice smart button:', page.url());
-    const invButtons = await page.locator('.o_control_panel button, .o_statusbar_buttons button').allTextContents();
-    console.log('invoice form buttons:', JSON.stringify(invButtons));
-    const dueDateVisible = await page.locator('.o_field_widget[name="invoice_date_due"]').first().isVisible({ timeout: 3000 }).catch(() => false);
-    console.log('due date field visible:', dueDateVisible);
-  }
+  const modalTexts2 = await page.locator('.modal').allTextContents();
+  console.log('t12: modals now=', JSON.stringify(modalTexts2));
+
+  const radios = await page.getByRole('radio').allTextContents();
+  console.log('t13: radios=', JSON.stringify(radios));
+  const checkedRadio = await page.getByRole('radio', { checked: true }).allTextContents();
+  console.log('t14: checked radio=', JSON.stringify(checkedRadio));
 });
