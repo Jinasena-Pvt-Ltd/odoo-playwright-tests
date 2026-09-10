@@ -343,15 +343,33 @@ export class SalesFormPage extends SalesBaseFormPage {
       // occasionally doesn't fire (or the dropdown doesn't render) from the first
       // keystroke batch, and simply clearing + retyping resolves it without needing to
       // throw away and recreate the whole row.
-      for (let typeAttempt = 1; typeAttempt <= 2 && !found; typeAttempt++) {
-        if (typeAttempt > 1) {
-          await productInput.fill('');
-          await this.page.waitForTimeout(300);
-        }
+      //
+      // CONFIRMED LIVE (2026-09-10): a freshly-created row auto-focuses its product
+      // input AND auto-opens the dropdown showing its default (untyped) suggestion list
+      // — so the old `dropdown.waitFor({state:'visible'})` check right after typing was
+      // never a real signal that the keystrokes registered, since the dropdown was
+      // already open before any typing happened. When pressSequentially's keystrokes
+      // occasionally didn't land in that already-open, already-focused input, this loop
+      // saw "dropdown open" = true and short-circuited past the "did it actually
+      // filter?" question — reporting `found: false` after checking the wrong thing
+      // rather than genuinely detecting and correcting the untyped state.
+      // Fix: explicitly select-all + Delete before every typing attempt (not just
+      // retries) to force a real, unambiguous input change, and check that the "Start
+      // typing..." placeholder item is gone as the real signal that text was received.
+      for (let typeAttempt = 1; typeAttempt <= 3 && !found; typeAttempt++) {
+        await productInput.click();
+        await this.page.keyboard.press('Control+A');
+        await this.page.keyboard.press('Delete');
+        await this.page.waitForTimeout(150);
         await productInput.pressSequentially(line.product, { delay: 50 });
-        const opened = await dropdown.waitFor({ state: 'visible', timeout: 10_000 }).then(() => true).catch(() => false);
+        await dropdown.waitFor({ state: 'visible', timeout: 10_000 }).catch(() => {});
+        const stillShowingPlaceholder = await dropdown
+          .locator('li, .o-autocomplete--dropdown-item')
+          .filter({ hasText: /^start typing/i }).first()
+          .isVisible({ timeout: 1_000 }).catch(() => false);
         match = dropdown.locator('li, .o-autocomplete--dropdown-item').filter({ hasText: line.product }).first();
-        found = opened && await match.isVisible({ timeout: 5_000 }).catch(() => false);
+        found = !stillShowingPlaceholder && await match.isVisible({ timeout: 5_000 }).catch(() => false);
+        if (!found) await this.page.waitForTimeout(300);
       }
 
       if (!found) {
