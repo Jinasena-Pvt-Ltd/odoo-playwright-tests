@@ -61,9 +61,14 @@ test('probe delivery step by step', async ({ page, salesMasterData }) => {
     console.log(`t6.${i}: filled`);
   }
 
+  await page.screenshot({ path: 'probe-before-validate.png' });
+  const allBtnsNow = await page.locator('.o_control_panel button, .o_statusbar_buttons button').allTextContents();
+  console.log('t6.5: all buttons now=', JSON.stringify(allBtnsNow));
+
   const validateBtn = page.locator('.o_control_panel').getByRole('button', { name: /validate/i });
   const valVisible = await validateBtn.isVisible({ timeout: 10_000 }).catch(() => false);
   console.log('t7: validate visible=', valVisible);
+  if (!valVisible) return;
   await validateBtn.click();
   console.log('t8: clicked validate');
 
