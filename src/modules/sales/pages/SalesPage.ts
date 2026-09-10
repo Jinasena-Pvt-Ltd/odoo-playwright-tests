@@ -651,14 +651,15 @@ export class SalesFormPage extends SalesBaseFormPage {
     }
     console.log('[DEBUG] past check availability');
 
+    await this.page.screenshot({ path: 'debug-1-before-opstab.png' }).catch(() => {});
     const opsTab = this.page.locator('.o_notebook .nav-link, .o_notebook .nav-item a')
       .filter({ hasText: /operations/i }).first();
     await opsTab.waitFor({ state: 'visible', timeout: 10_000 });
-    console.log('[DEBUG] opsTab visible, clicking');
+    await this.page.screenshot({ path: 'debug-2-opstab-visible.png' }).catch(() => {});
     await opsTab.click({ timeout: 10_000 });
-    console.log('[DEBUG] opsTab clicked, waiting one2many');
+    await this.page.screenshot({ path: 'debug-3-opstab-clicked.png' }).catch(() => {});
     await this.page.locator('.o_field_one2many').waitFor({ state: 'visible', timeout: 10_000 });
-    console.log('[DEBUG] operations tab open');
+    await this.page.screenshot({ path: 'debug-4-one2many-visible.png' }).catch(() => {});
 
     const rows = this.page.locator('.o_data_row');
     const rowCount = await rows.count();
