@@ -2,8 +2,8 @@ import { test } from '../../../core/fixtures/index';
 import { SalesFormPage } from '../pages/SalesPage';
 import { SALES_TEST_CONFIG } from '../data/sales.master-data';
 
-test('probe delivery step by step', async ({ page, salesMasterData }) => {
-  test.setTimeout(150_000);
+test('probe full invoice chain 2', async ({ page, salesMasterData }) => {
+  test.setTimeout(180_000);
   const formPage = new SalesFormPage(page);
   await formPage.navigate();
   await formPage.selectCustomerIfExists(salesMasterData.customerName);
@@ -12,67 +12,45 @@ test('probe delivery step by step', async ({ page, salesMasterData }) => {
   await formPage.fillOtherInfo(SALES_TEST_CONFIG.salesTeam, SALES_TEST_CONFIG.warehouse);
   await formPage.addOrderLines([{ product: SALES_TEST_CONFIG.product, quantity: 1, discount: 0 }]);
   await formPage.save();
+
+  console.log('--- confirming ---');
   await formPage.confirmOrder();
-  console.log('t0: confirmed');
 
-  const soUrl = page.url();
-  const statBtn = page.locator('.oe_button_box button, button.oe_stat_button, button.o_stat_button, .o_cp_stat_buttons button')
-    .filter({ hasText: /delivery/i }).first();
-  await statBtn.click();
-  console.log('t1: clicked delivery stat button');
-  await page.waitForURL((url) => url.href !== soUrl, { timeout: 30_000 });
-  console.log('t2: navigated to delivery, url=', page.url());
+  console.log('--- processing delivery ---');
+  const deliveryRef = await formPage.processDelivery();
+  console.log('delivery done:', deliveryRef, 'back on SO url:', page.url());
 
-  const checkAvail = page.locator('.o_control_panel').getByRole('button', { name: /check availability/i });
-  const caVisible = await checkAvail.isVisible({ timeout: 3_000 }).catch(() => false);
-  console.log('t3: check availability visible=', caVisible);
-  if (caVisible) {
-    await checkAvail.click();
-    console.log('t3b: clicked check availability');
-    await checkAvail.waitFor({ state: 'hidden', timeout: 15_000 }).catch((e) => console.log('t3c: hide wait failed', e.message.slice(0,100)));
+  console.log('--- creating invoice ---');
+  const createInvoiceBtn = page.locator('.o_statusbar_buttons, .o_control_panel').getByRole('button', { name: /create invoice/i }).first();
+  await createInvoiceBtn.waitFor({ state: 'visible', timeout: 15_000 });
+  await createInvoiceBtn.click();
+  await page.waitForTimeout(1000);
+  const dialog = page.locator('.modal').first();
+  if (await dialog.isVisible({ timeout: 3000 }).catch(() => false)) {
+    await dialog.getByRole('button', { name: /create draft invoice/i }).click();
+    await page.waitForTimeout(2000);
   }
 
-  const opsTab = page.locator('.o_notebook .nav-link, .o_notebook .nav-item a').filter({ hasText: /operations/i }).first();
-  await opsTab.waitFor({ state: 'visible', timeout: 10_000 });
-  await opsTab.click();
-  console.log('t4: clicked operations tab');
-  await page.locator('.o_field_one2many').waitFor({ state: 'visible', timeout: 10_000 });
-  console.log('t5: one2many visible');
-
-  const rows = page.locator('.o_data_row');
-  const rowCount = await rows.count();
-  console.log('t6: row count', rowCount);
-  for (let i = 0; i < rowCount; i++) {
-    const row = rows.nth(i);
-    const demandText = ((await row.locator('[name="product_uom_qty"]').textContent().catch(() => '0')) ?? '0').trim();
-    const demand = demandText.replace(/,/g, '');
-    console.log(`t6.${i}: demand=${demand}`);
-    if (!demand || demand === '0' || demand === '0.00') continue;
-    const qtyDone = row.locator('[name="quantity"] input').first();
-    const qdVisible = await qtyDone.isVisible({ timeout: 1_500 }).catch(() => false);
-    console.log(`t6.${i}: qty input visible=${qdVisible}`);
-    if (!qdVisible) {
-      await row.locator('[name="quantity"]').click();
-      await qtyDone.waitFor({ state: 'visible', timeout: 5_000 });
-    }
-    await qtyDone.click();
-    await qtyDone.fill(demand);
-    await qtyDone.press('Tab');
-    console.log(`t6.${i}: filled`);
+  const errModal = page.locator('.modal').filter({ hasText: /invalid operation/i });
+  const hasErr = await errModal.isVisible({ timeout: 3000 }).catch(() => false);
+  console.log('invoice error modal:', hasErr);
+  if (hasErr) {
+    console.log('error text:', (await errModal.textContent())?.slice(0, 300));
+    return;
   }
 
-  await page.screenshot({ path: 'probe-before-validate.png' });
-  const allBtnsNow = await page.locator('.o_control_panel button, .o_statusbar_buttons button').allTextContents();
-  console.log('t6.5: all buttons now=', JSON.stringify(allBtnsNow));
-
-  const validateBtn = page.locator('.o_control_panel').getByRole('button', { name: /validate/i });
-  const valVisible = await validateBtn.isVisible({ timeout: 10_000 }).catch(() => false);
-  console.log('t7: validate visible=', valVisible);
-  if (!valVisible) return;
-  await validateBtn.click();
-  console.log('t8: clicked validate');
-
-  await page.waitForTimeout(2000);
-  const modalTexts = await page.locator('.modal').allTextContents();
-  console.log('t9: modals=', JSON.stringify(modalTexts));
+  const smartButtons = await page.locator('.o_button_box button, .oe_stat_button, .o_stat_button').allTextContents();
+  console.log('smart buttons after invoice:', JSON.stringify(smartButtons));
+  const invoiceSmartBtn = page.locator('.o_button_box button, .oe_stat_button, .o_stat_button').filter({ hasText: /invoice/i }).first();
+  const invoiceSmartVisible = await invoiceSmartBtn.isVisible({ timeout: 5000 }).catch(() => false);
+  console.log('invoice smart button visible:', invoiceSmartVisible);
+  if (invoiceSmartVisible) {
+    await invoiceSmartBtn.click();
+    await page.waitForTimeout(2000);
+    console.log('url after clicking invoice smart button:', page.url());
+    const invButtons = await page.locator('.o_control_panel button, .o_statusbar_buttons button').allTextContents();
+    console.log('invoice form buttons:', JSON.stringify(invButtons));
+    const dueDateVisible = await page.locator('.o_field_widget[name="invoice_date_due"]').first().isVisible({ timeout: 3000 }).catch(() => false);
+    console.log('due date field visible:', dueDateVisible);
+  }
 });

@@ -636,7 +636,12 @@ export class SalesFormPage extends SalesBaseFormPage {
     const deliveryRef = ((await this.page.locator('[name="name"] .o_field_char, [name="name"] span')
       .first().textContent().catch(() => '')) ?? '').trim() || 'WH/OUT/xxxxx';
 
-    const checkAvail = this.page.locator('.o_control_panel').getByRole('button', { name: /check availability/i });
+    // `.o_statusbar_buttons, .o_control_panel` (not `.o_control_panel` alone): confirmed
+    // live via screenshot that this stock.picking form's "Validate"/"Check Availability"
+    // buttons render in `.o_statusbar_buttons`, matching the same dual-container pattern
+    // SalesFormPage.statusButton() already accounts for on sale.order — the plain
+    // `.o_control_panel`-only locator silently never matched them.
+    const checkAvail = this.page.locator('.o_statusbar_buttons, .o_control_panel').getByRole('button', { name: /check availability/i });
     if (await checkAvail.isVisible({ timeout: 3_000 }).catch(() => false)) {
       await checkAvail.click();
       await checkAvail.waitFor({ state: 'hidden', timeout: 15_000 }).catch(() => {});
@@ -674,7 +679,7 @@ export class SalesFormPage extends SalesBaseFormPage {
     // "Validate" present among the control panel's buttons, yet the anchored version
     // never matched it — likely due to leading icon/whitespace content in the accessible
     // name that a `^`-anchored pattern can't skip past).
-    const validateBtn = this.page.locator('.o_control_panel').getByRole('button', { name: /validate/i });
+    const validateBtn = this.page.locator('.o_statusbar_buttons, .o_control_panel').getByRole('button', { name: /validate/i });
     await validateBtn.waitFor({ state: 'visible', timeout: 10_000 });
     await validateBtn.click();
 
