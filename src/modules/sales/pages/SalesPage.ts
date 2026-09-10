@@ -308,7 +308,11 @@ export class SalesFormPage extends SalesBaseFormPage {
         .filter({ hasText: /add a product/i }).first();
       await addLink.waitFor({ state: 'visible', timeout: 10_000 });
       await addLink.click();
-      await this.page.waitForTimeout(300);
+      // Bumped 300ms -> 600ms (2026-09-10): same cold-start reasoning as
+      // addOrderLines()'s inter-line settle — the newly-created row's product
+      // autocomplete needs slightly longer to fully mount before it reliably accepts
+      // typed input, most visibly on the very first order-line add of a session.
+      await this.page.waitForTimeout(600);
 
       // .last() (not .first()): a previous row occasionally hasn't finished being
       // deselected by the time the next "Add a product" click fires — confirmed live —
@@ -476,8 +480,13 @@ export class SalesFormPage extends SalesBaseFormPage {
       // Settle before clicking "Add a product" again — the previous line's onchange
       // (price/uom/tax recompute) can still be wrapping up, and clicking too soon
       // occasionally raced ahead of it on this instance (observed: a 2nd line silently
-      // failing to add with no error, when clicked immediately after the 1st).
-      await this.page.waitForTimeout(500);
+      // failing to add with no error, when clicked immediately after the 1st). Bumped
+      // 500ms -> 1000ms (2026-09-10): confirmed live this failure is markedly more
+      // frequent specifically when this is the FIRST two-line add of an entire suite
+      // run (cold JS/render state, before anything has warmed up) — matches the same
+      // "first invocation is slower" pattern documented elsewhere in this codebase for
+      // fresh-product pricing and similar first-use interactions.
+      await this.page.waitForTimeout(1_000);
     }
     return added;
   }
