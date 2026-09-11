@@ -11,8 +11,10 @@
  * fixing it means a real Odoo Studio schema change outside this suite's scope.
  *
  * These tests instead verify the record-lifecycle operations this instance DOES
- * support — Delete and Duplicate, both confirmed present in the cog menu — so this
- * step still exercises real cleanup/lifecycle behavior instead of skipping outright.
+ * support — Delete and "Mark Quotation as Sent" (a genuine state-transition action,
+ * both confirmed present in the cog menu; "Duplicate" was also tried and is NOT
+ * present here despite existing as a generic BaseFormPage method) — so this step still
+ * exercises real cleanup/lifecycle behavior instead of skipping outright.
  */
 import { Page } from '@playwright/test';
 import { test, expect } from '../../../../core/fixtures/index';
@@ -58,22 +60,22 @@ test.describe('Sales Archive & Cleanup @module:sales @step:archive', () => {
     await listPage.expectNoRecords();
   });
 
-  test('duplicating a quotation creates an independent copy with its own reference', async ({ page, salesMasterData }) => {
+  test('marking a quotation as sent transitions its status without confirming it', async ({ page, salesMasterData }) => {
     const formPage = new SalesFormPage(page);
     const created = await createSavedQuotation(page, formPage, salesMasterData.customerName);
     if (!created) {
       test.skip(true, 'Could not create the prerequisite quotation (customer or Sales Team/Warehouse selection failed)');
       return;
     }
-    const { reference: originalReference } = created;
 
-    await formPage.duplicateRecord();
-    const duplicateReference = await formPage.reference.getValue();
+    expect((await formPage.getCurrentStatus()).toLowerCase()).toBe('quotation');
 
-    expect(duplicateReference, 'Duplicate must get its own reference, not reuse the original').not.toBe(originalReference);
-    expect(duplicateReference.trim().length, 'Duplicate must have a real, non-blank reference').toBeGreaterThan(0);
+    await formPage.clickActionMenuItem('Mark Quotation as Sent');
+    await formPage.waitForStatus('Quotation Sent');
 
-    // Clean up the duplicate too, since it's a real new record left behind by this test.
+    expect(await formPage.isConfirmVisible(), 'Marking as Sent must not confirm the order').toBe(true);
+
+    // Clean up — delete rather than leave a stray "Quotation Sent" record behind.
     await formPage.clickActionMenuItem('Delete');
     await formPage.confirmDialog();
   });
