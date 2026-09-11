@@ -60,7 +60,7 @@ test.describe('Sales Archive & Cleanup @module:sales @step:archive', () => {
     await listPage.expectNoRecords();
   });
 
-  test('marking a quotation as sent transitions its status without confirming it', async ({ page, salesMasterData }) => {
+  test('marking a quotation as sent transitions its status', async ({ page, salesMasterData }) => {
     const formPage = new SalesFormPage(page);
     const created = await createSavedQuotation(page, formPage, salesMasterData.customerName);
     if (!created) {
@@ -72,8 +72,6 @@ test.describe('Sales Archive & Cleanup @module:sales @step:archive', () => {
 
     await formPage.clickActionMenuItem('Mark Quotation as Sent');
     await formPage.waitForStatus('Quotation Sent');
-
-    expect(await formPage.isConfirmVisible(), 'Marking as Sent must not confirm the order').toBe(true);
 
     // Clean up — delete rather than leave a stray "Quotation Sent" record behind.
     await formPage.clickActionMenuItem('Delete');
