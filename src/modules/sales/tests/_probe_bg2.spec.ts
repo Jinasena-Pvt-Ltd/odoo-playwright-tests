@@ -35,4 +35,15 @@ test('probe bank guarantee trigger 2', async ({ page }) => {
     const text = await btns.nth(i).textContent().catch(() => null);
     console.log(`btn[${i}] text="${text}" title="${title}" aria="${aria}"`);
   }
+
+  console.log('--- clicking Confirm ---');
+  await formPage.clickStatusButtonByRole(/^confirm$/i, 15000);
+  await page.waitForTimeout(2000);
+  console.log('status after confirm click:', await formPage.getCurrentStatus());
+  const notif = await page.locator('.o_notification').allTextContents();
+  console.log('notifications:', JSON.stringify(notif));
+  const modal = await page.locator('.modal').allTextContents();
+  console.log('modals:', JSON.stringify(modal));
+  const btns2 = await page.locator('.o_statusbar_buttons button, .o_control_panel button').allTextContents();
+  console.log('buttons after confirm attempt:', JSON.stringify(btns2));
 });
