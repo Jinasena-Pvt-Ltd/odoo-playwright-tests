@@ -8,28 +8,50 @@
  * grant a given approval via security-group membership, independent of the general
  * Sales permissions `admin` otherwise has.
  *
- * This originally exercised the Insufficient Margin rule (admin was denied membership in
- * "Sales / Jin - Sales - Sales Margin Approvers" — confirmed live via
- * `studio.approval.rule.check_approval` returning `can_validate: false`). Admin was later
+ * History: this originally exercised the Insufficient Margin rule (admin was denied
+ * membership in "Sales / Jin - Sales - Sales Margin Approvers"). Admin was later
  * deliberately added to that group (2026-09-09) so the 02-business Insufficient Margin
- * test could exercise the full approve→confirm flow end to end, which removed the block
- * this test relied on. Retargeted to the Credit Limit rule instead — confirmed live via
- * the same RPC that admin is NOT a member of "Sales / Jin - Sales - Credit Limit
- * Approvers", so that rule still demonstrates real enforcement with only the `admin`
- * identity available.
+ * test could exercise the full approve→confirm flow end to end, removing the block this
+ * test relied on. Retargeted to Credit Limit next, but that rule turned out to depend on
+ * a customer's real outstanding/overdue AR balance (confirmed live via
+ * `partner_credit_warning` staying empty for any fresh customer regardless of order size
+ * or the Credit Limit field) — not reproducible without posting real invoices, so it
+ * skipped non-deterministically.
+ *
+ * Retargeted again to the Bank Guarantee Approvers group: like Insufficient Margin, this
+ * rule is driven by an order/customer ATTRIBUTE (the customer's "Mandatory Bank
+ * Guarantee" flag + the order's Bank Guarantee Amount/Expiry Date), not real payment
+ * history — confirmed live in 05-validations' Bank Guarantee test that checking this flag
+ * doesn't block the Contact form itself, but is enforced at Sales Order confirmation via
+ * a "Request/Approve Bank Guarantee" gate. `admin` is confirmed NOT a member of "Sales /
+ * Jin - Sales - Bank Guarantee Approvers" (only ever added to Margin Approvers).
  */
 import { test, expect } from '../../../../core/fixtures/index';
-import { SalesFormPage } from '../../pages/SalesPage';
+import { SalesFormPage, SalesCustomerFormPage } from '../../pages/SalesPage';
 import { SALES_TEST_CONFIG } from '../../data/sales.master-data';
+import { uniqueName } from '../../../../core/utils/RandomDataGenerator';
 
 test.describe('Sales User Permissions @module:sales @step:permissions', () => {
-  test('blocks a user outside the Credit Limit Approvers group from granting Credit Limit approval @smoke', async ({ page, salesMasterData }) => {
+  test('blocks a user outside the Bank Guarantee Approvers group from granting Bank Guarantee approval @smoke', async ({ page }) => {
+    const customerPage = new SalesCustomerFormPage(page);
+    await customerPage.navigate();
+    await customerPage.customerName.setValue(uniqueName('Bank Guarantee Customer'));
+
+    const tabOpened = await customerPage.openBankGuaranteeTabIfPresent();
+    if (!tabOpened) {
+      test.skip(true, 'Bank Guarantee Details tab not present in this Odoo environment');
+      return;
+    }
+    await customerPage.mandatoryBankGuarantee.enable();
+    await customerPage.save();
+    const customerName = await customerPage.customerName.getValue();
+
     const formPage = new SalesFormPage(page);
     await formPage.navigate();
 
-    const customerFound = await formPage.selectCustomerIfExists(salesMasterData.customerName);
+    const customerFound = await formPage.selectCustomerIfExists(customerName);
     if (!customerFound) {
-      test.skip(true, `Could not select fixture-created customer "${salesMasterData.customerName}" — transient UI issue, not a missing-data problem`);
+      test.skip(true, `Could not select the newly-created customer "${customerName}" — transient UI issue, not a missing-data problem`);
       return;
     }
     await formPage.setQuotationType(SALES_TEST_CONFIG.quotationType);
@@ -39,21 +61,8 @@ test.describe('Sales User Permissions @module:sales @step:permissions', () => {
       test.skip(true, 'Reference Sales Team/Warehouse not found in this Odoo environment');
       return;
     }
-
-    // A very large quantity AND an explicit high unit price (same technique as the
-    // 02-business Credit Limit test). NOTE: confirmed live this order's own size does
-    // NOT reliably trigger the requirement on its own — Odoo's credit check here is
-    // computed from partner_credit_warning, which reflects the customer's outstanding/
-    // overdue AR balance (unpaid invoices), not the current draft order's total. A fresh
-    // fixture-created customer has zero invoices, so partner_credit_warning came back
-    // empty even against a ~99.9 billion order and an explicit non-zero Credit Limit on
-    // the customer (both tried live). Forcing this deterministically would require
-    // creating and posting real unpaid invoices against the customer first — out of
-    // proportion for this test, and more live data mutation on a shared instance than
-    // is warranted. So this remains environment/business-data-dependent, same as the
-    // archive-related skips, just for a different underlying reason.
     const added = await formPage.addOrderLines([
-      { product: SALES_TEST_CONFIG.product, quantity: 100_000, discount: 0, unitPrice: 999_999 },
+      { product: SALES_TEST_CONFIG.product, quantity: 1, discount: 0 },
     ]);
     if (added === 0) {
       test.skip(true, 'Reference product not found in this Odoo environment');
@@ -61,16 +70,16 @@ test.describe('Sales User Permissions @module:sales @step:permissions', () => {
     }
     await formPage.save();
 
-    const approvalVisible = await formPage.isStatusButtonVisible(/request.*credit.*limit.*approval/i);
+    const approvalVisible = await formPage.isStatusButtonVisible(/request.*bank.*guarantee.*approval/i);
     if (!approvalVisible) {
-      test.skip(true, 'This order did not require Credit Limit approval in this environment (e.g. within the customer\'s configured limit)');
+      test.skip(true, 'Bank Guarantee approval workflow is not configured in this Odoo environment');
       return;
     }
 
-    await formPage.clickStatusButtonByRole(/request\s+credit\s+limit\s+approval/i);
+    await formPage.clickStatusButtonByRole(/request\s+bank\s+guarantee\s+approval/i);
 
-    const denied = await formPage.attemptApprovalAndCheckIfDenied(/approve credit limit/i);
-    expect(denied, 'admin is not a member of the Credit Limit Approvers group, so clicking Approve must be rejected, not silently accepted').toBe(true);
+    const denied = await formPage.attemptApprovalAndCheckIfDenied(/approve bank guarantee/i);
+    expect(denied, 'admin is not a member of the Bank Guarantee Approvers group, so clicking Approve must be rejected, not silently accepted').toBe(true);
 
     // The order must remain unconfirmed — permission enforcement should have real effect,
     // not just show a toast while quietly letting the state change anyway.
