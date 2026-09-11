@@ -46,40 +46,57 @@ test.describe('Sales Configuration Setup @module:sales @step:config', () => {
   });
 
   test('reference products exist, are sellable, and are distinct from each other', async ({ page, salesMasterData }) => {
-    // Modest headroom over the default 120s: addOrderLine()'s retry budget was raised
-    // 3 -> 5 to counter a confirmed ~1-in-3 first-line-of-a-fresh-page flake.
-    test.setTimeout(150_000);
+    // Modest headroom over the default 120s: each product gets up to 3 full attempts
+    // (see verifyProductSellable below), each with its own addOrderLine() retry budget.
+    test.setTimeout(180_000);
 
     // Each product is verified via its OWN separate, single-line quotation rather than
     // two lines on one quotation. Confirmed live, at length, that adding a SECOND order
     // line to an already-open quotation is a genuine, unresolved intermittent race in
     // this instance's product autocomplete (three different fix strategies against the
-    // shared addOrderLine()/addOrderLines() code didn't close it) — whereas a fresh
-    // quotation's first line add has never failed this whole session. This test's job
-    // is only "these two products exist and are sellable", not multi-line behavior
+    // shared addOrderLine()/addOrderLines() code didn't close it). This test's job is
+    // only "these two products exist and are sellable", not multi-line behavior
     // (already covered by sales.business.spec.ts), so there's no need to risk the
     // second-line race at all.
+    //
+    // Even a fresh single-line add on its own was confirmed to still occasionally fail
+    // (~1 in 3-4, even with addOrderLine()'s in-place retry budget raised 3 -> 5) — a
+    // more fundamental flake than just the second-line race. Rather than keep pushing
+    // addOrderLine()'s own retry logic further (diminishing returns, and any change
+    // there risks regressing the other tests that already pass reliably), this wraps
+    // each product's verification in its own OUTER retry loop: each attempt is a
+    // completely fresh formPage.navigate(), which is the one thing observed to
+    // actually change outcomes (not just relocate them) rather than repeat the same
+    // stuck in-place state.
     async function verifyProductSellable(product: string): Promise<void> {
-      const formPage = new SalesFormPage(page);
-      await formPage.navigate();
+      const maxAttempts = 3;
+      for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+        const formPage = new SalesFormPage(page);
+        await formPage.navigate();
 
-      const customerFound = await formPage.selectCustomerIfExists(salesMasterData.customerName);
-      if (!customerFound) {
-        test.skip(true, `Could not select fixture-created customer "${salesMasterData.customerName}" — transient UI issue, not a missing-data problem`);
-        return;
-      }
-      await formPage.setQuotationType(SALES_TEST_CONFIG.quotationType);
-      await formPage.setOrderPaymentType(SALES_TEST_CONFIG.orderPaymentType);
-      const otherInfoOk = await formPage.fillOtherInfo(SALES_TEST_CONFIG.salesTeam, SALES_TEST_CONFIG.warehouse);
-      if (!otherInfoOk) {
-        test.skip(true, 'Reference Sales Team/Warehouse not found in this Odoo environment');
-        return;
-      }
+        const customerFound = await formPage.selectCustomerIfExists(salesMasterData.customerName);
+        if (!customerFound) {
+          test.skip(true, `Could not select fixture-created customer "${salesMasterData.customerName}" — transient UI issue, not a missing-data problem`);
+          return;
+        }
+        await formPage.setQuotationType(SALES_TEST_CONFIG.quotationType);
+        await formPage.setOrderPaymentType(SALES_TEST_CONFIG.orderPaymentType);
+        const otherInfoOk = await formPage.fillOtherInfo(SALES_TEST_CONFIG.salesTeam, SALES_TEST_CONFIG.warehouse);
+        if (!otherInfoOk) {
+          test.skip(true, 'Reference Sales Team/Warehouse not found in this Odoo environment');
+          return;
+        }
 
-      await formPage.openOrderLinesTab();
-      const added = await formPage.addOrderLines([{ product, quantity: 1, discount: 0 }]);
-      expect(added, `Reference product "${product}" must exist and be sellable (sale_ok=true)`).toBe(1);
-      expect(await formPage.getLineQuantity(0)).toBe(1);
+        await formPage.openOrderLinesTab();
+        const added = await formPage.addOrderLines([{ product, quantity: 1, discount: 0 }]);
+        if (added === 1) {
+          expect(await formPage.getLineQuantity(0)).toBe(1);
+          return;
+        }
+        if (attempt === maxAttempts) {
+          expect(added, `Reference product "${product}" must exist and be sellable (sale_ok=true)`).toBe(1);
+        }
+      }
     }
 
     // "Distinct from each other" is inherently satisfied by using two different
