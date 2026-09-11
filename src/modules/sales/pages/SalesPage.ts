@@ -302,17 +302,18 @@ export class SalesFormPage extends SalesBaseFormPage {
    * confirmed empirically that the product genuinely exists and the dropdown does open
    * reliably in isolation, so this is a rendering-timing issue, not a data gap.
    *
-   * CONFIRMED LIVE (2026-09-10): raising `attempts` here does NOT help — when this fails,
-   * it tends to fail identically across every in-place retry (same page, same row state),
-   * not as an independent per-attempt coin flip. Pushing attempts 3 -> 6 only multiplied
-   * the worst-case duration (several sub-waits per attempt) until the test itself timed
-   * out, without improving the actual success rate. The only technique that changed the
-   * OUTCOME (not just relocated it) was a full save+reload — see
-   * addOrderLines()'s reload-and-retry fallback, which is the real recovery path for a
-   * line that fails all in-place attempts. Keep `attempts` modest here; it exists for
-   * genuine transient single-shot renders, not as a substitute for a fresh page state.
+   * CONFIRMED LIVE (2026-09-10): raising `attempts` did NOT help in one specific
+   * scenario — adding a SECOND line to an already-open order, where a failing attempt
+   * tended to fail identically on every in-place retry (same page, same row state).
+   * That's why callers were changed to avoid ever needing a second line on one page
+   * (see sales.config.spec.ts). Separately, a genuine (lower-frequency, ~1 in 3) FIRST-
+   * line-of-a-fresh-page failure was also observed — a different situation where more
+   * attempts are worth trying, since each attempt starts from a freshly-clicked "Add a
+   * product" row rather than repeating the exact same stuck state. Bumped 3 -> 5
+   * accordingly; the worst-case cost of extra attempts is bounded here now that no
+   * caller adds more than one line per page load.
    */
-  async addOrderLine(line: OrderLineInput, attempts = 3): Promise<boolean> {
+  async addOrderLine(line: OrderLineInput, attempts = 5): Promise<boolean> {
     for (let attempt = 1; attempt <= attempts; attempt++) {
       const addLink = this.page.locator('.o_field_x2many_list_row_add a')
         .filter({ hasText: /add a product/i }).first();

@@ -46,6 +46,10 @@ test.describe('Sales Configuration Setup @module:sales @step:config', () => {
   });
 
   test('reference products exist, are sellable, and are distinct from each other', async ({ page, salesMasterData }) => {
+    // Modest headroom over the default 120s: addOrderLine()'s retry budget was raised
+    // 3 -> 5 to counter a confirmed ~1-in-3 first-line-of-a-fresh-page flake.
+    test.setTimeout(150_000);
+
     // Each product is verified via its OWN separate, single-line quotation rather than
     // two lines on one quotation. Confirmed live, at length, that adding a SECOND order
     // line to an already-open quotation is a genuine, unresolved intermittent race in
