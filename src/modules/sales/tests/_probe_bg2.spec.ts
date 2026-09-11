@@ -1,26 +1,15 @@
 import { test } from '../../../core/fixtures/index';
-import { SalesFormPage, SalesCustomerFormPage } from '../pages/SalesPage';
+import { SalesFormPage } from '../pages/SalesPage';
 import { SALES_TEST_CONFIG } from '../data/sales.master-data';
-import { uniqueName } from '../../../core/utils/RandomDataGenerator';
 
-test('probe bank guarantee trigger 2', async ({ page }) => {
-  const customerPage = new SalesCustomerFormPage(page);
-  await customerPage.navigate();
-  await customerPage.customerName.setValue(uniqueName('BG Probe Customer'));
-  await customerPage.openBankGuaranteeTabIfPresent();
-  await customerPage.mandatoryBankGuarantee.enable();
-  await customerPage.bankGuaranteeAmount.setValue(0);
-  await customerPage.bankGuaranteeExpiryDate.setValue('2020-01-01');
-  await customerPage.save();
-  const customerName = await customerPage.customerName.getValue();
-
+test('probe RUG trigger via high discount', async ({ page, salesMasterData }) => {
   const formPage = new SalesFormPage(page);
   await formPage.navigate();
-  await formPage.selectCustomerIfExists(customerName);
+  await formPage.selectCustomerIfExists(salesMasterData.customerName);
   await formPage.setQuotationType(SALES_TEST_CONFIG.quotationType);
   await formPage.setOrderPaymentType(SALES_TEST_CONFIG.orderPaymentType);
   await formPage.fillOtherInfo(SALES_TEST_CONFIG.salesTeam, SALES_TEST_CONFIG.warehouse);
-  await formPage.addOrderLines([{ product: SALES_TEST_CONFIG.product, quantity: 1, discount: 0 }]);
+  await formPage.addOrderLines([{ product: SALES_TEST_CONFIG.product, quantity: 1, discount: 90 }]);
   await formPage.save();
 
   console.log('status:', await formPage.getCurrentStatus());
@@ -35,6 +24,10 @@ test('probe bank guarantee trigger 2', async ({ page }) => {
     const text = await btns.nth(i).textContent().catch(() => null);
     console.log(`btn[${i}] text="${text}" title="${title}" aria="${aria}"`);
   }
+
+  const rugVisible = await formPage.isStatusButtonVisible(/request.*rug.*approval/i);
+  console.log('RUG approval request visible:', rugVisible);
+  if (rugVisible) return;
 
   console.log('--- clicking Confirm ---');
   await formPage.clickStatusButtonByRole(/^confirm$/i, 15000);
