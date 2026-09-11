@@ -498,31 +498,20 @@ export class SalesFormPage extends SalesBaseFormPage {
   /**
    * Opens the Order Lines tab and adds every line. Returns the number successfully added.
    *
-   * If a line fails all of addOrderLine()'s in-place retries, this saves progress so far
-   * and reloads the page before trying that line once more. CONFIRMED LIVE (2026-09-10):
-   * when addOrderLine() fails, retrying in place (same page, same row state) tends to
-   * fail identically every time — it is not an independent per-attempt coin flip, so
-   * more in-place attempts don't help (tried, only inflated worst-case duration past the
-   * test timeout with no improvement). A full save+reload is the one thing that's been
-   * observed to change the outcome, because it gives the row a genuinely fresh render
-   * rather than repeating whatever transient state caused the failure. Saving first
-   * (rather than a bare reload) is essential — this method runs on a still-unsaved new
-   * record whenever it's the first thing called after filling header fields, and a raw
-   * reload on a record with no id yet would silently discard everything entered so far.
+   * NOTE (2026-09-10): a save+reload-and-retry recovery was tried here for a line that
+   * fails all of addOrderLine()'s in-place attempts, on the theory that a fresh page
+   * render (not just more in-place retries) is what actually changes the outcome. It
+   * was reverted: in practice the recovery path itself (save/reload/re-navigate) hung
+   * on at least one live run, trading a clean, honest assertion failure for a worse,
+   * harder-to-diagnose timeout. See addOrderLine()'s doc comment for the fuller history
+   * of what was tried against this instance's intermittent product-autocomplete race —
+   * it remains an accepted residual flake, not eliminated.
    */
   async addOrderLines(lines: OrderLineInput[]): Promise<number> {
     await this.openOrderLinesTab();
     let added = 0;
     for (const line of lines) {
-      let ok = await this.addOrderLine(line);
-      if (!ok) {
-        await this.save();
-        await this.page.reload();
-        await this.waitForOdooReady();
-        await this.openOrderLinesTab();
-        ok = await this.addOrderLine(line);
-      }
-      if (ok) added++;
+      if (await this.addOrderLine(line)) added++;
       // Settle before clicking "Add a product" again — the previous line's onchange
       // (price/uom/tax recompute) can still be wrapping up, and clicking too soon
       // occasionally raced ahead of it on this instance (observed: a 2nd line silently

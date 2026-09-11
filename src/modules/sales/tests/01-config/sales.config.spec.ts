@@ -46,10 +46,8 @@ test.describe('Sales Configuration Setup @module:sales @step:config', () => {
   });
 
   test('reference products exist, are sellable, and are distinct from each other', async ({ page, salesMasterData }) => {
-    // Bumped from the default 120s: addOrderLines() can now save+reload+retry a line
-    // that fails its in-place attempts (see SalesPage.ts), which adds a real save and
-    // page reload round-trip on top of the normal retry budget.
-    test.setTimeout(180_000);
+    // Modest headroom over the default 120s for the 2-line add's normal retry budget.
+    test.setTimeout(150_000);
 
     const formPage = new SalesFormPage(page);
     await formPage.navigate();
