@@ -73,8 +73,12 @@ test.describe('Sales Archive & Cleanup @module:sales @step:archive', () => {
     await formPage.clickActionMenuItem('Mark Quotation as Sent');
     await formPage.waitForStatus('Quotation Sent');
 
-    // Clean up — delete rather than leave a stray "Quotation Sent" record behind.
-    await formPage.clickActionMenuItem('Delete');
-    await formPage.confirmDialog();
+    // No cleanup delete here — confirmed live this is a real Odoo business rule, not a
+    // bug: attempting to Delete a "Quotation Sent" (or confirmed) record fails with a
+    // real "Invalid Operation" error dialog ("You can not delete a sent quotation or a
+    // confirmed sales order. You must first cancel it."). Deleting would need a Cancel
+    // step first, whose availability isn't confirmed for this environment, so this test
+    // deliberately leaves the record behind rather than risk a hang on an unhandled
+    // error dialog — same accepted tradeoff as SKIP_ARCHIVE elsewhere in this suite.
   });
 });
