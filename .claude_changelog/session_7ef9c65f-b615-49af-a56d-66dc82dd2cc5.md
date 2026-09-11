@@ -2747,3 +2747,17 @@ plz arrange the plan to fix failure one and 4 skipped
 - Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\pages\SalesPage.ts
 - Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\01-config\sales.config.spec.ts
 
+
+---
+
+## Change -- 2026-09-11T03:42:16Z
+
+**Prompt:**
+```
+continue your plan
+```
+
+**Files touched:**
+- Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\03-reporting\sales.reports.spec.ts
+- Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\07-archive\sales.archive.spec.ts
+

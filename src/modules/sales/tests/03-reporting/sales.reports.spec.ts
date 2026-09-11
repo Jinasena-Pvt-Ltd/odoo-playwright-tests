@@ -54,24 +54,17 @@ test.describe('Sales Reporting @module:sales @step:reporting', () => {
     expect(count, 'Grouping by Customer should split the list into at least one group').toBeGreaterThan(0);
   });
 
-  test('the Archived filter is selectable and applies as a facet on the search bar', async ({ page }) => {
-    const listPage = new SalesListPage(page);
-    await listPage.navigate();
-
+  test('the "Sales Orders" filter is selectable and applies as a facet on the search bar', async ({ page }) => {
     // Confirmed live: this action's Filters panel does not offer every filter a stock
     // Odoo list view normally would (only "My Quotations"/"Quotations"/"Sales Orders"/
     // "Create Date"/"Recurring"/"Not Recurring" were present) — "Archived" is genuinely
-    // absent here, not merely slow to render, so this is checked before use rather than
-    // assumed.
-    const available = await listPage.isFilterOrGroupAvailable('Archived');
-    if (!available) {
-      test.skip(true, 'The "Archived" filter is not offered on this action\'s search panel in this Odoo environment');
-      return;
-    }
-
-    await listPage.applyFilter('Archived');
+    // absent here (sale.order has no `active` field on this instance), so this uses
+    // "Sales Orders" instead, a filter confirmed to actually exist in this panel.
+    const listPage = new SalesListPage(page);
+    await listPage.navigate();
+    await listPage.applyFilter('Sales Orders');
     const facet = page.locator('.o_searchview .o_facet_value, .o_searchview .o_facet_values')
-      .filter({ hasText: /archived/i }).first();
+      .filter({ hasText: /sales orders/i }).first();
     await expect(facet).toBeVisible();
   });
 });
