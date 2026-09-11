@@ -3,7 +3,7 @@ import { SalesFormPage, SalesCustomerFormPage } from '../pages/SalesPage';
 import { SALES_TEST_CONFIG } from '../data/sales.master-data';
 import { uniqueName } from '../../../core/utils/RandomDataGenerator';
 
-test('probe bank guarantee trigger', async ({ page }) => {
+test('probe bank guarantee trigger 2', async ({ page }) => {
   const customerPage = new SalesCustomerFormPage(page);
   await customerPage.navigate();
   await customerPage.customerName.setValue(uniqueName('BG Probe Customer'));
@@ -13,7 +13,6 @@ test('probe bank guarantee trigger', async ({ page }) => {
   await customerPage.bankGuaranteeExpiryDate.setValue('2020-01-01');
   await customerPage.save();
   const customerName = await customerPage.customerName.getValue();
-  console.log('customer created:', customerName);
 
   const formPage = new SalesFormPage(page);
   await formPage.navigate();
@@ -24,9 +23,16 @@ test('probe bank guarantee trigger', async ({ page }) => {
   await formPage.addOrderLines([{ product: SALES_TEST_CONFIG.product, quantity: 1, discount: 0 }]);
   await formPage.save();
 
-  const buttons = await page.locator('.o_statusbar_buttons button, .o_control_panel button').allTextContents();
-  console.log('buttons after save:', JSON.stringify(buttons));
+  console.log('status:', await formPage.getCurrentStatus());
+  const radios = await page.getByRole('radio').allTextContents();
+  console.log('radios:', JSON.stringify(radios));
 
-  const confirmVisible = await formPage.isConfirmVisible();
-  console.log('confirm visible:', confirmVisible);
+  const btns = page.locator('.o_statusbar_buttons button, .o_control_panel button');
+  const n = await btns.count();
+  for (let i = 0; i < n; i++) {
+    const title = await btns.nth(i).getAttribute('title').catch(() => null);
+    const aria = await btns.nth(i).getAttribute('aria-label').catch(() => null);
+    const text = await btns.nth(i).textContent().catch(() => null);
+    console.log(`btn[${i}] text="${text}" title="${title}" aria="${aria}"`);
+  }
 });
