@@ -19,6 +19,25 @@ export class SalesOrderFormPage extends BaseFormPage {
     this.quotationType = new SelectionField(page, 'x_studio_quotation_type');
   }
 
+  /**
+   * SelectionField.selectByLabel's 500ms "is the <select> visible yet" probe is flaky on
+   * this instance's Studio-rendered selects — a false negative sends it into a 30s+ dead
+   * end looking for a radio-button fallback that doesn't exist here. Select directly instead.
+   */
+  private async selectStudioField(fieldName: string, label: string): Promise<void> {
+    const select = this.page.locator(`.o_field_widget[name="${fieldName}"] select`).first();
+    await select.waitFor({ state: 'visible', timeout: 10_000 });
+    await select.selectOption({ label });
+  }
+
+  async setPaymentType(label: 'Cash' | 'Credit'): Promise<void> {
+    await this.selectStudioField('x_studio_order_payment_method', label);
+  }
+
+  async setQuotationType(label: 'Sales' | 'Project' | 'Repair'): Promise<void> {
+    await this.selectStudioField('x_studio_quotation_type', label);
+  }
+
   /** See CustomerFormPage.navigate() for why this goes through the app switcher. */
   async navigate(): Promise<void> {
     await openOdooApp(this.page, 'Sales');

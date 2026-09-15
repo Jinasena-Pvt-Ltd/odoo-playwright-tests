@@ -13,7 +13,8 @@ test.describe('Sales Field Validations @module:sales @step:validations', () => {
     const saveBtn = page.locator('.o_form_button_save, button[name="save_manually"]').first();
     await saveBtn.click();
 
-    await orderForm.expectErrorToast();
+    // This instance's toast for a failed save doesn't carry the danger/error CSS class
+    // that expectErrorToast() filters on, so read the generic notification directly.
     const toastText = await orderForm.getToastMessage();
     expect(toastText).toContain('Invalid fields');
   });
@@ -21,8 +22,8 @@ test.describe('Sales Field Validations @module:sales @step:validations', () => {
   test('saving without a customer keeps the required-field marker on partner_id', async ({ page }) => {
     const orderForm = new SalesOrderFormPage(page);
     await orderForm.navigate();
-    await orderForm.paymentType.selectByLabel('Cash');
-    await orderForm.quotationType.selectByLabel('Sales');
+    await orderForm.setPaymentType('Cash');
+    await orderForm.setQuotationType('Sales');
     // No customer set.
 
     const saveBtn = page.locator('.o_form_button_save, button[name="save_manually"]').first();

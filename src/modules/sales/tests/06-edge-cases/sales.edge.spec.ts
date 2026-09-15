@@ -16,8 +16,8 @@ test.describe('Sales Edge Cases @module:sales @step:edge', () => {
     const orderForm = new SalesOrderFormPage(page);
     await orderForm.navigate();
     await orderForm.customer.setValue(customerName);
-    await orderForm.paymentType.selectByLabel('Cash');
-    await orderForm.quotationType.selectByLabel('Sales');
+    await orderForm.setPaymentType('Cash');
+    await orderForm.setQuotationType('Sales');
     await orderForm.addFirstAvailableProduct();
 
     await orderForm.setLastLineQuantity(0.5);

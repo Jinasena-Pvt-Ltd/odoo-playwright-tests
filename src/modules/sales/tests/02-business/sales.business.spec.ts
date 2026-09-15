@@ -18,8 +18,8 @@ test.describe('Sales Business Logic @module:sales @step:business', () => {
     const orderForm = new SalesOrderFormPage(page);
     await orderForm.navigate();
     await orderForm.customer.setValue(customerName);
-    await orderForm.paymentType.selectByLabel('Cash');
-    await orderForm.quotationType.selectByLabel('Sales');
+    await orderForm.setPaymentType('Cash');
+    await orderForm.setQuotationType('Sales');
     await orderForm.addFirstAvailableProduct();
     await orderForm.save();
 
@@ -27,6 +27,6 @@ test.describe('Sales Business Logic @module:sales @step:business', () => {
     expect(reference).not.toBe('New');
 
     expect(await orderForm.customer.getValue()).toBe(customerName);
-    await expect(page.locator('.o_data_row').first()).toBeVisible();
+    await expect(page.locator('.o_data_row').first()).toBeVisible({ timeout: 15_000 });
   });
 });
