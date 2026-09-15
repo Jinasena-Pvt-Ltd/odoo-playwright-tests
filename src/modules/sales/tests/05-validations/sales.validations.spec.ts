@@ -15,8 +15,11 @@ test.describe('Sales Field Validations @module:sales @step:validations', () => {
 
     // This instance's toast for a failed save doesn't carry the danger/error CSS class
     // that expectErrorToast() filters on, so read the generic notification directly.
+    // getToastMessage() only reads the body (.o_notification_content), which lists the
+    // invalid field labels run together without the "Invalid fields:" title text.
     const toastText = await orderForm.getToastMessage();
-    expect(toastText).toContain('Invalid fields');
+    expect(toastText).toContain('Order Payment Type');
+    expect(toastText).toContain('Quotation Type');
   });
 
   test('saving without a customer keeps the required-field marker on partner_id', async ({ page }) => {

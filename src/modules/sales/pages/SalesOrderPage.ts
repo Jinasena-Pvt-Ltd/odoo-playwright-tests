@@ -69,9 +69,10 @@ export class SalesOrderFormPage extends BaseFormPage {
     await firstOption.click();
     await this.page.waitForTimeout(500);
 
-    // Blur the editable row onto a plain, non-interactive label instead of another
-    // control — clicking a link/tab here was found to discard the uncommitted row.
-    await this.page.locator('.o_form_label', { hasText: 'Pricelist' }).first().click().catch(() => {});
+    // Blur the editable row with Escape. Clicking a link/tab was found to discard the
+    // uncommitted row, and clicking a field's <label> re-opens that field for editing
+    // (labels focus their control by design) — Escape avoids both.
+    await this.page.keyboard.press('Escape').catch(() => {});
     await this.page.waitForTimeout(300);
   }
 
@@ -87,7 +88,7 @@ export class SalesOrderFormPage extends BaseFormPage {
     const qtyInput = qtyCell.locator('input').last();
     await qtyInput.waitFor({ state: 'visible', timeout: 5_000 });
     await qtyInput.fill(String(qty));
-    await this.page.locator('.o_form_label', { hasText: 'Pricelist' }).first().click().catch(() => {});
+    await this.page.keyboard.press('Tab').catch(() => {});
     await this.page.waitForTimeout(300);
   }
 

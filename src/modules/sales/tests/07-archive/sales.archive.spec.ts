@@ -22,7 +22,12 @@ test.describe('Sales Archive & Cleanup @module:sales @step:archive', () => {
       .isVisible({ timeout: 3_000 }).catch(() => false);
     expect(visibleActive).toBe(false);
 
+    // Apply the Archived filter before re-searching: with the "Name" facet chip already
+    // on the search bar, the search bar's dropdown arrow opens that facet's own "Modify
+    // Condition" editor instead of the global Filters/Group By menu applyFilter() expects.
+    await listPage.clearSearch();
     await listPage.applyFilter('Archived');
+    await listPage.searchFor(customerName);
     await listPage.expectRecordExists(customerName);
   });
 });
