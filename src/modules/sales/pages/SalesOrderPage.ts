@@ -108,9 +108,18 @@ export class SalesOrderFormPage extends BaseFormPage {
     return unitPrice;
   }
 
-  /** Reads the read-only subtotal ("Tax excl.") of the most recently added order line. */
+  /**
+   * Reads the read-only subtotal ("Tax excl.") of the most recently added order line.
+   * Recomputing it after a quantity change is another async onchange (same as the
+   * price-fetch race in addFirstAvailableProduct), so poll rather than reading once.
+   */
   async getLastLineSubtotal(): Promise<number> {
-    return this.getLastCellNumber('price_subtotal');
+    let subtotal = await this.getLastCellNumber('price_subtotal');
+    for (let i = 0; i < 8 && subtotal === 0; i++) {
+      await this.page.waitForTimeout(500);
+      subtotal = await this.getLastCellNumber('price_subtotal');
+    }
+    return subtotal;
   }
 
   async getOrderReference(): Promise<string> {
