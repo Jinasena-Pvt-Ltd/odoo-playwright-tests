@@ -69,10 +69,12 @@ export class SalesOrderFormPage extends BaseFormPage {
     await firstOption.click();
     await this.page.waitForTimeout(500);
 
-    // Blur the editable row with Escape. Clicking a link/tab was found to discard the
-    // uncommitted row, and clicking a field's <label> re-opens that field for editing
-    // (labels focus their control by design) — Escape avoids both.
-    await this.page.keyboard.press('Escape').catch(() => {});
+    // Blur the editable row onto the list's own (non-interactive) column header — clicking
+    // a link/tab discards the uncommitted row, clicking a field's <label> re-opens that
+    // field for editing (labels focus their control by design), and Escape intermittently
+    // reverted the just-picked product (same revert behavior Many2OneField.clear() warns
+    // about), causing the row to silently vanish. A header cell is inert either way.
+    await this.page.locator('.o_list_renderer th', { hasText: 'Product' }).first().click().catch(() => {});
     await this.page.waitForTimeout(300);
   }
 

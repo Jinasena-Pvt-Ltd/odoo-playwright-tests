@@ -23,9 +23,10 @@ test.describe('Sales Edge Cases @module:sales @step:edge', () => {
     await orderForm.setLastLineQuantity(0.5);
 
     // Read via inputValue(), not textContent(): the row is still in edit mode after Tab,
-    // and an <input>'s value is never part of its element's textContent.
+    // and an <input>'s value is never part of its element's textContent. The UoM's
+    // decimal precision (4 places) reformats "0.5" to "0.5000" once the field commits.
     const qtyInput = page.locator('.o_field_widget[name="product_uom_qty"] input').last();
-    await expect(qtyInput).toHaveValue('0.5');
+    await expect(qtyInput).toHaveValue('0.5000');
   });
 
   test('a very long customer name is accepted without truncation error', async ({ page }) => {
