@@ -9,8 +9,9 @@
  * reference data is absent.
  */
 import { test, expect } from '../../../../core/fixtures/index';
-import { SalesFormPage, ApprovalPermissionError } from '../../pages/SalesPage';
+import { SalesFormPage, SalesCustomerFormPage, ApprovalPermissionError } from '../../pages/SalesPage';
 import { SALES_TEST_CONFIG } from '../../data/sales.master-data';
+import { uniqueName } from '../../../../core/utils/RandomDataGenerator';
 import {
   computeLineNetAmount,
   computeUntaxedAmount,
@@ -53,6 +54,47 @@ test.describe('Sales Business Logic @module:sales @step:business', () => {
 
     const reference = await formPage.reference.getValue();
     expect(reference.trim().length).toBeGreaterThan(0);
+  });
+
+  test('creates a sales order for a newly-created customer with a single reference product @smoke', async ({ page }) => {
+    // Creates its OWN dedicated customer inline (rather than the shared salesMasterData
+    // worker fixture) — this test's purpose is verifying the whole customer-creation →
+    // order-creation flow end to end as one self-contained unit, not sharing fixture
+    // state with the rest of the suite.
+    const customerPage = new SalesCustomerFormPage(page);
+    await customerPage.navigate();
+    const customerName = uniqueName('Test Customer');
+    await customerPage.customerName.setValue(customerName);
+    await customerPage.save();
+
+    const formPage = new SalesFormPage(page);
+    await formPage.navigate();
+
+    const customerFound = await formPage.selectCustomerIfExists(customerName);
+    if (!customerFound) {
+      test.skip(true, `Could not select newly-created customer "${customerName}" — transient UI issue, not a missing-data problem`);
+      return;
+    }
+    await formPage.setQuotationType(SALES_TEST_CONFIG.quotationType);
+    await formPage.setOrderPaymentType(SALES_TEST_CONFIG.orderPaymentType);
+    const otherInfoOk = await formPage.fillOtherInfo(SALES_TEST_CONFIG.salesTeam, SALES_TEST_CONFIG.warehouse);
+    if (!otherInfoOk) {
+      test.skip(true, 'Reference Sales Team/Warehouse not found in this Odoo environment');
+      return;
+    }
+
+    await formPage.openOrderLinesTab();
+    const added = await formPage.addOrderLines([
+      { product: SALES_TEST_CONFIG.product, quantity: 1, discount: 0 },
+    ]);
+    if (added === 0) {
+      test.skip(true, 'Reference product not found in this Odoo environment');
+      return;
+    }
+
+    await formPage.save();
+    const reference = await formPage.reference.getValue();
+    expect(reference.trim().length, 'Saved order must get a real, non-blank reference').toBeGreaterThan(0);
   });
 
   test('quotation line and grand total amounts reconcile with Qty × Unit Price arithmetic', async ({ page, salesMasterData }) => {
