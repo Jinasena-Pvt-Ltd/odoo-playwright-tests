@@ -45,8 +45,13 @@ export class SalesOrderFormPage extends BaseFormPage {
   }
   async openById(id: number): Promise<void> { await this.navigateTo(`/odoo/sales/${id}`); }
 
-  /** Adds one order line, picking whichever product is first in the dropdown — no name needed. */
-  async addFirstAvailableProduct(): Promise<void> {
+  /**
+   * Adds one order line, picking whichever product is first in the dropdown — no name
+   * needed. Returns the product's unit price (as it appeared with the default qty of 1,
+   * before an explicit `qty` was applied), so callers can compute an expected subtotal
+   * without hardcoding master-data prices.
+   */
+  async addFirstAvailableProduct(qty?: number): Promise<number> {
     const addProductLink = this.page
       .locator('.o_field_x2many_list_row_add a')
       .filter({ hasText: 'Add a product' })
@@ -69,6 +74,20 @@ export class SalesOrderFormPage extends BaseFormPage {
     await firstOption.click();
     await this.page.waitForTimeout(500);
 
+    const unitPrice = await this.getLastCellNumber('price_unit');
+
+    if (qty !== undefined) {
+      // Set the quantity now, while the row Odoo just auto-opened for this new line is
+      // still in edit mode — re-entering edit mode on an already-committed row later
+      // (click the cell again) was unreliable: sometimes the click just re-selects the
+      // row without exposing an <input>, hanging setLastLineQuantity's own visibility wait.
+      const qtyInput = this.page.locator('.o_field_widget[name="product_uom_qty"] input').last();
+      await qtyInput.waitFor({ state: 'visible', timeout: 5_000 });
+      await qtyInput.click();
+      await this.page.keyboard.press('Control+A');
+      await this.page.keyboard.type(String(qty), { delay: 50 });
+    }
+
     // Blur the editable row onto the list's own (non-interactive) column header — clicking
     // a link/tab discards the uncommitted row, clicking a field's <label> re-opens that
     // field for editing (labels focus their control by design), and Escape intermittently
@@ -76,6 +95,8 @@ export class SalesOrderFormPage extends BaseFormPage {
     // about), causing the row to silently vanish. A header cell is inert either way.
     await this.page.locator('.o_list_renderer th', { hasText: 'Product' }).first().click().catch(() => {});
     await this.page.waitForTimeout(300);
+
+    return unitPrice;
   }
 
   async getOrderReference(): Promise<string> {
@@ -83,28 +104,18 @@ export class SalesOrderFormPage extends BaseFormPage {
     return (await breadcrumb.textContent())?.trim() ?? '';
   }
 
-  /**
-   * Sets the quantity on the most recently added order line.
-   * Uses keyboard select-all + type instead of .fill() — this instance's quantity cell
-   * keeps re-rendering the row while .fill() is mid-retry, so the input handle it grabbed
-   * up front repeatedly goes stale ("element detached, retrying") and never stabilizes.
-   * Re-querying the input fresh right before typing avoids racing that re-render.
-   */
-  async setLastLineQuantity(qty: number): Promise<void> {
-    const qtyCell = this.page.locator('.o_field_widget[name="product_uom_qty"]').last();
-    await qtyCell.click();
-    await this.page.waitForTimeout(300);
-    const qtyInput = qtyCell.locator('input').last();
-    await qtyInput.waitFor({ state: 'visible', timeout: 5_000 });
-    await qtyInput.click();
-    await this.page.keyboard.press('Control+A');
-    await this.page.keyboard.type(String(qty), { delay: 50 });
-    await this.page.keyboard.press('Tab').catch(() => {});
-    await this.page.waitForTimeout(300);
-  }
-
   async getTotal(): Promise<string> {
     return (await this.page.locator('.oe_subtotal_footer, .o_field_widget[name="amount_total"]').last().textContent())?.trim() ?? '';
+  }
+
+  /** Reads a numeric order-line cell whether it's currently an editable <input> or read-only text. */
+  private async getLastCellNumber(fieldName: string): Promise<number> {
+    const cell = this.page.locator(`.o_field_widget[name="${fieldName}"]`).last();
+    const input = cell.locator('input').last();
+    const raw = (await input.isVisible({ timeout: 500 }).catch(() => false))
+      ? await input.inputValue()
+      : (await cell.textContent()) ?? '';
+    return parseFloat(raw.replace(/[^0-9.]/g, '')) || 0;
   }
 }
 

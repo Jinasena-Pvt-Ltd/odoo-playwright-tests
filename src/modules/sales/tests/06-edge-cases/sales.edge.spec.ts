@@ -18,15 +18,15 @@ test.describe('Sales Edge Cases @module:sales @step:edge', () => {
     await orderForm.customer.setValue(customerName);
     await orderForm.setPaymentType('Cash');
     await orderForm.setQuotationType('Sales');
-    await orderForm.addFirstAvailableProduct();
+    const unitPrice = await orderForm.addFirstAvailableProduct(0.5);
 
-    await orderForm.setLastLineQuantity(0.5);
-
-    // Read via inputValue(), not textContent(): the row is still in edit mode after Tab,
-    // and an <input>'s value is never part of its element's textContent. The UoM's
-    // decimal precision (4 places) reformats "0.5" to "0.5000" once the field commits.
-    const qtyInput = page.locator('.o_field_widget[name="product_uom_qty"] input').last();
-    await expect(qtyInput).toHaveValue('0.5000');
+    // Check the row's read-only subtotal rather than the quantity input's own value —
+    // whether that cell is still in edit mode (showing an <input>) or already blurred
+    // back to plain text varies run to run, so its raw value isn't a stable thing to
+    // assert on. The recalculated subtotal reflects the fractional quantity either way.
+    const subtotalText = await page.locator('.o_field_widget[name="price_subtotal"]').last().textContent();
+    const subtotal = parseFloat((subtotalText ?? '0').replace(/[^0-9.]/g, ''));
+    expect(subtotal).toBeCloseTo(unitPrice * 0.5, 2);
   });
 
   test('a very long customer name is accepted without truncation error', async ({ page }) => {
