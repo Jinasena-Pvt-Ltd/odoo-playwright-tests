@@ -24,8 +24,7 @@ test.describe('Sales Edge Cases @module:sales @step:edge', () => {
     // whether that cell is still in edit mode (showing an <input>) or already blurred
     // back to plain text varies run to run, so its raw value isn't a stable thing to
     // assert on. The recalculated subtotal reflects the fractional quantity either way.
-    const subtotalText = await page.locator('.o_field_widget[name="price_subtotal"]').last().textContent();
-    const subtotal = parseFloat((subtotalText ?? '0').replace(/[^0-9.]/g, ''));
+    const subtotal = await orderForm.getLastLineSubtotal();
     expect(subtotal).toBeCloseTo(unitPrice * 0.5, 2);
   });
 

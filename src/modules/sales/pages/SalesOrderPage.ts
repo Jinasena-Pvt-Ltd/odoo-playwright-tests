@@ -74,7 +74,16 @@ export class SalesOrderFormPage extends BaseFormPage {
     await firstOption.click();
     await this.page.waitForTimeout(500);
 
-    const unitPrice = await this.getLastCellNumber('price_unit');
+    // Selecting the product fires an async onchange that fetches its price — reading
+    // price_unit immediately can catch it mid-flight (still "0.0000"), and if a caller
+    // then starts typing into the quantity field before that onchange lands, the fetch's
+    // own write can be lost entirely, leaving the row permanently priced at 0. Poll until
+    // it settles (or genuinely is a free/zero-priced product) before moving on.
+    let unitPrice = await this.getLastCellNumber('price_unit');
+    for (let i = 0; i < 8 && unitPrice === 0; i++) {
+      await this.page.waitForTimeout(500);
+      unitPrice = await this.getLastCellNumber('price_unit');
+    }
 
     if (qty !== undefined) {
       // Set the quantity now, while the row Odoo just auto-opened for this new line is
@@ -99,6 +108,11 @@ export class SalesOrderFormPage extends BaseFormPage {
     return unitPrice;
   }
 
+  /** Reads the read-only subtotal ("Tax excl.") of the most recently added order line. */
+  async getLastLineSubtotal(): Promise<number> {
+    return this.getLastCellNumber('price_subtotal');
+  }
+
   async getOrderReference(): Promise<string> {
     const breadcrumb = this.page.locator('.o_breadcrumb .active, .o_breadcrumb .o_last_breadcrumb_item').last();
     return (await breadcrumb.textContent())?.trim() ?? '';
@@ -108,9 +122,15 @@ export class SalesOrderFormPage extends BaseFormPage {
     return (await this.page.locator('.oe_subtotal_footer, .o_field_widget[name="amount_total"]').last().textContent())?.trim() ?? '';
   }
 
-  /** Reads a numeric order-line cell whether it's currently an editable <input> or read-only text. */
+  /**
+   * Reads a numeric order-line cell whether it's currently an editable <input> or
+   * read-only text. Order-line list cells are `<td name="...">` directly (Odoo puts
+   * `.o_field_widget` around the value only while that cell is being edited) — targeting
+   * `.o_field_widget[name=...]` instead would match nothing once the row blurs back to
+   * read mode.
+   */
   private async getLastCellNumber(fieldName: string): Promise<number> {
-    const cell = this.page.locator(`.o_field_widget[name="${fieldName}"]`).last();
+    const cell = this.page.locator(`.o_data_row td[name="${fieldName}"]`).last();
     const input = cell.locator('input').last();
     const raw = (await input.isVisible({ timeout: 500 }).catch(() => false))
       ? await input.inputValue()
