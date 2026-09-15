@@ -34,6 +34,6 @@ export class CustomerFormPage extends BaseFormPage {
 
 export class CustomerListPage extends BaseListPage {
   constructor(page: Page) { super(page); }
-  async navigate(): Promise<void> { await this.navigateTo('/odoo/contacts'); }
+  async navigate(): Promise<void> { await openOdooApp(this.page, 'Contacts'); }
   async openCustomer(name: string): Promise<void> { await this.clickRowByText(name); }
 }

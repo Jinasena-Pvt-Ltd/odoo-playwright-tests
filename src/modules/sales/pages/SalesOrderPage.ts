@@ -60,10 +60,25 @@ export class SalesOrderFormPage extends BaseFormPage {
     const breadcrumb = this.page.locator('.o_breadcrumb .active, .o_breadcrumb .o_last_breadcrumb_item').last();
     return (await breadcrumb.textContent())?.trim() ?? '';
   }
+
+  /** Sets the quantity on the most recently added order line. */
+  async setLastLineQuantity(qty: number): Promise<void> {
+    const qtyCell = this.page.locator('.o_field_widget[name="product_uom_qty"]').last();
+    await qtyCell.click();
+    const qtyInput = qtyCell.locator('input').last();
+    await qtyInput.waitFor({ state: 'visible', timeout: 5_000 });
+    await qtyInput.fill(String(qty));
+    await this.page.locator('.o_form_label', { hasText: 'Pricelist' }).first().click().catch(() => {});
+    await this.page.waitForTimeout(300);
+  }
+
+  async getTotal(): Promise<string> {
+    return (await this.page.locator('.oe_subtotal_footer, .o_field_widget[name="amount_total"]').last().textContent())?.trim() ?? '';
+  }
 }
 
 export class SalesOrderListPage extends BaseListPage {
   constructor(page: Page) { super(page); }
-  async navigate(): Promise<void> { await this.navigateTo('/odoo/sales'); }
+  async navigate(): Promise<void> { await openOdooApp(this.page, 'Sales'); }
   async openOrder(reference: string): Promise<void> { await this.clickRowByText(reference); }
 }
