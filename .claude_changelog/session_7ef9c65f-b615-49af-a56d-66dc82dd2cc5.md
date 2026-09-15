@@ -3004,3 +3004,16 @@ https://rohanabalagalla-jinstage-jindbconfigure-37927229.dev.odoo.com new url
 **Files touched:**
 - Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\.env
 
+
+---
+
+## Change -- 2026-09-15T04:38:20Z
+
+**Prompt:**
+```
+don't run the my previouse test case.i just want to create a customer and create the sells order added only one availbale product with headed and give me the report
+```
+
+**Files touched:**
+- Write: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\_adhoc_create.spec.ts
+
