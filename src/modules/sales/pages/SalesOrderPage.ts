@@ -95,6 +95,10 @@ export class SalesOrderFormPage extends BaseFormPage {
       await qtyInput.click();
       await this.page.keyboard.press('Control+A');
       await this.page.keyboard.type(String(qty), { delay: 50 });
+      // The subtotal-recompute onchange only fires on a real blur/change event from this
+      // input — clicking elsewhere afterward (below) was not enough to trigger it.
+      await this.page.keyboard.press('Tab');
+      await this.page.waitForTimeout(500);
     }
 
     // Blur the editable row onto the list's own (non-interactive) column header — clicking
