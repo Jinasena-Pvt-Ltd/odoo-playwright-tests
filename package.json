@@ -6,6 +6,7 @@
     "test": "playwright test",
     "test:all": "playwright test --grep \"@e2e\"",
     "test:smoke": "playwright test --grep \"@smoke\"",
+    "test:sales": "playwright test --grep \"@module:sales\"",
     "test:config": "playwright test --grep \"@step:config\"",
     "test:business": "playwright test --grep \"@step:business\"",
     "test:reporting": "playwright test --grep \"@step:reporting\"",

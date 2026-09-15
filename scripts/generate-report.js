@@ -233,7 +233,10 @@ function loadResults(filePath) {
           // Use full stack when available; fall back to message only
           error = (stack || msg).replace(/\[[0-9;]*m/g, '').trim();
         }
-        map[spec.title] = { status, error };
+        // Keyed with tags stripped to match the parsed spec name (see parseTests' `name`) —
+        // results.json titles retain "@smoke"/"@e2e" etc. that the static parser strips out.
+        const key = spec.title.replace(/@\S+/g, '').trim();
+        map[key] = { status, error };
       }
       for (const sub of (s.suites || [])) walk(sub);
     }
