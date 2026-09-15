@@ -81,13 +81,22 @@ export class SalesOrderFormPage extends BaseFormPage {
     return (await breadcrumb.textContent())?.trim() ?? '';
   }
 
-  /** Sets the quantity on the most recently added order line. */
+  /**
+   * Sets the quantity on the most recently added order line.
+   * Uses keyboard select-all + type instead of .fill() — this instance's quantity cell
+   * keeps re-rendering the row while .fill() is mid-retry, so the input handle it grabbed
+   * up front repeatedly goes stale ("element detached, retrying") and never stabilizes.
+   * Re-querying the input fresh right before typing avoids racing that re-render.
+   */
   async setLastLineQuantity(qty: number): Promise<void> {
     const qtyCell = this.page.locator('.o_field_widget[name="product_uom_qty"]').last();
     await qtyCell.click();
+    await this.page.waitForTimeout(300);
     const qtyInput = qtyCell.locator('input').last();
     await qtyInput.waitFor({ state: 'visible', timeout: 5_000 });
-    await qtyInput.fill(String(qty));
+    await qtyInput.click();
+    await this.page.keyboard.press('Control+A');
+    await this.page.keyboard.type(String(qty), { delay: 50 });
     await this.page.keyboard.press('Tab').catch(() => {});
     await this.page.waitForTimeout(300);
   }

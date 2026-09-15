@@ -16,6 +16,10 @@ test.describe('Sales Archive & Cleanup @module:sales @step:archive', () => {
 
     const listPage = new CustomerListPage(page);
     await listPage.navigate();
+    // Contacts opens in Kanban by default — switch to List so BaseListPage's
+    // .o_list_table-based helpers (searchFor/expectRecordExists) have something to match.
+    await page.locator('.o_switch_view.o_list, button[data-tooltip="List"]').first().click();
+    await page.waitForSelector('.o_list_view', { state: 'visible', timeout: 10_000 });
     await listPage.searchFor(customerName);
 
     const visibleActive = await page.locator('.o_data_row').filter({ hasText: customerName })

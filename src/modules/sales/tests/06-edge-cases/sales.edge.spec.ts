@@ -22,8 +22,10 @@ test.describe('Sales Edge Cases @module:sales @step:edge', () => {
 
     await orderForm.setLastLineQuantity(0.5);
 
-    const qtyCell = page.locator('.o_field_widget[name="product_uom_qty"]').last();
-    await expect(qtyCell).toContainText('0.5');
+    // Read via inputValue(), not textContent(): the row is still in edit mode after Tab,
+    // and an <input>'s value is never part of its element's textContent.
+    const qtyInput = page.locator('.o_field_widget[name="product_uom_qty"] input').last();
+    await expect(qtyInput).toHaveValue('0.5');
   });
 
   test('a very long customer name is accepted without truncation error', async ({ page }) => {
