@@ -35,9 +35,12 @@ npm run test:validations   # Step 5: validation tests
 npm run test:edge          # Step 6: edge case tests
 npm run test:archive       # Step 7: archive tests
 npm run report             # Open Playwright HTML report
+npm run report:generate    # Regenerate master report from spec files (no test run)
+npm run test:report        # Run tests then regenerate master report
 npm run lint               # TypeScript type-check
 HEADLESS=false npm test    # Run with browser visible
 SLOW_MO=500 npm test       # Slow down actions by 500ms
+npx playwright test --project=setup --project=<role>  # Single role — faster during development
 ```
 
 ---
@@ -58,6 +61,7 @@ src/
         ├── pages/                 FormPage, ListPage, KanbanPage
         ├── data/                  <domain>.master-data.ts, <domain>.validation-cases.ts
         ├── calculations/          Business calculation helpers
+        ├── notes/                 <domain>.notes.md — free-form domain notes, gotchas, context
         └── tests/
             ├── 01-config/         <domain>.config.spec.ts
             ├── 02-business/       <domain>.business.spec.ts
