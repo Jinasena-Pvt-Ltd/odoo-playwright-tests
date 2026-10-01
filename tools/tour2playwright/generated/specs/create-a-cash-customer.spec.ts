@@ -13,7 +13,6 @@ import { test, expect, Page } from '@playwright/test';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as crypto from 'crypto';
-import { openOdooApp } from '../../../../src/modules/sales/pages/openOdooApp';
 
 const SCREENSHOT_DIR = path.resolve(__dirname, '../screenshots/create-a-cash-customer');
 fs.mkdirSync(SCREENSHOT_DIR, { recursive: true });
@@ -51,8 +50,39 @@ test('Create the cash Customer tour replay', async ({ page }) => {
   // Invoice/Products/Reporting/Configuration/... with no Customers entry (confirmed by
   // listing every `[data-menu-xmlid]` in the navbar; see REVIEW.md). Customer/contact
   // records are only reachable here via the separate Contacts app, which is what the
-  // module's own CustomerFormPage already uses — opening that directly instead.
-  await openOdooApp(page, 'Contacts');
+  // module's own CustomerFormPage already uses — opening that directly instead. Inlined
+  // (rather than calling the shared openOdooApp() helper) so each of the three original
+  // steps still gets its own screenshot.
+  const baseURL = process.env.ODOO_BASE_URL ?? 'http://localhost:8069';
+  const alreadyBooted = await page.locator('.o_main_navbar').isVisible({ timeout: 1_000 }).catch(() => false);
+  if (!alreadyBooted) {
+    await page.goto(`${baseURL}/web/login`);
+    const state = await Promise.race([
+      page.locator('.o_main_navbar').waitFor({ state: 'visible', timeout: 20_000 }).then(() => 'ready' as const),
+      page.getByRole('textbox', { name: 'Email' }).waitFor({ state: 'visible', timeout: 20_000 }).then(() => 'login' as const),
+    ]).catch(() => 'login' as const);
+    if (state === 'login') {
+      await page.getByRole('textbox', { name: 'Email' }).fill(process.env.ADMIN_EMAIL ?? 'admin');
+      await page.getByRole('textbox', { name: 'Password' }).fill(process.env.ADMIN_PASSWORD ?? 'admin');
+      await page.getByRole('button', { name: 'Log in' }).click();
+      await page.waitForSelector('.o_main_navbar', { state: 'visible', timeout: 45_000 });
+    }
+  }
+
+  // Step 10 — "Click Sales Module" → open the Home menu / app-switcher grid
+  const contactsTile = page.getByRole('option', { name: 'Contacts', exact: true });
+  const gridAlreadyOpen = await contactsTile.isVisible({ timeout: 3_000 }).catch(() => false);
+  if (!gridAlreadyOpen) {
+    await page.getByRole('link', { name: 'Home menu' }).click();
+  }
+  await captureStep(page, 10, 'open-home-menu');
+
+  // Step 20 — click the Contacts app tile (adapted from "Orders", which doesn't apply here)
+  await contactsTile.click();
+  await captureStep(page, 20, 'click-contacts-tile');
+
+  // Step 30 — Contacts app loaded (adapted from "Customers")
+  await page.waitForSelector('.o_list_view, .o_kanban_view, .o_form_view', { state: 'visible', timeout: 20_000 });
   await captureStep(page, 30, 'open-contacts-app');
 
   // Step 40 — Click New

@@ -12,11 +12,19 @@ Generated from an Odoo Tour Recorder export, replayed with Playwright, and scree
 
 Click Sales Module
 
+> **Note:** this step was adapted from the recorded tour — see REVIEW.md.
+
+![Step 1](../screenshots/create-a-cash-customer/step-010.png)
+
 ---
 
 ## 2. Orders
 
 Click Orders
+
+> **Note:** this step was adapted from the recorded tour — see REVIEW.md.
+
+![Step 2](../screenshots/create-a-cash-customer/step-020.png)
 
 ---
 

@@ -31,7 +31,7 @@ const TOUR_NOTES = {
     excluded: new Set(),
   },
   'create-a-cash-customer': {
-    adapted: new Set([30, 90, 110, 180, 190, 200]),
+    adapted: new Set([10, 20, 30, 90, 110, 180, 190, 200]),
     excluded: new Set([140, 150, 160, 224]),
   },
 };
