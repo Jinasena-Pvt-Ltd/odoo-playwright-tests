@@ -22,7 +22,21 @@ fs.mkdirSync(manualDir, { recursive: true });
 
 // Adaptations made by the translator (hand-authored here, since this run didn't go through
 // a fully automated pipeline) — surfaced in REVIEW.md and noted inline in the manual.
-const ADAPTED_SEQUENCES = new Set([10, 50, 60, 70, 80, 83, 84, 97]);
+// One entry per tour (keyed by the `tourName` arg); sequences not run at all (e.g. excluded
+// trailing/accidental steps, or fields that no longer exist on the form) are listed under
+// `excluded` so the manual can say so instead of just "no screenshot captured".
+const TOUR_NOTES = {
+  sales: {
+    adapted: new Set([10, 50, 60, 70, 80, 83, 84, 97]),
+    excluded: new Set(),
+  },
+  'create-a-cash-customer': {
+    adapted: new Set([30, 90, 110, 180, 190, 200]),
+    excluded: new Set([140, 150, 160, 224]),
+  },
+};
+const { adapted: ADAPTED_SEQUENCES, excluded: EXCLUDED_SEQUENCES } =
+  TOUR_NOTES[tourName] || { adapted: new Set(), excluded: new Set() };
 
 function screenshotFor(sequence) {
   const file = path.join(screenshotDir, `step-${String(sequence).padStart(3, '0')}.png`);
@@ -30,19 +44,25 @@ function screenshotFor(sequence) {
 }
 
 function buildLocale(locale, localeLabel) {
-  const steps = tour.steps.map((s) => ({
-    sequence: s.sequence,
-    title: s.title_i18n?.[locale] || s.title || '',
-    content: s.content_i18n?.[locale] || s.content || '',
-    description: s.description_i18n?.[locale] || s.description || '',
-    screenshot: screenshotFor(s.sequence),
-    adapted: ADAPTED_SEQUENCES.has(s.sequence),
-  }));
+  const steps = tour.steps
+    .filter((s) => !EXCLUDED_SEQUENCES.has(s.sequence))
+    .map((s) => ({
+      sequence: s.sequence,
+      title: s.title_i18n?.[locale] || s.title || '',
+      content: s.content_i18n?.[locale] || s.content || '',
+      description: s.description_i18n?.[locale] || s.description || '',
+      screenshot: screenshotFor(s.sequence),
+      adapted: ADAPTED_SEQUENCES.has(s.sequence),
+    }));
 
   // ---- Markdown ----
   let md = `# ${tour.name} — User Manual (${localeLabel})\n\n`;
   md += `${tour.description_i18n?.[locale] || tour.description}\n\n`;
-  md += `Generated from an Odoo Tour Recorder export, replayed with Playwright, and screenshotted at every step.\n\n---\n\n`;
+  md += `Generated from an Odoo Tour Recorder export, replayed with Playwright, and screenshotted at every step.\n\n`;
+  if (EXCLUDED_SEQUENCES.size > 0) {
+    md += `> ${EXCLUDED_SEQUENCES.size} recorded step(s) were excluded from the replay (fields/menus that no longer exist, or accidental trailing steps) — see REVIEW.md.\n\n`;
+  }
+  md += `---\n\n`;
   steps.forEach((s, i) => {
     const heading = s.title || s.content || `Step ${i + 1}`;
     md += `## ${i + 1}. ${heading}\n\n`;
@@ -102,11 +122,12 @@ function buildLocale(locale, localeLabel) {
 <header>
   <h1>${esc(tour.name)}</h1>
   <p>${esc(tour.description_i18n?.[locale] || tour.description)}</p>
+  ${EXCLUDED_SEQUENCES.size > 0 ? `<p style="opacity:.8;font-size:.9rem;margin-top:.5rem;">${EXCLUDED_SEQUENCES.size} recorded step(s) excluded from the replay — see REVIEW.md.</p>` : ''}
 </header>
 <main>
 ${stepsHtml}
 </main>
-<footer>Generated from an Odoo Tour Recorder export (tour/sales.json), replayed and screenshotted with Playwright.</footer>
+<footer>Generated from an Odoo Tour Recorder export (${esc(path.basename(tourJsonPath))}), replayed and screenshotted with Playwright.</footer>
 </body>
 </html>`;
   fs.writeFileSync(path.join(manualDir, `${tourName}.${locale}.html`), html, 'utf-8');

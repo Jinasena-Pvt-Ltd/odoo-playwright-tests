@@ -34,6 +34,14 @@ async function pickByText(page: Page, container: string, text: string): Promise<
   await page.locator(container).filter({ hasText: text }).first().click();
 }
 
+/** A form field's input, targeted by Odoo's stable `name` attribute instead of its
+ * auto-incrementing DOM id (`#name_1`, `#street_0`, ...) — those ids depend on render
+ * order and are not stable across runs/sessions (confirmed: the same tour hit a
+ * different id suffix on a second run). */
+function field(page: Page, name: string) {
+  return page.locator(`.o_field_widget[name="${name}"] input`).first();
+}
+
 test('Create the cash Customer tour replay', async ({ page }) => {
   test.setTimeout(120_000);
 
@@ -52,23 +60,26 @@ test('Create the cash Customer tour replay', async ({ page }) => {
   await captureStep(page, 40, 'click-new');
 
   // Step 50/60 — Set Company Type to Individual (both steps select the same radio; step 60's
-  // recorded title "on" is just the native HTML value of a checked radio input, not text to type).
-  await page.locator('div.form-check.o_radio_item:nth-of-type(1) > label.form-check-label.o_form_label').click();
+  // recorded title "on" is just the native HTML value of a checked radio input, not text to
+  // type). Adapted: targeted by role/label instead of the recorder's auto-incrementing
+  // `#radio_field_0_person` id.
+  await page.getByRole('radio', { name: 'Individual' }).check({ force: true });
   await captureStep(page, 50, 'select-individual');
-  await page.locator('#radio_field_0_person').check({ force: true }).catch(() => {});
   await captureStep(page, 60, 'individual-confirmed');
 
   // Step 70 — Customer name. Adapted: the recorded title is empty (no "value typed" field in
   // the export) — used a run-tagged placeholder name so repeat runs stay distinguishable.
-  await page.locator('#name_1').fill(CUSTOMER_NAME);
+  // Targeted by `name="name"` instead of the recorder's `#name_1` (unstable id suffix).
+  await field(page, 'name').fill(CUSTOMER_NAME);
   await captureStep(page, 70, 'type-name');
 
-  // Step 80 — Street address. Adapted: same empty-title gap as step 70 — used a representative address.
-  await page.locator('#street_0').fill('No. 123, Galle Road');
+  // Step 80 — Street address. Adapted: same empty-title gap as step 70 — used a
+  // representative address; targeted by `name="street"` instead of `#street_0`.
+  await field(page, 'street').fill('No. 123, Galle Road');
   await captureStep(page, 80, 'type-street');
 
-  // Step 90 — Open the Country dropdown
-  await page.locator('#country_id_0').click();
+  // Step 90 — Open the Country dropdown. Adapted: targeted by `name="country_id"`.
+  await page.locator('.o_field_widget[name="country_id"] input').first().click();
   await captureStep(page, 90, 'open-country-dropdown');
 
   // Step 100 — "Search More..." on Country
@@ -86,38 +97,33 @@ test('Create the cash Customer tour replay', async ({ page }) => {
   await pickByText(page, '.modal tbody tr', 'Sri Lanka');
   await captureStep(page, 110, 'select-sri-lanka');
 
-  // Step 120 — Phone (recorded title is the literal value that was typed)
-  await page.locator('#phone_0').fill('+94 711234569');
+  // Step 120 — Phone (recorded title is the literal value that was typed). Adapted: targeted
+  // by `name="phone"` instead of `#phone_0`.
+  await field(page, 'phone').fill('+94 711234569');
   await captureStep(page, 120, 'type-phone');
 
-  // Step 130 — Email (recorded title is the literal value that was typed)
-  await page.locator('#email_0').fill('CDE@gmail.com');
+  // Step 130 — Email (recorded title is the literal value that was typed). Adapted: targeted
+  // by `name="email"` instead of `#email_0`.
+  await field(page, 'email').fill('CDE@gmail.com');
   await captureStep(page, 130, 'type-email');
 
-  // Step 170 — Open the "Sales & Purchase" tab. Adapted: reordered ahead of steps 140-160 —
-  // Customer Group, Payment Terms, and Payment Method all live on this tab, but the
-  // recorded sequence numbers put the Customer Group fields (140-160) before the tab
-  // click (170), which doesn't match this form's actual layout (confirmed by screenshot:
-  // the field isn't present on the default "Contacts & Addresses" tab).
+  // Step 170 — Open the "Sales & Purchase" tab (Payment Terms and Payment Method live here).
   await page.locator('a[name="sales_purchases"]').click();
   await captureStep(page, 170, 'sales-purchase-tab');
 
-  // Step 140 — Open the Customer Group dropdown
-  await page.locator('#x_studio_customer_group_0').click();
-  await captureStep(page, 140, 'open-customer-group-dropdown');
+  // Steps 140/150/160 (recorded "Customer Group" selection, field `x_studio_customer_group`)
+  // are SKIPPED — that field no longer exists anywhere on this contact form in this instance
+  // (checked every tab's field names; none contain "group"). Same kind of environment drift
+  // as the missing `sale.res_partner_menu` menu item above — the tour was recorded against
+  // an older version of this Studio customization. See REVIEW.md.
 
-  // Step 150 — "Search More..." on Customer Group
-  await page.getByText('Search More...').first().click();
-  await captureStep(page, 150, 'customer-group-search-more');
-
-  // Step 160 — Select the "CAC" customer group. Adapted: matched by visible text instead of
-  // the recorder's positional `tr:nth-of-type(1)` — see step 110 for why a plain dialog
-  // table row shouldn't be targeted by position.
-  await pickByText(page, '.modal tbody tr, .modal .o_data_row', 'CAC');
-  await captureStep(page, 160, 'select-cac-group');
-
-  // Step 180 — Open the Payment Terms dropdown
-  await page.locator('#property_payment_term_id_0').click();
+  // Step 180 — Open the Payment Terms dropdown. Adapted: targeted by
+  // `name="property_payment_term_id"` instead of `#property_payment_term_id_0`, and types
+  // the target text first — this many2one's dropdown doesn't show any options on a bare
+  // click, only once there's something to filter by.
+  const paymentTermInput = page.locator('.o_field_widget[name="property_payment_term_id"] input').first();
+  await paymentTermInput.click();
+  await paymentTermInput.fill('Immediate');
   await captureStep(page, 180, 'open-payment-term-dropdown');
 
   // Step 190 — Select "Immediate Payment". Adapted: matched by visible text instead of the
@@ -127,8 +133,9 @@ test('Create the cash Customer tour replay', async ({ page }) => {
 
   // Step 200 — Payment Method. Adapted: unlike the ambiguous "Cash Credit" title seen on the
   // sales-order tour, this one is unambiguous — the tour is explicitly about creating *the
-  // cash* customer, so "Cash" is the clearly intended choice.
-  await page.locator('#x_studio_payment_method_0').selectOption({ label: 'Cash' });
+  // cash* customer, so "Cash" is the clearly intended choice. Targeted by
+  // `name="x_studio_payment_method"` instead of `#x_studio_payment_method_0`.
+  await page.locator('.o_field_widget[name="x_studio_payment_method"] select').selectOption({ label: 'Cash' });
   await captureStep(page, 200, 'select-payment-method');
 
   // Step 220 — Save
