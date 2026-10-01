@@ -1,0 +1,8 @@
+{
+  "name": "tour2playwright",
+  "private": true,
+  "scripts": {
+    "test": "playwright test --config=playwright.config.ts",
+    "manual": "node build-manual.js"
+  }
+}
