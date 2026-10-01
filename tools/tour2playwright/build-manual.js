@@ -33,9 +33,18 @@ const TOUR_NOTES = {
   'create-a-cash-customer': {
     adapted: new Set([10, 20, 30, 90, 110, 180, 190, 200]),
     excluded: new Set([140, 150, 160, 224]),
+    // The recorded title/content for 10/20/30 describe a menu path that no longer exists
+    // ("Click Sales Module" → "Orders" → "Customers") — the screenshots now show what the
+    // replay actually does instead (open the Home menu, click Contacts, land in Contacts),
+    // so the caption needs to say that too or image and text contradict each other.
+    overrides: {
+      10: { title: 'Open the Home menu', content: 'Click the Home menu (app switcher) icon to open the app grid.' },
+      20: { title: 'Click Contacts', content: 'Click the "Contacts" app tile — replaces the recorded Sales → Orders → Customers path, which no longer exists in this instance (see REVIEW.md).' },
+      30: { title: 'Contacts app loaded', content: 'The Contacts app list view is ready.' },
+    },
   },
 };
-const { adapted: ADAPTED_SEQUENCES, excluded: EXCLUDED_SEQUENCES } =
+const { adapted: ADAPTED_SEQUENCES, excluded: EXCLUDED_SEQUENCES, overrides: OVERRIDES = {} } =
   TOUR_NOTES[tourName] || { adapted: new Set(), excluded: new Set() };
 
 function screenshotFor(sequence) {
@@ -46,14 +55,17 @@ function screenshotFor(sequence) {
 function buildLocale(locale, localeLabel) {
   const steps = tour.steps
     .filter((s) => !EXCLUDED_SEQUENCES.has(s.sequence))
-    .map((s) => ({
-      sequence: s.sequence,
-      title: s.title_i18n?.[locale] || s.title || '',
-      content: s.content_i18n?.[locale] || s.content || '',
-      description: s.description_i18n?.[locale] || s.description || '',
-      screenshot: screenshotFor(s.sequence),
-      adapted: ADAPTED_SEQUENCES.has(s.sequence),
-    }));
+    .map((s) => {
+      const override = OVERRIDES[s.sequence];
+      return {
+        sequence: s.sequence,
+        title: override?.title ?? (s.title_i18n?.[locale] || s.title || ''),
+        content: override?.content ?? (s.content_i18n?.[locale] || s.content || ''),
+        description: override ? '' : (s.description_i18n?.[locale] || s.description || ''),
+        screenshot: screenshotFor(s.sequence),
+        adapted: ADAPTED_SEQUENCES.has(s.sequence),
+      };
+    });
 
   // ---- Markdown ----
   let md = `# ${tour.name} — User Manual (${localeLabel})\n\n`;

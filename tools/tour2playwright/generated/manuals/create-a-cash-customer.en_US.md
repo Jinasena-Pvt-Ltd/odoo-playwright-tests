@@ -8,9 +8,9 @@ Generated from an Odoo Tour Recorder export, replayed with Playwright, and scree
 
 ---
 
-## 1. Click Sales Module
+## 1. Open the Home menu
 
-Click Sales Module
+Click the Home menu (app switcher) icon to open the app grid.
 
 > **Note:** this step was adapted from the recorded tour — see REVIEW.md.
 
@@ -18,9 +18,9 @@ Click Sales Module
 
 ---
 
-## 2. Orders
+## 2. Click Contacts
 
-Click Orders
+Click the "Contacts" app tile — replaces the recorded Sales → Orders → Customers path, which no longer exists in this instance (see REVIEW.md).
 
 > **Note:** this step was adapted from the recorded tour — see REVIEW.md.
 
@@ -28,9 +28,9 @@ Click Orders
 
 ---
 
-## 3. Customers
+## 3. Contacts app loaded
 
-Click Customers
+The Contacts app list view is ready.
 
 > **Note:** this step was adapted from the recorded tour — see REVIEW.md.
 
