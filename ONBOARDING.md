@@ -50,11 +50,21 @@ Every `test.describe()` must carry **both** `@module:<domain>` and `@step:<step>
 
 ---
 
+### The `odoo-test-writer` Agent
+
+Instead of remembering which of the 5 skills above applies, you can just describe what you need in plain language — "add a test for X," "debug this failing spec," "review before I commit" — and the `odoo-test-writer` subagent (`.claude/agents/odoo-test-writer.md`) picks the right skill automatically. The slash commands still work directly too, for anyone who prefers them or is in an environment without subagent support.
+
+The agent re-reads `CLAUDE.md`/`ONBOARDING.md` fresh on every invocation rather than trusting stale memory of the convention, and after any spec-file change it runs `npm run lint` then `npm run report:generate` on its own — one less thing to remember before committing.
+
+It deliberately never runs `npm run report:consolidate` or edits `scripts/report-data/branches.json` — cross-module reporting stays a separate, occasional action for whoever owns it (see **Consolidated Cross-Branch Report** below), not something that happens as a side effect of routine test-writing.
+
+---
+
 ### Working in the Shared Repo
 
-All modules live on `main` — do not create branches per module. The `@module` tag system, `npm test`, and the master report only work when every module is on the same branch.
+This is a **single shared repo where each Odoo module lives on its own branch** (a `hr` branch, an `attendance` branch, a `repair` branch, …) — not as folders coexisting on `main`. Commit only to your own module's branch; `main` is the shared trunk, not where day-to-day module work happens.
 
-**Ownership:** Each team member owns their `src/modules/<domain>/` folder. Do not modify another module's files. `src/core/` is shared infrastructure — changes there need team agreement.
+**Ownership:** Your branch owns `src/modules/<domain>/`. `src/core/` is shared infrastructure — changes there need team agreement, since every module branch depends on it.
 
 **After scaffolding your module (`/add-module <domain>`), do two things:**
 1. Add to `package.json` scripts: `"test:<domain>": "playwright test --grep \"@module:<domain>\""`
@@ -62,14 +72,16 @@ All modules live on `main` — do not create branches per module. The `@module` 
 
 **Running tests:**
 ```bash
-npm run test:<domain>    # your module only — daily workflow
-npm test                 # all modules — run before raising a PR
+npm run test:<domain>    # your module — daily workflow
+npm test                 # everything on your branch — run before merging
 ```
 
-**PR workflow:**
-- Scope each PR to `src/modules/<domain>/` — one module per PR
+**Seeing every module together:** your branch's own `reports/master-report-*.html` only covers your module. Use `npm run report:consolidate` (see **Consolidated Cross-Branch Report** below) to roll up stats across every module branch.
+
+**Merge workflow:**
+- Keep changes scoped to `src/modules/<domain>/` on your branch (touch `src/core/` only with team agreement)
 - Run `npm run lint` and `/review-tests src/modules/<domain>/tests/` before pushing
-- Never commit `auth-storage/`, `playwright-report/`, `test-results/`, or `reports/` — all gitignored
+- Never commit `auth-storage/`, `playwright-report/`, or `test-results/` — gitignored. `reports/` is also gitignored, but the master report and `reports/summary.json` are the deliberate exception — force-added per the Report Convention below.
 
 ---
 
@@ -129,6 +141,40 @@ Edit these JSON files to add new findings or update skip reasons — the generat
 npx playwright test --project=setup --project=<role>
 ```
 Use this during development. Run all configured roles only before raising a PR.
+
+**Committing your report:** each run of `generate-report.js` also writes `reports/summary.json` — a small stats snapshot for your branch. Commit both together:
+```bash
+git add -f reports/master-report-*.html reports/summary.json
+```
+
+---
+
+### Consolidated Cross-Branch Report
+
+Each module lives on its own branch. Anyone can roll up every branch's stats into one overview, from any branch, without checking any of them out:
+
+```bash
+npm run report:consolidate
+```
+
+- Reads `scripts/report-data/branches.json` for the list of module branches to include (add a new branch name here once that module starts committing reports)
+- Pulls each branch's `reports/summary.json` and master-report HTML via `git show <branch>:<path>` — this reads the file straight from that branch's history without switching your working tree
+- Writes `reports/consolidated-report-YYYY-MM-DD.html` (grand totals + a tile per branch) plus `reports/branches/<branch>.html` copies so each tile's "View full report" link works locally
+- Branches with no `summary.json` yet, or that don't exist, are listed separately as gaps — never silently dropped
+- Both outputs are **local and on-demand** — regenerate anytime, nothing here gets committed
+
+---
+
+### Tours → Tests → Manuals
+
+If you have an Odoo Tour Recorder JSON export, hand it to Claude — the `tour2playwright` agent (`.claude/agents/tour2playwright.md`) turns it into a Playwright regression spec plus illustrated user manuals automatically. You only ever provide the tour export file path.
+
+**What it produces**, under `tools/tour2playwright/generated/` (gitignored, local, regenerate-on-demand):
+- A Playwright spec per tour, screenshotting each step as it runs (verifies the guide still works, not just documents it)
+- A Markdown manual **and** a self-contained HTML manual per language — the HTML embeds its screenshots as base64, so you can open it in a browser, select all, and paste it straight into Odoo Knowledge with formatting and images intact
+- `REVIEW.md` listing every step the translator couldn't map with full confidence — treat generated specs as a strong first draft, not ground truth
+
+**Credentials:** it reads this repo's root `.env` — the same one the rest of the suite uses — so there's nothing separate to configure. Because it runs against the same Odoo instance the test suite already exercises, the same care applies: the generated specs perform real clicks and can create real records.
 
 ---
 
@@ -191,7 +237,9 @@ Regardless of project state, create (or overwrite if outdated):
 4. `.claude/commands/new-page.md`
 5. `.claude/commands/debug-test.md`
 6. `.claude/commands/review-tests.md`
-7. `ONBOARDING.md` — this file itself (skip if already present)
+7. `.claude/agents/odoo-test-writer.md` — from the **Agent Files** section
+8. `.claude/agents/tour2playwright.md` — from the **Agent Files** section
+9. `ONBOARDING.md` — this file itself (skip if already present)
 
 ### Step 4 — Final checks
 
@@ -214,6 +262,8 @@ The 5 skill files in `.claude/commands/` register as slash commands (`/add-modul
 | Review tests for violations / `/review-tests` | **Skill Files → review-tests.md** section below |
 
 When a user types `/add-module recruitment` and you are **not** in the Claude Code terminal, treat it as "scaffold a new module called recruitment" and execute the add-module instructions directly — do not tell the user the command isn't recognized.
+
+Subagents (like `odoo-test-writer`) are likewise a Claude Code CLI/SDK concept and won't be available everywhere. In any environment without subagent support, don't just skip its behavior — follow the same table above to pick the right skill, and still run `npm run lint` then `npm run report:generate` afterward yourself, matching what the agent would have done automatically.
 
 ---
 
@@ -449,6 +499,7 @@ src/
         ├── pages/                 FormPage, ListPage, KanbanPage
         ├── data/                  <domain>.master-data.ts, <domain>.validation-cases.ts
         ├── calculations/          Business calculation helpers
+        ├── notes/                 <domain>.notes.md — free-form domain notes, gotchas, context
         └── tests/
             ├── 01-config/         <domain>.config.spec.ts
             ├── 02-business/       <domain>.business.spec.ts
@@ -583,8 +634,9 @@ npm run test:report              # run tests then regenerate with real pass/fail
 - **Master report:** `reports/master-report-YYYY-MM-DD.html` — all domains, section anchors `#<domain>-<step>`
 - **Generator:** `scripts/generate-report.js` — scans `src/modules/**/*.spec.ts`, parses every `test()` declaration, infers RPC/UI type from fixture params
 - **Results:** when `test-results/results.json` exists (written automatically by `playwright test`), the report shows real ✅/❌/⏭ status; otherwise tests show as ⬜ pending
+- **Summary artifact:** each run also writes `reports/summary.json` — a stats snapshot consumed by `report:consolidate` to roll up every module branch into one overview
 - **Auto-update hook:** the Stop hook regenerates the report automatically whenever a `*.spec.ts` file is changed during a Claude turn — the updated report is committed alongside the spec change
-- **Commit:** `git add -f reports/master-report-*.html` (reports/ is gitignored)
+- **Commit:** `git add -f reports/master-report-*.html reports/summary.json` (reports/ is gitignored)
 
 ---
 
@@ -626,6 +678,8 @@ src/modules/<module>/
 │   └── <module>.validation-cases.ts
 ├── calculations/
 │   └── <Module>Calculations.ts
+├── notes/
+│   └── <module>.notes.md
 └── tests/
     ├── 01-config/    <module>.config.spec.ts
     ├── 02-business/  <module>.business.spec.ts
@@ -688,6 +742,16 @@ export const <MODULE>_VALIDATION_CASES: typeof <MODULE>_MANDATORY_FIELDS = [];
 
 ```typescript
 // TODO: Add business calculation functions specific to this module.
+```
+
+### `notes/<module>.notes.md`
+
+```markdown
+# <Module> — Notes
+
+Free-form domain notes for the <module> module: Odoo quirks, SaaS-specific
+constraints, decisions, and anything future contributors on this branch
+should know that doesn't belong in test code or CLAUDE.md.
 ```
 
 ### Spec Files (all 7)
@@ -957,6 +1021,115 @@ File path/glob or auto-detect from `git status --short`.
 ### Suggestions (WARN/INFO)
 ```
 If clean: `All convention checks passed for <file>.`
+````
+
+---
+
+## Agent Files
+
+Write this file to `.claude/agents/<filename>` exactly as shown.
+
+---
+
+### `.claude/agents/odoo-test-writer.md`
+
+````markdown
+---
+name: odoo-test-writer
+description: Use for any Odoo Playwright test work on this branch — scaffolding a new module, writing/editing a spec file, creating a page object, debugging a failing test, or reviewing tests before commit. Proactively invoke when the user asks to add/write/fix/debug/review a test, page object, or module in this repo.
+tools: Read, Write, Edit, Glob, Grep, Bash
+model: sonnet
+---
+
+You write and maintain Odoo 17 Playwright E2E tests for this repo.
+
+## Always start here
+
+Read `CLAUDE.md` and `ONBOARDING.md` in the repo root before doing anything else —
+they are the current source of truth for the folder/step convention, tag system,
+and coding rules. Do not rely on what a previous session or a cached memory said;
+re-read every time, because these conventions change (folder counts, tag names,
+and rules have all shifted before).
+
+## Your five jobs
+
+Match the request to one of `.claude/commands/`, and follow that file's procedure:
+- **Scaffold a new module** → `add-module.md`
+- **Write or edit a test** → `new-test.md`
+- **Create a page object** → `new-page.md`
+- **Debug a failing test** → `debug-test.md`
+- **Review before commit** → `review-tests.md`
+
+## Branch discipline
+
+This is a single shared repo where each Odoo module lives on its own branch.
+Work only on the current branch and its own `src/modules/<module>/` folder.
+Never modify `src/core/` without being asked. Never touch `main`/`master`, and
+never commit to any branch other than the one currently checked out.
+
+## After any spec-file change
+
+Run `npm run lint`, then `npm run report:generate`, before reporting the task done.
+When committing, the report artifacts are force-added alongside the spec change:
+`git add -f reports/master-report-*.html reports/summary.json`.
+
+## Cross-branch reporting (read-only awareness)
+
+`npm run report:consolidate` rolls up every branch listed in
+`scripts/report-data/branches.json` into one dashboard. This is a deliberate,
+occasional action taken by whoever owns cross-module reporting — do not run it
+or edit `branches.json` as a side effect of routine test-writing work. If asked
+about cross-branch status, point to this command rather than running it yourself.
+````
+
+---
+
+### `.claude/agents/tour2playwright.md`
+
+````markdown
+---
+name: tour2playwright
+description: Use when the user provides an Odoo Tour Recorder JSON export (a tour.json file) and wants Playwright regression tests and/or illustrated user manuals generated from it. Proactively invoke when the user mentions a tour export, a recorded tour, or asks to convert/generate tests or manuals from one.
+tools: Read, Write, Edit, Glob, Grep, Bash
+model: sonnet
+---
+
+You run the `tour2playwright` pipeline (`tools/tour2playwright/`) to turn an Odoo Tour
+Recorder JSON export into Playwright regression specs and illustrated HTML/Markdown
+manuals. The user should only ever have to hand you a tour export file path.
+
+## Before running anything
+
+Check `tools/tour2playwright/node_modules/` exists; if not, run `npm install` and
+`npx playwright install chromium` inside `tools/tour2playwright/` first. Credentials
+come from this repo's root `.env` (the same one the test suite uses) — there is no
+separate `.env` for this tool, so no setup prompt is needed for that.
+
+## Running the pipeline
+
+From `tools/tour2playwright/`, run:
+```bash
+npm run build -- <path-to-export.json>
+```
+This generates specs, runs them (capturing screenshots), and builds the manuals in one
+step. Use `npm run gen -- <path>` / `npm run manual -- <path>` separately only if the
+user explicitly wants to inspect specs before running them.
+
+## After it finishes
+
+Report back:
+- How many tour specs were generated and where (`generated/specs/`)
+- Whether the test run passed, and where the Playwright report is (`generated/report/`)
+- Which manuals were produced, in which languages, and remind the user the `.html`
+  manual (`generated/manuals/<slug>.<lang>.html`) is the one to open in a browser and
+  copy-paste directly into Odoo Knowledge — it embeds its screenshots, so formatting
+  and images should carry over as-is
+- **Always read and summarize `generated/REVIEW.md`** if it exists — this lists every
+  step the translator couldn't map with confidence. Treat generated specs as a strong
+  first draft, not ground truth; tell the user exactly what needs manual review.
+
+Never commit anything under `tools/tour2playwright/generated/` — it's gitignored, local,
+regenerate-on-demand output, not a source artifact.
 ````
 
 ---
