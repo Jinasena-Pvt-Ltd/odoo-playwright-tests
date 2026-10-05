@@ -1208,3 +1208,16 @@ create it to html document.what's fail and what's pass.i want to step by step ho
 **Files touched:**
 - Write: C:\Users\Urliyas\Documents\GitHub\Sales-Testing-Step-testing\Test-Run-Report-3.html
 
+
+---
+
+## Change -- 2026-10-05T08:31:25Z
+
+**Prompt:**
+```
+The path to check the taxes is wrong. The menu item is accounting/taxes. not accounting/configuration/accounting/taxes. check the screenshot
+```
+
+**Files touched:**
+- Edit: C:\Users\Urliyas\Documents\GitHub\Sales-Testing-Step-testing\tests\Step-07.00-Validate-Quotation-Line-Amount-Calculations.spec.ts
+
