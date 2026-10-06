@@ -1405,3 +1405,17 @@ can i get the html report
 - Write: C:\Users\Urliyas\Documents\GitHub\Sales-Testing-Step-testing\tests\zz-probe-cost.spec.ts
 - Write: C:\Users\Urliyas\Documents\GitHub\Sales-Testing-Step-testing\Test-Run-Report-7.html
 
+
+---
+
+## Change -- 2026-10-06T10:07:35Z
+
+**Prompt:**
+```
+Fix the product cost reading in Step 08.00, and credit limits approval can admin.malsha hewage working as a admin in company
+```
+
+**Files touched:**
+- Edit: C:\Users\Urliyas\Documents\GitHub\Sales-Testing-Step-testing\tests\Step-08.00-Insufficient-Margin.spec.ts
+- Edit: C:\Users\Urliyas\Documents\GitHub\Sales-Testing-Step-testing\tests\Step-09.00-Credit-Limit-Control.spec.ts
+
