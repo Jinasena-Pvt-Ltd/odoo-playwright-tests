@@ -1419,3 +1419,24 @@ Fix the product cost reading in Step 08.00, and credit limits approval can admin
 - Edit: C:\Users\Urliyas\Documents\GitHub\Sales-Testing-Step-testing\tests\Step-08.00-Insufficient-Margin.spec.ts
 - Edit: C:\Users\Urliyas\Documents\GitHub\Sales-Testing-Step-testing\tests\Step-09.00-Credit-Limit-Control.spec.ts
 
+
+---
+
+## Change -- 2026-10-06T10:11:18Z
+
+**Prompt:**
+```
+<task-notification>
+<task-id>bqwkozv9u</task-id>
+<tool-use-id>toolu_012rzgrP5XqvxsztfYU5EEeL</tool-use-id>
+<output-file>C:\Users\Urliyas\AppData\Local\Temp\claude\c--Users-Urliyas-Documents-GitHub-odoo-playwright-tests\bf7c8ac6-556f-4d9a-8b6b-41ee218a2890\tasks\bqwkozv9u.output</output-file>
+<status>completed</status>
+<summary>Background command "Set-Location C:\Users\Urliyas\Documents\GitHub\Sales-Testing-Step-testing; $env:PLAYWRIGHT_JSON_OUTPUT_NAME="$PWD\run19.json"; npx playwright test tests/Step-08.00-Insufficient-Margin.spec.ts tests/Step-09.00-Credit-Limit-Control.spec.ts --workers=1 --reporter=json 2&gt;$null | Out-Null; node -e "
+const r=require('./run19.json');function walk(s){for(const sp of s.specs||[]){const x=sp.tests[0].results[0];console.log(sp.title,'=&gt;',x.status,Math.round(x.duration/1000)+'s',(x.error?.message||'').replace(/\x1b\[[0-9;]*m/g,'').split('\n')[0])}for(const c of s.suites||[])walk(c)}r.suites.forEach(walk)"
+foreach($f in 'Step-08.00-Insufficient-Margin-result.HTML','Step-09.00-Credit-Limit-Control-result.HTML'){ "== $f"; $t=(Get-Content test-results\$f -Raw) -replace '&lt;/tr&gt;',"`n" -replace '&lt;[^&gt;]*&gt;',' ' -replace '[ \t]+',' '; ($t -split "`n") | Where-Object { $_ -match 'CENTRIC|BALL|Minimum Sales Margin [\d]|Actual Result|Click |Approve|OVERALL|Confirm' -and $_ -notmatch 'Expected Result' } | ForEach-Object { $_.Trim().Substring(0,[Math]::Min(400,$_.Trim().Length)) } }" completed (exit code 0)</summary>
+</task-notification>
+```
+
+**Files touched:**
+- Edit: C:\Users\Urliyas\Documents\GitHub\Sales-Testing-Step-testing\tests\Step-09.00-Credit-Limit-Control.spec.ts
+
