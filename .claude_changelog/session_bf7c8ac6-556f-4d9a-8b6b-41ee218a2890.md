@@ -1221,3 +1221,16 @@ The path to check the taxes is wrong. The menu item is accounting/taxes. not acc
 **Files touched:**
 - Edit: C:\Users\Urliyas\Documents\GitHub\Sales-Testing-Step-testing\tests\Step-07.00-Validate-Quotation-Line-Amount-Calculations.spec.ts
 
+
+---
+
+## Change -- 2026-10-06T04:05:20Z
+
+**Prompt:**
+```
+use this path
+```
+
+**Files touched:**
+- Edit: C:\Users\Urliyas\Documents\GitHub\Sales-Testing-Step-testing\tests\Step-08.00-Insufficient-Margin.spec.ts
+
