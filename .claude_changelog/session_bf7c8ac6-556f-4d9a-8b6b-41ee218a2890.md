@@ -1372,3 +1372,16 @@ use this path
 **Files touched:**
 - Edit: C:\Users\Urliyas\Documents\GitHub\Sales-Testing-Step-testing\tests\Step-09.00-Credit-Limit-Control.spec.ts
 
+
+---
+
+## Change -- 2026-10-06T09:07:37Z
+
+**Prompt:**
+```
+can i get the html report
+```
+
+**Files touched:**
+- Write: C:\Users\Urliyas\Documents\GitHub\Sales-Testing-Step-testing\Test-Run-Report-6.html
+
