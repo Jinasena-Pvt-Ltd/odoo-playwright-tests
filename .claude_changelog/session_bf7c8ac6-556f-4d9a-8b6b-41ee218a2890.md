@@ -1598,3 +1598,16 @@ yes. port it in to odoo-playwright-tests as a sales.don't delete anything in Sal
 - Edit: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\package.json
 - Edit: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\CLAUDE.md
 
+
+---
+
+## Change -- 2026-10-07T05:44:54Z
+
+**Prompt:**
+```
+i want the html report step by step how t pass
+```
+
+**Files touched:**
+- Edit: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\pages\SalesPage.ts
+

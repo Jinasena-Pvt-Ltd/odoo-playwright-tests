@@ -283,20 +283,30 @@ export abstract class SalesFormBase extends BaseFormPage {
     // A disabled Save button (form flagged invalid) cannot be clicked: that is Odoo refusing the save.
     const clicked = await saveBtn.click({ timeout: 20_000 }).then(() => true).catch(() => false);
 
-    // Wait for the real outcome only: Save button gone (saved), a dialog, or a field flagged invalid.
-    // A notification is NOT an outcome: an unrelated toast may already be on screen and would end the
-    // wait before the save has finished.
-    if (clicked) await Promise.race([
-      saveBtn.waitFor({ state: 'hidden', timeout: 30_000 }),
-      this.page.getByRole('dialog').first().waitFor({ state: 'visible', timeout: 30_000 }),
-      this.page.locator('.o_field_invalid').first().waitFor({ state: 'visible', timeout: 30_000 }),
-    ]).catch(() => undefined);
+    // Odoo reports a refused save as a dialog, a field flagged invalid, or a short-lived toast. A toast
+    // disappears within seconds, so its text is captured the moment it appears. A toast alone does not end
+    // the wait: the save may still be finishing, so the Save button gets a short window to disappear.
+    let toast = '';
+    if (clicked) {
+      const toastSeen = this.page.locator('.o_notification').first()
+        .waitFor({ state: 'visible', timeout: 30_000 })
+        .then(async () => {
+          toast = squash(await this.page.locator('.o_notification').first().textContent({ timeout: 2_000 }).catch(() => ''));
+        });
+      await Promise.race([
+        saveBtn.waitFor({ state: 'hidden', timeout: 30_000 }),
+        this.page.getByRole('dialog').first().waitFor({ state: 'visible', timeout: 30_000 }),
+        this.page.locator('.o_field_invalid').first().waitFor({ state: 'visible', timeout: 30_000 }),
+        toastSeen.then(() => saveBtn.waitFor({ state: 'hidden', timeout: 12_000 })),
+      ]).catch(() => undefined);
+    }
 
     const dialog = this.page.getByRole('dialog').first();
     const dialogText = (await dialog.isVisible({ timeout: 1_000 }).catch(() => false))
       ? squash(await dialog.textContent().catch(() => ''))
       : '';
-    const notification = squash(await this.page.locator('.o_notification').first().textContent({ timeout: 1_000 }).catch(() => ''));
+    const notification = toast
+      || squash(await this.page.locator('.o_notification').first().textContent({ timeout: 1_000 }).catch(() => ''));
     const invalidFields = await this.page.locator('.o_field_invalid').count();
     const saved = (await saveBtn.isHidden().catch(() => false)) && dialogText === '';
     return { saved, invalidFields, notification, dialog: dialogText };
