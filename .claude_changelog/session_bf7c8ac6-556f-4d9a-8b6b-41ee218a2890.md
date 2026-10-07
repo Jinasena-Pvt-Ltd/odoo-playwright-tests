@@ -1530,3 +1530,16 @@ give the access to Malsha Hewage,as a admin credit limit approval and run test a
 **Files touched:**
 - Write: C:\Users\Urliyas\Documents\GitHub\Sales-Testing-Step-testing\Test-Run-Report-10.html
 
+
+---
+
+## Change -- 2026-10-07T03:25:08Z
+
+**Prompt:**
+```
+Make Malsha Hewage the approver in Odoo. Change the setting names  as the Malsha Hewage approver .
+```
+
+**Files touched:**
+- Write: C:\Users\Urliyas\Documents\GitHub\Sales-Testing-Step-testing\tests\zz-probe-settings.spec.ts
+
