@@ -277,14 +277,15 @@ export abstract class SalesFormBase extends BaseFormPage {
   // ── Saving ──────────────────────────────────────────────────────────────────
 
   /** Clicks Save and reports what Odoo did, without throwing when the save is refused. */
-  async trySave(): Promise<SaveOutcome> {
+  async trySave(opts: { strict?: boolean } = {}): Promise<SaveOutcome> {
     const saveBtn = this.page.locator('.o_form_button_save').first();
     // Nothing to save (clean form): there is no Save button, so the record is already stored.
     if (!(await saveBtn.isVisible({ timeout: 5_000 }).catch(() => false))) {
       return { saved: true, invalidFields: 0, notification: '', dialog: '' };
     }
-    const crumb = async () => squash(await this.page.locator('.o_control_panel .o_breadcrumb').first().textContent().catch(() => ''));
-    const crumbBefore = await crumb();
+    // The record title ("New" until the first save, then e.g. "S02058").
+    const title = async () => squash(await this.page.locator('.o_form_view h1').first().textContent({ timeout: 2_000 }).catch(() => ''));
+    const titleBefore = await title();
     // A disabled Save button (form flagged invalid) cannot be clicked: that is Odoo refusing the save.
     const clicked = await saveBtn.click({ timeout: 20_000 }).then(() => true).catch(() => false);
 
@@ -313,11 +314,17 @@ export abstract class SalesFormBase extends BaseFormPage {
     const notification = toast
       || squash(await this.page.locator('.o_notification').first().textContent({ timeout: 1_000 }).catch(() => ''));
     const invalidFields = await this.page.locator('.o_field_invalid').count();
-    // Saved = the Save button went away, OR a brand-new record received its number (breadcrumb "New" → "S0…").
-    // The second signal matters because Odoo can re-flag the form as modified right after a successful save.
-    const crumbAfter = await crumb();
-    const recordCreated = /(^|\s)New\s*$/.test(crumbBefore) && crumbAfter !== '' && !/(^|\s)New\s*$/.test(crumbAfter);
-    const saved = ((await saveBtn.isHidden().catch(() => false)) || recordCreated) && dialogText === '';
+    // This Odoo re-flags the form as modified right after a successful save (the Save icon comes back), so the
+    // button alone is not proof of a refusal. Saved means: no dialog, and either the Save button went away, or a
+    // brand-new record received its number ("New" → "S0…"), or (quotations) nothing at all signalled a refusal.
+    // `strict` (used for the customer form) trusts only the Save button.
+    const titleAfter = await title();
+    const isNew = (t: string) => /^\s*New\s*$/i.test(t);
+    const recordCreated = isNew(titleBefore) && titleAfter !== '' && !isNew(titleAfter);
+    const btnHidden = await saveBtn.isHidden().catch(() => false);
+    const saved = opts.strict
+      ? btnHidden && dialogText === ''
+      : dialogText === '' && invalidFields === 0 && (btnHidden || recordCreated || notification === '');
     return { saved, invalidFields, notification, dialog: dialogText };
   }
 
@@ -566,30 +573,24 @@ export class CustomerFormPage extends SalesFormBase {
     super(page);
   }
 
-  /** Sets the Customer Group (a Many2one, with <select> and label fallbacks). */
+  /** Sets the Customer Group. The field is found by its visible label (a combobox); nothing happens if it already shows the group. */
   async setCustomerGroup(group: string): Promise<void> {
-    const widget = this.page.locator('[name="x_customer_group_id"], [name="customer_group_id"]').first();
-    await widget.waitFor({ state: 'visible', timeout: 15_000 }).catch(() => {});
-    const input = widget.locator('input').first();
-
-    // Already set (shown as text, or as the input's value): nothing to do.
-    const shownText = squash(await widget.textContent().catch(() => ''));
-    const inputValue = await input.inputValue().catch(() => '');
-    if (`${shownText} ${inputValue}`.includes(group)) return;
-
-    if (await input.waitFor({ state: 'visible', timeout: 5_000 }).then(() => true).catch(() => false)) {
-      if ((await input.inputValue()).trim() === group) return;
-      await input.click();
-      await input.selectText();
-      await input.fill(group);
-      const drop = this.page.locator('.o-autocomplete--dropdown-menu');
-      await expect(drop).toBeVisible({ timeout: 30_000 });
-      await drop.locator('li, .o-autocomplete--dropdown-item').filter({ hasText: group }).first().click();
-    } else {
-      const select = widget.locator('select').first();
-      await select.selectOption({ label: group }, { timeout: 10_000 })
-        .catch(() => select.selectOption({ value: group }, { timeout: 10_000 }));
+    const field = this.page.getByRole('combobox', { name: /customer\s*group/i }).first();
+    if (!(await field.isVisible({ timeout: 10_000 }).catch(() => false))) {
+      // Read-only display: the label "Customer Group" followed by the value as plain text.
+      const formText = squash(await this.page.locator('.o_form_view').first().textContent().catch(() => ''));
+      if (new RegExp(`Customer Group\\s*${group}`).test(formText)) return; // already set, nothing to do
+      throw new Error(`Customer Group is not ${group} and cannot be edited on this customer form`);
     }
+    const current = (await field.inputValue().catch(() => '')) || (await field.textContent().catch(() => '')) || '';
+    if (current.includes(group)) return; // already set
+
+    await field.click();
+    await field.selectText().catch(() => {});
+    await field.fill(group);
+    const drop = this.page.locator('.o-autocomplete--dropdown-menu');
+    await expect(drop).toBeVisible({ timeout: 30_000 });
+    await drop.locator('li, .o-autocomplete--dropdown-item').filter({ hasText: group }).first().click();
     await this.page.locator('.o_field_widget.o_field_many2one.o_loading').waitFor({ state: 'hidden', timeout: 10_000 }).catch(() => {});
   }
 

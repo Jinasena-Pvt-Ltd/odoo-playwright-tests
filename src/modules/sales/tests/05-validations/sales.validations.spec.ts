@@ -89,7 +89,7 @@ test.describe('Sales Field Validations @module:sales @step:validations', () => {
         await amount.press('Tab');
         await customer.setInput(expiry, validDate);
         await expiry.press('Escape');
-        const outcome = await customer.trySave();
+        const outcome = await customer.trySave({ strict: true });
         expect(outcome.saved, 'saved with a blank Bank Guarantee amount').toBe(false);
         expect(outcome.dialog, 'Odoo should explain that the amount is required').toMatch(/bank guarantee amount/i);
         await customer.dismissDialog('stay');
@@ -100,7 +100,7 @@ test.describe('Sales Field Validations @module:sales @step:validations', () => {
         await amount.press('Tab');
         await customer.setInput(expiry, '');
         await expiry.press('Escape');
-        const outcome = await customer.trySave();
+        const outcome = await customer.trySave({ strict: true });
         // The expiry-date message is brief and auto-dismissing, so only the refusal itself is asserted.
         expect(outcome.saved, 'saved with a blank Bank Guarantee expiry date').toBe(false);
         await customer.dismissDialog('stay');
@@ -111,7 +111,7 @@ test.describe('Sales Field Validations @module:sales @step:validations', () => {
         await amount.press('Tab');
         await customer.setInput(expiry, '');
         await expiry.press('Escape');
-        const outcome = await customer.trySave();
+        const outcome = await customer.trySave({ strict: true });
         expect(outcome.saved, 'saved with both Bank Guarantee fields blank').toBe(false);
         expect(
           outcome.invalidFields > 0 || outcome.dialog !== '' || outcome.notification !== '',
