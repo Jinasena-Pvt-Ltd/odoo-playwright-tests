@@ -560,7 +560,14 @@ export class CustomerFormPage extends SalesFormBase {
   /** Sets the Customer Group (a Many2one, with <select> and label fallbacks). */
   async setCustomerGroup(group: string): Promise<void> {
     const widget = this.page.locator('[name="x_customer_group_id"], [name="customer_group_id"]').first();
+    await widget.waitFor({ state: 'visible', timeout: 15_000 }).catch(() => {});
     const input = widget.locator('input').first();
+
+    // Already set (shown as text, or as the input's value): nothing to do.
+    const shownText = squash(await widget.textContent().catch(() => ''));
+    const inputValue = await input.inputValue().catch(() => '');
+    if (`${shownText} ${inputValue}`.includes(group)) return;
+
     if (await input.waitFor({ state: 'visible', timeout: 5_000 }).then(() => true).catch(() => false)) {
       if ((await input.inputValue()).trim() === group) return;
       await input.click();
@@ -571,7 +578,8 @@ export class CustomerFormPage extends SalesFormBase {
       await drop.locator('li, .o-autocomplete--dropdown-item').filter({ hasText: group }).first().click();
     } else {
       const select = widget.locator('select').first();
-      await select.selectOption({ label: group }).catch(() => select.selectOption({ value: group }));
+      await select.selectOption({ label: group }, { timeout: 10_000 })
+        .catch(() => select.selectOption({ value: group }, { timeout: 10_000 }));
     }
     await this.page.locator('.o_field_widget.o_field_many2one.o_loading').waitFor({ state: 'hidden', timeout: 10_000 }).catch(() => {});
   }

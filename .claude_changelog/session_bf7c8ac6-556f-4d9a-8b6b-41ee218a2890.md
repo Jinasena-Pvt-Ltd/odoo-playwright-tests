@@ -1611,3 +1611,17 @@ i want the html report step by step how t pass
 **Files touched:**
 - Edit: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\pages\SalesPage.ts
 
+
+---
+
+## Change -- 2026-10-07T05:51:21Z
+
+**Prompt:**
+```
+run the that test cases and want me the html report step by step.not final
+```
+
+**Files touched:**
+- Edit: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\pages\SalesPage.ts
+- Edit: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\scripts\generate-report.js
+

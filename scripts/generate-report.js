@@ -38,7 +38,9 @@ const PKG_NAME = (() => {
 //          sub: 'Employees · Contracts · Approvals', css: 'hr', nav: 'HR Module', id: 'hr' }
 // The `css` field is used as a CSS class suffix for module-card and mod-header rules.
 // The `color` field drives the generated border/gradient CSS for that module.
-const MODULE_META = {};
+const MODULE_META = {
+  sales: { color: '#f59e0b', icon: '💼', name: 'Sales', sub: 'Quotations · Approvals · Validations', css: 'sales', nav: 'Sales Module', id: 'sales' },
+};
 
 const fallback = (mod) => ({
   color: '#64748b', icon: '📦', name: mod, sub: '', css: 'other',
