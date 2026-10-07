@@ -1571,3 +1571,30 @@ Don't touch my another file without my premission.only use the odoo-playwright-t
 - Write: C:\Users\Urliyas\.claude\projects\c--Users-Urliyas-Documents-GitHub-odoo-playwright-tests\memory\feedback_stay-in-this-repo.md
 - Write: C:\Users\Urliyas\.claude\projects\c--Users-Urliyas-Documents-GitHub-odoo-playwright-tests\memory\MEMORY.md
 
+
+---
+
+## Change -- 2026-10-07T05:13:39Z
+
+**Prompt:**
+```
+yes. port it in to odoo-playwright-tests as a sales.don't delete anything in Sales-Testing-Step-testing
+```
+
+**Files touched:**
+- Write: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\calculations\SalesCalculations.ts
+- Write: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\data\sales.master-data.ts
+- Write: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\data\sales.validation-cases.ts
+- Edit: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\data\sales.validation-cases.ts
+- Write: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\pages\SalesPage.ts
+- Write: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\01-config\sales.config.spec.ts
+- Write: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\02-business\sales.business.spec.ts
+- Write: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\05-validations\sales.validations.spec.ts
+- Write: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\06-edge-cases\sales.edge-cases.spec.ts
+- Write: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\03-reporting\sales.reports.spec.ts
+- Write: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\04-permissions\sales.permissions.spec.ts
+- Write: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\07-archive\sales.archive.spec.ts
+- Write: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\notes\sales.notes.md
+- Edit: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\package.json
+- Edit: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\CLAUDE.md
+

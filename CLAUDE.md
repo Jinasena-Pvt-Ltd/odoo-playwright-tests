@@ -84,6 +84,7 @@ src/
 |-----|---------|
 | `@module:<domain>` | The Odoo module being tested |
 | `@module:security-audit` | Daily user group & CRUD permission audit |
+| `@module:sales` | Sales module (quotations, margin & credit-limit approvals, validations) |
 | `@step:config` | Step 1 — configuration/setup |
 | `@step:business` | Step 2 — business logic |
 | `@step:reporting` | Step 3 — views and exports |
