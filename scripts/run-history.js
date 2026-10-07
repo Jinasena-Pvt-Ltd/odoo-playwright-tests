@@ -107,15 +107,29 @@ function record() {
   const report = readJsonLike(file);
   const tests = collect(report, arg('--module'));
   if (Object.keys(tests).length === 0) throw new Error('No tests found in the result file (check --module).');
+  // --overrides <file.json>: rebuild a past run from notes. The result file is only used for the list of tests;
+  // statuses come from rules: { "default": "NOTRUN", "rules": [ { "match": "regex on test title", "status": "PASS|FAIL|SKIP", "error": "text" } ] }
+  const overridesFile = arg('--overrides');
+  if (overridesFile) {
+    const ov = JSON.parse(fs.readFileSync(path.resolve(ROOT, overridesFile), 'utf8'));
+    const rules = (ov.rules || []).map((r) => ({ ...r, re: new RegExp(r.match, 'i') }));
+    Object.values(tests).forEach((t) => {
+      const rule = rules.find((r) => r.re.test(t.title));
+      t.status = rule ? rule.status : (ov.default || 'NOTRUN');
+      t.error = rule && rule.status === 'FAIL' ? (rule.error || '') : '';
+      t.durationMs = rule && rule.durationMs ? rule.durationMs : 0;
+      t.flaky = false;
+    });
+  }
   const history = loadHistory();
   const id = history.runs.length ? history.runs[history.runs.length - 1].id + 1 : 1;
   history.runs.push({
     id,
-    at: (report.stats && report.stats.startTime) || new Date().toISOString(),
-    durationMs: (report.stats && report.stats.duration) || 0,
+    at: arg('--at') || (report.stats && report.stats.startTime) || new Date().toISOString(),
+    durationMs: overridesFile ? 0 : ((report.stats && report.stats.duration) || 0),
     label: arg('--label') || `Run ${id}`,
     source: path.basename(file),
-    reconstructed: false,
+    reconstructed: process.argv.includes('--reconstructed'),
     tests,
   });
   saveHistory(history);

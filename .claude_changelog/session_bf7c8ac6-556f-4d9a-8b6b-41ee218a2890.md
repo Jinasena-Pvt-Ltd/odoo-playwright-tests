@@ -1640,3 +1640,17 @@ no. i don't need the master report just now.i want to customize report when 1st 
 - Edit: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\pages\SalesPage.ts
 - Edit: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\package.json
 
+
+---
+
+## Change -- 2026-10-07T06:13:41Z
+
+**Prompt:**
+```
+now run the test cases and give me the test report script
+```
+
+**Files touched:**
+- Edit: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\scripts\run-history.js
+- Write: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\reports\run-history\run1-overrides.json
+
