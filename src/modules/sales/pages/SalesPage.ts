@@ -279,7 +279,12 @@ export abstract class SalesFormBase extends BaseFormPage {
   /** Clicks Save and reports what Odoo did, without throwing when the save is refused. */
   async trySave(): Promise<SaveOutcome> {
     const saveBtn = this.page.locator('.o_form_button_save').first();
-    await saveBtn.waitFor({ state: 'visible', timeout: 30_000 });
+    // Nothing to save (clean form): there is no Save button, so the record is already stored.
+    if (!(await saveBtn.isVisible({ timeout: 5_000 }).catch(() => false))) {
+      return { saved: true, invalidFields: 0, notification: '', dialog: '' };
+    }
+    const crumb = async () => squash(await this.page.locator('.o_control_panel .o_breadcrumb').first().textContent().catch(() => ''));
+    const crumbBefore = await crumb();
     // A disabled Save button (form flagged invalid) cannot be clicked: that is Odoo refusing the save.
     const clicked = await saveBtn.click({ timeout: 20_000 }).then(() => true).catch(() => false);
 
@@ -308,7 +313,11 @@ export abstract class SalesFormBase extends BaseFormPage {
     const notification = toast
       || squash(await this.page.locator('.o_notification').first().textContent({ timeout: 1_000 }).catch(() => ''));
     const invalidFields = await this.page.locator('.o_field_invalid').count();
-    const saved = (await saveBtn.isHidden().catch(() => false)) && dialogText === '';
+    // Saved = the Save button went away, OR a brand-new record received its number (breadcrumb "New" → "S0…").
+    // The second signal matters because Odoo can re-flag the form as modified right after a successful save.
+    const crumbAfter = await crumb();
+    const recordCreated = /(^|\s)New\s*$/.test(crumbBefore) && crumbAfter !== '' && !/(^|\s)New\s*$/.test(crumbAfter);
+    const saved = ((await saveBtn.isHidden().catch(() => false)) || recordCreated) && dialogText === '';
     return { saved, invalidFields, notification, dialog: dialogText };
   }
 

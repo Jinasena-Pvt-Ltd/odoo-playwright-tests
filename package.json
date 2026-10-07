@@ -16,6 +16,8 @@
     "test:archive": "playwright test --grep \"@step:archive\"",
     "report": "playwright show-report",
     "report:generate": "node scripts/generate-report.js",
+    "history:record": "node scripts/run-history.js record",
+    "history:report": "node scripts/run-history.js report",
     "test:report": "playwright test && node scripts/generate-report.js",
     "report:allure": "allure serve allure-results",
     "lint": "tsc --noEmit"

@@ -1625,3 +1625,18 @@ run the that test cases and want me the html report step by step.not final
 - Edit: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\pages\SalesPage.ts
 - Edit: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\scripts\generate-report.js
 
+
+---
+
+## Change -- 2026-10-07T06:06:30Z
+
+**Prompt:**
+```
+no. i don't need the master report just now.i want to customize report when 1st time run and 2nd and third time,etc whta's fail,what pass for a show it
+```
+
+**Files touched:**
+- Write: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\scripts\run-history.js
+- Edit: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\pages\SalesPage.ts
+- Edit: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\package.json
+
