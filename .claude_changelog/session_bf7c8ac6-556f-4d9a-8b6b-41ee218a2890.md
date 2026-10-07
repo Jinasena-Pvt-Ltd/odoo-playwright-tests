@@ -1707,3 +1707,18 @@ now fix the connection isssues
 **Files touched:**
 - Write: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\Test-Run-Report-3.html
 
+
+---
+
+## Change -- 2026-10-07T09:32:27Z
+
+**Prompt:**
+```
+i set the approval for a Malsha Hewage
+```
+
+**Files touched:**
+- Edit: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\02-business\sales.business.spec.ts
+- Write: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\zz-probe-approval-rule.spec.ts
+- Edit: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\notes\sales.notes.md
+

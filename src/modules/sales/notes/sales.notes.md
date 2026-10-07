@@ -34,6 +34,9 @@ Defaults live in `data/sales.master-data.ts` and can be overridden with `SALES_*
   "Approve Credit Limit" activity assigned to a specific user. Everyone else sees the Approve button with the
   tooltip "Waiting for approval". Set `ODOO_APPROVER_EMAIL` / `ODOO_APPROVER_PASSWORD` in `.env` to let the test
   approve as that user; without them the approve → confirm test is skipped.
+- **Who may approve:** the button is controlled by the Studio approval rule "SLS - Credit Limit Approval"
+  (Settings ▸ Technical ▸ Approval Rules ▸ rule 18). Its approver group is **"Sales / Jin - Sales - Credit Limit Approvers"**;
+  only members of that group can approve. The activity's "Responsible" user does not grant the right to approve.
 - The over-limit test uses a huge quantity (`OVER_LIMIT_QUANTITY`) so it never depends on the customer's configured limit.
 - Slow days: the instance can take 2–4× longer; the page objects use generous waits.
 

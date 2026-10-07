@@ -158,14 +158,19 @@ test.describe('Sales Business Logic @module:sales @step:business', () => {
     test.setTimeout(400_000);
     const form = await requestOverLimitApproval(page);
     const approve = form.headerButton(/approve.*credit/i);
-    const waiting = /waiting for approval/i.test(await form.buttonTooltip(/approve.*credit/i));
     const assignee = await form.pendingActivityAssignee();
 
-    if (waiting) {
-      // The signed-in user is not the approver: approve as the approver when a login is provided.
+    // The "Waiting for approval" tooltip is shown even to the assigned approver, so it is not a reliable sign
+    // that the signed-in user cannot approve. Just try: click Approve as the signed-in user and see if it clears.
+    await approve.click({ timeout: 30_000 });
+    const approvedBySignedInUser = await approve.waitFor({ state: 'hidden', timeout: 20_000 })
+      .then(() => true).catch(() => false);
+
+    if (!approvedBySignedInUser) {
+      // Clicking Approve did nothing: another user must approve. Use their login when one is provided.
       test.skip(
         !(APPROVER_LOGIN.email && APPROVER_LOGIN.password),
-        `Approval is assigned to ${assignee || 'another user'}; set ODOO_APPROVER_EMAIL and ODOO_APPROVER_PASSWORD in .env to run approve → confirm`,
+        `Clicking Approve as the signed-in user did nothing (task assigned to ${assignee || 'unknown'}). Only members of the group "Jin - Sales - Credit Limit Approvers" can approve: add this user to that group in Odoo, or set ODOO_APPROVER_EMAIL and ODOO_APPROVER_PASSWORD in .env`,
       );
       const recordUrl = form.currentUrl();
       const approverContext = await page.context().browser()!.newContext();
@@ -185,12 +190,11 @@ test.describe('Sales Business Logic @module:sales @step:business', () => {
       } finally {
         await approverContext.close();
       }
-      await page.reload({ waitUntil: 'domcontentloaded' });
-    } else {
-      // The signed-in user is the approver: approve directly.
-      await approve.click();
-      await expect(approve).toBeHidden({ timeout: 30_000 });
     }
+    // Reload the saved quotation so the buttons reflect the approval, then confirm.
+    await page.reload({ waitUntil: 'domcontentloaded' });
+    await expect(page.locator('.o_form_view')).toBeVisible({ timeout: 60_000 });
+    await form.scrollToTop();
 
     await expect(form.headerButton(/^confirm$/i)).toBeVisible({ timeout: 30_000 });
     await form.headerButton(/^confirm$/i).click();
