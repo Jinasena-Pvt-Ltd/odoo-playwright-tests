@@ -283,11 +283,13 @@ export abstract class SalesFormBase extends BaseFormPage {
     // A disabled Save button (form flagged invalid) cannot be clicked: that is Odoo refusing the save.
     const clicked = await saveBtn.click({ timeout: 20_000 }).then(() => true).catch(() => false);
 
+    // Wait for the real outcome only: Save button gone (saved), a dialog, or a field flagged invalid.
+    // A notification is NOT an outcome: an unrelated toast may already be on screen and would end the
+    // wait before the save has finished.
     if (clicked) await Promise.race([
-      saveBtn.waitFor({ state: 'hidden', timeout: 20_000 }),
-      this.page.getByRole('dialog').first().waitFor({ state: 'visible', timeout: 20_000 }),
-      this.page.locator('.o_notification').first().waitFor({ state: 'visible', timeout: 20_000 }),
-      this.page.locator('.o_field_invalid').first().waitFor({ state: 'visible', timeout: 20_000 }),
+      saveBtn.waitFor({ state: 'hidden', timeout: 30_000 }),
+      this.page.getByRole('dialog').first().waitFor({ state: 'visible', timeout: 30_000 }),
+      this.page.locator('.o_field_invalid').first().waitFor({ state: 'visible', timeout: 30_000 }),
     ]).catch(() => undefined);
 
     const dialog = this.page.getByRole('dialog').first();
