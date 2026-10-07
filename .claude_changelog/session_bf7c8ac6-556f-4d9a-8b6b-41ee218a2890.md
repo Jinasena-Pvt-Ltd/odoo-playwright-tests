@@ -1557,3 +1557,17 @@ can't u change the setting
 **Files touched:**
 - Write: C:\Users\Urliyas\Documents\GitHub\Sales-Testing-Step-testing\tests\zz-probe-acttype.spec.ts
 
+
+---
+
+## Change -- 2026-10-07T05:04:25Z
+
+**Prompt:**
+```
+Don't touch my another file without my premission.only use the odoo-playwright-tests folder
+```
+
+**Files touched:**
+- Write: C:\Users\Urliyas\.claude\projects\c--Users-Urliyas-Documents-GitHub-odoo-playwright-tests\memory\feedback_stay-in-this-repo.md
+- Write: C:\Users\Urliyas\.claude\projects\c--Users-Urliyas-Documents-GitHub-odoo-playwright-tests\memory\MEMORY.md
+
