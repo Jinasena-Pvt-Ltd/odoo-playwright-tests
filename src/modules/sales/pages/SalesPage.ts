@@ -41,10 +41,30 @@ export class SalesAppPage extends BasePage {
     return this.page.locator('.o_menu_sections');
   }
 
+  /**
+   * page.goto with retries for network trouble (connection timed out / reset, DNS not resolved, slow server).
+   * The Odoo dev instance occasionally drops connections for a few seconds; a short wait and retry rides it out.
+   */
+  async gotoWithRetry(url: string, attempts = 5): Promise<void> {
+    const transient = /ERR_(CONNECTION|NAME_NOT_RESOLVED|INTERNET|NETWORK|TIMED_OUT|EMPTY_RESPONSE|ADDRESS|PROXY|SSL)|Timeout|timeout/;
+    let lastError: unknown;
+    for (let attempt = 1; attempt <= attempts; attempt++) {
+      try {
+        await this.page.goto(url, { timeout: 60_000, waitUntil: 'domcontentloaded' });
+        return;
+      } catch (e) {
+        lastError = e;
+        if (attempt === attempts || !transient.test(String(e))) break;
+        await this.page.waitForTimeout(5_000 * attempt); // back off: 5s, 10s, 15s, 20s
+      }
+    }
+    throw lastError;
+  }
+
   /** Opens the backend home screen (re-using the saved admin session) and enters the Sales app. */
   async open(): Promise<void> {
     const baseURL = process.env.ODOO_BASE_URL ?? 'http://localhost:8069';
-    await this.page.goto(`${baseURL}/web/login`);
+    await this.gotoWithRetry(`${baseURL}/web/login`);
 
     const state = await Promise.race([
       this.page.locator('.o_home_menu, .o_main_navbar').first()
