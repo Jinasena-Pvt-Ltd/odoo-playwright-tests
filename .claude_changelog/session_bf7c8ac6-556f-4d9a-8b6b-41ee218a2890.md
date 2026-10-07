@@ -1722,3 +1722,17 @@ i set the approval for a Malsha Hewage
 - Write: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\zz-probe-approval-rule.spec.ts
 - Edit: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\notes\sales.notes.md
 
+
+---
+
+## Change -- 2026-10-07T09:57:58Z
+
+**Prompt:**
+```
+i can't find the path
+```
+
+**Files touched:**
+- Write: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\zz-probe-user.spec.ts
+- Write: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\zz-probe-group.spec.ts
+
