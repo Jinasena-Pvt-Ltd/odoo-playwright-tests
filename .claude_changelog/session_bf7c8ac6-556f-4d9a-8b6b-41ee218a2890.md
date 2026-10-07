@@ -1498,3 +1498,16 @@ give the Malsha Hewage to approval credit limit and check test case againg and g
 **Files touched:**
 - Edit: C:\Users\Urliyas\Documents\GitHub\Sales-Testing-Step-testing\tests\Step-09.00-Credit-Limit-Control.spec.ts
 
+
+---
+
+## Change -- 2026-10-07T03:05:21Z
+
+**Prompt:**
+```
+give the access to Malsha Hewage,as a admin credit limit approval and run test againg and give me the report
+```
+
+**Files touched:**
+- Write: C:\Users\Urliyas\Documents\GitHub\Sales-Testing-Step-testing\tests\zz-probe-access.spec.ts
+
