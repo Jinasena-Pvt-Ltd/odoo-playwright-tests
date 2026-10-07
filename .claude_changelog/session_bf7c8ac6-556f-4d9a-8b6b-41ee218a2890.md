@@ -1485,3 +1485,16 @@ fix the credit limit approvel test
 **Files touched:**
 - Edit: C:\Users\Urliyas\Documents\GitHub\Sales-Testing-Step-testing\tests\Step-09.00-Credit-Limit-Control.spec.ts
 
+
+---
+
+## Change -- 2026-10-07T02:56:41Z
+
+**Prompt:**
+```
+give the Malsha Hewage to approval credit limit and check test case againg and give me the result
+```
+
+**Files touched:**
+- Edit: C:\Users\Urliyas\Documents\GitHub\Sales-Testing-Step-testing\tests\Step-09.00-Credit-Limit-Control.spec.ts
+
