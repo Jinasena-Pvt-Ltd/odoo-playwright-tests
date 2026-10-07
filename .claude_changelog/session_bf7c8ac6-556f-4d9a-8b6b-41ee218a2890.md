@@ -1736,3 +1736,25 @@ i can't find the path
 - Write: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\zz-probe-user.spec.ts
 - Write: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\zz-probe-group.spec.ts
 
+
+---
+
+## Change -- 2026-10-07T10:53:00Z
+
+**Prompt:**
+```
+<task-notification>
+<task-id>bg8m2n7p8</task-id>
+<tool-use-id>toolu_01Lg7tzm76pYRCPrCzBbZu5s</tool-use-id>
+<output-file>C:\Users\Urliyas\AppData\Local\Temp\claude\c--Users-Urliyas-Documents-GitHub-odoo-playwright-tests\bf7c8ac6-556f-4d9a-8b6b-41ee218a2890\tasks\bg8m2n7p8.output</output-file>
+<status>failed</status>
+<summary>Background command "$d = "C:\Users\Urliyas\AppData\Local\Temp\claude\c--Users-Urliyas-Documents-GitHub-odoo-playwright-tests\bf7c8ac6-556f-4d9a-8b6b-41ee218a2890\scratchpad"; Remove-Item "$d\sales-run10.log" -ErrorAction SilentlyContinue; Set-Location C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests; Get-Process chrome,chromium,headless_shell -ErrorAction SilentlyContinue | Where-Object { $_.Path -like '*ms-playwright*' } | Stop-Process -Force -ErrorAction SilentlyContinue; $env:HEADLESS = 'false'; $env:PLAYWRIGHT_JSON_OUTPUT_NAME = "$PWD\test-results\run10.json"; cmd /c "npx playwright test --project=setup --project=admin --grep @module:sales --reporter=list,json &gt; `"$d\sales-run10.log`" 2&gt;&amp;1"; "done exit=$LASTEXITCODE"" failed with exit code 1</summary>
+</task-notification>
+```
+
+**Files touched:**
+- Edit: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\pages\SalesPage.ts
+- Edit: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\02-business\sales.business.spec.ts
+- Write: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\zz-probe-bg-rule.spec.ts
+- Write: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\Test-Run-Report-4.html
+

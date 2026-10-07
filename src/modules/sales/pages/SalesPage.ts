@@ -548,6 +548,36 @@ export class QuotationFormPage extends SalesFormBase {
 
   // ── Header buttons ──────────────────────────────────────────────────────────
 
+  /**
+   * Odoo can require several approvals in sequence before Confirm appears (Credit Limit, then Bank Guarantee,
+   * Insufficient Margin, Overdue ...). Works through "Request X Approval" → "Approve X" until Confirm is visible.
+   * Returns the name of the approval that blocks it when the signed-in user cannot complete one.
+   */
+  async completeRemainingApprovals(maxSteps = 8): Promise<{ blockedBy?: string }> {
+    for (let i = 0; i < maxSteps; i++) {
+      await this.scrollToTop();
+      if (await this.isButtonVisible(/^confirm$/i, 4_000)) return {};
+
+      const request = this.page.getByRole('button', { name: /^request .* approval$/i }).first();
+      let label = '';
+      if (await request.isVisible({ timeout: 4_000 }).catch(() => false)) {
+        label = squash(await request.textContent().catch(() => '')).replace(/^request\s+/i, '').replace(/\s+approval$/i, '');
+        await request.click({ timeout: 20_000 });
+      }
+      const approve = this.page.getByRole('button', { name: /^approve /i }).first();
+      if (!(await approve.waitFor({ state: 'visible', timeout: 15_000 }).then(() => true).catch(() => false))) {
+        return label ? { blockedBy: `${label}: no Approve button appeared after requesting it` } : {};
+      }
+      if (!label) label = squash(await approve.textContent().catch(() => '')).replace(/^approve\s+/i, '');
+      await approve.click({ timeout: 20_000 });
+      const cleared = await approve.waitFor({ state: 'hidden', timeout: 20_000 }).then(() => true).catch(() => false);
+      if (!cleared) return { blockedBy: `${label}: clicking Approve did nothing (this user is probably not in that approval's approver group)` };
+      await this.page.reload({ waitUntil: 'domcontentloaded' });
+      await this.page.locator('.o_form_view').waitFor({ state: 'visible', timeout: 60_000 });
+    }
+    return {};
+  }
+
   async scrollToTop(): Promise<void> {
     await this.page.evaluate(() => window.scrollTo(0, 0));
   }

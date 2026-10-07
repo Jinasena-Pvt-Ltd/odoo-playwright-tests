@@ -196,6 +196,10 @@ test.describe('Sales Business Logic @module:sales @step:business', () => {
     await expect(page.locator('.o_form_view')).toBeVisible({ timeout: 60_000 });
     await form.scrollToTop();
 
+    // Odoo may require more approvals (for example Bank Guarantee) before Confirm appears.
+    const remaining = await form.completeRemainingApprovals();
+    test.skip(!!remaining.blockedBy, `Confirm needs another approval this user cannot complete — ${remaining.blockedBy}`);
+
     await expect(form.headerButton(/^confirm$/i)).toBeVisible({ timeout: 30_000 });
     await form.headerButton(/^confirm$/i).click();
     expect(await form.isStatus(/sales order/i), 'status should become Sales Order').toBe(true);

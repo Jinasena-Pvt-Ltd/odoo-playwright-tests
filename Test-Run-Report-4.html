@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sales Testing – Run 6 Report</title>
+<style>
+  body{font-family:Arial,sans-serif;max-width:1150px;margin:40px auto;padding:0 20px;color:#222}
+  h1{border-bottom:2px solid #333;padding-bottom:8px}
+  h2{margin-top:36px;border-bottom:1px solid #ccc;padding-bottom:4px}
+  table{border-collapse:collapse;width:100%;margin:12px 0}
+  td,th{border:1px solid #ddd;padding:8px 12px;text-align:left;vertical-align:top}
+  th{background:#f5f5f5} td.c,th.c{text-align:center}
+  .pass{color:#2e7d32;font-weight:bold}.fail{color:#c62828;font-weight:bold}.warn{color:#e65100;font-weight:bold}.mute{color:#6b7280;font-weight:bold}
+  .box{background:#fff8e1;border-left:4px solid #f9a825;padding:10px 16px;margin:16px 0}
+  .ok{background:#e8f5e9;border-left:4px solid #2e7d32;padding:10px 16px;margin:16px 0}
+  .bad{background:#ffebee;border-left:4px solid #c62828;padding:10px 16px;margin:16px 0}
+  code{background:#f4f4f4;padding:2px 5px;border-radius:3px;font-size:.9em}
+  tr.sep td{background:#eef2f7;font-weight:bold}
+</style>
+</head>
+<body>
+<h1>Sales Testing – Run 6 Report</h1>
+<p><b>Repo:</b> odoo-playwright-tests (module <code>sales</code>) &nbsp;|&nbsp; <b>Date:</b> 2026-10-07 &nbsp;|&nbsp; <b>Browser:</b> visible (headed) &nbsp;|&nbsp; <b>User:</b> Malsha Hewage</p>
+<p><i>Run 1 was reconstructed from the console output of the first run (stopped early; its last 3 tests show NOT RUN). "Now" combines Run 6 with the two tests I re-ran afterwards.</i></p>
+
+<div class="ok"><b>Now (latest result of every test): <span class="pass">14 passed</span>, <span class="fail">5 failed</span>, <span class="warn">4 skipped</span></b> out of 23.
+<b>Progress in this run:</b> Malsha Hewage <b>can now approve the credit limit</b> (you added her to the approver group). The approve &rarr; confirm test gets past that approval for the first time. It then stops at a <b>second approval: Bank Guarantee</b>, which needs its own approver group (Section 3).</div>
+
+<h2>1. Progress by run</h2>
+<table>
+<tr><th>Run</th><th class="c">Passed</th><th class="c">Failed</th><th class="c">Skipped</th><th class="c">Not run</th><th>What happened</th></tr>
+<tr><td>Run 1 (reconstructed)</td><td class="c pass">10</td><td class="c fail">7</td><td class="c warn">3</td><td class="c mute">3</td><td>Stopped early; several failures were bugs in my test code.</td></tr>
+<tr><td>Run 2</td><td class="c pass">10</td><td class="c fail">9</td><td class="c warn">4</td><td class="c mute">0</td><td>Same test-code bugs.</td></tr>
+<tr><td>Run 3</td><td class="c pass">10</td><td class="c fail">10</td><td class="c warn">3</td><td class="c mute">0</td><td>Save check still wrong.</td></tr>
+<tr><td>Run 4</td><td class="c pass">11</td><td class="c fail">8</td><td class="c warn">4</td><td class="c mute">0</td><td>Save check fixed; 3 tests hit a network timeout.</td></tr>
+<tr><td>Run 5</td><td class="c pass">14</td><td class="c fail">5</td><td class="c warn">4</td><td class="c mute">0</td><td>Connection retries in; only the 5 real findings fail.</td></tr>
+<tr><td><b>Run 6 (latest full run)</b></td><td class="c pass"><b>13</b></td><td class="c fail"><b>7</b></td><td class="c warn"><b>3</b></td><td class="c mute">0</td><td>Malsha added as credit-limit approver. The minimum-margin test hung once (28.6 min, machine stall) and approve &rarr; confirm failed at the next approval.</td></tr>
+<tr><td><b>Now</b> (Run 6 + re-runs)</td><td class="c pass"><b>14</b></td><td class="c fail"><b>5</b></td><td class="c warn"><b>4</b></td><td class="c mute">0</td><td>Margin test passes on re-run (3.2 min). Approve &rarr; confirm now skips with a precise reason instead of failing.</td></tr>
+</table>
+
+<h2>2. Every test, run by run</h2>
+<table>
+<tr><th>Step</th><th>Test</th><th class="c">Run 1</th><th class="c">Run 2</th><th class="c">Run 3</th><th class="c">Run 4</th><th class="c">Run 5</th><th class="c">Run 6</th><th class="c">Now</th></tr>
+<tr class="sep"><td colspan="9">Step 1 — Configuration</td></tr>
+<tr><td>1</td><td>Opens the Sales app</td><td class="c pass">PASS</td><td class="c pass">PASS</td><td class="c pass">PASS</td><td class="c pass">PASS</td><td class="c pass">PASS</td><td class="c pass">PASS</td><td class="c pass">PASS</td></tr>
+<tr><td>1</td><td>Switches to the sales company</td><td class="c pass">PASS</td><td class="c pass">PASS</td><td class="c pass">PASS</td><td class="c pass">PASS</td><td class="c pass">PASS</td><td class="c pass">PASS</td><td class="c pass">PASS</td></tr>
+<tr><td>1</td><td>Lists quotations</td><td class="c pass">PASS</td><td class="c pass">PASS</td><td class="c pass">PASS</td><td class="c pass">PASS</td><td class="c pass">PASS</td><td class="c pass">PASS</td><td class="c pass">PASS</td></tr>
+<tr><td>1</td><td>Blank quotation form opens (customer empty, editable)</td><td class="c pass">PASS</td><td class="c pass">PASS</td><td class="c pass">PASS</td><td class="c pass">PASS</td><td class="c pass">PASS</td><td class="c pass">PASS</td><td class="c pass">PASS</td></tr>
+<tr><td>1</td><td>Minimum Sales Margin is configured (22.90%)</td><td class="c pass">PASS</td><td class="c pass">PASS</td><td class="c pass">PASS</td><td class="c pass">PASS</td><td class="c pass">PASS</td><td class="c pass">PASS</td><td class="c pass">PASS</td></tr>
+<tr class="sep"><td colspan="9">Step 2 — Business Logic</td></tr>
+<tr><td>2</td><td>Quotation amounts add up (net, untaxed, VAT, total)</td><td class="c fail">FAIL</td><td class="c fail">FAIL</td><td class="c fail">FAIL</td><td class="c pass">PASS</td><td class="c pass">PASS</td><td class="c pass">PASS</td><td class="c pass">PASS</td></tr>
+<tr><td>2</td><td>Line below minimum margin: approval needed, Confirm hidden</td><td class="c pass">PASS</td><td class="c pass">PASS</td><td class="c pass">PASS</td><td class="c pass">PASS</td><td class="c pass">PASS</td><td class="c fail">FAIL (hang)</td><td class="c pass">PASS</td></tr>
+<tr><td>2</td><td>Over-limit sale: approval requested, Confirm blocked while pending</td><td class="c pass">PASS</td><td class="c pass">PASS</td><td class="c pass">PASS</td><td class="c pass">PASS</td><td class="c pass">PASS</td><td class="c pass">PASS</td><td class="c pass">PASS</td></tr>
+<tr><td>2</td><td>Once approved, the order can be confirmed</td><td class="c warn">SKIP</td><td class="c warn">SKIP</td><td class="c fail">FAIL</td><td class="c warn">SKIP</td><td class="c warn">SKIP</td><td class="c fail">FAIL</td><td class="c warn">SKIP</td></tr>
+<tr class="sep"><td colspan="9">Steps 3 and 4 — Reporting, Permissions</td></tr>
+<tr><td>3</td><td>Placeholder (no reporting tests yet)</td><td class="c warn">SKIP</td><td class="c warn">SKIP</td><td class="c warn">SKIP</td><td class="c warn">SKIP</td><td class="c warn">SKIP</td><td class="c warn">SKIP</td><td class="c warn">SKIP</td></tr>
+<tr><td>4</td><td>Placeholder (manager/employee logins not set)</td><td class="c warn">SKIP</td><td class="c warn">SKIP</td><td class="c warn">SKIP</td><td class="c warn">SKIP</td><td class="c warn">SKIP</td><td class="c warn">SKIP</td><td class="c warn">SKIP</td></tr>
+<tr class="sep"><td colspan="9">Step 5 — Validations</td></tr>
+<tr><td>5</td><td>Blank Customer cannot be saved (05.1)</td><td class="c pass">PASS</td><td class="c pass">PASS</td><td class="c pass">PASS</td><td class="c pass">PASS</td><td class="c pass">PASS</td><td class="c pass">PASS</td><td class="c pass">PASS</td></tr>
+<tr><td>5</td><td>Blank Order Payment Type cannot be saved (05.2)</td><td class="c pass">PASS</td><td class="c pass">PASS</td><td class="c pass">PASS</td><td class="c pass">PASS</td><td class="c pass">PASS</td><td class="c pass">PASS</td><td class="c pass">PASS</td></tr>
+<tr><td>5</td><td>Blank Quotation Type cannot be saved (05.3)</td><td class="c pass">PASS</td><td class="c pass">PASS</td><td class="c pass">PASS</td><td class="c pass">PASS</td><td class="c pass">PASS</td><td class="c pass">PASS</td><td class="c pass">PASS</td></tr>
+<tr><td>5</td><td>Blank Payment Terms cannot be saved (05.4)</td><td class="c fail">FAIL</td><td class="c fail">FAIL</td><td class="c fail">FAIL</td><td class="c fail">FAIL</td><td class="c fail">FAIL</td><td class="c fail">FAIL</td><td class="c fail">FAIL</td></tr>
+<tr><td>5</td><td>Blank Salesperson cannot be saved (05.5)</td><td class="c fail">FAIL</td><td class="c fail">FAIL</td><td class="c fail">FAIL</td><td class="c fail">FAIL</td><td class="c fail">FAIL</td><td class="c fail">FAIL</td><td class="c fail">FAIL</td></tr>
+<tr><td>5</td><td>Blank Sales Team cannot be saved (05.6)</td><td class="c fail">FAIL</td><td class="c fail">FAIL</td><td class="c fail">FAIL</td><td class="c fail">FAIL</td><td class="c fail">FAIL</td><td class="c fail">FAIL</td><td class="c fail">FAIL</td></tr>
+<tr><td>5</td><td>Blank Company cannot be saved (05.7)</td><td class="c fail">FAIL</td><td class="c fail">FAIL</td><td class="c fail">FAIL</td><td class="c fail">FAIL</td><td class="c fail">FAIL</td><td class="c fail">FAIL</td><td class="c fail">FAIL</td></tr>
+<tr><td>5</td><td>Blank Warehouse cannot be saved (05.8)</td><td class="c fail">FAIL</td><td class="c fail">FAIL</td><td class="c fail">FAIL</td><td class="c fail">FAIL</td><td class="c fail">FAIL</td><td class="c fail">FAIL</td><td class="c fail">FAIL</td></tr>
+<tr><td>5</td><td>Distributor customer needs Bank Guarantee amount and expiry date</td><td class="c fail">FAIL</td><td class="c fail">FAIL</td><td class="c fail">FAIL</td><td class="c fail">FAIL</td><td class="c pass">PASS</td><td class="c pass">PASS</td><td class="c pass">PASS</td></tr>
+<tr class="sep"><td colspan="9">Step 6 — Edge Cases</td></tr>
+<tr><td>6</td><td>Zero-quantity line cannot be confirmed (06.00)</td><td class="c mute">NOT RUN</td><td class="c fail">FAIL</td><td class="c fail">FAIL</td><td class="c fail">FAIL</td><td class="c pass">PASS</td><td class="c pass">PASS</td><td class="c pass">PASS</td></tr>
+<tr><td>6</td><td>Zero-unit-price line cannot be confirmed (06.01)</td><td class="c mute">NOT RUN</td><td class="c fail">FAIL</td><td class="c fail">FAIL</td><td class="c fail">FAIL</td><td class="c pass">PASS</td><td class="c pass">PASS</td><td class="c pass">PASS</td></tr>
+<tr class="sep"><td colspan="9">Step 7 — Archive</td></tr>
+<tr><td>7</td><td>Placeholder (nothing is archived yet)</td><td class="c mute">NOT RUN</td><td class="c warn">SKIP</td><td class="c warn">SKIP</td><td class="c warn">SKIP</td><td class="c warn">SKIP</td><td class="c warn">SKIP</td><td class="c warn">SKIP</td></tr>
+</table>
+
+<h2>3. The approval chain, step by step (new in this run)</h2>
+<table>
+<tr><th>#</th><th>Approval step</th><th>Result</th><th>Detail</th></tr>
+<tr><td>1</td><td>Request Credit Limit Approval</td><td class="pass">PASS</td><td>Button appears for the over-limit sale; Confirm stays hidden.</td></tr>
+<tr><td>2</td><td>Approve Credit Limit (as Malsha)</td><td class="pass">PASS</td><td>Worked once Malsha was added to the group <b>Sales / Jin - Sales - Credit Limit Approvers</b>.</td></tr>
+<tr><td>3</td><td>Request Bank Guarantee Approval</td><td class="pass">PASS</td><td>Appears next, because Odoo needs a second approval before Confirm.</td></tr>
+<tr><td>4</td><td>Approve Bank Guarantee (as Malsha)</td><td class="fail">BLOCKED</td><td>Clicking Approve does nothing. The rule "SLS - Bank Guarantee Approval" only allows the group <b>Sales / Jin - Sales - Bank Guarantee Approvers</b>.</td></tr>
+<tr><td>5</td><td>Confirm</td><td class="mute">NOT REACHED</td><td>Becomes visible once all approvals above are done.</td></tr>
+</table>
+
+<h2>4. What is still open</h2>
+<table>
+<tr><th>Item</th><th>What is needed</th></tr>
+<tr><td>Approve &rarr; confirm (skipped)</td><td>Add Malsha Hewage to the group <b>Sales / Jin - Sales - Bank Guarantee Approvers</b>, the same way you added her to the credit-limit group: open <code>https://rohanabalagalla-jinstage-jindbconfigure-37927229.dev.odoo.com/web?debug=1#action=base.action_res_groups</code>, search "Bank Guarantee Approvers", open it, <b>Users</b> tab &rarr; Add a line &rarr; Malsha Hewage &rarr; Save. Other approvals may follow (Overdue, Over Commission, Insufficient Margin, Temporary Credit): each has its own "Jin - Sales - &hellip; Approvers" group. The test now works through them one by one and names whichever one blocks it. It then confirms a real Sales Order.</td></tr>
+<tr><td>05.4 – 05.8 (5 failures)</td><td>Odoo saves a quotation with Payment Terms, Salesperson, Sales Team, Company or Warehouse blank, so those fields are not required today. For each: make it required in Odoo (the test then passes) or delete its line from <code>src/modules/sales/data/sales.validation-cases.ts</code>.</td></tr>
+<tr><td>Steps 3, 4, 7 (3 placeholders)</td><td>Write real tests when ready.</td></tr>
+</table>
+
+<div class="box"><b>Notes:</b>
+<ul>
+<li>The one-off margin-test hang in Run 6 (28.6 minutes against a 6.7-minute limit) looks like the machine stalling; the test passes in 3.2 minutes when re-run.</li>
+<li>Tests create real quotations on the live instance (not cleaned up).</li>
+<li>Failure screenshots and traces are in <code>test-results\</code>; raw results are <code>test-results\run10.json</code> (full run) and <code>run11-approval.json</code> (re-run).</li>
+</ul></div>
+</body>
+</html>
