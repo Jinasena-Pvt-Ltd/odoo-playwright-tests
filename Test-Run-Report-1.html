@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sales Testing – Run 2 Report</title>
+<style>
+  body{font-family:Arial,sans-serif;max-width:1000px;margin:40px auto;padding:0 20px;color:#222}
+  h1{border-bottom:2px solid #333;padding-bottom:8px}
+  h2{margin-top:36px;border-bottom:1px solid #ccc;padding-bottom:4px}
+  table{border-collapse:collapse;width:100%;margin:12px 0}
+  td,th{border:1px solid #ddd;padding:8px 12px;text-align:left;vertical-align:top}
+  th{background:#f5f5f5}
+  .pass{color:#2e7d32;font-weight:bold}.fail{color:#c62828;font-weight:bold}.warn{color:#e65100;font-weight:bold}.mute{color:#6b7280;font-weight:bold}
+  .box{background:#fff8e1;border-left:4px solid #f9a825;padding:10px 16px;margin:16px 0}
+  .ok{background:#e8f5e9;border-left:4px solid #2e7d32;padding:10px 16px;margin:16px 0}
+  code{background:#f4f4f4;padding:2px 5px;border-radius:3px;font-size:.9em}
+</style>
+</head>
+<body>
+<h1>Sales Testing – Run 2 Report</h1>
+<p><b>Repo:</b> odoo-playwright-tests (module <code>sales</code>) &nbsp;|&nbsp; <b>Date:</b> 2026-10-07 &nbsp;|&nbsp; <b>Duration:</b> about 27 minutes &nbsp;|&nbsp; <b>User:</b> Malsha Hewage</p>
+<p><i>Run 1 was reconstructed from the console output of the first run, which was stopped before the last 3 tests executed (shown as NOT RUN).</i></p>
+
+<div class="box"><b>Summary:</b> Run 2: <span class="pass">10 passed</span>, <span class="fail">9 failed</span>, <span class="warn">4 skipped</span> out of 23 Sales tests
+(Run 1: 10 passed, 7 failed, 3 skipped, 3 not run).
+<b>4 of the 9 failures are test-code problems that I have already fixed but not re-run yet</b> (amounts, Bank Guarantee, 06.00, 06.01; see Section 3). The other 5 (05.4 to 05.8) are real findings: Odoo lets you save a quotation with those fields blank.</div>
+
+<h2>1. Results per step</h2>
+<table>
+<tr><th>Step</th><th>Test</th><th>Run 1</th><th>Run 2</th></tr>
+<tr><td>1 Config</td><td>Opens the Sales app with its Orders menu</td><td class="pass">PASS</td><td class="pass">PASS</td></tr>
+<tr><td>1 Config</td><td>Switches to the sales company</td><td class="pass">PASS</td><td class="pass">PASS</td></tr>
+<tr><td>1 Config</td><td>Lists quotations or shows the empty state</td><td class="pass">PASS</td><td class="pass">PASS</td></tr>
+<tr><td>1 Config</td><td>Opens a blank quotation form (customer empty, editable)</td><td class="pass">PASS</td><td class="pass">PASS</td></tr>
+<tr><td>1 Config</td><td>Minimum Sales Margin is configured (22.90%)</td><td class="pass">PASS</td><td class="pass">PASS</td></tr>
+<tr><td>2 Business</td><td>Quotation amounts add up (net, untaxed, VAT, total)</td><td class="fail">FAIL</td><td class="fail">FAIL</td></tr>
+<tr><td>2 Business</td><td>Line below minimum margin needs approval, Confirm hidden</td><td class="pass">PASS</td><td class="pass">PASS</td></tr>
+<tr><td>2 Business</td><td>Over-limit sale asks for credit-limit approval, Confirm blocked while pending</td><td class="pass">PASS</td><td class="pass">PASS</td></tr>
+<tr><td>2 Business</td><td>Once approved, the order can be confirmed</td><td class="warn">SKIP</td><td class="warn">SKIP</td></tr>
+<tr><td>3 Reporting</td><td>Placeholder</td><td class="warn">SKIP</td><td class="warn">SKIP</td></tr>
+<tr><td>4 Permissions</td><td>Placeholder</td><td class="warn">SKIP</td><td class="warn">SKIP</td></tr>
+<tr><td>5 Validations</td><td>Blank Customer cannot be saved (05.1)</td><td class="pass">PASS</td><td class="pass">PASS</td></tr>
+<tr><td>5 Validations</td><td>Blank Order Payment Type cannot be saved (05.2)</td><td class="pass">PASS</td><td class="pass">PASS</td></tr>
+<tr><td>5 Validations</td><td>Blank Quotation Type cannot be saved (05.3)</td><td class="pass">PASS</td><td class="pass">PASS</td></tr>
+<tr><td>5 Validations</td><td>Blank Payment Terms cannot be saved (05.4)</td><td class="fail">FAIL</td><td class="fail">FAIL</td></tr>
+<tr><td>5 Validations</td><td>Blank Salesperson cannot be saved (05.5)</td><td class="fail">FAIL</td><td class="fail">FAIL</td></tr>
+<tr><td>5 Validations</td><td>Blank Sales Team cannot be saved (05.6)</td><td class="fail">FAIL</td><td class="fail">FAIL</td></tr>
+<tr><td>5 Validations</td><td>Blank Company cannot be saved (05.7)</td><td class="fail">FAIL</td><td class="fail">FAIL</td></tr>
+<tr><td>5 Validations</td><td>Blank Warehouse cannot be saved (05.8)</td><td class="fail">FAIL</td><td class="fail">FAIL</td></tr>
+<tr><td>5 Validations</td><td>Distributor customer needs Bank Guarantee amount and expiry date</td><td class="fail">FAIL</td><td class="fail">FAIL (timeout 7 min)</td></tr>
+<tr><td>6 Edge cases</td><td>Zero-quantity line cannot be confirmed (06.00)</td><td class="mute">NOT RUN</td><td class="fail">FAIL</td></tr>
+<tr><td>6 Edge cases</td><td>Zero-unit-price line cannot be confirmed (06.01)</td><td class="mute">NOT RUN</td><td class="fail">FAIL</td></tr>
+<tr><td>7 Archive</td><td>Placeholder</td><td class="mute">NOT RUN</td><td class="warn">SKIP</td></tr>
+</table>
+
+<h2>2. Why each failure happened</h2>
+<table>
+<tr><th>Test</th><th>Reason</th><th>Whose problem</th></tr>
+<tr><td>Amounts add up</td><td>Line 1 already gets VAT 18% automatically, so the "set tax" step changed nothing. The form was already saved, there was no Save button, and the test timed out waiting for it.</td><td>Test code (fixed, not re-run)</td></tr>
+<tr><td>06.00 and 06.01</td><td>"Odoo refused to save the quotation: 0 invalid field(s)". The save worked, but the test misread the Save icon, which reappears after a save.</td><td>Test code (fixed, not re-run)</td></tr>
+<tr><td>Bank Guarantee</td><td>The customer already has the DISTR group, so there was no dropdown to pick from. The test waited for it until the 7-minute timeout.</td><td>Test code (fixed, not re-run)</td></tr>
+<tr><td>05.4 to 05.8</td><td><b>Odoo accepted the save</b> with that field blank: the quotation got a number (for example S02047). So Payment Terms, Salesperson, Sales Team, Company and Warehouse are not required in Odoo right now. The original specs showed PASS for these by mistake, because they only checked the URL and never noticed the save.</td><td>Odoo configuration or the expectation (a decision for you)</td></tr>
+</table>
+
+<h2>3. Fixes already made in this repo (not yet re-run)</h2>
+<ul>
+<li><b>Save check:</b> "no Save button" now means "already saved", and a quotation that gets its number counts as saved. This should fix the amounts test, 06.00 and 06.01.</li>
+<li><b>Customer Group:</b> the Bank Guarantee test now skips setting the group when the customer already has DISTR.</li>
+<li><b>05.4 to 05.8:</b> with the corrected save check these will now fail clearly with "Odoo saved the quotation although X was blank", instead of the vague message.</li>
+</ul>
+
+<h2>4. What is needed to get all green</h2>
+<table>
+<tr><th>#</th><th>Action</th><th>Fixes</th></tr>
+<tr><td>1</td><td>Re-run the Sales tests: <code>npx playwright test --project=setup --project=admin --grep @module:sales</code> (about 25 minutes)</td><td>Amounts, Bank Guarantee, 06.00, 06.01</td></tr>
+<tr><td>2</td><td>For each of Payment Terms, Salesperson, Sales Team, Company and Warehouse, decide: <b>required</b> (make the field required in Odoo, then the test passes) or <b>optional</b> (remove it from <code>src/modules/sales/data/sales.validation-cases.ts</code>)</td><td>05.4 to 05.8</td></tr>
+<tr><td>3</td><td>Make Malsha Hewage the approver (Odoo debug mode &rarr; Settings &rarr; Technical &rarr; Server Actions &rarr; "SLS - Request Approval - Notify User" &rarr; Assigned To), or add <code>ODOO_APPROVER_EMAIL</code> and <code>ODOO_APPROVER_PASSWORD</code> to <code>.env</code></td><td>Approve &rarr; Confirm test (skipped)</td></tr>
+<tr><td>4</td><td>Write real tests for Reporting, Permissions and Archive when ready</td><td>The 3 placeholders (skipped)</td></tr>
+</table>
+
+<div class="box"><b>Notes:</b>
+<ul>
+<li>Business and edge tests create real quotations on the live instance; they are not cleaned up.</li>
+<li>Failure screenshots and traces are in <code>test-results\</code>.</li>
+</ul></div>
+</body>
+</html>
