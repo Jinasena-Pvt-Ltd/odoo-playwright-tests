@@ -1543,3 +1543,17 @@ Make Malsha Hewage the approver in Odoo. Change the setting names  as the Malsha
 **Files touched:**
 - Write: C:\Users\Urliyas\Documents\GitHub\Sales-Testing-Step-testing\tests\zz-probe-settings.spec.ts
 
+
+---
+
+## Change -- 2026-10-07T03:51:42Z
+
+**Prompt:**
+```
+<ide_opened_file>The user opened the file c:\Users\Urliyas\Documents\GitHub\Sales-Testing-Step-testing\run2.json in the IDE. This may or may not be related to the current task.</ide_opened_file>
+can't u change the setting
+```
+
+**Files touched:**
+- Write: C:\Users\Urliyas\Documents\GitHub\Sales-Testing-Step-testing\tests\zz-probe-acttype.spec.ts
+
