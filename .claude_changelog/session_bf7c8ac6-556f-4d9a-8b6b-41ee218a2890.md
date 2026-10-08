@@ -1777,3 +1777,18 @@ i can't find the path
 **Files touched:**
 - Write: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\Test-Run-Report-5.html
 
+
+---
+
+## Change -- 2026-10-08T03:30:14Z
+
+**Prompt:**
+```
+normal odoo DB save the quotation with Payment Terms, Salesperson, Sales Team, Company or Warehouse left blank.butin my database can't save the without this field fill
+```
+
+**Files touched:**
+- Edit: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\pages\SalesPage.ts
+- Edit: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\05-validations\sales.validations.spec.ts
+- Write: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\reports\run-history\build-report-6.js
+

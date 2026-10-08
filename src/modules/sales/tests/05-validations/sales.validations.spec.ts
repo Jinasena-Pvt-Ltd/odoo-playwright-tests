@@ -51,6 +51,19 @@ test.describe('Sales Field Validations @module:sales @step:validations', () => {
         ],
       });
 
+      // Odoo pre-fills several of these fields (Salesperson, Sales Team, Warehouse, Payment Terms ...), so "not
+      // touched" is NOT "blank". Empty the field for real, and only then try to save.
+      if (c.skipIfReadOnly && c.field) {
+        await form.openTab(/other\s*info/i);
+        const emptied = await form.clearMany2one(c.field);
+        const nowShows = await form.many2oneValue(c.field);
+        test.skip(
+          !emptied || nowShows !== '',
+          `${c.label} cannot be emptied here (it is read-only, or Odoo fills it in again); it still shows "${nowShows}"`,
+        );
+        test.info().annotations.push({ type: 'field-state', description: `${c.label} was emptied before saving` });
+      }
+
       const outcome = await form.trySave();
       expect(outcome.saved, `Odoo saved the quotation although ${c.label} was blank`).toBe(false);
       expect(

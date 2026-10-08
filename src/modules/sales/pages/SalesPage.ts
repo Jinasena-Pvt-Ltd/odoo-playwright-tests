@@ -437,6 +437,40 @@ export class QuotationFormPage extends SalesFormBase {
     if (warehouse) await this.pickMany2one('warehouse_id', warehouse);
   }
 
+  /** What a Many2one field currently shows (input value, or plain text when it is read-only). */
+  async many2oneValue(fieldName: string): Promise<string> {
+    const widget = this.page.locator(`[name="${fieldName}"]`).first();
+    const input = widget.locator('input').first();
+    if (await input.isVisible({ timeout: 2_000 }).catch(() => false)) return (await input.inputValue()).trim();
+    return squash(await widget.textContent().catch(() => ''));
+  }
+
+  /**
+   * Empties a Many2one field the way a user would (hover the field, click its X; fall back to select-all + delete).
+   * Odoo pre-fills several fields (Salesperson, Sales Team, Warehouse ...), so a "blank field" test must clear them.
+   * Returns true when the field is empty afterwards.
+   */
+  async clearMany2one(fieldName: string): Promise<boolean> {
+    const widget = this.page.locator(`[name="${fieldName}"]`).first();
+    const input = widget.locator('input').first();
+    if (!(await input.isVisible({ timeout: 5_000 }).catch(() => false))) return (await this.many2oneValue(fieldName)) === '';
+    if ((await input.inputValue()) === '') return true;
+
+    await widget.hover().catch(() => {});
+    const x = widget.locator('.o_delete').first();
+    if (await x.isVisible({ timeout: 1_500 }).catch(() => false)) {
+      await x.click();
+    } else {
+      await input.click();
+      await input.selectText().catch(() => {});
+      await input.fill('');
+      await this.page.keyboard.press('Tab');
+    }
+    await this.page.keyboard.press('Escape').catch(() => {});
+    await this.page.waitForTimeout(600); // let onchange handlers finish (they may re-fill the field)
+    return (await input.inputValue().catch(() => 'x')) === '';
+  }
+
   /** State of a field on the open form: whether the user can type in it, and what it shows. */
   async fieldState(fieldName: string): Promise<{ present: boolean; editable: boolean; value: string }> {
     const widget = this.page.locator(`[name="${fieldName}"]`).first();
