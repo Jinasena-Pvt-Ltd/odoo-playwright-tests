@@ -65,6 +65,17 @@ test.describe('Sales Field Validations @module:sales @step:validations', () => {
       }
 
       const outcome = await form.trySave();
+      if (outcome.saved && c.field && c.skipIfReadOnly) {
+        // Report what the saved record holds: if Odoo re-filled the field while saving, it was not really saved blank.
+        await form.openTab(/other\s*info/i);
+        const afterSave = await form.many2oneValue(c.field);
+        test.info().annotations.push({ type: 'after-save', description: `${c.label} on the saved quotation: "${afterSave}"` });
+        expect(
+          false,
+          `Odoo saved the quotation although ${c.label} was emptied. On the saved quotation the field shows "${afterSave || '(empty)'}"` +
+            (afterSave ? ' — Odoo filled it in again while saving.' : ' — it was saved blank.'),
+        ).toBe(true);
+      }
       expect(outcome.saved, `Odoo saved the quotation although ${c.label} was blank`).toBe(false);
       expect(
         outcome.invalidFields > 0 || outcome.notification !== '' || outcome.dialog !== '',

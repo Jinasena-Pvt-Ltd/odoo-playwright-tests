@@ -22,6 +22,15 @@
 
 <div class="ok"><b>What the corrected tests show (Run 8):</b> <b>Salesperson, Sales Team, Company and Warehouse are required in your database</b> (Odoo refuses to save when they are empty), exactly as you said. Only <b>Payment Terms</b> is still saved when empty. Your own screenshot agrees: Payment Terms was blank and was <i>not</i> in Odoo's "Invalid fields" list (Customer, Invoice Address, Delivery Address, Order Payment Type, Quotation Type).</div>
 
+<div class="box"><b>Re-check of Payment Terms (Run 9, 2026-10-08):</b> you said Odoo cannot save a quotation with Payment Terms blank, so I re-ran test 05.4 with the browser visible and added a check that reads the field <i>after</i> saving.
+<ul>
+<li>The test filled every required field (Customer, Invoice Address, Delivery Address, Order Payment Type, Quotation Type) and the product lines.</li>
+<li>It then <b>emptied Payment Terms</b>, confirmed the field was empty, and clicked Save.</li>
+<li><b>Result: Odoo saved the quotation as S02129</b>, and the saved record shows <b>Payment Terms empty</b> (screenshot: <code>test-results\\modules-sales-tests-05-val-2f7ea--cannot-be-saved-step-05-4--admin\\test-failed-1.png</code>). Odoo did not fill the field again while saving.</li>
+<li>You can verify it yourself: open quotation <b>S02129</b> (Sales &rarr; Orders &rarr; Quotations), Other Info tab, Payment Terms is blank.</li>
+</ul>
+If you cannot save a quotation with Payment Terms blank when you try it by hand, the cause is probably another field being empty at the same time (the red "Invalid fields" message lists exactly which). Please send me that message and I will compare.</div>
+
 <h2>1. Progress by run</h2>
 <table><tr><th>Run</th><th class="c">Passed</th><th class="c">Failed</th><th class="c">Skipped</th><th class="c">Not run</th><th>What happened</th></tr>
 <tr><td>Run 1 (reconstructed)</td><td class="c pass">10</td><td class="c fail">7</td><td class="c warn">3</td><td class="c mute">3</td><td>Stopped early; several failures were bugs in my test code.</td></tr>

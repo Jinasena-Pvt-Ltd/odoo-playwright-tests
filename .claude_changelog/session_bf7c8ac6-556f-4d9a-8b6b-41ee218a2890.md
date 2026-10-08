@@ -1792,3 +1792,17 @@ normal odoo DB save the quotation with Payment Terms, Salesperson, Sales Team, C
 - Edit: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\05-validations\sales.validations.spec.ts
 - Write: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\reports\run-history\build-report-6.js
 
+
+---
+
+## Change -- 2026-10-08T03:53:08Z
+
+**Prompt:**
+```
+without payment terms filed blank odoo can't save it.re run and check and give the html repot
+```
+
+**Files touched:**
+- Edit: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\05-validations\sales.validations.spec.ts
+- Edit: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\Test-Run-Report-6.html
+
