@@ -67,6 +67,13 @@ async function checkBlankField(page: Page, c: BlankFieldCase): Promise<void> {
       }
 
       const outcome = await form.trySave();
+      if (/client error/i.test(outcome.dialog)) {
+        // A generic "Odoo Client Error" hides the real message behind "See details": open it and keep the text.
+        const dlg = page.getByRole('dialog').first();
+        await dlg.getByText(/see details/i).first().click({ timeout: 3_000 }).catch(() => {});
+        const full = (await dlg.textContent().catch(() => '')) ?? '';
+        test.info().annotations.push({ type: 'client-error-details', description: full.replace(/\s+/g, ' ').trim().slice(0, 2000) });
+      }
       if (outcome.saved && c.field && c.skipIfReadOnly) {
         // Report what the saved record holds: if Odoo re-filled the field while saving, it was not really saved blank.
         await form.openTab(/other\s*info/i);

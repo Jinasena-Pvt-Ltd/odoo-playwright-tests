@@ -1826,3 +1826,19 @@ without payment terms filed blank odoo can't save it.re run and check and give t
 - Edit: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\05-validations\sales.validations.spec.ts
 - Edit: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\scripts\generate-report.js
 
+
+---
+
+## Change -- 2026-10-08T05:22:43Z
+
+**Prompt:**
+```
+check what's the reason for s02129 quatation save without payment terms and now it's ca't save without payment terms
+```
+
+**Files touched:**
+- Write: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\zz-probe-paymentterm.spec.ts
+- Write: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\zz-probe-paymentterm2.spec.ts
+- Write: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\zz-probe-paymentterm3.spec.ts
+- Edit: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\05-validations\sales.validations.spec.ts
+
