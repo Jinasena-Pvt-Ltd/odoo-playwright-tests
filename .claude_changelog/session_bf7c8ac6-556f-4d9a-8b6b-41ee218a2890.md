@@ -1894,3 +1894,17 @@ At the manually check,both places automatically fill.how it clear
 **Files touched:**
 - Write: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\zz-probe-blank-saved.spec.ts
 
+
+---
+
+## Change -- 2026-10-08T08:51:14Z
+
+**Prompt:**
+```
+<ide_opened_file>The user opened the file c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\tour\create a cash customer.json in the IDE. This may or may not be related to the current task.</ide_opened_file>
+can i get the prompt of my test
+```
+
+**Files touched:**
+- Write: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\prompts\sales-tests-prompt.md
+
