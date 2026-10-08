@@ -12,6 +12,7 @@
   code{background:#f4f4f4;padding:2px 5px;border-radius:3px;font-size:.9em} tr.sep td{background:#eef2f7;font-weight:bold}
 </style></head><body>
 <h1>Sales Testing – Corrected Report (Run 8)</h1>
+<div class="bad"><b>SUPERSEDED (2026-10-08, later run).</b> The statement below that "Salesperson, Sales Team, Company and Warehouse are required in your database" is <b>not correct</b>. Those four tests had passed only because my test's own Escape/Tab key presses crashed Odoo's dropdown (a JavaScript error popup), which blocked the save. After fixing the test, the real results are: <b>Payment Terms</b> and <b>Sales Team</b> are <b>not required</b> (Odoo saved the quotation with them empty); <b>Warehouse</b> is truly required ("Invalid fields: Warehouse"); <b>Salesperson</b> is refused with an analytic-plan error ("Sales Center" plan has no matching account); <b>Company</b> is refused with a server error popup. See the master report <code>reports\master-report-2026-10-08.html</code> (18 passed, 2 failed, 3 skipped).</div>
 <p><b>Repo:</b> odoo-playwright-tests (module <code>sales</code>) &nbsp;|&nbsp; <b>Date:</b> 2026-10-08 &nbsp;|&nbsp; <b>Browser:</b> visible &nbsp;|&nbsp; <b>User:</b> Malsha Hewage</p>
 <p><i>Run 1 was reconstructed from console output. Run 8 re-ran only 05.4 – 05.8, after fixing how those tests work (below). "Now" = latest result of every test.</i></p>
 
