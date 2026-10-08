@@ -248,7 +248,8 @@ function loadResults(filePath) {
 
 function getStatus(test, map) {
   if (map) {
-    const r = map[test.name];
+    // Playwright records titles WITH their tags (@smoke, @e2e); test.name has them stripped. Try both.
+    const r = map[test.name] || map[test.rawName];
     if (r) return r.status;
   }
   if (test.isSkip)      return 'skipped';

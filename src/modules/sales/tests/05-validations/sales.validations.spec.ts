@@ -2,10 +2,12 @@
  * Step 5 — Field Validations for the sales module.
  * Blank required fields on a quotation, and the mandatory Bank Guarantee on distributor customers.
  */
+import { Page } from '@playwright/test';
 import { test, expect } from '../../../../core/fixtures/index';
 import { SalesAppPage, QuotationListPage, QuotationFormPage, CustomerFormPage } from '../../pages/SalesPage';
 import { SALES_MASTER_DATA } from '../../data/sales.master-data';
 import {
+  BlankFieldCase,
   SALES_BLANK_FIELD_CASES,
   SALES_BANK_GUARANTEE_AMOUNT_VALID,
   SALES_BANK_GUARANTEE_EXPIRY_VALID,
@@ -13,9 +15,9 @@ import {
 
 const D = SALES_MASTER_DATA;
 
-test.describe('Sales Field Validations @module:sales @step:validations', () => {
-  for (const c of SALES_BLANK_FIELD_CASES) {
-    test(`quotation with a blank ${c.label} cannot be saved (step ${c.step})`, async ({ page }) => {
+/** One "blank field cannot be saved" check: fill a new quotation, empty the field under test, try to save. */
+async function checkBlankField(page: Page, c: BlankFieldCase): Promise<void> {
+  {
       test.setTimeout(240_000);
       const app = new SalesAppPage(page);
       const form = new QuotationFormPage(page);
@@ -85,8 +87,22 @@ test.describe('Sales Field Validations @module:sales @step:validations', () => {
         type: 'odoo-validation',
         description: outcome.dialog || outcome.notification || `${outcome.invalidFields} invalid field(s)`,
       });
-    });
   }
+}
+
+const blankCase = (step: string): BlankFieldCase => SALES_BLANK_FIELD_CASES.find((c) => c.step === step)!;
+
+// The eight blank-field tests are written out one by one (not generated in a loop) so every test has a fixed
+// title that the report tools can read.
+test.describe('Sales Field Validations @module:sales @step:validations', () => {
+  test('quotation with a blank Customer cannot be saved (step 05.1)', async ({ page }) => checkBlankField(page, blankCase('05.1')));
+  test('quotation with a blank Order Payment Type cannot be saved (step 05.2)', async ({ page }) => checkBlankField(page, blankCase('05.2')));
+  test('quotation with a blank Quotation Type cannot be saved (step 05.3)', async ({ page }) => checkBlankField(page, blankCase('05.3')));
+  test('quotation with a blank Payment Terms cannot be saved (step 05.4)', async ({ page }) => checkBlankField(page, blankCase('05.4')));
+  test('quotation with a blank Salesperson cannot be saved (step 05.5)', async ({ page }) => checkBlankField(page, blankCase('05.5')));
+  test('quotation with a blank Sales Team cannot be saved (step 05.6)', async ({ page }) => checkBlankField(page, blankCase('05.6')));
+  test('quotation with a blank Company cannot be saved (step 05.7)', async ({ page }) => checkBlankField(page, blankCase('05.7')));
+  test('quotation with a blank Warehouse cannot be saved (step 05.8)', async ({ page }) => checkBlankField(page, blankCase('05.8')));
 
   test('a distributor customer needs both Bank Guarantee amount and expiry date', async ({ page }) => {
     test.setTimeout(420_000);
