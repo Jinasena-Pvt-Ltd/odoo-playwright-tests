@@ -1881,3 +1881,16 @@ check what's the reason for s02129 quatation save without payment terms and now 
 **Files touched:**
 - Edit: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\Test-Run-Report-6.html
 
+
+---
+
+## Change -- 2026-10-08T06:50:27Z
+
+**Prompt:**
+```
+At the manually check,both places automatically fill.how it clear
+```
+
+**Files touched:**
+- Write: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\zz-probe-blank-saved.spec.ts
+
