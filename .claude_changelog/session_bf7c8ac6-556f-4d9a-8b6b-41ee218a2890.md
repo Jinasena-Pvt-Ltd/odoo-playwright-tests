@@ -1842,3 +1842,23 @@ check what's the reason for s02129 quatation save without payment terms and now 
 - Write: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\zz-probe-paymentterm3.spec.ts
 - Edit: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\05-validations\sales.validations.spec.ts
 
+
+---
+
+## Change -- 2026-10-08T05:58:31Z
+
+**Prompt:**
+```
+<task-notification>
+<task-id>b84sc6vng</task-id>
+<tool-use-id>toolu_01BtvssrSjDkNdSxfjHry5q4</tool-use-id>
+<output-file>C:\Users\Urliyas\AppData\Local\Temp\claude\c--Users-Urliyas-Documents-GitHub-odoo-playwright-tests\bf7c8ac6-556f-4d9a-8b6b-41ee218a2890\tasks\b84sc6vng.output</output-file>
+<status>completed</status>
+<summary>Background command "$d = "C:\Users\Urliyas\AppData\Local\Temp\claude\c--Users-Urliyas-Documents-GitHub-odoo-playwright-tests\bf7c8ac6-556f-4d9a-8b6b-41ee218a2890\scratchpad"; Remove-Item "$d\master-run3.log" -ErrorAction SilentlyContinue; Set-Location C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests; Remove-Item Env:PLAYWRIGHT_JSON_OUTPUT_NAME -ErrorAction SilentlyContinue; Get-Process chrome,chromium,headless_shell -ErrorAction SilentlyContinue | Where-Object { $_.Path -like '*ms-playwright*' } | Stop-Process -Force -ErrorAction SilentlyContinue; $env:HEADLESS = 'false'; cmd /c "npx playwright test --project=setup --project=admin --grep @module:sales &gt; `"$d\master-run3.log`" 2&gt;&amp;1"; "playwright exit=$LASTEXITCODE"; node scripts/generate-report.js 2&gt;&amp;1 | Select-Object -Last 8; "generator exit=$LASTEXITCODE"" completed (exit code 0)</summary>
+</task-notification>
+```
+
+**Files touched:**
+- Edit: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\pages\SalesPage.ts
+- Edit: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\05-validations\sales.validations.spec.ts
+

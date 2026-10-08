@@ -73,6 +73,11 @@ async function checkBlankField(page: Page, c: BlankFieldCase): Promise<void> {
         await dlg.getByText(/see details/i).first().click({ timeout: 3_000 }).catch(() => {});
         const full = (await dlg.textContent().catch(() => '')) ?? '';
         test.info().annotations.push({ type: 'client-error-details', description: full.replace(/\s+/g, ' ').trim().slice(0, 2000) });
+        // A JavaScript crash is not Odoo refusing the value: the save was never really judged. Do not count it as a pass.
+        expect(
+          false,
+          `Odoo showed a JavaScript "Client Error" instead of a validation result for ${c.label} — the field was not truly tested. Details: ${full.replace(/\s+/g, ' ').replace(/.*See details/, '').slice(0, 220)}`,
+        ).toBe(true);
       }
       if (outcome.saved && c.field && c.skipIfReadOnly) {
         // Report what the saved record holds: if Odoo re-filled the field while saving, it was not really saved blank.

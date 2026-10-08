@@ -462,12 +462,13 @@ export class QuotationFormPage extends SalesFormBase {
       await x.click();
     } else {
       await input.click();
-      await input.selectText().catch(() => {});
       await input.fill('');
-      await this.page.keyboard.press('Tab');
     }
-    await this.page.keyboard.press('Escape').catch(() => {});
-    await this.page.waitForTimeout(600); // let onchange handlers finish (they may re-fill the field)
+    // Do NOT press Escape or Tab here: with Odoo's autocomplete list open, those keys can crash Bootstrap's dropdown
+    // keydown handler ("Cannot read properties of undefined (reading 'nextElementSibling')") and Odoo then shows an
+    // "Odoo Client Error" that blocks the save. Click a neutral spot instead so the field simply loses focus.
+    await this.page.mouse.click(4, 400);
+    await this.page.waitForTimeout(800); // let onchange handlers finish (they may re-fill the field)
     return (await input.inputValue().catch(() => 'x')) === '';
   }
 
