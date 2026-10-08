@@ -12,10 +12,15 @@ export class Many2ManyField {
     await input.waitFor({ state: 'visible', timeout: 5_000 });
     await input.fill(displayName);
 
-    const dropdown = this.page.locator('.o_field_many2many_dropdown, .o-dropdown--menu').first();
+    const dropdown = this.page
+      .locator('.o_field_many2many_dropdown, .o-dropdown--menu, .ui-autocomplete, .o-autocomplete--dropdown-menu')
+      .first();
     await dropdown.waitFor({ state: 'visible', timeout: 8_000 });
     await this.page
-      .locator('.o_field_many2many_dropdown .o_menu_item, .o-dropdown--menu .o_menu_item')
+      .locator(
+        '.o_field_many2many_dropdown .o_menu_item, .o-dropdown--menu .o_menu_item, ' +
+        '.ui-autocomplete .ui-menu-item, .o-autocomplete--dropdown-item',
+      )
       .filter({ hasText: displayName })
       .first()
       .click();

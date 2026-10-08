@@ -17,7 +17,9 @@
     "report:generate": "node scripts/generate-report.js",
     "test:report": "playwright test && node scripts/generate-report.js",
     "report:allure": "allure serve allure-results",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit",
+    "test:fix_repair": "playwright test --grep \"@module:fix_repair\"",
+    "test:helpdesk": "playwright test --grep \"@module:helpdesk\""
   },
   "devDependencies": {
     "@playwright/test": "^1.50.0",
