@@ -3,6 +3,8 @@ import { today } from '../../../core/utils/DateHelper';
 /** Static test configuration for the fix_repair module */
 export const FIX_REPAIR_TEST_CONFIG = {
   repairTypeNotUnderWarrantyNoSerial: 'Repair - Not Under Warranty (Without Ser',
+  // 'Not Under Warranty (With Serial No)' flow (tour 3A): unique substring of the type name.
+  repairTypeNotUnderWarrantyWithSerial: 'Not Under Warranty (With Serial',
   // 'Under Warranty - RUG (Approved)' flow (tour 2A): the type is picked by a
   // unique substring. The Serial Number field only offers serials already sold
   // to a customer (e.g. 0630_001 in the tour); the spec picks a clean one at
