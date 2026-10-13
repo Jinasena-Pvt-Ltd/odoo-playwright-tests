@@ -167,9 +167,13 @@ test('Cash Sales Order tour replay', async ({ page }) => {
   await shotThenClick(page, 197, 'final-sale-order', page.locator('button[name="action_view_source_sale_orders"]'));
   await shotThenClick(page, 198, 'final-invoice', page.locator('button[name="action_view_invoice"]'));
 
-  // 199 — final result: the paid invoice (highlight its status bar)
+  // 199 — final result: the paid invoice (highlight the "In Payment"/"Paid" ribbon, fall back to the title)
   await page.locator('.o_form_view').first().waitFor({ state: 'visible', timeout: 15_000 });
-  await shot(page, 199, 'invoice-paid', page.locator('.o_form_statusbar').first());
+  const ribbon = page.locator('.o_form_view .ribbon').first();
+  const paidTarget = (await ribbon.isVisible({ timeout: 3_000 }).catch(() => false))
+    ? ribbon
+    : page.locator('.o_form_view .oe_title').first();
+  await shot(page, 199, 'invoice-paid', paidTarget);
 
   await expect(page.locator('.o_form_view, .o_list_view').first()).toBeVisible();
 });

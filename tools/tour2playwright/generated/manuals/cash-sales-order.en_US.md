@@ -294,3 +294,11 @@ Click the Invoices smart button
 
 ---
 
+## 37. Invoice paid
+
+The invoice now shows as Paid — the cash sale is complete
+
+![Step 37](../screenshots/cash-sales-order/step-199.png)
+
+---
+
