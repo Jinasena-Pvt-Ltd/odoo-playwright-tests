@@ -109,7 +109,9 @@ test('Cash Sales Order tour replay', async ({ page }) => {
   await pickFromSearchMore(page, 'JAM Warehouse Ekala');
   await captureStep(page, 183, 'warehouse-selected');
 
-  // --- real records are created from here on ---
+  // --- real records are created from here on: only replayed when CONFIRM_REAL_RECORDS=true ---
+  if (process.env.CONFIRM_REAL_RECORDS !== 'true') return;
+
   await page.locator('[data-hotkey="q"]').first().click();
   await page.waitForTimeout(2000);
   await captureStep(page, 184, 'confirm-order');
