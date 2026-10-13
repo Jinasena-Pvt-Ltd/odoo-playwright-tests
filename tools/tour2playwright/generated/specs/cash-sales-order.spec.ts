@@ -31,9 +31,16 @@ async function pickOption(page: Page, text: string): Promise<void> {
     .click();
 }
 
-async function openMany2one(page: Page, id: string): Promise<void> {
-  await page.locator(`#${id}`).click();
-  await page.locator('.o-dropdown--menu, .ui-autocomplete').first().waitFor({ state: 'visible', timeout: 8_000 });
+/** Opens a many2one dropdown by field name (the recorded #field_N ids are positional and drift). */
+async function openMany2one(page: Page, fieldName: string): Promise<void> {
+  const input = page.locator(`.o_field_widget[name="${fieldName}"] input`).first();
+  await input.scrollIntoViewIfNeeded();
+  await input.click();
+  const menu = page.locator('.o-dropdown--menu, .ui-autocomplete').first();
+  if (!(await menu.isVisible({ timeout: 3_000 }).catch(() => false))) {
+    await input.click();
+  }
+  await menu.waitFor({ state: 'visible', timeout: 8_000 });
 }
 
 async function pickFromSearchMore(page: Page, text: string): Promise<void> {
@@ -47,8 +54,15 @@ async function pickFromSearchMore(page: Page, text: string): Promise<void> {
 test('Cash Sales Order tour replay', async ({ page }) => {
   test.setTimeout(240_000);
 
-  await openOdooApp(page, 'Sales');
+  // Step 10 — screenshot the app grid with the Sales tile BEFORE clicking it.
+  await openOdooApp(page, 'Sales'); // establishes the session (login flow), lands inside Sales
+  await page.getByRole('link', { name: 'Home menu' }).click();
+  const salesTile = page.getByRole('option', { name: 'Sales', exact: true });
+  await salesTile.waitFor({ state: 'visible', timeout: 15_000 });
+  await salesTile.hover();
   await captureStep(page, 10, 'open-sales');
+  await salesTile.click();
+  await page.waitForSelector('.o_list_view, .o_kanban_view, .o_form_view', { state: 'visible', timeout: 20_000 });
 
   await page.locator('[data-menu-xmlid="sale.sale_order_menu"]').click();
   await captureStep(page, 20, 'orders');
@@ -90,19 +104,19 @@ test('Cash Sales Order tour replay', async ({ page }) => {
   await page.locator('a[name="other_information"]').click();
   await captureStep(page, 130, 'other-info');
 
-  await openMany2one(page, 'payment_term_id_0');
+  await openMany2one(page, 'payment_term_id');
   await captureStep(page, 140, 'payment-terms');
   await pickOption(page, 'Immediate Payment');
   await captureStep(page, 150, 'immediate-payment');
 
-  await openMany2one(page, 'team_id_0');
+  await openMany2one(page, 'team_id');
   await captureStep(page, 160, 'sales-team');
   await page.getByText('Search More...').click();
   await captureStep(page, 170, 'team-search-more');
   await pickFromSearchMore(page, 'Colombo Sales Centre');
   await captureStep(page, 180, 'team-selected');
 
-  await openMany2one(page, 'warehouse_id_1');
+  await openMany2one(page, 'warehouse_id');
   await captureStep(page, 181, 'warehouse');
   await page.getByText('Search More...').click();
   await captureStep(page, 182, 'warehouse-search-more');
@@ -142,7 +156,7 @@ test('Cash Sales Order tour replay', async ({ page }) => {
   await page.locator('[data-hotkey="g"]').first().click();
   await captureStep(page, 192, 'register-payment');
 
-  await openMany2one(page, 'journal_id_0');
+  await openMany2one(page, 'journal_id');
   await captureStep(page, 193, 'journal');
   await page.getByText('Search More...').click();
   await captureStep(page, 194, 'journal-search-more');
