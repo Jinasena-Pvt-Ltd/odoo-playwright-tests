@@ -1,0 +1,191 @@
+{
+  "version": 2,
+  "tours": [
+    {
+      "name": "Cash Sales Order",
+      "description": "New Sales Order",
+      "steps": [
+        {
+          "sequence": 10,
+          "title": "Open Sales",
+          "content": "Click the Sales module"
+        },
+        {
+          "sequence": 20,
+          "title": "Orders",
+          "content": "Click the Orders"
+        },
+        {
+          "sequence": 30,
+          "title": "Quotations",
+          "content": "Click the Quotations"
+        },
+        {
+          "sequence": 40,
+          "title": "New",
+          "content": "Click the New button"
+        },
+        {
+          "sequence": 50,
+          "title": "Find the customer",
+          "content": "Find a customer..."
+        },
+        {
+          "sequence": 60,
+          "title": "Select the customer",
+          "content": "Select a customer"
+        },
+        {
+          "sequence": 70,
+          "title": "Order Payment Type",
+          "content": "Select Cash"
+        },
+        {
+          "sequence": 80,
+          "title": "Quotation Type",
+          "content": "Select Sales"
+        },
+        {
+          "sequence": 90,
+          "title": "Add a product",
+          "content": "Click Add a product"
+        },
+        {
+          "sequence": 100,
+          "title": "Search the product",
+          "content": "Search the product"
+        },
+        {
+          "sequence": 110,
+          "title": "[02BB 023] BALL BEARING 6202-2RS",
+          "content": "Add the product"
+        },
+        {
+          "sequence": 120,
+          "title": "Quantity",
+          "content": "Set the quantity"
+        },
+        {
+          "sequence": 130,
+          "title": "Other Info",
+          "content": "Click Other Info"
+        },
+        {
+          "sequence": 140,
+          "title": "Payment Terms",
+          "content": "Click Payment Terms"
+        },
+        {
+          "sequence": 150,
+          "title": "Immediate Payment",
+          "content": "Click Immediate Payment because this is a cash order"
+        },
+        {
+          "sequence": 160,
+          "title": "Sales Team",
+          "content": "Click the Sales Team"
+        },
+        {
+          "sequence": 170,
+          "title": "Search More...",
+          "content": "Click Search More"
+        },
+        {
+          "sequence": 180,
+          "title": "Colombo Sales Centre",
+          "content": "Click Colombo Sales Centre"
+        },
+        {
+          "sequence": 181,
+          "title": "Warehouse",
+          "content": "Click Warehouse"
+        },
+        {
+          "sequence": 182,
+          "title": "Search More...",
+          "content": "Click Search More"
+        },
+        {
+          "sequence": 183,
+          "title": "JAM Warehouse Ekala- (JM-EK)",
+          "content": "Click JAM Warehouse Ekala- (JM-EK)"
+        },
+        {
+          "sequence": 184,
+          "title": "Confirm",
+          "content": "Click the Confirm button"
+        },
+        {
+          "sequence": 185,
+          "title": "Delivery",
+          "content": "Click the Delivery smart button"
+        },
+        {
+          "sequence": 186,
+          "title": "Validate",
+          "content": "Click the Validate button"
+        },
+        {
+          "sequence": 187,
+          "title": "Back to the sales order",
+          "content": "Back to the sales order"
+        },
+        {
+          "sequence": 188,
+          "title": "Create Invoice",
+          "content": "Click Create Invoice"
+        },
+        {
+          "sequence": 189,
+          "title": "Confirm",
+          "content": "Click Confirm"
+        },
+        {
+          "sequence": 190,
+          "title": "Sale Orders",
+          "content": "Click the Sale Orders smart button"
+        },
+        {
+          "sequence": 191,
+          "title": "Invoices",
+          "content": "Click the Invoices smart button"
+        },
+        {
+          "sequence": 192,
+          "title": "Register Payment",
+          "content": "Click Register Payment"
+        },
+        {
+          "sequence": 193,
+          "title": "Journal",
+          "content": "Click the bank journal field"
+        },
+        {
+          "sequence": 194,
+          "title": "Search More...",
+          "content": "Click Search More"
+        },
+        {
+          "sequence": 195,
+          "title": "Customer Receipts - Cash",
+          "content": "Select Customer Receipts - Cash"
+        },
+        {
+          "sequence": 196,
+          "title": "Create Payment",
+          "content": "Click Create Payment"
+        },
+        {
+          "sequence": 197,
+          "title": "Sale Orders",
+          "content": "Click the Sales Order smart button"
+        },
+        {
+          "sequence": 198,
+          "title": "Invoices",
+          "content": "Click the Invoices smart button"
+        }
+      ]
+    }
+  ]
+}

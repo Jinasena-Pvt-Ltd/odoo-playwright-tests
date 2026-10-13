@@ -1170,3 +1170,17 @@ create the documentation
 - Write: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\tools\tour2playwright\generated\manuals\cash-sales-order.en_US.md
 - Write: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\tools\tour2playwright\generated\manuals\cash-sales-order.en_US.html
 
+
+---
+
+## Change -- 2026-10-13T05:40:26Z
+
+**Prompt:**
+```
+<ide_opened_file>The user opened the file c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\tools\tour2playwright\generated\manuals\cash-sales-order.en_US.html in the IDE. This may or may not be related to the current task.</ide_opened_file>
+yes i want the screenshorts with documentation
+```
+
+**Files touched:**
+- Write: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\tools\tour2playwright\generated\specs\cash-sales-order.spec.ts
+
