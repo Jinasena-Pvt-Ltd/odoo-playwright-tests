@@ -152,8 +152,6 @@ test('Cash Sales Order tour replay', async ({ page }) => {
   await shotThenClick(page, 189, 'confirm-invoice', page.locator('[data-hotkey="q"]').first());
   await page.waitForTimeout(2000);
 
-  await shotThenClick(page, 190, 'sale-orders-button', page.locator('button[name="action_view_source_sale_orders"]'));
-  await shotThenClick(page, 191, 'invoices-button', page.locator('button[name="action_view_invoice"]'));
   await shotThenClick(page, 192, 'register-payment', page.locator('[data-hotkey="g"]').first());
 
   const journalInput = await openMany2one(page, 'journal_id');

@@ -222,83 +222,67 @@ In the window that opens, click **Create Invoice** again to confirm.
 
 ---
 
-## 28. Check the linked order
-
-Click the **Sale Orders** button on the invoice to confirm it is linked to your order.
-
-![Step 28](../screenshots/cash-sales-order/step-190.png)
-
----
-
-## 29. Open the invoice
-
-Back on the order, click the **Invoices** button to open the invoice.
-
-![Step 29](../screenshots/cash-sales-order/step-191.png)
-
----
-
-## 30. Register the payment
+## 28. Register the payment
 
 On the invoice, click **Register Payment** to record the cash received.
 
-![Step 30](../screenshots/cash-sales-order/step-192.png)
+![Step 28](../screenshots/cash-sales-order/step-192.png)
 
 ---
 
-## 31. Choose the journal
+## 29. Choose the journal
 
 Click the **Journal** field to choose where the payment is recorded.
 
-![Step 31](../screenshots/cash-sales-order/step-193.png)
+![Step 29](../screenshots/cash-sales-order/step-193.png)
 
 ---
 
-## 32. Search for more journals
+## 30. Search for more journals
 
 Click **Search More...** to see all journals.
 
-![Step 32](../screenshots/cash-sales-order/step-194.png)
+![Step 30](../screenshots/cash-sales-order/step-194.png)
 
 ---
 
-## 33. Choose the cash journal
+## 31. Choose the cash journal
 
 Select **Customer Receipts - Cash**.
 
-![Step 33](../screenshots/cash-sales-order/step-195.png)
+![Step 31](../screenshots/cash-sales-order/step-195.png)
 
 ---
 
-## 34. Create the payment
+## 32. Create the payment
 
 Click **Create Payment** to finish. The invoice is now paid.
 
-![Step 34](../screenshots/cash-sales-order/step-196.png)
+![Step 32](../screenshots/cash-sales-order/step-196.png)
 
 ---
 
-## 35. Return to the order
+## 33. Return to the order
 
 Click the **Sale Orders** button to go back to the sales order.
 
-![Step 35](../screenshots/cash-sales-order/step-197.png)
+![Step 33](../screenshots/cash-sales-order/step-197.png)
 
 ---
 
-## 36. Open the invoice again
+## 34. Open the invoice again
 
 Click the **Invoices** button to view the invoice one last time.
 
-![Step 36](../screenshots/cash-sales-order/step-198.png)
+![Step 34](../screenshots/cash-sales-order/step-198.png)
 
 ---
 
-## 37. Done — the invoice is paid
+## 35. Done — the invoice is paid
 
 The invoice shows the green **In Payment** ribbon. The cash sale is complete.
 
-![Step 37](../screenshots/cash-sales-order/step-199.png)
+![Step 35](../screenshots/cash-sales-order/step-199.png)
 
 ---
 

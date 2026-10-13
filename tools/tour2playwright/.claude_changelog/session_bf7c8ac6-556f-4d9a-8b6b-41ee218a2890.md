@@ -50,3 +50,16 @@ now i want user friendly description to understand to user.can u edit the my des
 **Files touched:**
 - Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\tools\tour2playwright\build-manual.js
 
+
+---
+
+## Change -- 2026-10-13T08:44:25Z
+
+**Prompt:**
+```
+reduce the some step and againg send me the fully documentation
+```
+
+**Files touched:**
+- Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\tools\tour2playwright\generated\specs\cash-sales-order.spec.ts
+

@@ -141,16 +141,6 @@
           "content": "In the window that opens, click **Create Invoice** again to confirm."
         },
         {
-          "sequence": 190,
-          "title": "Check the linked order",
-          "content": "Click the **Sale Orders** button on the invoice to confirm it is linked to your order."
-        },
-        {
-          "sequence": 191,
-          "title": "Open the invoice",
-          "content": "Back on the order, click the **Invoices** button to open the invoice."
-        },
-        {
           "sequence": 192,
           "title": "Register the payment",
           "content": "On the invoice, click **Register Payment** to record the cash received."
