@@ -1156,3 +1156,17 @@ regenerate-on-demand output, not a source artifact.
 - Write: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\.claude\commands\debug-test.md
 - Write: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\.claude\commands\review-tests.md
 
+
+---
+
+## Change -- 2026-10-13T05:22:14Z
+
+**Prompt:**
+```
+create the documentation
+```
+
+**Files touched:**
+- Write: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\tools\tour2playwright\generated\manuals\cash-sales-order.en_US.md
+- Write: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\tools\tour2playwright\generated\manuals\cash-sales-order.en_US.html
+

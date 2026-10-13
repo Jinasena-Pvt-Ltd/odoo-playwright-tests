@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Cash Sales Order</title>
+<style>
+  body { font-family: Arial, sans-serif; max-width: 820px; margin: 2rem auto; padding: 0 1rem; color: #222; line-height: 1.5; }
+  h1 { color: #714b67; }
+  h2 { color: #714b67; border-bottom: 2px solid #eee; padding-bottom: .2rem; margin-top: 2rem; }
+  .meta { color: #666; }
+  ol { padding-left: 1.4rem; }
+  li { margin-bottom: .5rem; }
+  .note { background: #fff8e1; border-left: 4px solid #f5a623; padding: .6rem 1rem; margin-top: 2rem; }
+</style>
+</head>
+<body>
+<h1>Cash Sales Order</h1>
+<p>How to create a cash sales order in Odoo and take it all the way through delivery, invoice and payment.</p>
+<p class="meta"><b>Module:</b> Sales · <b>Language:</b> English · <b>Steps:</b> 35</p>
+
+<h2>Part 1 — Create the quotation</h2>
+<ol start="1">
+  <li><b>Open the Sales app.</b> Click the <b>Sales</b> module in the main menu.</li>
+  <li><b>Open Orders.</b> Click <b>Orders</b>.</li>
+  <li><b>Open Quotations.</b> Click <b>Quotations</b>.</li>
+  <li><b>Start a new quotation.</b> Click the <b>New</b> button.</li>
+  <li><b>Find the customer.</b> Click the <b>Customer</b> field and start typing the customer's name.</li>
+  <li><b>Select the customer.</b> Click the matching customer in the dropdown list.</li>
+  <li><b>Choose the payment method.</b> In <b>Order Payment Type</b>, select <b>Cash</b>.</li>
+  <li><b>Choose the quotation type.</b> In <b>Quotation Type</b>, select <b>Sales</b>.</li>
+</ol>
+
+<h2>Part 2 — Add the product</h2>
+<ol start="9">
+  <li><b>Add a line.</b> In the order lines table, click <b>Add a product</b>.</li>
+  <li><b>Search the product.</b> Type the product name or code in the <b>Product</b> field (for example <code>02BB 023</code>).</li>
+  <li><b>Select the product.</b> Click the product in the dropdown, for example <b>[02BB 023] BALL BEARING 6202-2RS</b>.</li>
+  <li><b>Set the quantity.</b> Click the <b>Quantity</b> cell and enter the quantity (default <code>1.0000</code>).</li>
+</ol>
+
+<h2>Part 3 — Other Info tab</h2>
+<ol start="13">
+  <li><b>Open Other Info.</b> Click the <b>Other Info</b> tab.</li>
+  <li><b>Open Payment Terms.</b> Click the <b>Payment Terms</b> field. The default may be <b>90 Days</b>.</li>
+  <li><b>Pick Immediate Payment.</b> Select <b>Immediate Payment</b>, because this is a cash order.</li>
+  <li><b>Open Sales Team.</b> Click the <b>Sales Team</b> field.</li>
+  <li><b>Search more.</b> Click <b>Search More...</b> at the bottom of the dropdown.</li>
+  <li><b>Select the team.</b> In the list, click <b>Colombo Sales Centre</b>.</li>
+  <li><b>Open Warehouse.</b> Click the <b>Warehouse</b> field.</li>
+  <li><b>Search more.</b> Click <b>Search More...</b>.</li>
+  <li><b>Select the warehouse.</b> Click <b>JAM Warehouse Ekala- (JM-EK)</b>.</li>
+</ol>
+
+<h2>Part 4 — Confirm and deliver</h2>
+<ol start="22">
+  <li><b>Confirm the order.</b> Click <b>Confirm</b>. The quotation becomes a sales order.</li>
+  <li><b>Open the delivery.</b> Click the <b>Delivery</b> smart button.</li>
+  <li><b>Validate the delivery.</b> Click <b>Validate</b>.</li>
+  <li><b>Go back to the order.</b> Click the order reference in the breadcrumb (for example <b>S01881</b>).</li>
+</ol>
+
+<h2>Part 5 — Invoice</h2>
+<ol start="26">
+  <li><b>Create the invoice.</b> Click <b>Create Invoice</b>.</li>
+  <li><b>Confirm the invoice.</b> Click <b>Confirm</b> on the invoice.</li>
+  <li><b>Check the source order.</b> Click the <b>Sale Orders</b> smart button to confirm the link back to the order.</li>
+  <li><b>Open the invoice again.</b> Click the <b>Invoices</b> smart button.</li>
+</ol>
+
+<h2>Part 6 — Register the payment</h2>
+<ol start="30">
+  <li><b>Register payment.</b> Click <b>Register Payment</b>.</li>
+  <li><b>Open Journal.</b> Click the <b>Journal</b> field (bank).</li>
+  <li><b>Search more.</b> Click <b>Search More...</b>.</li>
+  <li><b>Select the cash journal.</b> Click <b>Customer Receipts - Cash</b>.</li>
+  <li><b>Create the payment.</b> Click <b>Create Payment</b>.</li>
+  <li><b>Verify the links.</b> Click the <b>Sale Orders</b> smart button, then the <b>Invoices</b> smart button, to check that order, invoice and payment are linked.</li>
+</ol>
+
+<div class="note">
+  <b>Notes</b>
+  <ul>
+    <li>Steps 14–15: always use <b>Immediate Payment</b> for cash orders, not 90 Days.</li>
+    <li>Steps 24, 27 and 34 are real accounting actions and cannot be undone casually. Practise on a test database.</li>
+    <li>Screenshots are not included. Run the tour2playwright pipeline against this export to generate them.</li>
+  </ul>
+</div>
+</body>
+</html>
