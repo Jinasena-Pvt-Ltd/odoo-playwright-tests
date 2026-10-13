@@ -3,192 +3,192 @@
   "tours": [
     {
       "name": "Cash Sales Order",
-      "description": "New Sales Order",
+      "description": "Step-by-step guide to selling to a cash customer: create the quotation, confirm it, deliver the goods, invoice the customer and record the cash payment.",
       "steps": [
         {
           "sequence": 10,
-          "title": "Open Sales",
-          "content": "Click the Sales module"
+          "title": "Open the Sales app",
+          "content": "From the Odoo home screen, click the **Sales** app."
         },
         {
           "sequence": 20,
-          "title": "Orders",
-          "content": "Click the Orders"
+          "title": "Go to Orders",
+          "content": "In the top menu, click **Orders** to see the order options."
         },
         {
           "sequence": 30,
-          "title": "Quotations",
-          "content": "Click the Quotations"
+          "title": "Open Quotations",
+          "content": "Click **Quotations** to see the list of existing quotations."
         },
         {
           "sequence": 40,
-          "title": "New",
-          "content": "Click the New button"
+          "title": "Create a new quotation",
+          "content": "Click the **New** button at the top left to start a blank quotation."
         },
         {
           "sequence": 50,
-          "title": "Find the customer",
-          "content": "Find a customer..."
+          "title": "Search for the customer",
+          "content": "Click the **Customer** field and type the customer name (for example \"abc\"). Matching customers appear in a list."
         },
         {
           "sequence": 60,
-          "title": "Select the customer",
-          "content": "Select a customer"
+          "title": "Choose the customer",
+          "content": "Click the correct customer in the list to select them."
         },
         {
           "sequence": 70,
-          "title": "Order Payment Type",
-          "content": "Select Cash"
+          "title": "Set the payment type to Cash",
+          "content": "In **Order Payment Type**, choose **Cash**, because the customer pays on the spot."
         },
         {
           "sequence": 80,
-          "title": "Quotation Type",
-          "content": "Select Sales"
+          "title": "Set the quotation type",
+          "content": "In **Quotation Type**, choose **Sales**."
         },
         {
           "sequence": 90,
-          "title": "Add a product",
-          "content": "Click Add a product"
+          "title": "Add a product line",
+          "content": "Under the order lines, click **Add a product** to add a new row."
         },
         {
           "sequence": 100,
-          "title": "Search the product",
-          "content": "Search the product"
+          "title": "Search for the product",
+          "content": "In the new row, type the product name or code (for example \"02BB 023\")."
         },
         {
           "sequence": 110,
-          "title": "[02BB 023] BALL BEARING 6202-2RS",
-          "content": "Add the product"
+          "title": "Choose the product",
+          "content": "Click the product in the list, for example **[02BB 023] BALL BEARING 6202-2RS**."
         },
         {
           "sequence": 120,
-          "title": "Quantity",
-          "content": "Set the quantity"
+          "title": "Check the quantity",
+          "content": "Click the **Quantity** cell. It starts at 1. Type a different number if the customer is buying more."
         },
         {
           "sequence": 130,
-          "title": "Other Info",
-          "content": "Click Other Info"
+          "title": "Open the Other Info tab",
+          "content": "Click the **Other Info** tab to fill in payment, team and warehouse details."
         },
         {
           "sequence": 140,
-          "title": "Payment Terms",
-          "content": "Click Payment Terms"
+          "title": "Open Payment Terms",
+          "content": "Click the **Payment Terms** field. A list of payment terms appears."
         },
         {
           "sequence": 150,
-          "title": "Immediate Payment",
-          "content": "Click Immediate Payment because this is a cash order"
+          "title": "Choose Immediate Payment",
+          "content": "Select **Immediate Payment**. Cash orders are paid straight away, so do not use terms such as \"90 Days\"."
         },
         {
           "sequence": 160,
-          "title": "Sales Team",
-          "content": "Click the Sales Team"
+          "title": "Open Sales Team",
+          "content": "Click the **Sales Team** field. If your team is not in the short list, use \"Search More...\" in the next step."
         },
         {
           "sequence": 170,
-          "title": "Search More...",
-          "content": "Click Search More"
+          "title": "Search for more teams",
+          "content": "Click **Search More...** at the bottom of the list to see all sales teams."
         },
         {
           "sequence": 180,
-          "title": "Colombo Sales Centre",
-          "content": "Click Colombo Sales Centre"
+          "title": "Choose your sales team",
+          "content": "Click your team, for example **Colombo Sales Centre**."
         },
         {
           "sequence": 181,
-          "title": "Warehouse",
-          "content": "Click Warehouse"
+          "title": "Open Warehouse",
+          "content": "Click the **Warehouse** field to choose where the goods will be shipped from."
         },
         {
           "sequence": 182,
-          "title": "Search More...",
-          "content": "Click Search More"
+          "title": "Search for more warehouses",
+          "content": "Click **Search More...** to see all warehouses."
         },
         {
           "sequence": 183,
-          "title": "JAM Warehouse Ekala- (JM-EK)",
-          "content": "Click JAM Warehouse Ekala- (JM-EK)"
+          "title": "Choose the warehouse",
+          "content": "Click the warehouse, for example **JAM Warehouse Ekala- (JM-EK)**."
         },
         {
           "sequence": 184,
-          "title": "Confirm",
-          "content": "Click the Confirm button"
+          "title": "Confirm the order",
+          "content": "Click **Confirm**. The quotation becomes a confirmed Sales Order."
         },
         {
           "sequence": 185,
-          "title": "Delivery",
-          "content": "Click the Delivery smart button"
+          "title": "Open the delivery",
+          "content": "Click the **Delivery** button at the top of the order to open the delivery document."
         },
         {
           "sequence": 186,
-          "title": "Validate",
-          "content": "Click the Validate button"
+          "title": "Validate the delivery",
+          "content": "Click **Validate** to confirm the goods have been handed over to the customer."
         },
         {
           "sequence": 187,
-          "title": "Back to the sales order",
-          "content": "Back to the sales order"
+          "title": "Go back to the order",
+          "content": "Click the order number (for example **S01881**) at the top to return to the sales order."
         },
         {
           "sequence": 188,
-          "title": "Create Invoice",
-          "content": "Click Create Invoice"
+          "title": "Start the invoice",
+          "content": "Click **Create Invoice** to begin billing the customer."
         },
         {
           "sequence": 189,
-          "title": "Confirm",
-          "content": "Click Confirm"
+          "title": "Create the invoice",
+          "content": "In the window that opens, click **Create Invoice** again to confirm."
         },
         {
           "sequence": 190,
-          "title": "Sale Orders",
-          "content": "Click the Sale Orders smart button"
+          "title": "Check the linked order",
+          "content": "Click the **Sale Orders** button on the invoice to confirm it is linked to your order."
         },
         {
           "sequence": 191,
-          "title": "Invoices",
-          "content": "Click the Invoices smart button"
+          "title": "Open the invoice",
+          "content": "Back on the order, click the **Invoices** button to open the invoice."
         },
         {
           "sequence": 192,
-          "title": "Register Payment",
-          "content": "Click Register Payment"
+          "title": "Register the payment",
+          "content": "On the invoice, click **Register Payment** to record the cash received."
         },
         {
           "sequence": 193,
-          "title": "Journal",
-          "content": "Click the bank journal field"
+          "title": "Choose the journal",
+          "content": "Click the **Journal** field to choose where the payment is recorded."
         },
         {
           "sequence": 194,
-          "title": "Search More...",
-          "content": "Click Search More"
+          "title": "Search for more journals",
+          "content": "Click **Search More...** to see all journals."
         },
         {
           "sequence": 195,
-          "title": "Customer Receipts - Cash",
-          "content": "Select Customer Receipts - Cash"
+          "title": "Choose the cash journal",
+          "content": "Select **Customer Receipts - Cash**."
         },
         {
           "sequence": 196,
-          "title": "Create Payment",
-          "content": "Click Create Payment"
+          "title": "Create the payment",
+          "content": "Click **Create Payment** to finish. The invoice is now paid."
         },
         {
           "sequence": 197,
-          "title": "Sale Orders",
-          "content": "Click the Sales Order smart button"
+          "title": "Return to the order",
+          "content": "Click the **Sale Orders** button to go back to the sales order."
         },
         {
           "sequence": 198,
-          "title": "Invoices",
-          "content": "Click the Invoices smart button"
+          "title": "Open the invoice again",
+          "content": "Click the **Invoices** button to view the invoice one last time."
         },
         {
           "sequence": 199,
-          "title": "Invoice paid",
-          "content": "The invoice now shows as Paid — the cash sale is complete"
+          "title": "Done — the invoice is paid",
+          "content": "The invoice shows the green **In Payment** ribbon. The cash sale is complete."
         }
       ]
     }

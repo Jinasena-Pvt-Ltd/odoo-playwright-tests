@@ -37,3 +37,16 @@ re check and last one step is missing
 **Files touched:**
 - Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\tools\tour2playwright\generated\specs\cash-sales-order.spec.ts
 
+
+---
+
+## Change -- 2026-10-13T07:22:58Z
+
+**Prompt:**
+```
+now i want user friendly description to understand to user.can u edit the my description to user friendly description?
+```
+
+**Files touched:**
+- Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\tools\tour2playwright\build-manual.js
+

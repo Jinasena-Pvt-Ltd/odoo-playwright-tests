@@ -99,7 +99,7 @@ function buildLocale(locale, localeLabel) {
       return `
       <section class="step">
         <h2><span class="step-num">${i + 1}</span>${heading}</h2>
-        ${s.content ? `<p class="content">${esc(s.content)}</p>` : ''}
+        ${s.content ? `<p class="content">${esc(s.content).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')}</p>` : ''}
         ${s.description && s.description !== s.content ? `<p class="desc">${esc(s.description)}</p>` : ''}
         ${s.adapted ? '<p class="adapted">⚠ Adapted from the recorded tour — see REVIEW.md for details.</p>' : ''}
         ${img}
