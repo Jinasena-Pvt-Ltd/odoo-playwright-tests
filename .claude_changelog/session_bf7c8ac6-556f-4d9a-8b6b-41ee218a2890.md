@@ -1184,3 +1184,16 @@ yes i want the screenshorts with documentation
 **Files touched:**
 - Write: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\tools\tour2playwright\generated\specs\cash-sales-order.spec.ts
 
+
+---
+
+## Change -- 2026-10-13T07:15:11Z
+
+**Prompt:**
+```
+still not adding the 37 step
+```
+
+**Files touched:**
+- Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\tools\tour2playwright\generated\specs\cash-sales-order.spec.ts
+

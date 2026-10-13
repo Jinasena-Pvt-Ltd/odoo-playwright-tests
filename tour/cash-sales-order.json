@@ -184,6 +184,11 @@
           "sequence": 198,
           "title": "Invoices",
           "content": "Click the Invoices smart button"
+        },
+        {
+          "sequence": 199,
+          "title": "Invoice paid",
+          "content": "The invoice now shows as Paid — the cash sale is complete"
         }
       ]
     }

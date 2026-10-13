@@ -178,11 +178,15 @@ Click JAM Warehouse Ekala- (JM-EK)
 
 Click the Confirm button
 
+![Step 22](../screenshots/cash-sales-order/step-184.png)
+
 ---
 
 ## 23. Delivery
 
 Click the Delivery smart button
+
+![Step 23](../screenshots/cash-sales-order/step-185.png)
 
 ---
 
@@ -190,11 +194,15 @@ Click the Delivery smart button
 
 Click the Validate button
 
+![Step 24](../screenshots/cash-sales-order/step-186.png)
+
 ---
 
 ## 25. Back to the sales order
 
 Back to the sales order
+
+![Step 25](../screenshots/cash-sales-order/step-187.png)
 
 ---
 
@@ -202,11 +210,15 @@ Back to the sales order
 
 Click Create Invoice
 
+![Step 26](../screenshots/cash-sales-order/step-188.png)
+
 ---
 
 ## 27. Confirm
 
 Click Confirm
+
+![Step 27](../screenshots/cash-sales-order/step-189.png)
 
 ---
 
@@ -214,11 +226,15 @@ Click Confirm
 
 Click the Sale Orders smart button
 
+![Step 28](../screenshots/cash-sales-order/step-190.png)
+
 ---
 
 ## 29. Invoices
 
 Click the Invoices smart button
+
+![Step 29](../screenshots/cash-sales-order/step-191.png)
 
 ---
 
@@ -226,11 +242,15 @@ Click the Invoices smart button
 
 Click Register Payment
 
+![Step 30](../screenshots/cash-sales-order/step-192.png)
+
 ---
 
 ## 31. Journal
 
 Click the bank journal field
+
+![Step 31](../screenshots/cash-sales-order/step-193.png)
 
 ---
 
@@ -238,11 +258,15 @@ Click the bank journal field
 
 Click Search More
 
+![Step 32](../screenshots/cash-sales-order/step-194.png)
+
 ---
 
 ## 33. Customer Receipts - Cash
 
 Select Customer Receipts - Cash
+
+![Step 33](../screenshots/cash-sales-order/step-195.png)
 
 ---
 
@@ -250,17 +274,23 @@ Select Customer Receipts - Cash
 
 Click Create Payment
 
+![Step 34](../screenshots/cash-sales-order/step-196.png)
+
 ---
 
 ## 35. Sale Orders
 
 Click the Sales Order smart button
 
+![Step 35](../screenshots/cash-sales-order/step-197.png)
+
 ---
 
 ## 36. Invoices
 
 Click the Invoices smart button
+
+![Step 36](../screenshots/cash-sales-order/step-198.png)
 
 ---
 
