@@ -10,6 +10,8 @@
 
 This manual explains how to register and complete a **factory** repair for a customer's product that is **still under warranty** and has an existing **serial number**, but whose damage **is not covered by the warranty** and is not a RUG case (type **Under Warranty - External not RUG**). The process starts with a Helpdesk ticket at the receiving branch, moves the item to the factory, records the repair through a Field Service task, quotes the spare part for the customer's online approval, collects a 50% deposit, routes the item back through the sales centre, collects the balance and ends when the item is dispatched back to the customer.
 
+If, for any reason, it is later decided to provide the RUG facility for this, the type of this ticket can be changed to 'RUG' before adding the item.
+
 ### Ticket stages covered
 
 `New` → `Sent to Factory` → `Received at Factory` → `Diagnosis` → `Estimation Sent to Customer` → `Estimation Approval Received` → `Advance Received` → `Repair Started` → `Repair Completed` → `Sent to Sales Centre` → `Received at Sales Centre` → `Handed Over to Customer`
@@ -59,8 +61,6 @@ This manual explains how to register and complete a **factory** repair for a cus
 | I | 62–68 | Collect the remaining balance from the customer. |
 | J | 69–71 | Dispatch the repaired item back to the customer. |
 
-
-If, for any reason, it is later decided to provide the RUG facility for this, the type of this ticket can be changed to 'RUG' before adding the item.
 ---
 
 ## Section A — Create the Repair Ticket (Steps 1–10)
