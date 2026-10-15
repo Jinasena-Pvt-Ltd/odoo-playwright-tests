@@ -10,6 +10,10 @@ export const FIX_REPAIR_TEST_CONFIG = {
   // to a customer (e.g. 0630_001 in the tour); the spec picks a clean one at
   // run time and falls back to this value.
   repairTypeUnderWarrantyRug: 'Under Warranty - RUG',
+  // 'Under Warranty (External not RUG)' flow (tour 4A): the instance's option is
+  // 'Repair - Under Warranty -  External not RUG' (note the double space), so a
+  // unique substring is used.
+  repairTypeUnderWarrantyExternal: 'External not RUG',
   serialNumberExample: '0630_001',
   warrantyCardImagePath: 'WarrantyCard.jpg',
   jobLocationFactory: 'Factory Repair',
