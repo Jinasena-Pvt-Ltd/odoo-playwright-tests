@@ -22,6 +22,11 @@ export class OdooSystemError extends Error {
   }
 }
 
+/** The flow legitimately stops here (e.g. an approval needs another user) — reported as a note, not a bug. */
+export class ExpectedStopError extends Error {}
+
+export interface FlowNote { group: string; flow: string; step: string; text: string }
+
 const OUT_DIR = path.resolve(__dirname, '../../../../test-results/flow-bugs');
 const REPORT_DIR = path.resolve(__dirname, '../../../../reports');
 
@@ -32,15 +37,30 @@ const REPORT_DIR = path.resolve(__dirname, '../../../../reports');
 export class BugLog {
   readonly bugs: Bug[] = [];
   readonly passed: string[] = [];
+  readonly notes: FlowNote[] = [];
 
+  note(n: FlowNote): void {
+    this.notes.push(n);
+  }
+
+  /** Adds a bug; the same problem found again in another Customer Group is merged into the first entry. */
   add(b: Omit<Bug, 'id'>): Bug {
-    const dup = this.bugs.find(
-      x => x.flow === b.flow && x.step === b.step && x.title === b.title && x.group !== b.group,
-    );
+    const dup = this.bugs.find(x => x.flow === b.flow && x.step === b.step && x.title === b.title);
+    if (dup) {
+      if (!dup.group.split(', ').includes(b.group)) dup.group += `, ${b.group}`;
+      return dup;
+    }
     const bug: Bug = { id: `BUG-${String(this.bugs.length + 1).padStart(3, '0')}`, ...b };
-    if (dup) bug.detail += `\n(Same problem as ${dup.id} in group ${dup.group}.)`;
     this.bugs.push(bug);
     return bug;
+  }
+
+  /** Same as add(), but also saves a screenshot of the current page as evidence. */
+  async addWithShot(page: Page, b: Omit<Bug, 'id' | 'screenshot'>): Promise<Bug> {
+    fs.mkdirSync(OUT_DIR, { recursive: true });
+    const shot = path.join(OUT_DIR, `${b.group}-${b.flow}-${b.step}`.replace(/[^a-z0-9]+/gi, '_').slice(0, 90) + '.png');
+    await page.screenshot({ path: shot }).catch(() => {});
+    return this.add({ ...b, screenshot: shot });
   }
 
   ok(label: string): void {
@@ -59,6 +79,10 @@ export class BugLog {
       this.ok(`${ctx.group} / ${ctx.flow} / ${name}`);
       return true;
     } catch (e) {
+      if (e instanceof ExpectedStopError) {
+        this.note({ group: ctx.group, flow: ctx.flow, step: name, text: e.message });
+        return false;
+      }
       const isSystem = e instanceof OdooSystemError;
       const msg = e instanceof Error ? e.message : String(e);
       fs.mkdirSync(OUT_DIR, { recursive: true });
@@ -85,7 +109,7 @@ export class BugLog {
     const date = new Date().toISOString().slice(0, 10);
     const md = path.join(REPORT_DIR, `sales-flow-bugs-${date}.md`);
     const json = path.join(REPORT_DIR, `sales-flow-bugs-${date}.json`);
-    fs.writeFileSync(json, JSON.stringify({ bugs: this.bugs, passed: this.passed }, null, 2), 'utf-8');
+    fs.writeFileSync(json, JSON.stringify({ bugs: this.bugs, passed: this.passed, notes: this.notes }, null, 2), 'utf-8');
 
     const bySeverity = (s: Severity) => this.bugs.filter(b => b.severity === s).length;
     let out = `# Sales flow bug report — ${date}\n\n`;
@@ -102,6 +126,10 @@ export class BugLog {
       if (b.screenshot) out += `- **Screenshot:** \`${path.relative(path.resolve(__dirname, '../../../..'), b.screenshot).replace(/\\/g, '/')}\`\n`;
       out += '\n';
     }
+    out += `## Flow stopped here — not a bug\n\n`;
+    out += this.notes.length
+      ? this.notes.map(n => `- **${n.group} / ${n.flow} / ${n.step}:** ${n.text}`).join('\n') + '\n\n'
+      : '_None._\n\n';
     out += `## Steps that passed\n\n`;
     out += this.passed.map(p => `- ${p}`).join('\n') + '\n';
     fs.writeFileSync(md, out, 'utf-8');

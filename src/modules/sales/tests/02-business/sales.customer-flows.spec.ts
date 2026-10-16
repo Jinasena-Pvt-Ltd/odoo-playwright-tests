@@ -20,6 +20,7 @@ import { BugLog } from '../../flows/BugLog';
 import {
   COMPANY, openSalesApp, switchCompany, createQuotation, approveAndConfirm,
   validateDelivery, unlockOrder, createInvoice, registerCashPayment, visibleHeaderButtons,
+  BLANK_FIELDS, blankFieldAndTrySave, tryConfirmBadOrder,
 } from '../../flows/flowHelpers';
 
 interface CustomerGroup { id: number; name: string }
@@ -140,9 +141,17 @@ test.describe('Sales Cash & Credit flows by Customer Group @module:sales @step:b
   test.skip(process.env.RUN_SALES_FLOWS !== 'true',
     'Creates real customers/orders/invoices — set RUN_SALES_FLOWS=true to run');
 
-  test('walk Cash and Credit flow for every Customer Group and collect bugs', async ({ page, browser, rpc }) => {
+  test('walk Cash and Credit flow for every Customer Group and collect bugs', async ({ page: firstPage, browser, rpc }) => {
     test.setTimeout(0); // many groups × two UI flows; progress is written after every group
     const bugs = new BugLog();
+
+    // One long session crashes the browser page ("Page crashed"), so every flow / check starts on a fresh page.
+    let page = firstPage;
+    const renewPage = async () => {
+      const old = page;
+      page = await firstPage.context().newPage();
+      if (old !== page) await old.close().catch(() => {});
+    };
 
     try {
       const { groups, foreign } = await readGroups(rpc, bugs);
@@ -151,6 +160,7 @@ test.describe('Sales Cash & Credit flows by Customer Group @module:sales @step:b
       await switchCompany(page, COMPANY);
 
       const cashFlow = async (label: string, customer: string) => {
+        await renewPage();
         const c = { group: label, flow: 'Cash' };
         let orderUrl = '';
         let ok = await bugs.step(page, c, '1 Create quotation (Cash)', async () => {
@@ -178,6 +188,7 @@ test.describe('Sales Cash & Credit flows by Customer Group @module:sales @step:b
       };
 
       const creditFlow = async (label: string, customer: string) => {
+        await renewPage();
         const c = { group: label, flow: 'Credit' };
         let ok = await bugs.step(page, c, '1 Create quotation (Credit)', async () => {
           await createQuotation(page, { customer, paymentType: 'Credit' });
@@ -192,6 +203,63 @@ test.describe('Sales Cash & Credit flows by Customer Group @module:sales @step:b
         });
         if (ok) ok = await bugs.step(page, c, '3 Validate delivery', async () => { await validateDelivery(page); });
         if (ok) await bugs.step(page, c, '4 Create invoice', async () => { await createInvoice(page); });
+      };
+
+
+      /**
+       * Validation checks: does Odoo stop a quotation that should not be accepted?
+       * Each header field is emptied on an otherwise complete quotation and Save is pressed;
+       * if the quotation saves, that is a missing validation (bug). Zero quantity / zero price lines
+       * must not be confirmable.
+       */
+      const validationChecks = async (label: string, customer: string, paymentType: 'Cash' | 'Credit') => {
+        const c = { group: label, flow: `Validation (${paymentType})` };
+        for (const f of BLANK_FIELDS) {
+          const name = `Save with blank ${f.label}`;
+          await renewPage();
+          try {
+            await createQuotation(page, { customer, paymentType, save: false });
+            const r = await blankFieldAndTrySave(page, f);
+            if (r === 'saved') {
+              await bugs.addWithShot(page, {
+                ...c, step: name, severity: 'High',
+                title: `Quotation can be saved with a blank ${f.label}`,
+                detail: `A complete ${paymentType} quotation was saved after ${f.label} was emptied. ` +
+                  `Odoo showed no required-field error and created a quotation number. ${f.label} should be mandatory.`,
+              });
+            } else {
+              bugs.ok(`${label} / Validation (${paymentType}) / ${name}: ${r === 'blocked' ? 'blocked by Odoo (OK)' : r}`);
+            }
+          } catch (e) {
+            const msg = e instanceof Error ? e.message : String(e);
+            bugs.add({ ...c, step: name, severity: 'Medium', title: 'Validation check could not be completed (needs review)',
+              detail: `${f.label}: ${msg.split('\n')[0].slice(0, 300)}` });
+          }
+        }
+        for (const bad of [
+          { what: 'zero quantity', opts: { quantity: 0 } },
+          { what: 'zero unit price', opts: { unitPrice: 0 } },
+        ]) {
+          const name = `Confirm order with ${bad.what}`;
+          await renewPage();
+          try {
+            await createQuotation(page, { customer, paymentType, ...bad.opts });
+            const r = await tryConfirmBadOrder(page);
+            if (r === 'confirmed') {
+              await bugs.addWithShot(page, {
+                ...c, step: name, severity: 'High',
+                title: `Order with ${bad.what} can be confirmed`,
+                detail: `The quotation line has ${bad.what} and Confirm turned it into a Sales Order without any error.`,
+              });
+            } else {
+              bugs.ok(`${label} / Validation (${paymentType}) / ${name}: ${r} (OK)`);
+            }
+          } catch (e) {
+            const msg = e instanceof Error ? e.message : String(e);
+            bugs.add({ ...c, step: name, severity: 'Medium', title: 'Validation check could not be completed (needs review)',
+              detail: `${bad.what}: ${msg.split('\n')[0].slice(0, 300)}` });
+          }
+        }
       };
 
       // Control run: an existing, known-good customer (used by the recorded tour). If the same step also fails here,
@@ -218,6 +286,10 @@ test.describe('Sales Cash & Credit flows by Customer Group @module:sales @step:b
         if (cashCustomer) await cashFlow(group.name, cashCustomer);
         const creditCustomer = await createCustomer(rpc, bugs, group, 'Credit');
         if (creditCustomer) await creditFlow(group.name, creditCustomer);
+        if (process.env.FLOW_SKIP_VALIDATIONS !== 'true') {
+          if (cashCustomer) await validationChecks(group.name, cashCustomer, 'Cash');
+          if (creditCustomer && group === groups[0]) await validationChecks(group.name, creditCustomer, 'Credit');
+        }
         bugs.writeReports(); // keep partial results if a later group crashes the run
       }
     } finally {

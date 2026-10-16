@@ -16,7 +16,7 @@ if (!jsonPath) {
   if (!files.length) { console.error('No reports/sales-flow-bugs-*.json found. Run npm run test:sales-flows first.'); process.exit(1); }
   jsonPath = path.join(reportsDir, files[files.length - 1]);
 }
-const { bugs, passed } = JSON.parse(fs.readFileSync(jsonPath, 'utf-8'));
+const { bugs, passed, notes = [] } = JSON.parse(fs.readFileSync(jsonPath, 'utf-8'));
 const outPath = jsonPath.replace(/\.json$/, '.html');
 
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -45,6 +45,9 @@ const card = (b) => {
   </section>`;
 };
 
+const notesHtml = notes.length
+  ? '<ul>' + notes.map((n) => `<li><b>${esc(n.group)} / ${esc(n.flow)} / ${esc(n.step)}:</b> ${esc(clean(n.text))}</li>`).join('') + '</ul>'
+  : '<p>None.</p>';
 const passedRows = passed.map((p) => `<li>${esc(p)}</li>`).join('\n');
 
 const html = `<!doctype html>
@@ -103,6 +106,11 @@ const html = `<!doctype html>
   </div>
 
   ${bugs.length ? bugs.map(card).join('\n') : '<p><b>No bugs found.</b></p>'}
+
+  <details open>
+    <summary>Flow stopped here &mdash; not a bug (${notes.length})</summary>
+    ${notesHtml}
+  </details>
 
   <details>
     <summary>Steps that passed (${passed.length})</summary>

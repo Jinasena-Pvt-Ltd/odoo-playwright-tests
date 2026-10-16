@@ -5,7 +5,7 @@
  * and all credentials come from the root .env (ADMIN_*, optional ODOO_APPROVER_*).
  */
 import { Browser, Locator, Page, expect } from '@playwright/test';
-import { OdooSystemError } from './BugLog';
+import { ExpectedStopError, OdooSystemError } from './BugLog';
 
 export const COMPANY      = process.env.FLOW_COMPANY      ?? 'Jinasena Agricultural Machinery (Pvt) Ltd.';
 export const WAREHOUSE    = process.env.FLOW_WAREHOUSE    ?? 'JAM Warehouse Ekala- (JM-EK)';
@@ -198,6 +198,10 @@ export interface OrderInput {
   customer: string;
   paymentType: 'Cash' | 'Credit';
   quantity?: number;
+  /** Override the unit price of the line (e.g. 0 for the zero-price check). */
+  unitPrice?: number;
+  /** false = leave the form unsaved (used by the blank-field validation checks). Default true. */
+  save?: boolean;
 }
 
 /** Creates and saves a quotation with one product line. Returns the order number (e.g. S02250). */
@@ -241,12 +245,17 @@ export async function createQuotation(page: Page, input: OrderInput): Promise<st
   const drop = page.locator('.o-autocomplete--dropdown-menu');
   await expect(drop).toBeVisible({ timeout: 10_000 });
   await drop.locator('li, .o-autocomplete--dropdown-item').filter({ hasText: PRODUCT_NAME }).first().click({ force: true });
-  if (input.quantity && input.quantity !== 1) {
+  if (input.quantity !== undefined && input.quantity !== 1) {
     const qty = row.locator('[name="product_uom_qty"] input').first();
     await qty.click(); await qty.selectText(); await qty.fill(String(input.quantity)); await qty.press('Tab');
   }
+  if (input.unitPrice !== undefined) {
+    const price = row.locator('[name="price_unit"] input').first();
+    await price.click(); await price.selectText(); await price.fill(String(input.unitPrice)); await price.press('Tab');
+  }
   await throwIfOdooError(page);
 
+  if (input.save === false) return '';
   await saveRecord(page);
   const name = ((await page.locator('.o_form_view [name="name"]').first().textContent().catch(() => '')) ?? '').trim();
   if (!/^S\d+/.test(name)) throw new Error(`Quotation was not saved (title shows "${name || 'New'}").`);
@@ -315,9 +324,10 @@ export async function approveAndConfirm(page: Page, browser: Browser): Promise<A
         // The approval is assigned to another user — the requester cannot approve it.
         const who = await approverNameOnPage(page);
         if (!process.env.ODOO_APPROVER_EMAIL || !process.env.ODOO_APPROVER_PASSWORD) {
-          throw new Error(
-            `"${appr.text}" is waiting for approval by ${who}; the requesting user cannot approve it. ` +
-            `Add ODOO_APPROVER_EMAIL / ODOO_APPROVER_PASSWORD (the approver's login) to .env to continue.`);
+          throw new ExpectedStopError(
+            `Approval requested (${out.taken.join(', ') || appr.text}). "${appr.text}" is now waiting for ${who} — ` +
+            `normal behaviour, the requester cannot approve it. Add ODOO_APPROVER_EMAIL / ODOO_APPROVER_PASSWORD ` +
+            `to .env to let the test continue with confirm, delivery and invoice.`);
         }
         await approveAsApprover(browser, recordUrl, appr.text);
         out.taken.push(`${appr.text} (as ${process.env.ODOO_APPROVER_EMAIL})`);
@@ -399,7 +409,13 @@ export async function createInvoice(page: Page): Promise<string> {
   await expect(page.locator('.o_form_view [name="partner_id"]')).toBeVisible({ timeout: 30_000 });
   await expect(page.locator('.o_form_statusbar .o_statusbar_status')).toContainText(/draft|posted/i, { timeout: 30_000 });
   const confirm = page.locator('.o_form_statusbar').getByRole('button', { name: /^confirm$/i }).first();
-  if (await confirm.isVisible({ timeout: 3_000 }).catch(() => false)) {
+  const bgNotify = page.locator('.o_form_statusbar').getByRole('button', { name: /send bank guarantee validity notification/i }).first();
+  if (!(await confirm.isVisible({ timeout: 3_000 }).catch(() => false)) && await bgNotify.isVisible({ timeout: 2_000 }).catch(() => false)) {
+    // Dealer/Distributor invoices must send the Bank Guarantee Validity Notification before Confirm appears.
+    await bgNotify.click();
+    await throwIfOdooError(page);
+  }
+  if (await confirm.isVisible({ timeout: 5_000 }).catch(() => false)) {
     await confirm.click();
     await throwIfOdooError(page);
   }
@@ -417,4 +433,86 @@ export async function registerCashPayment(page: Page): Promise<void> {
   await throwIfOdooError(page);
   await expect(page.locator('.o_form_view .o_widget_web_ribbon, .o_form_view .ribbon').first())
     .toContainText(/paid|in payment/i, { timeout: 30_000 });
+}
+
+// ─── Validation checks (does Odoo stop a bad quotation?) ──────────────────────
+
+export interface BlankField {
+  label: string;
+  name: string;
+  kind: 'many2one' | 'select';
+  tab?: RegExp; // notebook tab the field lives on
+}
+
+export const BLANK_FIELDS: BlankField[] = [
+  { label: 'Customer', name: 'partner_id', kind: 'many2one' },
+  { label: 'Order Payment Type', name: 'x_studio_order_payment_method', kind: 'select' },
+  { label: 'Quotation Type', name: 'x_studio_quotation_type', kind: 'select' },
+  { label: 'Payment Terms', name: 'payment_term_id', kind: 'many2one', tab: /other\s*info/i },
+  { label: 'Salesperson', name: 'user_id', kind: 'many2one', tab: /other\s*info/i },
+  { label: 'Sales Team', name: 'team_id', kind: 'many2one', tab: /other\s*info/i },
+  { label: 'Warehouse', name: 'warehouse_id', kind: 'many2one', tab: /other\s*info/i },
+  { label: 'Company', name: 'company_id', kind: 'many2one', tab: /other\s*info/i },
+];
+
+export type BlankResult = 'blocked' | 'saved' | 'not-blankable' | 'field-not-shown';
+
+/**
+ * On an UNSAVED, fully filled quotation: empties one header field and presses Save.
+ * 'saved' means Odoo accepted the quotation with that field blank (a missing validation).
+ */
+export async function blankFieldAndTrySave(page: Page, f: BlankField): Promise<BlankResult> {
+  if (f.tab) await clickTab(page, f.tab).catch(() => {});
+  const root = page.locator(`.o_form_view [name="${f.name}"]`).first();
+  if (!(await root.isVisible({ timeout: 3_000 }).catch(() => false))) return 'field-not-shown';
+
+  if (f.kind === 'select') {
+    const sel = root.locator('select').first();
+    const emptyValue = await sel.evaluate(el => {
+      const o = Array.from((el as HTMLSelectElement).options).find(x => x.value === '' || x.value === 'false' || x.text.trim() === '');
+      return o ? o.value : null;
+    }).catch(() => null);
+    if (emptyValue === null) return 'not-blankable';
+    await sel.selectOption({ value: emptyValue });
+  } else {
+    const input = root.locator('input').first();
+    if (!(await input.isEditable({ timeout: 2_000 }).catch(() => false))) return 'not-blankable';
+    await input.click();
+    await input.fill('');
+    await input.press('Tab');
+    await page.waitForTimeout(500);
+    await page.locator('.o-autocomplete--dropdown-menu').waitFor({ state: 'hidden', timeout: 3_000 }).catch(() => {});
+  }
+
+  const save = page.locator('.o_form_button_save').first();
+  if (!(await save.isVisible({ timeout: 3_000 }).catch(() => false))) return 'blocked';
+  const clicked = await save.click({ timeout: 8_000 }).then(() => true).catch(() => false);
+  if (!clicked) return 'blocked';
+
+  try { await throwIfOdooError(page); } catch (e) {
+    if (e instanceof OdooSystemError) return 'blocked';
+    throw e;
+  }
+  await page.waitForTimeout(1_500);
+  const invalid = await page.locator('.o_field_invalid').first().isVisible({ timeout: 1_000 }).catch(() => false);
+  if (invalid) return 'blocked';
+  const title = ((await page.locator('.o_form_view [name="name"]').first().textContent().catch(() => '')) ?? '').trim();
+  return /^S\d+/.test(title) ? 'saved' : 'blocked';
+}
+
+/**
+ * After a quotation with a bad line (zero quantity / zero price) is saved: is Confirm blocked?
+ * Returns 'confirmed' when Odoo turned it into a Sales Order anyway.
+ */
+export async function tryConfirmBadOrder(page: Page): Promise<'confirm-hidden' | 'blocked' | 'confirmed'> {
+  await page.evaluate(() => window.scrollTo(0, 0));
+  const confirm = page.locator('.o_form_statusbar').getByRole('button', { name: /^confirm$/i }).first();
+  if (!(await confirm.isVisible({ timeout: 5_000 }).catch(() => false))) return 'confirm-hidden';
+  await confirm.click().catch(() => {});
+  try { await throwIfOdooError(page); } catch (e) {
+    if (e instanceof OdooSystemError) return 'blocked';
+    throw e;
+  }
+  const current = await page.locator('.o_form_statusbar .o_arrow_button_current').first().textContent().catch(() => '');
+  return /sales order/i.test(current ?? '') ? 'confirmed' : 'blocked';
 }
