@@ -100,7 +100,7 @@ function buildLocale(locale, localeLabel) {
       <section class="step">
         <h2><span class="step-num">${i + 1}</span>${heading}</h2>
         ${s.content ? `<p class="content">${esc(s.content).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')}</p>` : ''}
-        ${s.description && s.description !== s.content ? `<p class="desc">${esc(s.description)}</p>` : ''}
+        ${s.description && s.description !== s.content ? `<p class="desc">${esc(s.description).replace(/(Why:|Check:|Watch out:|Tip:|Result:)/g, '<b>$1</b>')}</p>` : ''}
         ${s.adapted ? '<p class="adapted">⚠ Adapted from the recorded tour — see REVIEW.md for details.</p>' : ''}
         ${img}
       </section>`;
@@ -114,20 +114,22 @@ function buildLocale(locale, localeLabel) {
 <title>${esc(tour.name)} — User Manual</title>
 <style>
   :root { color-scheme: light; }
-  body { font-family: -apple-system, Segoe UI, Roboto, sans-serif; background: #f6f7f9; color: #1a1a1a; margin: 0; padding: 0 0 4rem; }
-  header { background: #714B67; color: #fff; padding: 2.5rem 2rem; }
-  header h1 { margin: 0 0 .5rem; font-size: 1.8rem; }
-  header p { margin: 0; opacity: .9; }
-  main { max-width: 900px; margin: 0 auto; padding: 2rem; }
-  .step { background: #fff; border: 1px solid #e3e3e3; border-radius: 10px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,.05); }
-  .step h2 { margin: 0 0 .75rem; font-size: 1.15rem; display: flex; align-items: center; gap: .6rem; }
-  .step-num { background: #714B67; color: #fff; border-radius: 50%; width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center; font-size: .85rem; flex-shrink: 0; }
-  .content { color: #444; margin: 0 0 .5rem; }
-  .desc { color: #666; font-style: italic; margin: 0 0 .5rem; }
-  .adapted { color: #8a5a00; background: #fff6e5; border: 1px solid #ffe2a8; border-radius: 6px; padding: .5rem .75rem; font-size: .9rem; margin: 0 0 .75rem; }
+  body { font-family: -apple-system, Segoe UI, Roboto, sans-serif; background: #f6f7f9; color: #1a1a1a; margin: 0; padding: 0 0 4rem; font-size: 20px; line-height: 1.6; }
+  header { background: #714B67; color: #fff; padding: 3rem 2rem; }
+  header h1 { margin: 0 0 .75rem; font-size: 2.6rem; font-weight: 800; }
+  header p { margin: 0; opacity: .95; font-size: 1.2rem; }
+  main { max-width: 1000px; margin: 0 auto; padding: 2rem; }
+  .step { background: #fff; border: 1px solid #e3e3e3; border-left: 8px solid #714B67; border-radius: 12px; padding: 2rem; margin-bottom: 2.5rem; box-shadow: 0 2px 6px rgba(0,0,0,.08); }
+  .step h2 { margin: 0 0 1.25rem; font-size: 1.9rem; line-height: 1.3; font-weight: 800; color: #4a2c42; display: flex; align-items: flex-start; gap: .9rem; }
+  .step-num { background: #714B67; color: #fff; border-radius: 50%; min-width: 52px; height: 52px; display: inline-flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 800; flex-shrink: 0; }
+  .content { color: #111; margin: 0 0 1rem; font-size: 1.4rem; font-weight: 500; }
+  .content strong { background: #fff176; color: #000; font-weight: 800; padding: 0 .3em; border-radius: 4px; }
+  .desc { color: #1b4d2b; background: #e8f5e9; border-left: 6px solid #43a047; border-radius: 6px; padding: .9rem 1.1rem; font-size: 1.15rem; margin: 0 0 1.25rem; }
+  .desc b { color: #0b5d1e; font-weight: 800; }
+  .adapted { color: #8a5a00; background: #fff6e5; border: 1px solid #ffe2a8; border-radius: 6px; padding: .6rem .9rem; font-size: 1rem; margin: 0 0 .75rem; }
   .missing { color: #999; font-style: italic; }
-  img { max-width: 100%; border: 1px solid #ddd; border-radius: 6px; display: block; }
-  footer { max-width: 900px; margin: 0 auto; padding: 0 2rem; color: #888; font-size: .85rem; }
+  img { max-width: 100%; border: 2px solid #ccc; border-radius: 8px; display: block; }
+  footer { max-width: 1000px; margin: 0 auto; padding: 0 2rem; color: #888; font-size: 1rem; }
 </style>
 </head>
 <body>
