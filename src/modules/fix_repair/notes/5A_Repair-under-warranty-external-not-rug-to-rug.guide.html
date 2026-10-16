@@ -58,6 +58,7 @@
   .data-table th, .data-table td { border: 1px solid var(--border); padding: 8px 10px; text-align: left; vertical-align: top; }
   .data-table th { background: var(--accent); color: #fff; font-weight: 700; }
   .summary-table th:nth-child(1), .summary-table td:nth-child(1), .summary-table th:nth-child(2), .summary-table td:nth-child(2) { white-space: nowrap; width: 1%; }
+  .when-type-note li::marker { color: #dc2626; }
   .data-table tr:nth-child(even) td { background: #f8fafc; }
   .step-range { font-weight: 400; color: var(--muted); font-size: 0.85rem; }
   .step-box { border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; margin-bottom: 16px; }
@@ -83,6 +84,7 @@
 </div>
 <h3 class="phase">1. Overview</h3>
 <p>This manual explains how to <strong>change</strong> a repair ticket that was started under the <strong>Under Warranty (External not RUG)</strong> type to the <strong>Under Warranty - RUG</strong> type. The ticket is created at the receiving branch for a Factory Repair, and while it is still of type External not RUG the <strong>Change to RUG</strong> button is used. Because the RUG facility requires proof of warranty, the <strong>Warranty Details</strong> tab must then be completed by attaching the warranty card, after which the normal RUG process continues with <strong>Return</strong>.</p>
+<div class="when-type-note" style="color:#dc2626;">
 <h4>When the type can be changed</h4>
 <ol>
   <li>At the time the ticket was created, before the return was received (shown in this manual).</li>
@@ -91,6 +93,8 @@
   <li>After receiving from the factory, and before creating a task.</li>
 </ol>
 <p>After any one of these cases, the warranty details must be attached, then the normal RUG process is followed.</p>
+
+</div>
 <h4>Ticket stages covered</h4>
 <div class="stage-pills">
   <span class="pill">New</span>
