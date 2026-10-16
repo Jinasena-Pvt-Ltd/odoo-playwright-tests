@@ -57,6 +57,7 @@
   .data-table { width: 100%; border-collapse: collapse; margin-bottom: 18px; font-size: 0.88rem; }
   .data-table th, .data-table td { border: 1px solid var(--border); padding: 8px 10px; text-align: left; vertical-align: top; }
   .data-table th { background: var(--accent); color: #fff; font-weight: 700; }
+  .summary-table th:nth-child(1), .summary-table td:nth-child(1), .summary-table th:nth-child(2), .summary-table td:nth-child(2) { white-space: nowrap; width: 1%; }
   .data-table tr:nth-child(even) td { background: #f8fafc; }
   .step-range { font-weight: 400; color: var(--muted); font-size: 0.85rem; }
   .step-box { border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; margin-bottom: 16px; }
@@ -119,7 +120,7 @@
   <tr><th>Screenshot</th><td>The screen you are on <em>right before</em> performing the action, with the element to use framed in red.</td></tr>
 </table>
 <h4>Step summary</h4>
-<table class="data-table">
+<table class="data-table summary-table">
   <tr><th>Section</th><th>Steps</th><th>Purpose</th></tr>
   <tr><td>A</td><td>1–12</td><td>Open Helpdesk, create the ticket, classify it as Under Warranty - RUG, enter the serial number and attach the warranty card.</td></tr>
   <tr><td>B</td><td>13–15</td><td>Return the item into stock and validate the receipt.</td></tr>
