@@ -53,3 +53,16 @@ cd /c/Users/Urliyas/Documents/GitHub/odoo-playwright-tests &amp;&amp; npx playwr
 **Files touched:**
 - Write: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\_docs2.js
 
+
+---
+
+## Change -- 2026-10-20T10:45:22Z
+
+**Prompt:**
+```
+no worries. now i want to user friendly more description in the documnetation at the serial number sales order
+```
+
+**Files touched:**
+- Write: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\_docs3.js
+

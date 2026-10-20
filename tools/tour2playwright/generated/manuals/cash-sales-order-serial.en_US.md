@@ -1,206 +1,206 @@
 # Cash Sales Order - Serial — User Manual (English)
 
-Step-by-step guide to creating a Cash sales order for a serial-number product: create the quotation, confirm it, add a new serial number on the delivery, validate the delivery, create the invoice and register the cash payment.
+Step-by-step guide to selling a serial-number product to a cash customer: create the quotation, confirm it, give the unit its own serial number on the delivery, validate the delivery, invoice the customer and record the cash payment. Before you start: you need access to the Sales app, an existing cash customer, and a product that is tracked by serial number (this guide uses [27PM LJ20] EY20KP PUMP SHAFT ENGINE). A serial number is a unique code that identifies one single unit (like a chassis number), so every unit you deliver needs its own, and it must not be used twice. In every screenshot the red box shows exactly what to click or fill in.
 
 Generated from an Odoo Tour Recorder export, replayed with Playwright, and screenshotted at every step.
 
 ---
 
-## 1. Open the Sales app
+## 1. Open the Sales app from the Odoo home screen to start a new sale
 
-On the Odoo home screen, click the **Sales** icon to open the Sales app.
+Log in to Odoo. On the home screen you will see a grid of app icons. Find the **Sales** icon (red box) and click it. The Sales app opens and its menu appears across the top of the screen.
 
-_Why: every sale starts in the Sales app. Check: the Sales menu (Orders, To Invoice, Products, Reporting...) appears across the top._
+_Why: every sale starts in the Sales app. Check: you see the menu Orders, To Invoice, Products, Reporting, Configuration. Watch out: if the Sales icon is missing, your user has no Sales access, so ask your administrator._
 
 ![Step 1](../screenshots/cash-sales-order-serial/step-010.png)
 
 ---
 
-## 2. Open the Orders menu
+## 2. Click Orders in the top menu to see the order options
 
-Click **Orders** in the top menu. A small dropdown opens.
+Look at the menu bar at the top of the screen. Click **Orders**. A small dropdown opens just below it.
 
-_Why: the Orders menu groups quotations and sales orders. Check: the dropdown shows Quotations._
+_Why: the Orders menu groups quotations and sales orders together. Check: the dropdown lists Quotations._
 
 ![Step 2](../screenshots/cash-sales-order-serial/step-020.png)
 
 ---
 
-## 3. Open the Quotations list
+## 3. Click Quotations to open the list of existing quotations
 
-Click **Quotations** in the dropdown.
+In the dropdown, click **Quotations**. A list opens with the quotations that already exist, showing the customer, the date and the status of each one.
 
-_Why: a quotation is the draft of a sale; it becomes a Sales Order when you confirm it. Check: the list of existing quotations opens._
+_Why: a quotation is the draft of a sale. It only becomes a Sales Order when you click Confirm. Check: you see a list with a **New** button at the top left._
 
 ![Step 3](../screenshots/cash-sales-order-serial/step-030.png)
 
 ---
 
-## 4. Start a new quotation
+## 4. Click New to start a blank quotation
 
-Click the **New** button at the top left.
+At the top left of the list, click the purple **New** button. A blank quotation form opens.
 
-_Check: a blank quotation form opens._
+_Check: the form shows the title "New" and empty fields such as Customer and Order Payment Type._
 
 ![Step 4](../screenshots/cash-sales-order-serial/step-040.png)
 
 ---
 
-## 5. Find the customer
+## 5. Click the Customer field and type the customer name to search for them
 
-Click the **Customer** field and start typing the customer name (for example "abc").
+On the form, find the **Customer** field near the top left. Click it and type the customer name, or part of it (in this example **abc**). A list of matching customers opens below the field.
 
-_Why: the list narrows as you type. Tip: for a Cash sale, use a Cash customer._
+_Why: Odoo needs a customer to price the order and to print the invoice. Tip: you can search by name, phone or code. Watch out: for a cash sale choose a cash customer; if the customer does not exist, create them first._
 
 ![Step 5](../screenshots/cash-sales-order-serial/step-050.png)
 
 ---
 
-## 6. Select the customer
+## 6. Select the correct customer from the search results
 
-Click the customer you want in the dropdown list.
+Look through the list and click the correct customer (red box). The name now shows in the Customer field, and the Invoice Address and Delivery Address fill in by themselves.
 
-_Check: the customer name and address appear on the form, and the Invoice and Delivery Address fill in automatically. Watch out: a Cash customer cannot be changed to Credit later._
+_Check: the customer name and address appear, and the Invoice Address and Delivery Address are filled. Wrong customer? Click the field again and choose another one before saving. Watch out: a cash customer cannot be changed to Credit later on this order._
 
 ![Step 6](../screenshots/cash-sales-order-serial/step-060.png)
 
 ---
 
-## 7. Set the payment type to Cash
+## 7. Set Order Payment Type to Cash because the customer pays immediately
 
-In **Order Payment Type**, choose **Cash**.
+Find **Order Payment Type** on the right side of the form and choose **Cash** from the dropdown.
 
-_Why: this tells Odoo the customer pays immediately. Check: the field shows "Cash"._
+_Why: this tells Odoo the customer pays at once, not later on credit. Cash orders normally need no approval. Check: the field shows "Cash"._
 
 ![Step 7](../screenshots/cash-sales-order-serial/step-070.png)
 
 ---
 
-## 8. Set the quotation type to Sales
+## 8. Set Quotation Type to Sales to mark this as a normal product sale
 
-In **Quotation Type**, choose **Sales**.
+Just below, open **Quotation Type** and choose **Sales**.
 
-_Check: the field shows "Sales". Watch out: the quotation cannot be saved if this field is empty._
+_Check: the field shows "Sales". Watch out: Odoo will not let you save the quotation while this field is empty._
 
 ![Step 8](../screenshots/cash-sales-order-serial/step-080.png)
 
 ---
 
-## 9. Add a product line
+## 9. Click Add a product to add a new row to the order lines
 
-Under the **Order Lines** tab, click **Add a product**.
+Scroll down to the **Order Lines** tab at the bottom of the form and click **Add a product**. A new empty row appears.
 
-_Check: a new empty line appears and the Product field is ready for typing._
+_Check: the new row is ready, with an empty Product cell._
 
 ![Step 9](../screenshots/cash-sales-order-serial/step-090.png)
 
 ---
 
-## 10. Open the Product field
+## 10. Click the Product field on the new row to open the list of products
 
-Click the **Product** field on the new line. A dropdown with a few products opens.
+Click the **Product** cell of the new row. A short dropdown opens with the first few products and a **Search More...** option at the bottom.
 
-_Tip: the dropdown shows only the first few products; use "Search More..." to see them all._
+_Why: the dropdown only shows the first few products, so the product you want is usually not in it yet. Tip: you can also type a few letters of the product code straight into this cell._
 
 ![Step 10](../screenshots/cash-sales-order-serial/step-100.png)
 
 ---
 
-## 11. Click "Search More..."
+## 11. Click Search More... to open the full product list
 
-At the bottom of the dropdown, click **Search More...**.
+At the bottom of the dropdown, click **Search More...**. A larger window opens with the complete product list and a search bar at the top.
 
-_Check: a larger window opens with a full product list and a search bar._
+_Check: the "Search: Product" window is open and shows many products._
 
 ![Step 11](../screenshots/cash-sales-order-serial/step-110.png)
 
 ---
 
-## 12. Search for the product
+## 12. Type the product code in the search bar to find the serial-number product
 
-In the search bar of that window, type the product code, for example **EY20KP**, and press Enter.
+In the search bar of that window, type **EY20KP** (the product code) and press **Enter**. The long list shrinks to the products that match.
 
-_Tip: typing a part of the name or code is enough. Check: the list shrinks to the matching product._
+_Tip: part of the name or code is enough. Check: the list now shows only the EY20KP pump shaft engine._
 
 ![Step 12](../screenshots/cash-sales-order-serial/step-120.png)
 
 ---
 
-## 13. Select the serial-number product
+## 13. Select the serial-number product from the results
 
-Click the product **[27PM LJ20] EY20KP (PETROL/KEROSENE) PUMP SHAFT ENGINE (LJ20)**.
+Click the row **[27PM LJ20] EY20KP (PETROL/KEROSENE) PUMP SHAFT ENGINE (LJ20)** (red box). The window closes and the product appears on the order line.
 
-_Why: this product is tracked by serial number, so each unit needs its own serial number at delivery. Check: the product appears on the order line._
+_Why: this product is tracked by serial number, so each unit needs its own serial number when you deliver it (steps 25 to 33). Check: the order line shows the product, quantity 1 and a price._
 
 ![Step 13](../screenshots/cash-sales-order-serial/step-130.png)
 
 ---
 
-## 14. Open the Other Info tab
+## 14. Open the Other Info tab to fill in payment terms, sales team and warehouse
 
-Click the **Other Info** tab.
+Click the **Other Info** tab (next to Order Lines). It holds the payment, delivery and sales team details of the order.
 
-_Check: payment terms, sales team and warehouse fields are visible._
+_Check: you see fields such as Payment Terms, Salesperson, Sales Team and Warehouse._
 
 ![Step 14](../screenshots/cash-sales-order-serial/step-140.png)
 
 ---
 
-## 15. Open the Payment Terms field
+## 15. Click the Payment Terms field to see the available payment terms
 
-Click the **Payment Terms** field.
+Click the **Payment Terms** field. A dropdown lists the payment terms that Odoo knows, for example Immediate Payment, 30 Days, 90 Days.
 
-_Check: a dropdown of payment terms opens._
+_Check: the dropdown is open and shows several payment terms._
 
 ![Step 15](../screenshots/cash-sales-order-serial/step-150.png)
 
 ---
 
-## 16. Choose Immediate Payment
+## 16. Select Immediate Payment because a cash sale is paid straight away
 
-Click **Immediate Payment**.
+Click **Immediate Payment** (red box).
 
-_Why: this is a Cash order, so payment is due straight away. Check: the field shows "Immediate Payment"._
+_Why: on a cash order the money is due at once, so the invoice must not be given a later due date. Check: the field shows "Immediate Payment". Watch out: the wrong payment term makes the invoice show a future due date._
 
 ![Step 16](../screenshots/cash-sales-order-serial/step-160.png)
 
 ---
 
-## 17. Open the Sales Team field
+## 17. Click the Sales Team field to choose the team making this sale
 
-Click the **Sales Team** field.
+Click the **Sales Team** field. A dropdown opens with a few teams.
 
-_Check: a dropdown of sales teams opens._
+_Why: the sales team decides the sales reports the order is counted in and, here, also the delivery warehouse._
 
 ![Step 17](../screenshots/cash-sales-order-serial/step-170.png)
 
 ---
 
-## 18. Click "Search More..."
+## 18. Click Search More... to see every sales team
 
-Click **Search More...** at the bottom of the dropdown.
+At the bottom of the dropdown, click **Search More...**. A window opens with the full list of sales teams.
 
-_Check: a window with the full list of sales teams opens._
+_Check: the list of teams is shown. Tip: you can also type the team name directly in the field._
 
 ![Step 18](../screenshots/cash-sales-order-serial/step-180.png)
 
 ---
 
-## 19. Select the Sales Team
+## 19. Select the Colombo Sales Centre team
 
-Click **Colombo Sales Centre**.
+Click **Colombo Sales Centre** (red box). The window closes and the team appears in the field.
 
-_Check: the Sales Team field shows "Colombo Sales Centre" and the Warehouse is filled in automatically._
+_Check: the Sales Team field shows "Colombo Sales Centre". Odoo now also fills the Warehouse on its own._
 
 ![Step 19](../screenshots/cash-sales-order-serial/step-190.png)
 
 ---
 
-## 20. Check the Warehouse
+## 20. Check that the Warehouse is correct
 
-Look at the **Warehouse** field. Odoo has already filled it in from the Sales Team: **JAM Warehouse Ekala- (JM-EK)**.
+Look at the **Warehouse** field in the Delivery section (red box). Odoo has already filled it in from the Sales Team: **JAM Warehouse Ekala- (JM-EK)**.
 
-_Why: the goods are delivered from this warehouse. Tip: if the field is empty, click it and choose Search More... (next steps)._
+_Why: the goods will be taken out of stock from this warehouse. Tip: if the field is empty, click it and use the next two steps to pick the warehouse._
 
 > **Note:** this step was adapted from the recorded tour — see REVIEW.md.
 
@@ -208,11 +208,11 @@ _Why: the goods are delivered from this warehouse. Tip: if the field is empty, c
 
 ---
 
-## 21. If the Warehouse is empty: click "Search More..."
+## 21. Only if the Warehouse is empty: click Search More...
 
-Only if the Warehouse field is empty: click the field and choose **Search More...** at the bottom of the dropdown.
+If the Warehouse field was empty, click it and choose **Search More...** at the bottom of the dropdown.
 
-_Check: the list of warehouses opens. In this example the field was already filled, so you can skip this step._
+_Check: a list of warehouses opens. In this example the Warehouse was already filled, so you can skip this step._
 
 > **Note:** this step was adapted from the recorded tour — see REVIEW.md.
 
@@ -220,11 +220,11 @@ _Check: the list of warehouses opens. In this example the field was already fill
 
 ---
 
-## 22. If the Warehouse is empty: select it
+## 22. Only if the Warehouse is empty: select JAM Warehouse Ekala- (JM-EK)
 
 Click **JAM Warehouse Ekala- (JM-EK)** in the list.
 
-_Check: the Warehouse field shows JAM Warehouse Ekala- (JM-EK)._
+_Check: the Warehouse field shows "JAM Warehouse Ekala- (JM-EK)". If it was already filled, nothing to do here._
 
 > **Note:** this step was adapted from the recorded tour — see REVIEW.md.
 
@@ -232,81 +232,81 @@ _Check: the Warehouse field shows JAM Warehouse Ekala- (JM-EK)._
 
 ---
 
-## 23. Confirm the order
+## 23. Click Confirm to turn the quotation into a Sales Order
 
-Click the **Confirm** button at the top.
+At the top of the form, click the purple **Confirm** button (red box). Odoo saves the quotation and turns it into a confirmed Sales Order.
 
-_Why: this turns the quotation into a confirmed Sales Order and creates the delivery. Check: the status changes to "Sales Order" and a Delivery smart button appears._
+_Why: confirming makes the order official and creates the delivery that you will process next. Check: the status bar moves to "Sales Order", the number changes to S0..., and a **Delivery** button appears at the top._
 
 ![Step 23](../screenshots/cash-sales-order-serial/step-230.png)
 
 ---
 
-## 24. Open the delivery
+## 24. Click the Delivery button to open the delivery
 
-Click the **Delivery** smart button at the top of the order.
+At the top of the order, click the **Delivery** smart button (red box). The delivery transfer opens, for example JM-EK/OUT/01060.
 
-_Check: the delivery transfer (for example JM-EK/OUT/00001) opens._
+_Why: the delivery is the document your warehouse uses to hand the goods to the customer. Check: you see the delivery with the product line and the status "Waiting"._
 
 ![Step 24](../screenshots/cash-sales-order-serial/step-240.png)
 
 ---
 
-## 25. Open the serial number details
+## 25. Click the list icon on the product line to enter the serial number
 
-On the product line, click the **list icon** at the right end of the line.
+On the product line in the Operations tab, click the small **list icon** at the right end of the line (red box). A window titled "Open: Stock move" opens.
 
-_Why: a serial-number product must have a serial number assigned before it can be delivered. Check: the "Open: Stock move" window opens._
+_Why: a serial-number product cannot be delivered until each unit has its serial number. This window is where you give it one. Check: the window shows the product, the Demand quantity and an **Add a line** link._
 
 ![Step 25](../screenshots/cash-sales-order-serial/step-250.png)
 
 ---
 
-## 26. Add a serial number line
+## 26. Click Add a line to add a serial number
 
-Click **Add a line** in that window.
+In that window, click **Add a line**. A second window lists the serial numbers that are already in stock, with a **New** button at the bottom.
 
-_Check: a list of serial numbers already in stock opens, with a **New** button._
+_Tip: if the serial number you need is already in the list, you can simply select it. This guide creates a brand new one. Check: the "Add line" list is open._
 
 ![Step 26](../screenshots/cash-sales-order-serial/step-260.png)
 
 ---
 
-## 27. Create a new serial number
+## 27. Click New to create a new serial number
 
-Click **New**.
+Click the purple **New** button at the bottom of the list. A small window titled "Create Move Line" opens.
 
-_Check: the "Create Move Line" window opens with a Lot/Serial Number field._
+_Check: the window shows a **Lot/Serial Number** field and a yellow warning about negative stock. Do not worry about the warning: it simply says this serial number has no stock yet._
 
 ![Step 27](../screenshots/cash-sales-order-serial/step-270.png)
 
 ---
 
-## 28. Enter the new serial number
+## 28. Type the new serial number in the Lot/Serial Number field
 
-Click the **Lot/Serial Number** field and type the new serial number.
+Click the **Lot/Serial Number** field and type the new serial number, for example **DOC12345**. A dropdown appears below with the option Create "your serial number".
 
-_Tip: each serial number must be unique for the product._
+_Tip: use the code that is written on the unit itself or on its label. Watch out: every serial number must be unique for the product. Odoo will not accept one that already exists._
 
 ![Step 28](../screenshots/cash-sales-order-serial/step-280.png)
 
 ---
 
-## 29. Create the serial number
+## 29. Click Create to register the new serial number
 
-Click **Create "<your serial number>"** in the dropdown.
+In the dropdown, click **Create "your serial number"** (red box). Odoo creates the serial number and puts it in the field.
 
-_Check: the serial number is accepted and the field shows it._
+_Check: the field now shows your serial number, with a small arrow icon at its right._
 
 ![Step 29](../screenshots/cash-sales-order-serial/step-281.png)
 
 ---
 
-## 30. Serial number added
+## 30. Check that the serial number is in the field
 
-The new serial number now shows in the **Lot/Serial Number** field. If it does not, press **Enter**.
+Look at the **Lot/Serial Number** field (red box). Your serial number is shown there. If it is not, press **Enter** to confirm it.
 
-_Check: the field shows your serial number and a small arrow icon beside it._
+_Check: the serial number is visible and the "Save & Close" button is available at the bottom._
 
 > **Note:** this step was adapted from the recorded tour — see REVIEW.md.
 
@@ -314,21 +314,21 @@ _Check: the field shows your serial number and a small arrow icon beside it._
 
 ---
 
-## 31. Save the move line
+## 31. Click Save & Close to keep the serial number
 
-Click **Save & Close**.
+Click **Save & Close** (red box) at the bottom of the small window. It closes and you return to the "Open: Stock move" window.
 
-_Check: the Create Move Line window closes._
+_Check: the Create Move Line window is gone and the stock move now lists a line with your serial number and quantity 1._
 
 ![Step 31](../screenshots/cash-sales-order-serial/step-283.png)
 
 ---
 
-## 32. Save the serial number
+## 32. Click Save to attach the serial number to the delivery
 
-In the "Open: Stock move" window, click **Save**.
+In the "Open: Stock move" window, click **Save** (red box). The window closes and you are back on the delivery.
 
-_Check: the window closes and the line now shows the quantity._
+_Check: the product line on the delivery now shows quantity 1.0000 in the Quantity column._
 
 ![Step 32](../screenshots/cash-sales-order-serial/step-284.png)
 
@@ -336,19 +336,19 @@ _Check: the window closes and the line now shows the quantity._
 
 ## 33. Save the delivery
 
-Click the **Save** (cloud) icon at the top of the delivery.
+If the **Save** (cloud) icon is shown at the top left next to the delivery number, click it so that the delivery is saved with the serial number.
 
-_Check: the delivery is saved with the serial number._
+_Check: the cloud icon disappears. Tip: if it was not shown, the delivery was saved already, so go on to the next step._
 
 ![Step 33](../screenshots/cash-sales-order-serial/step-285.png)
 
 ---
 
-## 34. Validate the delivery
+## 34. Click Validate to deliver the goods
 
-Click **Validate**.
+Click the purple **Validate** button at the top left (red box). If Odoo asks a question, confirm it.
 
-_Why: this hands the goods to the customer and takes them out of stock. Check: the status bar moves to **Done** (see the next screenshot). Watch out: Odoo refuses to deliver a serial number that has no stock, so the serial number must be in stock first._
+_Why: this hands the goods to the customer and takes the unit out of stock. Check: the status bar at the top right moves to **Done**. Watch out: Odoo refuses to deliver a serial number that has no stock ("negative stock"). Make sure the serial number is in stock before validating, or the delivery will not complete._
 
 ![Step 34](../screenshots/cash-sales-order-serial/step-286.png)
 
@@ -356,49 +356,49 @@ _Why: this hands the goods to the customer and takes them out of stock. Check: t
 
 ## 35. Go back to the sales order
 
-The delivery is now **Done**. Click the sales order number at the top left (next to "Quotations") to go back to the order.
+The delivery is now **Done**. At the top left, click the sales order number (red box, for example S02729) to go back to the order.
 
-_Check: the order opens and shows an invoice button._
+_Check: the order opens again and now shows a **Create Invoice** button._
 
 ![Step 35](../screenshots/cash-sales-order-serial/step-287.png)
 
 ---
 
-## 36. Create the invoice
+## 36. Click Create Invoice to bill the customer
 
-Click **Create Invoice**.
+Click **Create Invoice** (red box). If a small window asks which kind of invoice to create, keep the default "Regular invoice" and click **Create Draft Invoice**.
 
-_Check: the invoice window or the draft invoice opens._
+_Why: the invoice is the document you give the customer to ask for payment. Check: a draft invoice opens with the customer, the product and the amount._
 
 ![Step 36](../screenshots/cash-sales-order-serial/step-288.png)
 
 ---
 
-## 37. Confirm the invoice
+## 37. Click Confirm to post the invoice
 
-Click **Confirm**.
+On the draft invoice, click **Confirm** (red box). The invoice gets its final number, for example FTI/2026/00602.
 
-_Why: this posts the invoice. Check: the invoice status becomes "Posted"._
+_Why: a draft invoice has no accounting effect; confirming it records the sale in the books. Check: the status bar moves to **Posted** and a **Register Payment** button appears._
 
 ![Step 37](../screenshots/cash-sales-order-serial/step-289.png)
 
 ---
 
-## 38. Register the payment
+## 38. Click Register Payment to record the money received
 
-Click **Register Payment**.
+Click **Register Payment** (red box) at the top of the invoice. A payment window opens.
 
-_Check: the payment window opens._
+_Why: this records that the customer has paid. Check: the Register Payment window opens._
 
 ![Step 38](../screenshots/cash-sales-order-serial/step-290.png)
 
 ---
 
-## 39. The payment window opens
+## 39. Review the Register Payment window
 
-The **Register Payment** window opens. It shows the Journal, the Payment Method, the Amount and the Payment Date.
+The **Register Payment** window shows the Journal, the Payment Method, the Amount and the Payment Date.
 
-_Check: the Amount equals the invoice total. Watch out: the Journal may be pre-filled with a bank journal; for a cash sale you change it in the next steps._
+_Check: the Amount equals the invoice total and the Payment Date is today. Watch out: the Journal may be pre-filled with a bank journal. For a cash sale you must change it to the cash journal (next steps)._
 
 > **Note:** this step was adapted from the recorded tour — see REVIEW.md.
 
@@ -406,21 +406,21 @@ _Check: the Amount equals the invoice total. Watch out: the Journal may be pre-f
 
 ---
 
-## 40. Open the Journal field
+## 40. Click the Journal field to choose where the payment is recorded
 
-Click the **Journal** field to choose where the payment is recorded.
+Click the **Journal** field at the top left of the window. A short list of journals opens.
 
-_Check: a short list of journals opens._
+_Why: the journal decides which account the money goes to: cash or bank. Check: the list of journals is open._
 
 ![Step 40](../screenshots/cash-sales-order-serial/step-311.png)
 
 ---
 
-## 41. Find the cash journal
+## 41. Look for Customer Receipts - Cash in the journal list
 
-Look for **Customer Receipts - Cash** in the list.
+In the list, look for **Customer Receipts - Cash**. It is the journal used for payments received in cash.
 
-_Tip: if it is not in the short list, choose Search More... at the bottom._
+_Tip: if you do not see it in the short list, choose **Search More...** at the bottom of the list or type "Cash" in the field._
 
 > **Note:** this step was adapted from the recorded tour — see REVIEW.md.
 
@@ -428,11 +428,11 @@ _Tip: if it is not in the short list, choose Search More... at the bottom._
 
 ---
 
-## 42. Click "Search More..."
+## 42. Click Search More... to see all the journals
 
-Click **Search More...** at the bottom of the dropdown.
+At the bottom of the dropdown, click **Search More...**. A window opens with every journal.
 
-_Check: a window with the journals opens._
+_Check: the full list of journals is shown._
 
 ![Step 42](../screenshots/cash-sales-order-serial/step-313.png)
 
@@ -440,49 +440,49 @@ _Check: a window with the journals opens._
 
 ## 43. Select Customer Receipts - Cash
 
-Click **Customer Receipts - Cash**.
+Click the row **Customer Receipts - Cash** (red box).
 
-_Why: a cash payment is recorded on the cash journal. Check: the Journal field shows "Customer Receipts - Cash"._
+_Check: the Journal field now shows "Customer Receipts - Cash". Watch out: choosing a bank journal by mistake would record the money as a bank deposit._
 
 ![Step 43](../screenshots/cash-sales-order-serial/step-314.png)
 
 ---
 
-## 44. Create the payment
+## 44. Click Create Payment to finish the payment
 
-Click **Create Payment**.
+Click **Create Payment** (red box). The window closes and the invoice is updated.
 
-_Check: the payment is created and the invoice shows it as paid or in payment._
+_Check: a green **IN PAYMENT** ribbon appears at the top right of the invoice, or **PAID** if the payment is already reconciled._
 
 ![Step 44](../screenshots/cash-sales-order-serial/step-315.png)
 
 ---
 
-## 45. Open the source sales order
+## 45. Click the Sale Orders button to see the original order
 
-Click the **Sales Orders** smart button.
+At the top of the invoice, click the **Sale Orders** button (red box). The sales order this invoice came from opens.
 
-_Check: the original sales order opens._
+_Why: it lets you jump between the order and its invoice at any time. Check: the sales order opens._
 
 ![Step 45](../screenshots/cash-sales-order-serial/step-316.png)
 
 ---
 
-## 46. Open the invoice
+## 46. Click the Invoices button to return to the invoice
 
-Click the **Invoices** smart button.
+On the sales order, click the **Invoices** button (red box) to go back to the invoice.
 
-_Check: the invoice linked to the order opens._
+_Check: the invoice opens again._
 
 ![Step 46](../screenshots/cash-sales-order-serial/step-317.png)
 
 ---
 
-## 47. The customer invoice
+## 47. Review the finished customer invoice
 
-The customer invoice opens. At the top right the status bar shows **Posted**.
+The customer invoice is open. At the top right the status bar shows **Posted**, and the customer, the invoice number and the dates are shown.
 
-_Check: the invoice number (for example FTI/2026/00602) and the customer are shown._
+_Check: the invoice number (for example FTI/2026/00602) and the customer name are correct._
 
 > **Note:** this step was adapted from the recorded tour — see REVIEW.md.
 
@@ -490,11 +490,11 @@ _Check: the invoice number (for example FTI/2026/00602) and the customer are sho
 
 ---
 
-## 48. Invoice lines
+## 48. Check the invoice lines and the amount due
 
-Scroll down to the **Invoice Lines**. They list the serial-number product that was invoiced.
+Scroll down to the **Invoice Lines**. They list the serial-number product you sold. At the bottom right you see the Total and the **Amount Due**.
 
-_Check: the line shows [27PM LJ20] EY20KP PUMP SHAFT ENGINE, quantity 1, and **Amount Due 0.0000** once the payment is registered._
+_Check: the line shows [27PM LJ20] EY20KP PUMP SHAFT ENGINE, quantity 1, and the **Amount Due is 0.0000** because the customer has paid._
 
 > **Note:** this step was adapted from the recorded tour — see REVIEW.md.
 
@@ -502,11 +502,11 @@ _Check: the line shows [27PM LJ20] EY20KP PUMP SHAFT ENGINE, quantity 1, and **A
 
 ---
 
-## 49. Payment registered
+## 49. Confirm that the payment is registered
 
-The green **IN PAYMENT** ribbon at the top right of the invoice confirms that the payment was registered.
+Look at the top right of the invoice: the green **IN PAYMENT** ribbon (red box) shows that the payment has been registered. The sale is now complete.
 
-_Result: the sale is complete. Tip: "In Payment" changes to **Paid** once the payment is reconciled with the cash or bank statement._
+_Result: product delivered with its own serial number, customer invoiced, payment recorded. Tip: "In Payment" becomes **Paid** after the payment is reconciled with your cash or bank statement._
 
 > **Note:** this step was adapted from the recorded tour — see REVIEW.md.
 
