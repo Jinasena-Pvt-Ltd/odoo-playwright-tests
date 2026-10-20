@@ -97,12 +97,16 @@ it's findable by search. Each run creates a new contact tagged with a random run
 (`Cash Customer <TAG>`) so repeat runs don't produce indistinguishable duplicates.
 
 
-## cash-sales-order-serial (no replay, text-only manual)
+## cash-sales-order-serial (replayed, illustrated manual)
 
-Manual written from `tour/cash-sales-order-serial.json` (Odoo export, 49 steps). All 49 recorded steps are kept; none removed. The manual has no screenshots because the tour was not replayed end to end.
+Manual built from `tour/cash-sales-order-serial.json` (Odoo export, 49 steps, none removed) and the replay `generated/specs/cash-sales-order-serial.spec.ts`. The replay ran all 49 steps with no failures and created a real sales order, delivery, new serial number, invoice and payment in Odoo.
 
-Steps to review before using the manual for training:
-- **291** ("Create button"): recorded on the serial-number dropdown selector (`#lot_id_0_0_0`) but placed after Register Payment, so it probably belongs to a different step.
-- **312** (journal): recorded content says "Click the Serial number Product" but the target is the Journal field.
-- **200-220** (warehouse): the Warehouse field is normally filled automatically once the Sales Team is chosen, so these steps only apply when it is empty.
-- **110-130, 180-190, 210-220, 313-314** use "Search More..." and fixed list positions; they depend on the number of records and may not match every database.
+Steps adapted (the screenshot shows what the replay actually did, which differs slightly from the recording):
+- **200, 210, 220** (warehouse): Odoo fills the Warehouse from the Sales Team, so the replay only highlights the filled field. The Search More... route is described as "only if empty".
+- **282** (press Enter): shows the serial number in the field after Create; Enter is not needed.
+- **291, 312** (payment window / journal): the recording labels these oddly (a Create button, "Click the Serial number Product"); the manual describes what the screen shows. The replay does not change the pre-filled journal.
+- **318-320**: the recorded Save / product-code / Save & Close steps are replaced by the final invoice screens (invoice, invoice lines, IN PAYMENT ribbon).
+
+Not part of the tour but needed for the replay: one unit of the new serial number is put into stock (inventory adjustment) before Validate, because Odoo refuses to deliver a serial number with no stock.
+
+The Search More... steps (110-130, 180-190, 313-314) depend on how many records exist and may not match every database.

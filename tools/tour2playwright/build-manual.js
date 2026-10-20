@@ -28,7 +28,7 @@ fs.mkdirSync(manualDir, { recursive: true });
 const TOUR_NOTES = {
   'cash-sales-order-serial': {
     // Steps whose recorded text does not match what they act on - flagged for review in REVIEW.md
-    adapted: new Set([291, 312]),
+    adapted: new Set([200, 210, 220, 282, 291, 312, 318, 319, 320]),
     excluded: new Set(),
   },
   sales: {

@@ -50,7 +50,7 @@ async function shot(page: Page, sequence: number, label: string, target?: Locato
 async function shotThenClick(page: Page, sequence: number, label: string, target: Locator): Promise<void> {
   await target.waitFor({ state: 'visible', timeout: 15_000 });
   await shot(page, sequence, label, target);
-  await target.click();
+  await target.click({ timeout: 20_000 });
 }
 
 /** Runs one documented step; a failure is logged and the replay carries on (the manual notes missing shots). */
@@ -209,10 +209,10 @@ test('Cash Sales Order - Serial tour replay', async ({ page }) => {
     await page.waitForTimeout(800);
     await shot(page, 282, 'serial-entered', topModal(page).locator('.o_field_widget[name="lot_id"]').first());
   });
-  await step(283, 'save-and-close', () => shotThenClick(page, 283, 'save-and-close', topModal(page).locator('footer button.btn-primary').first()));
+  await step(283, 'save-and-close', () => shotThenClick(page, 283, 'save-and-close', page.getByRole('button', { name: 'Save & Close' }).last()));
   await step(284, 'save-move', async () => {
     await page.waitForTimeout(1000);
-    await shotThenClick(page, 284, 'save-move', topModal(page).locator('footer button.btn-primary').first());
+    await shotThenClick(page, 284, 'save-move', topModal(page).getByRole('button', { name: 'Save', exact: true }).last());
     await page.waitForTimeout(1200);
   });
   await step(285, 'save-delivery', async () => {
