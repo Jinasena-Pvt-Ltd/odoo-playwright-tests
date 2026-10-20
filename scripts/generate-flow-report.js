@@ -33,7 +33,7 @@ const card = (b) => {
     img = `<img alt="screenshot for ${esc(b.id)}" src="data:image/png;base64,${fs.readFileSync(b.screenshot).toString('base64')}">`;
   }
   return `
-  <section class="bug sev-${esc(b.severity)}" data-sev="${esc(b.severity)}" data-group="${esc(b.group)}">
+  <section id="${esc(b.id)}" class="bug sev-${esc(b.severity)}" data-sev="${esc(b.severity)}" data-group="${esc(b.group)}">
     <h3><span class="id">${esc(b.id)}</span>${esc(b.title)}<span class="badge ${esc(b.severity)}">${esc(b.severity)}</span></h3>
     <table class="meta">
       <tr><th>Customer Group</th><td>${esc(b.group)}</td><th>Flow</th><td>${esc(b.flow)}</td></tr>
@@ -44,6 +44,39 @@ const card = (b) => {
     ${img}
   </section>`;
 };
+
+
+// ── Every test case, one row each: PASS (from `passed`), FAIL (bugs) and STOPPED (notes) ──
+const cases = [];
+for (const p of passed) {
+  const parts = p.split(' / ');
+  if (parts.length < 3) continue;
+  const group = parts[0], flow = parts[1], rest = parts.slice(2).join(' / ');
+  const m = rest.match(/^(.*?)(?::\s(.*))?$/);
+  cases.push({ group, flow, step: m[1], status: 'PASS', detail: m[2] || '', bug: '' });
+}
+for (const b of bugs) {
+  for (const g of String(b.group).split(', ')) {
+    cases.push({ group: g, flow: b.flow, step: b.step, status: b.severity === 'Info' ? 'INFO' : 'FAIL',
+      detail: b.title, bug: b.id });
+  }
+}
+for (const n of notes) {
+  cases.push({ group: n.group, flow: n.flow, step: n.step, status: 'STOPPED', detail: clean(n.text), bug: '' });
+}
+const groupOrder = [...new Set(cases.map((c) => c.group))];
+const stepNo = (t) => { const m = String(t).match(/^(\d+)/); return m ? Number(m[1]) : 99; };
+cases.sort((a, b) =>
+  groupOrder.indexOf(a.group) - groupOrder.indexOf(b.group) ||
+  a.flow.localeCompare(b.flow) || stepNo(a.step) - stepNo(b.step) || a.step.localeCompare(b.step));
+const caseCount = (st) => cases.filter((c) => c.status === st).length;
+const casesHtml = cases.map((c) => `
+    <tr class="case ${c.status}" data-status="${c.status}" data-group="${esc(c.group)}">
+      <td>${esc(c.group)}</td><td>${esc(c.flow)}</td><td>${esc(c.step)}</td>
+      <td><span class="st ${c.status}">${c.status === 'STOPPED' ? 'STOPPED (not a bug)' : c.status}</span></td>
+      <td>${esc(c.detail)}${c.bug ? ` <a href="#${esc(c.bug)}">${esc(c.bug)}</a>` : ''}</td>
+    </tr>`).join('');
+const groupOptions = groupOrder.map((g) => `<option>${esc(g)}</option>`).join('');
 
 const notesHtml = notes.length
   ? '<ul>' + notes.map((n) => `<li><b>${esc(n.group)} / ${esc(n.flow)} / ${esc(n.step)}:</b> ${esc(clean(n.text))}</li>`).join('') + '</ul>'
@@ -81,6 +114,14 @@ const html = `<!doctype html>
   img { max-width: 100%; border: 2px solid #ccc; border-radius: 8px; display: block; }
   details { background: #fff; border: 1px solid #e3e3e3; border-radius: 10px; padding: 1rem 1.4rem; margin-top: 2rem; }
   details summary { font-weight: 700; cursor: pointer; font-size: 1.15rem; }
+  table.cases { border-collapse: collapse; width: 100%; background: #fff; font-size: .95rem; }
+  table.cases th { background: #714B67; color: #fff; text-align: left; padding: .5rem .7rem; position: sticky; top: 0; }
+  table.cases td { border-bottom: 1px solid #e3e3e3; padding: .45rem .7rem; vertical-align: top; }
+  .st { border-radius: 999px; padding: .1rem .7rem; color: #fff; font-size: .8rem; white-space: nowrap; font-weight: 700; }
+  .st.PASS { background: #2e7d32; } .st.FAIL { background: #c62828; } .st.INFO { background: #1565c0; } .st.STOPPED { background: #6d6d6d; }
+  tr.case.FAIL td { background: #fff3f3; }
+  .toolbar { display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; margin: 1rem 0; }
+  .toolbar select, .toolbar input { font-size: 1rem; padding: .35rem .6rem; border: 1px solid #bbb; border-radius: 6px; }
   footer { max-width: 1100px; margin: 0 auto; padding: 0 2rem; color: #888; font-size: .9rem; }
 </style></head>
 <body>
@@ -99,6 +140,24 @@ const html = `<!doctype html>
   </div>
   <p><b>High</b> = Odoo showed an error or blocked the flow. <b>Medium</b> = a step could not be completed and a person must confirm the cause. <b>Info</b> = data or configuration observation.</p>
 
+
+  <h2>All test cases (${cases.length})</h2>
+  <div class="summary">
+    <div class="tile pass"><b>${caseCount('PASS')}</b>PASS</div>
+    <div class="tile High"><b>${caseCount('FAIL')}</b>FAIL</div>
+    <div class="tile"><b>${caseCount('STOPPED')}</b>Stopped (not a bug)</div>
+    <div class="tile Info"><b>${caseCount('INFO')}</b>Info</div>
+  </div>
+  <div class="toolbar">
+    <label>Customer Group <select id="fGroup"><option value="">All</option>${groupOptions}</select></label>
+    <label>Result <select id="fStatus"><option value="">All</option><option>PASS</option><option>FAIL</option><option>STOPPED</option><option>INFO</option></select></label>
+    <label>Search <input id="fText" placeholder="step or text"></label>
+    <span id="fCount"></span>
+  </div>
+  <table class="cases"><thead><tr><th>Customer Group</th><th>Flow</th><th>Test case / step</th><th>Result</th><th>Details</th></tr></thead>
+  <tbody id="caseRows">${casesHtml}</tbody></table>
+
+  <h2 style="margin-top:2.5rem">Issues found (${bugs.length})</h2>
   <div class="filters" id="filters">
     <span>Show:</span>
     <button data-sev="all" class="on">All</button>
@@ -125,6 +184,19 @@ const html = `<!doctype html>
     var sev = b.getAttribute('data-sev');
     document.querySelectorAll('.bug').forEach(function (s) { s.style.display = (sev === 'all' || s.dataset.sev === sev) ? '' : 'none'; });
   });
+
+  (function () {
+    var g = document.getElementById('fGroup'), st = document.getElementById('fStatus'), t = document.getElementById('fText'), n = document.getElementById('fCount');
+    function apply() {
+      var shown = 0, q = t.value.toLowerCase();
+      document.querySelectorAll('#caseRows tr').forEach(function (r) {
+        var ok = (!g.value || r.dataset.group === g.value) && (!st.value || r.dataset.status === st.value) && (!q || r.textContent.toLowerCase().indexOf(q) > -1);
+        r.style.display = ok ? '' : 'none'; if (ok) shown++;
+      });
+      n.textContent = shown + ' shown';
+    }
+    [g, st].forEach(function (e) { e.addEventListener('change', apply); }); t.addEventListener('input', apply); apply();
+  })();
 </script>
 </body></html>`;
 

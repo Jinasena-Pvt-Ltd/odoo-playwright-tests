@@ -113,7 +113,10 @@ async function createCustomer(
     return name;
   } catch (e1) {
     const msg1 = e1 instanceof Error ? e1.message : String(e1);
-    bugs.add({ ...ctx, severity: 'Medium', title: 'Customer cannot be created with only the basic fields',
+    // A missing Bank Guarantee is an Odoo business rule that the retry below satisfies, so it is a note, not a bug.
+    const guaranteeRule = /bank guarantee/i.test(msg1);
+    bugs.add({ ...ctx, severity: guaranteeRule ? 'Info' : 'Medium',
+      title: guaranteeRule ? `${group.name} customers need Bank Guarantee data (expected rule)` : 'Customer cannot be created with only the basic fields',
       detail: msg1.slice(0, 600) });
     try {
       const fields = await rpc.callMethod<Record<string, { string: string; type: string }>>(
@@ -136,6 +139,9 @@ async function createCustomer(
     }
   }
 }
+
+// A stuck click must fail (and be reported) instead of hanging the whole run; no video/trace keeps the long session light.
+test.use({ actionTimeout: 20_000, navigationTimeout: 60_000, video: 'off', trace: 'off' });
 
 test.describe('Sales Cash & Credit flows by Customer Group @module:sales @step:business @e2e', () => {
   test.skip(process.env.RUN_SALES_FLOWS !== 'true',

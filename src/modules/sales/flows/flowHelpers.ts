@@ -362,6 +362,123 @@ async function pressThroughDialogs(page: Page): Promise<void> {
   }
 }
 
+/**
+ * Puts 1 unit of a freshly created serial into stock (inventory adjustment through the session's RPC),
+ * because Odoo refuses to deliver a serial that has no stock (negative stock not allowed).
+ */
+async function receiveSerialIntoStock(page: Page, serial: string): Promise<void> {
+  const err = await page.evaluate(async ([name, productCode]) => {
+    const call = async (model: string, method: string, args: unknown[], kwargs: Record<string, unknown> = {}) => {
+      const r = await fetch('/web/dataset/call_kw', {
+        method: 'POST', headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ jsonrpc: '2.0', method: 'call', params: { model, method, args, kwargs } }),
+      });
+      const j = await r.json();
+      if (j.error) throw new Error(j.error.data?.message ?? j.error.message);
+      return j.result;
+    };
+    try {
+      // Search every company the user can access: lots are company-specific and the session default may differ.
+      const info = await (await fetch('/web/session/get_session_info', {
+        method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ jsonrpc: '2.0', method: 'call', params: {} }),
+      })).json();
+      const companyIds: number[] = Object.keys(info.result?.user_companies?.allowed_companies ?? {}).map(Number);
+      // The serial is saved by the popup just before; give the server a moment to commit it.
+      let lots: { id: number; product_id: [number, string]; company_id: [number, string] | false }[] = [];
+      for (let i = 0; i < 10 && !lots.length; i++) {
+        lots = await call('stock.lot', 'search_read', [[['name', '=', name]], ['id', 'product_id', 'company_id']],
+          { context: { allowed_company_ids: companyIds } });
+        if (!lots.length) await new Promise(r => setTimeout(r, 1000));
+      }
+      if (!lots.length) return `Serial ${name} was not created`;
+      const loc = await call('stock.location', 'search_read', [[['complete_name', 'ilike', 'JM-EK/Stock'], ['usage', '=', 'internal']], ['id']], { limit: 1 });
+      const ctx = { inventory_mode: true, allowed_company_ids: lots[0].company_id ? [lots[0].company_id[0]] : companyIds };
+      const q = await call('stock.quant', 'create', [{
+        product_id: lots[0].product_id[0], location_id: loc[0].id, lot_id: lots[0].id, inventory_quantity: 1,
+      }], { context: ctx });
+      await call('stock.quant', 'action_apply_inventory', [[q]], { context: ctx });
+      return '';
+    } catch (e) { return e instanceof Error ? e.message : String(e); }
+  }, [serial, PRODUCT_CODE]);
+  if (err) throw new Error(`Could not receive serial ${serial} into stock: ${err}`);
+}
+
+/**
+ * Serial-tracked products: Odoo cannot validate until each unit has a serial number.
+ * When the delivery is not Ready, opens Detailed Operations and creates a NEW serial number for each unit
+ * (adds a line when nothing was reserved). Returns the serials created.
+ */
+async function assignSerials(page: Page): Promise<string[]> {
+  const used: string[] = [];
+  await page.waitForTimeout(2_500); // let Check Availability finish updating the status
+  const ready = await page.locator('.o_form_statusbar .o_arrow_button_current').first().textContent().catch(() => '');
+  if (/ready|done/i.test(ready ?? '')) return used;
+  // The button at the right end of the product line in the Operations tab opens the line's Detailed Operations popup.
+  const productRow = page.locator('.o_form_view [name="move_ids_without_package"] .o_data_row').first();
+  await expect(productRow, 'No product line on the delivery').toBeVisible({ timeout: 10_000 });
+  // List icon at the right end of the product line ("Open Move") -> "Open: Stock move" popup.
+  const move = page.locator('.modal:visible').first();
+  await expect(async () => {
+    await productRow.hover();
+    await productRow.locator('button[name="Open Move"]').click({ timeout: 4_000 });
+    await expect(move).toBeVisible({ timeout: 4_000 });
+  }, 'Open Move button on the product line could not be clicked').toPass({ timeout: 30_000 });
+  await expect(move, 'Open: Stock move popup did not open').toBeVisible({ timeout: 10_000 });
+
+  // Add a line -> "Create Move Line" popup with the Lot/Serial Number field.
+  await move.locator('.o_field_x2many_list_row_add a').filter({ hasText: /add a line/i }).first().click();
+  // Odoo first lists existing in-stock serials; "New" opens the Create Move Line form for a brand-new serial.
+  const pick = page.locator('.modal:visible').filter({ hasText: /add line/i }).last();
+  await pick.locator('footer button').filter({ hasText: /^new$/i }).first().click({ timeout: 10_000 });
+  const line = page.locator('.modal:visible').filter({ hasText: /create move line/i }).last();
+  await expect(line, 'Create Move Line popup did not open').toBeVisible({ timeout: 10_000 });
+  const lot = line.locator('[name="lot_id"] input, [name="lot_name"] input, .o_field_widget input').first();
+  await expect(lot, 'No Lot/Serial Number field on the new move line').toBeVisible({ timeout: 10_000 });
+  const serial = `SN${Date.now().toString(36).toUpperCase()}`;
+  // Type the new name and pick "Create" from the dropdown; retry until the field really holds the serial.
+  let committed = false;
+  let seen = '';
+  for (let attempt = 0; attempt < 4 && !committed; attempt++) {
+    await lot.click();
+    await lot.fill('');
+    await lot.pressSequentially(serial, { delay: 60 });
+    const create = page.locator('.o-autocomplete--dropdown-item:visible')
+      .filter({ hasText: /create/i }).filter({ hasText: serial }).first();
+    let clicked = false;
+    if (await create.isVisible({ timeout: 8_000 }).catch(() => false)) {
+      await create.click();
+      clicked = true;
+      await page.waitForTimeout(800);
+    } else {
+      seen = (await page.locator('.o-autocomplete--dropdown-item:visible').allTextContents()).join(' | ');
+    }
+    const shown = await lot.inputValue().catch(() => '');
+    // only counts when the Create option was really used (plain typed text creates no serial)
+    committed = clicked && shown === serial;
+  }
+  if (!committed) throw new Error(`Could not create serial ${serial} in the Create Move Line popup (Create option never accepted; dropdown showed: ${seen || 'nothing'})`);
+  used.push(serial);
+  const dbg = (n: string) => process.env.FLOW_DEBUG ? page.screenshot({ path: `test-results/dbg-${n}.png` }) : Promise.resolve();
+  await dbg('1-before-saveclose');
+  await line.locator('footer button').filter({ hasText: /save & close|save/i }).first().click();
+  await throwIfOdooError(page);
+  await page.waitForTimeout(800);
+  await dbg('2-after-saveclose');
+  await move.locator('footer button').filter({ hasText: /^save$/i }).first().click();
+  await throwIfOdooError(page);
+  await page.waitForTimeout(800);
+  await dbg('3-after-move-save');
+  // The serial is only created when the delivery itself is saved.
+  const saveDelivery = page.locator('.o_form_status_indicator .o_form_button_save, button.o_form_button_save').first();
+  if (await saveDelivery.isVisible({ timeout: 3_000 }).catch(() => false)) {
+    await saveDelivery.click();
+    await throwIfOdooError(page);
+    await expect(saveDelivery).toBeHidden({ timeout: 15_000 });
+  }
+  await receiveSerialIntoStock(page, serial);
+  return used;
+}
+
 /** Opens the delivery from the order, validates it, comes back to the order. */
 export async function validateDelivery(page: Page): Promise<string> {
   const orderUrl = page.url();
@@ -377,6 +494,7 @@ export async function validateDelivery(page: Page): Promise<string> {
   const check = page.locator('.o_form_statusbar').getByRole('button', { name: /check availability/i });
   if (await check.isVisible({ timeout: 2_000 }).catch(() => false)) await check.click();
 
+  await assignSerials(page);
   await clickButton(page, /^validate$/i, 20_000);
   await pressThroughDialogs(page);
   await expect(page.locator('.o_form_statusbar .o_statusbar_status'))
@@ -485,9 +603,10 @@ export async function blankFieldAndTrySave(page: Page, f: BlankField): Promise<B
   }
 
   const save = page.locator('.o_form_button_save').first();
-  if (!(await save.isVisible({ timeout: 3_000 }).catch(() => false))) return 'blocked';
+  // No Save button = the form never became dirty, i.e. the field could not really be emptied.
+  if (!(await save.isVisible({ timeout: 3_000 }).catch(() => false))) return 'not-blankable';
   const clicked = await save.click({ timeout: 8_000 }).then(() => true).catch(() => false);
-  if (!clicked) return 'blocked';
+  if (!clicked) return 'blocked'; // Odoo disables Save while a required field is empty
 
   try { await throwIfOdooError(page); } catch (e) {
     if (e instanceof OdooSystemError) return 'blocked';

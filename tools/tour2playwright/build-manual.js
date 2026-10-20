@@ -26,6 +26,11 @@ fs.mkdirSync(manualDir, { recursive: true });
 // trailing/accidental steps, or fields that no longer exist on the form) are listed under
 // `excluded` so the manual can say so instead of just "no screenshot captured".
 const TOUR_NOTES = {
+  'cash-sales-order-serial': {
+    // Steps whose recorded text does not match what they act on - flagged for review in REVIEW.md
+    adapted: new Set([291, 312]),
+    excluded: new Set(),
+  },
   sales: {
     adapted: new Set([10, 50, 60, 70, 80, 83, 84, 97]),
     excluded: new Set(),
@@ -70,7 +75,9 @@ function buildLocale(locale, localeLabel) {
   // ---- Markdown ----
   let md = `# ${tour.name} — User Manual (${localeLabel})\n\n`;
   md += `${tour.description_i18n?.[locale] || tour.description}\n\n`;
-  md += `Generated from an Odoo Tour Recorder export, replayed with Playwright, and screenshotted at every step.\n\n`;
+  md += fs.existsSync(screenshotDir)
+    ? `Generated from an Odoo Tour Recorder export, replayed with Playwright, and screenshotted at every step.\n\n`
+    : `Generated from an Odoo Tour Recorder export (no screenshots for this manual).\n\n`;
   if (EXCLUDED_SEQUENCES.size > 0) {
     md += `> ${EXCLUDED_SEQUENCES.size} recorded step(s) were excluded from the replay (fields/menus that no longer exist, or accidental trailing steps) — see REVIEW.md.\n\n`;
   }
@@ -95,7 +102,7 @@ function buildLocale(locale, localeLabel) {
       const heading = esc(s.title || s.content || `Step ${i + 1}`);
       const img = s.screenshot
         ? `<img src="data:image/png;base64,${fs.readFileSync(s.screenshot).toString('base64')}" alt="Step ${i + 1} screenshot">`
-        : '<p class="missing">(no screenshot captured for this step)</p>';
+        : (fs.existsSync(screenshotDir) ? '<p class="missing">(no screenshot captured for this step)</p>' : '');
       return `
       <section class="step">
         <h2><span class="step-num">${i + 1}</span>${heading}</h2>
@@ -141,7 +148,7 @@ function buildLocale(locale, localeLabel) {
 <main>
 ${stepsHtml}
 </main>
-<footer>Generated from an Odoo Tour Recorder export (${esc(path.basename(tourJsonPath))}), replayed and screenshotted with Playwright.</footer>
+<footer>Generated from an Odoo Tour Recorder export (${esc(path.basename(tourJsonPath))})${fs.existsSync(screenshotDir) ? ', replayed and screenshotted with Playwright' : ''}.</footer>
 </body>
 </html>`;
   fs.writeFileSync(path.join(manualDir, `${tourName}.${locale}.html`), html, 'utf-8');

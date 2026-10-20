@@ -95,3 +95,14 @@ Creates a real Individual contact (`res.partner`) with name, address (Sri Lanka)
 email, "Immediate Payment" payment term, and "Cash" payment method, saves it, and verifies
 it's findable by search. Each run creates a new contact tagged with a random run suffix
 (`Cash Customer <TAG>`) so repeat runs don't produce indistinguishable duplicates.
+
+
+## cash-sales-order-serial (no replay, text-only manual)
+
+Manual written from `tour/cash-sales-order-serial.json` (Odoo export, 49 steps). All 49 recorded steps are kept; none removed. The manual has no screenshots because the tour was not replayed end to end.
+
+Steps to review before using the manual for training:
+- **291** ("Create button"): recorded on the serial-number dropdown selector (`#lot_id_0_0_0`) but placed after Register Payment, so it probably belongs to a different step.
+- **312** (journal): recorded content says "Click the Serial number Product" but the target is the Journal field.
+- **200-220** (warehouse): the Warehouse field is normally filled automatically once the Sales Team is chosen, so these steps only apply when it is empty.
+- **110-130, 180-190, 210-220, 313-314** use "Search More..." and fixed list positions; they depend on the number of records and may not match every database.
