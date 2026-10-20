@@ -1,4 +1,4 @@
-# Cash Sales Order - Serial — User Manual (English)
+# CASH SALES ORDER - SERIAL — User Manual (English)
 
 Step-by-step guide to selling a serial-number product to a cash customer: create the quotation, confirm it, give the unit its own serial number on the delivery, validate the delivery, invoice the customer and record the cash payment. Before you start: you need access to the Sales app, an existing cash customer, and a product that is tracked by serial number (this guide uses [27PM LJ20] EY20KP PUMP SHAFT ENGINE). A serial number is a unique code that identifies one single unit (like a chassis number), so every unit you deliver needs its own, and it must not be used twice. In every screenshot the red box shows exactly what to click or fill in.
 

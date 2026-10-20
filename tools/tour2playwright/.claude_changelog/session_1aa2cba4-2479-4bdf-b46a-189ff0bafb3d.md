@@ -79,3 +79,16 @@ remove step 12
 **Files touched:**
 - Write: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\_docs5.js
 
+
+---
+
+## Change -- 2026-10-20T11:15:21Z
+
+**Prompt:**
+```
+hightlight the topic 'cash sales order - serial' in capital
+```
+
+**Files touched:**
+- Edit: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\tools\tour2playwright\build-manual.js
+

@@ -28,6 +28,7 @@ fs.mkdirSync(manualDir, { recursive: true });
 const TOUR_NOTES = {
   'cash-sales-order-serial': {
     // Steps whose recorded text does not match what they act on - flagged for review in REVIEW.md
+    displayTitle: 'CASH SALES ORDER - SERIAL',
     adapted: new Set([200, 210, 220, 282, 291, 312, 318, 319, 320]),
     excluded: new Set(),
   },
@@ -49,6 +50,7 @@ const TOUR_NOTES = {
     },
   },
 };
+const DISPLAY_TITLE = (TOUR_NOTES[tourName] || {}).displayTitle || null;
 const { adapted: ADAPTED_SEQUENCES, excluded: EXCLUDED_SEQUENCES, overrides: OVERRIDES = {} } =
   TOUR_NOTES[tourName] || { adapted: new Set(), excluded: new Set() };
 
@@ -73,7 +75,7 @@ function buildLocale(locale, localeLabel) {
     });
 
   // ---- Markdown ----
-  let md = `# ${tour.name} — User Manual (${localeLabel})\n\n`;
+  let md = `# ${DISPLAY_TITLE || tour.name} — User Manual (${localeLabel})\n\n`;
   md += `${tour.description_i18n?.[locale] || tour.description}\n\n`;
   md += fs.existsSync(screenshotDir)
     ? `Generated from an Odoo Tour Recorder export, replayed with Playwright, and screenshotted at every step.\n\n`
@@ -118,13 +120,14 @@ function buildLocale(locale, localeLabel) {
 <html lang="${locale.split('_')[0]}">
 <head>
 <meta charset="utf-8">
-<title>${esc(tour.name)} — User Manual</title>
+<title>${esc(DISPLAY_TITLE || tour.name)} — User Manual</title>
 <style>
   :root { color-scheme: light; }
   body { font-family: -apple-system, Segoe UI, Roboto, sans-serif; background: #f6f7f9; color: #1a1a1a; margin: 0; padding: 0 0 4rem; font-size: 20px; line-height: 1.6; }
   header { background: #714B67; color: #fff; padding: 3rem 2rem; }
   header h1 { margin: 0 0 .75rem; font-size: 2.6rem; font-weight: 800; }
   header p { margin: 0; opacity: .95; font-size: 1.2rem; }
+  .topic { background: #fff176; color: #000; padding: .05em .35em; border-radius: 8px; letter-spacing: .02em; }
   main { max-width: 1000px; margin: 0 auto; padding: 2rem; }
   .step { background: #fff; border: 1px solid #e3e3e3; border-left: 8px solid #714B67; border-radius: 12px; padding: 2rem; margin-bottom: 2.5rem; box-shadow: 0 2px 6px rgba(0,0,0,.08); }
   .step h2 { margin: 0 0 1.25rem; font-size: 1.9rem; line-height: 1.3; font-weight: 800; color: #4a2c42; display: flex; align-items: flex-start; gap: .9rem; }
@@ -141,7 +144,7 @@ function buildLocale(locale, localeLabel) {
 </head>
 <body>
 <header>
-  <h1>${esc(tour.name)}</h1>
+  <h1>${DISPLAY_TITLE ? `<span class="topic">${esc(DISPLAY_TITLE)}</span>` : esc(tour.name)}</h1>
   <p>${esc(tour.description_i18n?.[locale] || tour.description)}</p>
   ${EXCLUDED_SEQUENCES.size > 0 ? `<p style="opacity:.8;font-size:.9rem;margin-top:.5rem;">${EXCLUDED_SEQUENCES.size} recorded step(s) excluded from the replay — see REVIEW.md.</p>` : ''}
 </header>
