@@ -354,11 +354,11 @@
             "ta_IN": "Click Search More... to open the full product list"
           },
           "trigger": "#autocomplete_0_8",
-          "content": "At the bottom of the dropdown, click **Search More...**. A larger window opens with the complete product list and a search bar at the top.",
+          "content": "At the bottom of the dropdown, click **Search More...** (red box). A larger window opens with the complete product list and a search bar at the top.",
           "content_i18n": {
-            "en_US": "At the bottom of the dropdown, click **Search More...**. A larger window opens with the complete product list and a search bar at the top.",
-            "si_LK": "At the bottom of the dropdown, click **Search More...**. A larger window opens with the complete product list and a search bar at the top.",
-            "ta_IN": "At the bottom of the dropdown, click **Search More...**. A larger window opens with the complete product list and a search bar at the top."
+            "en_US": "At the bottom of the dropdown, click **Search More...** (red box). A larger window opens with the complete product list and a search bar at the top.",
+            "si_LK": "At the bottom of the dropdown, click **Search More...** (red box). A larger window opens with the complete product list and a search bar at the top.",
+            "ta_IN": "At the bottom of the dropdown, click **Search More...** (red box). A larger window opens with the complete product list and a search bar at the top."
           },
           "position": "bottom",
           "run": "click",
@@ -379,62 +379,29 @@
           }
         },
         {
-          "sequence": 120,
-          "title": "Type the product code in the search bar to find the serial-number product",
-          "title_i18n": {
-            "en_US": "Type the product code in the search bar to find the serial-number product",
-            "si_LK": "Type the product code in the search bar to find the serial-number product",
-            "ta_IN": "Type the product code in the search bar to find the serial-number product"
-          },
-          "trigger": "input.o_searchview_input.o_input",
-          "content": "In the search bar of that window, type **EY20KP** (the product code) and press **Enter**. The long list shrinks to the products that match.",
-          "content_i18n": {
-            "en_US": "In the search bar of that window, type **EY20KP** (the product code) and press **Enter**. The long list shrinks to the products that match.",
-            "si_LK": "In the search bar of that window, type **EY20KP** (the product code) and press **Enter**. The long list shrinks to the products that match.",
-            "ta_IN": "In the search bar of that window, type **EY20KP** (the product code) and press **Enter**. The long list shrinks to the products that match."
-          },
-          "position": "bottom",
-          "run": "edit",
-          "is_check": false,
-          "validation_type": "none",
-          "description": "Tip: part of the name or code is enough. Check: the list now shows only the EY20KP pump shaft engine.",
-          "description_i18n": {
-            "en_US": "Tip: part of the name or code is enough. Check: the list now shows only the EY20KP pump shaft engine.",
-            "si_LK": "Tip: part of the name or code is enough. Check: the list now shows only the EY20KP pump shaft engine.",
-            "ta_IN": "Tip: part of the name or code is enough. Check: the list now shows only the EY20KP pump shaft engine."
-          },
-          "validation_regex": "",
-          "validation_message": "",
-          "validation_message_i18n": {
-            "en_US": "",
-            "si_LK": "",
-            "ta_IN": ""
-          }
-        },
-        {
           "sequence": 130,
-          "title": "Select the serial-number product from the results",
+          "title": "Find and select the serial-number product",
           "title_i18n": {
-            "en_US": "Select the serial-number product from the results",
-            "si_LK": "Select the serial-number product from the results",
-            "ta_IN": "Select the serial-number product from the results"
+            "en_US": "Find and select the serial-number product",
+            "si_LK": "Find and select the serial-number product",
+            "ta_IN": "Find and select the serial-number product"
           },
           "trigger": "div.o_content > div.o_list_renderer.o_renderer > table.o_list_table.table > tbody.ui-sortable > tr.o_data_row.o_row_draggable:nth-of-type(1) > td.o_data_cell.cursor-pointer:nth-of-type(3)",
-          "content": "Click the row **[27PM LJ20] EY20KP (PETROL/KEROSENE) PUMP SHAFT ENGINE (LJ20)** (red box). The window closes and the product appears on the order line.",
+          "content": "In the product window, find the row **[27PM LJ20] EY20KP (PETROL/KEROSENE) PUMP SHAFT ENGINE (LJ20)** and click it (red box). If you do not see it, type **EY20KP** in the search bar at the top of the window and press **Enter**; the list shrinks to the matching product. The window closes and the product appears on the order line.",
           "content_i18n": {
-            "en_US": "Click the row **[27PM LJ20] EY20KP (PETROL/KEROSENE) PUMP SHAFT ENGINE (LJ20)** (red box). The window closes and the product appears on the order line.",
-            "si_LK": "Click the row **[27PM LJ20] EY20KP (PETROL/KEROSENE) PUMP SHAFT ENGINE (LJ20)** (red box). The window closes and the product appears on the order line.",
-            "ta_IN": "Click the row **[27PM LJ20] EY20KP (PETROL/KEROSENE) PUMP SHAFT ENGINE (LJ20)** (red box). The window closes and the product appears on the order line."
+            "en_US": "In the product window, find the row **[27PM LJ20] EY20KP (PETROL/KEROSENE) PUMP SHAFT ENGINE (LJ20)** and click it (red box). If you do not see it, type **EY20KP** in the search bar at the top of the window and press **Enter**; the list shrinks to the matching product. The window closes and the product appears on the order line.",
+            "si_LK": "In the product window, find the row **[27PM LJ20] EY20KP (PETROL/KEROSENE) PUMP SHAFT ENGINE (LJ20)** and click it (red box). If you do not see it, type **EY20KP** in the search bar at the top of the window and press **Enter**; the list shrinks to the matching product. The window closes and the product appears on the order line.",
+            "ta_IN": "In the product window, find the row **[27PM LJ20] EY20KP (PETROL/KEROSENE) PUMP SHAFT ENGINE (LJ20)** and click it (red box). If you do not see it, type **EY20KP** in the search bar at the top of the window and press **Enter**; the list shrinks to the matching product. The window closes and the product appears on the order line."
           },
           "position": "bottom",
           "run": "click",
           "is_check": false,
           "validation_type": "none",
-          "description": "Why: this product is tracked by serial number, so each unit needs its own serial number when you deliver it (steps 25 to 33). Check: the order line shows the product, quantity 1 and a price.",
+          "description": "Why: this product is tracked by serial number, so each unit needs its own serial number when you deliver it (steps 24 to 32). Tip: part of the name or code is enough in the search bar. Check: the order line shows the product, quantity 1 and a price.",
           "description_i18n": {
-            "en_US": "Why: this product is tracked by serial number, so each unit needs its own serial number when you deliver it (steps 25 to 33). Check: the order line shows the product, quantity 1 and a price.",
-            "si_LK": "Why: this product is tracked by serial number, so each unit needs its own serial number when you deliver it (steps 25 to 33). Check: the order line shows the product, quantity 1 and a price.",
-            "ta_IN": "Why: this product is tracked by serial number, so each unit needs its own serial number when you deliver it (steps 25 to 33). Check: the order line shows the product, quantity 1 and a price."
+            "en_US": "Why: this product is tracked by serial number, so each unit needs its own serial number when you deliver it (steps 24 to 32). Tip: part of the name or code is enough in the search bar. Check: the order line shows the product, quantity 1 and a price.",
+            "si_LK": "Why: this product is tracked by serial number, so each unit needs its own serial number when you deliver it (steps 24 to 32). Tip: part of the name or code is enough in the search bar. Check: the order line shows the product, quantity 1 and a price.",
+            "ta_IN": "Why: this product is tracked by serial number, so each unit needs its own serial number when you deliver it (steps 24 to 32). Tip: part of the name or code is enough in the search bar. Check: the order line shows the product, quantity 1 and a price."
           },
           "validation_regex": "",
           "validation_message": "",
@@ -479,28 +446,28 @@
         },
         {
           "sequence": 150,
-          "title": "Click the Payment Terms field to see the available payment terms",
+          "title": "Check the Payment Terms that Odoo filled in from the customer",
           "title_i18n": {
-            "en_US": "Click the Payment Terms field to see the available payment terms",
-            "si_LK": "Click the Payment Terms field to see the available payment terms",
-            "ta_IN": "Click the Payment Terms field to see the available payment terms"
+            "en_US": "Check the Payment Terms that Odoo filled in from the customer",
+            "si_LK": "Check the Payment Terms that Odoo filled in from the customer",
+            "ta_IN": "Check the Payment Terms that Odoo filled in from the customer"
           },
           "trigger": "#payment_term_id_0",
-          "content": "Click the **Payment Terms** field. A dropdown lists the payment terms that Odoo knows, for example Immediate Payment, 30 Days, 90 Days.",
+          "content": "When you selected the customer, Odoo **filled in the Payment Terms automatically** from that customer's record. Open the **Other Info** tab and look at the **Payment Terms** field (red box) to read the value. You can click the field to see the other payment terms in the dropdown.",
           "content_i18n": {
-            "en_US": "Click the **Payment Terms** field. A dropdown lists the payment terms that Odoo knows, for example Immediate Payment, 30 Days, 90 Days.",
-            "si_LK": "Click the **Payment Terms** field. A dropdown lists the payment terms that Odoo knows, for example Immediate Payment, 30 Days, 90 Days.",
-            "ta_IN": "Click the **Payment Terms** field. A dropdown lists the payment terms that Odoo knows, for example Immediate Payment, 30 Days, 90 Days."
+            "en_US": "When you selected the customer, Odoo **filled in the Payment Terms automatically** from that customer's record. Open the **Other Info** tab and look at the **Payment Terms** field (red box) to read the value. You can click the field to see the other payment terms in the dropdown.",
+            "si_LK": "When you selected the customer, Odoo **filled in the Payment Terms automatically** from that customer's record. Open the **Other Info** tab and look at the **Payment Terms** field (red box) to read the value. You can click the field to see the other payment terms in the dropdown.",
+            "ta_IN": "When you selected the customer, Odoo **filled in the Payment Terms automatically** from that customer's record. Open the **Other Info** tab and look at the **Payment Terms** field (red box) to read the value. You can click the field to see the other payment terms in the dropdown."
           },
           "position": "bottom",
           "run": "click",
           "is_check": false,
           "validation_type": "none",
-          "description": "Check: the dropdown is open and shows several payment terms.",
+          "description": "Why: the payment terms decide the due date printed on the invoice. Double-check: for a cash sale the value must be **Immediate Payment**. If it shows something else (for example 30 Days), change it in the next step. Check: the field shows a payment term and the dropdown lists the alternatives.",
           "description_i18n": {
-            "en_US": "Check: the dropdown is open and shows several payment terms.",
-            "si_LK": "Check: the dropdown is open and shows several payment terms.",
-            "ta_IN": "Check: the dropdown is open and shows several payment terms."
+            "en_US": "Why: the payment terms decide the due date printed on the invoice. Double-check: for a cash sale the value must be **Immediate Payment**. If it shows something else (for example 30 Days), change it in the next step. Check: the field shows a payment term and the dropdown lists the alternatives.",
+            "si_LK": "Why: the payment terms decide the due date printed on the invoice. Double-check: for a cash sale the value must be **Immediate Payment**. If it shows something else (for example 30 Days), change it in the next step. Check: the field shows a payment term and the dropdown lists the alternatives.",
+            "ta_IN": "Why: the payment terms decide the due date printed on the invoice. Double-check: for a cash sale the value must be **Immediate Payment**. If it shows something else (for example 30 Days), change it in the next step. Check: the field shows a payment term and the dropdown lists the alternatives."
           },
           "validation_regex": "",
           "validation_message": "",
@@ -512,28 +479,28 @@
         },
         {
           "sequence": 160,
-          "title": "Select Immediate Payment because a cash sale is paid straight away",
+          "title": "If the Payment Terms is not Immediate Payment, select it",
           "title_i18n": {
-            "en_US": "Select Immediate Payment because a cash sale is paid straight away",
-            "si_LK": "Select Immediate Payment because a cash sale is paid straight away",
-            "ta_IN": "Select Immediate Payment because a cash sale is paid straight away"
+            "en_US": "If the Payment Terms is not Immediate Payment, select it",
+            "si_LK": "If the Payment Terms is not Immediate Payment, select it",
+            "ta_IN": "If the Payment Terms is not Immediate Payment, select it"
           },
           "trigger": "#payment_term_id_0_0_0",
-          "content": "Click **Immediate Payment** (red box).",
+          "content": "If the field already shows **Immediate Payment**, there is nothing to change. Otherwise, click **Immediate Payment** (red box) in the dropdown.",
           "content_i18n": {
-            "en_US": "Click **Immediate Payment** (red box).",
-            "si_LK": "Click **Immediate Payment** (red box).",
-            "ta_IN": "Click **Immediate Payment** (red box)."
+            "en_US": "If the field already shows **Immediate Payment**, there is nothing to change. Otherwise, click **Immediate Payment** (red box) in the dropdown.",
+            "si_LK": "If the field already shows **Immediate Payment**, there is nothing to change. Otherwise, click **Immediate Payment** (red box) in the dropdown.",
+            "ta_IN": "If the field already shows **Immediate Payment**, there is nothing to change. Otherwise, click **Immediate Payment** (red box) in the dropdown."
           },
           "position": "bottom",
           "run": "click",
           "is_check": false,
           "validation_type": "none",
-          "description": "Why: on a cash order the money is due at once, so the invoice must not be given a later due date. Check: the field shows \"Immediate Payment\". Watch out: the wrong payment term makes the invoice show a future due date.",
+          "description": "Why: on a cash order the money is due at once, so the invoice must not get a later due date. Check: the field shows \"Immediate Payment\". Watch out: a wrong payment term gives the invoice a future due date.",
           "description_i18n": {
-            "en_US": "Why: on a cash order the money is due at once, so the invoice must not be given a later due date. Check: the field shows \"Immediate Payment\". Watch out: the wrong payment term makes the invoice show a future due date.",
-            "si_LK": "Why: on a cash order the money is due at once, so the invoice must not be given a later due date. Check: the field shows \"Immediate Payment\". Watch out: the wrong payment term makes the invoice show a future due date.",
-            "ta_IN": "Why: on a cash order the money is due at once, so the invoice must not be given a later due date. Check: the field shows \"Immediate Payment\". Watch out: the wrong payment term makes the invoice show a future due date."
+            "en_US": "Why: on a cash order the money is due at once, so the invoice must not get a later due date. Check: the field shows \"Immediate Payment\". Watch out: a wrong payment term gives the invoice a future due date.",
+            "si_LK": "Why: on a cash order the money is due at once, so the invoice must not get a later due date. Check: the field shows \"Immediate Payment\". Watch out: a wrong payment term gives the invoice a future due date.",
+            "ta_IN": "Why: on a cash order the money is due at once, so the invoice must not get a later due date. Check: the field shows \"Immediate Payment\". Watch out: a wrong payment term gives the invoice a future due date."
           },
           "validation_regex": "",
           "validation_message": "",
@@ -710,28 +677,28 @@
         },
         {
           "sequence": 220,
-          "title": "Only if the Warehouse is empty: select JAM Warehouse Ekala- (JM-EK)",
+          "title": "Confirm the delivery Warehouse (JAM Warehouse Ekala- (JM-EK))",
           "title_i18n": {
-            "en_US": "Only if the Warehouse is empty: select JAM Warehouse Ekala- (JM-EK)",
-            "si_LK": "Only if the Warehouse is empty: select JAM Warehouse Ekala- (JM-EK)",
-            "ta_IN": "Only if the Warehouse is empty: select JAM Warehouse Ekala- (JM-EK)"
+            "en_US": "Confirm the delivery Warehouse (JAM Warehouse Ekala- (JM-EK))",
+            "si_LK": "Confirm the delivery Warehouse (JAM Warehouse Ekala- (JM-EK))",
+            "ta_IN": "Confirm the delivery Warehouse (JAM Warehouse Ekala- (JM-EK))"
           },
           "trigger": "tr.o_data_row.o_row_draggable:nth-of-type(4) > td.o_data_cell.cursor-pointer:nth-of-type(3)",
-          "content": "Click **JAM Warehouse Ekala- (JM-EK)** in the list.",
+          "content": "The **Warehouse** field is populated automatically from the Sales Team you selected, so in most cases no action is required. Verify that it reads **JAM Warehouse Ekala- (JM-EK)** (red box). Only if the field is empty, open it and select **JAM Warehouse Ekala- (JM-EK)** from the list.",
           "content_i18n": {
-            "en_US": "Click **JAM Warehouse Ekala- (JM-EK)** in the list.",
-            "si_LK": "Click **JAM Warehouse Ekala- (JM-EK)** in the list.",
-            "ta_IN": "Click **JAM Warehouse Ekala- (JM-EK)** in the list."
+            "en_US": "The **Warehouse** field is populated automatically from the Sales Team you selected, so in most cases no action is required. Verify that it reads **JAM Warehouse Ekala- (JM-EK)** (red box). Only if the field is empty, open it and select **JAM Warehouse Ekala- (JM-EK)** from the list.",
+            "si_LK": "The **Warehouse** field is populated automatically from the Sales Team you selected, so in most cases no action is required. Verify that it reads **JAM Warehouse Ekala- (JM-EK)** (red box). Only if the field is empty, open it and select **JAM Warehouse Ekala- (JM-EK)** from the list.",
+            "ta_IN": "The **Warehouse** field is populated automatically from the Sales Team you selected, so in most cases no action is required. Verify that it reads **JAM Warehouse Ekala- (JM-EK)** (red box). Only if the field is empty, open it and select **JAM Warehouse Ekala- (JM-EK)** from the list."
           },
           "position": "bottom",
           "run": "click",
           "is_check": false,
           "validation_type": "none",
-          "description": "Check: the Warehouse field shows \"JAM Warehouse Ekala- (JM-EK)\". If it was already filled, nothing to do here.",
+          "description": "Why: the Warehouse determines which stock location the goods are reserved and picked from, and which delivery document (for example JM-EK/OUT/...) is created when the order is confirmed. Check: the Warehouse shows JAM Warehouse Ekala- (JM-EK). Watch out: a warehouse that does not hold the product may prevent Odoo from reserving the stock for the delivery.",
           "description_i18n": {
-            "en_US": "Check: the Warehouse field shows \"JAM Warehouse Ekala- (JM-EK)\". If it was already filled, nothing to do here.",
-            "si_LK": "Check: the Warehouse field shows \"JAM Warehouse Ekala- (JM-EK)\". If it was already filled, nothing to do here.",
-            "ta_IN": "Check: the Warehouse field shows \"JAM Warehouse Ekala- (JM-EK)\". If it was already filled, nothing to do here."
+            "en_US": "Why: the Warehouse determines which stock location the goods are reserved and picked from, and which delivery document (for example JM-EK/OUT/...) is created when the order is confirmed. Check: the Warehouse shows JAM Warehouse Ekala- (JM-EK). Watch out: a warehouse that does not hold the product may prevent Odoo from reserving the stock for the delivery.",
+            "si_LK": "Why: the Warehouse determines which stock location the goods are reserved and picked from, and which delivery document (for example JM-EK/OUT/...) is created when the order is confirmed. Check: the Warehouse shows JAM Warehouse Ekala- (JM-EK). Watch out: a warehouse that does not hold the product may prevent Odoo from reserving the stock for the delivery.",
+            "ta_IN": "Why: the Warehouse determines which stock location the goods are reserved and picked from, and which delivery document (for example JM-EK/OUT/...) is created when the order is confirmed. Check: the Warehouse shows JAM Warehouse Ekala- (JM-EK). Watch out: a warehouse that does not hold the product may prevent Odoo from reserving the stock for the delivery."
           },
           "validation_regex": "",
           "validation_message": "",

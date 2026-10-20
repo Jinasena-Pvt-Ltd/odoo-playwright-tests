@@ -66,3 +66,16 @@ no worries. now i want to user friendly more description in the documnetation at
 **Files touched:**
 - Write: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\_docs3.js
 
+
+---
+
+## Change -- 2026-10-20T11:11:07Z
+
+**Prompt:**
+```
+remove step 12
+```
+
+**Files touched:**
+- Write: C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\_docs5.js
+

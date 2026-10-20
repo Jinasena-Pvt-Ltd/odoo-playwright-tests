@@ -99,7 +99,7 @@ it's findable by search. Each run creates a new contact tagged with a random run
 
 ## cash-sales-order-serial (replayed, illustrated manual)
 
-Manual built from `tour/cash-sales-order-serial.json` (Odoo export, 49 steps, none removed) and the replay `generated/specs/cash-sales-order-serial.spec.ts`. The replay ran all 49 steps with no failures and created a real sales order, delivery, new serial number, invoice and payment in Odoo.
+Manual built from `tour/cash-sales-order-serial.json` (Odoo export, 49 steps; recorded step 120 "Search..." was removed from the manual at the user's request, so the manual has 48 steps and the product search tip now sits in the product-selection step. The Odoo tour itself is unchanged) and the replay `generated/specs/cash-sales-order-serial.spec.ts`. The replay ran all 49 steps with no failures and created a real sales order, delivery, new serial number, invoice and payment in Odoo.
 
 Steps adapted (the screenshot shows what the replay actually did, which differs slightly from the recording):
 - **200, 210, 220** (warehouse): Odoo fills the Warehouse from the Sales Team, so the replay only highlights the filled field. The Search More... route is described as "only if empty".
