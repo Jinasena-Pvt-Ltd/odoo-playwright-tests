@@ -110,3 +110,13 @@ Steps adapted (the screenshot shows what the replay actually did, which differs 
 Not part of the tour but needed for the replay: one unit of the new serial number is put into stock (inventory adjustment) before Validate, because Odoo refuses to deliver a serial number with no stock.
 
 The Search More... steps (110-130, 180-190, 313-314) depend on how many records exist and may not match every database.
+
+
+## credit-sales-order (replayed, illustrated manual)
+
+Manual built from `tour/credit-sales-order.json` (Odoo export "tour_export (6)", 64 recorded steps, 34 in the manual) and the replay `generated/specs/credit-sales-order.spec.ts`. The replay ran with no failures and created a real Credit sales order, delivery, invoice (Payment Terms 14 Days) and payment in Odoo.
+
+- **Customer changed:** the recording used `abc`, which has overdue invoices. The replay uses **DIDULA MOTORES** (credit customer, no overdue invoices); override with `CREDIT_CUSTOMER`.
+- **Excluded (accidental/duplicate recorded clicks):** 17 (Credit selected twice), 38 and 48 (home menu / Sales app clicked mid-flow), 40 (Sale Orders clicked twice), 41-42 (hotkey Q, no visible target).
+- **Excluded (Advance Payment part, 410-550):** a second flow on another order (To Invoice > Orders to Invoice > Create Advance Payment > BOC BANK payment). `button[name="2341"]` does not exist on the posted invoice, so it was not replayed. Needs its own tour.
+- **Adapted:** 14, 15 (customer swap); 28-30 (Odoo fills the Warehouse from the Sales Team, so the replay highlights the filled field); 47 (the recording says "bank" in steps 45/49 but the clicked row is "Customer Receipts - Cash"; the manual follows the clicked row and mentions choosing a bank journal if paid by bank).
