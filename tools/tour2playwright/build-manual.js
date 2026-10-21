@@ -26,6 +26,11 @@ fs.mkdirSync(manualDir, { recursive: true });
 // trailing/accidental steps, or fields that no longer exist on the form) are listed under
 // `excluded` so the manual can say so instead of just "no screenshot captured".
 const TOUR_NOTES = {
+  'cash-sales-order': {
+    displayTitle: 'CASH SALES ORDER',
+    adapted: new Set(),
+    excluded: new Set(),
+  },
   'cash-sales-order-serial': {
     // Steps whose recorded text does not match what they act on - flagged for review in REVIEW.md
     displayTitle: 'CASH SALES ORDER - SERIAL',

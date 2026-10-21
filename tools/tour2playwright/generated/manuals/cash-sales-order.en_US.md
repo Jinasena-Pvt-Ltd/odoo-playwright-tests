@@ -1,4 +1,4 @@
-# Cash Sales Order — User Manual (English)
+# CASH SALES ORDER — User Manual (English)
 
 Step-by-step guide to selling to a cash customer: create the quotation, confirm it, deliver the goods, invoice the customer and record the cash payment.
 
