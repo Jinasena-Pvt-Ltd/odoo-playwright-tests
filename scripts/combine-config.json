@@ -1,0 +1,16 @@
+{
+  "title": "Jinasena Odoo E2E",
+  "remote": "origin",
+  "branches": [
+    { "branch": "Sales" },
+    { "branch": "purchase" },
+    { "branch": "repair" },
+    { "branch": "manufacturing" }
+  ],
+  "moduleMeta": {
+    "sales":      { "color": "#f59e0b", "icon": "💼", "name": "Sales",      "sub": "Quotations · Approvals · Validations", "css": "sales",      "nav": "Sales Module",      "id": "sales" },
+    "purchase":   { "color": "#3b82f6", "icon": "🛒", "name": "Purchase",   "sub": "RFQs · Orders · Vendors",              "css": "purchase",   "nav": "Purchase Module",   "id": "purchase" },
+    "fix_repair": { "color": "#ef4444", "icon": "🔧", "name": "Repair",     "sub": "Repair orders · Parts",                "css": "fix_repair", "nav": "Repair Module",     "id": "fixrepai" },
+    "helpdesk":   { "color": "#10b981", "icon": "🎧", "name": "Helpdesk",   "sub": "Tickets · Teams · SLA",                "css": "helpdesk",   "nav": "Helpdesk Module",   "id": "helpdesk" }
+  }
+}

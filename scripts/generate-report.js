@@ -17,14 +17,17 @@ const path = require('path');
 // ── Paths ────────────────────────────────────────────────────────────────────
 
 const ROOT        = path.resolve(__dirname, '..');
-const SRC_MODULES = path.join(ROOT, 'src', 'modules');
+// The REPORT_* env vars let scripts/combine-report.js point this generator at a
+// combined tree assembled from several module branches.
+const SRC_MODULES = process.env.REPORT_SRC_MODULES || path.join(ROOT, 'src', 'modules');
 const REPORTS_DIR = path.join(ROOT, 'reports');
-const DATA_DIR    = path.join(__dirname, 'report-data');
+const DATA_DIR    = process.env.REPORT_DATA_DIR    || path.join(__dirname, 'report-data');
+const OUT_PREFIX  = process.env.REPORT_OUT_PREFIX  || 'master-report';
 const TODAY       = new Date().toISOString().slice(0, 10);
 
 // ── Project name (from package.json) ─────────────────────────────────────────
 
-const PKG_NAME = (() => {
+const PKG_NAME = process.env.REPORT_TITLE || (() => {
   try { return JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf-8')).name || 'Odoo E2E'; }
   catch { return 'Odoo E2E'; }
 })();
@@ -39,6 +42,9 @@ const PKG_NAME = (() => {
 // The `css` field is used as a CSS class suffix for module-card and mod-header rules.
 // The `color` field drives the generated border/gradient CSS for that module.
 const MODULE_META = {};
+if (process.env.REPORT_MODULE_META && fs.existsSync(process.env.REPORT_MODULE_META)) {
+  Object.assign(MODULE_META, JSON.parse(fs.readFileSync(process.env.REPORT_MODULE_META, 'utf-8')));
+}
 
 const fallback = (mod) => ({
   color: '#64748b', icon: '📦', name: mod, sub: '', css: 'other',
@@ -1088,7 +1094,7 @@ ${FOOTER_JS}
 </html>`;
 
   if (!fs.existsSync(REPORTS_DIR)) fs.mkdirSync(REPORTS_DIR, { recursive: true });
-  const outFile = path.join(REPORTS_DIR, `master-report-${TODAY}.html`);
+  const outFile = path.join(REPORTS_DIR, `${OUT_PREFIX}-${TODAY}.html`);
   fs.writeFileSync(outFile, html, 'utf-8');
 
   console.log(`✅ Report: ${outFile}`);
