@@ -4,6 +4,8 @@ dist/
 auth-storage/
 test-results/
 allure-results/
-allure-report/
+allure-report/s
+playwright-report/
+tools/
 *.log
 .claude/hooks/branch.txt

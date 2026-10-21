@@ -31,6 +31,11 @@ const TOUR_NOTES = {
     adapted: new Set(),
     excluded: new Set(),
   },
+  'credit-sales-order': {
+    displayTitle: 'CREDIT SALES ORDER',
+    adapted: new Set(),
+    excluded: new Set(),
+  },
   'cash-sales-order-serial': {
     // Steps whose recorded text does not match what they act on - flagged for review in REVIEW.md
     displayTitle: 'CASH SALES ORDER - SERIAL',
