@@ -1,0 +1,47 @@
+{
+  "bugs": [
+    {
+      "id": "BUG-001",
+      "group": "All",
+      "flow": "Setup",
+      "step": "Read Customer Groups",
+      "severity": "Info",
+      "title": "Customer Group names differ between companies",
+      "detail": "Groups exist per company. Only in \"Jinasena Agricultural Machinery (Pvt) Ltd.\": TC. Only in other companies: TC-SC."
+    },
+    {
+      "id": "BUG-002",
+      "group": "DISTR",
+      "flow": "Cash customer",
+      "step": "Create customer",
+      "severity": "Medium",
+      "title": "Customer cannot be created with only the basic fields",
+      "detail": "Odoo RPC error: Bank Guarantee Amount must be Specified for Distributors."
+    },
+    {
+      "id": "BUG-003",
+      "group": "DISTR",
+      "flow": "Credit customer",
+      "step": "Create customer",
+      "severity": "Medium",
+      "title": "Customer cannot be created with only the basic fields",
+      "detail": "Odoo RPC error: Bank Guarantee Amount must be Specified for Distributors."
+    }
+  ],
+  "passed": [
+    "DISTR / Cash customer / create customer (with bank guarantee)",
+    "DISTR / Cash / 1 Create quotation (Cash)",
+    "DISTR / Cash / 2 Confirm order",
+    "DISTR / Cash / 3 Validate delivery",
+    "DISTR / Cash / 4 Create invoice",
+    "DISTR / Cash / 5 Register cash payment",
+    "DISTR / Credit customer / create customer (with bank guarantee)",
+    "DISTR / Credit / 1 Create quotation (Credit)",
+    "DISTR / Credit / buttons before approval: Confirm | Preview | Sales Order | Quotation Sent | Quotation",
+    "DISTR / Credit / approvals taken: none needed",
+    "DISTR / Credit / 2 Give approvals and confirm",
+    "DISTR / Credit / 3 Validate delivery",
+    "DISTR / Credit / 4 Create invoice"
+  ],
+  "notes": []
+}

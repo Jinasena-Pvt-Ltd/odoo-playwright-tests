@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sales Tests — Step by Step: Results and How to Pass</title>
+<style>
+  :root{--pass:#2e7d32;--fail:#c62828;--skip:#e65100;--pend:#1565c0;--line:#e5e7eb;--ink:#1f2937}
+  *{box-sizing:border-box}
+  body{font-family:Segoe UI,Arial,sans-serif;margin:0;background:#f8fafc;color:var(--ink);line-height:1.5}
+  header{background:#0f172a;color:#fff;padding:26px 40px}
+  header h1{margin:0 0 6px;font-size:25px} header p{margin:0;color:#cbd5e1;font-size:14px}
+  main{max-width:1100px;margin:0 auto;padding:22px 26px 60px}
+  .sum{display:flex;gap:14px;flex-wrap:wrap;margin:6px 0 4px}
+  .box{flex:1 1 150px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 16px;text-align:center}
+  .box b{display:block;font-size:28px} .box span{font-size:13px;color:#6b7280}
+  .p{color:var(--pass)} .f{color:var(--fail)} .s{color:var(--skip)} .q{color:var(--pend)}
+  .note{background:#fffbeb;border-left:4px solid #f59e0b;padding:10px 14px;margin:14px 0;font-size:13.5px}
+  .step{background:#fff;border:1px solid var(--line);border-radius:12px;margin:20px 0;overflow:hidden}
+  .step>h2{margin:0;padding:12px 18px;background:#f1f5f9;border-bottom:1px solid var(--line);font-size:18px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+  .step>h2 small{font-weight:400;color:#475569;font-size:13px}
+  .t{padding:14px 18px;border-bottom:1px solid var(--line)} .t:last-child{border-bottom:0}
+  .t h3{margin:0 0 6px;font-size:15.5px;display:flex;gap:10px;align-items:flex-start;flex-wrap:wrap}
+  .b{display:inline-block;min-width:64px;text-align:center;border-radius:5px;padding:2px 9px;font-weight:700;font-size:12px;color:#fff;flex:none}
+  .b.p{background:var(--pass);color:#fff} .b.f{background:var(--fail);color:#fff} .b.s{background:#f59e0b;color:#fff} .b.q{background:var(--pend);color:#fff}
+  .lbl{font-weight:700;font-size:12.5px;text-transform:uppercase;letter-spacing:.04em;color:#475569;margin:10px 0 2px}
+  .why{background:#fef2f2;border:1px solid #fecaca;border-radius:6px;padding:8px 12px;font-size:13.5px}
+  .ok{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:6px;padding:8px 12px;font-size:13.5px}
+  ol{margin:4px 0 4px 20px;padding:0} li{margin:3px 0;font-size:14px}
+  code{background:#f1f5f9;border-radius:4px;padding:1px 6px;font-size:12.5px}
+  .tag{font-size:11.5px;background:#e0f2fe;color:#075985;border-radius:4px;padding:1px 7px;font-weight:600}
+  .tag.fix{background:#dcfce7;color:#166534}
+  table{border-collapse:collapse;width:100%;font-size:13.5px} th,td{border:1px solid var(--line);padding:7px 10px;text-align:left} th{background:#f1f5f9}
+</style>
+</head>
+<body>
+<header>
+  <h1>Sales Tests — Step by Step: Results and How to Pass</h1>
+  <p>Project odoo-playwright-tests · module <b>sales</b> · results from <b>Run 2</b> (2026-10-07) · each test shows what happened and the steps to make it pass</p>
+</header>
+<main>
+
+<div class="sum">
+  <div class="box"><b class="p">10</b><span>passed</span></div>
+  <div class="box"><b class="f">9</b><span>failed</span></div>
+  <div class="box"><b class="s">4</b><span>skipped (by design)</span></div>
+  <div class="box"><b>23</b><span>Sales tests in total</span></div>
+</div>
+<div class="note">
+  <b>How to read this:</b> every test below has a result, the reason, and a numbered <b>How to pass</b> list.
+  <span class="tag fix">Fix applied</span> means I already changed the test code after Run 2, but it has <b>not been re-run yet</b>, so it still counts as failed here until Run 3 confirms it.
+</div>
+
+<!-- STEP 1 -->
+<section class="step">
+  <h2>Step 1 — Configuration <small>5 of 5 passed</small></h2>
+  <div class="t"><h3><span class="b p">PASS</span> Opens the Sales app with its Orders menu</h3></div>
+  <div class="t"><h3><span class="b p">PASS</span> Switches to the sales company</h3></div>
+  <div class="t"><h3><span class="b p">PASS</span> Lists quotations or shows the empty state</h3></div>
+  <div class="t"><h3><span class="b p">PASS</span> Opens a blank quotation form with an empty, editable customer</h3></div>
+  <div class="t"><h3><span class="b p">PASS</span> Has a Minimum Sales Margin configured in Sales settings <small>(value found: 22.90%)</small></h3></div>
+</section>
+
+<!-- STEP 2 -->
+<section class="step">
+  <h2>Step 2 — Business Logic <small>2 passed · 1 failed · 1 skipped</small></h2>
+
+  <div class="t">
+    <h3><span class="b f">FAIL</span> Quotation amounts add up: net, untaxed, VAT and total</h3>
+    <div class="lbl">What happened</div>
+    <div class="why">The test timed out waiting for the Save button. Line 1 already receives the VAT 18% tax automatically, so the "set tax" step changed nothing, the form was already saved, and there was no Save button to click. The quotation and its amounts were fine; the test did not allow for a form with nothing to save.</div>
+    <div class="lbl">How to pass <span class="tag fix">Fix applied</span></div>
+    <ol>
+      <li>The test code now treats "no Save button" as "already saved" (done in <code>SalesPage.ts</code>, <code>trySave</code>).</li>
+      <li>Re-run: <code>npx playwright test --project=setup --project=admin --grep "quotation amounts add up"</code></li>
+      <li>Nothing needs to change in Odoo.</li>
+    </ol>
+  </div>
+
+  <div class="t">
+    <h3><span class="b p">PASS</span> A line below the minimum margin needs approval and hides Confirm</h3>
+    <div class="ok">Request Insufficient Margin Approval was visible and Confirm was hidden, as expected (minimum margin 22.90%).</div>
+  </div>
+
+  <div class="t">
+    <h3><span class="b p">PASS</span> An over-limit sale asks for credit-limit approval and blocks Confirm while pending</h3>
+    <div class="ok">The sale (about 1.2 billion) is far above the credit limit. Request Credit Limit Approval and View Credit Limit Overdue Details appeared, Confirm stayed hidden, and after the request the approval showed "Waiting for approval".</div>
+  </div>
+
+  <div class="t">
+    <h3><span class="b s">SKIP</span> Once the credit limit is approved the order can be confirmed</h3>
+    <div class="lbl">What happened</div>
+    <div class="why">Odoo assigns the "Approve Credit Limit" task to <b>Tharaka Herath</b>. The signed-in user (Malsha Hewage) can only see "Waiting for approval", so this test skips itself.</div>
+    <div class="lbl">How to pass</div>
+    <ol>
+      <li><b>Option A (in Odoo):</b> in debug mode go to Settings → Technical → Server Actions → <b>SLS - Request Approval - Notify User</b>, change <b>Assigned To</b> from Tharaka Herath to Malsha Hewage, and save. The test then clicks Approve and Confirm itself.</li>
+      <li><b>Option B (no Odoo change):</b> add <code>ODOO_APPROVER_EMAIL</code> and <code>ODOO_APPROVER_PASSWORD</code> (Tharaka Herath's login) to <code>.env</code>. The test signs in as that user, approves, then confirms.</li>
+      <li>Re-run the test. Note it confirms a real Sales Order on the live instance.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- STEP 3 -->
+<section class="step">
+  <h2>Step 3 — Reporting <small>1 skipped</small></h2>
+  <div class="t">
+    <h3><span class="b s">SKIP</span> Placeholder — no reporting tests exist yet</h3>
+    <div class="lbl">How to pass</div>
+    <ol>
+      <li>Decide which reports to cover (for example Sales ▸ Reporting views, filters, exports).</li>
+      <li>Replace the placeholder in <code>src/modules/sales/tests/03-reporting/sales.reports.spec.ts</code> with real tests.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- STEP 4 -->
+<section class="step">
+  <h2>Step 4 — Permissions <small>1 skipped</small></h2>
+  <div class="t">
+    <h3><span class="b s">SKIP</span> Placeholder — manager and employee logins are not configured</h3>
+    <div class="lbl">How to pass</div>
+    <ol>
+      <li>Fill <code>MANAGER_EMAIL</code>/<code>MANAGER_PASSWORD</code> and <code>EMPLOYEE_EMAIL</code>/<code>EMPLOYEE_PASSWORD</code> in <code>.env</code> (the users must exist in Odoo).</li>
+      <li>Write the role-based tests in <code>04-permissions/sales.permissions.spec.ts</code>.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- STEP 5 -->
+<section class="step">
+  <h2>Step 5 — Validations <small>3 passed · 6 failed</small></h2>
+
+  <div class="t"><h3><span class="b p">PASS</span> Blank Customer cannot be saved (05.1)</h3><div class="ok">Odoo blocked the save and flagged the Customer field.</div></div>
+  <div class="t"><h3><span class="b p">PASS</span> Blank Order Payment Type cannot be saved (05.2)</h3><div class="ok">Odoo blocked the save.</div></div>
+  <div class="t"><h3><span class="b p">PASS</span> Blank Quotation Type cannot be saved (05.3)</h3><div class="ok">Odoo blocked the save.</div></div>
+
+  <div class="t">
+    <h3><span class="b f">FAIL</span> Blank Payment Terms / Salesperson / Sales Team / Company / Warehouse (05.4 – 05.8)</h3>
+    <div class="lbl">What happened</div>
+    <div class="why">
+      For these five tests Odoo <b>accepted the save</b>: the quotation received a number (for example S02047). So Odoo does not currently require these five fields to be filled.
+      The test reported "no validation signal" because the Save icon reappeared after the save.
+      <br><b>Important:</b> the original specs showed PASS for 05.4–05.8 by mistake. They only checked the URL path, so a successful save was never noticed.
+    </div>
+    <div class="lbl">How to pass <span class="tag fix">Fix applied to the test</span></div>
+    <ol>
+      <li>The test now detects a saved record correctly (the breadcrumb changes from "New" to the quotation number). After this change it fails with a clear message: "Odoo saved the quotation although &lt;field&gt; was blank."</li>
+      <li><b>Decide per field</b> whether it is meant to be required:
+        <ol type="a">
+          <li><b>If it must be required:</b> make the field required in Odoo (Studio ▸ select the field ▸ <b>Required</b>), or add a rule that blocks saving. Re-run; the test then passes.</li>
+          <li><b>If it is optional by design:</b> remove that field from <code>SALES_BLANK_FIELD_CASES</code> in <code>src/modules/sales/data/sales.validation-cases.ts</code>. The test then no longer expects a block.</li>
+        </ol>
+      </li>
+      <li>Re-run Step 5: <code>npx playwright test --project=setup --project=admin --grep "@step:validations"</code></li>
+    </ol>
+  </div>
+
+  <div class="t">
+    <h3><span class="b f">FAIL</span> A distributor customer needs both Bank Guarantee amount and expiry date</h3>
+    <div class="lbl">What happened</div>
+    <div class="why">The test timed out after 7 minutes. It tried to set the Customer Group, but "Test Customer - Playwright 1" already has the DISTR group, so there was no dropdown to pick from and it waited forever.</div>
+    <div class="lbl">How to pass <span class="tag fix">Fix applied</span></div>
+    <ol>
+      <li>The test now skips the group step when the customer already has DISTR (done in <code>SalesPage.ts</code>, <code>setCustomerGroup</code>).</li>
+      <li>Re-run: <code>npx playwright test --project=setup --project=admin --grep "Bank Guarantee"</code></li>
+      <li>Nothing needs to change in Odoo. The test never saves the customer (it discards its edits).</li>
+    </ol>
+  </div>
+</section>
+
+<!-- STEP 6 -->
+<section class="step">
+  <h2>Step 6 — Edge Cases <small>2 failed</small></h2>
+
+  <div class="t">
+    <h3><span class="b f">FAIL</span> A zero-quantity order line cannot be confirmed (06.00)</h3>
+    <div class="lbl">What happened</div>
+    <div class="why">The test stopped at "Odoo refused to save the quotation: 0 invalid field(s)". This is the same false alarm as in Step 5: the save worked, but the test misread the Save icon.</div>
+    <div class="lbl">How to pass <span class="tag fix">Fix applied</span></div>
+    <ol>
+      <li>The save check now recognises that a new record received its number.</li>
+      <li>Re-run: <code>npx playwright test --project=setup --project=admin --grep "zero-quantity"</code></li>
+      <li>If Odoo then shows a Confirm button, the test clicks it to prove the problem. That would confirm a test quotation, so check the result.</li>
+    </ol>
+  </div>
+
+  <div class="t">
+    <h3><span class="b f">FAIL</span> A zero-unit-price order line cannot be confirmed (06.01)</h3>
+    <div class="lbl">What happened</div>
+    <div class="why">Same as 06.00: "Odoo refused to save the quotation: 0 invalid field(s)". The save worked, but the test misread the Save icon.</div>
+    <div class="lbl">How to pass <span class="tag fix">Fix applied</span></div>
+    <ol>
+      <li>Same fix as 06.00 (the save check now recognises a new quotation number).</li>
+      <li>Re-run: <code>npx playwright test --project=setup --project=admin --grep "zero-unit-price"</code></li>
+    </ol>
+  </div>
+</section>
+
+<!-- STEP 7 -->
+<section class="step">
+  <h2>Step 7 — Archive <small>1 skipped</small></h2>
+  <div class="t">
+    <h3><span class="b s">SKIP</span> Placeholder — the tests do not archive anything yet</h3>
+    <div class="lbl">How to pass</div>
+    <ol>
+      <li>Business and edge tests create quotations that are never cleaned up. Add a test (or cleanup step) that archives or deletes them.</li>
+      <li>Put it in <code>07-archive/sales.archive.spec.ts</code>.</li>
+    </ol>
+  </div>
+</section>
+
+<h2 style="margin-top:34px">Fastest path to a green run</h2>
+<table>
+  <tr><th>#</th><th>Do this</th><th>Fixes</th></tr>
+  <tr><td>1</td><td>Re-run all Sales tests (the code fixes are already in): <code>npx playwright test --project=setup --project=admin --grep @module:sales</code> (about 25 minutes)</td><td>Amounts, Bank Guarantee, zero quantity, zero unit price (4 tests)</td></tr>
+  <tr><td>2</td><td>Decide for 05.4–05.8 whether each field must be required (make it required in Odoo) or optional (remove it from the test data)</td><td>5 validation tests</td></tr>
+  <tr><td>3</td><td>Make Malsha Hewage the approver in the "SLS - Request Approval - Notify User" server action, or add the approver login to <code>.env</code></td><td>Approve → Confirm test</td></tr>
+  <tr><td>4</td><td>Write real tests for Reporting, Permissions and Archive when ready</td><td>The 3 placeholders</td></tr>
+</table>
+
+<p style="color:#6b7280;font-size:12.5px;margin-top:22px">Source of results: Run 2 console output (Playwright, project admin). Failure screenshots and traces are in <code>test-results/</code>.</p>
+</main>
+</body>
+</html>

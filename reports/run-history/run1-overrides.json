@@ -1,0 +1,25 @@
+{
+  "_note": "Run 1 reconstructed from the console output of the first Sales run (it was stopped before the last tests executed).",
+  "default": "NOTRUN",
+  "rules": [
+    { "match": "^opens the Sales app", "status": "PASS" },
+    { "match": "^switches to the sales company", "status": "PASS" },
+    { "match": "^lists quotations", "status": "PASS" },
+    { "match": "^opens a blank quotation form", "status": "PASS" },
+    { "match": "^has a Minimum Sales Margin", "status": "PASS" },
+    { "match": "^quotation amounts add up", "status": "FAIL",
+      "error": "Odoo refused to save the quotation: 0 invalid field(s). Cause: the test's save check stopped at an unrelated notification and read the Save button before the save had finished (test bug; the quotation was saved)." },
+    { "match": "^a line below the minimum margin", "status": "PASS" },
+    { "match": "^an over-limit sale asks for credit-limit approval", "status": "PASS" },
+    { "match": "^once the credit limit is approved", "status": "SKIP" },
+    { "match": "^placeholder . replace with real reporting", "status": "SKIP" },
+    { "match": "^placeholder . replace with real permission", "status": "SKIP" },
+    { "match": "blank Customer", "status": "PASS" },
+    { "match": "blank Order Payment Type", "status": "PASS" },
+    { "match": "blank Quotation Type", "status": "PASS" },
+    { "match": "blank (Payment Terms|Salesperson|Sales Team|Company|Warehouse)", "status": "FAIL",
+      "error": "Odoo blocked the save but showed no validation signal. (The short-lived error toast had already disappeared before it was read.)" },
+    { "match": "^a distributor customer needs both Bank Guarantee", "status": "FAIL",
+      "error": "Test timeout of 420000ms exceeded. The test waited for a Customer Group dropdown that does not exist because the customer already has the DISTR group." }
+  ]
+}

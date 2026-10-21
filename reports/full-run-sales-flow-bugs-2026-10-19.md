@@ -1,0 +1,360 @@
+# Sales flow bug report — 2026-10-19
+
+Cash and Credit flows walked step by step for every Customer Group.
+
+| Steps passed | Bugs found | High | Medium | Low | Info |
+|---|---|---|---|---|---|
+| 218 | 9 | 5 | 3 | 0 | 1 |
+
+Severity: **High** = Odoo showed an error / blocked the flow. **Medium** = a step could not be completed, needs a human to confirm. **Info** = data or configuration observation.
+
+## Bugs
+
+### BUG-001 — Customer Group names differ between companies
+
+- **Group:** All  
+- **Flow:** Setup  
+- **Step:** Read Customer Groups  
+- **Severity:** Info
+- **Details:**
+
+```
+Groups exist per company. Only in "Jinasena Agricultural Machinery (Pvt) Ltd.": TC. Only in other companies: TC-SC.
+```
+
+### BUG-002 — Access Error
+
+- **Group:** CAC (other company)  
+- **Flow:** Cross-company check  
+- **Step:** Select a customer whose Customer Group is of another company on a quotation  
+- **Severity:** High
+- **Details:**
+
+```
+Access Error: Uh-oh! Looks like you have stumbled upon some top-secret records. Sorry, Malsha Hewage (id=749) doesn't have 'read' access to: - Customer Group (x_customer_group) If you really, really need access, perhaps you can win over your friendly administrator with a batch of freshly baked cookies.
+```
+- **Screenshot:** `test-results/flow-bugs/CAC_other_company_Cross_company_check_Select_a_customer_whose_Customer_Group_is_of_another.png`
+
+### BUG-003 — Quotation can be saved with a blank Payment Terms
+
+- **Group:** CAC, CENT-ISSUE, DISTR, DLRS, EXPT, SBU1, SVAT-CAC, SVAT-CRC, TC, WELFARE, COMM  
+- **Flow:** Validation (Cash)  
+- **Step:** Save with blank Payment Terms  
+- **Severity:** High
+- **Details:**
+
+```
+A complete Cash quotation was saved after Payment Terms was emptied. Odoo showed no required-field error and created a quotation number. Payment Terms should be mandatory.
+```
+- **Screenshot:** `test-results/flow-bugs/CAC_Validation_Cash_Save_with_blank_Payment_Terms.png`
+
+### BUG-004 — Quotation can be saved with a blank Sales Team
+
+- **Group:** CAC, CENT-ISSUE, DISTR, DLRS, EXPT, LEGAL, SBU1, SVAT-CAC, SVAT-CRC, TC, WELFARE, COMM  
+- **Flow:** Validation (Cash)  
+- **Step:** Save with blank Sales Team  
+- **Severity:** High
+- **Details:**
+
+```
+A complete Cash quotation was saved after Sales Team was emptied. Odoo showed no required-field error and created a quotation number. Sales Team should be mandatory.
+```
+- **Screenshot:** `test-results/flow-bugs/CAC_Validation_Cash_Save_with_blank_Sales_Team.png`
+
+### BUG-005 — Quotation can be saved with a blank Payment Terms
+
+- **Group:** CAC  
+- **Flow:** Validation (Credit)  
+- **Step:** Save with blank Payment Terms  
+- **Severity:** High
+- **Details:**
+
+```
+A complete Credit quotation was saved after Payment Terms was emptied. Odoo showed no required-field error and created a quotation number. Payment Terms should be mandatory.
+```
+- **Screenshot:** `test-results/flow-bugs/CAC_Validation_Credit_Save_with_blank_Payment_Terms.png`
+
+### BUG-006 — Quotation can be saved with a blank Sales Team
+
+- **Group:** CAC  
+- **Flow:** Validation (Credit)  
+- **Step:** Save with blank Sales Team  
+- **Severity:** High
+- **Details:**
+
+```
+A complete Credit quotation was saved after Sales Team was emptied. Odoo showed no required-field error and created a quotation number. Sales Team should be mandatory.
+```
+- **Screenshot:** `test-results/flow-bugs/CAC_Validation_Credit_Save_with_blank_Sales_Team.png`
+
+### BUG-007 — Customer cannot be created with only the basic fields
+
+- **Group:** DISTR  
+- **Flow:** Cash customer  
+- **Step:** Create customer  
+- **Severity:** Medium
+- **Details:**
+
+```
+Odoo RPC error: Bank Guarantee Amount must be Specified for Distributors.
+```
+
+### BUG-008 — Customer cannot be created with only the basic fields
+
+- **Group:** DISTR  
+- **Flow:** Credit customer  
+- **Step:** Create customer  
+- **Severity:** Medium
+- **Details:**
+
+```
+Odoo RPC error: Bank Guarantee Amount must be Specified for Distributors.
+```
+
+### BUG-009 — Validation check could not be completed (needs review)
+
+- **Group:** LEGAL  
+- **Flow:** Validation (Cash)  
+- **Step:** Confirm order with zero unit price  
+- **Severity:** Medium
+- **Details:**
+
+```
+zero unit price: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+```
+
+## Flow stopped here — not a bug
+
+- **CAC / Credit / 2 Give approvals and confirm:** Approval requested (Request Credit Limit Approval). "Approve Credit Limit" is now waiting for Malsha Hewage — normal behaviour, the requester cannot approve it. Add ODOO_APPROVER_EMAIL / ODOO_APPROVER_PASSWORD to .env to let the test continue with confirm, delivery and invoice.
+- **CENT-ISSUE / Credit / 2 Give approvals and confirm:** Approval requested (Request Credit Limit Approval). "Approve Credit Limit" is now waiting for Malsha Hewage — normal behaviour, the requester cannot approve it. Add ODOO_APPROVER_EMAIL / ODOO_APPROVER_PASSWORD to .env to let the test continue with confirm, delivery and invoice.
+- **DISTR / Credit / 2 Give approvals and confirm:** Approval requested (Request Credit Limit Approval). "Approve Credit Limit" is now waiting for Malsha Hewage — normal behaviour, the requester cannot approve it. Add ODOO_APPROVER_EMAIL / ODOO_APPROVER_PASSWORD to .env to let the test continue with confirm, delivery and invoice.
+- **DLRS / Credit / 2 Give approvals and confirm:** Approval requested (Request Credit Limit Approval). "Approve Credit Limit" is now waiting for Malsha Hewage — normal behaviour, the requester cannot approve it. Add ODOO_APPROVER_EMAIL / ODOO_APPROVER_PASSWORD to .env to let the test continue with confirm, delivery and invoice.
+- **EXPT / Credit / 2 Give approvals and confirm:** Approval requested (Request Credit Limit Approval). "Approve Credit Limit" is now waiting for Malsha Hewage — normal behaviour, the requester cannot approve it. Add ODOO_APPROVER_EMAIL / ODOO_APPROVER_PASSWORD to .env to let the test continue with confirm, delivery and invoice.
+- **LEGAL / Credit / 2 Give approvals and confirm:** Approval requested (Request Credit Limit Approval). "Approve Credit Limit" is now waiting for Malsha Hewage — normal behaviour, the requester cannot approve it. Add ODOO_APPROVER_EMAIL / ODOO_APPROVER_PASSWORD to .env to let the test continue with confirm, delivery and invoice.
+- **SBU1 / Credit / 2 Give approvals and confirm:** Approval requested (Request Credit Limit Approval). "Approve Credit Limit" is now waiting for Malsha Hewage — normal behaviour, the requester cannot approve it. Add ODOO_APPROVER_EMAIL / ODOO_APPROVER_PASSWORD to .env to let the test continue with confirm, delivery and invoice.
+- **SVAT-CAC / Credit / 2 Give approvals and confirm:** Approval requested (Request Credit Limit Approval). "Approve Credit Limit" is now waiting for Malsha Hewage — normal behaviour, the requester cannot approve it. Add ODOO_APPROVER_EMAIL / ODOO_APPROVER_PASSWORD to .env to let the test continue with confirm, delivery and invoice.
+- **SVAT-CRC / Credit / 2 Give approvals and confirm:** Approval requested (Request Credit Limit Approval). "Approve Credit Limit" is now waiting for Malsha Hewage — normal behaviour, the requester cannot approve it. Add ODOO_APPROVER_EMAIL / ODOO_APPROVER_PASSWORD to .env to let the test continue with confirm, delivery and invoice.
+- **TC / Credit / 2 Give approvals and confirm:** Approval requested (Request Credit Limit Approval). "Approve Credit Limit" is now waiting for Malsha Hewage — normal behaviour, the requester cannot approve it. Add ODOO_APPROVER_EMAIL / ODOO_APPROVER_PASSWORD to .env to let the test continue with confirm, delivery and invoice.
+- **WELFARE / Credit / 2 Give approvals and confirm:** Approval requested (Request Credit Limit Approval). "Approve Credit Limit" is now waiting for Malsha Hewage — normal behaviour, the requester cannot approve it. Add ODOO_APPROVER_EMAIL / ODOO_APPROVER_PASSWORD to .env to let the test continue with confirm, delivery and invoice.
+- **COMM / Credit / 2 Give approvals and confirm:** Approval requested (Request Credit Limit Approval). "Approve Credit Limit" is now waiting for Malsha Hewage — normal behaviour, the requester cannot approve it. Add ODOO_APPROVER_EMAIL / ODOO_APPROVER_PASSWORD to .env to let the test continue with confirm, delivery and invoice.
+
+## Steps that passed
+
+- Control (existing customer "abc") / Cash / 1 Create quotation (Cash)
+- Control (existing customer "abc") / Cash / 2 Confirm order
+- Control (existing customer "abc") / Cash / 3 Validate delivery
+- Control (existing customer "abc") / Cash / 4 Create invoice
+- Control (existing customer "abc") / Cash / 5 Register cash payment
+- CAC (other company) / Cash customer / create customer
+- CAC / Cash customer / create customer
+- CAC / Cash / 1 Create quotation (Cash)
+- CAC / Cash / 2 Confirm order
+- CAC / Cash / 3 Validate delivery
+- CAC / Cash / 4 Create invoice
+- CAC / Cash / 5 Register cash payment
+- CAC / Credit customer / create customer
+- CAC / Credit / 1 Create quotation (Credit)
+- CAC / Credit / buttons before approval: Request Credit Limit Approval | View Credit Limit Overdue Details | Preview | Sales Order | Quotation Sent | Quotation
+- CAC / Validation (Cash) / Save with blank Customer: blocked by Odoo (OK)
+- CAC / Validation (Cash) / Save with blank Order Payment Type: blocked by Odoo (OK)
+- CAC / Validation (Cash) / Save with blank Quotation Type: blocked by Odoo (OK)
+- CAC / Validation (Cash) / Save with blank Salesperson: blocked by Odoo (OK)
+- CAC / Validation (Cash) / Save with blank Warehouse: blocked by Odoo (OK)
+- CAC / Validation (Cash) / Save with blank Company: blocked by Odoo (OK)
+- CAC / Validation (Cash) / Confirm order with zero quantity: confirm-hidden (OK)
+- CAC / Validation (Cash) / Confirm order with zero unit price: confirm-hidden (OK)
+- CAC / Validation (Credit) / Save with blank Customer: blocked by Odoo (OK)
+- CAC / Validation (Credit) / Save with blank Order Payment Type: blocked by Odoo (OK)
+- CAC / Validation (Credit) / Save with blank Quotation Type: blocked by Odoo (OK)
+- CAC / Validation (Credit) / Save with blank Salesperson: blocked by Odoo (OK)
+- CAC / Validation (Credit) / Save with blank Warehouse: blocked by Odoo (OK)
+- CAC / Validation (Credit) / Save with blank Company: blocked by Odoo (OK)
+- CAC / Validation (Credit) / Confirm order with zero quantity: confirm-hidden (OK)
+- CAC / Validation (Credit) / Confirm order with zero unit price: confirm-hidden (OK)
+- CENT-ISSUE / Cash customer / create customer
+- CENT-ISSUE / Cash / 1 Create quotation (Cash)
+- CENT-ISSUE / Cash / 2 Confirm order
+- CENT-ISSUE / Cash / 3 Validate delivery
+- CENT-ISSUE / Cash / 4 Create invoice
+- CENT-ISSUE / Cash / 5 Register cash payment
+- CENT-ISSUE / Credit customer / create customer
+- CENT-ISSUE / Credit / 1 Create quotation (Credit)
+- CENT-ISSUE / Credit / buttons before approval: Request Credit Limit Approval | View Credit Limit Overdue Details | Preview | Sales Order | Quotation Sent | Quotation
+- CENT-ISSUE / Validation (Cash) / Save with blank Customer: blocked by Odoo (OK)
+- CENT-ISSUE / Validation (Cash) / Save with blank Order Payment Type: blocked by Odoo (OK)
+- CENT-ISSUE / Validation (Cash) / Save with blank Quotation Type: blocked by Odoo (OK)
+- CENT-ISSUE / Validation (Cash) / Save with blank Salesperson: blocked by Odoo (OK)
+- CENT-ISSUE / Validation (Cash) / Save with blank Warehouse: blocked by Odoo (OK)
+- CENT-ISSUE / Validation (Cash) / Save with blank Company: blocked by Odoo (OK)
+- CENT-ISSUE / Validation (Cash) / Confirm order with zero quantity: confirm-hidden (OK)
+- CENT-ISSUE / Validation (Cash) / Confirm order with zero unit price: confirm-hidden (OK)
+- DISTR / Cash customer / create customer (with bank guarantee)
+- DISTR / Cash / 1 Create quotation (Cash)
+- DISTR / Cash / 2 Confirm order
+- DISTR / Cash / 3 Validate delivery
+- DISTR / Cash / 4 Create invoice
+- DISTR / Cash / 5 Register cash payment
+- DISTR / Credit customer / create customer (with bank guarantee)
+- DISTR / Credit / 1 Create quotation (Credit)
+- DISTR / Credit / buttons before approval: Request Credit Limit Approval | View Credit Limit Overdue Details | Preview | Sales Order | Quotation Sent | Quotation
+- DISTR / Validation (Cash) / Save with blank Customer: blocked by Odoo (OK)
+- DISTR / Validation (Cash) / Save with blank Order Payment Type: blocked by Odoo (OK)
+- DISTR / Validation (Cash) / Save with blank Quotation Type: blocked by Odoo (OK)
+- DISTR / Validation (Cash) / Save with blank Salesperson: blocked by Odoo (OK)
+- DISTR / Validation (Cash) / Save with blank Warehouse: blocked by Odoo (OK)
+- DISTR / Validation (Cash) / Save with blank Company: blocked by Odoo (OK)
+- DISTR / Validation (Cash) / Confirm order with zero quantity: confirm-hidden (OK)
+- DISTR / Validation (Cash) / Confirm order with zero unit price: confirm-hidden (OK)
+- DLRS / Cash customer / create customer
+- DLRS / Cash / 1 Create quotation (Cash)
+- DLRS / Cash / 2 Confirm order
+- DLRS / Cash / 3 Validate delivery
+- DLRS / Cash / 4 Create invoice
+- DLRS / Cash / 5 Register cash payment
+- DLRS / Credit customer / create customer
+- DLRS / Credit / 1 Create quotation (Credit)
+- DLRS / Credit / buttons before approval: Request Credit Limit Approval | View Credit Limit Overdue Details | Send Bank Guarantee Validity Notification | Preview | Sales Order | Quotation Sent | Quotation
+- DLRS / Validation (Cash) / Save with blank Customer: blocked by Odoo (OK)
+- DLRS / Validation (Cash) / Save with blank Order Payment Type: blocked by Odoo (OK)
+- DLRS / Validation (Cash) / Save with blank Quotation Type: blocked by Odoo (OK)
+- DLRS / Validation (Cash) / Save with blank Salesperson: blocked by Odoo (OK)
+- DLRS / Validation (Cash) / Save with blank Warehouse: blocked by Odoo (OK)
+- DLRS / Validation (Cash) / Save with blank Company: blocked by Odoo (OK)
+- DLRS / Validation (Cash) / Confirm order with zero quantity: confirm-hidden (OK)
+- DLRS / Validation (Cash) / Confirm order with zero unit price: confirm-hidden (OK)
+- EXPT / Cash customer / create customer
+- EXPT / Cash / 1 Create quotation (Cash)
+- EXPT / Cash / 2 Confirm order
+- EXPT / Cash / 3 Validate delivery
+- EXPT / Cash / 4 Create invoice
+- EXPT / Cash / 5 Register cash payment
+- EXPT / Credit customer / create customer
+- EXPT / Credit / 1 Create quotation (Credit)
+- EXPT / Credit / buttons before approval: Request Credit Limit Approval | View Credit Limit Overdue Details | Preview | Sales Order | Quotation Sent | Quotation
+- EXPT / Validation (Cash) / Save with blank Customer: blocked by Odoo (OK)
+- EXPT / Validation (Cash) / Save with blank Order Payment Type: blocked by Odoo (OK)
+- EXPT / Validation (Cash) / Save with blank Quotation Type: blocked by Odoo (OK)
+- EXPT / Validation (Cash) / Save with blank Salesperson: blocked by Odoo (OK)
+- EXPT / Validation (Cash) / Save with blank Warehouse: blocked by Odoo (OK)
+- EXPT / Validation (Cash) / Save with blank Company: blocked by Odoo (OK)
+- EXPT / Validation (Cash) / Confirm order with zero quantity: confirm-hidden (OK)
+- EXPT / Validation (Cash) / Confirm order with zero unit price: confirm-hidden (OK)
+- LEGAL / Cash customer / create customer
+- LEGAL / Cash / 1 Create quotation (Cash)
+- LEGAL / Cash / 2 Confirm order
+- LEGAL / Cash / 3 Validate delivery
+- LEGAL / Cash / 4 Create invoice
+- LEGAL / Cash / 5 Register cash payment
+- LEGAL / Credit customer / create customer
+- LEGAL / Credit / 1 Create quotation (Credit)
+- LEGAL / Credit / buttons before approval: Request Credit Limit Approval | View Credit Limit Overdue Details | Preview | Sales Order | Quotation Sent | Quotation
+- LEGAL / Validation (Cash) / Save with blank Customer: blocked by Odoo (OK)
+- LEGAL / Validation (Cash) / Save with blank Order Payment Type: blocked by Odoo (OK)
+- LEGAL / Validation (Cash) / Save with blank Quotation Type: blocked by Odoo (OK)
+- LEGAL / Validation (Cash) / Save with blank Payment Terms: blocked by Odoo (OK)
+- LEGAL / Validation (Cash) / Save with blank Salesperson: blocked by Odoo (OK)
+- LEGAL / Validation (Cash) / Save with blank Warehouse: blocked by Odoo (OK)
+- LEGAL / Validation (Cash) / Save with blank Company: blocked by Odoo (OK)
+- LEGAL / Validation (Cash) / Confirm order with zero quantity: confirm-hidden (OK)
+- SBU1 / Cash customer / create customer
+- SBU1 / Cash / 1 Create quotation (Cash)
+- SBU1 / Cash / 2 Confirm order
+- SBU1 / Cash / 3 Validate delivery
+- SBU1 / Cash / 4 Create invoice
+- SBU1 / Cash / 5 Register cash payment
+- SBU1 / Credit customer / create customer
+- SBU1 / Credit / 1 Create quotation (Credit)
+- SBU1 / Credit / buttons before approval: Request Credit Limit Approval | View Credit Limit Overdue Details | Preview | Sales Order | Quotation Sent | Quotation
+- SBU1 / Validation (Cash) / Save with blank Customer: blocked by Odoo (OK)
+- SBU1 / Validation (Cash) / Save with blank Order Payment Type: blocked by Odoo (OK)
+- SBU1 / Validation (Cash) / Save with blank Quotation Type: blocked by Odoo (OK)
+- SBU1 / Validation (Cash) / Save with blank Salesperson: blocked by Odoo (OK)
+- SBU1 / Validation (Cash) / Save with blank Warehouse: blocked by Odoo (OK)
+- SBU1 / Validation (Cash) / Save with blank Company: blocked by Odoo (OK)
+- SBU1 / Validation (Cash) / Confirm order with zero quantity: confirm-hidden (OK)
+- SBU1 / Validation (Cash) / Confirm order with zero unit price: confirm-hidden (OK)
+- SVAT-CAC / Cash customer / create customer
+- SVAT-CAC / Cash / 1 Create quotation (Cash)
+- SVAT-CAC / Cash / 2 Confirm order
+- SVAT-CAC / Cash / 3 Validate delivery
+- SVAT-CAC / Cash / 4 Create invoice
+- SVAT-CAC / Cash / 5 Register cash payment
+- SVAT-CAC / Credit customer / create customer
+- SVAT-CAC / Credit / 1 Create quotation (Credit)
+- SVAT-CAC / Credit / buttons before approval: Request Credit Limit Approval | View Credit Limit Overdue Details | Preview | Sales Order | Quotation Sent | Quotation
+- SVAT-CAC / Validation (Cash) / Save with blank Customer: blocked by Odoo (OK)
+- SVAT-CAC / Validation (Cash) / Save with blank Order Payment Type: blocked by Odoo (OK)
+- SVAT-CAC / Validation (Cash) / Save with blank Quotation Type: blocked by Odoo (OK)
+- SVAT-CAC / Validation (Cash) / Save with blank Salesperson: blocked by Odoo (OK)
+- SVAT-CAC / Validation (Cash) / Save with blank Warehouse: blocked by Odoo (OK)
+- SVAT-CAC / Validation (Cash) / Save with blank Company: blocked by Odoo (OK)
+- SVAT-CAC / Validation (Cash) / Confirm order with zero quantity: confirm-hidden (OK)
+- SVAT-CAC / Validation (Cash) / Confirm order with zero unit price: confirm-hidden (OK)
+- SVAT-CRC / Cash customer / create customer
+- SVAT-CRC / Cash / 1 Create quotation (Cash)
+- SVAT-CRC / Cash / 2 Confirm order
+- SVAT-CRC / Cash / 3 Validate delivery
+- SVAT-CRC / Cash / 4 Create invoice
+- SVAT-CRC / Cash / 5 Register cash payment
+- SVAT-CRC / Credit customer / create customer
+- SVAT-CRC / Credit / 1 Create quotation (Credit)
+- SVAT-CRC / Credit / buttons before approval: Request Credit Limit Approval | View Credit Limit Overdue Details | Preview | Sales Order | Quotation Sent | Quotation
+- SVAT-CRC / Validation (Cash) / Save with blank Customer: blocked by Odoo (OK)
+- SVAT-CRC / Validation (Cash) / Save with blank Order Payment Type: blocked by Odoo (OK)
+- SVAT-CRC / Validation (Cash) / Save with blank Quotation Type: blocked by Odoo (OK)
+- SVAT-CRC / Validation (Cash) / Save with blank Salesperson: blocked by Odoo (OK)
+- SVAT-CRC / Validation (Cash) / Save with blank Warehouse: blocked by Odoo (OK)
+- SVAT-CRC / Validation (Cash) / Save with blank Company: blocked by Odoo (OK)
+- SVAT-CRC / Validation (Cash) / Confirm order with zero quantity: confirm-hidden (OK)
+- SVAT-CRC / Validation (Cash) / Confirm order with zero unit price: confirm-hidden (OK)
+- TC / Cash customer / create customer
+- TC / Cash / 1 Create quotation (Cash)
+- TC / Cash / 2 Confirm order
+- TC / Cash / 3 Validate delivery
+- TC / Cash / 4 Create invoice
+- TC / Cash / 5 Register cash payment
+- TC / Credit customer / create customer
+- TC / Credit / 1 Create quotation (Credit)
+- TC / Credit / buttons before approval: Request Credit Limit Approval | View Credit Limit Overdue Details | Preview | Sales Order | Quotation Sent | Quotation
+- TC / Validation (Cash) / Save with blank Customer: blocked by Odoo (OK)
+- TC / Validation (Cash) / Save with blank Order Payment Type: blocked by Odoo (OK)
+- TC / Validation (Cash) / Save with blank Quotation Type: blocked by Odoo (OK)
+- TC / Validation (Cash) / Save with blank Salesperson: blocked by Odoo (OK)
+- TC / Validation (Cash) / Save with blank Warehouse: blocked by Odoo (OK)
+- TC / Validation (Cash) / Save with blank Company: blocked by Odoo (OK)
+- TC / Validation (Cash) / Confirm order with zero quantity: confirm-hidden (OK)
+- TC / Validation (Cash) / Confirm order with zero unit price: confirm-hidden (OK)
+- WELFARE / Cash customer / create customer
+- WELFARE / Cash / 1 Create quotation (Cash)
+- WELFARE / Cash / 2 Confirm order
+- WELFARE / Cash / 3 Validate delivery
+- WELFARE / Cash / 4 Create invoice
+- WELFARE / Cash / 5 Register cash payment
+- WELFARE / Credit customer / create customer
+- WELFARE / Credit / 1 Create quotation (Credit)
+- WELFARE / Credit / buttons before approval: Request Credit Limit Approval | View Credit Limit Overdue Details | Preview | Sales Order | Quotation Sent | Quotation
+- WELFARE / Validation (Cash) / Save with blank Customer: blocked by Odoo (OK)
+- WELFARE / Validation (Cash) / Save with blank Order Payment Type: blocked by Odoo (OK)
+- WELFARE / Validation (Cash) / Save with blank Quotation Type: blocked by Odoo (OK)
+- WELFARE / Validation (Cash) / Save with blank Salesperson: blocked by Odoo (OK)
+- WELFARE / Validation (Cash) / Save with blank Warehouse: blocked by Odoo (OK)
+- WELFARE / Validation (Cash) / Save with blank Company: blocked by Odoo (OK)
+- WELFARE / Validation (Cash) / Confirm order with zero quantity: confirm-hidden (OK)
+- WELFARE / Validation (Cash) / Confirm order with zero unit price: confirm-hidden (OK)
+- COMM / Cash customer / create customer
+- COMM / Cash / 1 Create quotation (Cash)
+- COMM / Cash / 2 Confirm order
+- COMM / Cash / 3 Validate delivery
+- COMM / Cash / 4 Create invoice
+- COMM / Cash / 5 Register cash payment
+- COMM / Credit customer / create customer
+- COMM / Credit / 1 Create quotation (Credit)
+- COMM / Credit / buttons before approval: Request Credit Limit Approval | View Credit Limit Overdue Details | Preview | Sales Order | Quotation Sent | Quotation
+- COMM / Validation (Cash) / Save with blank Customer: blocked by Odoo (OK)
+- COMM / Validation (Cash) / Save with blank Order Payment Type: blocked by Odoo (OK)
+- COMM / Validation (Cash) / Save with blank Quotation Type: blocked by Odoo (OK)
+- COMM / Validation (Cash) / Save with blank Salesperson: blocked by Odoo (OK)
+- COMM / Validation (Cash) / Save with blank Warehouse: blocked by Odoo (OK)
+- COMM / Validation (Cash) / Save with blank Company: blocked by Odoo (OK)
+- COMM / Validation (Cash) / Confirm order with zero quantity: confirm-hidden (OK)
+- COMM / Validation (Cash) / Confirm order with zero unit price: confirm-hidden (OK)

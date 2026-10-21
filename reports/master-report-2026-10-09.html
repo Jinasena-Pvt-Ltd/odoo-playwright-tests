@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>odoo-playwright-tests — Master E2E Report · 2026-10-09</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --pass: #16a34a; --pass-bg: #f0fdf4; --pass-border: #bbf7d0;
+      --fail: #dc2626; --fail-bg: #fff5f5; --fail-border: #fecaca;
+      --warn: #d97706; --warn-bg: #fffbeb; --warn-border: #fde68a;
+      --info: #2563eb; --info-bg: #eff6ff; --info-border: #bfdbfe;
+      --skip: #7c3aed; --skip-bg: #f5f3ff; --skip-border: #ddd6fe;
+      --surface: #ffffff; --bg: #f1f5f9; --text: #0f172a; --muted: #64748b;
+      --border: #e2e8f0; --radius: 10px; --shadow: 0 1px 4px rgba(0,0,0,.08);
+    }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; font-size: 14px; }
+    .layout { display: flex; min-height: 100vh; }
+
+    /* ── Sidebar ── */
+    .sidebar { width: 260px; flex-shrink: 0; background: #1e293b; color: #cbd5e1; position: sticky; top: 0; height: 100vh; overflow-y: auto; padding: 24px 0; }
+    .sidebar-brand { padding: 0 20px 18px; border-bottom: 1px solid #334155; margin-bottom: 12px; }
+    .sidebar-brand h2 { font-size: 0.85rem; font-weight: 700; color: #f8fafc; margin-bottom: 2px; }
+    .sidebar-brand p { font-size: 0.68rem; color: #94a3b8; }
+    .nav-section { padding: 0 12px; margin-bottom: 4px; }
+    .nav-module-label { font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: .10em; color: #64748b; padding: 8px 8px 4px; margin-top: 8px; display: flex; align-items: center; gap: 6px; }
+    .nav-module-label .mod-dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
+    .nav-item { display: flex; align-items: center; gap: 8px; padding: 6px 8px; border-radius: 6px; cursor: pointer; font-size: 0.75rem; color: #94a3b8; text-decoration: none; transition: background .15s; }
+    .nav-item:hover, .nav-item.active { background: #334155; color: #f1f5f9; }
+    .nav-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+    .nav-dot.green { background: #22c55e; } .nav-dot.amber { background: #f59e0b; } .nav-dot.blue { background: #60a5fa; }
+    .nav-count { margin-left: auto; font-size: 0.65rem; font-weight: 700; background: #1e293b; border-radius: 999px; padding: 1px 6px; color: #64748b; }
+    .nav-count.skip { background: #2e1065; color: #c4b5fd; }
+    .nav-divider { height: 1px; background: #334155; margin: 12px 12px; }
+    .nav-toggle { flex-shrink:0; width:14px; display:flex; align-items:center; justify-content:center; cursor:pointer; color:#64748b; font-size:0.6rem; transition: transform .15s; }
+    .nav-toggle.open { transform: rotate(90deg); }
+    .nav-children { display:none; flex-direction:column; gap:1px; padding-left:6px; margin: 2px 0 4px 20px; border-left: 1px solid #334155; max-height:300px; overflow-y:auto; }
+    .nav-children.open { display:flex; }
+    .nav-children .nav-group-label { font-size:0.6rem; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:#475569; padding:6px 8px 2px; }
+    .nav-subitem { display:flex; align-items:center; gap:6px; padding:4px 8px; border-radius:5px; cursor:pointer; font-size:0.68rem; color:#94a3b8; white-space:nowrap; overflow:hidden; }
+    .nav-subitem:hover { background:#334155; color:#f1f5f9; }
+    .nav-subitem span.lbl { overflow:hidden; text-overflow:ellipsis; }
+    .nav-subdot { width:5px; height:5px; border-radius:50%; flex-shrink:0; }
+    .nav-subdot.pass { background:#22c55e; } .nav-subdot.skip { background:#7c3aed; } .nav-subdot.fail { background:#dc2626; } .nav-subdot.hist { background:#f59e0b; }
+
+    /* ── Main ── */
+    .main { flex: 1; min-width: 0; padding: 32px 36px; }
+
+    /* ── Hero ── */
+    .hero { background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 55%, #1a3a6b 100%); border-radius: 14px; padding: 36px 40px; color: white; margin-bottom: 28px; }
+    .hero-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; margin-bottom: 28px; }
+    .hero-title { font-size: 1.55rem; font-weight: 800; margin-bottom: 4px; }
+    .hero-sub { font-size: 0.85rem; opacity: 0.75; }
+    .hero-badge { background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2); border-radius: 8px; padding: 6px 14px; font-size: 0.78rem; font-weight: 600; }
+    .hero-stats { display: flex; gap: 28px; flex-wrap: wrap; align-items: flex-end; }
+    .hero-stat .num { font-size: 2.4rem; font-weight: 800; line-height: 1; }
+    .hero-stat .lbl { font-size: 0.68rem; font-weight: 600; opacity: 0.65; text-transform: uppercase; letter-spacing: .05em; margin-top: 2px; }
+    .hero-stat .num.green { color: #4ade80; } .hero-stat .num.red { color: #f87171; } .hero-stat .num.purple { color: #c4b5fd; } .hero-stat .num.amber { color: #fbbf24; }
+    .hero-divider { width: 1px; background: rgba(255,255,255,.15); align-self: stretch; }
+    .hero-bar-wrap { margin-top: 20px; }
+    .hero-bar-label { display: flex; justify-content: space-between; font-size: 0.78rem; opacity: 0.75; margin-bottom: 6px; }
+    .hero-bar-bg { height: 8px; background: rgba(255,255,255,.15); border-radius: 999px; overflow: hidden; }
+    .hero-bar-fill { height: 100%; border-radius: 999px; background: linear-gradient(90deg, #4ade80, #22c55e); }
+
+    /* ── Module overview grid ── */
+    .module-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 32px; }
+    .module-card { background: var(--surface); border-radius: 12px; box-shadow: var(--shadow); padding: 20px; border-top: 4px solid; }
+    .module-card.other { border-color: #64748b; }
+    .module-card.sales { border-color:#f59e0b; }
+    .mod-header.sales { background: linear-gradient(90deg, #f8fafc, #f1f5f9); border-left: 5px solid #f59e0b; }
+    .module-card-icon { font-size: 1.6rem; margin-bottom: 8px; }
+    .module-card-name { font-weight: 800; font-size: 1rem; margin-bottom: 2px; }
+    .module-card-sub  { font-size: 0.7rem; color: var(--muted); margin-bottom: 14px; }
+    .module-card-stats { display: flex; gap: 16px; font-size: 0.8rem; }
+    .module-card-stats .p { color: var(--pass); font-weight: 700; } .module-card-stats .s { color: var(--skip); font-weight: 700; }
+    .module-card-stats .f { color: var(--fail); font-weight: 700; } .module-card-stats .t { color: var(--muted); }
+    .module-mini-bar { height: 5px; background: var(--border); border-radius: 999px; overflow: hidden; margin-top: 12px; display: flex; }
+    .module-mini-bar .seg-pass { background: #22c55e; } .module-mini-bar .seg-skip { background: #7c3aed; opacity: .5; }
+    .module-mini-bar .seg-fail { background: #dc2626; opacity: .7; } .module-mini-bar .seg-hist { background: #f59e0b; opacity: .5; }
+
+    /* ── Module section ── */
+    .mod-section { margin-bottom: 48px; }
+    .mod-header { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; padding: 14px 20px; border-radius: 10px; background: #f8fafc; border-left: 5px solid #64748b; }
+    .mod-header.other { background: #f8fafc; border-left-color: #64748b; }
+    .module-card.sales { border-color:#f59e0b; }
+    .mod-header.sales { background: linear-gradient(90deg, #f8fafc, #f1f5f9); border-left: 5px solid #f59e0b; }
+    .mod-header-icon { font-size: 1.5rem; } .mod-header-title { font-size: 1.2rem; font-weight: 800; }
+    .mod-header-meta { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
+    .mod-header-pills { margin-left: auto; display: flex; gap: 8px; flex-wrap: wrap; }
+
+    /* ── Suite header ── */
+    .suite-hdr { display: flex; align-items: center; gap: 10px; margin: 20px 0 10px; padding-bottom: 8px; border-bottom: 2px solid var(--border); flex-wrap: wrap; }
+    .suite-hdr-icon { font-size: 1rem; } .suite-hdr-title { font-size: 0.95rem; font-weight: 700; }
+    .suite-hdr-file { font-size: 0.68rem; font-family: monospace; color: var(--muted); margin-left: auto; }
+
+    /* ── Test rows ── */
+    .test-list { display: flex; flex-direction: column; gap: 5px; margin-bottom: 4px; }
+    .test-row { display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 7px; font-size: 0.82rem; border: 1px solid var(--border); background: var(--surface); flex-wrap: wrap; }
+    .test-row.pass { border-color: var(--pass-border); } .test-row.skip { border-color: var(--skip-border); background: var(--skip-bg); }
+    .test-row.fail { border-color: var(--fail-border); background: var(--fail-bg); } .test-row.hist { border-color: var(--warn-border); background: var(--warn-bg); }
+    .test-row-icon { flex-shrink: 0; font-size: 0.9rem; } .test-row-name { flex: 1; font-weight: 500; min-width: 0; }
+    .test-row-note { font-size: 0.68rem; color: var(--muted); font-style: italic; width: 100%; padding-left: 24px; }
+    .test-row-tags { display: flex; gap: 4px; flex-shrink: 0; }
+
+    /* ── Expandable code snippet ── */
+    .code-snippet { flex-basis: 100%; border-top: 1px dashed var(--border); margin-top: 6px; padding-top: 4px; }
+    .code-snippet summary { cursor: pointer; font-size: 0.68rem; color: var(--info); list-style: none; user-select: none; }
+    .code-snippet summary::-webkit-details-marker { display: none; }
+    .code-snippet summary::before { content: "⟨/⟩ view code"; }
+    .code-snippet[open] summary::before { content: "⟨/⟩ hide code"; }
+    .code-snippet .code { margin-top: 6px; font-size: 0.72rem; max-height: 480px; overflow-y: auto; }
+
+    /* ── Code block ── */
+    .code { font-family: 'Consolas','Monaco',monospace; font-size: 0.78rem; background: #1e2430; color: #e2e8f0; border-radius: 6px; padding: 8px 12px; margin-top: 6px; overflow-x: auto; line-height: 1.6; }
+
+    /* ── Pill / Tag ── */
+    .pill { display: inline-flex; align-items: center; font-size: 0.65rem; font-weight: 700; padding: 2px 8px; border-radius: 999px; }
+    .pill.green  { background: var(--pass-bg); color: var(--pass); border: 1px solid var(--pass-border); }
+    .pill.purple { background: var(--skip-bg); color: var(--skip); border: 1px solid var(--skip-border); }
+    .pill.red    { background: var(--fail-bg); color: var(--fail); border: 1px solid var(--fail-border); }
+    .pill.amber  { background: var(--warn-bg); color: var(--warn); border: 1px solid var(--warn-border); }
+    .pill.blue   { background: var(--info-bg); color: var(--info); border: 1px solid var(--info-border); }
+    .tag { display: inline-block; font-size: 0.62rem; font-weight: 700; padding: 1px 6px; border-radius: 4px; background: var(--bg); color: var(--muted); border: 1px solid var(--border); }
+    .tag.smoke { background: #fef3c7; color: #92400e; border-color: #fde68a; } .tag.rpc   { background: #ede9fe; color: #5b21b6; border-color: #ddd6fe; }
+    .tag.ui    { background: #e0f2fe; color: #0369a1; border-color: #bae6fd; } .tag.saas  { background: #fef9c3; color: #713f12; border-color: #fde047; }
+    .tag.fixed { background: #dcfce7; color: #14532d; border-color: #86efac; }
+
+    /* ── Callout ── */
+    .callout { border-radius: 8px; padding: 12px 16px; font-size: 0.82rem; margin-bottom: 16px; }
+    .callout.saas { background: #f0f9ff; border: 1px solid #bae6fd; color: #0c4a6e; }
+    .callout.info { background: var(--info-bg); border: 1px solid var(--info-border); color: #1e3a8a; }
+    .callout strong { font-weight: 700; }
+
+    /* ── Behaviour box ── */
+    .behaviour-box { background: #f8fafc; border: 1px solid var(--border); border-radius: 8px; padding: 12px 16px; margin-bottom: 14px; font-size: 0.82rem; }
+    .behaviour-box h4 { font-size: 0.78rem; font-weight: 700; margin-bottom: 4px; color: var(--info); }
+
+    /* ── Section ── */
+    .section { margin-bottom: 40px; }
+    .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--border); }
+    .section-icon { font-size: 1.2rem; } .section-title { font-size: 1.1rem; font-weight: 800; }
+
+    /* ── Findings table ── */
+    .findings-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin-bottom: 8px; }
+    .findings-table th { background: #f8fafc; text-align: left; padding: 8px 12px; font-size: 0.66rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); border-bottom: 2px solid var(--border); }
+    .findings-table td { padding: 8px 12px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.4; }
+    .findings-table tr:last-child td { border-bottom: none; } .findings-table tr:hover td { background: #fafbfc; }
+    .finding-pass { color: var(--pass); font-weight: 600; } .finding-skip { color: var(--skip); font-weight: 600; }
+    .finding-info { color: var(--info); font-weight: 600; } .finding-warn { color: var(--warn); font-weight: 600; }
+
+    /* ── Test detail drawer ── */
+    .test-drawer-overlay { position:fixed; inset:0; background:rgba(15,23,42,.45); z-index:200; opacity:0; pointer-events:none; transition:opacity .18s; }
+    .test-drawer-overlay.open { opacity:1; pointer-events:auto; }
+    .test-drawer { position:fixed; top:0; right:0; height:100vh; width:min(560px,92vw); background:var(--surface); z-index:201; box-shadow:-8px 0 30px rgba(0,0,0,.2); transform:translateX(100%); transition:transform .2s ease; display:flex; flex-direction:column; }
+    .test-drawer.open { transform:translateX(0); }
+    .test-drawer-head { padding:20px 24px 16px; border-bottom:1px solid var(--border); display:flex; gap:12px; align-items:flex-start; }
+    .test-drawer-head .icon { font-size:1.3rem; }
+    .test-drawer-title { font-size:1rem; font-weight:800; line-height:1.35; }
+    .test-drawer-meta { font-size:0.72rem; color:var(--muted); margin-top:4px; }
+    .test-drawer-close { margin-left:auto; background:none; border:none; font-size:1.2rem; color:var(--muted); cursor:pointer; line-height:1; padding:4px; }
+    .test-drawer-body { padding:18px 24px 32px; overflow-y:auto; flex:1; }
+    .test-drawer-section { margin-bottom:18px; }
+    .test-drawer-label { font-size:0.66rem; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); margin-bottom:6px; }
+    .failure-reason { background:rgba(239,68,68,.08); border:1px solid rgba(239,68,68,.25); border-radius:6px; padding:12px 14px; font-family:monospace; font-size:0.75rem; line-height:1.6; color:var(--text); white-space:pre-wrap; overflow-x:auto; }
+    .test-row.flash { animation: flash-hl 1.4s ease; }
+    /* ── Security snapshot ── */
+    .snapshot-stats { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin:16px 0 20px; }
+    .snap-stat { background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:14px; text-align:center; }
+    .snap-num { display:block; font-size:1.8rem; font-weight:800; color:var(--text); font-family:monospace; }
+    .snap-stat span:last-child { font-size:0.72rem; color:var(--muted); text-transform:uppercase; letter-spacing:.05em; }
+    .snap-table { width:100%; border-collapse:collapse; font-size:0.82rem; margin-bottom:20px; }
+    .snap-table th { text-align:left; padding:7px 10px; font-size:0.68rem; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); border-bottom:1px solid var(--border); }
+    .snap-table td { padding:7px 10px; border-bottom:1px solid var(--border); }
+    .snap-table tr:last-child td { border-bottom:none; }
+    .snap-section-label { font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); margin:20px 0 8px; }
+    @keyframes flash-hl { 0%,100% { box-shadow:none; } 20% { box-shadow:0 0 0 3px rgba(37,99,235,.35); } }
+
+    footer { text-align: center; padding: 32px; color: var(--muted); font-size: 0.75rem; border-top: 1px solid var(--border); margin-top: 24px; }
+    @media (max-width: 1200px) { .module-grid { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width: 900px)  { .sidebar { display:none; } .main { padding: 20px 16px; } .module-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+<div class="layout">
+
+<nav class="sidebar">
+  <div class="sidebar-brand">
+    <h2>odoo-playwright-tests — Master Report</h2>
+    <p>2026-10-09 · 1 modules</p>
+  </div>
+  <div class="nav-section">
+    <a class="nav-item" href="#top"><span class="nav-dot blue"></span>Dashboard</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-module-label"><span class="mod-dot" style="background:#f59e0b"></span>Sales Module</div>
+    <a class="nav-item" href="#sales-config"><span class="nav-dot green"></span>Config<span class="nav-count">5/5</span></a>
+    <a class="nav-item" href="#sales-business"><span class="nav-dot green"></span>Business<span class="nav-count">4/4</span></a>
+    <a class="nav-item" href="#sales-reporting"><span class="nav-dot amber"></span>Reporting<span class="nav-count skip">0p 1s</span></a>
+    <a class="nav-item" href="#sales-permissions"><span class="nav-dot amber"></span>Permissions<span class="nav-count skip">0p 1s</span></a>
+    <a class="nav-item" href="#sales-validations"><span class="nav-dot red"></span>Field Validations<span class="nav-count">7p 2f 0s</span></a>
+    <a class="nav-item" href="#sales-edge"><span class="nav-dot green"></span>Edge Cases<span class="nav-count">2/2</span></a>
+    <a class="nav-item" href="#sales-archive"><span class="nav-dot amber"></span>Archive<span class="nav-count skip">0p 1s</span></a>
+  </div>
+  <div class="nav-divider"></div>
+  <div class="nav-section">
+    <div class="nav-module-label">Analysis</div>
+    <a class="nav-item" href="#findings">🔬 Odoo Findings</a>
+    <a class="nav-item" href="#skip-analysis">⏭ Skip Analysis</a>
+    <a class="nav-item" href="#coverage">📊 Coverage Matrix</a>
+    <a class="nav-item" href="#security-snapshot">🔒 Security Snapshot</a>
+  </div>
+</nav>
+
+<main class="main" id="top">
+
+  <div class="hero">
+    <div class="hero-top">
+      <div>
+        <div class="hero-title">odoo-playwright-tests — Master E2E Report</div>
+        <div class="hero-sub">1 Modules · 23 tests · 2026-10-09</div>
+      </div>
+      <div class="hero-badge">Auto-generated</div>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="num">1</div><div class="lbl">Modules</div></div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat"><div class="num">23</div><div class="lbl">Total Tests</div></div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat"><div class="num green">18</div><div class="lbl">Passed</div></div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat"><div class="num red">2</div><div class="lbl">Failed</div></div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat"><div class="num purple">3</div><div class="lbl">Skipped (SaaS)</div></div>
+      
+    </div>
+    <div class="hero-bar-wrap">
+      <div class="hero-bar-label"><span>Pass rate (of tests that ran)</span><span>90% · 18/20</span></div>
+      <div class="hero-bar-bg"><div class="hero-bar-fill" style="width:90%"></div></div>
+    </div>
+  </div>
+
+  <div class="module-grid">
+    <div class="module-card sales">
+      <div class="module-card-icon">💼</div>
+      <div class="module-card-name">Sales</div>
+      <div class="module-card-sub">Quotations · Approvals · Validations</div>
+      <div class="module-card-stats">
+        <span class="p">✔ 18</span>
+        <span class="s">⏭ 3</span>
+        <span class="f">❌ 2</span>
+        <span class="t">of 23</span>
+      </div>
+      <div class="module-mini-bar">
+        <div class="seg-pass" style="width:78%"></div>
+        <div class="seg-skip" style="width:13%"></div>
+        <div class="seg-fail" style="width:9%"></div>
+      </div>
+      <div style="font-size:0.68rem;color:var(--muted);margin-top:6px;">7 spec files</div>
+    </div>
+  </div>
+
+
+  <!-- ═══ SALES ═══ -->
+  <div class="mod-section" id="sales">
+    <div class="mod-header sales">
+      <span class="mod-header-icon">💼</span>
+      <div>
+        <div class="mod-header-title">Sales</div>
+        <div class="mod-header-meta">src/modules/sales/ · 7 spec files · 23 tests</div>
+      </div>
+      <div class="mod-header-pills"><span class="pill green">18 passed</span> <span class="pill red">2 failed</span> <span class="pill purple">3 skipped</span></div>
+    </div>
+    
+    
+    <div id="sales-config">
+      <div class="suite-hdr">
+        <span class="suite-hdr-icon">⚙️</span>
+        <span class="suite-hdr-title">Config</span>
+        <span class="pill green">5 passed</span>
+        <span class="suite-hdr-file">sales.config.spec.ts</span>
+      </div>
+      
+      <div class="test-list">
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">opens the Sales app with its Orders menu</span><div class="test-row-tags"><span class="tag smoke">@smoke</span><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('opens the Sales app with its Orders menu @smoke', async ({ page }) =&gt; {
+    const app = new SalesAppPage(page);
+    await app.open();
+    await expect(page.locator('.o_menu_sections').getByText('Orders').first()).toBeVisible();
+  });
+
+  test('switches to the sales company @smoke', async ({ page }) =&gt; {
+    const app = new SalesAppPage(page);
+    await app.open();
+    const result = await app.switchCompany(SALES_MASTER_DATA.company);
+    test.skip(result === 'unavailable', 'No company switcher: this user has access to a single company');
+    await expect(page.locator('.o_switch_company_menu')).toContainText(SALES_MASTER_DATA.company.split(' ')[0]);
+  });
+
+  test('lists quotations or shows the empty state', async ({ page }) =&gt; {
+    const app = new SalesAppPage(page);
+    await app.open();
+    await app.switchCompany(SALES_MASTER_DATA.company);
+    await app.goToQuotations();
+    await expect(
+      page.locator('.o_list_view .o_data_row, .o_view_nocontent, .o_nocontent_help').first(),
+    ).toBeVisible({ timeout: 30_000 });</pre></details></div>
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">switches to the sales company</span><div class="test-row-tags"><span class="tag smoke">@smoke</span><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('switches to the sales company @smoke', async ({ page }) =&gt; {
+    const app = new SalesAppPage(page);
+    await app.open();
+    const result = await app.switchCompany(SALES_MASTER_DATA.company);
+    test.skip(result === 'unavailable', 'No company switcher: this user has access to a single company');
+    await expect(page.locator('.o_switch_company_menu')).toContainText(SALES_MASTER_DATA.company.split(' ')[0]);
+  });
+
+  test('lists quotations or shows the empty state', async ({ page }) =&gt; {
+    const app = new SalesAppPage(page);
+    await app.open();
+    await app.switchCompany(SALES_MASTER_DATA.company);
+    await app.goToQuotations();
+    await expect(
+      page.locator('.o_list_view .o_data_row, .o_view_nocontent, .o_nocontent_help').first(),
+    ).toBeVisible({ timeout: 30_000 });
+  });
+
+  test('opens a blank quotation form with an empty, editable customer @smoke', async ({ page }) =&gt; {
+    const app = new SalesAppPage(page);
+    await app.open();
+    await app.switchCompany(SALES_MASTER_DATA.company);</pre></details></div>
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">lists quotations or shows the empty state</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('lists quotations or shows the empty state', async ({ page }) =&gt; {
+    const app = new SalesAppPage(page);
+    await app.open();
+    await app.switchCompany(SALES_MASTER_DATA.company);
+    await app.goToQuotations();
+    await expect(
+      page.locator('.o_list_view .o_data_row, .o_view_nocontent, .o_nocontent_help').first(),
+    ).toBeVisible({ timeout: 30_000 });
+  });
+
+  test('opens a blank quotation form with an empty, editable customer @smoke', async ({ page }) =&gt; {
+    const app = new SalesAppPage(page);
+    await app.open();
+    await app.switchCompany(SALES_MASTER_DATA.company);
+    await app.goToQuotations();
+    await new QuotationListPage(page).clickNewQuotation();
+
+    const form = new QuotationFormPage(page);
+    await form.waitForNewForm();
+    expect(await form.customerValue()).toBe('');
+  });
+</pre></details></div>
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">opens a blank quotation form with an empty, editable customer</span><div class="test-row-tags"><span class="tag smoke">@smoke</span><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('opens a blank quotation form with an empty, editable customer @smoke', async ({ page }) =&gt; {
+    const app = new SalesAppPage(page);
+    await app.open();
+    await app.switchCompany(SALES_MASTER_DATA.company);
+    await app.goToQuotations();
+    await new QuotationListPage(page).clickNewQuotation();
+
+    const form = new QuotationFormPage(page);
+    await form.waitForNewForm();
+    expect(await form.customerValue()).toBe('');
+  });
+
+  test('has a Minimum Sales Margin configured in Sales settings', async ({ page }) =&gt; {
+    const app = new SalesAppPage(page);
+    await app.open();
+    await app.switchCompany(SALES_MASTER_DATA.company);
+    const margin = await app.readMinimumSalesMargin();
+    test.skip(margin === null, 'Minimum Sales Margin field is not shown in Sales settings for this configuration');
+    expect(margin!).toBeGreaterThan(0);
+  });
+});
+</pre></details></div>
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">has a Minimum Sales Margin configured in Sales settings</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('has a Minimum Sales Margin configured in Sales settings', async ({ page }) =&gt; {
+    const app = new SalesAppPage(page);
+    await app.open();
+    await app.switchCompany(SALES_MASTER_DATA.company);
+    const margin = await app.readMinimumSalesMargin();
+    test.skip(margin === null, 'Minimum Sales Margin field is not shown in Sales settings for this configuration');
+    expect(margin!).toBeGreaterThan(0);
+  });
+});
+</pre></details></div>
+      </div>
+    </div>
+
+    <div id="sales-business">
+      <div class="suite-hdr">
+        <span class="suite-hdr-icon">💼</span>
+        <span class="suite-hdr-title">Business</span>
+        <span class="pill green">4 passed</span>
+        <span class="suite-hdr-file">sales.business.spec.ts</span>
+      </div>
+      
+      <div class="test-list">
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">quotation amounts add up: net, untaxed, VAT and total</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('quotation amounts add up: net, untaxed, VAT and total @e2e', async ({ page }) =&gt; {
+    test.setTimeout(300_000);
+    const app = new SalesAppPage(page);
+    const form = new QuotationFormPage(page);
+
+    // Read the VAT % from Accounting first (it needs the Accounting app).
+    await app.open();
+    await app.switchCompany(D.company);
+    const vatPercent = await app.readTaxPercent(D.salesTax);
+    test.skip(vatPercent === null, `Tax &quot;${D.salesTax}&quot; is not readable in Accounting for this user`);
+
+    await startNewQuotation(app, form, page);
+    await form.fillQuotation({
+      customer: D.customer, quotationType: D.quotationType, salesTeam: D.salesTeam, warehouse: D.warehouse,
+      lines: [
+        { product: D.product1, quantity: 1, discount: 0 },
+        { product: D.product2, quantity: 2, discount: 0 },
+      ],
+    });
+    await form.saveOrThrow(); // commits both rows
+    await form.openTab(/order\s*lines/i);
+    await form.setFirstTaxOnLine(0); // VAT on line 1 only; line 2 stays untaxed</pre></details></div>
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">a line below the minimum margin needs approval and hides Confirm</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('a line below the minimum margin needs approval and hides Confirm @e2e', async ({ page }) =&gt; {
+    test.setTimeout(400_000);
+    const app = new SalesAppPage(page);
+    const form = new QuotationFormPage(page);
+
+    await app.open();
+    await app.switchCompany(D.company);
+    const minMargin = await app.readMinimumSalesMargin();
+    test.skip(minMargin === null, 'Minimum Sales Margin is not available in Sales settings');
+    const cost1 = await app.readProductCost(D.product1);
+    const cost2 = await app.readProductCost(D.product2);
+    test.skip(cost1 === null || cost2 === null, 'Product cost is not readable for this user');
+
+    await startNewQuotation(app, form, page);
+    await form.fillQuotation({
+      customer: D.customer, quotationType: D.quotationType, salesTeam: D.salesTeam, warehouse: D.warehouse,
+      lines: [
+        { product: D.product1, quantity: 1, discount: 0 },
+        { product: D.product2, quantity: 1, discount: 0, unitPrice: BELOW_COST_UNIT_PRICE },
+      ],
+    });
+    await form.saveOrThrow();</pre></details></div>
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">an over-limit sale asks for credit-limit approval and blocks Confirm while pending</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('an over-limit sale asks for credit-limit approval and blocks Confirm while pending @e2e', async ({ page }) =&gt; {
+    test.setTimeout(400_000);
+    const form = await requestOverLimitApproval(page);
+    expect(await form.isButtonVisible(/^confirm$/i, 3_000), 'Confirm must stay hidden while approval is pending').toBe(false);
+
+    // The request must be recorded as pending: waiting on an approver, or actionable by this user.
+    const tooltip = await form.buttonTooltip(/approve.*credit/i);
+    const assignee = await form.pendingActivityAssignee();
+    expect(
+      /waiting for approval/i.test(tooltip) || assignee !== '' || (await form.isButtonVisible(/approve.*credit/i)),
+      'the request should leave an approval pending',
+    ).toBe(true);
+  });
+
+  test('once the credit limit is approved the order can be confirmed @e2e', async ({ page }) =&gt; {
+    test.setTimeout(400_000);
+    const form = await requestOverLimitApproval(page);
+    const approve = form.headerButton(/approve.*credit/i);
+    const assignee = await form.pendingActivityAssignee();
+
+    // The &quot;Waiting for approval&quot; tooltip is shown even to the assigned approver, so it is not a reliable sign
+    // that the signed-in user cannot approve. Just try: click Approve as the signed-in user and see if it clears.</pre></details></div>
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">once the credit limit is approved the order can be confirmed</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('once the credit limit is approved the order can be confirmed @e2e', async ({ page }) =&gt; {
+    test.setTimeout(400_000);
+    const form = await requestOverLimitApproval(page);
+    const approve = form.headerButton(/approve.*credit/i);
+    const assignee = await form.pendingActivityAssignee();
+
+    // The &quot;Waiting for approval&quot; tooltip is shown even to the assigned approver, so it is not a reliable sign
+    // that the signed-in user cannot approve. Just try: click Approve as the signed-in user and see if it clears.
+    await approve.click({ timeout: 30_000 });
+    const approvedBySignedInUser = await approve.waitFor({ state: 'hidden', timeout: 20_000 })
+      .then(() =&gt; true).catch(() =&gt; false);
+
+    if (!approvedBySignedInUser) {
+      // Clicking Approve did nothing: another user must approve. Use their login when one is provided.
+      test.skip(
+        !(APPROVER_LOGIN.email &amp;&amp; APPROVER_LOGIN.password),
+        `Clicking Approve as the signed-in user did nothing (task assigned to ${assignee || 'unknown'}). Only members of the group &quot;Jin - Sales - Credit Limit Approvers&quot; can approve: add this user to that group in Odoo, or set ODOO_APPROVER_EMAIL and ODOO_APPROVER_PASSWORD in .env`,
+      );
+      const recordUrl = form.currentUrl();
+      const approverContext = await page.context().browser()!.newContext();
+      try {
+        const approverPage = await approverContext.newPage();</pre></details></div>
+      </div>
+    </div>
+
+    <div id="sales-reporting">
+      <div class="suite-hdr">
+        <span class="suite-hdr-icon">📋</span>
+        <span class="suite-hdr-title">Reporting</span>
+        <span class="pill purple">1 skipped</span>
+        <span class="suite-hdr-file">sales.reports.spec.ts</span>
+      </div>
+      
+      <div class="test-list">
+        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">placeholder — replace with real reporting tests</span><span class="test-row-note">Not yet implemented: no sales reporting tests exist yet</span><div class="test-row-tags"><span class="tag smoke">@smoke</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('placeholder — replace with real reporting tests @smoke', async () =&gt; {
+    test.skip(true, 'Not yet implemented: no sales reporting tests exist yet');
+  });
+});
+</pre></details></div>
+      </div>
+    </div>
+
+    <div id="sales-permissions">
+      <div class="suite-hdr">
+        <span class="suite-hdr-icon">🔐</span>
+        <span class="suite-hdr-title">Permissions</span>
+        <span class="pill purple">1 skipped</span>
+        <span class="suite-hdr-file">sales.permissions.spec.ts</span>
+      </div>
+      
+      <div class="test-list">
+        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">placeholder — replace with real permission tests</span><span class="test-row-note">Not yet implemented: manager and employee logins are not configured in .env</span><div class="test-row-tags"><span class="tag smoke">@smoke</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('placeholder — replace with real permission tests @smoke', async () =&gt; {
+    test.skip(true, 'Not yet implemented: manager and employee logins are not configured in .env');
+  });
+});
+</pre></details></div>
+      </div>
+    </div>
+
+    <div id="sales-validations">
+      <div class="suite-hdr">
+        <span class="suite-hdr-icon">🧪</span>
+        <span class="suite-hdr-title">Field Validations</span>
+        <span class="pill green">7 passed</span> <span class="pill red">2 failed</span>
+        <span class="suite-hdr-file">sales.validations.spec.ts</span>
+      </div>
+      
+      <div class="test-list">
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">quotation with a blank Customer cannot be saved (step 05.1)</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('quotation with a blank Customer cannot be saved (step 05.1)', async ({ page }) =&gt; checkBlankField(page, blankCase('05.1')));
+  test('quotation with a blank Order Payment Type cannot be saved (step 05.2)', async ({ page }) =&gt; checkBlankField(page, blankCase('05.2')));
+  test('quotation with a blank Quotation Type cannot be saved (step 05.3)', async ({ page }) =&gt; checkBlankField(page, blankCase('05.3')));
+  test('quotation with a blank Payment Terms cannot be saved (step 05.4)', async ({ page }) =&gt; checkBlankField(page, blankCase('05.4')));
+  test('quotation with a blank Salesperson cannot be saved (step 05.5)', async ({ page }) =&gt; checkBlankField(page, blankCase('05.5')));
+  test('quotation with a blank Sales Team cannot be saved (step 05.6)', async ({ page }) =&gt; checkBlankField(page, blankCase('05.6')));
+  test('quotation with a blank Company cannot be saved (step 05.7)', async ({ page }) =&gt; checkBlankField(page, blankCase('05.7')));
+  test('quotation with a blank Warehouse cannot be saved (step 05.8)', async ({ page }) =&gt; checkBlankField(page, blankCase('05.8')));
+
+  test('a distributor customer needs both Bank Guarantee amount and expiry date', async ({ page }) =&gt; {
+    test.setTimeout(420_000);
+    const app = new SalesAppPage(page);
+    const customer = new CustomerFormPage(page);
+
+    await app.open();
+    await app.switchCompany(D.company);
+    await app.goToCustomers();
+    await app.searchAndOpen(D.customer);
+    await customer.setCustomerGroup(D.distributorGroup);
+    await customer.openBankGuaranteeTab();
+
+    const amount = await customer.bankGuaranteeAmountInput();</pre></details></div>
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">quotation with a blank Order Payment Type cannot be saved (step 05.2)</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('quotation with a blank Order Payment Type cannot be saved (step 05.2)', async ({ page }) =&gt; checkBlankField(page, blankCase('05.2')));
+  test('quotation with a blank Quotation Type cannot be saved (step 05.3)', async ({ page }) =&gt; checkBlankField(page, blankCase('05.3')));
+  test('quotation with a blank Payment Terms cannot be saved (step 05.4)', async ({ page }) =&gt; checkBlankField(page, blankCase('05.4')));
+  test('quotation with a blank Salesperson cannot be saved (step 05.5)', async ({ page }) =&gt; checkBlankField(page, blankCase('05.5')));
+  test('quotation with a blank Sales Team cannot be saved (step 05.6)', async ({ page }) =&gt; checkBlankField(page, blankCase('05.6')));
+  test('quotation with a blank Company cannot be saved (step 05.7)', async ({ page }) =&gt; checkBlankField(page, blankCase('05.7')));
+  test('quotation with a blank Warehouse cannot be saved (step 05.8)', async ({ page }) =&gt; checkBlankField(page, blankCase('05.8')));
+
+  test('a distributor customer needs both Bank Guarantee amount and expiry date', async ({ page }) =&gt; {
+    test.setTimeout(420_000);
+    const app = new SalesAppPage(page);
+    const customer = new CustomerFormPage(page);
+
+    await app.open();
+    await app.switchCompany(D.company);
+    await app.goToCustomers();
+    await app.searchAndOpen(D.customer);
+    await customer.setCustomerGroup(D.distributorGroup);
+    await customer.openBankGuaranteeTab();
+
+    const amount = await customer.bankGuaranteeAmountInput();
+    const expiry = await customer.bankGuaranteeExpiryInput();</pre></details></div>
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">quotation with a blank Quotation Type cannot be saved (step 05.3)</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('quotation with a blank Quotation Type cannot be saved (step 05.3)', async ({ page }) =&gt; checkBlankField(page, blankCase('05.3')));
+  test('quotation with a blank Payment Terms cannot be saved (step 05.4)', async ({ page }) =&gt; checkBlankField(page, blankCase('05.4')));
+  test('quotation with a blank Salesperson cannot be saved (step 05.5)', async ({ page }) =&gt; checkBlankField(page, blankCase('05.5')));
+  test('quotation with a blank Sales Team cannot be saved (step 05.6)', async ({ page }) =&gt; checkBlankField(page, blankCase('05.6')));
+  test('quotation with a blank Company cannot be saved (step 05.7)', async ({ page }) =&gt; checkBlankField(page, blankCase('05.7')));
+  test('quotation with a blank Warehouse cannot be saved (step 05.8)', async ({ page }) =&gt; checkBlankField(page, blankCase('05.8')));
+
+  test('a distributor customer needs both Bank Guarantee amount and expiry date', async ({ page }) =&gt; {
+    test.setTimeout(420_000);
+    const app = new SalesAppPage(page);
+    const customer = new CustomerFormPage(page);
+
+    await app.open();
+    await app.switchCompany(D.company);
+    await app.goToCustomers();
+    await app.searchAndOpen(D.customer);
+    await customer.setCustomerGroup(D.distributorGroup);
+    await customer.openBankGuaranteeTab();
+
+    const amount = await customer.bankGuaranteeAmountInput();
+    const expiry = await customer.bankGuaranteeExpiryInput();
+    await expect(amount).toBeVisible();</pre></details></div>
+        <div class="test-row fail" data-error="Error: Odoo saved the quotation although Payment Terms was emptied. On the saved quotation the field shows &quot;(empty)&quot; — it was saved blank.
+
+expect(received).toBe(expected) // Object.is equality
+
+Expected: true
+Received: false
+    at checkBlankField (C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\05-validations\sales.validations.spec.ts:91:11)"><span class="test-row-icon">❌</span><span class="test-row-name">quotation with a blank Payment Terms cannot be saved (step 05.4)</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('quotation with a blank Payment Terms cannot be saved (step 05.4)', async ({ page }) =&gt; checkBlankField(page, blankCase('05.4')));
+  test('quotation with a blank Salesperson cannot be saved (step 05.5)', async ({ page }) =&gt; checkBlankField(page, blankCase('05.5')));
+  test('quotation with a blank Sales Team cannot be saved (step 05.6)', async ({ page }) =&gt; checkBlankField(page, blankCase('05.6')));
+  test('quotation with a blank Company cannot be saved (step 05.7)', async ({ page }) =&gt; checkBlankField(page, blankCase('05.7')));
+  test('quotation with a blank Warehouse cannot be saved (step 05.8)', async ({ page }) =&gt; checkBlankField(page, blankCase('05.8')));
+
+  test('a distributor customer needs both Bank Guarantee amount and expiry date', async ({ page }) =&gt; {
+    test.setTimeout(420_000);
+    const app = new SalesAppPage(page);
+    const customer = new CustomerFormPage(page);
+
+    await app.open();
+    await app.switchCompany(D.company);
+    await app.goToCustomers();
+    await app.searchAndOpen(D.customer);
+    await customer.setCustomerGroup(D.distributorGroup);
+    await customer.openBankGuaranteeTab();
+
+    const amount = await customer.bankGuaranteeAmountInput();
+    const expiry = await customer.bankGuaranteeExpiryInput();
+    await expect(amount).toBeVisible();
+    await expect(expiry).toBeVisible();</pre></details></div>
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">quotation with a blank Salesperson cannot be saved (step 05.5)</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('quotation with a blank Salesperson cannot be saved (step 05.5)', async ({ page }) =&gt; checkBlankField(page, blankCase('05.5')));
+  test('quotation with a blank Sales Team cannot be saved (step 05.6)', async ({ page }) =&gt; checkBlankField(page, blankCase('05.6')));
+  test('quotation with a blank Company cannot be saved (step 05.7)', async ({ page }) =&gt; checkBlankField(page, blankCase('05.7')));
+  test('quotation with a blank Warehouse cannot be saved (step 05.8)', async ({ page }) =&gt; checkBlankField(page, blankCase('05.8')));
+
+  test('a distributor customer needs both Bank Guarantee amount and expiry date', async ({ page }) =&gt; {
+    test.setTimeout(420_000);
+    const app = new SalesAppPage(page);
+    const customer = new CustomerFormPage(page);
+
+    await app.open();
+    await app.switchCompany(D.company);
+    await app.goToCustomers();
+    await app.searchAndOpen(D.customer);
+    await customer.setCustomerGroup(D.distributorGroup);
+    await customer.openBankGuaranteeTab();
+
+    const amount = await customer.bankGuaranteeAmountInput();
+    const expiry = await customer.bankGuaranteeExpiryInput();
+    await expect(amount).toBeVisible();
+    await expect(expiry).toBeVisible();
+    const { year, month, day } = SALES_BANK_GUARANTEE_EXPIRY_VALID;</pre></details></div>
+        <div class="test-row fail" data-error="Error: Odoo saved the quotation although Sales Team was emptied. On the saved quotation the field shows &quot;(empty)&quot; — it was saved blank.
+
+expect(received).toBe(expected) // Object.is equality
+
+Expected: true
+Received: false
+    at checkBlankField (C:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\05-validations\sales.validations.spec.ts:91:11)"><span class="test-row-icon">❌</span><span class="test-row-name">quotation with a blank Sales Team cannot be saved (step 05.6)</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('quotation with a blank Sales Team cannot be saved (step 05.6)', async ({ page }) =&gt; checkBlankField(page, blankCase('05.6')));
+  test('quotation with a blank Company cannot be saved (step 05.7)', async ({ page }) =&gt; checkBlankField(page, blankCase('05.7')));
+  test('quotation with a blank Warehouse cannot be saved (step 05.8)', async ({ page }) =&gt; checkBlankField(page, blankCase('05.8')));
+
+  test('a distributor customer needs both Bank Guarantee amount and expiry date', async ({ page }) =&gt; {
+    test.setTimeout(420_000);
+    const app = new SalesAppPage(page);
+    const customer = new CustomerFormPage(page);
+
+    await app.open();
+    await app.switchCompany(D.company);
+    await app.goToCustomers();
+    await app.searchAndOpen(D.customer);
+    await customer.setCustomerGroup(D.distributorGroup);
+    await customer.openBankGuaranteeTab();
+
+    const amount = await customer.bankGuaranteeAmountInput();
+    const expiry = await customer.bankGuaranteeExpiryInput();
+    await expect(amount).toBeVisible();
+    await expect(expiry).toBeVisible();
+    const { year, month, day } = SALES_BANK_GUARANTEE_EXPIRY_VALID;
+    const validDate = await customer.futureDateFor(expiry, year, month, day);</pre></details></div>
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">quotation with a blank Company cannot be saved (step 05.7)</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('quotation with a blank Company cannot be saved (step 05.7)', async ({ page }) =&gt; checkBlankField(page, blankCase('05.7')));
+  test('quotation with a blank Warehouse cannot be saved (step 05.8)', async ({ page }) =&gt; checkBlankField(page, blankCase('05.8')));
+
+  test('a distributor customer needs both Bank Guarantee amount and expiry date', async ({ page }) =&gt; {
+    test.setTimeout(420_000);
+    const app = new SalesAppPage(page);
+    const customer = new CustomerFormPage(page);
+
+    await app.open();
+    await app.switchCompany(D.company);
+    await app.goToCustomers();
+    await app.searchAndOpen(D.customer);
+    await customer.setCustomerGroup(D.distributorGroup);
+    await customer.openBankGuaranteeTab();
+
+    const amount = await customer.bankGuaranteeAmountInput();
+    const expiry = await customer.bankGuaranteeExpiryInput();
+    await expect(amount).toBeVisible();
+    await expect(expiry).toBeVisible();
+    const { year, month, day } = SALES_BANK_GUARANTEE_EXPIRY_VALID;
+    const validDate = await customer.futureDateFor(expiry, year, month, day);
+</pre></details></div>
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">quotation with a blank Warehouse cannot be saved (step 05.8)</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('quotation with a blank Warehouse cannot be saved (step 05.8)', async ({ page }) =&gt; checkBlankField(page, blankCase('05.8')));
+
+  test('a distributor customer needs both Bank Guarantee amount and expiry date', async ({ page }) =&gt; {
+    test.setTimeout(420_000);
+    const app = new SalesAppPage(page);
+    const customer = new CustomerFormPage(page);
+
+    await app.open();
+    await app.switchCompany(D.company);
+    await app.goToCustomers();
+    await app.searchAndOpen(D.customer);
+    await customer.setCustomerGroup(D.distributorGroup);
+    await customer.openBankGuaranteeTab();
+
+    const amount = await customer.bankGuaranteeAmountInput();
+    const expiry = await customer.bankGuaranteeExpiryInput();
+    await expect(amount).toBeVisible();
+    await expect(expiry).toBeVisible();
+    const { year, month, day } = SALES_BANK_GUARANTEE_EXPIRY_VALID;
+    const validDate = await customer.futureDateFor(expiry, year, month, day);
+
+    try {</pre></details></div>
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">a distributor customer needs both Bank Guarantee amount and expiry date</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('a distributor customer needs both Bank Guarantee amount and expiry date', async ({ page }) =&gt; {
+    test.setTimeout(420_000);
+    const app = new SalesAppPage(page);
+    const customer = new CustomerFormPage(page);
+
+    await app.open();
+    await app.switchCompany(D.company);
+    await app.goToCustomers();
+    await app.searchAndOpen(D.customer);
+    await customer.setCustomerGroup(D.distributorGroup);
+    await customer.openBankGuaranteeTab();
+
+    const amount = await customer.bankGuaranteeAmountInput();
+    const expiry = await customer.bankGuaranteeExpiryInput();
+    await expect(amount).toBeVisible();
+    await expect(expiry).toBeVisible();
+    const { year, month, day } = SALES_BANK_GUARANTEE_EXPIRY_VALID;
+    const validDate = await customer.futureDateFor(expiry, year, month, day);
+
+    try {
+      await test.step('amount blank, expiry date filled', async () =&gt; {
+        await customer.setInput(amount, '0');</pre></details></div>
+      </div>
+    </div>
+
+    <div id="sales-edge">
+      <div class="suite-hdr">
+        <span class="suite-hdr-icon">⚡</span>
+        <span class="suite-hdr-title">Edge Cases</span>
+        <span class="pill green">2 passed</span>
+        <span class="suite-hdr-file">sales.edge-cases.spec.ts</span>
+      </div>
+      
+      <div class="test-list">
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">a zero-quantity order line cannot be confirmed (step 06.00)</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('a zero-quantity order line cannot be confirmed (step 06.00)', async ({ page }) =&gt; {
+    test.setTimeout(240_000);
+    await expectConfirmBlocked(page, [{ product: D.product1, quantity: 0, discount: 10 }]);
+  });
+
+  test('a zero-unit-price order line cannot be confirmed (step 06.01)', async ({ page }) =&gt; {
+    test.setTimeout(240_000);
+    await expectConfirmBlocked(page, [
+      { product: D.product1, quantity: 1, discount: 10 },
+      { product: D.product1, quantity: 1, discount: 10, unitPrice: 0 },
+    ]);
+  });
+});
+</pre></details></div>
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">a zero-unit-price order line cannot be confirmed (step 06.01)</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('a zero-unit-price order line cannot be confirmed (step 06.01)', async ({ page }) =&gt; {
+    test.setTimeout(240_000);
+    await expectConfirmBlocked(page, [
+      { product: D.product1, quantity: 1, discount: 10 },
+      { product: D.product1, quantity: 1, discount: 10, unitPrice: 0 },
+    ]);
+  });
+});
+</pre></details></div>
+      </div>
+    </div>
+
+    <div id="sales-archive">
+      <div class="suite-hdr">
+        <span class="suite-hdr-icon">🗄️</span>
+        <span class="suite-hdr-title">Archive</span>
+        <span class="pill purple">1 skipped</span>
+        <span class="suite-hdr-file">sales.archive.spec.ts</span>
+      </div>
+      
+      <div class="test-list">
+        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">placeholder — replace with real archive tests</span><span class="test-row-note">Not yet implemented: quotations are not archived by the tests yet</span><div class="test-row-tags"><span class="tag smoke">@smoke</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('placeholder — replace with real archive tests @smoke', async () =&gt; {
+    test.skip(true, 'Not yet implemented: quotations are not archived by the tests yet');
+  });
+});
+</pre></details></div>
+      </div>
+    </div>
+  </div>
+
+  <section class="section" id="findings">
+    <div class="section-header">
+      <span class="section-icon">🔬</span>
+      <span class="section-title">Odoo Behaviour Findings — All Modules</span>
+    </div>
+    <div class="behaviour-box">
+      <h4>About</h4>
+      Observed Odoo 17 behaviours discovered during test development across all modules. Deviations from expected defaults, version differences, and SaaS-specific constraints worth documenting.
+    </div>
+    <table class="findings-table">
+      <thead>
+        <tr><th>#</th><th>Module</th><th>Finding</th><th>Detail</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr><td colspan="5" style="color:var(--muted);font-style:italic;">No findings data — edit scripts/report-data/findings.json to add rows.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="section" id="skip-analysis">
+    <div class="section-header">
+      <span class="section-icon">⏭</span>
+      <span class="section-title">Skip Analysis — Deliberate Skips</span>
+    </div>
+    <div class="behaviour-box">
+      <h4>Coverage Integrity</h4>
+      All skips are deliberate responses to SaaS environment constraints — not gaps in tested functionality. Zero tests were skipped due to missing module features.
+    </div>
+    <table class="findings-table">
+      <thead>
+        <tr><th>Module</th><th>Skipped Tests</th><th>Root Cause</th><th>Alternative Coverage</th></tr>
+      </thead>
+      <tbody>
+        <tr><td colspan="4" style="color:var(--muted);font-style:italic;">No skip analysis data — edit scripts/report-data/skip-analysis.json to add rows.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="section" id="coverage">
+    <div class="section-header">
+      <span class="section-icon">📊</span>
+      <span class="section-title">Coverage Matrix</span>
+    </div>
+    <div class="behaviour-box">
+      <h4>No coverage data</h4>
+      Edit <code>scripts/report-data/coverage.json</code> to populate the coverage matrix.
+      Shape: <code>{ "columns": ["Module A"], "rows": [{ "cap": "Create via UI", "cells": ["pass"] }] }</code>
+    </div>
+    <table class="findings-table">
+      <thead><tr><th>Capability</th><th>Sales</th></tr></thead>
+      <tbody>
+        <tr><td colspan="2" style="color:var(--muted);font-style:italic;">No rows — add data to coverage.json</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+
+
+</main>
+</div>
+
+<footer>
+  odoo-playwright-tests · Odoo 17 · Master Report · Generated 2026-10-09 · Sales
+</footer>
+
+<script>
+  // IntersectionObserver for sidebar active highlight
+  const navItems = document.querySelectorAll('.nav-item[href^="#"]');
+  const headings = document.querySelectorAll('[id]');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navItems.forEach(a => a.classList.remove('active'));
+        const active = document.querySelector(`.nav-item[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+  headings.forEach(h => observer.observe(h));
+</script>
+
+<!-- ════════════════ SIDEBAR DRILL-DOWN + TEST DETAIL DRAWER ════════════════ -->
+<script>
+(function(){
+  const sidebar = document.querySelector('.sidebar');
+  let testCounter = 0;
+
+  function statusOf(row){
+    if (row.classList.contains('fail')) return 'fail';
+    if (row.classList.contains('skip')) return 'skip';
+    if (row.classList.contains('hist')) return 'hist';
+    return 'pass';
+  }
+  const statusLabel = { pass:'Passed', skip:'Skipped', fail:'Failed', hist:'Flaky — Fixed' };
+  const statusIcon  = { pass:'✅', skip:'⏭', fail:'❌', hist:'🛠' };
+  const statusPill  = { pass:'green', skip:'purple', fail:'red', hist:'amber' };
+
+  const overlay = document.createElement('div');
+  overlay.className = 'test-drawer-overlay';
+  const drawer = document.createElement('div');
+  drawer.className = 'test-drawer';
+  drawer.innerHTML =
+    '<div class="test-drawer-head">' +
+      '<span class="icon" id="td-icon"></span>' +
+      '<div style="flex:1; min-width:0;">' +
+        '<div class="test-drawer-title" id="td-title"></div>' +
+        '<div class="test-drawer-meta" id="td-meta"></div>' +
+      '</div>' +
+      '<button class="test-drawer-close" id="td-close" aria-label="Close">×</button>' +
+    '</div>' +
+    '<div class="test-drawer-body" id="td-body"></div>';
+  document.body.appendChild(overlay);
+  document.body.appendChild(drawer);
+
+  function closeDrawer(){ overlay.classList.remove('open'); drawer.classList.remove('open'); }
+  overlay.addEventListener('click', closeDrawer);
+  drawer.querySelector('#td-close').addEventListener('click', closeDrawer);
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeDrawer(); });
+
+  function escapeHtml(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+
+  function openDrawerFor(row, suiteTitle, suiteFile){
+    const status = statusOf(row);
+    const name = (row.querySelector('.test-row-name') || {}).textContent || 'Untitled test';
+    const note = row.querySelector('.test-row-note');
+    const tags = Array.from(row.querySelectorAll('.test-row-tags .tag')).map(function(t){ return t.outerHTML; }).join(' ');
+    const codeEl = row.querySelector('.code-snippet pre.code');
+
+    document.getElementById('td-icon').textContent = statusIcon[status];
+    document.getElementById('td-title').textContent = name.trim();
+    document.getElementById('td-meta').innerHTML = (suiteTitle ? escapeHtml(suiteTitle) + ' · ' : '') + (suiteFile ? '<span style="font-family:monospace">' + escapeHtml(suiteFile) + '</span>' : '');
+
+    const errorMsg = row.getAttribute('data-error') || '';
+    let body = '<div class="test-drawer-section"><div class="test-drawer-label">Status</div><span class="pill ' + statusPill[status] + '">' + statusLabel[status] + '</span></div>';
+    if (tags) body += '<div class="test-drawer-section"><div class="test-drawer-label">Tags</div>' + tags + '</div>';
+    if (errorMsg) body += '<div class="test-drawer-section"><div class="test-drawer-label">Failure reason</div><div class="failure-reason">' + escapeHtml(errorMsg) + '</div></div>';
+    if (note) body += '<div class="test-drawer-section"><div class="test-drawer-label">Note</div><div class="callout info">' + escapeHtml(note.textContent.trim()) + '</div></div>';
+    if (codeEl) body += '<div class="test-drawer-section"><div class="test-drawer-label">Test source</div><pre class="code" style="max-height:none;">' + escapeHtml(codeEl.textContent.trim()) + '</pre></div>';
+    document.getElementById('td-body').innerHTML = body;
+
+    overlay.classList.add('open');
+    drawer.classList.add('open');
+  }
+
+  sidebar.querySelectorAll('.nav-item[href^="#"]').forEach(function(navItem){
+    const id = navItem.getAttribute('href').slice(1);
+    if (id === 'top') return;
+    const target = document.getElementById(id);
+    if (!target) return;
+    const rows = target.querySelectorAll('.test-row');
+    if (!rows.length) return;
+
+    const toggle = document.createElement('span');
+    toggle.className = 'nav-toggle';
+    toggle.textContent = '▸';
+    navItem.insertBefore(toggle, navItem.firstChild);
+
+    const childWrap = document.createElement('div');
+    childWrap.className = 'nav-children';
+
+    let currentTitle = null, currentFile = null;
+    Array.from(target.children).forEach(function(child){
+      if (child.classList.contains('suite-hdr')) {
+        const t = child.querySelector('.suite-hdr-title');
+        const f = child.querySelector('.suite-hdr-file');
+        currentTitle = t ? t.textContent.trim() : null;
+        currentFile  = f ? f.textContent.trim() : null;
+      } else if (child.classList.contains('test-list')) {
+        const groupRows = Array.from(child.querySelectorAll('.test-row'));
+        if (!groupRows.length) return;
+        if (currentTitle) {
+          const label = document.createElement('div');
+          label.className = 'nav-group-label';
+          label.textContent = currentTitle;
+          childWrap.appendChild(label);
+        }
+        const title = currentTitle, file = currentFile;
+        groupRows.forEach(function(row){
+          testCounter++;
+          if (!row.id) row.id = 'test-' + testCounter;
+          const st = statusOf(row);
+          const nameEl = row.querySelector('.test-row-name');
+          const name = nameEl ? nameEl.textContent.trim() : 'Untitled test';
+          const sub = document.createElement('div');
+          sub.className = 'nav-subitem';
+          sub.title = name;
+          sub.innerHTML = '<span class="nav-subdot ' + st + '"></span><span class="lbl">' + escapeHtml(name) + '</span>';
+          sub.addEventListener('click', function(){
+            const rect = row.getBoundingClientRect();
+            window.scrollTo({ top: window.pageYOffset + rect.top - 100, behavior: 'smooth' });
+            row.classList.remove('flash');
+            void row.offsetWidth;
+            row.classList.add('flash');
+            openDrawerFor(row, title, file);
+          });
+          childWrap.appendChild(sub);
+          row.style.cursor = 'pointer';
+          row.addEventListener('click', function(e){
+            if (e.target.closest('.code-snippet')) return;
+            openDrawerFor(row, title, file);
+          });
+        });
+      }
+    });
+
+    navItem.parentNode.insertBefore(childWrap, navItem.nextSibling);
+
+    function toggleChildren(){
+      const isOpen = childWrap.classList.toggle('open');
+      toggle.classList.toggle('open', isOpen);
+    }
+    toggle.addEventListener('click', function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      toggleChildren();
+    });
+    navItem.addEventListener('click', function(){
+      if (!childWrap.classList.contains('open')) toggleChildren();
+    });
+  });
+})();
+</script>
+</body>
+</html>
