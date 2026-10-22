@@ -16,6 +16,15 @@ TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 TEMP_DIR="/tmp/claude_hooks"
 mkdir -p "$TEMP_DIR"
 
+# Background-task notifications also arrive as "prompts". Do not let them replace
+# the user's real prompt (it feeds the commit message); just start a fresh turn.
+case "$PROMPT" in
+  "<task-notification>"*)
+    rm -f "$TEMP_DIR/files_${SESSION_ID}.txt"
+    exit 0
+    ;;
+esac
+
 echo "$PROMPT"    > "$TEMP_DIR/prompt_${SESSION_ID}.txt"
 echo "$TIMESTAMP" > "$TEMP_DIR/timestamp_${SESSION_ID}.txt"
 

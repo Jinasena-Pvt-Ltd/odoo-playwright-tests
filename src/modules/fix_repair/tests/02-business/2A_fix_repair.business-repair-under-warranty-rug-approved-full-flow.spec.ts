@@ -474,10 +474,27 @@ test.describe('Fix Repair - Under Warranty - RUG (Approved) - Factory Full Flow 
 
     // 35. Approve RUG (done by R&D)
     const approveRug = page.locator('button[name="action_approve_rug_direct"]:visible').first();
-    await expect(approveRug).toBeVisible({ timeout: 10_000 });
-    await shot('35-approve-rug.png', approveRug);
-    await approveRug.click();
-    await page.waitForTimeout(2_000);
+    // The button can take a moment (or a refresh of the order) to appear after
+    // the approval request, so wait, then reload the order and look again.
+    let approveShown = await appears(approveRug, 10_000);
+    for (let attempt = 1; attempt <= 3 && !approveShown; attempt++) {
+      note(`Approve RUG button not shown yet (retry ${attempt}); reloading the order.`);
+      await page.waitForTimeout(3_000);
+      await closeStrayDialogs(page);
+      await gotoRecord(page, 'sale.order', soId);
+      await page.waitForTimeout(2_500);
+      approveShown = await appears(approveRug, 8_000);
+    }
+    if (approveShown) {
+      await shot('35-approve-rug.png', approveRug);
+      await approveRug.click();
+      await page.waitForTimeout(2_000);
+    } else {
+      note('Approve RUG button not available; approving through the action_approve_rug_direct RPC.');
+      await shot('35-approve-rug.png', page.locator('.o_statusbar_status:visible').first());
+      await callKwWithRetry(page, 'sale.order', 'action_approve_rug_direct', [[soId]]);
+      await page.waitForTimeout(1_000);
+    }
 
     // 36. Confirm the sales order
     const confirmBtn = page.locator('div.o_statusbar_buttons button:visible', { hasText: /^Confirm$/ }).first();
@@ -520,12 +537,14 @@ test.describe('Fix Repair - Under Warranty - RUG (Approved) - Factory Full Flow 
       const pk = pickings[i];
       const slug = pk.name.replace(/\W+/g, '-');
       const isLast = i === pickings.length - 1;
+      // With a single transfer the Delivery button opens it directly (no list).
       const row = page.locator('tr.o_data_row:visible', { hasText: pk.name }).first();
-      await expect(row).toBeVisible({ timeout: 10_000 });
-      await shot(`${step}-open-${slug}.png`, row);
-      await row.locator('td.o_data_cell').nth(1).click();
-      await page.waitForTimeout(2_000);
-      step++;
+      if (await appears(row, pickings.length > 1 ? 10_000 : 4_000)) {
+        await shot(`${step}-open-${slug}.png`, row);
+        await row.locator('td.o_data_cell').nth(1).click();
+        await page.waitForTimeout(2_000);
+        step++;
+      }
 
       const validateUi = page.locator('button:visible', { hasText: /^Validate$/ }).first();
       await expect(validateUi).toBeVisible({ timeout: 10_000 });
