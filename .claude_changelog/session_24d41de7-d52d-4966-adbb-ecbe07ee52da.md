@@ -60,3 +60,20 @@ after study this tour,create the test cases.save it in tests folder.
 - Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\flows\flowHelpers.ts
 - Write: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\02-business\sales.credit-serial.spec.ts
 
+
+---
+
+## Change -- 2026-10-22T07:14:12Z
+
+**Prompt:**
+```
+yes i want more tast cases.i'll added some prieviouse test cases.guide it and create new professional test cases for me
+```
+
+**Files touched:**
+- Write: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\calculations\SalesCalculations.ts
+- Write: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\flows\quotationCleanup.ts
+- Write: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\05-validations\sales.quotation-validations.spec.ts
+- Write: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\02-business\sales.quotation-calculations.spec.ts
+- Write: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\06-edge-cases\sales.credit-control.spec.ts
+

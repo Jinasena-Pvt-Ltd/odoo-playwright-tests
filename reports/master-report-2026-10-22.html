@@ -193,11 +193,11 @@
   <div class="nav-section">
     <div class="nav-module-label"><span class="mod-dot" style="background:#64748b"></span>sales</div>
     <a class="nav-item" href="#sales-config"><span class="nav-dot amber"></span>Config<span class="nav-count skip">0p 1s</span></a>
-    <a class="nav-item" href="#sales-business"><span class="nav-dot amber"></span>Business<span class="nav-count skip">0p 8s</span></a>
+    <a class="nav-item" href="#sales-business"><span class="nav-dot amber"></span>Business<span class="nav-count skip">0p 9s</span></a>
     <a class="nav-item" href="#sales-reporting"><span class="nav-dot amber"></span>Reporting<span class="nav-count skip">0p 1s</span></a>
     <a class="nav-item" href="#sales-permissions"><span class="nav-dot amber"></span>Permissions<span class="nav-count skip">0p 1s</span></a>
-    <a class="nav-item" href="#sales-validations"><span class="nav-dot amber"></span>Field Validations<span class="nav-count skip">0p 1s</span></a>
-    <a class="nav-item" href="#sales-edge"><span class="nav-dot amber"></span>Edge Cases<span class="nav-count skip">0p 1s</span></a>
+    <a class="nav-item" href="#sales-validations"><span class="nav-dot amber"></span>Field Validations<span class="nav-count skip">0p 3s</span></a>
+    <a class="nav-item" href="#sales-edge"><span class="nav-dot amber"></span>Edge Cases<span class="nav-count skip">0p 4s</span></a>
     <a class="nav-item" href="#sales-archive"><span class="nav-dot amber"></span>Archive<span class="nav-count skip">0p 1s</span></a>
   </div>
   <div class="nav-divider"></div>
@@ -216,21 +216,21 @@
     <div class="hero-top">
       <div>
         <div class="hero-title">odoo-playwright-tests — Master E2E Report</div>
-        <div class="hero-sub">1 Modules · 14 tests · 2026-10-22</div>
+        <div class="hero-sub">1 Modules · 20 tests · 2026-10-22</div>
       </div>
       <div class="hero-badge">Auto-generated</div>
     </div>
     <div class="hero-stats">
       <div class="hero-stat"><div class="num">1</div><div class="lbl">Modules</div></div>
       <div class="hero-divider"></div>
-      <div class="hero-stat"><div class="num">14</div><div class="lbl">Total Tests</div></div>
+      <div class="hero-stat"><div class="num">20</div><div class="lbl">Total Tests</div></div>
       <div class="hero-divider"></div>
       <div class="hero-stat"><div class="num green">0</div><div class="lbl">Passed</div></div>
       <div class="hero-divider"></div>
       <div class="hero-stat"><div class="num red">0</div><div class="lbl">Failed</div></div>
       <div class="hero-divider"></div>
-      <div class="hero-stat"><div class="num purple">7</div><div class="lbl">Skipped (SaaS)</div></div>
-      <div class="hero-divider"></div><div class="hero-stat"><div class="num amber">7</div><div class="lbl">Pending</div></div>
+      <div class="hero-stat"><div class="num purple">11</div><div class="lbl">Skipped (SaaS)</div></div>
+      <div class="hero-divider"></div><div class="hero-stat"><div class="num amber">9</div><div class="lbl">Pending</div></div>
     </div>
     <div class="hero-bar-wrap">
       <div class="hero-bar-label"><span>Pass rate (of tests that ran)</span><span>0% · 0/0</span></div>
@@ -245,16 +245,16 @@
       <div class="module-card-sub"></div>
       <div class="module-card-stats">
         <span class="p">✔ 0</span>
-        <span class="s">⏭ 7</span>
+        <span class="s">⏭ 11</span>
         
-        <span class="t">of 14</span>
+        <span class="t">of 20</span>
       </div>
       <div class="module-mini-bar">
         <div class="seg-pass" style="width:0%"></div>
-        <div class="seg-skip" style="width:50%"></div>
+        <div class="seg-skip" style="width:55%"></div>
         <div class="seg-fail" style="width:0%"></div>
       </div>
-      <div style="font-size:0.68rem;color:var(--muted);margin-top:6px;">9 spec files</div>
+      <div style="font-size:0.68rem;color:var(--muted);margin-top:6px;">12 spec files</div>
     </div>
   </div>
 
@@ -265,9 +265,9 @@
       <span class="mod-header-icon">📦</span>
       <div>
         <div class="mod-header-title">sales</div>
-        <div class="mod-header-meta">src/modules/sales/ · 9 spec files · 14 tests</div>
+        <div class="mod-header-meta">src/modules/sales/ · 12 spec files · 20 tests</div>
       </div>
-      <div class="mod-header-pills"><span class="pill purple">7 skipped</span> <span class="pill amber">7 pending</span></div>
+      <div class="mod-header-pills"><span class="pill purple">11 skipped</span> <span class="pill amber">9 pending</span></div>
     </div>
     
     
@@ -305,8 +305,8 @@
       <div class="suite-hdr">
         <span class="suite-hdr-icon">💼</span>
         <span class="suite-hdr-title">Business</span>
-        <span class="pill purple">1 skipped</span> <span class="pill amber">7 pending</span>
-        <span class="suite-hdr-file">3 files</span>
+        <span class="pill purple">1 skipped</span> <span class="pill amber">8 pending</span>
+        <span class="suite-hdr-file">4 files</span>
       </div>
       
       <div class="suite-hdr" style="margin-top:4px;">
@@ -505,6 +505,36 @@
         const c = { group: label, flow: 'Cash' };
         let orderUrl = '';</pre></details></div>
       </div>
+      <div class="suite-hdr" style="margin-top:16px;">
+        <span class="suite-hdr-icon">💼</span>
+        <span class="suite-hdr-title">sales.quotation-calculations</span>
+        <span class="pill amber">1 pending</span>
+        <span class="suite-hdr-file">sales.quotation-calculations.spec.ts</span>
+      </div>
+      <div class="test-list">
+        <div class="test-row hist"><span class="test-row-icon">⬜</span><span class="test-row-name">line, untaxed and total amounts follow the quantity × price arithmetic</span><div class="test-row-tags"><span class="tag ui">UI</span><span class="tag rpc">RPC</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('line, untaxed and total amounts follow the quantity × price arithmetic', async ({ page, rpc }) =&gt; {
+    test.setTimeout(180_000);
+    await openSalesApp(page);
+    await switchCompany(page, COMPANY);
+    orderNumber = await createQuotation(page, {
+      customer: CUSTOMER, paymentType: 'Cash', quantity: QUANTITY, unitPrice: UNIT_PRICE,
+    });
+
+    const row = page.locator('.o_data_row').first();
+    const qty = parseAmount(await row.locator('[name=&quot;product_uom_qty&quot;]').textContent());
+    const price = parseAmount(await row.locator('[name=&quot;price_unit&quot;]').textContent());
+    const discount = parseAmount(await row.locator('[name=&quot;discount&quot;]').textContent().catch(() =&gt; '0'));
+    const shownSubtotal = parseAmount(await row.locator('[name=&quot;price_subtotal&quot;]').textContent());
+    expect(qty).toBe(QUANTITY);
+    expect(price).toBe(UNIT_PRICE);
+
+    // 1. line amount
+    const expectedLine = lineSubtotal({ quantity: qty, unitPrice: price, discountPct: discount });
+    expect(Math.abs(shownSubtotal - expectedLine), `line Tax excl. ${shownSubtotal} vs ${expectedLine}`).toBeLessThanOrEqual(TOLERANCE);
+
+    // 2 + 3. totals panel
+    const shown = await readTotals(page);</pre></details></div>
+      </div>
     </div>
 
     <div id="sales-reporting">
@@ -571,10 +601,60 @@
       <div class="suite-hdr">
         <span class="suite-hdr-icon">🧪</span>
         <span class="suite-hdr-title">Field Validations</span>
+        <span class="pill purple">2 skipped</span> <span class="pill amber">1 pending</span>
+        <span class="suite-hdr-file">2 files</span>
+      </div>
+      
+      <div class="suite-hdr" style="margin-top:4px;">
+        <span class="suite-hdr-icon">🧪</span>
+        <span class="suite-hdr-title">sales.quotation-validations</span>
+        <span class="pill purple">1 skipped</span> <span class="pill amber">1 pending</span>
+        <span class="suite-hdr-file">sales.quotation-validations.spec.ts</span>
+      </div>
+      <div class="test-list">
+        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">blank ${f.label} cannot be saved (${c.type})</span><span class="test-row-note">${f.label} is not shown on the form in this configuration</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">        test(`blank ${f.label} cannot be saved (${c.type})`, async ({ page }) =&gt; {
+          test.setTimeout(180_000);
+          await createQuotation(page, { customer: c.customer, paymentType: c.type, save: false });
+          const result = await blankFieldAndTrySave(page, f);
+
+          if (result === 'saved') created.push(await currentQuotationNumber(page));
+          if (result === 'field-not-shown') test.skip(true, `${f.label} is not shown on the form in this configuration`);
+
+          test.info().annotations.push({ type: 'outcome', description: `${f.label}: ${result}` });
+          expect(result, `Odoo saved a ${c.type} quotation with a blank ${f.label} — the field should be mandatory`)
+            .not.toBe('saved');
+        });
+      }
+    });
+  }
+
+  // ── B. Order lines ───────────────────────────────────────────────────────────
+  test.describe('order lines: confirm blocked for invalid lines', () =&gt; {
+    test.skip(process.env.RUN_SALES_FLOWS !== 'true',
+      'May leave a confirmed order if Odoo has no such control — set RUN_SALES_FLOWS=true to run');
+
+    const BAD_LINES = [</pre></details></div>
+        <div class="test-row hist"><span class="test-row-icon">⬜</span><span class="test-row-name">quotation with ${bad.what} cannot be confirmed</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">      test(`quotation with ${bad.what} cannot be confirmed`, async ({ page }) =&gt; {
+        test.setTimeout(180_000);
+        const number = await createQuotation(page, { customer: CASH_CUSTOMER, paymentType: 'Cash', ...bad.opts });
+        created.push(number);
+
+        const outcome = await tryConfirmBadOrder(page);
+        test.info().annotations.push({ type: 'outcome', description: `${bad.what}: ${outcome}` });
+        expect(outcome, `${number}: Odoo confirmed an order with ${bad.what} — Confirm must be hidden or blocked`)
+          .not.toBe('confirmed');
+      });
+    }
+  });
+});
+</pre></details></div>
+      </div>
+      <div class="suite-hdr" style="margin-top:16px;">
+        <span class="suite-hdr-icon">🧪</span>
+        <span class="suite-hdr-title">sales.validations</span>
         <span class="pill purple">1 skipped</span>
         <span class="suite-hdr-file">sales.validations.spec.ts</span>
       </div>
-      
       <div class="test-list">
         <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">placeholder — replace with real test</span><span class="test-row-note">Sales module not installed on this instance — update isModuleInstalled() model name</span><div class="test-row-tags"><span class="tag smoke">@smoke</span><span class="tag rpc">RPC</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('placeholder — replace with real test @smoke', async ({ rpc }) =&gt; {
     if (!await isModuleInstalled(rpc)) {
@@ -601,10 +681,81 @@
       <div class="suite-hdr">
         <span class="suite-hdr-icon">⚡</span>
         <span class="suite-hdr-title">Edge Cases</span>
+        <span class="pill purple">4 skipped</span>
+        <span class="suite-hdr-file">2 files</span>
+      </div>
+      
+      <div class="suite-hdr" style="margin-top:4px;">
+        <span class="suite-hdr-icon">⚡</span>
+        <span class="suite-hdr-title">sales.credit-control</span>
+        <span class="pill purple">3 skipped</span>
+        <span class="suite-hdr-file">sales.credit-control.spec.ts</span>
+      </div>
+      <div class="test-list">
+        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">within the credit limit: Confirm is available, no approval needed</span><span class="test-row-note">No Credit customer with overdue invoices exists — nothing to check</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('within the credit limit: Confirm is available, no approval needed', async ({ page }) =&gt; {
+    test.setTimeout(180_000);
+    created.push(await createQuotation(page, { customer: CREDIT_CUSTOMER, paymentType: 'Credit' }));
+    const b = await shown(page);
+    expect(b.confirm, `Confirm should be visible. Buttons: ${b.all.join(' | ')}`).toBe(true);
+    expect(b.request, 'Request Credit Limit Approval should be hidden within the limit').toBe(false);
+    expect(b.overdue, 'View Credit Limit Overdue Details should be hidden within the limit').toBe(false);
+  });
+
+  test('over the credit limit: Confirm is blocked, approval must be requested', async ({ page }) =&gt; {
+    test.setTimeout(240_000);
+    created.push(await createQuotation(page, {
+      customer: CREDIT_CUSTOMER, paymentType: 'Credit', quantity: OVER_LIMIT_QUANTITY,
+    }));
+    const b = await shown(page);
+    expect(b.confirm, `Confirm must be hidden above the credit limit. Buttons: ${b.all.join(' | ')}`).toBe(false);
+    expect(b.request, 'Request Credit Limit Approval should be visible above the limit').toBe(true);
+    expect(b.overdue, 'View Credit Limit Overdue Details should be visible above the limit').toBe(true);
+  });
+
+  test('customer with overdue invoices: Confirm is blocked, approval must be requested', async ({ page, rpc }) =&gt; {
+    test.setTimeout(240_000);</pre></details></div>
+        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">over the credit limit: Confirm is blocked, approval must be requested</span><span class="test-row-note">No Credit customer with overdue invoices exists — nothing to check</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('over the credit limit: Confirm is blocked, approval must be requested', async ({ page }) =&gt; {
+    test.setTimeout(240_000);
+    created.push(await createQuotation(page, {
+      customer: CREDIT_CUSTOMER, paymentType: 'Credit', quantity: OVER_LIMIT_QUANTITY,
+    }));
+    const b = await shown(page);
+    expect(b.confirm, `Confirm must be hidden above the credit limit. Buttons: ${b.all.join(' | ')}`).toBe(false);
+    expect(b.request, 'Request Credit Limit Approval should be visible above the limit').toBe(true);
+    expect(b.overdue, 'View Credit Limit Overdue Details should be visible above the limit').toBe(true);
+  });
+
+  test('customer with overdue invoices: Confirm is blocked, approval must be requested', async ({ page, rpc }) =&gt; {
+    test.setTimeout(240_000);
+    const overdueCustomer = await findOverdueCreditCustomer(rpc);
+    if (!overdueCustomer) test.skip(true, 'No Credit customer with overdue invoices exists — nothing to check');
+
+    created.push(await createQuotation(page, { customer: overdueCustomer!, paymentType: 'Credit' }));
+    const b = await shown(page);
+    expect(b.confirm, `${overdueCustomer} has overdue invoices, Confirm must be hidden. Buttons: ${b.all.join(' | ')}`).toBe(false);
+    expect(b.request, 'Request Credit Limit Approval should be visible for an overdue customer').toBe(true);
+    expect(b.overdue, 'View Credit Limit Overdue Details should be visible for an overdue customer').toBe(true);
+  });</pre></details></div>
+        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">customer with overdue invoices: Confirm is blocked, approval must be requested</span><span class="test-row-note">No Credit customer with overdue invoices exists — nothing to check</span><div class="test-row-tags"><span class="tag ui">UI</span><span class="tag rpc">RPC</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('customer with overdue invoices: Confirm is blocked, approval must be requested', async ({ page, rpc }) =&gt; {
+    test.setTimeout(240_000);
+    const overdueCustomer = await findOverdueCreditCustomer(rpc);
+    if (!overdueCustomer) test.skip(true, 'No Credit customer with overdue invoices exists — nothing to check');
+
+    created.push(await createQuotation(page, { customer: overdueCustomer!, paymentType: 'Credit' }));
+    const b = await shown(page);
+    expect(b.confirm, `${overdueCustomer} has overdue invoices, Confirm must be hidden. Buttons: ${b.all.join(' | ')}`).toBe(false);
+    expect(b.request, 'Request Credit Limit Approval should be visible for an overdue customer').toBe(true);
+    expect(b.overdue, 'View Credit Limit Overdue Details should be visible for an overdue customer').toBe(true);
+  });
+});
+</pre></details></div>
+      </div>
+      <div class="suite-hdr" style="margin-top:16px;">
+        <span class="suite-hdr-icon">⚡</span>
+        <span class="suite-hdr-title">sales.edge-cases</span>
         <span class="pill purple">1 skipped</span>
         <span class="suite-hdr-file">sales.edge-cases.spec.ts</span>
       </div>
-      
       <div class="test-list">
         <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">placeholder — replace with real test</span><span class="test-row-note">Sales module not installed on this instance — update isModuleInstalled() model name</span><div class="test-row-tags"><span class="tag smoke">@smoke</span><span class="tag rpc">RPC</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('placeholder — replace with real test @smoke', async ({ rpc }) =&gt; {
     if (!await isModuleInstalled(rpc)) {
