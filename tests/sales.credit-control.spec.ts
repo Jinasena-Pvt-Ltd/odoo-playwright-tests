@@ -72,9 +72,15 @@ test.describe('Sales credit limit control @module:sales @step:edge', () => {
     test.setTimeout(180_000);
     created.push(await createQuotation(page, { customer: CREDIT_CUSTOMER, paymentType: 'Credit' }));
     const b = await shown(page);
-    expect(b.confirm, `Confirm should be visible. Buttons: ${b.all.join(' | ')}`).toBe(true);
-    expect(b.request, 'Request Credit Limit Approval should be hidden within the limit').toBe(false);
-    expect(b.overdue, 'View Credit Limit Overdue Details should be hidden within the limit').toBe(false);
+    await test.step('Confirm is visible', async () => {
+      expect(b.confirm, `Confirm should be visible. Buttons: ${b.all.join(' | ')}`).toBe(true);
+    });
+    await test.step('Request Credit Limit Approval is hidden', async () => {
+      expect(b.request, 'Request Credit Limit Approval should be hidden within the limit').toBe(false);
+    });
+    await test.step('View Credit Limit Overdue Details is hidden', async () => {
+      expect(b.overdue, 'View Credit Limit Overdue Details should be hidden within the limit').toBe(false);
+    });
   });
 
   test('over the credit limit: Confirm is blocked, approval must be requested', async ({ page }) => {
@@ -83,9 +89,15 @@ test.describe('Sales credit limit control @module:sales @step:edge', () => {
       customer: CREDIT_CUSTOMER, paymentType: 'Credit', quantity: OVER_LIMIT_QUANTITY,
     }));
     const b = await shown(page);
-    expect(b.confirm, `Confirm must be hidden above the credit limit. Buttons: ${b.all.join(' | ')}`).toBe(false);
-    expect(b.request, 'Request Credit Limit Approval should be visible above the limit').toBe(true);
-    expect(b.overdue, 'View Credit Limit Overdue Details should be visible above the limit').toBe(true);
+    await test.step('Confirm is hidden', async () => {
+      expect(b.confirm, `Confirm must be hidden above the credit limit. Buttons: ${b.all.join(' | ')}`).toBe(false);
+    });
+    await test.step('Request Credit Limit Approval is visible', async () => {
+      expect(b.request, 'Request Credit Limit Approval should be visible above the limit').toBe(true);
+    });
+    await test.step('View Credit Limit Overdue Details is visible', async () => {
+      expect(b.overdue, 'View Credit Limit Overdue Details should be visible above the limit').toBe(true);
+    });
   });
 
   test('customer with overdue invoices: Confirm is blocked, approval must be requested', async ({ page, rpc }) => {
@@ -95,7 +107,11 @@ test.describe('Sales credit limit control @module:sales @step:edge', () => {
 
     created.push(await createQuotation(page, { customer: overdueCustomer!, paymentType: 'Credit' }));
     const b = await shown(page);
-    expect(b.confirm, `${overdueCustomer} has overdue invoices, Confirm must be hidden. Buttons: ${b.all.join(' | ')}`).toBe(false);
-    expect(b.requestAny, `An overdue / credit limit approval request should be offered. Buttons: ${b.all.join(' | ')}`).toBe(true);
+    await test.step('Confirm is hidden', async () => {
+      expect(b.confirm, `${overdueCustomer} has overdue invoices, Confirm must be hidden. Buttons: ${b.all.join(' | ')}`).toBe(false);
+    });
+    await test.step('An overdue / credit-limit approval request is offered', async () => {
+      expect(b.requestAny, `An overdue / credit limit approval request should be offered. Buttons: ${b.all.join(' | ')}`).toBe(true);
+    });
   });
 });

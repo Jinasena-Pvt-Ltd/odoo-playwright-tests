@@ -58,8 +58,10 @@ test.describe('Sales quotation validations @module:sales @step:validations', () 
           if (result === 'field-not-shown') test.skip(true, `${f.label} is not shown on the form in this configuration`);
 
           test.info().annotations.push({ type: 'outcome', description: `${f.label}: ${result}` });
-          expect(result, `Odoo saved a ${c.type} quotation with a blank ${f.label} — the field should be mandatory`)
-            .not.toBe('saved');
+          await test.step(`Odoo blocks the save when ${f.label} is blank (result: ${result})`, async () => {
+            expect(result, `Odoo saved a ${c.type} quotation with a blank ${f.label} — the field should be mandatory`)
+              .not.toBe('saved');
+          });
         });
       }
     });
@@ -83,8 +85,10 @@ test.describe('Sales quotation validations @module:sales @step:validations', () 
 
         const outcome = await tryConfirmBadOrder(page);
         test.info().annotations.push({ type: 'outcome', description: `${bad.what}: ${outcome}` });
-        expect(outcome, `${number}: Odoo confirmed an order with ${bad.what} — Confirm must be hidden or blocked`)
-          .not.toBe('confirmed');
+        await test.step(`Confirm is hidden or blocked (result: ${outcome})`, async () => {
+          expect(outcome, `${number}: Odoo confirmed an order with ${bad.what} — Confirm must be hidden or blocked`)
+            .not.toBe('confirmed');
+        });
       });
     }
   });

@@ -92,3 +92,16 @@ no it's not clear.i want to master reports in reports and also i want to customi
 - Write: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\core\reporters\StepRunReporter.ts
 - Write: C:\Users\Urliyas\AppData\Local\Temp\claude\c--Users-Urliyas-Documents-GitHub-odoo-playwright-tests\24d41de7-d52d-4966-adbb-ecbe07ee52da\scratchpad\shot.js
 
+
+---
+
+## Change -- 2026-10-22T08:39:22Z
+
+**Prompt:**
+```
+i want a report devided the test cases like congfig,business,1st run,2nd run pass, fail,etc.create it
+```
+
+**Files touched:**
+- Write: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\core\reporters\StepRunReporter.ts
+

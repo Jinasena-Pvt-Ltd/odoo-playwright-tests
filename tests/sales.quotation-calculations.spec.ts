@@ -45,19 +45,27 @@ test.describe('Sales quotation calculations @module:sales @step:business', () =>
     const price = parseAmount(await row.locator('[name="price_unit"]').textContent());
     const discount = parseAmount(await row.locator('[name="discount"]').textContent().catch(() => '0'));
     const shownSubtotal = parseAmount(await row.locator('[name="price_subtotal"]').textContent());
-    expect(qty).toBe(QUANTITY);
-    expect(price).toBe(UNIT_PRICE);
+    await test.step(`Line shows quantity ${QUANTITY} and unit price ${UNIT_PRICE}`, async () => {
+      expect(qty).toBe(QUANTITY);
+      expect(price).toBe(UNIT_PRICE);
+    });
 
     // 1. line amount
     const expectedLine = lineSubtotal({ quantity: qty, unitPrice: price, discountPct: discount });
-    expect(Math.abs(shownSubtotal - expectedLine), `line Tax excl. ${shownSubtotal} vs ${expectedLine}`).toBeLessThanOrEqual(TOLERANCE);
+    await test.step(`Line Tax excl. = ${qty} × ${price} × (1 − ${discount}%) = ${expectedLine}`, async () => {
+      expect(Math.abs(shownSubtotal - expectedLine), `line Tax excl. ${shownSubtotal} vs ${expectedLine}`).toBeLessThanOrEqual(TOLERANCE);
+    });
 
     // 2 + 3. stored totals
     const expected = quotationTotals([{ quantity: qty, unitPrice: price, discountPct: discount }]);
     const [stored] = await rpc.searchRead<{ amount_untaxed: number; amount_tax: number; amount_total: number }>(
       'sale.order', [['name', '=', orderNumber]], ['amount_untaxed', 'amount_tax', 'amount_total'], { limit: 1 });
-    expect(Math.abs(stored.amount_untaxed - expected.untaxed), `Untaxed ${stored.amount_untaxed} vs ${expected.untaxed}`).toBeLessThanOrEqual(TOLERANCE);
-    expect(Math.abs(stored.amount_total - round2(stored.amount_untaxed + stored.amount_tax)),
-      `Total ${stored.amount_total} vs untaxed + tax ${stored.amount_untaxed + stored.amount_tax}`).toBeLessThanOrEqual(TOLERANCE);
+    await test.step(`Untaxed Amount = sum of line amounts = ${expected.untaxed}`, async () => {
+      expect(Math.abs(stored.amount_untaxed - expected.untaxed), `Untaxed ${stored.amount_untaxed} vs ${expected.untaxed}`).toBeLessThanOrEqual(TOLERANCE);
+    });
+    await test.step('Total = Untaxed Amount + Taxes', async () => {
+      expect(Math.abs(stored.amount_total - round2(stored.amount_untaxed + stored.amount_tax)),
+        `Total ${stored.amount_total} vs untaxed + tax ${stored.amount_untaxed + stored.amount_tax}`).toBeLessThanOrEqual(TOLERANCE);
+    });
   });
 });
