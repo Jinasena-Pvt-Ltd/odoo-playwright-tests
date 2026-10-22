@@ -573,122 +573,122 @@
         },
         {
           "sequence": 38,
-          "title": "Back to Home menu (accidental recorded click)",
+          "title": "14 days later: open the Sales app again to find the order",
           "title_i18n": {
-            "en_US": "Back to Home menu (accidental recorded click)"
+            "en_US": "14 days later: open the Sales app again to find the order"
           },
-          "trigger": "a.o_menu_toggle.hasImage",
-          "content": "Back to Home menu",
+          "trigger": "[data-menu-xmlid=\"sale.sale_menu_root\"]",
+          "content": "The customer pays on credit, about **14 days after the invoice date**. When the payment comes in, log in to Odoo and click the **Home menu** icon, then click **Sales** (red box).",
           "content_i18n": {
-            "en_US": "Back to Home menu"
+            "en_US": "The customer pays on credit, about **14 days after the invoice date**. When the payment comes in, log in to Odoo and click the **Home menu** icon, then click **Sales** (red box)."
           },
           "position": "bottom",
           "run": "click",
           "is_check": false,
           "validation_type": "none",
-          "description": "",
+          "description": "Why: a credit sale is finished in two visits. Today you delivered and invoiced; on the payment day you come back from the Sales app. Check: the Sales app opens with its menu across the top.",
           "description_i18n": {
-            "en_US": ""
+            "en_US": "Why: a credit sale is finished in two visits. Today you delivered and invoiced; on the payment day you come back from the Sales app. Check: the Sales app opens with its menu across the top."
           }
         },
         {
           "sequence": 39,
-          "title": "Click the Sale Orders button to see the original order",
+          "title": "Click Orders in the top menu",
           "title_i18n": {
-            "en_US": "Click the Sale Orders button to see the original order"
+            "en_US": "Click Orders in the top menu"
           },
-          "trigger": "button[name=\"action_view_source_sale_orders\"]",
-          "content": "At the top of the invoice, click the **Sale Orders** button (red box). The sales order this invoice came from opens.",
+          "trigger": "[data-menu-xmlid=\"sale.sale_order_menu\"]",
+          "content": "Click **Orders** in the top menu. A dropdown opens.",
           "content_i18n": {
-            "en_US": "At the top of the invoice, click the **Sale Orders** button (red box). The sales order this invoice came from opens."
+            "en_US": "Click **Orders** in the top menu. A dropdown opens."
           },
           "position": "bottom",
           "run": "click",
           "is_check": false,
           "validation_type": "none",
-          "description": "Why: it lets you jump between the order and its invoice at any time. Check: the sales order opens.",
+          "description": "Check: the dropdown lists Quotations and Orders.",
           "description_i18n": {
-            "en_US": "Why: it lets you jump between the order and its invoice at any time. Check: the sales order opens."
+            "en_US": "Check: the dropdown lists Quotations and Orders."
           }
         },
         {
           "sequence": 40,
-          "title": "Click Sales Order button (duplicate recorded click)",
+          "title": "Click Orders to open the confirmed sales orders",
           "title_i18n": {
-            "en_US": "Click Sales Order button (duplicate recorded click)"
+            "en_US": "Click Orders to open the confirmed sales orders"
           },
-          "trigger": "button[name=\"action_view_source_sale_orders\"]",
-          "content": "Click Sales Order button",
+          "trigger": "[data-menu-xmlid=\"sale.menu_sale_order\"]",
+          "content": "In the dropdown, click **Orders** (the second entry, red box). The list of confirmed Sales Orders opens.",
           "content_i18n": {
-            "en_US": "Click Sales Order button"
+            "en_US": "In the dropdown, click **Orders** (the second entry, red box). The list of confirmed Sales Orders opens."
           },
           "position": "bottom",
           "run": "click",
           "is_check": false,
           "validation_type": "none",
-          "description": "",
+          "description": "Check: you see a list of sales orders with a search bar at the top.",
           "description_i18n": {
-            "en_US": ""
+            "en_US": "Check: you see a list of sales orders with a search bar at the top."
           }
         },
         {
           "sequence": 41,
-          "title": "Click Search... (recorded on a hotkey, no visible target)",
+          "title": "Search for the sales order by its number",
           "title_i18n": {
-            "en_US": "Click Search... (recorded on a hotkey, no visible target)"
+            "en_US": "Search for the sales order by its number"
           },
-          "trigger": "[data-hotkey=\"Q\"]",
-          "content": "Click Search...",
+          "trigger": "input.o_searchview_input.o_input",
+          "content": "Click the search bar (red box), type the sales order number (for example **S02748**) and press **Enter**.",
           "content_i18n": {
-            "en_US": "Click Search..."
-          },
-          "position": "bottom",
-          "run": "click",
-          "is_check": false,
-          "validation_type": "none",
-          "description": "",
-          "description_i18n": {
-            "en_US": ""
-          }
-        },
-        {
-          "sequence": 42,
-          "title": "Type the sales order number (recorded on a hotkey, no visible target)",
-          "title_i18n": {
-            "en_US": "Type the sales order number (recorded on a hotkey, no visible target)"
-          },
-          "trigger": "[data-hotkey=\"Q\"]",
-          "content": "Type the sales order number",
-          "content_i18n": {
-            "en_US": "Type the sales order number"
+            "en_US": "Click the search bar (red box), type the sales order number (for example **S02748**) and press **Enter**."
           },
           "position": "bottom",
           "run": "edit",
           "is_check": false,
           "validation_type": "none",
-          "description": "",
+          "description": "Tip: you can also search by customer name. Check: the list shows only your order.",
           "description_i18n": {
-            "en_US": ""
+            "en_US": "Tip: you can also search by customer name. Check: the list shows only your order."
           }
         },
         {
-          "sequence": 43,
-          "title": "Click the Invoices button to return to the invoice",
+          "sequence": 42,
+          "title": "Open the sales order",
           "title_i18n": {
-            "en_US": "Click the Invoices button to return to the invoice"
+            "en_US": "Open the sales order"
           },
-          "trigger": "button[name=\"action_view_invoice\"]",
-          "content": "On the sales order, click the **Invoices** button (red box) to go back to the invoice.",
+          "trigger": "td.o_data_cell",
+          "content": "Click the order row (red box). The sales order opens.",
           "content_i18n": {
-            "en_US": "On the sales order, click the **Invoices** button (red box) to go back to the invoice."
+            "en_US": "Click the order row (red box). The sales order opens."
           },
           "position": "bottom",
           "run": "click",
           "is_check": false,
           "validation_type": "none",
-          "description": "Check: the invoice opens again and shows the status **Posted**.",
+          "description": "Check: the status bar shows \"Sales Order\" and an **Invoices** button is at the top.",
           "description_i18n": {
-            "en_US": "Check: the invoice opens again and shows the status **Posted**."
+            "en_US": "Check: the status bar shows \"Sales Order\" and an **Invoices** button is at the top."
+          }
+        },
+        {
+          "sequence": 43,
+          "title": "Click the Invoices button to open the invoice",
+          "title_i18n": {
+            "en_US": "Click the Invoices button to open the invoice"
+          },
+          "trigger": "button[name=\"action_view_invoice\"]",
+          "content": "At the top of the order, click the **Invoices** button (red box). The posted invoice opens.",
+          "content_i18n": {
+            "en_US": "At the top of the order, click the **Invoices** button (red box). The posted invoice opens."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Check: the invoice shows the status **Posted**, the Payment Terms **14 Days** and a **Register Payment** button.",
+          "description_i18n": {
+            "en_US": "Check: the invoice shows the status **Posted**, the Payment Terms **14 Days** and a **Register Payment** button."
           }
         },
         {
@@ -809,6 +809,26 @@
           "description": "Check: a green **IN PAYMENT** ribbon appears at the top right of the invoice, or **PAID** if the payment is already reconciled. Result: product delivered, customer invoiced on 14 Days credit terms, payment recorded.",
           "description_i18n": {
             "en_US": "Check: a green **IN PAYMENT** ribbon appears at the top right of the invoice, or **PAID** if the payment is already reconciled. Result: product delivered, customer invoiced on 14 Days credit terms, payment recorded."
+          }
+        },
+        {
+          "sequence": 50,
+          "title": "Check the IN PAYMENT ribbon on the invoice",
+          "title_i18n": {
+            "en_US": "Check the IN PAYMENT ribbon on the invoice"
+          },
+          "trigger": ".ribbon",
+          "content": "Look at the top right corner of the invoice. The green **IN PAYMENT** ribbon (red box) shows that the payment has been registered. The credit sale is now complete.",
+          "content_i18n": {
+            "en_US": "Look at the top right corner of the invoice. The green **IN PAYMENT** ribbon (red box) shows that the payment has been registered. The credit sale is now complete."
+          },
+          "position": "bottom",
+          "run": "check",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Result: product delivered, customer invoiced on 14 Days credit terms, payment recorded. Check: the ribbon says IN PAYMENT, and the Amount Due is 0. Tip: IN PAYMENT becomes **PAID** once the payment is matched with your cash or bank statement.",
+          "description_i18n": {
+            "en_US": "Result: product delivered, customer invoiced on 14 Days credit terms, payment recorded. Check: the ribbon says IN PAYMENT, and the Amount Due is 0. Tip: IN PAYMENT becomes **PAID** once the payment is matched with your cash or bank statement."
           }
         },
         {

@@ -33,10 +33,10 @@ const TOUR_NOTES = {
   },
   'credit-sales-order': {
     displayTitle: 'CREDIT SALES ORDER',
-    adapted: new Set([14, 15, 28, 29, 30, 47]),
-    // Duplicate/accidental recorded clicks (17, 38, 40, 41, 42, 48) and the Advance Payment part (410-550), which is a
-    // separate flow on another order and acts on a button that does not exist on this invoice.
-    excluded: new Set([17, 38, 40, 41, 42, 48, 410, 420, 430, 440, 450, 460, 470, 480, 490, 500, 510, 520, 530, 540, 550]),
+    adapted: new Set([14, 15, 28, 29, 30, 38, 39, 40, 41, 42, 43, 47]),
+    // 17 = Credit selected twice, 48 = second recorded Sales-app click (replaced by steps 38-43); 410-550 = the Advance
+    // Payment part, a separate flow on another order whose button does not exist on this invoice.
+    excluded: new Set([17, 48, 410, 420, 430, 440, 450, 460, 470, 480, 490, 500, 510, 520, 530, 540, 550]),
   },
   'cash-sales-order-serial': {
     // Steps whose recorded text does not match what they act on - flagged for review in REVIEW.md
