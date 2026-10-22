@@ -31,6 +31,11 @@ const TOUR_NOTES = {
     adapted: new Set(),
     excluded: new Set(),
   },
+  'credit-sales-order-serial': {
+    displayTitle: 'CREDIT SALES ORDER - SERIAL',
+    adapted: new Set([200, 282, 300, 301, 302, 303, 304, 305, 314]),
+    excluded: new Set(),
+  },
   'credit-sales-order': {
     displayTitle: 'CREDIT SALES ORDER',
     adapted: new Set([14, 15, 28, 29, 30, 38, 39, 40, 41, 42, 43, 47]),
