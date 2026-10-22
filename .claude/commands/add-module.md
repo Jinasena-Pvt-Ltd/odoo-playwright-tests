@@ -1,11 +1,11 @@
 # Scaffold a Complete New Test Module
 
-You are scaffolding a complete new test module for the Odoo 17 Playwright HR test framework, mirroring `src/modules/hr/`.
+You are scaffolding a complete new test module for the Odoo 17 Playwright test framework, mirroring the structure of existing modules such as `src/modules/helpdesk/`.
 
 ## Arguments
 $ARGUMENTS
 
-The argument is the module name in lowercase (e.g. `leave`, `payroll`, `recruitment`, `appraisal`).
+The argument is the module name in lowercase (e.g. `recruitment`, `appraisal`, `expenses`).
 
 ## Target Directory Tree
 
@@ -20,21 +20,16 @@ src/modules/<module>/
 │   └── <module>.validation-cases.ts
 ├── calculations/
 │   └── <Module>Calculations.ts
+├── notes/
+│   └── <module>.notes.md
 └── tests/
-    ├── 01-config/
-    │   └── <module>.config.spec.ts
-    ├── 02-business/
-    │   └── <module>.business.spec.ts
-    ├── 03-reporting/
-    │   └── <module>.reports.spec.ts
-    ├── 04-permissions/
-    │   └── <module>.permissions.spec.ts
-    ├── 05-validations/
-    │   └── <module>.validations.spec.ts
-    ├── 06-edge-cases/
-    │   └── <module>.edge-cases.spec.ts
-    └── 07-archive/
-        └── <module>.archive.spec.ts
+    ├── 01-config/    <module>.config.spec.ts
+    ├── 02-business/  <module>.business.spec.ts
+    ├── 03-reporting/ <module>.reports.spec.ts
+    ├── 04-permissions/<module>.permissions.spec.ts
+    ├── 05-validations/<module>.validations.spec.ts
+    ├── 06-edge-cases/<module>.edge-cases.spec.ts
+    └── 07-archive/   <module>.archive.spec.ts
 ```
 
 ## File Contents
@@ -49,7 +44,7 @@ import { CharField } from '../../../core/components/CharField';
 import { Many2OneField } from '../../../core/components/Many2OneField';
 
 // TODO: Add typed field components matching the Odoo <module> model fields.
-// Reference: src/modules/hr/pages/EmployeePage.ts
+// Reference: src/modules/helpdesk/pages/
 
 export class <Module>FormPage extends BaseFormPage {
   readonly name: CharField;
@@ -108,7 +103,7 @@ export function get<Module>Dates() {
 /**
  * Mandatory field validation cases for the primary <module> Odoo model.
  * TODO: Replace with real field names and expected error messages.
- * Reference: src/modules/hr/data/hr.validation-cases.ts
+ * Reference: src/modules/helpdesk/data/helpdesk.validation-cases.ts
  */
 export const <MODULE>_MANDATORY_FIELDS: Array<{
   module: string;
@@ -134,7 +129,6 @@ export const <MODULE>_VALIDATION_CASES: typeof <MODULE>_MANDATORY_FIELDS = [];
 /**
  * <Module> calculation helpers.
  * TODO: Add business calculation functions specific to this module.
- * Reference: src/modules/hr/calculations/HrCalculations.ts
  */
 
 // TODO: Define the calculation result shape and implement functions.
@@ -147,6 +141,16 @@ export const <MODULE>_VALIDATION_CASES: typeof <MODULE>_MANDATORY_FIELDS = [];
 // }
 ```
 
+### `notes/<module>.notes.md`
+
+```markdown
+# <Module> — Notes
+
+Free-form domain notes for the <module> module: Odoo quirks, SaaS-specific
+constraints, decisions, and anything future contributors on this branch
+should know that doesn't belong in test code or CLAUDE.md.
+```
+
 ### Spec Files (all 7)
 
 Generate all 7 spec files using this template, substituting the step name and number from the table below:
@@ -156,33 +160,19 @@ Generate all 7 spec files using this template, substituting the step name and nu
  * Step <N> — <Step Label> for the <module> module.
  * TODO: Replace the placeholder test with real test cases.
  */
-import { test } from '../../../../core/fixtures/index';
-import { OdooRPC } from '../../../../core/api/OdooRPC';
-
-/**
- * Returns true if the primary Odoo model for this module exists on the instance.
- * TODO: Replace 'module.primary.model' with the real Odoo model name (e.g. 'hr.recruitment').
- */
-async function isModuleInstalled(rpc: OdooRPC): Promise<boolean> {
-  const r = await rpc.searchRead<{ id: number }>(
-    'ir.model', [['model', '=', 'module.primary.model']], ['id'], { limit: 1 },
-  );
-  return r.length > 0;
-}
+import { test, expect } from '../../../../core/fixtures/index';
+import { <Module>FormPage } from '../../pages/<Module>Page';
 
 test.describe('<Module> <Step Label> @module:<module> @step:<step>', () => {
 
-  test('placeholder — replace with real test @smoke', async ({ rpc }) => {
-    if (!await isModuleInstalled(rpc)) {
-      test.skip(true, '<Module> module not installed on this instance — update isModuleInstalled() model name');
-      return;
-    }
+  test('placeholder — replace with real test @smoke', async ({ page }) => {
+    const formPage = new <Module>FormPage(page);
+    await formPage.navigate();
     // TODO: Implement this test.
     // Conventions:
-    //   1. Use rpc.create() for all test data setup — never UI
+    //   1. Interact only through the browser UI — page objects and form fills, never RPC
     //   2. Use uniqueName() for every record name
-    //   3. Archive all records in teardown: await rpc.archive(model, [id])
-    //   4. Wrap config-dependent assertions in graceful skip:
+    //   3. Wrap config-dependent assertions in graceful skip:
     //      const visible = await page.locator('button', { hasText: 'X' })
     //        .isVisible({ timeout: 3_000 }).catch(() => false);
     //      if (!visible) test.skip(true, 'X not available in this configuration');
@@ -225,7 +215,7 @@ Find the tag table in `CLAUDE.md` and add:
 npm run lint
 ```
 
-Fix any TypeScript errors (common: unused imports, missing type parameters on `rpc.create<T>()`).
+Fix any TypeScript errors (common: unused imports, missing type annotations on page object return values).
 
 ### 4. Confirm all placeholders skip cleanly
 

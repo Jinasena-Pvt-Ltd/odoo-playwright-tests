@@ -6,7 +6,7 @@ E2E test framework for **Odoo 17** built with Playwright and TypeScript.
 Tests cover any Odoo module following a consistent 7-step structure across all domains.
 Three user roles are tested independently: admin, manager, and employee.
 
-**Tech stack:** Playwright 1.50, TypeScript 5.7, Allure reporting, Odoo RPC API
+**Tech stack:** Playwright 1.50, TypeScript 5.7, Allure reporting
 
 ---
 
@@ -58,6 +58,7 @@ src/
         ├── pages/                 FormPage, ListPage, KanbanPage
         ├── data/                  <domain>.master-data.ts, <domain>.validation-cases.ts
         ├── calculations/          Business calculation helpers
+        ├── notes/                 <domain>.notes.md — free-form domain notes, gotchas, context
         └── tests/
             ├── 01-config/         <domain>.config.spec.ts
             ├── 02-business/       <domain>.business.spec.ts
@@ -79,6 +80,8 @@ src/
 | Tag | Purpose |
 |-----|---------|
 | `@module:<domain>` | The Odoo module being tested |
+| `@module:helpdesk` | Helpdesk module |
+| `@module:fix_repair` | Fix Repair module (custom Studio app on top of Helpdesk) |
 | `@module:security-audit` | Daily user group & CRUD permission audit |
 | `@step:config` | Step 1 — configuration/setup |
 | `@step:business` | Step 2 — business logic |
@@ -121,13 +124,16 @@ export class <Domain>FormPage extends BaseFormPage {
 }
 ```
 
-### RPC Usage — never UI for data setup
+### UI-First Tests — always interact through the browser
 
 ```typescript
-test('example', async ({ rpc }) => {
-  const id = await rpc.create<number>('<odoo.model>', { name: uniqueName('Record') });
-  // ... test ...
-  await rpc.archive('<odoo.model>', [id]);
+test('example', async ({ page }) => {
+  const formPage = new <Domain>FormPage(page);
+  await formPage.navigate();
+  await formPage.name.setValue(uniqueName('Record'));
+  await formPage.save();
+  // assert against rendered UI
+  await expect(page.locator('.o_form_status_indicator')).toBeVisible();
 });
 ```
 
@@ -192,8 +198,9 @@ npm run test:report       # run tests then regenerate with real pass/fail result
 - **Generator:** `scripts/generate-report.js` — scans `src/modules/**/*.spec.ts`
 - **Master report:** `reports/master-report-YYYY-MM-DD.html` — section anchors `#<domain>-<step>`
 - **Results:** uses `test-results/results.json` when present for real ✅/❌/⏭ status; otherwise ⬜ pending
+- **Summary artifact:** each run also writes `reports/summary.json` — a stats snapshot consumed by `report:consolidate` to roll up every module branch into one overview
 - **Auto-hook:** Stop hook regenerates the report whenever a `*.spec.ts` file changes
-- **Commit:** `git add -f reports/master-report-*.html` (reports/ is gitignored)
+- **Commit:** `git add -f reports/master-report-*.html reports/summary.json` (reports/ is gitignored)
 
 ---
 

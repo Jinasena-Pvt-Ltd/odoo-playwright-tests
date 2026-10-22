@@ -9,3 +9,5 @@ reports/
 playwright-report/
 *.log
 .claude/hooks/branch.txt
+Tour/
+images/

@@ -1,15 +1,15 @@
 # Diagnose a Failing Playwright Test
 
-You are a debugging assistant for the Odoo 17 HR Playwright test framework. Help diagnose and fix a failing test.
+You are a debugging assistant for the Odoo 17 Playwright test framework. Help diagnose and fix a failing test.
 
 ## Arguments
 $ARGUMENTS
 
 Parse as: `<test-file-or-name> [error message or symptom]`
 Examples:
-- `hr.approvals.spec.ts "TimeoutError waiting for .o_statusbar_buttons"`
-- `"contract can be confirmed to Running state" "Expected ['Running', 'Open'] to contain 'Draft'"`
-- `src/modules/hr/tests/05-validations/hr.validations.spec.ts`
+- `helpdesk.escalation.spec.ts "TimeoutError waiting for .o_statusbar_buttons"`
+- `"ticket can be confirmed to Closed state" "Expected ['Closed', 'Solved'] to contain 'Open'"`
+- `src/modules/helpdesk/tests/05-validations/helpdesk.validations.spec.ts`
 
 ## Step 1: Locate and Read the Failing Test
 
@@ -54,20 +54,16 @@ Fixes:
 
 Checks:
 1. Which Playwright project is running this test? (`admin`, `manager`, `employee`) — see `playwright.config.ts`.
-2. Does the test use `hrMasterData`? That fixture always authenticates as admin for RPC calls regardless of the browser project's `storageState`.
-3. Are the `auth-storage/*.json` files stale? Auth sessions expire. Re-run setup:
+2. Are the `auth-storage/*.json` files stale? Auth sessions expire. Re-run setup:
    ```bash
    npx playwright test --project=setup
    ```
-4. Does the test override `storageState` explicitly (permissions-test pattern)? Verify the path `auth-storage/employee.json` is correct and the file exists.
-5. Is the Odoo user behind `MANAGER_EMAIL` actually in the HR Manager group? Check with:
-   ```typescript
-   const users = await rpc.searchRead('res.users', [['login', '=', process.env.MANAGER_EMAIL]], ['groups_id', 'name']);
-   ```
+3. Does the test override `storageState` explicitly (permissions-test pattern)? Verify the path `auth-storage/employee.json` is correct and the file exists.
+4. Is the Odoo user behind `MANAGER_EMAIL` actually in the expected group? Check directly in the Odoo UI (Settings → Users) rather than via RPC.
 
 Fixes:
 - Refresh auth: `npx playwright test --project=setup`
-- For role isolation in permission tests, use the pattern from `hr.permissions.spec.ts`:
+- For role isolation in permission tests, use the pattern from the module's `*.permissions.spec.ts`:
   ```typescript
   import { test as base } from '@playwright/test';
   const employeeTest = base.extend({});
@@ -76,27 +72,18 @@ Fixes:
 
 ---
 
-### Category C: RPC / Data Setup Failure
-**Symptoms:** `Odoo RPC error`, `HTTP 500`, `record not found`, `hrMasterData.employeeId` assertion fails
+### Category C: Data / State Failure
+**Symptoms:** orphaned `[TEST]` records, unexpected form state, save fails silently, record not found in list view
 
 Checks:
 1. Are `ODOO_BASE_URL` and `ODOO_DB` set correctly in `.env`?
-2. Is `ADMIN_EMAIL` / `ADMIN_PASSWORD` valid? The `rpc` fixture always authenticates as admin.
-3. Is the Odoo model name correct? Common mistakes:
-   - `hr.employee` (correct) vs `res.employee` (wrong)
-   - `hr.contract` (correct) vs `hr.payroll.contract` (wrong)
-   - `hr.leave` (correct) vs `hr.holiday` (old Odoo name)
-4. Does `rpc.create()` include all server-required fields? At minimum:
-   - `hr.contract` requires: `name`, `employee_id`, `wage`, `date_start`
-   - `hr.employee` requires: `name`
-5. Did a previous run leave orphaned `[TEST]` records that are blocking creation (e.g. unique constraint)? Find them:
-   ```typescript
-   await rpc.searchRead('hr.employee', [['name', 'like', '[TEST]']], ['id', 'name', 'active'], { context: { active_test: false } });
-   ```
+2. Are `ADMIN_EMAIL` / `ADMIN_PASSWORD` (and the relevant role's credentials) valid?
+3. Did a previous run leave orphaned `[TEST]` records behind (e.g. blocking a unique-name constraint)? Search for them directly in the Odoo UI using the `[TEST]` name prefix filter.
+4. Does the form require fields the test didn't fill before saving? Check the save error banner in the UI.
 
 Fixes:
-- Add all required fields to `rpc.create()`
-- Archive orphaned test records: `await rpc.archive('hr.employee', [orphanId])`
+- Fill all server-required fields via the form before saving
+- Archive orphaned test records through the Odoo UI (list view → Action → Archive)
 - Verify `.env` variables are loaded: `console.log(process.env.ODOO_BASE_URL)`
 
 ---
@@ -105,12 +92,10 @@ Fixes:
 **Symptoms:** `Expected ['Running', 'Open'] to contain 'Draft'`, unexpected status, button text differs, passes locally but fails in CI
 
 Checks:
-1. Is the test asserting an exact status bar value? Contract states differ across Odoo editions:
-   - Community/Enterprise: `New` / `Running` / `Expired` / `Cancelled`
-   - Some configurations: `Draft` / `Open` instead
+1. Is the test asserting an exact status bar value? States can differ across Odoo editions and configurations.
    - Fix: use `expect(['New', 'Draft']).toContain(status)` instead of `expect(status).toBe('New')`
-2. Was a field auto-computed by Odoo (e.g. salary rules modifying wage)?
-3. Does the Odoo instance have custom modules that alter HR behavior? The graceful skip pattern handles this.
+2. Was a field auto-computed by Odoo?
+3. Does the Odoo instance have custom modules or configuration that alters the expected behavior? The graceful skip pattern handles this.
 4. Is the test running on a shared instance where another run left data in unexpected state? Ensure all prior test records were archived (`active = false`).
 
 Fixes:
@@ -153,5 +138,5 @@ After applying the fix:
 ```bash
 npm run lint
 npx playwright test --grep "<test name>" --project=admin
-npm run test:hr
+npm run test:<module>
 ```

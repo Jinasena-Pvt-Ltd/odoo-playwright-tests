@@ -1,6 +1,6 @@
 # Review Test Files Against Project Conventions
 
-You are a code reviewer for the Odoo 17 Playwright HR test framework. Review one or more spec files and report convention violations.
+You are a code reviewer for the Odoo 17 Playwright test framework. Review one or more spec files and report convention violations.
 
 ## Arguments
 $ARGUMENTS
@@ -26,19 +26,18 @@ For each file, evaluate every item below. Report each as:
 ### 1. Import Source
 - `[FAIL]` if `test` or `expect` is imported from `@playwright/test` in a spec that does NOT need a role override via `storageState`. The only valid reason to import from `@playwright/test` directly is a permissions-test pattern like `const roleTest = base.extend({}); roleTest.use({ storageState: '...' })`.
 - `[FAIL]` if `test` is not imported from `../../../../core/fixtures/index` (or the correct relative path for this file's location — count the depth).
-- `[FAIL]` if page object classes are imported using `@modules/` alias — must use relative paths (e.g. `../../pages/EmployeePage`).
+- `[FAIL]` if page object classes are imported using `@modules/` alias — must use relative paths (e.g. `../../pages/HelpdeskTicketPage`).
 - `[WARN]` if `@core/` aliases are used inside `src/modules/` spec files — prefer relative paths.
 
 ### 2. Unique Naming
-- `[FAIL]` if any `rpc.create()` call passes a hardcoded string literal for `name`, `login`, or `email` without `uniqueName()` or `uniqueEmail()`.
+- `[FAIL]` if any form fill sets `name`, `login`, or `email` to a hardcoded string literal without `uniqueName()` or `uniqueEmail()`.
 - `[FAIL]` if `uniqueName()` / `uniqueEmail()` are used but not imported from `../../../../core/utils/RandomDataGenerator`.
 - `[INFO]` if `RUN_TAG` is concatenated manually instead of using `uniqueName()`.
 
-### 3. RPC Cleanup
-- `[FAIL]` if a record is created with `rpc.create()` inside a `test()` body and there is no corresponding `rpc.archive()` in the same test body or in an `afterEach`/`afterAll` hook.
-- `[FAIL]` if `rpc.unlink()` is used for cleanup — this project uses `rpc.archive()` (sets `active: false`), never hard-delete.
-- `[WARN]` if a cleanup `rpc.archive()` is not wrapped in `.catch(() => {})` when the record may not have been created (e.g. after a conditional skip).
-- `[PASS]` for records owned by the `hrMasterData` fixture — those are cleaned up by the fixture teardown.
+### 3. UI-First Data Setup
+- `[FAIL]` if a test calls `rpc.create()`, `rpc.searchRead()`, or any other RPC method to set up or assert data state instead of using page objects and form fills — RPC is not a substitute for UI interaction.
+- `[PASS]` if all create/edit/assert actions go through page objects and rendered UI elements.
+- `[WARN]` if cleanup (archiving a created record) is done through a settings/list-view UI action but not wrapped in a graceful skip when the action may not be visible.
 
 ### 4. Graceful Skip Pattern
 - `[FAIL]` if a test throws or uses `expect(visible).toBe(true)` to assert that a config-dependent element is present — use `test.skip(true, 'reason')` instead.
@@ -46,9 +45,9 @@ For each file, evaluate every item below. Report each as:
 - `[WARN]` if `test.skip()` is called with a non-descriptive reason like `'TODO'` or `'skip'`.
 - `[PASS]` if the correct pattern is used: `const visible = await locator.isVisible({ timeout: 3_000 }).catch(() => false); if (!visible) test.skip(true, '...');`
 
-### 5. No UI-Based Data Setup
-- `[FAIL]` if test data is created by navigating to a form and filling fields — all record creation must go through `rpc.create()`.
-- `[PASS]` if the form navigation IS the subject of the test (testing the create flow itself).
+### 5. UI Interaction Required
+- `[FAIL]` if a test bypasses the UI to set up or assert data state via RPC.
+- `[PASS]` if the test uses page objects and form fills for all create/edit/assert actions.
 
 ### 6. Tag Convention
 - `[FAIL]` if the `test.describe()` block does not include both `@module:<name>` and `@step:<name>` tags.
@@ -61,10 +60,10 @@ For each file, evaluate every item below. Report each as:
 
 ### 8. Test Isolation
 - `[FAIL]` if tests within the same `describe` block share mutable state via variables declared outside `test()` (a `let` written by one test and read by another).
-- `[WARN]` if `test.beforeAll` is used to create records — prefer the `hrMasterData` worker fixture or per-test `rpc.create()`.
+- `[WARN]` if `test.beforeAll` is used to create records via UI — prefer a dedicated config test in `01-config/` or the UI `beforeEach`.
 
 ### 9. TypeScript Generics
-- `[FAIL]` if `rpc.create()` or `rpc.searchRead()` is called without a type parameter, leaving the return type as implicit `any`.
+- `[FAIL]` if page object methods are called without necessary type annotations on return values.
 - `[WARN]` if `// @ts-ignore` or `// @ts-expect-error` is present without a clear explanation comment.
 
 ### 10. Timeout and Selector Practices
@@ -93,12 +92,12 @@ For each reviewed file:
 
 | # | Severity | Item | Line | Detail |
 |---|----------|------|------|--------|
-| 1 | FAIL | RPC Cleanup | 45 | rpc.create('hr.employee', ...) has no rpc.archive() |
+| 1 | FAIL | UI-First Data Setup | 45 | rpc.create('res.partner', ...) used instead of form fill |
 | 2 | WARN | Graceful Skip | 67 | test.skip() called without a reason string |
 ...
 
 ### Required Actions (FAIL items)
-1. Line 45: Add `await rpc.archive('hr.employee', [id]);` before test end
+1. Line 45: Replace `rpc.create(...)` with page-object form fill + save
 
 ### Suggestions (WARN / INFO items)
 ...

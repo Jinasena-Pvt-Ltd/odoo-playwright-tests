@@ -1,0 +1,17 @@
+Customer — KURUNEGALA CASH CUSTOMER
+Product - [JMC6] Multi Chopper 6Hp (Tractor Type)
+Repair Reason - Difficult to start the engine
+
+Diagnosis Area = "Burnt Part"
+Diagnosis Code = "Base Plate"
+Reason = "Internal"
+Sub Reason = "Hi Voltage"
+Resolution = "Reject"
+Repair Stage = "1-REP-REC"
+
+Repair Image = D:\Github\odoo-playwright-tests\WaterPump.jpg
+Warranty Card = D:\Github\odoo-playwright-tests\WarrantyCard.jpg
+
+Quotation Product = 02BB 023
+
+Serial Number = Remember to apply this method whenever you enter data into the Serial Number field of the Ticket Data Entry Form. FIND a serial number for item JMC6 that has an 'on-hand quantity' of zero, and enter it into the 'Serial Number'.

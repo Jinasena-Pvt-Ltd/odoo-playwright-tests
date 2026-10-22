@@ -4,6 +4,10 @@
 
 set -euo pipefail
 
+# jq (installed with winget) is not always on the PATH that hooks inherit
+JQ_DIR="$HOME/AppData/Local/Microsoft/WinGet/Packages/jqlang.jq_Microsoft.Winget.Source_8wekyb3d8bbwe"
+if [[ -d "$JQ_DIR" ]]; then export PATH="$PATH:$JQ_DIR"; fi
+
 INPUT=$(cat)
 SESSION_ID=$(echo "$INPUT" | jq -r '.session_id // "unknown"')
 CWD=$(echo "$INPUT"        | jq -r '.cwd // "."')
@@ -51,6 +55,19 @@ if ! git rev-parse --git-dir > /dev/null 2>&1; then
   exit 0
 fi
 
+# Only ever commit/push on the branch named in .claude/hooks/branch.txt (default: repair).
+# On any other branch this hook does nothing.
+BRANCH_FILE="$CWD/.claude/hooks/branch.txt"
+if [[ -f "$BRANCH_FILE" ]]; then
+  TARGET_BRANCH=$(tr -d '[:space:]' < "$BRANCH_FILE")
+fi
+TARGET_BRANCH="${TARGET_BRANCH:-repair}"
+CURRENT_BRANCH=$(git branch --show-current)
+if [[ "$CURRENT_BRANCH" != "$TARGET_BRANCH" ]]; then
+  echo "On branch '$CURRENT_BRANCH', auto-commit is limited to '$TARGET_BRANCH' - skipping." >&2
+  exit 0
+fi
+
 # If any spec file changed, regenerate the master report before committing
 if echo "$FILES" | grep -q "\.spec\.ts" && command -v node > /dev/null 2>&1 && [[ -f "$CWD/scripts/generate-report.js" ]]; then
   echo "Spec file changed — regenerating master report..." >&2
@@ -63,13 +80,6 @@ if git diff --cached --quiet; then
   exit 0
 fi
 
-# Resolve target branch: .claude/hooks/branch.txt → current branch
-BRANCH_FILE="$CWD/.claude/hooks/branch.txt"
-if [[ -f "$BRANCH_FILE" ]]; then
-  TARGET_BRANCH=$(tr -d '[:space:]' < "$BRANCH_FILE")
-else
-  TARGET_BRANCH=$(git branch --show-current)
-fi
 
 # Commit message: first 80 chars of prompt + file count
 SHORT_PROMPT=$(echo "$PROMPT" | head -c 80 | tr '\n' ' ')

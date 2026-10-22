@@ -11,8 +11,9 @@
  */
 'use strict';
 
-const fs   = require('fs');
-const path = require('path');
+const fs            = require('fs');
+const path          = require('path');
+const { execSync }  = require('child_process');
 
 // ── Paths ────────────────────────────────────────────────────────────────────
 
@@ -157,7 +158,7 @@ function parseSpecFile(filePath) {
     module: moduleTag,
     step: stepTag,
     describeTitle,
-    tests: parseTests(content),
+    tests: parseTests(content).map((t) => ({ ...t, file: fileName })),
   };
 }
 
@@ -220,7 +221,8 @@ function loadResults(filePath) {
   try {
     const data = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
     const map  = {};
-    function walk(s) {
+    function walk(s, parentFile) {
+      const file = s.file || parentFile || '';
       for (const spec of (s.specs || [])) {
         const result = spec.tests?.[0]?.results?.[0];
         const rawStatus = result?.status;
@@ -233,9 +235,9 @@ function loadResults(filePath) {
           // Use full stack when available; fall back to message only
           error = (stack || msg).replace(/\[[0-9;]*m/g, '').trim();
         }
-        map[spec.title] = { status, error };
+        map[path.basename(file.split(String.fromCharCode(92)).join('/')) + '::' + spec.title] = { status, error };
       }
-      for (const sub of (s.suites || [])) walk(sub);
+      for (const sub of (s.suites || [])) walk(sub, file);
     }
     for (const s of (data.suites || [])) walk(s);
     return map;
@@ -244,9 +246,11 @@ function loadResults(filePath) {
 
 // ── Status helpers ────────────────────────────────────────────────────────────
 
+const resultKey = (t) => t.file + '::' + t.rawName;
+
 function getStatus(test, map) {
   if (map) {
-    const r = map[test.name];
+    const r = map[resultKey(test)];
     if (r) return r.status;
   }
   if (test.isSkip)      return 'skipped';
@@ -306,8 +310,8 @@ function testRow(t, map) {
     ? `<details class="code-snippet"><summary></summary><pre class="code">${esc(t.codeSnippet)}</pre></details>`
     : '';
 
-  const errorAttr = (map && map[t.name]?.error)
-    ? ` data-error="${esc(map[t.name].error)}"`
+  const errorAttr = (map && map[resultKey(t)]?.error)
+    ? ` data-error="${esc(map[resultKey(t)].error)}"`
     : '';
   return `<div class="test-row ${cls}"${errorAttr}><span class="test-row-icon">${ico}</span><span class="test-row-name">${esc(t.name)}</span>${noteHtml}<div class="test-row-tags">${tags}</div>${snippetHtml}</div>`;
 }
@@ -1091,8 +1095,39 @@ ${FOOTER_JS}
   const outFile = path.join(REPORTS_DIR, `master-report-${TODAY}.html`);
   fs.writeFileSync(outFile, html, 'utf-8');
 
+  writeSummary(ordered, moduleMap, resultsMap, global, outFile);
+
   console.log(`✅ Report: ${outFile}`);
   console.log(`   ${global.total} tests · ${global.passed} passed · ${global.failed} failed · ${global.skipped} skipped · ${global.pending} pending`);
+}
+
+// ── Summary artifact (consumed by report:consolidate) ─────────────────────────
+
+function currentBranch() {
+  try { return execSync('git rev-parse --abbrev-ref HEAD', { cwd: ROOT }).toString().trim(); }
+  catch { return 'unknown'; }
+}
+
+function writeSummary(ordered, moduleMap, resultsMap, global, masterReportFile) {
+  const modules = ordered.map(mod => {
+    const meta = MODULE_META[mod] || fallback(mod);
+    const all  = Object.values(moduleMap[mod]).flat();
+    const s    = computeStats(all, resultsMap);
+    return { key: mod, name: meta.name, ...s };
+  });
+
+  const summary = {
+    branch: currentBranch(),
+    date: TODAY,
+    project: PKG_NAME,
+    masterReportFile: path.basename(masterReportFile),
+    global,
+    modules,
+  };
+
+  const summaryFile = path.join(REPORTS_DIR, 'summary.json');
+  fs.writeFileSync(summaryFile, JSON.stringify(summary, null, 2), 'utf-8');
+  console.log(`✅ Summary: ${summaryFile}`);
 }
 
 main();

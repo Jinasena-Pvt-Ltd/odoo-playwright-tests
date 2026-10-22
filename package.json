@@ -13,18 +13,20 @@
     "test:validations": "playwright test --grep \"@step:validations\"",
     "test:edge": "playwright test --grep \"@step:edge\"",
     "test:archive": "playwright test --grep \"@step:archive\"",
+    "test:fix_repair": "playwright test --grep \"@module:fix_repair\"",
+    "test:helpdesk": "playwright test --grep \"@module:helpdesk\"",
     "report": "playwright show-report",
     "report:generate": "node scripts/generate-report.js",
+    "report:consolidate": "node scripts/report-consolidate.js",
     "test:report": "playwright test && node scripts/generate-report.js",
     "report:allure": "allure serve allure-results",
-    "lint": "tsc --noEmit",
-    "test:fix_repair": "playwright test --grep \"@module:fix_repair\"",
-    "test:helpdesk": "playwright test --grep \"@module:helpdesk\""
+    "lint": "tsc --noEmit"
   },
   "devDependencies": {
     "@playwright/test": "^1.50.0",
     "@types/node": "^25.9.1",
     "allure-playwright": "^3.0.0",
+    "jimp": "^1.6.1",
     "typescript": "^5.7.0"
   },
   "dependencies": {

@@ -1,22 +1,22 @@
 # Scaffold a New Page Object File
 
-You are creating a new Playwright TypeScript page object file for the Odoo 17 HR test framework.
+You are creating a new Playwright TypeScript page object file for the Odoo 17 test framework.
 
 ## Arguments
 $ARGUMENTS
 
 Parse the arguments as: `<module> <odoo.model> "<field_name:field_type,...>"`
 Examples:
-- `hr leave.type "name:char,requires_allocation:bool,leave_validation_type:selection,responsible_id:many2one"`
-- `payroll salary.structure "name:char,type_id:many2one,wage_type:selection"`
-- `leave hr.leave.allocation "holiday_status_id:many2one,number_of_days:monetary,date_from:date,date_to:date"`
+- `helpdesk helpdesk.ticket "name:char,partner_id:many2one,team_id:many2one,priority:selection"`
+- `recruitment hr.applicant "partner_name:char,job_id:many2one,stage_id:many2one"`
+- `expenses hr.expense "name:char,employee_id:many2one,total_amount:monetary,date:date"`
 
 ## Target File
 
 Create the file at:
 `src/modules/<module>/pages/<ModelNameInPascalCase>Page.ts`
 
-Examples: `leave.type` → `LeaveTypePage.ts`, `hr.leave.allocation` → `LeaveAllocationPage.ts`.
+Examples: `helpdesk.ticket` → `HelpdeskTicketPage.ts`, `hr.applicant` → `HrApplicantPage.ts`.
 
 ## Field Type Mapping
 
@@ -36,7 +36,7 @@ Only import component classes that are actually used by the specified fields.
 
 ## Required Structure
 
-Follow this pattern EXACTLY, mirroring `src/modules/hr/pages/EmployeePage.ts` and `ContractPage.ts`:
+Follow this pattern EXACTLY, mirroring the page objects under `src/modules/helpdesk/pages/`:
 
 ```typescript
 import { Page } from '@playwright/test';
@@ -59,11 +59,6 @@ export class <ModelName>FormPage extends BaseFormPage {
 
   async navigate(): Promise<void> {
     // Derive the Odoo URL from the model name.
-    // Common patterns:
-    //   hr.employee       → /odoo/employees/new
-    //   hr.contract       → /odoo/payroll/contracts/new
-    //   hr.leave          → /odoo/time-off/new
-    //   hr.leave.type     → /odoo/time-off/types/new
     // If the URL is uncertain, use /odoo/<model-as-kebab>/new and add a TODO comment.
     await this.navigateTo('/odoo/<url-path>/new');
   }
@@ -103,7 +98,7 @@ export class <ModelName>ListPage extends BaseListPage {
 
 1. File lives in `src/modules/<module>/pages/` — use relative imports (`../../../core/...`), NOT `@core/` or `@modules/` aliases; aliases are for test files only
 2. Every field declared as `readonly` on the class, initialized in constructor with `new ComponentClass(page, 'odoo_field_name')`
-3. The string passed to each component constructor is the Odoo technical field name (snake_case, e.g. `department_id`, `date_start`); the TypeScript property is the semantic camelCase name (e.g. `department`, `dateStart`)
+3. The string passed to each component constructor is the Odoo technical field name (snake_case, e.g. `partner_id`, `date_start`); the TypeScript property is the semantic camelCase name (e.g. `partner`, `dateStart`)
 4. Always include `navigate()` and `openById(id: number)` on FormPage
 5. Always include `navigate()` and `open<ModelName>(name: string)` on ListPage
 6. The `create<ModelName>()` helper is always present — required fields unconditional, optional fields behind `if` guards
@@ -114,6 +109,6 @@ export class <ModelName>ListPage extends BaseListPage {
 ## Output
 
 Generate the complete file content, then state:
-- The full absolute path (e.g. `D:\Playwright_HR\src\modules\hr\pages\LeaveTypePage.ts`)
+- The full absolute path (e.g. `D:\Github\odoo-playwright-tests\src\modules\helpdesk\pages\HelpdeskTicketPage.ts`)
 - Which component imports were included and why
 - Any URL paths that required inference (note them as TODO if uncertain)
