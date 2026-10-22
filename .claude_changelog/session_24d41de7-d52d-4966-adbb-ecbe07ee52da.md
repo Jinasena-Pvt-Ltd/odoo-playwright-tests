@@ -77,3 +77,18 @@ yes i want more tast cases.i'll added some prieviouse test cases.guide it and cr
 - Write: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\02-business\sales.quotation-calculations.spec.ts
 - Write: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\06-edge-cases\sales.credit-control.spec.ts
 
+
+---
+
+## Change -- 2026-10-22T08:20:04Z
+
+**Prompt:**
+```
+no it's not clear.i want to master reports in reports and also i want to customize report step by step run
+```
+
+**Files touched:**
+- Write: C:\Users\Urliyas\AppData\Local\Temp\claude\c--Users-Urliyas-Documents-GitHub-odoo-playwright-tests\24d41de7-d52d-4966-adbb-ecbe07ee52da\scratchpad\addsteps.py
+- Write: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\core\reporters\StepRunReporter.ts
+- Write: C:\Users\Urliyas\AppData\Local\Temp\claude\c--Users-Urliyas-Documents-GitHub-odoo-playwright-tests\24d41de7-d52d-4966-adbb-ecbe07ee52da\scratchpad\shot.js
+

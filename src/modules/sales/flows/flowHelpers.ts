@@ -4,7 +4,7 @@
  * the browser session comes from the `admin` project storage state (no login here),
  * and all credentials come from the root .env (ADMIN_*, optional ODOO_APPROVER_*).
  */
-import { Browser, Locator, Page, expect } from '@playwright/test';
+import { Browser, Locator, Page, expect, test } from '@playwright/test';
 import { ExpectedStopError, OdooSystemError } from './BugLog';
 
 export const COMPANY      = process.env.FLOW_COMPANY      ?? 'Jinasena Agricultural Machinery (Pvt) Ltd.';
@@ -55,7 +55,7 @@ export async function throwIfOdooError(page: Page): Promise<void> {
 // ─── Navigation ───────────────────────────────────────────────────────────────
 
 /** Opens the Sales app from the Odoo home screen / any page (uses the logged-in admin storage state). */
-export async function openSalesApp(page: Page): Promise<void> {
+async function openSalesAppImpl(page: Page): Promise<void> {
   await page.goto(`${BASE_URL.replace(/\/$/, '')}/web`, { waitUntil: 'domcontentloaded' });
   // The saved admin session is sometimes not accepted (fresh server session) → fall back to the login form.
   const state = await Promise.race([
@@ -83,7 +83,7 @@ export async function openSalesApp(page: Page): Promise<void> {
 }
 
 /** Switches the active company if it is not the selected one already. */
-export async function switchCompany(page: Page, company: string): Promise<void> {
+async function switchCompanyImpl(page: Page, company: string): Promise<void> {
   const switcher = page.locator('.o_switch_company_menu');
   if (!(await switcher.isVisible({ timeout: 5_000 }).catch(() => false))) return; // single-company user
   await switcher.locator('.dropdown-toggle').click();
@@ -100,7 +100,7 @@ export async function switchCompany(page: Page, company: string): Promise<void> 
   }
 }
 
-export async function navigateToQuotations(page: Page): Promise<void> {
+async function navigateToQuotationsImpl(page: Page): Promise<void> {
   const orders = page.locator('.o_menu_sections').getByText('Orders').first();
   await expect(orders).toBeVisible({ timeout: 10_000 });
   await orders.click();
@@ -210,7 +210,7 @@ export interface OrderInput {
 }
 
 /** Creates and saves a quotation with one product line. Returns the order number (e.g. S02250). */
-export async function createQuotation(page: Page, input: OrderInput): Promise<string> {
+async function createQuotationImpl(page: Page, input: OrderInput): Promise<string> {
   await openSalesApp(page); // fresh start: a previous failed flow may have left an unsaved form / dialog open
   await navigateToQuotations(page);
   const newBtn = page.locator('.o_control_panel').getByRole('button', { name: 'New' });
@@ -218,28 +218,35 @@ export async function createQuotation(page: Page, input: OrderInput): Promise<st
   await newBtn.click();
   await expect(page.locator('.o_form_view')).toBeVisible({ timeout: 30_000 });
 
-  await selectMany2one(page, 'partner_id', input.customer);
-  await throwIfOdooError(page); // customer warnings / onchange errors
+  await test.step(`Select customer "${input.customer}"`, async () => {
+    await selectMany2one(page, 'partner_id', input.customer);
+    await throwIfOdooError(page); // customer warnings / onchange errors
+  });
 
-  const payType = page.locator('[name="x_studio_order_payment_method"] select').first();
-  await expect(payType).toBeVisible({ timeout: 10_000 });
-  await payType.selectOption({ label: input.paymentType });
+  await test.step(`Set Order Payment Type = ${input.paymentType}, Quotation Type = Sales`, async () => {
+    const payType = page.locator('[name="x_studio_order_payment_method"] select').first();
+    await expect(payType).toBeVisible({ timeout: 10_000 });
+    await payType.selectOption({ label: input.paymentType });
 
-  const qType = page.locator('[name="x_studio_quotation_type"] select').first();
-  if (await qType.isVisible({ timeout: 3_000 }).catch(() => false)) await qType.selectOption({ label: 'Sales' });
+    const qType = page.locator('[name="x_studio_quotation_type"] select').first();
+    if (await qType.isVisible({ timeout: 3_000 }).catch(() => false)) await qType.selectOption({ label: 'Sales' });
+  });
 
   // Other Info: payment terms / team / warehouse are normally auto-filled — only fill what is empty.
-  await clickTab(page, /other\s*info/i);
-  await expect(page.locator('[name="team_id"]')).toBeVisible({ timeout: 10_000 });
-  if (await many2oneIsEmpty(page, 'team_id')) await selectMany2one(page, 'team_id', SALES_TEAM);
-  if (await many2oneIsEmpty(page, 'warehouse_id')) await selectMany2one(page, 'warehouse_id', WAREHOUSE);
-  if (input.paymentType === 'Cash' && (await many2oneIsEmpty(page, 'payment_term_id') ||
-      !/immediate/i.test(await page.locator('[name="payment_term_id"] input').first().inputValue().catch(() => '')))) {
-    await selectMany2one(page, 'payment_term_id', 'Immediate Payment');
-  }
-  if (input.paymentTerm) await selectMany2one(page, 'payment_term_id', input.paymentTerm);
+  await test.step(`Other Info tab: Sales Team, Warehouse, Payment Terms${input.paymentTerm ? ` = ${input.paymentTerm}` : ''}`, async () => {
+    await clickTab(page, /other\s*info/i);
+    await expect(page.locator('[name="team_id"]')).toBeVisible({ timeout: 10_000 });
+    if (await many2oneIsEmpty(page, 'team_id')) await selectMany2one(page, 'team_id', SALES_TEAM);
+    if (await many2oneIsEmpty(page, 'warehouse_id')) await selectMany2one(page, 'warehouse_id', WAREHOUSE);
+    if (input.paymentType === 'Cash' && (await many2oneIsEmpty(page, 'payment_term_id') ||
+        !/immediate/i.test(await page.locator('[name="payment_term_id"] input').first().inputValue().catch(() => '')))) {
+      await selectMany2one(page, 'payment_term_id', 'Immediate Payment');
+    }
+    if (input.paymentTerm) await selectMany2one(page, 'payment_term_id', input.paymentTerm);
+  });
 
   // Product line
+  await test.step(`Add product line ${input.productCode ?? PRODUCT_CODE}${input.quantity !== undefined ? `, quantity ${input.quantity}` : ''}${input.unitPrice !== undefined ? `, unit price ${input.unitPrice}` : ''}`, async () => {
   await clickTab(page, /order\s*lines/i);
   const addLink = page.locator('.o_field_x2many_list_row_add a').filter({ hasText: /add a product/i }).first();
   await expect(addLink).toBeVisible({ timeout: 10_000 });
@@ -260,12 +267,15 @@ export async function createQuotation(page: Page, input: OrderInput): Promise<st
     await price.click(); await price.selectText(); await price.fill(String(input.unitPrice)); await price.press('Tab');
   }
   await throwIfOdooError(page);
+  });
 
   if (input.save === false) return '';
-  await saveRecord(page);
-  const name = ((await page.locator('.o_form_view [name="name"]').first().textContent().catch(() => '')) ?? '').trim();
-  if (!/^S\d+/.test(name)) throw new Error(`Quotation was not saved (title shows "${name || 'New'}").`);
-  return name;
+  return test.step('Save the quotation', async () => {
+    await saveRecord(page);
+    const name = ((await page.locator('.o_form_view [name="name"]').first().textContent().catch(() => '')) ?? '').trim();
+    if (!/^S\d+/.test(name)) throw new Error(`Quotation was not saved (title shows "${name || 'New'}").`);
+    return name;
+  });
 }
 
 // ─── Approvals & confirm ──────────────────────────────────────────────────────
@@ -297,7 +307,7 @@ async function approveAsApprover(browser: Browser, recordUrl: string, approveNam
  * Walks every "Request … Approval" / "Approve …" button until Confirm is available, then confirms.
  * Throws OdooSystemError / Error when the flow gets stuck, with the visible buttons as evidence.
  */
-export async function approveAndConfirm(page: Page, browser: Browser): Promise<ApprovalOutcome> {
+async function approveAndConfirmImpl(page: Page, browser: Browser): Promise<ApprovalOutcome> {
   const out: ApprovalOutcome = { taken: [], buttonsSeen: [] };
   const recordUrl = page.url();
   const requested = new Set<string>();
@@ -372,7 +382,7 @@ async function pressThroughDialogs(page: Page): Promise<void> {
  * Puts 1 unit of a freshly created serial into stock (inventory adjustment through the session's RPC),
  * because Odoo refuses to deliver a serial that has no stock (negative stock not allowed).
  */
-async function receiveSerialIntoStock(page: Page, serial: string): Promise<void> {
+async function receiveSerialIntoStockImpl(page: Page, serial: string): Promise<void> {
   const err = await page.evaluate(async ([name, productCode]) => {
     const call = async (model: string, method: string, args: unknown[], kwargs: Record<string, unknown> = {}) => {
       const r = await fetch('/web/dataset/call_kw', {
@@ -414,7 +424,7 @@ async function receiveSerialIntoStock(page: Page, serial: string): Promise<void>
  * When the delivery is not Ready, opens Detailed Operations and creates a NEW serial number for each unit
  * (adds a line when nothing was reserved). Returns the serials created.
  */
-async function assignSerials(page: Page): Promise<string[]> {
+async function assignSerialsImpl(page: Page): Promise<string[]> {
   const used: string[] = [];
   await page.waitForTimeout(2_500); // let Check Availability finish updating the status
   const ready = await page.locator('.o_form_statusbar .o_arrow_button_current').first().textContent().catch(() => '');
@@ -486,7 +496,7 @@ async function assignSerials(page: Page): Promise<string[]> {
 }
 
 /** Opens the delivery from the order, validates it, comes back to the order. */
-export async function validateDelivery(page: Page): Promise<string> {
+async function validateDeliveryImpl(page: Page): Promise<string> {
   const orderUrl = page.url();
   const smart = page.locator('button[name="action_view_delivery"]').first();
   await expect(smart, 'Delivery smart button missing on the confirmed order').toBeVisible({ timeout: 20_000 });
@@ -522,7 +532,7 @@ export async function unlockOrder(page: Page): Promise<boolean> {
 }
 
 /** Creates and posts the invoice from the sales order. Leaves the page on the invoice form. */
-export async function createInvoice(page: Page): Promise<string> {
+async function createInvoiceImpl(page: Page): Promise<string> {
   await clickButton(page, /^create invoice$/i, 20_000);
   // Some configurations open a "Create invoices" wizard, others create the draft invoice straight away.
   const dlg = page.locator('.modal:visible').first();
@@ -548,7 +558,7 @@ export async function createInvoice(page: Page): Promise<string> {
 }
 
 /** Registers the cash payment on the posted invoice and checks the paid ribbon. */
-export async function registerCashPayment(page: Page): Promise<void> {
+async function registerCashPaymentImpl(page: Page): Promise<void> {
   await clickButton(page, /^register payment$/i, 20_000);
   const dlg = page.locator('.modal:visible').first();
   await expect(dlg).toBeVisible({ timeout: 15_000 });
@@ -585,7 +595,7 @@ export type BlankResult = 'blocked' | 'saved' | 'not-blankable' | 'field-not-sho
  * On an UNSAVED, fully filled quotation: empties one header field and presses Save.
  * 'saved' means Odoo accepted the quotation with that field blank (a missing validation).
  */
-export async function blankFieldAndTrySave(page: Page, f: BlankField): Promise<BlankResult> {
+async function blankFieldAndTrySaveImpl(page: Page, f: BlankField): Promise<BlankResult> {
   if (f.tab) await clickTab(page, f.tab).catch(() => {});
   const root = page.locator(`.o_form_view [name="${f.name}"]`).first();
   if (!(await root.isVisible({ timeout: 3_000 }).catch(() => false))) return 'field-not-shown';
@@ -629,7 +639,7 @@ export async function blankFieldAndTrySave(page: Page, f: BlankField): Promise<B
  * After a quotation with a bad line (zero quantity / zero price) is saved: is Confirm blocked?
  * Returns 'confirmed' when Odoo turned it into a Sales Order anyway.
  */
-export async function tryConfirmBadOrder(page: Page): Promise<'confirm-hidden' | 'blocked' | 'confirmed'> {
+async function tryConfirmBadOrderImpl(page: Page): Promise<'confirm-hidden' | 'blocked' | 'confirmed'> {
   await page.evaluate(() => window.scrollTo(0, 0));
   const confirm = page.locator('.o_form_statusbar').getByRole('button', { name: /^confirm$/i }).first();
   if (!(await confirm.isVisible({ timeout: 5_000 }).catch(() => false))) return 'confirm-hidden';
@@ -641,3 +651,30 @@ export async function tryConfirmBadOrder(page: Page): Promise<'confirm-hidden' |
   const current = await page.locator('.o_form_statusbar .o_arrow_button_current').first().textContent().catch(() => '');
   return /sales order/i.test(current ?? '') ? 'confirmed' : 'blocked';
 }
+
+// ─── Named report steps ───────────────────────────────────────────────────────
+// Each flow helper is exposed as a named test.step so the run report lists what happened, step by step.
+export const openSalesApp = (...args: Parameters<typeof openSalesAppImpl>): ReturnType<typeof openSalesAppImpl> =>
+  test.step('Open the Sales app', () => openSalesAppImpl(...args));
+export const switchCompany = (...args: Parameters<typeof switchCompanyImpl>): ReturnType<typeof switchCompanyImpl> =>
+  test.step(`Switch company to "${args[1]}"`, () => switchCompanyImpl(...args));
+export const navigateToQuotations = (...args: Parameters<typeof navigateToQuotationsImpl>): ReturnType<typeof navigateToQuotationsImpl> =>
+  test.step('Go to Orders > Quotations', () => navigateToQuotationsImpl(...args));
+export const createQuotation = (...args: Parameters<typeof createQuotationImpl>): ReturnType<typeof createQuotationImpl> =>
+  test.step(`Create quotation: ${args[1].customer}, ${args[1].paymentType}${args[1].save === false ? ' (not saved)' : ''}`, () => createQuotationImpl(...args));
+export const approveAndConfirm = (...args: Parameters<typeof approveAndConfirmImpl>): ReturnType<typeof approveAndConfirmImpl> =>
+  test.step('Give the required approvals and confirm the order', () => approveAndConfirmImpl(...args));
+const assignSerials = (...args: Parameters<typeof assignSerialsImpl>): ReturnType<typeof assignSerialsImpl> =>
+  test.step('Create a new serial number on the delivery', () => assignSerialsImpl(...args));
+const receiveSerialIntoStock = (...args: Parameters<typeof receiveSerialIntoStockImpl>): ReturnType<typeof receiveSerialIntoStockImpl> =>
+  test.step(`Put serial ${args[1]} into stock`, () => receiveSerialIntoStockImpl(...args));
+export const validateDelivery = (...args: Parameters<typeof validateDeliveryImpl>): ReturnType<typeof validateDeliveryImpl> =>
+  test.step('Open the delivery and validate it', () => validateDeliveryImpl(...args));
+export const createInvoice = (...args: Parameters<typeof createInvoiceImpl>): ReturnType<typeof createInvoiceImpl> =>
+  test.step('Create and post the invoice', () => createInvoiceImpl(...args));
+export const registerCashPayment = (...args: Parameters<typeof registerCashPaymentImpl>): ReturnType<typeof registerCashPaymentImpl> =>
+  test.step('Register the payment', () => registerCashPaymentImpl(...args));
+export const blankFieldAndTrySave = (...args: Parameters<typeof blankFieldAndTrySaveImpl>): ReturnType<typeof blankFieldAndTrySaveImpl> =>
+  test.step(`Empty "${args[1].label}" and try to save`, () => blankFieldAndTrySaveImpl(...args));
+export const tryConfirmBadOrder = (...args: Parameters<typeof tryConfirmBadOrderImpl>): ReturnType<typeof tryConfirmBadOrderImpl> =>
+  test.step('Try to confirm the order', () => tryConfirmBadOrderImpl(...args));

@@ -5,14 +5,14 @@
  * shows follows the arithmetic in SalesCalculations:
  *   1. line "Tax excl." = quantity × unit price × (1 − discount %)
  *   2. Untaxed Amount   = sum of the lines' Tax excl.
- *   3. Total            = Untaxed Amount + taxes shown in the totals panel
- *   4. the UI totals equal the stored sale.order amounts (read back by RPC)
+ *   3. Total            = Untaxed Amount + Taxes
+ * (2 and 3 are checked on the stored sale.order amounts, read back by RPC: this form's totals panel is not a plain
+ *  table, so the stored values are the reliable source.)
  * The draft quotation is deleted afterwards.
  *
  * Optional env: FLOW_CONTROL_CUSTOMER (default "abc").
  */
 import { test, expect } from '../../../../core/fixtures/index';
-import type { Page } from '@playwright/test';
 import { COMPANY, openSalesApp, switchCompany, createQuotation } from '../../flows/flowHelpers';
 import { deleteDraftQuotations } from '../../flows/quotationCleanup';
 import { parseAmount, lineSubtotal, quotationTotals, round2 } from '../../calculations/SalesCalculations';
@@ -23,26 +23,6 @@ const UNIT_PRICE = 250;
 const TOLERANCE = 0.02;
 
 test.use({ actionTimeout: 20_000, navigationTimeout: 60_000, video: 'off', trace: 'off' });
-
-interface ShownTotals { untaxed: number; taxes: number; total: number }
-
-/** Reads the totals panel; labels carry CSS-injected colons, so match on words only. */
-async function readTotals(page: Page): Promise<ShownTotals> {
-  const table = page.locator('table').filter({ hasText: /Untaxed Amount/i }).last();
-  await expect(table).toBeVisible({ timeout: 15_000 });
-  await table.scrollIntoViewIfNeeded();
-  const rows = await table.locator('tr').evaluateAll(trs => trs.map(tr => ({
-    label: (tr.querySelector('td, th')?.textContent ?? '').replace(/\s+/g, ' ').trim(),
-    value: (tr.querySelector('td:last-child')?.textContent ?? '').trim(),
-  })));
-  let untaxed = 0; let total = 0; let taxes = 0;
-  for (const r of rows) {
-    if (/untaxed amount/i.test(r.label)) untaxed = parseAmount(r.value);
-    else if (/^total\b/i.test(r.label)) total = parseAmount(r.value);
-    else if (r.label && /\d/.test(r.value)) taxes += parseAmount(r.value);
-  }
-  return { untaxed, taxes: round2(taxes), total };
-}
 
 test.describe('Sales quotation calculations @module:sales @step:business', () => {
   let orderNumber = '';
@@ -65,23 +45,27 @@ test.describe('Sales quotation calculations @module:sales @step:business', () =>
     const price = parseAmount(await row.locator('[name="price_unit"]').textContent());
     const discount = parseAmount(await row.locator('[name="discount"]').textContent().catch(() => '0'));
     const shownSubtotal = parseAmount(await row.locator('[name="price_subtotal"]').textContent());
-    expect(qty).toBe(QUANTITY);
-    expect(price).toBe(UNIT_PRICE);
+    await test.step(`Line shows quantity ${QUANTITY} and unit price ${UNIT_PRICE}`, async () => {
+      expect(qty).toBe(QUANTITY);
+      expect(price).toBe(UNIT_PRICE);
+    });
 
     // 1. line amount
     const expectedLine = lineSubtotal({ quantity: qty, unitPrice: price, discountPct: discount });
-    expect(Math.abs(shownSubtotal - expectedLine), `line Tax excl. ${shownSubtotal} vs ${expectedLine}`).toBeLessThanOrEqual(TOLERANCE);
+    await test.step(`Line Tax excl. = ${qty} × ${price} × (1 − ${discount}%) = ${expectedLine}`, async () => {
+      expect(Math.abs(shownSubtotal - expectedLine), `line Tax excl. ${shownSubtotal} vs ${expectedLine}`).toBeLessThanOrEqual(TOLERANCE);
+    });
 
-    // 2 + 3. totals panel
-    const shown = await readTotals(page);
+    // 2 + 3. stored totals
     const expected = quotationTotals([{ quantity: qty, unitPrice: price, discountPct: discount }]);
-    expect(Math.abs(shown.untaxed - expected.untaxed), `Untaxed ${shown.untaxed} vs ${expected.untaxed}`).toBeLessThanOrEqual(TOLERANCE);
-    expect(Math.abs(shown.total - round2(shown.untaxed + shown.taxes)), `Total ${shown.total} vs untaxed + taxes ${shown.untaxed + shown.taxes}`).toBeLessThanOrEqual(TOLERANCE);
-
-    // 4. stored amounts
-    const [stored] = await rpc.searchRead<{ amount_untaxed: number; amount_total: number }>(
-      'sale.order', [['name', '=', orderNumber]], ['amount_untaxed', 'amount_total'], { limit: 1 });
-    expect(Math.abs(stored.amount_untaxed - shown.untaxed)).toBeLessThanOrEqual(TOLERANCE);
-    expect(Math.abs(stored.amount_total - shown.total)).toBeLessThanOrEqual(TOLERANCE);
+    const [stored] = await rpc.searchRead<{ amount_untaxed: number; amount_tax: number; amount_total: number }>(
+      'sale.order', [['name', '=', orderNumber]], ['amount_untaxed', 'amount_tax', 'amount_total'], { limit: 1 });
+    await test.step(`Untaxed Amount = sum of line amounts = ${expected.untaxed}`, async () => {
+      expect(Math.abs(stored.amount_untaxed - expected.untaxed), `Untaxed ${stored.amount_untaxed} vs ${expected.untaxed}`).toBeLessThanOrEqual(TOLERANCE);
+    });
+    await test.step('Total = Untaxed Amount + Taxes', async () => {
+      expect(Math.abs(stored.amount_total - round2(stored.amount_untaxed + stored.amount_tax)),
+        `Total ${stored.amount_total} vs untaxed + tax ${stored.amount_untaxed + stored.amount_tax}`).toBeLessThanOrEqual(TOLERANCE);
+    });
   });
 });

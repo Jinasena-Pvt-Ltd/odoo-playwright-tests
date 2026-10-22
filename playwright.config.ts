@@ -21,6 +21,7 @@ export default defineConfig({
     ['json', { outputFile: 'test-results/results.json' }],
     ['allure-playwright', { outputFolder: 'allure-results' }],
     ['./src/core/reporters/ValidationTableReporter.ts', { outputDir: 'reports/validation-table' }],
+    ['./src/core/reporters/StepRunReporter.ts', { outputDir: 'reports' }],
   ],
 
   use: {
