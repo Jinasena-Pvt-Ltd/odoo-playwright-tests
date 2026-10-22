@@ -47,6 +47,8 @@ const HINTS = [
     'Odoo finding: Confirm is available for a line with zero quantity / zero price. The test passes once Odoo blocks it. A confirmed order was left behind — cancel it in Odoo.'],
   [/View Credit Limit Overdue Details should be/i,
     'Odoo only shows this button in some credit positions. If it is not required above the credit limit, remove that check from sales.credit-control.spec.ts.'],
+  [/Bank Guarantee/i,
+    'The customer has a mandatory Bank Guarantee that is not valid, so Odoo will not confirm its invoice. Open the customer > Bank Guarantee Details: enter the amount, expiry date and documents and tick "Valid Bank Guarantee" (or use a credit customer without a mandatory Bank Guarantee).'],
   [/Stuck before Confirm/i,
     'No Confirm / Request / Approve button was usable. Check the customer is within its credit limit and not overdue, or set ODOO_APPROVER_EMAIL / ODOO_APPROVER_PASSWORD so approvals can be given.'],
   [/o_main_navbar|Odoo did not load|Orders'\)\.first\(\)/i,

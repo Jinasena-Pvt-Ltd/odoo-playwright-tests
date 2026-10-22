@@ -72,6 +72,9 @@ test.describe('Sales quotation validations @module:sales @step:validations', () 
     test.skip(process.env.RUN_SALES_FLOWS !== 'true',
       'May leave a confirmed order if Odoo has no such control — set RUN_SALES_FLOWS=true to run');
 
+    // The server sometimes drops requests late in a long run ("Odoo did not load"); one retry separates that from a real failure.
+    test.describe.configure({ retries: 1 });
+
     const BAD_LINES = [
       { what: 'zero quantity', opts: { quantity: 0 } },
       { what: 'zero unit price', opts: { unitPrice: 0 } },

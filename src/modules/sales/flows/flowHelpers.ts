@@ -192,6 +192,18 @@ export async function saveRecord(page: Page): Promise<void> {
   }
 }
 
+/**
+ * The document number shown in the form title (delivery "…/OUT/…", invoice "…/2026/…"). Read from the title block,
+ * because the first [name="name"] on a delivery / invoice form can be a product line instead of the document.
+ */
+export async function recordNumber(page: Page): Promise<string> {
+  const title = ((await page.locator('.o_form_view .oe_title').first().textContent().catch(() => '')) ?? '').replace(/\s+/g, ' ').trim();
+  const doc = title.match(/[A-Za-z0-9.-]+(?:\/[A-Za-z0-9.-]+)+/);
+  if (doc) return doc[0];
+  if (title) return title;
+  return ((await page.locator('.o_form_view [name="name"]').first().textContent().catch(() => '')) ?? '').trim();
+}
+
 // ─── Quotation ────────────────────────────────────────────────────────────────
 
 export interface OrderInput {
@@ -319,7 +331,7 @@ async function approveAndConfirmImpl(page: Page, browser: Browser): Promise<Appr
 
     if (buttons.some(b => /^confirm$/i.test(b.text) && b.enabled)) {
       await clickButton(page, /^confirm$/i);
-      await expect(page.locator('.o_form_statusbar .o_statusbar_status')).toContainText(/sales order/i, { timeout: 60_000 });
+      await expect(page.locator('.o_form_statusbar .o_arrow_button_current')).toContainText(/sales order/i, { timeout: 60_000 });
       return out;
     }
 
@@ -505,7 +517,7 @@ async function validateDeliveryImpl(page: Page): Promise<string> {
     await page.locator('.o_list_view .o_data_row').first().click();
   }
   await expect(page.locator('.o_form_view')).toBeVisible({ timeout: 20_000 });
-  const ref = ((await page.locator('.o_form_view [name="name"]').first().textContent().catch(() => '')) ?? '').trim();
+  const ref = await recordNumber(page);
 
   const check = page.locator('.o_form_statusbar').getByRole('button', { name: /check availability/i });
   if (await check.isVisible({ timeout: 2_000 }).catch(() => false)) await check.click();
@@ -513,7 +525,7 @@ async function validateDeliveryImpl(page: Page): Promise<string> {
   await assignSerials(page);
   await clickButton(page, /^validate$/i, 20_000);
   await pressThroughDialogs(page);
-  await expect(page.locator('.o_form_statusbar .o_statusbar_status'))
+  await expect(page.locator('.o_form_statusbar .o_arrow_button_current'))
     .toContainText(/done/i, { timeout: 30_000 })
     .catch(() => { throw new Error(`Delivery ${ref} did not reach Done. Header buttons: ${'(see screenshot)'}`); });
 
@@ -541,7 +553,7 @@ async function createInvoiceImpl(page: Page): Promise<string> {
     await throwIfOdooError(page);
   }
   await expect(page.locator('.o_form_view [name="partner_id"]')).toBeVisible({ timeout: 30_000 });
-  await expect(page.locator('.o_form_statusbar .o_statusbar_status')).toContainText(/draft|posted/i, { timeout: 30_000 });
+  await expect(page.locator('.o_form_statusbar .o_arrow_button_current')).toContainText(/draft|posted/i, { timeout: 30_000 });
   const confirm = page.locator('.o_form_statusbar').getByRole('button', { name: /^confirm$/i }).first();
   const bgNotify = page.locator('.o_form_statusbar').getByRole('button', { name: /send bank guarantee validity notification/i }).first();
   if (!(await confirm.isVisible({ timeout: 3_000 }).catch(() => false)) && await bgNotify.isVisible({ timeout: 2_000 }).catch(() => false)) {
@@ -553,8 +565,12 @@ async function createInvoiceImpl(page: Page): Promise<string> {
     await confirm.click();
     await throwIfOdooError(page);
   }
-  await expect(page.locator('.o_form_statusbar .o_statusbar_status')).toContainText(/posted/i, { timeout: 30_000 });
-  return ((await page.locator('.o_form_view [name="name"]').first().textContent().catch(() => '')) ?? '').trim();
+  const stage = page.locator('.o_form_statusbar .o_arrow_button_current');
+  if (!/posted/i.test((await stage.first().textContent({ timeout: 30_000 }).catch(() => '')) ?? '')) {
+    await expect(stage, `The invoice stayed in Draft: Confirm was not available. Header buttons: ${(await visibleHeaderButtons(page)).join(' | ') || '(none)'}. ` +
+      'A "View Bank Guarantee Validity" button means the customer has a mandatory Bank Guarantee that is not valid.').toContainText(/posted/i, { timeout: 10_000 });
+  }
+  return recordNumber(page);
 }
 
 /** Registers the cash payment on the posted invoice and checks the paid ribbon. */
