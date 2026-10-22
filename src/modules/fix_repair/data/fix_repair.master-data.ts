@@ -15,7 +15,7 @@ export const FIX_REPAIR_TEST_CONFIG = {
   // unique substring is used.
   repairTypeUnderWarrantyExternal: 'External not RUG',
   serialNumberExample: '0630_001',
-  warrantyCardImagePath: 'WarrantyCard.jpg',
+  warrantyCardImagePath: 'images/WarrantyCard.jpg',
   jobLocationFactory: 'Factory Repair',
   jobLocationCentre: 'Centre Repair',
   returnReceiptLocationExample: 'BR-AM/Stock',
@@ -43,7 +43,7 @@ export const FIX_REPAIR_TEST_CONFIG = {
   diagnosisSubReason: 'Hi Voltage',
   diagnosisResolution: 'Reject',
   diagnosisRepairStage: '1-REP-REC',
-  repairImagePath: 'WaterPump.jpg',
+  repairImagePath: 'images/WaterPump.jpg',
   // Spare part added to the repair quotation via the task's "Products"
   // catalog — [02BB 023] BALL BEARING 6202-2RS, has stock on this instance.
   quotationProductSearchTerm: '02BB 023',
