@@ -193,7 +193,7 @@
   <div class="nav-section">
     <div class="nav-module-label"><span class="mod-dot" style="background:#64748b"></span>sales</div>
     <a class="nav-item" href="#sales-config"><span class="nav-dot amber"></span>Config<span class="nav-count skip">0p 1s</span></a>
-    <a class="nav-item" href="#sales-business"><span class="nav-dot amber"></span>Business<span class="nav-count skip">0p 2s</span></a>
+    <a class="nav-item" href="#sales-business"><span class="nav-dot amber"></span>Business<span class="nav-count skip">0p 8s</span></a>
     <a class="nav-item" href="#sales-reporting"><span class="nav-dot amber"></span>Reporting<span class="nav-count skip">0p 1s</span></a>
     <a class="nav-item" href="#sales-permissions"><span class="nav-dot amber"></span>Permissions<span class="nav-count skip">0p 1s</span></a>
     <a class="nav-item" href="#sales-validations"><span class="nav-dot amber"></span>Field Validations<span class="nav-count skip">0p 1s</span></a>
@@ -216,21 +216,21 @@
     <div class="hero-top">
       <div>
         <div class="hero-title">odoo-playwright-tests — Master E2E Report</div>
-        <div class="hero-sub">1 Modules · 8 tests · 2026-10-22</div>
+        <div class="hero-sub">1 Modules · 14 tests · 2026-10-22</div>
       </div>
       <div class="hero-badge">Auto-generated</div>
     </div>
     <div class="hero-stats">
       <div class="hero-stat"><div class="num">1</div><div class="lbl">Modules</div></div>
       <div class="hero-divider"></div>
-      <div class="hero-stat"><div class="num">8</div><div class="lbl">Total Tests</div></div>
+      <div class="hero-stat"><div class="num">14</div><div class="lbl">Total Tests</div></div>
       <div class="hero-divider"></div>
       <div class="hero-stat"><div class="num green">0</div><div class="lbl">Passed</div></div>
       <div class="hero-divider"></div>
       <div class="hero-stat"><div class="num red">0</div><div class="lbl">Failed</div></div>
       <div class="hero-divider"></div>
       <div class="hero-stat"><div class="num purple">7</div><div class="lbl">Skipped (SaaS)</div></div>
-      <div class="hero-divider"></div><div class="hero-stat"><div class="num amber">1</div><div class="lbl">Pending</div></div>
+      <div class="hero-divider"></div><div class="hero-stat"><div class="num amber">7</div><div class="lbl">Pending</div></div>
     </div>
     <div class="hero-bar-wrap">
       <div class="hero-bar-label"><span>Pass rate (of tests that ran)</span><span>0% · 0/0</span></div>
@@ -247,14 +247,14 @@
         <span class="p">✔ 0</span>
         <span class="s">⏭ 7</span>
         
-        <span class="t">of 8</span>
+        <span class="t">of 14</span>
       </div>
       <div class="module-mini-bar">
         <div class="seg-pass" style="width:0%"></div>
-        <div class="seg-skip" style="width:88%"></div>
+        <div class="seg-skip" style="width:50%"></div>
         <div class="seg-fail" style="width:0%"></div>
       </div>
-      <div style="font-size:0.68rem;color:var(--muted);margin-top:6px;">8 spec files</div>
+      <div style="font-size:0.68rem;color:var(--muted);margin-top:6px;">9 spec files</div>
     </div>
   </div>
 
@@ -265,9 +265,9 @@
       <span class="mod-header-icon">📦</span>
       <div>
         <div class="mod-header-title">sales</div>
-        <div class="mod-header-meta">src/modules/sales/ · 8 spec files · 8 tests</div>
+        <div class="mod-header-meta">src/modules/sales/ · 9 spec files · 14 tests</div>
       </div>
-      <div class="mod-header-pills"><span class="pill purple">7 skipped</span> <span class="pill amber">1 pending</span></div>
+      <div class="mod-header-pills"><span class="pill purple">7 skipped</span> <span class="pill amber">7 pending</span></div>
     </div>
     
     
@@ -305,8 +305,8 @@
       <div class="suite-hdr">
         <span class="suite-hdr-icon">💼</span>
         <span class="suite-hdr-title">Business</span>
-        <span class="pill purple">1 skipped</span> <span class="pill amber">1 pending</span>
-        <span class="suite-hdr-file">2 files</span>
+        <span class="pill purple">1 skipped</span> <span class="pill amber">7 pending</span>
+        <span class="suite-hdr-file">3 files</span>
       </div>
       
       <div class="suite-hdr" style="margin-top:4px;">
@@ -333,6 +333,146 @@
     test.skip(true, 'Not yet implemented — replace this placeholder with real test logic');
   });
 });
+</pre></details></div>
+      </div>
+      <div class="suite-hdr" style="margin-top:16px;">
+        <span class="suite-hdr-icon">💼</span>
+        <span class="suite-hdr-title">sales.credit-serial</span>
+        <span class="pill amber">6 pending</span>
+        <span class="suite-hdr-file">sales.credit-serial.spec.ts</span>
+      </div>
+      <div class="test-list">
+        <div class="test-row hist"><span class="test-row-icon">⬜</span><span class="test-row-name">precondition: credit customer is set to Credit and has no overdue invoices</span><div class="test-row-tags"><span class="tag smoke">@smoke</span><span class="tag rpc">RPC</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('precondition: credit customer is set to Credit and has no overdue invoices @smoke', async ({ rpc }) =&gt; {
+    const [company] = await rpc.searchRead&lt;{ id: number }&gt;('res.company', [['name', '=', COMPANY]], ['id'], { limit: 1 });
+    expect(company, `Company &quot;${COMPANY}&quot; not found`).toBeTruthy();
+    const [partner] = await rpc.callMethod&lt;Array&lt;{
+      name: string; total_overdue: number; x_studio_payment_method: string | false;
+      use_partner_credit_limit: boolean; credit_limit: number;
+    }&gt;&gt;('res.partner', 'search_read', [[['name', '=', CUSTOMER]]], {
+      fields: ['name', 'total_overdue', 'x_studio_payment_method', 'use_partner_credit_limit', 'credit_limit'],
+      limit: 1,
+      context: { allowed_company_ids: [company.id], company_id: company.id },
+    });
+    expect(partner, `Customer &quot;${CUSTOMER}&quot; not found`).toBeTruthy();
+    expect(partner.x_studio_payment_method, `${CUSTOMER} must be a Credit customer`).toBe('Credit');
+    expect(partner.total_overdue, `${CUSTOMER} has overdue invoices — choose another customer (CREDIT_CUSTOMER)`).toBe(0);
+    expect(partner.credit_limit, `${CUSTOMER} needs a credit limit`).toBeGreaterThan(0);
+  });
+
+  test('1. quotation: Credit order, serial product, Payment Terms 14 Days', async ({ page }) =&gt; {
+    orderNumber = await createQuotation(page, {
+      customer: CUSTOMER, paymentType: 'Credit',
+      productCode: SERIAL_CODE, productName: SERIAL_NAME, paymentTerm: PAYMENT_TERM,
+    });</pre></details></div>
+        <div class="test-row hist"><span class="test-row-icon">⬜</span><span class="test-row-name">1. quotation: Credit order, serial product, Payment Terms 14 Days</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('1. quotation: Credit order, serial product, Payment Terms 14 Days', async ({ page }) =&gt; {
+    orderNumber = await createQuotation(page, {
+      customer: CUSTOMER, paymentType: 'Credit',
+      productCode: SERIAL_CODE, productName: SERIAL_NAME, paymentTerm: PAYMENT_TERM,
+    });
+    expect(orderNumber).toMatch(/^S\d+/);
+    orderUrl = page.url();
+
+    await expect(page.locator('[name=&quot;x_studio_order_payment_method&quot;] select').first()).toHaveValue(/credit/i);
+    await page.locator('.o_notebook .nav-link').filter({ hasText: /other\s*info/i }).first().click();
+    await expect(page.locator('[name=&quot;payment_term_id&quot;] input').first()).toHaveValue(PAYMENT_TERM);
+    // A credit order must never use Immediate Payment.
+    await expect(page.locator('[name=&quot;payment_term_id&quot;] input').first()).not.toHaveValue(/immediate/i);
+  });
+
+  test('2. confirm: no approval needed, quotation becomes a Sales Order', async ({ page, browser }) =&gt; {
+    await page.goto(orderUrl, { waitUntil: 'domcontentloaded' });
+    const buttons = (await headerButtons(page)).map(b =&gt; b.text);
+    expect(buttons.some(t =&gt; /^request .*approval$/i.test(t)),
+      `${CUSTOMER} needs a credit limit approval (over limit or overdue). Buttons: ${buttons.join(' | ')}`).toBe(false);
+
+    const outcome = await approveAndConfirm(page, browser);</pre></details></div>
+        <div class="test-row hist"><span class="test-row-icon">⬜</span><span class="test-row-name">2. confirm: no approval needed, quotation becomes a Sales Order</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('2. confirm: no approval needed, quotation becomes a Sales Order', async ({ page, browser }) =&gt; {
+    await page.goto(orderUrl, { waitUntil: 'domcontentloaded' });
+    const buttons = (await headerButtons(page)).map(b =&gt; b.text);
+    expect(buttons.some(t =&gt; /^request .*approval$/i.test(t)),
+      `${CUSTOMER} needs a credit limit approval (over limit or overdue). Buttons: ${buttons.join(' | ')}`).toBe(false);
+
+    const outcome = await approveAndConfirm(page, browser);
+    expect(outcome.taken, 'no approvals expected for a customer within the credit limit').toEqual([]);
+    await expect(page.locator('.o_form_statusbar .o_statusbar_status')).toContainText(/sales order/i);
+    await expect(page.locator('button[name=&quot;action_view_delivery&quot;]').first()).toBeVisible();
+  });
+
+  test('3. delivery: new serial number, validate → Done', async ({ page }) =&gt; {
+    await page.goto(orderUrl, { waitUntil: 'domcontentloaded' });
+    const ref = await validateDelivery(page); // creates the serial, puts it in stock, validates, returns to the order
+    expect(ref).toMatch(/OUT/i);
+    await expect(page.locator('button[name=&quot;action_view_delivery&quot;]').first()).toBeVisible();
+    await expect(page.locator('button', { hasText: /create invoice/i }).first()).toBeVisible();
+  });
+
+  test('4. invoice: posted, keeps 14 Days, due 14 days after the invoice date', async ({ page, rpc }) =&gt; {
+    await page.goto(orderUrl, { waitUntil: 'domcontentloaded' });</pre></details></div>
+        <div class="test-row hist"><span class="test-row-icon">⬜</span><span class="test-row-name">3. delivery: new serial number, validate → Done</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('3. delivery: new serial number, validate → Done', async ({ page }) =&gt; {
+    await page.goto(orderUrl, { waitUntil: 'domcontentloaded' });
+    const ref = await validateDelivery(page); // creates the serial, puts it in stock, validates, returns to the order
+    expect(ref).toMatch(/OUT/i);
+    await expect(page.locator('button[name=&quot;action_view_delivery&quot;]').first()).toBeVisible();
+    await expect(page.locator('button', { hasText: /create invoice/i }).first()).toBeVisible();
+  });
+
+  test('4. invoice: posted, keeps 14 Days, due 14 days after the invoice date', async ({ page, rpc }) =&gt; {
+    await page.goto(orderUrl, { waitUntil: 'domcontentloaded' });
+    invoiceName = await createInvoice(page);
+    expect(invoiceName).toMatch(/\//);
+    await expect(page.locator('.o_form_statusbar .o_statusbar_status')).toContainText(/posted/i);
+    // A credit sale is not paid at invoicing time: no payment ribbon yet.
+    await expect(page.locator('.o_form_view .ribbon span')).toHaveCount(0);
+
+    const [move] = await rpc.searchRead&lt;{
+      invoice_date: string; invoice_date_due: string; invoice_payment_term_id: [number, string] | false; payment_state: string;
+    }&gt;('account.move', [['name', '=', invoiceName]],
+      ['invoice_date', 'invoice_date_due', 'invoice_payment_term_id', 'payment_state'], { limit: 1 });
+    expect(move.invoice_payment_term_id &amp;&amp; move.invoice_payment_term_id[1]).toBe(PAYMENT_TERM);
+    expect(daysBetween(move.invoice_date, move.invoice_date_due)).toBe(TERM_DAYS);</pre></details></div>
+        <div class="test-row hist"><span class="test-row-icon">⬜</span><span class="test-row-name">4. invoice: posted, keeps 14 Days, due 14 days after the invoice date</span><div class="test-row-tags"><span class="tag ui">UI</span><span class="tag rpc">RPC</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('4. invoice: posted, keeps 14 Days, due 14 days after the invoice date', async ({ page, rpc }) =&gt; {
+    await page.goto(orderUrl, { waitUntil: 'domcontentloaded' });
+    invoiceName = await createInvoice(page);
+    expect(invoiceName).toMatch(/\//);
+    await expect(page.locator('.o_form_statusbar .o_statusbar_status')).toContainText(/posted/i);
+    // A credit sale is not paid at invoicing time: no payment ribbon yet.
+    await expect(page.locator('.o_form_view .ribbon span')).toHaveCount(0);
+
+    const [move] = await rpc.searchRead&lt;{
+      invoice_date: string; invoice_date_due: string; invoice_payment_term_id: [number, string] | false; payment_state: string;
+    }&gt;('account.move', [['name', '=', invoiceName]],
+      ['invoice_date', 'invoice_date_due', 'invoice_payment_term_id', 'payment_state'], { limit: 1 });
+    expect(move.invoice_payment_term_id &amp;&amp; move.invoice_payment_term_id[1]).toBe(PAYMENT_TERM);
+    expect(daysBetween(move.invoice_date, move.invoice_date_due)).toBe(TERM_DAYS);
+    expect(move.payment_state).toBe('not_paid');
+  });
+
+  test('5. payment day: come back through the Sales app, register the payment → IN PAYMENT', async ({ page, rpc }) =&gt; {
+    // &quot;14 days later&quot;: start from the Sales app, not from a saved link.
+    await openSalesApp(page);
+    await page.locator('.o_menu_sections').getByText('Orders').first().click();
+    await page.locator('[data-menu-xmlid=&quot;sale.menu_sale_order&quot;]').click();</pre></details></div>
+        <div class="test-row hist"><span class="test-row-icon">⬜</span><span class="test-row-name">5. payment day: come back through the Sales app, register the payment → IN PAYMENT</span><div class="test-row-tags"><span class="tag ui">UI</span><span class="tag rpc">RPC</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('5. payment day: come back through the Sales app, register the payment → IN PAYMENT', async ({ page, rpc }) =&gt; {
+    // &quot;14 days later&quot;: start from the Sales app, not from a saved link.
+    await openSalesApp(page);
+    await page.locator('.o_menu_sections').getByText('Orders').first().click();
+    await page.locator('[data-menu-xmlid=&quot;sale.menu_sale_order&quot;]').click();
+    await expect(page.locator('.o_list_view')).toBeVisible({ timeout: 30_000 });
+
+    const search = page.locator('input.o_searchview_input').first();
+    await search.fill(orderNumber);
+    await search.press('Enter');
+    await expect(page.locator('.o_searchview_facet').filter({ hasText: orderNumber }).first()).toBeVisible({ timeout: 10_000 });
+    await page.locator('.o_list_table .o_data_row').filter({ hasText: orderNumber }).first().click();
+    await expect(page.locator('.o_form_view')).toBeVisible({ timeout: 30_000 });
+
+    await page.locator('button[name=&quot;action_view_invoice&quot;]').first().click();
+    await throwIfOdooError(page);
+    await expect(page.locator('.o_form_statusbar .o_statusbar_status')).toContainText(/posted/i, { timeout: 30_000 });
+    await expect(page.locator('.o_form_view [name=&quot;name&quot;]').first()).toContainText(invoiceName);
+
+    await registerCashPayment(page); // Register Payment → Customer Receipts - Cash → Create Payment → ribbon
+    await expect(page.locator('.o_form_view .ribbon span').first()).toHaveText(/in payment|paid/i);
 </pre></details></div>
       </div>
       <div class="suite-hdr" style="margin-top:16px;">

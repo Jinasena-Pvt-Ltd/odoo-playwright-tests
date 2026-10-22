@@ -202,6 +202,11 @@ export interface OrderInput {
   unitPrice?: number;
   /** false = leave the form unsaved (used by the blank-field validation checks). Default true. */
   save?: boolean;
+  /** Product to sell; defaults to PRODUCT_CODE / PRODUCT_NAME. */
+  productCode?: string;
+  productName?: string;
+  /** Payment Terms to select on the Other Info tab (e.g. '14 Days'); when omitted Odoo's default from the customer is kept. */
+  paymentTerm?: string;
 }
 
 /** Creates and saves a quotation with one product line. Returns the order number (e.g. S02250). */
@@ -232,6 +237,7 @@ export async function createQuotation(page: Page, input: OrderInput): Promise<st
       !/immediate/i.test(await page.locator('[name="payment_term_id"] input').first().inputValue().catch(() => '')))) {
     await selectMany2one(page, 'payment_term_id', 'Immediate Payment');
   }
+  if (input.paymentTerm) await selectMany2one(page, 'payment_term_id', input.paymentTerm);
 
   // Product line
   await clickTab(page, /order\s*lines/i);
@@ -241,10 +247,10 @@ export async function createQuotation(page: Page, input: OrderInput): Promise<st
   const row = page.locator('.o_data_row.o_selected_row').first();
   const pInput = row.locator('[name="product_id"] input').first();
   await expect(pInput).toBeVisible({ timeout: 8_000 });
-  await pInput.pressSequentially(PRODUCT_CODE, { delay: 50 });
+  await pInput.pressSequentially(input.productCode ?? PRODUCT_CODE, { delay: 50 });
   const drop = page.locator('.o-autocomplete--dropdown-menu');
   await expect(drop).toBeVisible({ timeout: 10_000 });
-  await drop.locator('li, .o-autocomplete--dropdown-item').filter({ hasText: PRODUCT_NAME }).first().click({ force: true });
+  await drop.locator('li, .o-autocomplete--dropdown-item').filter({ hasText: input.productName ?? PRODUCT_NAME }).first().click({ force: true });
   if (input.quantity !== undefined && input.quantity !== 1) {
     const qty = row.locator('[name="product_uom_qty"] input').first();
     await qty.click(); await qty.selectText(); await qty.fill(String(input.quantity)); await qty.press('Tab');

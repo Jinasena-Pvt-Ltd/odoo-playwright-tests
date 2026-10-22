@@ -45,3 +45,18 @@ import isn't here,before u made the Sales: Credit Sales Order - Serial Number Pr
 **Files touched:**
 - Write: C:\Users\Urliyas\AppData\Local\Temp\claude\c--Users-Urliyas-Documents-GitHub-odoo-playwright-tests\24d41de7-d52d-4966-adbb-ecbe07ee52da\scratchpad\q2.js
 
+
+---
+
+## Change -- 2026-10-22T05:11:44Z
+
+**Prompt:**
+```
+<ide_opened_file>The user opened the file c:\Users\Urliyas\Downloads\Handoff Odoo 17 Sales Bug Retest Automation.md in the IDE. This may or may not be related to the current task.</ide_opened_file>
+after study this tour,create the test cases.save it in tests folder.
+```
+
+**Files touched:**
+- Edit: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\flows\flowHelpers.ts
+- Write: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\modules\sales\tests\02-business\sales.credit-serial.spec.ts
+
