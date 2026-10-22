@@ -1,0 +1,1841 @@
+{
+ "label": "2nd run",
+ "startedAt": "2026-10-22T08:41:00.353Z",
+ "rows": [
+  {
+   "key": "setup|setup|setup||authenticate: auth-storage/admin.json",
+   "module": "setup",
+   "stepKey": "setup",
+   "describe": "",
+   "title": "authenticate: auth-storage/admin.json",
+   "status": "passed",
+   "durationMs": 11768,
+   "error": "",
+   "steps": [],
+   "annotations": [],
+   "screenshot": "",
+   "project": "setup"
+  },
+  {
+   "key": "admin|sales|config|Sales Configuration Setup|placeholder — replace with real test",
+   "module": "sales",
+   "stepKey": "config",
+   "describe": "Sales Configuration Setup",
+   "title": "placeholder — replace with real test",
+   "status": "skipped",
+   "durationMs": 1123,
+   "error": "",
+   "steps": [],
+   "annotations": [
+    {
+     "type": "skip",
+     "description": "Not yet implemented — replace this placeholder with real test logic"
+    }
+   ],
+   "screenshot": "",
+   "project": "admin"
+  },
+  {
+   "key": "admin|sales|business|Sales Business Logic|placeholder — replace with real test",
+   "module": "sales",
+   "stepKey": "business",
+   "describe": "Sales Business Logic",
+   "title": "placeholder — replace with real test",
+   "status": "skipped",
+   "durationMs": 1205,
+   "error": "",
+   "steps": [],
+   "annotations": [
+    {
+     "type": "skip",
+     "description": "Not yet implemented — replace this placeholder with real test logic"
+    }
+   ],
+   "screenshot": "",
+   "project": "admin"
+  },
+  {
+   "key": "admin|sales|reporting|Sales Reporting|placeholder — replace with real test",
+   "module": "sales",
+   "stepKey": "reporting",
+   "describe": "Sales Reporting",
+   "title": "placeholder — replace with real test",
+   "status": "skipped",
+   "durationMs": 911,
+   "error": "",
+   "steps": [],
+   "annotations": [
+    {
+     "type": "skip",
+     "description": "Not yet implemented — replace this placeholder with real test logic"
+    }
+   ],
+   "screenshot": "",
+   "project": "admin"
+  },
+  {
+   "key": "admin|sales|permissions|Sales User Permissions|placeholder — replace with real test",
+   "module": "sales",
+   "stepKey": "permissions",
+   "describe": "Sales User Permissions",
+   "title": "placeholder — replace with real test",
+   "status": "skipped",
+   "durationMs": 1145,
+   "error": "",
+   "steps": [],
+   "annotations": [
+    {
+     "type": "skip",
+     "description": "Not yet implemented — replace this placeholder with real test logic"
+    }
+   ],
+   "screenshot": "",
+   "project": "admin"
+  },
+  {
+   "key": "admin|sales|validations|Sales Field Validations|placeholder — replace with real test",
+   "module": "sales",
+   "stepKey": "validations",
+   "describe": "Sales Field Validations",
+   "title": "placeholder — replace with real test",
+   "status": "skipped",
+   "durationMs": 811,
+   "error": "",
+   "steps": [],
+   "annotations": [
+    {
+     "type": "skip",
+     "description": "Not yet implemented — replace this placeholder with real test logic"
+    }
+   ],
+   "screenshot": "",
+   "project": "admin"
+  },
+  {
+   "key": "admin|sales|edge|Sales Edge Cases|placeholder — replace with real test",
+   "module": "sales",
+   "stepKey": "edge",
+   "describe": "Sales Edge Cases",
+   "title": "placeholder — replace with real test",
+   "status": "skipped",
+   "durationMs": 871,
+   "error": "",
+   "steps": [],
+   "annotations": [
+    {
+     "type": "skip",
+     "description": "Not yet implemented — replace this placeholder with real test logic"
+    }
+   ],
+   "screenshot": "",
+   "project": "admin"
+  },
+  {
+   "key": "admin|sales|archive|Sales Archive & Cleanup|placeholder — replace with real test",
+   "module": "sales",
+   "stepKey": "archive",
+   "describe": "Sales Archive & Cleanup",
+   "title": "placeholder — replace with real test",
+   "status": "skipped",
+   "durationMs": 980,
+   "error": "",
+   "steps": [],
+   "annotations": [
+    {
+     "type": "skip",
+     "description": "Not yet implemented — replace this placeholder with real test logic"
+    }
+   ],
+   "screenshot": "",
+   "project": "admin"
+  },
+  {
+   "key": "admin|sales|business|Sales credit order with serial product|precondition: credit customer is set to Credit and has no overdue invoices",
+   "module": "sales",
+   "stepKey": "business",
+   "describe": "Sales credit order with serial product",
+   "title": "precondition: credit customer is set to Credit and has no overdue invoices",
+   "status": "passed",
+   "durationMs": 8187,
+   "error": "",
+   "steps": [
+    {
+     "title": "Open the Sales app",
+     "durationMs": 5414,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Switch company to \"Jinasena Agricultural Machinery (Pvt) Ltd.\"",
+     "durationMs": 3,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Read company \"Jinasena Agricultural Machinery (Pvt) Ltd.\"",
+     "durationMs": 65,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Customer \"test distributor\" exists",
+     "durationMs": 1,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Customer is set to Credit",
+     "durationMs": 1,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Customer has no overdue invoices",
+     "durationMs": 1,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Customer has a credit limit",
+     "durationMs": 1,
+     "error": "",
+     "children": []
+    }
+   ],
+   "annotations": [
+    {
+     "type": "serial",
+     "description": ""
+    }
+   ],
+   "screenshot": "",
+   "project": "admin"
+  },
+  {
+   "key": "admin|sales|business|Sales credit order with serial product|1. quotation: Credit order, serial product, Payment Terms 14 Days",
+   "module": "sales",
+   "stepKey": "business",
+   "describe": "Sales credit order with serial product",
+   "title": "1. quotation: Credit order, serial product, Payment Terms 14 Days",
+   "status": "passed",
+   "durationMs": 17223,
+   "error": "",
+   "steps": [
+    {
+     "title": "Open the Sales app",
+     "durationMs": 5610,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Switch company to \"Jinasena Agricultural Machinery (Pvt) Ltd.\"",
+     "durationMs": 7,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Create quotation: test distributor, Credit",
+     "durationMs": 9882,
+     "error": "",
+     "children": [
+      {
+       "title": "Open the Sales app",
+       "durationMs": 1507,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Go to Orders > Quotations",
+       "durationMs": 520,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Select customer \"test distributor\"",
+       "durationMs": 1735,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Set Order Payment Type = Credit, Quotation Type = Sales",
+       "durationMs": 65,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Other Info tab: Sales Team, Warehouse, Payment Terms = 14 Days",
+       "durationMs": 1146,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Add product line JMC6",
+       "durationMs": 1901,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Save the quotation",
+       "durationMs": 1538,
+       "error": "",
+       "children": []
+      }
+     ]
+    },
+    {
+     "title": "Quotation number assigned (S00044)",
+     "durationMs": 2,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Order Payment Type shows Credit",
+     "durationMs": 6,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Payment Terms show 14 Days, not Immediate Payment",
+     "durationMs": 105,
+     "error": "",
+     "children": []
+    }
+   ],
+   "annotations": [
+    {
+     "type": "serial",
+     "description": ""
+    }
+   ],
+   "screenshot": "",
+   "project": "admin"
+  },
+  {
+   "key": "admin|sales|business|Sales credit order with serial product|2. confirm: no approval needed, quotation becomes a Sales Order",
+   "module": "sales",
+   "stepKey": "business",
+   "describe": "Sales credit order with serial product",
+   "title": "2. confirm: no approval needed, quotation becomes a Sales Order",
+   "status": "passed",
+   "durationMs": 10308,
+   "error": "",
+   "steps": [
+    {
+     "title": "Open the Sales app",
+     "durationMs": 5862,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Switch company to \"Jinasena Agricultural Machinery (Pvt) Ltd.\"",
+     "durationMs": 3,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "No approval request is offered (customer within limit)",
+     "durationMs": 69,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Give the required approvals and confirm the order",
+     "durationMs": 933,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "No approvals were needed",
+     "durationMs": 2,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Status is Sales Order and the Delivery button appears",
+     "durationMs": 180,
+     "error": "",
+     "children": []
+    }
+   ],
+   "annotations": [
+    {
+     "type": "serial",
+     "description": ""
+    }
+   ],
+   "screenshot": "",
+   "project": "admin"
+  },
+  {
+   "key": "admin|sales|business|Sales credit order with serial product|3. delivery: new serial number, validate → Done",
+   "module": "sales",
+   "stepKey": "business",
+   "describe": "Sales credit order with serial product",
+   "title": "3. delivery: new serial number, validate → Done",
+   "status": "failed",
+   "durationMs": 35536,
+   "error": "TimeoutError: locator.click: Timeout 20000ms exceeded.\nCall log:\n  - waiting for locator('.modal:visible').filter({ hasText: /create move line/i }).last().locator('[name=\"lot_id\"] input, [name=\"lot_name\"] input, .o_field_widget input').first()\n    - locator resolved to <input type=\"text\" id=\"lot_id_0\" placeholder=\"\" role=\"combobox\" autocomplete=\"off\" aria-expanded=\"false\" aria-haspopup=\"listbox\" aria-autocomplete=\"list\" class=\"o-autocomplete--input o_input\"/>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <p class=\"text-prewrap\">You are not allowed to create a lot or serial num…</p> from <div id=\"dialog_3\" class=\"o_dialog\">…</div> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <p class=\"text-prewrap\">You are not allowed to create a lot or serial num…</p> from <div id=\"dialog_3\" class=\"o_dialog\">…</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    37 × waiting for element to be visible, enabled and stable\n       - element is visible, enabled and stable\n       - scrolling into view if needed\n       - done scrolling\n       - <p class=\"text-prewrap\">You are not allowed to create a lot or serial num…</p> from <div id=\"dialog_3\" class=\"o_dialog\">…</div> subtree intercepts pointer events\n     - retrying click action\n       - waiting 500ms",
+   "steps": [
+    {
+     "title": "Open the Sales app",
+     "durationMs": 5560,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Switch company to \"Jinasena Agricultural Machinery (Pvt) Ltd.\"",
+     "durationMs": 4,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Open the delivery and validate it",
+     "durationMs": 27002,
+     "error": "TimeoutError: locator.click: Timeout 20000ms exceeded.",
+     "children": [
+      {
+       "title": "Create a new serial number on the delivery",
+       "durationMs": 26749,
+       "error": "TimeoutError: locator.click: Timeout 20000ms exceeded.",
+       "children": []
+      }
+     ]
+    }
+   ],
+   "annotations": [
+    {
+     "type": "serial",
+     "description": ""
+    }
+   ],
+   "screenshot": "",
+   "project": "admin"
+  },
+  {
+   "key": "admin|sales|business|Sales credit order with serial product|4. invoice: posted, keeps 14 Days, due 14 days after the invoice date",
+   "module": "sales",
+   "stepKey": "business",
+   "describe": "Sales credit order with serial product",
+   "title": "4. invoice: posted, keeps 14 Days, due 14 days after the invoice date",
+   "status": "skipped",
+   "durationMs": 0,
+   "error": "",
+   "steps": [],
+   "annotations": [
+    {
+     "type": "serial",
+     "description": ""
+    }
+   ],
+   "screenshot": "",
+   "project": "admin"
+  },
+  {
+   "key": "admin|sales|business|Sales credit order with serial product|5. payment day: come back through the Sales app, register the payment → IN PAYMENT",
+   "module": "sales",
+   "stepKey": "business",
+   "describe": "Sales credit order with serial product",
+   "title": "5. payment day: come back through the Sales app, register the payment → IN PAYMENT",
+   "status": "skipped",
+   "durationMs": 0,
+   "error": "",
+   "steps": [],
+   "annotations": [
+    {
+     "type": "serial",
+     "description": ""
+    }
+   ],
+   "screenshot": "",
+   "project": "admin"
+  },
+  {
+   "key": "admin|sales|business|Sales quotation calculations|line, untaxed and total amounts follow the quantity × price arithmetic",
+   "module": "sales",
+   "stepKey": "business",
+   "describe": "Sales quotation calculations",
+   "title": "line, untaxed and total amounts follow the quantity × price arithmetic",
+   "status": "passed",
+   "durationMs": 18752,
+   "error": "",
+   "steps": [
+    {
+     "title": "Open the Sales app",
+     "durationMs": 5846,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Switch company to \"Jinasena Agricultural Machinery (Pvt) Ltd.\"",
+     "durationMs": 5,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Create quotation: Milinda Bakmiwewa, Cash",
+     "durationMs": 9867,
+     "error": "",
+     "children": [
+      {
+       "title": "Open the Sales app",
+       "durationMs": 1508,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Go to Orders > Quotations",
+       "durationMs": 718,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Select customer \"Milinda Bakmiwewa\"",
+       "durationMs": 1859,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Set Order Payment Type = Cash, Quotation Type = Sales",
+       "durationMs": 85,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Other Info tab: Sales Team, Warehouse, Payment Terms",
+       "durationMs": 199,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Add product line 02BB 023, quantity 3, unit price 250",
+       "durationMs": 2513,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Save the quotation",
+       "durationMs": 1520,
+       "error": "",
+       "children": []
+      }
+     ]
+    },
+    {
+     "title": "Line shows quantity 3 and unit price 250",
+     "durationMs": 3,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Line Tax excl. = 3 × 250 × (1 − 0%) = 750",
+     "durationMs": 1,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Untaxed Amount = sum of line amounts = 750",
+     "durationMs": 1,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Total = Untaxed Amount + Taxes",
+     "durationMs": 0,
+     "error": "",
+     "children": []
+    }
+   ],
+   "annotations": [],
+   "screenshot": "",
+   "project": "admin"
+  },
+  {
+   "key": "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Customer cannot be saved (Cash)",
+   "module": "sales",
+   "stepKey": "validations",
+   "describe": "Sales quotation validations › Cash quotation: required fields",
+   "title": "blank Customer cannot be saved (Cash)",
+   "status": "passed",
+   "durationMs": 18183,
+   "error": "",
+   "steps": [
+    {
+     "title": "Open the Sales app",
+     "durationMs": 4711,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Switch company to \"Jinasena Agricultural Machinery (Pvt) Ltd.\"",
+     "durationMs": 3,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Create quotation: Milinda Bakmiwewa, Cash (not saved)",
+     "durationMs": 7947,
+     "error": "",
+     "children": [
+      {
+       "title": "Open the Sales app",
+       "durationMs": 1664,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Go to Orders > Quotations",
+       "durationMs": 638,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Select customer \"Milinda Bakmiwewa\"",
+       "durationMs": 1785,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Set Order Payment Type = Cash, Quotation Type = Sales",
+       "durationMs": 52,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Other Info tab: Sales Team, Warehouse, Payment Terms",
+       "durationMs": 263,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Add product line 02BB 023",
+       "durationMs": 2083,
+       "error": "",
+       "children": []
+      }
+     ]
+    },
+    {
+     "title": "Empty \"Customer\" and try to save",
+     "durationMs": 2995,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Odoo blocks the save when Customer is blank (result: blocked)",
+     "durationMs": 2,
+     "error": "",
+     "children": []
+    }
+   ],
+   "annotations": [
+    {
+     "type": "outcome",
+     "description": "Customer: blocked"
+    }
+   ],
+   "screenshot": "",
+   "project": "admin"
+  },
+  {
+   "key": "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Order Payment Type cannot be saved (Cash)",
+   "module": "sales",
+   "stepKey": "validations",
+   "describe": "Sales quotation validations › Cash quotation: required fields",
+   "title": "blank Order Payment Type cannot be saved (Cash)",
+   "status": "passed",
+   "durationMs": 18424,
+   "error": "",
+   "steps": [
+    {
+     "title": "Open the Sales app",
+     "durationMs": 5336,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Switch company to \"Jinasena Agricultural Machinery (Pvt) Ltd.\"",
+     "durationMs": 3,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Create quotation: Milinda Bakmiwewa, Cash (not saved)",
+     "durationMs": 8193,
+     "error": "",
+     "children": [
+      {
+       "title": "Open the Sales app",
+       "durationMs": 2008,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Go to Orders > Quotations",
+       "durationMs": 572,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Select customer \"Milinda Bakmiwewa\"",
+       "durationMs": 1767,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Set Order Payment Type = Cash, Quotation Type = Sales",
+       "durationMs": 56,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Other Info tab: Sales Team, Warehouse, Payment Terms",
+       "durationMs": 198,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Add product line 02BB 023",
+       "durationMs": 2080,
+       "error": "",
+       "children": []
+      }
+     ]
+    },
+    {
+     "title": "Empty \"Order Payment Type\" and try to save",
+     "durationMs": 2343,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Odoo blocks the save when Order Payment Type is blank (result: blocked)",
+     "durationMs": 1,
+     "error": "",
+     "children": []
+    }
+   ],
+   "annotations": [
+    {
+     "type": "outcome",
+     "description": "Order Payment Type: blocked"
+    }
+   ],
+   "screenshot": "",
+   "project": "admin"
+  },
+  {
+   "key": "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Quotation Type cannot be saved (Cash)",
+   "module": "sales",
+   "stepKey": "validations",
+   "describe": "Sales quotation validations › Cash quotation: required fields",
+   "title": "blank Quotation Type cannot be saved (Cash)",
+   "status": "passed",
+   "durationMs": 17585,
+   "error": "",
+   "steps": [
+    {
+     "title": "Open the Sales app",
+     "durationMs": 5158,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Switch company to \"Jinasena Agricultural Machinery (Pvt) Ltd.\"",
+     "durationMs": 10,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Create quotation: Milinda Bakmiwewa, Cash (not saved)",
+     "durationMs": 7729,
+     "error": "",
+     "children": [
+      {
+       "title": "Open the Sales app",
+       "durationMs": 1603,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Go to Orders > Quotations",
+       "durationMs": 520,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Select customer \"Milinda Bakmiwewa\"",
+       "durationMs": 1782,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Set Order Payment Type = Cash, Quotation Type = Sales",
+       "durationMs": 43,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Other Info tab: Sales Team, Warehouse, Payment Terms",
+       "durationMs": 191,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Add product line 02BB 023",
+       "durationMs": 2097,
+       "error": "",
+       "children": []
+      }
+     ]
+    },
+    {
+     "title": "Empty \"Quotation Type\" and try to save",
+     "durationMs": 2348,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Odoo blocks the save when Quotation Type is blank (result: blocked)",
+     "durationMs": 1,
+     "error": "",
+     "children": []
+    }
+   ],
+   "annotations": [
+    {
+     "type": "outcome",
+     "description": "Quotation Type: blocked"
+    }
+   ],
+   "screenshot": "",
+   "project": "admin"
+  },
+  {
+   "key": "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Payment Terms cannot be saved (Cash)",
+   "module": "sales",
+   "stepKey": "validations",
+   "describe": "Sales quotation validations › Cash quotation: required fields",
+   "title": "blank Payment Terms cannot be saved (Cash)",
+   "status": "passed",
+   "durationMs": 19097,
+   "error": "",
+   "steps": [
+    {
+     "title": "Open the Sales app",
+     "durationMs": 5595,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Switch company to \"Jinasena Agricultural Machinery (Pvt) Ltd.\"",
+     "durationMs": 2,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Create quotation: Milinda Bakmiwewa, Cash (not saved)",
+     "durationMs": 7798,
+     "error": "",
+     "children": [
+      {
+       "title": "Open the Sales app",
+       "durationMs": 1525,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Go to Orders > Quotations",
+       "durationMs": 558,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Select customer \"Milinda Bakmiwewa\"",
+       "durationMs": 1756,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Set Order Payment Type = Cash, Quotation Type = Sales",
+       "durationMs": 52,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Other Info tab: Sales Team, Warehouse, Payment Terms",
+       "durationMs": 250,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Add product line 02BB 023",
+       "durationMs": 2230,
+       "error": "",
+       "children": []
+      }
+     ]
+    },
+    {
+     "title": "Empty \"Payment Terms\" and try to save",
+     "durationMs": 3060,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Odoo blocks the save when Payment Terms is blank (result: blocked)",
+     "durationMs": 1,
+     "error": "",
+     "children": []
+    }
+   ],
+   "annotations": [
+    {
+     "type": "outcome",
+     "description": "Payment Terms: blocked"
+    }
+   ],
+   "screenshot": "",
+   "project": "admin"
+  },
+  {
+   "key": "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Salesperson cannot be saved (Cash)",
+   "module": "sales",
+   "stepKey": "validations",
+   "describe": "Sales quotation validations › Cash quotation: required fields",
+   "title": "blank Salesperson cannot be saved (Cash)",
+   "status": "passed",
+   "durationMs": 19390,
+   "error": "",
+   "steps": [
+    {
+     "title": "Open the Sales app",
+     "durationMs": 5650,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Switch company to \"Jinasena Agricultural Machinery (Pvt) Ltd.\"",
+     "durationMs": 5,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Create quotation: Milinda Bakmiwewa, Cash (not saved)",
+     "durationMs": 7898,
+     "error": "",
+     "children": [
+      {
+       "title": "Open the Sales app",
+       "durationMs": 1531,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Go to Orders > Quotations",
+       "durationMs": 528,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Select customer \"Milinda Bakmiwewa\"",
+       "durationMs": 1820,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Set Order Payment Type = Cash, Quotation Type = Sales",
+       "durationMs": 52,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Other Info tab: Sales Team, Warehouse, Payment Terms",
+       "durationMs": 260,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Add product line 02BB 023",
+       "durationMs": 2200,
+       "error": "",
+       "children": []
+      }
+     ]
+    },
+    {
+     "title": "Empty \"Salesperson\" and try to save",
+     "durationMs": 3043,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Odoo blocks the save when Salesperson is blank (result: blocked)",
+     "durationMs": 1,
+     "error": "",
+     "children": []
+    }
+   ],
+   "annotations": [
+    {
+     "type": "outcome",
+     "description": "Salesperson: blocked"
+    }
+   ],
+   "screenshot": "",
+   "project": "admin"
+  },
+  {
+   "key": "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Sales Team cannot be saved (Cash)",
+   "module": "sales",
+   "stepKey": "validations",
+   "describe": "Sales quotation validations › Cash quotation: required fields",
+   "title": "blank Sales Team cannot be saved (Cash)",
+   "status": "passed",
+   "durationMs": 18619,
+   "error": "",
+   "steps": [
+    {
+     "title": "Open the Sales app",
+     "durationMs": 5603,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Switch company to \"Jinasena Agricultural Machinery (Pvt) Ltd.\"",
+     "durationMs": 24,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Create quotation: Milinda Bakmiwewa, Cash (not saved)",
+     "durationMs": 7927,
+     "error": "",
+     "children": [
+      {
+       "title": "Open the Sales app",
+       "durationMs": 1731,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Go to Orders > Quotations",
+       "durationMs": 696,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Select customer \"Milinda Bakmiwewa\"",
+       "durationMs": 1775,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Set Order Payment Type = Cash, Quotation Type = Sales",
+       "durationMs": 47,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Other Info tab: Sales Team, Warehouse, Payment Terms",
+       "durationMs": 186,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Add product line 02BB 023",
+       "durationMs": 2131,
+       "error": "",
+       "children": []
+      }
+     ]
+    },
+    {
+     "title": "Empty \"Sales Team\" and try to save",
+     "durationMs": 3041,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Odoo blocks the save when Sales Team is blank (result: blocked)",
+     "durationMs": 0,
+     "error": "",
+     "children": []
+    }
+   ],
+   "annotations": [
+    {
+     "type": "outcome",
+     "description": "Sales Team: blocked"
+    }
+   ],
+   "screenshot": "",
+   "project": "admin"
+  },
+  {
+   "key": "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Warehouse cannot be saved (Cash)",
+   "module": "sales",
+   "stepKey": "validations",
+   "describe": "Sales quotation validations › Cash quotation: required fields",
+   "title": "blank Warehouse cannot be saved (Cash)",
+   "status": "passed",
+   "durationMs": 19941,
+   "error": "",
+   "steps": [
+    {
+     "title": "Open the Sales app",
+     "durationMs": 6128,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Switch company to \"Jinasena Agricultural Machinery (Pvt) Ltd.\"",
+     "durationMs": 3,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Create quotation: Milinda Bakmiwewa, Cash (not saved)",
+     "durationMs": 8449,
+     "error": "",
+     "children": [
+      {
+       "title": "Open the Sales app",
+       "durationMs": 1479,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Go to Orders > Quotations",
+       "durationMs": 784,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Select customer \"Milinda Bakmiwewa\"",
+       "durationMs": 1840,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Set Order Payment Type = Cash, Quotation Type = Sales",
+       "durationMs": 65,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Other Info tab: Sales Team, Warehouse, Payment Terms",
+       "durationMs": 219,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Add product line 02BB 023",
+       "durationMs": 2213,
+       "error": "",
+       "children": []
+      }
+     ]
+    },
+    {
+     "title": "Empty \"Warehouse\" and try to save",
+     "durationMs": 3091,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Odoo blocks the save when Warehouse is blank (result: blocked)",
+     "durationMs": 1,
+     "error": "",
+     "children": []
+    }
+   ],
+   "annotations": [
+    {
+     "type": "outcome",
+     "description": "Warehouse: blocked"
+    }
+   ],
+   "screenshot": "",
+   "project": "admin"
+  },
+  {
+   "key": "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Company cannot be saved (Cash)",
+   "module": "sales",
+   "stepKey": "validations",
+   "describe": "Sales quotation validations › Cash quotation: required fields",
+   "title": "blank Company cannot be saved (Cash)",
+   "status": "skipped",
+   "durationMs": 16252,
+   "error": "",
+   "steps": [
+    {
+     "title": "Open the Sales app",
+     "durationMs": 5844,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Switch company to \"Jinasena Agricultural Machinery (Pvt) Ltd.\"",
+     "durationMs": 2,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Create quotation: Milinda Bakmiwewa, Cash (not saved)",
+     "durationMs": 8174,
+     "error": "",
+     "children": [
+      {
+       "title": "Open the Sales app",
+       "durationMs": 1476,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Go to Orders > Quotations",
+       "durationMs": 584,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Select customer \"Milinda Bakmiwewa\"",
+       "durationMs": 1897,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Set Order Payment Type = Cash, Quotation Type = Sales",
+       "durationMs": 56,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Other Info tab: Sales Team, Warehouse, Payment Terms",
+       "durationMs": 213,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Add product line 02BB 023",
+       "durationMs": 2460,
+       "error": "",
+       "children": []
+      }
+     ]
+    },
+    {
+     "title": "Empty \"Company\" and try to save",
+     "durationMs": 97,
+     "error": "",
+     "children": []
+    }
+   ],
+   "annotations": [
+    {
+     "type": "skip",
+     "description": "Company is not shown on the form in this configuration"
+    }
+   ],
+   "screenshot": "",
+   "project": "admin"
+  },
+  {
+   "key": "admin|sales|validations|Sales quotation validations › Credit quotation: required fields|blank Customer cannot be saved (Credit)",
+   "module": "sales",
+   "stepKey": "validations",
+   "describe": "Sales quotation validations › Credit quotation: required fields",
+   "title": "blank Customer cannot be saved (Credit)",
+   "status": "passed",
+   "durationMs": 22001,
+   "error": "",
+   "steps": [
+    {
+     "title": "Open the Sales app",
+     "durationMs": 8266,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Switch company to \"Jinasena Agricultural Machinery (Pvt) Ltd.\"",
+     "durationMs": 3,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Create quotation: test distributor, Credit (not saved)",
+     "durationMs": 8961,
+     "error": "",
+     "children": [
+      {
+       "title": "Open the Sales app",
+       "durationMs": 1561,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Go to Orders > Quotations",
+       "durationMs": 639,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Select customer \"test distributor\"",
+       "durationMs": 2243,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Set Order Payment Type = Credit, Quotation Type = Sales",
+       "durationMs": 57,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Other Info tab: Sales Team, Warehouse, Payment Terms",
+       "durationMs": 254,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Add product line 02BB 023",
+       "durationMs": 2198,
+       "error": "",
+       "children": []
+      }
+     ]
+    },
+    {
+     "title": "Empty \"Customer\" and try to save",
+     "durationMs": 2942,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Odoo blocks the save when Customer is blank (result: blocked)",
+     "durationMs": 1,
+     "error": "",
+     "children": []
+    }
+   ],
+   "annotations": [
+    {
+     "type": "outcome",
+     "description": "Customer: blocked"
+    }
+   ],
+   "screenshot": "",
+   "project": "admin"
+  },
+  {
+   "key": "admin|sales|validations|Sales quotation validations › Credit quotation: required fields|blank Order Payment Type cannot be saved (Credit)",
+   "module": "sales",
+   "stepKey": "validations",
+   "describe": "Sales quotation validations › Credit quotation: required fields",
+   "title": "blank Order Payment Type cannot be saved (Credit)",
+   "status": "passed",
+   "durationMs": 36915,
+   "error": "",
+   "steps": [
+    {
+     "title": "Open the Sales app",
+     "durationMs": 6047,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Switch company to \"Jinasena Agricultural Machinery (Pvt) Ltd.\"",
+     "durationMs": 2,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Create quotation: test distributor, Credit (not saved)",
+     "durationMs": 21782,
+     "error": "",
+     "children": [
+      {
+       "title": "Open the Sales app",
+       "durationMs": 1511,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Go to Orders > Quotations",
+       "durationMs": 835,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Select customer \"test distributor\"",
+       "durationMs": 3703,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Set Order Payment Type = Credit, Quotation Type = Sales",
+       "durationMs": 36,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Other Info tab: Sales Team, Warehouse, Payment Terms",
+       "durationMs": 2741,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Add product line 02BB 023",
+       "durationMs": 8794,
+       "error": "",
+       "children": []
+      }
+     ]
+    },
+    {
+     "title": "Empty \"Order Payment Type\" and try to save",
+     "durationMs": 4096,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Odoo blocks the save when Order Payment Type is blank (result: blocked)",
+     "durationMs": 0,
+     "error": "",
+     "children": []
+    }
+   ],
+   "annotations": [
+    {
+     "type": "outcome",
+     "description": "Order Payment Type: blocked"
+    }
+   ],
+   "screenshot": "",
+   "project": "admin"
+  },
+  {
+   "key": "admin|sales|validations|Sales quotation validations › Credit quotation: required fields|blank Payment Terms cannot be saved (Credit)",
+   "module": "sales",
+   "stepKey": "validations",
+   "describe": "Sales quotation validations › Credit quotation: required fields",
+   "title": "blank Payment Terms cannot be saved (Credit)",
+   "status": "passed",
+   "durationMs": 18610,
+   "error": "",
+   "steps": [
+    {
+     "title": "Open the Sales app",
+     "durationMs": 6721,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Switch company to \"Jinasena Agricultural Machinery (Pvt) Ltd.\"",
+     "durationMs": 3,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Create quotation: test distributor, Credit (not saved)",
+     "durationMs": 6970,
+     "error": "",
+     "children": [
+      {
+       "title": "Open the Sales app",
+       "durationMs": 1198,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Go to Orders > Quotations",
+       "durationMs": 497,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Select customer \"test distributor\"",
+       "durationMs": 1688,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Set Order Payment Type = Credit, Quotation Type = Sales",
+       "durationMs": 39,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Other Info tab: Sales Team, Warehouse, Payment Terms",
+       "durationMs": 144,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Add product line 02BB 023",
+       "durationMs": 2101,
+       "error": "",
+       "children": []
+      }
+     ]
+    },
+    {
+     "title": "Empty \"Payment Terms\" and try to save",
+     "durationMs": 3007,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Odoo blocks the save when Payment Terms is blank (result: blocked)",
+     "durationMs": 1,
+     "error": "",
+     "children": []
+    }
+   ],
+   "annotations": [
+    {
+     "type": "outcome",
+     "description": "Payment Terms: blocked"
+    }
+   ],
+   "screenshot": "",
+   "project": "admin"
+  },
+  {
+   "key": "admin|sales|validations|Sales quotation validations › order lines: confirm blocked for invalid lines|quotation with zero quantity cannot be confirmed",
+   "module": "sales",
+   "stepKey": "validations",
+   "describe": "Sales quotation validations › order lines: confirm blocked for invalid lines",
+   "title": "quotation with zero quantity cannot be confirmed",
+   "status": "passed",
+   "durationMs": 19678,
+   "error": "",
+   "steps": [
+    {
+     "title": "Open the Sales app",
+     "durationMs": 6110,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Switch company to \"Jinasena Agricultural Machinery (Pvt) Ltd.\"",
+     "durationMs": 4,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Create quotation: Milinda Bakmiwewa, Cash",
+     "durationMs": 11283,
+     "error": "",
+     "children": [
+      {
+       "title": "Open the Sales app",
+       "durationMs": 1701,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Go to Orders > Quotations",
+       "durationMs": 1310,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Select customer \"Milinda Bakmiwewa\"",
+       "durationMs": 1731,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Set Order Payment Type = Cash, Quotation Type = Sales",
+       "durationMs": 35,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Other Info tab: Sales Team, Warehouse, Payment Terms",
+       "durationMs": 152,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Add product line 02BB 023, quantity 0",
+       "durationMs": 2414,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Save the quotation",
+       "durationMs": 2373,
+       "error": "",
+       "children": []
+      }
+     ]
+    },
+    {
+     "title": "Try to confirm the order",
+     "durationMs": 11,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Confirm is hidden or blocked (result: confirm-hidden)",
+     "durationMs": 1,
+     "error": "",
+     "children": []
+    }
+   ],
+   "annotations": [
+    {
+     "type": "outcome",
+     "description": "zero quantity: confirm-hidden"
+    }
+   ],
+   "screenshot": "",
+   "project": "admin"
+  },
+  {
+   "key": "admin|sales|validations|Sales quotation validations › order lines: confirm blocked for invalid lines|quotation with zero unit price cannot be confirmed",
+   "module": "sales",
+   "stepKey": "validations",
+   "describe": "Sales quotation validations › order lines: confirm blocked for invalid lines",
+   "title": "quotation with zero unit price cannot be confirmed",
+   "status": "passed",
+   "durationMs": 17878,
+   "error": "",
+   "steps": [
+    {
+     "title": "Open the Sales app",
+     "durationMs": 5703,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Switch company to \"Jinasena Agricultural Machinery (Pvt) Ltd.\"",
+     "durationMs": 25,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Create quotation: Milinda Bakmiwewa, Cash",
+     "durationMs": 9559,
+     "error": "",
+     "children": [
+      {
+       "title": "Open the Sales app",
+       "durationMs": 1437,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Go to Orders > Quotations",
+       "durationMs": 740,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Select customer \"Milinda Bakmiwewa\"",
+       "durationMs": 1783,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Set Order Payment Type = Cash, Quotation Type = Sales",
+       "durationMs": 56,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Other Info tab: Sales Team, Warehouse, Payment Terms",
+       "durationMs": 307,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Add product line 02BB 023, unit price 0",
+       "durationMs": 2182,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Save the quotation",
+       "durationMs": 1525,
+       "error": "",
+       "children": []
+      }
+     ]
+    },
+    {
+     "title": "Try to confirm the order",
+     "durationMs": 806,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Confirm is hidden or blocked (result: blocked)",
+     "durationMs": 0,
+     "error": "",
+     "children": []
+    }
+   ],
+   "annotations": [
+    {
+     "type": "outcome",
+     "description": "zero unit price: blocked"
+    },
+    {
+     "type": "left-behind",
+     "description": "Not deletable: S00047"
+    }
+   ],
+   "screenshot": "",
+   "project": "admin"
+  },
+  {
+   "key": "admin|sales|edge|Sales credit limit control|within the credit limit: Confirm is available, no approval needed",
+   "module": "sales",
+   "stepKey": "edge",
+   "describe": "Sales credit limit control",
+   "title": "within the credit limit: Confirm is available, no approval needed",
+   "status": "failed",
+   "durationMs": 92726,
+   "error": "TimeoutError: locator.waitFor: Timeout 90000ms exceeded.\nCall log:\n  - waiting for locator('.o_main_navbar') to be visible\n    - waiting for \"https://jinasena-upgrade-testing-39894820.dev.odoo.com/web/login\" navigation to finish...\n    - navigated to \"https://jinasena-upgrade-testing-39894820.dev.odoo.com/web\"",
+   "steps": [
+    {
+     "title": "Open the Sales app",
+     "durationMs": 90989,
+     "error": "TimeoutError: locator.waitFor: Timeout 90000ms exceeded.",
+     "children": []
+    }
+   ],
+   "annotations": [],
+   "screenshot": "",
+   "project": "admin"
+  },
+  {
+   "key": "admin|sales|edge|Sales credit limit control|over the credit limit: Confirm is blocked, approval must be requested",
+   "module": "sales",
+   "stepKey": "edge",
+   "describe": "Sales credit limit control",
+   "title": "over the credit limit: Confirm is blocked, approval must be requested",
+   "status": "failed",
+   "durationMs": 52223,
+   "error": "Error: View Credit Limit Overdue Details should be visible above the limit\n\nexpect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false",
+   "steps": [
+    {
+     "title": "Open the Sales app",
+     "durationMs": 9886,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Switch company to \"Jinasena Agricultural Machinery (Pvt) Ltd.\"",
+     "durationMs": 6,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Create quotation: test distributor, Credit",
+     "durationMs": 35865,
+     "error": "",
+     "children": [
+      {
+       "title": "Open the Sales app",
+       "durationMs": 6039,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Go to Orders > Quotations",
+       "durationMs": 4644,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Select customer \"test distributor\"",
+       "durationMs": 3532,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Set Order Payment Type = Credit, Quotation Type = Sales",
+       "durationMs": 46,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Other Info tab: Sales Team, Warehouse, Payment Terms",
+       "durationMs": 2605,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Add product line 02BB 023, quantity 1000000000",
+       "durationMs": 9443,
+       "error": "",
+       "children": []
+      },
+      {
+       "title": "Save the quotation",
+       "durationMs": 3048,
+       "error": "",
+       "children": []
+      }
+     ]
+    },
+    {
+     "title": "Confirm is hidden",
+     "durationMs": 2,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Request Credit Limit Approval is visible",
+     "durationMs": 1,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "View Credit Limit Overdue Details is visible",
+     "durationMs": 3,
+     "error": "Error: View Credit Limit Overdue Details should be visible above the limit",
+     "children": []
+    }
+   ],
+   "annotations": [],
+   "screenshot": "",
+   "project": "admin"
+  },
+  {
+   "key": "admin|sales|edge|Sales credit limit control|customer with overdue invoices: Confirm is blocked, approval must be requested",
+   "module": "sales",
+   "stepKey": "edge",
+   "describe": "Sales credit limit control",
+   "title": "customer with overdue invoices: Confirm is blocked, approval must be requested",
+   "status": "skipped",
+   "durationMs": 7828,
+   "error": "",
+   "steps": [
+    {
+     "title": "Open the Sales app",
+     "durationMs": 5259,
+     "error": "",
+     "children": []
+    },
+    {
+     "title": "Switch company to \"Jinasena Agricultural Machinery (Pvt) Ltd.\"",
+     "durationMs": 4,
+     "error": "",
+     "children": []
+    }
+   ],
+   "annotations": [
+    {
+     "type": "skip",
+     "description": "No Credit customer with overdue invoices exists — nothing to check"
+    }
+   ],
+   "screenshot": "",
+   "project": "admin"
+  }
+ ]
+}

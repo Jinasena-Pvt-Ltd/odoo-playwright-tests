@@ -105,3 +105,21 @@ i want a report devided the test cases like congfig,business,1st run,2nd run pas
 **Files touched:**
 - Write: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\core\reporters\StepRunReporter.ts
 
+
+---
+
+## Change -- 2026-10-22T08:57:58Z
+
+**Prompt:**
+```
+i want separate report.1st one is master report.2nd one is my customie report.like this report.two report need
+```
+
+**Files touched:**
+- Write: C:\Users\Urliyas\AppData\Local\Temp\claude\c--Users-Urliyas-Documents-GitHub-odoo-playwright-tests\24d41de7-d52d-4966-adbb-ecbe07ee52da\scratchpad\shot2.js
+- Write: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\scripts\generate-run-reports.js
+- Write: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\src\core\reporters\StepRunReporter.ts
+- Write: c:\Users\Urliyas\Documents\GitHub\odoo-playwright-tests\scripts\update-inventory.js
+- Write: C:\Users\Urliyas\AppData\Local\Temp\claude\c--Users-Urliyas-Documents-GitHub-odoo-playwright-tests\24d41de7-d52d-4966-adbb-ecbe07ee52da\scratchpad\migrate.py
+- Write: C:\Users\Urliyas\AppData\Local\Temp\claude\c--Users-Urliyas-Documents-GitHub-odoo-playwright-tests\24d41de7-d52d-4966-adbb-ecbe07ee52da\scratchpad\repair.py
+

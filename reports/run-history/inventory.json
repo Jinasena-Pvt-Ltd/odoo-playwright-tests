@@ -1,0 +1,322 @@
+[
+ {
+  "key": "setup|setup|setup||authenticate: auth-storage/admin.json",
+  "project": "setup",
+  "mod": "setup",
+  "stepKey": "setup",
+  "describe": "",
+  "title": "authenticate: auth-storage/admin.json",
+  "file": "auth.setup.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|config|Sales Configuration Setup|placeholder — replace with real test",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "config",
+  "describe": "Sales Configuration Setup",
+  "title": "placeholder — replace with real test",
+  "file": "sales.config.spec.ts",
+  "placeholder": true
+ },
+ {
+  "key": "admin|sales|business|Sales Business Logic|placeholder — replace with real test",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Sales Business Logic",
+  "title": "placeholder — replace with real test",
+  "file": "sales.business.spec.ts",
+  "placeholder": true
+ },
+ {
+  "key": "admin|sales|business|Sales credit order with serial product|precondition: credit customer is set to Credit and has no overdue invoices",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Sales credit order with serial product",
+  "title": "precondition: credit customer is set to Credit and has no overdue invoices",
+  "file": "sales.credit-serial.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Sales credit order with serial product|1. quotation: Credit order, serial product, Payment Terms 14 Days",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Sales credit order with serial product",
+  "title": "1. quotation: Credit order, serial product, Payment Terms 14 Days",
+  "file": "sales.credit-serial.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Sales credit order with serial product|2. confirm: no approval needed, quotation becomes a Sales Order",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Sales credit order with serial product",
+  "title": "2. confirm: no approval needed, quotation becomes a Sales Order",
+  "file": "sales.credit-serial.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Sales credit order with serial product|3. delivery: new serial number, validate → Done",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Sales credit order with serial product",
+  "title": "3. delivery: new serial number, validate → Done",
+  "file": "sales.credit-serial.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Sales credit order with serial product|4. invoice: posted, keeps 14 Days, due 14 days after the invoice date",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Sales credit order with serial product",
+  "title": "4. invoice: posted, keeps 14 Days, due 14 days after the invoice date",
+  "file": "sales.credit-serial.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Sales credit order with serial product|5. payment day: come back through the Sales app, register the payment → IN PAYMENT",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Sales credit order with serial product",
+  "title": "5. payment day: come back through the Sales app, register the payment → IN PAYMENT",
+  "file": "sales.credit-serial.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Sales Cash & Credit flows by Customer Group|walk Cash and Credit flow for every Customer Group and collect bugs",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Sales Cash & Credit flows by Customer Group",
+  "title": "walk Cash and Credit flow for every Customer Group and collect bugs",
+  "file": "sales.customer-flows.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Sales quotation calculations|line, untaxed and total amounts follow the quantity × price arithmetic",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Sales quotation calculations",
+  "title": "line, untaxed and total amounts follow the quantity × price arithmetic",
+  "file": "sales.quotation-calculations.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|reporting|Sales Reporting|placeholder — replace with real test",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "reporting",
+  "describe": "Sales Reporting",
+  "title": "placeholder — replace with real test",
+  "file": "sales.reports.spec.ts",
+  "placeholder": true
+ },
+ {
+  "key": "admin|sales|permissions|Sales User Permissions|placeholder — replace with real test",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "permissions",
+  "describe": "Sales User Permissions",
+  "title": "placeholder — replace with real test",
+  "file": "sales.permissions.spec.ts",
+  "placeholder": true
+ },
+ {
+  "key": "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Customer cannot be saved (Cash)",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "validations",
+  "describe": "Sales quotation validations › Cash quotation: required fields",
+  "title": "blank Customer cannot be saved (Cash)",
+  "file": "sales.quotation-validations.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Order Payment Type cannot be saved (Cash)",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "validations",
+  "describe": "Sales quotation validations › Cash quotation: required fields",
+  "title": "blank Order Payment Type cannot be saved (Cash)",
+  "file": "sales.quotation-validations.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Quotation Type cannot be saved (Cash)",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "validations",
+  "describe": "Sales quotation validations › Cash quotation: required fields",
+  "title": "blank Quotation Type cannot be saved (Cash)",
+  "file": "sales.quotation-validations.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Payment Terms cannot be saved (Cash)",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "validations",
+  "describe": "Sales quotation validations › Cash quotation: required fields",
+  "title": "blank Payment Terms cannot be saved (Cash)",
+  "file": "sales.quotation-validations.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Salesperson cannot be saved (Cash)",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "validations",
+  "describe": "Sales quotation validations › Cash quotation: required fields",
+  "title": "blank Salesperson cannot be saved (Cash)",
+  "file": "sales.quotation-validations.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Sales Team cannot be saved (Cash)",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "validations",
+  "describe": "Sales quotation validations › Cash quotation: required fields",
+  "title": "blank Sales Team cannot be saved (Cash)",
+  "file": "sales.quotation-validations.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Warehouse cannot be saved (Cash)",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "validations",
+  "describe": "Sales quotation validations › Cash quotation: required fields",
+  "title": "blank Warehouse cannot be saved (Cash)",
+  "file": "sales.quotation-validations.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Company cannot be saved (Cash)",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "validations",
+  "describe": "Sales quotation validations › Cash quotation: required fields",
+  "title": "blank Company cannot be saved (Cash)",
+  "file": "sales.quotation-validations.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|validations|Sales quotation validations › Credit quotation: required fields|blank Customer cannot be saved (Credit)",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "validations",
+  "describe": "Sales quotation validations › Credit quotation: required fields",
+  "title": "blank Customer cannot be saved (Credit)",
+  "file": "sales.quotation-validations.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|validations|Sales quotation validations › Credit quotation: required fields|blank Order Payment Type cannot be saved (Credit)",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "validations",
+  "describe": "Sales quotation validations › Credit quotation: required fields",
+  "title": "blank Order Payment Type cannot be saved (Credit)",
+  "file": "sales.quotation-validations.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|validations|Sales quotation validations › Credit quotation: required fields|blank Payment Terms cannot be saved (Credit)",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "validations",
+  "describe": "Sales quotation validations › Credit quotation: required fields",
+  "title": "blank Payment Terms cannot be saved (Credit)",
+  "file": "sales.quotation-validations.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|validations|Sales quotation validations › order lines: confirm blocked for invalid lines|quotation with zero quantity cannot be confirmed",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "validations",
+  "describe": "Sales quotation validations › order lines: confirm blocked for invalid lines",
+  "title": "quotation with zero quantity cannot be confirmed",
+  "file": "sales.quotation-validations.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|validations|Sales quotation validations › order lines: confirm blocked for invalid lines|quotation with zero unit price cannot be confirmed",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "validations",
+  "describe": "Sales quotation validations › order lines: confirm blocked for invalid lines",
+  "title": "quotation with zero unit price cannot be confirmed",
+  "file": "sales.quotation-validations.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|validations|Sales Field Validations|placeholder — replace with real test",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "validations",
+  "describe": "Sales Field Validations",
+  "title": "placeholder — replace with real test",
+  "file": "sales.validations.spec.ts",
+  "placeholder": true
+ },
+ {
+  "key": "admin|sales|edge|Sales credit limit control|within the credit limit: Confirm is available, no approval needed",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "edge",
+  "describe": "Sales credit limit control",
+  "title": "within the credit limit: Confirm is available, no approval needed",
+  "file": "sales.credit-control.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|edge|Sales credit limit control|over the credit limit: Confirm is blocked, approval must be requested",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "edge",
+  "describe": "Sales credit limit control",
+  "title": "over the credit limit: Confirm is blocked, approval must be requested",
+  "file": "sales.credit-control.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|edge|Sales credit limit control|customer with overdue invoices: Confirm is blocked, approval must be requested",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "edge",
+  "describe": "Sales credit limit control",
+  "title": "customer with overdue invoices: Confirm is blocked, approval must be requested",
+  "file": "sales.credit-control.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|edge|Sales Edge Cases|placeholder — replace with real test",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "edge",
+  "describe": "Sales Edge Cases",
+  "title": "placeholder — replace with real test",
+  "file": "sales.edge-cases.spec.ts",
+  "placeholder": true
+ },
+ {
+  "key": "admin|sales|archive|Sales Archive & Cleanup|placeholder — replace with real test",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "archive",
+  "describe": "Sales Archive & Cleanup",
+  "title": "placeholder — replace with real test",
+  "file": "sales.archive.spec.ts",
+  "placeholder": true
+ }
+]
