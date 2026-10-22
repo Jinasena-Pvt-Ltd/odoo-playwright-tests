@@ -5,9 +5,9 @@
  *   runs.json        every run so far (1st run, 2nd run, …) with the result of every test
  *   inventory.json   every test case ever seen, in file order (also filled by scripts/update-inventory.js)
  *   latest-run.json  full detail of the latest run: named steps (test.step), errors, failure screenshots
- * and then calls scripts/generate-run-reports.js, which writes
- *   reports/master-test-report-YYYY-MM-DD.html   (all test cases by module / test step, latest result)
- *   reports/custom-run-report-YYYY-MM-DD.html    (run by run, open items, step-by-step detail)
+ * and then writes the two reports from it:
+ *   reports/master-report-YYYY-MM-DD.html       (scripts/generate-report.js — the Master E2E report, all test cases by step)
+ *   reports/custom-run-report-YYYY-MM-DD.html   (scripts/generate-run-reports.js — run by run, open items, step detail)
  *
  * Options: { outputDir?: string }  (default "reports")
  * Env:     RUN_LABEL — name for this run (default "1st run", "2nd run", …)
@@ -15,6 +15,7 @@
  *          RUN_HISTORY=off — generate the reports from the existing history without saving this run
  */
 import type { FullConfig, FullResult, Reporter, Suite, TestCase, TestResult, TestStep } from '@playwright/test/reporter';
+import { execFileSync } from 'child_process';
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -151,6 +152,8 @@ export default class StepRunReporter implements Reporter {
     }
 
     try {
+      // master report (generate-report.js reads the history) + custom run report
+      execFileSync(process.execPath, [path.resolve(this.rootDir, 'scripts', 'generate-report.js')], { cwd: this.rootDir, stdio: 'inherit' });
       // eslint-disable-next-line @typescript-eslint/no-require-imports
       require(path.resolve(this.rootDir, 'scripts', 'generate-run-reports.js')).generate();
     } catch (e) {

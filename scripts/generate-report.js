@@ -113,6 +113,33 @@ function loadLatestSnapshot() {
   } catch { return null; }
 }
 
+// ── Run history (saved by StepRunReporter) ────────────────────────────────────
+//
+// reports/run-history/inventory.json  — every test case Playwright knows (looped / data-driven tests included)
+// reports/run-history/runs.json       — every run, with the result of every test
+// When present they replace the regex title scan and the title-matched results.json, so the counts are exact.
+
+const HISTORY_DIR = path.join(ROOT, 'reports', 'run-history');
+
+function readHistory(name) {
+  try { return JSON.parse(fs.readFileSync(path.join(HISTORY_DIR, name), 'utf-8')); } catch { return null; }
+}
+
+const INVENTORY = (readHistory('inventory.json') || []).filter(i => i.project !== 'setup');
+
+/** Latest known result of every test, keyed by inventory key. */
+function loadRunHistoryMap() {
+  const runs = readHistory('runs.json');
+  if (!runs || !runs.length) return null;
+  const map = {};
+  for (const run of runs) {
+    for (const [key, r] of Object.entries(run.results || {})) {
+      map[key] = { status: r.status, error: r.status === 'failed' ? (r.error || '') : null };
+    }
+  }
+  return map;
+}
+
 // ── File scanner ──────────────────────────────────────────────────────────────
 
 function findSpecFiles(dir) {
@@ -152,12 +179,29 @@ function parseSpecFile(filePath) {
   const moduleTag = (describeTitle.match(/@module:([\w-]+)/) || [])[1] || mod;
   const stepTag   = (describeTitle.match(/@step:([\w-]+)/)   || [])[1] || step;
 
+  const parsed = parseTests(content);
+  const inv = INVENTORY.filter(i => i.file === fileName && i.mod === mod);
+  const tests = inv.length
+    ? inv.map(i => {
+        // exact test list from the inventory; code snippet from the matching (or first looped) test in the file
+        const m = parsed.find(p => p.name === i.title) || parsed.find(p => p.rawName.includes('${')) || parsed[0] || {};
+        return {
+          ...m,
+          name: i.title, rawName: i.title, key: i.key,
+          isSkip: false,
+          hasBodySkip: !!i.placeholder,
+          skipReason: i.placeholder ? 'Not yet implemented — placeholder test' : (m.skipReason || ''),
+          hasSmoke: /@smoke/.test(m.rawName || ''),
+        };
+      })
+    : parsed;
+
   return {
     filePath, fileName,
     module: moduleTag,
     step: stepTag,
     describeTitle,
-    tests: parseTests(content),
+    tests,
   };
 }
 
@@ -246,7 +290,7 @@ function loadResults(filePath) {
 
 function getStatus(test, map) {
   if (map) {
-    const r = map[test.name];
+    const r = (test.key && map[test.key]) || (!test.key && map[test.name]);
     if (r) return r.status;
   }
   if (test.isSkip)      return 'skipped';
@@ -306,8 +350,9 @@ function testRow(t, map) {
     ? `<details class="code-snippet"><summary></summary><pre class="code">${esc(t.codeSnippet)}</pre></details>`
     : '';
 
-  const errorAttr = (map && map[t.name]?.error)
-    ? ` data-error="${esc(map[t.name].error)}"`
+  const res = map && ((t.key && map[t.key]) || (!t.key && map[t.name]));
+  const errorAttr = (res && res.error)
+    ? ` data-error="${esc(res.error)}"`
     : '';
   return `<div class="test-row ${cls}"${errorAttr}><span class="test-row-icon">${ico}</span><span class="test-row-name">${esc(t.name)}</span>${noteHtml}<div class="test-row-tags">${tags}</div>${snippetHtml}</div>`;
 }
@@ -1024,9 +1069,11 @@ function main() {
     ? args[rIdx + 1]
     : path.join(ROOT, 'test-results', 'results.json');
 
-  const resultsMap = loadResults(resFile);
-  if (resultsMap) console.log(`Loaded results: ${resFile}`);
-  else            console.log('No results file — showing static inventory (⬜ pending)');
+  const historyMap = INVENTORY.length ? loadRunHistoryMap() : null;
+  const resultsMap = historyMap || loadResults(resFile);
+  if (historyMap)      console.log(`Loaded run history: ${INVENTORY.length} test cases, latest result of each`);
+  else if (resultsMap) console.log(`Loaded results: ${resFile}`);
+  else                 console.log('No results file — showing static inventory (⬜ pending)');
 
   const specFiles = findSpecFiles(SRC_MODULES);
   const suites    = specFiles.map(parseSpecFile).filter(Boolean);

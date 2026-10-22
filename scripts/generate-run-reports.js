@@ -2,13 +2,14 @@
 /**
  * scripts/generate-run-reports.js
  *
- * Writes the two run reports from the data saved by StepRunReporter (reports/run-history/):
+ * Writes the CUSTOM run report from the data saved by StepRunReporter (reports/run-history/):
  *
- *   reports/master-test-report-YYYY-MM-DD.html  — MASTER report: every test case of the project, divided by
- *                                                  module and test step (config, business, …), with its latest result.
- *   reports/custom-run-report-YYYY-MM-DD.html   — CUSTOM report: progress run by run (1st run, 2nd run, …),
+ *   reports/custom-run-report-YYYY-MM-DD.html   — progress run by run (1st run, 2nd run, …),
  *                                                  every test PASS / FAIL / SKIP per run, open items with "how to pass",
  *                                                  and the step-by-step detail of the latest run.
+ *
+ * The MASTER report (reports/master-report-YYYY-MM-DD.html) is written by scripts/generate-report.js, which reads
+ * the same run history, so both reports always show the same results.
  *
  * Usage:  node scripts/generate-run-reports.js      (also called automatically at the end of every test run)
  *
@@ -137,59 +138,6 @@ function page(title, body) {
 
 function stepNum(stepKey) { return STEP_NO[stepKey] ? `Step ${STEP_NO[stepKey]} ` : ''; }
 
-// ── MASTER report ─────────────────────────────────────────────────────────────
-
-function masterReport(data, date, customName) {
-  const { runs } = data;
-  const tests = allTests(data);
-  const status = new Map(tests.map(t => [t.key, latestResult(t.key, runs)]));
-  const total = tests.length;
-  const impl = tests.filter(t => !t.placeholder).length;
-  const t = tally(tests.map(x => status.get(x.key)?.status));
-  const mods = [...new Set(tests.map(x => x.mod))].filter(m => m !== 'setup');
-  const host = (process.env.ODOO_BASE_URL || '').replace(/^https?:\/\//, '').split('/')[0];
-
-  const stepRows = (list) => STEP_ORDER.filter(k => list.some(x => x.stepKey === k)).map(k => {
-    const l = list.filter(x => x.stepKey === k);
-    const x = tally(l.map(y => status.get(y.key)?.status));
-    const done = l.filter(y => !y.placeholder).length;
-    const pct = (n) => (l.length ? (n / l.length) * 100 : 0);
-    return `<tr><td><b>${esc(stepNum(k))}${esc(STEP_LABEL[k])}</b></td><td class="c">${l.length}</td><td class="c">${done}</td>` +
-      `<td class="c">${l.length - done}</td><td class="c p">${x.p}</td><td class="c f">${x.f}</td><td class="c s">${x.s}</td><td class="c">${x.n}</td>` +
-      `<td><div class="bar"><i style="width:${pct(x.p)}%;background:#2e7d32"></i><i style="width:${pct(x.f)}%;background:#c62828"></i><i style="width:${pct(x.s)}%;background:#e65100"></i></div></td></tr>`;
-  }).join('');
-
-  const sections = mods.map(m => {
-    const ml = tests.filter(x => x.mod === m);
-    const body = STEP_ORDER.filter(k => k !== 'setup' && ml.some(x => x.stepKey === k)).map(k => {
-      const l = ml.filter(x => x.stepKey === k);
-      const rows = l.map((x, i) => {
-        const r = status.get(x.key);
-        const st = r ? r.status : null;
-        return `<tr><td class="c">${i + 1}</td><td>${esc(x.title)}${x.placeholder ? ' <span class="chip ph">placeholder</span>' : ''}` +
-          `${x.describe ? `<div class="muted">${esc(x.describe)}</div>` : ''}</td>` +
-          `${cellStatus(st)}<td class="c muted">${esc(r ? r.run : 'not run yet')}</td><td class="muted">${esc(x.file || '')}</td></tr>`;
-      }).join('');
-      return `<h3>${esc(stepNum(k))}${esc(STEP_LABEL[k])} <span class="muted">— ${l.length} test case${l.length === 1 ? '' : 's'}</span></h3>` +
-        `<table><tr><th class="c">#</th><th>Test case</th><th class="c">Latest result</th><th class="c">Last run</th><th>Spec file</th></tr>${rows}</table>`;
-    }).join('');
-    return `<h2>${esc(m.charAt(0).toUpperCase() + m.slice(1))} module — all test cases</h2>${body}`;
-  }).join('');
-
-  const customFile = customName ? `<a href="${esc(customName)}">${esc(customName)}</a>` : 'the custom run report';
-  const body = `<h1>Sales Testing – Master Test Report</h1>
-<div class="meta"><b>Date:</b> ${esc(date)} &nbsp;|&nbsp; <b>Environment:</b> ${esc(host || 'Odoo')} &nbsp;|&nbsp; <b>Runs recorded:</b> ${runs.length}
-&nbsp;|&nbsp; <b>Modules:</b> ${esc(mods.join(', ') || '–')}</div>
-<div class="call info">This is the <b>master report</b>: every test case in the project, divided by test step (Config, Business, Reporting, Permissions, Validations, Edge cases, Archive), with its latest result. The run-by-run comparison (1st run, 2nd run, …) is in ${customFile}.</div>
-<div class="boxes"><div class="box"><b>${total}</b><span>test cases</span></div><div class="box"><b>${impl}</b><span>implemented</span></div>
-<div class="box"><b>${total - impl}</b><span>placeholders</span></div><div class="box"><b class="p">${t.p}</b><span>passed</span></div>
-<div class="box"><b class="f">${t.f}</b><span>failed</span></div><div class="box"><b class="s">${t.s}</b><span>skipped</span></div><div class="box"><b>${t.n}</b><span>not run yet</span></div></div>
-<h2>Summary by test step</h2>
-<table><tr><th>Test step</th><th class="c">Test cases</th><th class="c">Implemented</th><th class="c">Placeholders</th><th class="c">Passed</th><th class="c">Failed</th><th class="c">Skipped</th><th class="c">Not run yet</th><th>Progress</th></tr>${stepRows(tests.filter(x => x.stepKey !== 'setup'))}</table>
-${sections}`;
-  return page('Sales Testing – Master Test Report', body);
-}
-
 // ── CUSTOM run report ─────────────────────────────────────────────────────────
 
 function autoSummary(run) {
@@ -214,7 +162,7 @@ function renderSteps(steps, prefix = '') {
 function customReport(data, date, masterName) {
   const { runs, notes, latest } = data;
   const shown = runs.slice(-MAX_RUNS_SHOWN);
-  const tests = allTests(data);
+  const tests = allTests(data).filter(t => t.stepKey !== 'setup'); // the login setup is not a test case
   const nowStatus = new Map(tests.map(t => [t.key, latestResult(t.key, runs)]));
   const now = tally(tests.map(t => nowStatus.get(t.key)?.status));
   const host = (process.env.ODOO_BASE_URL || '').replace(/^https?:\/\//, '').split('/')[0];
@@ -222,7 +170,7 @@ function customReport(data, date, masterName) {
 
   // 1. progress by run
   const progress = shown.map(r => {
-    const x = tally(Object.values(r.results).map(v => v.status));
+    const x = tally(Object.entries(r.results).filter(([k]) => parts(k).stepKey !== 'setup').map(([, v]) => v.status));
     const notRun = tests.filter(t => !r.results[t.key] && t.stepKey !== 'setup').length;
     const note = (notes.runs && notes.runs[r.label]) || r.note || autoSummary(r);
     return `<tr><td><b>${esc(r.label)}</b><div class="muted">${esc(when(r.startedAt))}</div></td><td class="c p">${x.p}</td><td class="c f">${x.f}</td><td class="c s">${x.s}</td><td class="c">${notRun}</td><td>${esc(note)}</td></tr>`;
@@ -299,13 +247,12 @@ function generate() {
   if (!data.runs.length && !data.inventory.length) { console.log('No run history yet — nothing to report.'); return null; }
   const last = data.runs[data.runs.length - 1];
   const date = (last ? last.startedAt : new Date().toISOString()).slice(0, 10);
-  const masterName = `master-test-report-${date}.html`;
+  const masterName = `master-report-${date}.html`;
   const customName = `custom-run-report-${date}.html`;
   fs.mkdirSync(OUT, { recursive: true });
-  fs.writeFileSync(path.join(OUT, masterName), masterReport(data, date, customName), 'utf-8');
   fs.writeFileSync(path.join(OUT, customName), customReport(data, date, masterName), 'utf-8');
-  console.log(`\nMaster report: ${path.join(OUT, masterName)}\nCustom run report: ${path.join(OUT, customName)}`);
-  return { master: path.join(OUT, masterName), custom: path.join(OUT, customName) };
+  console.log(`\nCustom run report: ${path.join(OUT, customName)}`);
+  return { custom: path.join(OUT, customName) };
 }
 
 module.exports = { generate };

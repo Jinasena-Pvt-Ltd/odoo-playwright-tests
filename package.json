@@ -17,8 +17,8 @@
     "test:sales-flows": "node scripts/run-sales-flows.js",
     "report": "playwright show-report",
     "report:generate": "node scripts/generate-report.js",
-    "report:runs": "node scripts/generate-run-reports.js",
-    "report:inventory": "node scripts/update-inventory.js && node scripts/generate-run-reports.js",
+    "report:runs": "node scripts/generate-report.js && node scripts/generate-run-reports.js",
+    "report:inventory": "node scripts/update-inventory.js && node scripts/generate-report.js && node scripts/generate-run-reports.js",
     "test:report": "playwright test && node scripts/generate-report.js",
     "report:allure": "allure serve allure-results",
     "lint": "tsc --noEmit"
