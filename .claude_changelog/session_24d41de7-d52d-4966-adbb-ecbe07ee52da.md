@@ -32,3 +32,16 @@ after researching this 2 tour.create a credit sales order - serial
 - Write: C:\Users\Urliyas\AppData\Local\Temp\claude\c--Users-Urliyas-Documents-GitHub-odoo-playwright-tests\24d41de7-d52d-4966-adbb-ecbe07ee52da\scratchpad\mkspec3.py
 - Write: C:\Users\Urliyas\AppData\Local\Temp\claude\c--Users-Urliyas-Documents-GitHub-odoo-playwright-tests\24d41de7-d52d-4966-adbb-ecbe07ee52da\scratchpad\mk3.py
 
+
+---
+
+## Change -- 2026-10-22T02:56:57Z
+
+**Prompt:**
+```
+import isn't here,before u made the Sales: Credit Sales Order - Serial Number Product.update that tour
+```
+
+**Files touched:**
+- Write: C:\Users\Urliyas\AppData\Local\Temp\claude\c--Users-Urliyas-Documents-GitHub-odoo-playwright-tests\24d41de7-d52d-4966-adbb-ecbe07ee52da\scratchpad\q2.js
+

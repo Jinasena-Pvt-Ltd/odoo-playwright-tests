@@ -121,3 +121,13 @@ Manual built from `tour/credit-sales-order.json` (Odoo export "tour_export (6)",
 - **Payment day (38-49):** a credit sale is paid about 14 days after invoicing, so after the invoice is confirmed (37) the manual returns through the Sales app: Home menu > Sales > Orders > Orders > search the order number > open it > Invoices > Register Payment. Steps 38-43 were rewritten for this (the recording clicked Sale Orders / Invoices from the invoice instead).
 - **Excluded (Advance Payment part, 410-550):** a second flow on another order (To Invoice > Orders to Invoice > Create Advance Payment > BOC BANK payment). `button[name="2341"]` does not exist on the posted invoice, so it was not replayed. Needs its own tour.
 - **Adapted:** 14, 15 (customer swap); 28-30 (Odoo fills the Warehouse from the Sales Team, so the replay highlights the filled field); 47 (the recording says "bank" in steps 45/49 but the clicked row is "Customer Receipts - Cash"; the manual follows the clicked row and mentions choosing a bank journal if paid by bank).
+
+
+## credit-sales-order-serial (replayed, illustrated manual)
+
+Manual built from `tour/credit-sales-order-serial.json` (46 steps) and the replay `generated/specs/credit-sales-order-serial.spec.ts`. It combines the two recorded tours "Credit Sales Order" (Credit, 14 Days, payment on a second visit) and "Cash Sales Order - Serial" (serial-number product EY20KP, new serial number on the delivery). Replay created a real sales order (S02757), delivery, new serial number, invoice (Payment Terms 14 Days) and payment in Odoo. The payment-day steps (300-316) were replayed in a second run against the same order, after fixing the order search (the first run clicked the wrong row).
+
+- **Customer:** DIDULA MOTORES (credit customer, no overdue invoices) instead of `abc`, which has overdue invoices. Override with `CREDIT_CUSTOMER`.
+- **Not part of the tour but needed for the replay:** one unit of the new serial number is put into stock (inventory adjustment) before Validate, because Odoo refuses to deliver a serial number with no stock.
+- **Journal:** the recording says "bank" in places but the clicked row is "Customer Receipts - Cash"; the manual follows the clicked row and mentions a bank journal for bank payments.
+- **Payment day (300-316):** after the invoice is confirmed, the manual returns through the Sales app (Home menu > Sales > Orders > Orders > search order number > Invoices > Register Payment), because a credit sale is paid about 14 days later.
