@@ -121,7 +121,12 @@ export async function selectMany2one(page: Page, fieldName: string, value: strin
   await input.pressSequentially(value, { delay: 40 });
   const drop = page.locator('.o-autocomplete--dropdown-menu');
   await expect(drop).toBeVisible({ timeout: 10_000 });
-  const option = drop.locator('li, .o-autocomplete--dropdown-item').filter({ hasText: value }).first();
+  const items = drop.locator('li, .o-autocomplete--dropdown-item');
+  // Prefer the option whose text is exactly the value ("Cash" must not pick "BOC - Cash Receipts"), else the first containing it.
+  const exact = items.filter({ hasText: new RegExp(`^\s*${escRx(value)}\s*$`) }).first();
+  const option = (await exact.waitFor({ state: 'visible', timeout: 4_000 }).then(() => true).catch(() => false))
+    ? exact
+    : items.filter({ hasText: value }).first();
   // The dropdown first shows the default list and refreshes after Odoo's search debounce — wait for the match.
   if (!(await option.waitFor({ state: 'visible', timeout: 15_000 }).then(() => true).catch(() => false))) {
     const offered = (await drop.locator('li, .o-autocomplete--dropdown-item').allTextContents().catch(() => []))
@@ -197,11 +202,16 @@ export async function saveRecord(page: Page): Promise<void> {
  * because the first [name="name"] on a delivery / invoice form can be a product line instead of the document.
  */
 export async function recordNumber(page: Page): Promise<string> {
-  const title = ((await page.locator('.o_form_view .oe_title').first().textContent().catch(() => '')) ?? '').replace(/\s+/g, ' ').trim();
-  const doc = title.match(/[A-Za-z0-9.-]+(?:\/[A-Za-z0-9.-]+)+/);
+  const clean = (t: string | null | undefined): string => (t ?? '').replace(/\s+/g, ' ').trim();
+  // the number field inside the title block, then the title heading
+  const field = clean(await page.locator('.o_form_view .oe_title [name="name"]').first().textContent().catch(() => ''));
+  if (field && field !== '/') return field;
+  const title = clean(await page.locator('.o_form_view .oe_title').first().textContent().catch(() => ''));
+  // "Customer InvoiceFTI/2026/00002": the label and number run together, so start at the number's capital prefix
+  const doc = title.match(/[A-Z][A-Z0-9]*(?:\/[A-Za-z0-9.-]+)+/);
   if (doc) return doc[0];
   if (title) return title;
-  return ((await page.locator('.o_form_view [name="name"]').first().textContent().catch(() => '')) ?? '').trim();
+  return clean(await page.locator('.o_form_view [name="name"]').first().textContent().catch(() => ''));
 }
 
 // ─── Quotation ────────────────────────────────────────────────────────────────
@@ -275,8 +285,21 @@ async function createQuotationImpl(page: Page, input: OrderInput): Promise<strin
     await qty.click(); await qty.selectText(); await qty.fill(String(input.quantity)); await qty.press('Tab');
   }
   if (input.unitPrice !== undefined) {
-    const price = row.locator('[name="price_unit"] input').first();
-    await price.click(); await price.selectText(); await price.fill(String(input.unitPrice)); await price.press('Tab');
+    // Odoo's pricelist onchange can put the list price back a moment after it is typed, so type it, wait, and check
+    // the value stayed; otherwise a "zero price" test would silently run with the normal price.
+    const wanted = input.unitPrice;
+    const shownPrice = async (): Promise<number> => {
+      const cell = page.locator('.o_data_row [name="price_unit"]').first();
+      const v = await cell.locator('input').first().inputValue({ timeout: 1_500 }).catch(async () => (await cell.textContent().catch(() => '')) ?? '');
+      return parseFloat(String(v).replace(/[^0-9.-]/g, '')) || 0;
+    };
+    for (let attempt = 0; attempt < 4; attempt++) {
+      const price = page.locator('.o_data_row [name="price_unit"] input').first();
+      if (!(await price.isVisible({ timeout: 1_500 }).catch(() => false))) await page.locator('.o_data_row [name="price_unit"]').first().click();
+      await price.click(); await price.selectText(); await price.fill(String(wanted)); await price.press('Tab');
+      await page.waitForTimeout(1_500);
+      if ((await shownPrice()) === wanted) break;
+    }
   }
   await throwIfOdooError(page);
   });
@@ -664,8 +687,19 @@ async function tryConfirmBadOrderImpl(page: Page): Promise<'confirm-hidden' | 'b
     if (e instanceof OdooSystemError) return 'blocked';
     throw e;
   }
-  const current = await page.locator('.o_form_statusbar .o_arrow_button_current').first().textContent().catch(() => '');
-  return /sales order/i.test(current ?? '') ? 'confirmed' : 'blocked';
+  // Confirm takes a moment: wait for the stage to change (confirmed) or for Odoo to refuse (dialog), instead of
+  // reading the stage right after the click, when it can still say "Quotation" for an order that is about to be confirmed.
+  const stage = page.locator('.o_form_statusbar .o_arrow_button_current').first();
+  const deadline = Date.now() + 15_000;
+  while (Date.now() < deadline) {
+    if (/sales order/i.test((await stage.textContent().catch(() => '')) ?? '')) return 'confirmed';
+    try { await throwIfOdooError(page); } catch (e) {
+      if (e instanceof OdooSystemError) return 'blocked';
+      throw e;
+    }
+    await page.waitForTimeout(500);
+  }
+  return 'blocked';
 }
 
 // ─── Named report steps ───────────────────────────────────────────────────────

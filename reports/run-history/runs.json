@@ -941,5 +941,1146 @@
     "error": ""
    }
   }
+ },
+ {
+  "id": "2026-10-22T10:06:19.583Z",
+  "startedAt": "2026-10-22T10:06:19.583Z",
+  "label": "7th run",
+  "note": "",
+  "results": {
+   "setup|setup|setup||authenticate: auth-storage/admin.json": {
+    "status": "passed",
+    "durationMs": 12665,
+    "error": ""
+   },
+   "admin|sales|config|Sales Configuration Setup|placeholder — replace with real test": {
+    "status": "skipped",
+    "durationMs": 1248,
+    "error": ""
+   },
+   "admin|sales|business|Sales Business Logic|placeholder — replace with real test": {
+    "status": "skipped",
+    "durationMs": 866,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting|placeholder — replace with real test": {
+    "status": "skipped",
+    "durationMs": 1126,
+    "error": ""
+   },
+   "admin|sales|permissions|Sales User Permissions|placeholder — replace with real test": {
+    "status": "skipped",
+    "durationMs": 974,
+    "error": ""
+   },
+   "admin|sales|validations|Sales Field Validations|placeholder — replace with real test": {
+    "status": "skipped",
+    "durationMs": 1024,
+    "error": ""
+   },
+   "admin|sales|edge|Sales Edge Cases|placeholder — replace with real test": {
+    "status": "skipped",
+    "durationMs": 861,
+    "error": ""
+   },
+   "admin|sales|archive|Sales Archive & Cleanup|placeholder — replace with real test": {
+    "status": "skipped",
+    "durationMs": 973,
+    "error": ""
+   },
+   "admin|sales|business|Sales credit order with serial product|precondition: credit customer is set to Credit and has no overdue invoices": {
+    "status": "failed",
+    "durationMs": 10590,
+    "error": "Error: test distributor has a mandatory Bank Guarantee that is not valid, so Odoo will not let its invoice be confirmed. Enter the Bank Guarantee details (amount, expiry date, documents) and tick Valid Bank Guarantee, or use another credit "
+   },
+   "admin|sales|business|Sales credit order with serial product|1. quotation: Credit order, serial product, Payment Terms 14 Days": {
+    "status": "skipped",
+    "durationMs": 0,
+    "error": ""
+   },
+   "admin|sales|business|Sales credit order with serial product|2. confirm: no approval needed, quotation becomes a Sales Order": {
+    "status": "skipped",
+    "durationMs": 0,
+    "error": ""
+   },
+   "admin|sales|business|Sales credit order with serial product|3. delivery: new serial number, validate → Done": {
+    "status": "skipped",
+    "durationMs": 0,
+    "error": ""
+   },
+   "admin|sales|business|Sales credit order with serial product|4. invoice: posted, keeps 14 Days, due 14 days after the invoice date": {
+    "status": "skipped",
+    "durationMs": 0,
+    "error": ""
+   },
+   "admin|sales|business|Sales credit order with serial product|5. payment day: come back through the Sales app, register the payment → IN PAYMENT": {
+    "status": "skipped",
+    "durationMs": 0,
+    "error": ""
+   },
+   "admin|sales|business|Sales quotation calculations|line, untaxed and total amounts follow the quantity × price arithmetic": {
+    "status": "passed",
+    "durationMs": 21926,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Customer cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 19196,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Order Payment Type cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 18172,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Quotation Type cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 21542,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Payment Terms cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 18115,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Salesperson cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 22218,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Sales Team cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 29201,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Warehouse cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 21706,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Company cannot be saved (Cash)": {
+    "status": "skipped",
+    "durationMs": 18894,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Credit quotation: required fields|blank Customer cannot be saved (Credit)": {
+    "status": "passed",
+    "durationMs": 21937,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Credit quotation: required fields|blank Order Payment Type cannot be saved (Credit)": {
+    "status": "passed",
+    "durationMs": 19963,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Credit quotation: required fields|blank Payment Terms cannot be saved (Credit)": {
+    "status": "passed",
+    "durationMs": 21566,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › order lines: confirm blocked for invalid lines|quotation with zero quantity cannot be confirmed": {
+    "status": "passed",
+    "durationMs": 20856,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › order lines: confirm blocked for invalid lines|quotation with zero unit price cannot be confirmed": {
+    "status": "passed",
+    "durationMs": 18731,
+    "error": ""
+   },
+   "admin|sales|edge|Sales credit limit control|within the credit limit: Confirm is available, no approval needed": {
+    "status": "passed",
+    "durationMs": 16206,
+    "error": ""
+   },
+   "admin|sales|edge|Sales credit limit control|over the credit limit: Confirm is blocked, approval must be requested": {
+    "status": "failed",
+    "durationMs": 17474,
+    "error": "Error: View Credit Limit Overdue Details should be visible above the limit"
+   },
+   "admin|sales|edge|Sales credit limit control|customer with overdue invoices: Confirm is blocked, approval must be requested": {
+    "status": "skipped",
+    "durationMs": 9628,
+    "error": ""
+   }
+  }
+ },
+ {
+  "id": "2026-10-22T10:18:19.032Z",
+  "startedAt": "2026-10-22T10:18:19.032Z",
+  "label": "8th run",
+  "note": "",
+  "results": {
+   "setup|setup|setup||authenticate: auth-storage/admin.json": {
+    "status": "passed",
+    "durationMs": 11027,
+    "error": ""
+   },
+   "admin|sales|config|Sales Configuration Setup|placeholder — replace with real test": {
+    "status": "skipped",
+    "durationMs": 756,
+    "error": ""
+   },
+   "admin|sales|business|Sales Business Logic|placeholder — replace with real test": {
+    "status": "skipped",
+    "durationMs": 953,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting|placeholder — replace with real test": {
+    "status": "skipped",
+    "durationMs": 836,
+    "error": ""
+   },
+   "admin|sales|permissions|Sales User Permissions|placeholder — replace with real test": {
+    "status": "skipped",
+    "durationMs": 987,
+    "error": ""
+   },
+   "admin|sales|validations|Sales Field Validations|placeholder — replace with real test": {
+    "status": "skipped",
+    "durationMs": 960,
+    "error": ""
+   },
+   "admin|sales|edge|Sales Edge Cases|placeholder — replace with real test": {
+    "status": "skipped",
+    "durationMs": 966,
+    "error": ""
+   },
+   "admin|sales|archive|Sales Archive & Cleanup|placeholder — replace with real test": {
+    "status": "skipped",
+    "durationMs": 948,
+    "error": ""
+   },
+   "admin|sales|business|Sales credit order with serial product|precondition: credit customer is set to Credit and has no overdue invoices": {
+    "status": "passed",
+    "durationMs": 8475,
+    "error": ""
+   },
+   "admin|sales|business|Sales credit order with serial product|1. quotation: Credit order, serial product, Payment Terms 14 Days": {
+    "status": "passed",
+    "durationMs": 20613,
+    "error": ""
+   },
+   "admin|sales|business|Sales credit order with serial product|2. confirm: no approval needed, quotation becomes a Sales Order": {
+    "status": "passed",
+    "durationMs": 11094,
+    "error": ""
+   },
+   "admin|sales|business|Sales credit order with serial product|3. delivery: new serial number, validate → Done": {
+    "status": "passed",
+    "durationMs": 25443,
+    "error": ""
+   },
+   "admin|sales|business|Sales credit order with serial product|4. invoice: posted, keeps 14 Days, due 14 days after the invoice date": {
+    "status": "failed",
+    "durationMs": 11763,
+    "error": "TypeError: Cannot read properties of undefined (reading 'invoice_payment_term_id')"
+   },
+   "admin|sales|business|Sales credit order with serial product|5. payment day: come back through the Sales app, register the payment → IN PAYMENT": {
+    "status": "skipped",
+    "durationMs": 0,
+    "error": ""
+   },
+   "admin|sales|business|Sales quotation calculations|line, untaxed and total amounts follow the quantity × price arithmetic": {
+    "status": "passed",
+    "durationMs": 22822,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Customer cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 18970,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Order Payment Type cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 17916,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Quotation Type cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 17895,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Payment Terms cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 19604,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Salesperson cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 19172,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Sales Team cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 18296,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Warehouse cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 23207,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Company cannot be saved (Cash)": {
+    "status": "skipped",
+    "durationMs": 16376,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Credit quotation: required fields|blank Customer cannot be saved (Credit)": {
+    "status": "passed",
+    "durationMs": 18570,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Credit quotation: required fields|blank Order Payment Type cannot be saved (Credit)": {
+    "status": "passed",
+    "durationMs": 17473,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Credit quotation: required fields|blank Payment Terms cannot be saved (Credit)": {
+    "status": "passed",
+    "durationMs": 24209,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › order lines: confirm blocked for invalid lines|quotation with zero quantity cannot be confirmed": {
+    "status": "passed",
+    "durationMs": 17230,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › order lines: confirm blocked for invalid lines|quotation with zero unit price cannot be confirmed": {
+    "status": "failed",
+    "durationMs": 20407,
+    "error": "Error: S00081: Odoo confirmed an order with zero unit price — Confirm must be hidden or blocked"
+   },
+   "admin|sales|edge|Sales credit limit control|within the credit limit: Confirm is available, no approval needed": {
+    "status": "passed",
+    "durationMs": 17109,
+    "error": ""
+   },
+   "admin|sales|edge|Sales credit limit control|over the credit limit: Confirm is blocked, approval must be requested": {
+    "status": "passed",
+    "durationMs": 18227,
+    "error": ""
+   },
+   "admin|sales|edge|Sales credit limit control|customer with overdue invoices: Confirm is blocked, approval must be requested": {
+    "status": "skipped",
+    "durationMs": 9320,
+    "error": ""
+   }
+  }
+ },
+ {
+  "id": "2026-10-22T10:26:38.146Z",
+  "startedAt": "2026-10-22T10:26:38.146Z",
+  "label": "9th run",
+  "note": "",
+  "results": {
+   "setup|setup|setup||authenticate: auth-storage/admin.json": {
+    "status": "passed",
+    "durationMs": 10107,
+    "error": ""
+   },
+   "admin|sales|config|Sales Configuration Setup|placeholder — replace with real test": {
+    "status": "skipped",
+    "durationMs": 768,
+    "error": ""
+   },
+   "admin|sales|business|Sales Business Logic|placeholder — replace with real test": {
+    "status": "skipped",
+    "durationMs": 925,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting|placeholder — replace with real test": {
+    "status": "skipped",
+    "durationMs": 953,
+    "error": ""
+   },
+   "admin|sales|permissions|Sales User Permissions|placeholder — replace with real test": {
+    "status": "skipped",
+    "durationMs": 963,
+    "error": ""
+   },
+   "admin|sales|validations|Sales Field Validations|placeholder — replace with real test": {
+    "status": "skipped",
+    "durationMs": 932,
+    "error": ""
+   },
+   "admin|sales|edge|Sales Edge Cases|placeholder — replace with real test": {
+    "status": "skipped",
+    "durationMs": 986,
+    "error": ""
+   },
+   "admin|sales|archive|Sales Archive & Cleanup|placeholder — replace with real test": {
+    "status": "skipped",
+    "durationMs": 955,
+    "error": ""
+   },
+   "admin|sales|business|Sales credit order with serial product|precondition: credit customer is set to Credit and has no overdue invoices": {
+    "status": "passed",
+    "durationMs": 10168,
+    "error": ""
+   },
+   "admin|sales|business|Sales credit order with serial product|1. quotation: Credit order, serial product, Payment Terms 14 Days": {
+    "status": "passed",
+    "durationMs": 17817,
+    "error": ""
+   },
+   "admin|sales|business|Sales credit order with serial product|2. confirm: no approval needed, quotation becomes a Sales Order": {
+    "status": "passed",
+    "durationMs": 9396,
+    "error": ""
+   },
+   "admin|sales|business|Sales credit order with serial product|3. delivery: new serial number, validate → Done": {
+    "status": "passed",
+    "durationMs": 24406,
+    "error": ""
+   },
+   "admin|sales|business|Sales credit order with serial product|4. invoice: posted, keeps 14 Days, due 14 days after the invoice date": {
+    "status": "passed",
+    "durationMs": 12295,
+    "error": ""
+   },
+   "admin|sales|business|Sales credit order with serial product|5. payment day: come back through the Sales app, register the payment → IN PAYMENT": {
+    "status": "failed",
+    "durationMs": 31674,
+    "error": "Error: \"Customer Receipts - Cash\" was not offered in the journal_id dropdown. Offered: No records"
+   },
+   "admin|sales|business|Sales quotation calculations|line, untaxed and total amounts follow the quantity × price arithmetic": {
+    "status": "passed",
+    "durationMs": 19493,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Customer cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 19104,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Order Payment Type cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 18836,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Quotation Type cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 18689,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Payment Terms cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 19305,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Salesperson cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 18945,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Sales Team cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 19328,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Warehouse cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 18824,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Company cannot be saved (Cash)": {
+    "status": "skipped",
+    "durationMs": 16543,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Credit quotation: required fields|blank Customer cannot be saved (Credit)": {
+    "status": "passed",
+    "durationMs": 18375,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Credit quotation: required fields|blank Order Payment Type cannot be saved (Credit)": {
+    "status": "passed",
+    "durationMs": 19149,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Credit quotation: required fields|blank Payment Terms cannot be saved (Credit)": {
+    "status": "passed",
+    "durationMs": 19410,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › order lines: confirm blocked for invalid lines|quotation with zero quantity cannot be confirmed": {
+    "status": "passed",
+    "durationMs": 19359,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › order lines: confirm blocked for invalid lines|quotation with zero unit price cannot be confirmed": {
+    "status": "passed",
+    "durationMs": 18997,
+    "error": ""
+   },
+   "admin|sales|edge|Sales credit limit control|within the credit limit: Confirm is available, no approval needed": {
+    "status": "passed",
+    "durationMs": 17398,
+    "error": ""
+   },
+   "admin|sales|edge|Sales credit limit control|over the credit limit: Confirm is blocked, approval must be requested": {
+    "status": "passed",
+    "durationMs": 17736,
+    "error": ""
+   },
+   "admin|sales|edge|Sales credit limit control|customer with overdue invoices: Confirm is blocked, approval must be requested": {
+    "status": "skipped",
+    "durationMs": 7170,
+    "error": ""
+   }
+  }
+ },
+ {
+  "id": "2026-10-22T10:35:19.221Z",
+  "startedAt": "2026-10-22T10:35:19.221Z",
+  "label": "10th run",
+  "note": "",
+  "results": {
+   "setup|setup|setup||authenticate: auth-storage/admin.json": {
+    "status": "passed",
+    "durationMs": 8373,
+    "error": ""
+   },
+   "admin|sales|config|Sales Configuration Setup|placeholder — replace with real test": {
+    "status": "skipped",
+    "durationMs": 791,
+    "error": ""
+   },
+   "admin|sales|business|Sales Business Logic|placeholder — replace with real test": {
+    "status": "skipped",
+    "durationMs": 932,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting|placeholder — replace with real test": {
+    "status": "skipped",
+    "durationMs": 897,
+    "error": ""
+   },
+   "admin|sales|permissions|Sales User Permissions|placeholder — replace with real test": {
+    "status": "skipped",
+    "durationMs": 1099,
+    "error": ""
+   },
+   "admin|sales|validations|Sales Field Validations|placeholder — replace with real test": {
+    "status": "skipped",
+    "durationMs": 901,
+    "error": ""
+   },
+   "admin|sales|edge|Sales Edge Cases|placeholder — replace with real test": {
+    "status": "skipped",
+    "durationMs": 1080,
+    "error": ""
+   },
+   "admin|sales|archive|Sales Archive & Cleanup|placeholder — replace with real test": {
+    "status": "skipped",
+    "durationMs": 811,
+    "error": ""
+   },
+   "admin|sales|business|Sales credit order with serial product|precondition: credit customer is set to Credit and has no overdue invoices": {
+    "status": "passed",
+    "durationMs": 15798,
+    "error": ""
+   },
+   "admin|sales|business|Sales credit order with serial product|1. quotation: Credit order, serial product, Payment Terms 14 Days": {
+    "status": "passed",
+    "durationMs": 16984,
+    "error": ""
+   },
+   "admin|sales|business|Sales credit order with serial product|2. confirm: no approval needed, quotation becomes a Sales Order": {
+    "status": "passed",
+    "durationMs": 8580,
+    "error": ""
+   },
+   "admin|sales|business|Sales credit order with serial product|3. delivery: new serial number, validate → Done": {
+    "status": "passed",
+    "durationMs": 27738,
+    "error": ""
+   },
+   "admin|sales|business|Sales credit order with serial product|4. invoice: posted, keeps 14 Days, due 14 days after the invoice date": {
+    "status": "passed",
+    "durationMs": 12265,
+    "error": ""
+   },
+   "admin|sales|business|Sales credit order with serial product|5. payment day: come back through the Sales app, register the payment → IN PAYMENT": {
+    "status": "failed",
+    "durationMs": 16306,
+    "error": "Error: Invalid Operation: You can't create a new payment without an outstanding payments/receipts account set either on the company or the Manual payment method in the Cash journal."
+   },
+   "admin|sales|business|Sales quotation calculations|line, untaxed and total amounts follow the quantity × price arithmetic": {
+    "status": "passed",
+    "durationMs": 19013,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Customer cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 18746,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Order Payment Type cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 18148,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Quotation Type cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 17686,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Payment Terms cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 17928,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Salesperson cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 18281,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Sales Team cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 18868,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Warehouse cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 18670,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Company cannot be saved (Cash)": {
+    "status": "skipped",
+    "durationMs": 16411,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Credit quotation: required fields|blank Customer cannot be saved (Credit)": {
+    "status": "passed",
+    "durationMs": 19880,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Credit quotation: required fields|blank Order Payment Type cannot be saved (Credit)": {
+    "status": "passed",
+    "durationMs": 18071,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Credit quotation: required fields|blank Payment Terms cannot be saved (Credit)": {
+    "status": "passed",
+    "durationMs": 20979,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › order lines: confirm blocked for invalid lines|quotation with zero quantity cannot be confirmed": {
+    "status": "passed",
+    "durationMs": 17558,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › order lines: confirm blocked for invalid lines|quotation with zero unit price cannot be confirmed": {
+    "status": "passed",
+    "durationMs": 19665,
+    "error": ""
+   },
+   "admin|sales|edge|Sales credit limit control|within the credit limit: Confirm is available, no approval needed": {
+    "status": "passed",
+    "durationMs": 17147,
+    "error": ""
+   },
+   "admin|sales|edge|Sales credit limit control|over the credit limit: Confirm is blocked, approval must be requested": {
+    "status": "passed",
+    "durationMs": 16879,
+    "error": ""
+   },
+   "admin|sales|edge|Sales credit limit control|customer with overdue invoices: Confirm is blocked, approval must be requested": {
+    "status": "skipped",
+    "durationMs": 7686,
+    "error": ""
+   }
+  }
+ },
+ {
+  "id": "2026-10-22T10:43:10.037Z",
+  "startedAt": "2026-10-22T10:43:10.037Z",
+  "label": "11th run",
+  "note": "",
+  "results": {
+   "setup|setup|setup||authenticate: auth-storage/admin.json": {
+    "status": "passed",
+    "durationMs": 8631,
+    "error": ""
+   },
+   "admin|sales|config|Sales Configuration Setup|placeholder — replace with real test": {
+    "status": "skipped",
+    "durationMs": 1516,
+    "error": ""
+   },
+   "admin|sales|business|Sales Business Logic|placeholder — replace with real test": {
+    "status": "skipped",
+    "durationMs": 1231,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting|placeholder — replace with real test": {
+    "status": "skipped",
+    "durationMs": 1099,
+    "error": ""
+   },
+   "admin|sales|permissions|Sales User Permissions|placeholder — replace with real test": {
+    "status": "skipped",
+    "durationMs": 984,
+    "error": ""
+   },
+   "admin|sales|validations|Sales Field Validations|placeholder — replace with real test": {
+    "status": "skipped",
+    "durationMs": 957,
+    "error": ""
+   },
+   "admin|sales|edge|Sales Edge Cases|placeholder — replace with real test": {
+    "status": "skipped",
+    "durationMs": 1021,
+    "error": ""
+   },
+   "admin|sales|archive|Sales Archive & Cleanup|placeholder — replace with real test": {
+    "status": "skipped",
+    "durationMs": 878,
+    "error": ""
+   },
+   "admin|sales|business|Sales credit order with serial product|precondition: credit customer is set to Credit and has no overdue invoices": {
+    "status": "passed",
+    "durationMs": 8683,
+    "error": ""
+   },
+   "admin|sales|business|Sales credit order with serial product|1. quotation: Credit order, serial product, Payment Terms 14 Days": {
+    "status": "passed",
+    "durationMs": 16150,
+    "error": ""
+   },
+   "admin|sales|business|Sales credit order with serial product|2. confirm: no approval needed, quotation becomes a Sales Order": {
+    "status": "passed",
+    "durationMs": 12188,
+    "error": ""
+   },
+   "admin|sales|business|Sales credit order with serial product|3. delivery: new serial number, validate → Done": {
+    "status": "passed",
+    "durationMs": 23548,
+    "error": ""
+   },
+   "admin|sales|business|Sales credit order with serial product|4. invoice: posted, keeps 14 Days, due 14 days after the invoice date": {
+    "status": "passed",
+    "durationMs": 16231,
+    "error": ""
+   },
+   "admin|sales|business|Sales credit order with serial product|5. payment day: come back through the Sales app, register the payment → IN PAYMENT": {
+    "status": "passed",
+    "durationMs": 28744,
+    "error": ""
+   },
+   "admin|sales|business|Sales quotation calculations|line, untaxed and total amounts follow the quantity × price arithmetic": {
+    "status": "passed",
+    "durationMs": 26178,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Customer cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 37145,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Order Payment Type cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 24508,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Quotation Type cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 26666,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Payment Terms cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 26881,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Salesperson cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 26544,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Sales Team cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 34880,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Warehouse cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 27603,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Company cannot be saved (Cash)": {
+    "status": "skipped",
+    "durationMs": 41358,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Credit quotation: required fields|blank Customer cannot be saved (Credit)": {
+    "status": "passed",
+    "durationMs": 27681,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Credit quotation: required fields|blank Order Payment Type cannot be saved (Credit)": {
+    "status": "passed",
+    "durationMs": 31656,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Credit quotation: required fields|blank Payment Terms cannot be saved (Credit)": {
+    "status": "passed",
+    "durationMs": 25705,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › order lines: confirm blocked for invalid lines|quotation with zero quantity cannot be confirmed": {
+    "status": "passed",
+    "durationMs": 34022,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › order lines: confirm blocked for invalid lines|quotation with zero unit price cannot be confirmed": {
+    "status": "failed",
+    "durationMs": 18765,
+    "error": "Error: S00102: Odoo confirmed an order with zero unit price — Confirm must be hidden or blocked"
+   },
+   "admin|sales|edge|Sales credit limit control|within the credit limit: Confirm is available, no approval needed": {
+    "status": "passed",
+    "durationMs": 18063,
+    "error": ""
+   },
+   "admin|sales|edge|Sales credit limit control|over the credit limit: Confirm is blocked, approval must be requested": {
+    "status": "passed",
+    "durationMs": 16691,
+    "error": ""
+   },
+   "admin|sales|edge|Sales credit limit control|customer with overdue invoices: Confirm is blocked, approval must be requested": {
+    "status": "skipped",
+    "durationMs": 7343,
+    "error": ""
+   }
+  }
+ },
+ {
+  "id": "2026-10-22T10:55:08.091Z",
+  "startedAt": "2026-10-22T10:55:08.091Z",
+  "label": "12th run",
+  "note": "",
+  "results": {
+   "setup|setup|setup||authenticate: auth-storage/admin.json": {
+    "status": "passed",
+    "durationMs": 50874,
+    "error": ""
+   },
+   "admin|sales|config|Sales Configuration Setup|placeholder — replace with real test": {
+    "status": "skipped",
+    "durationMs": 761,
+    "error": ""
+   },
+   "admin|sales|business|Sales Business Logic|placeholder — replace with real test": {
+    "status": "skipped",
+    "durationMs": 982,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting|placeholder — replace with real test": {
+    "status": "skipped",
+    "durationMs": 968,
+    "error": ""
+   },
+   "admin|sales|permissions|Sales User Permissions|placeholder — replace with real test": {
+    "status": "skipped",
+    "durationMs": 903,
+    "error": ""
+   },
+   "admin|sales|validations|Sales Field Validations|placeholder — replace with real test": {
+    "status": "skipped",
+    "durationMs": 953,
+    "error": ""
+   },
+   "admin|sales|edge|Sales Edge Cases|placeholder — replace with real test": {
+    "status": "skipped",
+    "durationMs": 955,
+    "error": ""
+   },
+   "admin|sales|archive|Sales Archive & Cleanup|placeholder — replace with real test": {
+    "status": "skipped",
+    "durationMs": 995,
+    "error": ""
+   },
+   "admin|sales|business|Sales credit order with serial product|precondition: credit customer is set to Credit and has no overdue invoices": {
+    "status": "passed",
+    "durationMs": 9042,
+    "error": ""
+   },
+   "admin|sales|business|Sales credit order with serial product|1. quotation: Credit order, serial product, Payment Terms 14 Days": {
+    "status": "passed",
+    "durationMs": 17315,
+    "error": ""
+   },
+   "admin|sales|business|Sales credit order with serial product|2. confirm: no approval needed, quotation becomes a Sales Order": {
+    "status": "passed",
+    "durationMs": 7995,
+    "error": ""
+   },
+   "admin|sales|business|Sales credit order with serial product|3. delivery: new serial number, validate → Done": {
+    "status": "passed",
+    "durationMs": 22585,
+    "error": ""
+   },
+   "admin|sales|business|Sales credit order with serial product|4. invoice: posted, keeps 14 Days, due 14 days after the invoice date": {
+    "status": "passed",
+    "durationMs": 11160,
+    "error": ""
+   },
+   "admin|sales|business|Sales credit order with serial product|5. payment day: come back through the Sales app, register the payment → IN PAYMENT": {
+    "status": "passed",
+    "durationMs": 16622,
+    "error": ""
+   },
+   "admin|sales|business|Sales quotation calculations|line, untaxed and total amounts follow the quantity × price arithmetic": {
+    "status": "passed",
+    "durationMs": 17813,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Customer cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 17835,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Order Payment Type cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 16734,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Quotation Type cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 17793,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Payment Terms cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 19391,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Salesperson cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 18604,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Sales Team cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 17051,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Warehouse cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 17442,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Company cannot be saved (Cash)": {
+    "status": "skipped",
+    "durationMs": 15065,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Credit quotation: required fields|blank Customer cannot be saved (Credit)": {
+    "status": "passed",
+    "durationMs": 16687,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Credit quotation: required fields|blank Order Payment Type cannot be saved (Credit)": {
+    "status": "passed",
+    "durationMs": 17299,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Credit quotation: required fields|blank Payment Terms cannot be saved (Credit)": {
+    "status": "passed",
+    "durationMs": 17741,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › order lines: confirm blocked for invalid lines|quotation with zero quantity cannot be confirmed": {
+    "status": "passed",
+    "durationMs": 15952,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › order lines: confirm blocked for invalid lines|quotation with zero unit price cannot be confirmed": {
+    "status": "failed",
+    "durationMs": 18463,
+    "error": "Error: S00110: Odoo confirmed an order with zero unit price — Confirm must be hidden or blocked"
+   },
+   "admin|sales|edge|Sales credit limit control|within the credit limit: Confirm is available, no approval needed": {
+    "status": "passed",
+    "durationMs": 17476,
+    "error": ""
+   },
+   "admin|sales|edge|Sales credit limit control|over the credit limit: Confirm is blocked, approval must be requested": {
+    "status": "passed",
+    "durationMs": 16657,
+    "error": ""
+   },
+   "admin|sales|edge|Sales credit limit control|customer with overdue invoices: Confirm is blocked, approval must be requested": {
+    "status": "skipped",
+    "durationMs": 7296,
+    "error": ""
+   }
+  }
+ },
+ {
+  "id": "2026-10-22T11:09:02.597Z",
+  "startedAt": "2026-10-22T11:09:02.597Z",
+  "label": "13th run",
+  "note": "",
+  "results": {
+   "setup|setup|setup||authenticate: auth-storage/admin.json": {
+    "status": "passed",
+    "durationMs": 8724,
+    "error": ""
+   },
+   "admin|sales|config|Sales Configuration Setup|placeholder — replace with real test": {
+    "status": "skipped",
+    "durationMs": 832,
+    "error": ""
+   },
+   "admin|sales|business|Sales Business Logic|placeholder — replace with real test": {
+    "status": "skipped",
+    "durationMs": 824,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting|placeholder — replace with real test": {
+    "status": "skipped",
+    "durationMs": 1007,
+    "error": ""
+   },
+   "admin|sales|permissions|Sales User Permissions|placeholder — replace with real test": {
+    "status": "skipped",
+    "durationMs": 947,
+    "error": ""
+   },
+   "admin|sales|validations|Sales Field Validations|placeholder — replace with real test": {
+    "status": "skipped",
+    "durationMs": 1090,
+    "error": ""
+   },
+   "admin|sales|edge|Sales Edge Cases|placeholder — replace with real test": {
+    "status": "skipped",
+    "durationMs": 768,
+    "error": ""
+   },
+   "admin|sales|archive|Sales Archive & Cleanup|placeholder — replace with real test": {
+    "status": "skipped",
+    "durationMs": 1005,
+    "error": ""
+   },
+   "admin|sales|business|Sales credit order with serial product|precondition: credit customer is set to Credit and has no overdue invoices": {
+    "status": "passed",
+    "durationMs": 9162,
+    "error": ""
+   },
+   "admin|sales|business|Sales credit order with serial product|1. quotation: Credit order, serial product, Payment Terms 14 Days": {
+    "status": "passed",
+    "durationMs": 17241,
+    "error": ""
+   },
+   "admin|sales|business|Sales credit order with serial product|2. confirm: no approval needed, quotation becomes a Sales Order": {
+    "status": "passed",
+    "durationMs": 9642,
+    "error": ""
+   },
+   "admin|sales|business|Sales credit order with serial product|3. delivery: new serial number, validate → Done": {
+    "status": "passed",
+    "durationMs": 23610,
+    "error": ""
+   },
+   "admin|sales|business|Sales credit order with serial product|4. invoice: posted, keeps 14 Days, due 14 days after the invoice date": {
+    "status": "passed",
+    "durationMs": 11870,
+    "error": ""
+   },
+   "admin|sales|business|Sales credit order with serial product|5. payment day: come back through the Sales app, register the payment → IN PAYMENT": {
+    "status": "passed",
+    "durationMs": 17944,
+    "error": ""
+   },
+   "admin|sales|business|Sales quotation calculations|line, untaxed and total amounts follow the quantity × price arithmetic": {
+    "status": "passed",
+    "durationMs": 18147,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Customer cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 18387,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Order Payment Type cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 18070,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Quotation Type cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 17039,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Payment Terms cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 18866,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Salesperson cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 18676,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Sales Team cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 18869,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Warehouse cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 18837,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Company cannot be saved (Cash)": {
+    "status": "skipped",
+    "durationMs": 20671,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Credit quotation: required fields|blank Customer cannot be saved (Credit)": {
+    "status": "passed",
+    "durationMs": 31703,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Credit quotation: required fields|blank Order Payment Type cannot be saved (Credit)": {
+    "status": "passed",
+    "durationMs": 17505,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Credit quotation: required fields|blank Payment Terms cannot be saved (Credit)": {
+    "status": "passed",
+    "durationMs": 17928,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › order lines: confirm blocked for invalid lines|quotation with zero quantity cannot be confirmed": {
+    "status": "passed",
+    "durationMs": 16738,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › order lines: confirm blocked for invalid lines|quotation with zero unit price cannot be confirmed": {
+    "status": "passed",
+    "durationMs": 20074,
+    "error": ""
+   },
+   "admin|sales|edge|Sales credit limit control|within the credit limit: Confirm is available, no approval needed": {
+    "status": "passed",
+    "durationMs": 16795,
+    "error": ""
+   },
+   "admin|sales|edge|Sales credit limit control|over the credit limit: Confirm is blocked, approval must be requested": {
+    "status": "passed",
+    "durationMs": 17037,
+    "error": ""
+   },
+   "admin|sales|edge|Sales credit limit control|customer with overdue invoices: Confirm is blocked, approval must be requested": {
+    "status": "skipped",
+    "durationMs": 7110,
+    "error": ""
+   }
+  }
  }
 ]

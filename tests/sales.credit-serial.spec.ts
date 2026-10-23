@@ -64,8 +64,10 @@ test.describe.serial('Sales credit order with serial product @module:sales @step
     const [partner] = await rpc.callMethod<Array<{
       name: string; total_overdue: number; x_studio_payment_method: string | false;
       use_partner_credit_limit: boolean; credit_limit: number;
+      x_studio_mandatory_bank_guarantee: boolean; x_studio_valid_bank_guarantee: boolean;
     }>>('res.partner', 'search_read', [[['name', '=', CUSTOMER]]], {
-      fields: ['name', 'total_overdue', 'x_studio_payment_method', 'use_partner_credit_limit', 'credit_limit'],
+      fields: ['name', 'total_overdue', 'x_studio_payment_method', 'use_partner_credit_limit', 'credit_limit',
+        'x_studio_mandatory_bank_guarantee', 'x_studio_valid_bank_guarantee'],
       limit: 1,
       context: { allowed_company_ids: [company.id], company_id: company.id },
     });
@@ -80,6 +82,11 @@ test.describe.serial('Sales credit order with serial product @module:sales @step
     });
     await test.step('Customer has a credit limit', async () => {
       expect(partner.credit_limit, `${CUSTOMER} needs a credit limit`).toBeGreaterThan(0);
+    });
+    await test.step('Bank Guarantee: valid, or not mandatory (otherwise the invoice cannot be confirmed)', async () => {
+      expect(!partner.x_studio_mandatory_bank_guarantee || partner.x_studio_valid_bank_guarantee,
+        `${CUSTOMER} has a mandatory Bank Guarantee that is not valid, so Odoo will not let its invoice be confirmed. ` +
+        'Enter the Bank Guarantee details (amount, expiry date, documents) and tick Valid Bank Guarantee, or use another credit customer.').toBe(true);
     });
   });
 
@@ -115,7 +122,7 @@ test.describe.serial('Sales credit order with serial product @module:sales @step
       expect(outcome.taken, 'no approvals expected for a customer within the credit limit').toEqual([]);
     });
     await test.step('Status is Sales Order and the Delivery button appears', async () => {
-      await expect(page.locator('.o_form_statusbar .o_statusbar_status')).toContainText(/sales order/i);
+      await expect(page.locator('.o_form_statusbar .o_arrow_button_current')).toContainText(/sales order/i);
       await expect(page.locator('button[name="action_view_delivery"]').first()).toBeVisible();
     });
   });
@@ -135,7 +142,7 @@ test.describe.serial('Sales credit order with serial product @module:sales @step
     invoiceName = await createInvoice(page);
     await test.step(`Invoice ${invoiceName} is Posted, with no payment ribbon yet`, async () => {
       expect(invoiceName, 'invoice number could not be read').toBeTruthy();
-      await expect(page.locator('.o_form_statusbar .o_statusbar_status')).toContainText(/posted/i);
+      await expect(page.locator('.o_form_statusbar .o_arrow_button_current')).toContainText(/posted/i);
       // A credit sale is not paid at invoicing time: no payment ribbon yet.
       await expect(page.locator('.o_form_view .ribbon span')).toHaveCount(0);
     });
@@ -174,7 +181,7 @@ test.describe.serial('Sales credit order with serial product @module:sales @step
     await test.step(`Click Invoices: the posted invoice ${invoiceName} opens`, async () => {
       await page.locator('button[name="action_view_invoice"]').first().click();
       await throwIfOdooError(page);
-      await expect(page.locator('.o_form_statusbar .o_statusbar_status')).toContainText(/posted/i, { timeout: 30_000 });
+      await expect(page.locator('.o_form_statusbar .o_arrow_button_current')).toContainText(/posted/i, { timeout: 30_000 });
       await expect(page.locator('.o_form_view .oe_title').first()).toContainText(invoiceName);
     });
 

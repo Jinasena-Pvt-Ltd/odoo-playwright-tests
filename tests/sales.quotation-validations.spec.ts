@@ -86,6 +86,11 @@ test.describe('Sales quotation validations @module:sales @step:validations', () 
         const number = await createQuotation(page, { customer: CASH_CUSTOMER, paymentType: 'Cash', ...bad.opts });
         created.push(number);
 
+        await test.step(`The line really has ${bad.what} (not reset by Odoo's pricing)`, async () => {
+          const field = 'unitPrice' in bad.opts ? 'price_unit' : 'product_uom_qty';
+          const shown = ((await page.locator(`.o_data_row [name="${field}"]`).first().textContent().catch(() => '')) ?? '').replace(/[^0-9.-]/g, '');
+          expect(parseFloat(shown || 'NaN'), `${number}: the test could not set ${bad.what} on the line (shows ${shown || 'nothing'})`).toBe(0);
+        });
         const outcome = await tryConfirmBadOrder(page);
         test.info().annotations.push({ type: 'outcome', description: `${bad.what}: ${outcome}` });
         await test.step(`Confirm is hidden or blocked (result: ${outcome})`, async () => {

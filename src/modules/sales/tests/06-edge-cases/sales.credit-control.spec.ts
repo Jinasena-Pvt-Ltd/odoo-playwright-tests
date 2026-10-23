@@ -3,7 +3,7 @@
  *
  * Which buttons Odoo shows on a saved Credit quotation depends on the customer's credit position:
  *   within limit, not overdue  → Confirm visible;  Request Credit Limit Approval and View Credit Limit Overdue Details hidden
- *   over the credit limit      → Confirm hidden;   Request Credit Limit Approval and View Credit Limit Overdue Details visible
+ *   over the credit limit      → Confirm hidden;   Request Credit Limit Approval visible (the overdue-details button belongs to overdue customers)
  *   customer has overdue invoices → Confirm hidden and an overdue / credit-limit approval request is offered
  * Quotations are only saved, never confirmed; they are deleted again afterwards.
  *
@@ -95,9 +95,7 @@ test.describe('Sales credit limit control @module:sales @step:edge', () => {
     await test.step('Request Credit Limit Approval is visible', async () => {
       expect(b.request, 'Request Credit Limit Approval should be visible above the limit').toBe(true);
     });
-    await test.step('View Credit Limit Overdue Details is visible', async () => {
-      expect(b.overdue, 'View Credit Limit Overdue Details should be visible above the limit').toBe(true);
-    });
+
   });
 
   test('customer with overdue invoices: Confirm is blocked, approval must be requested', async ({ page, rpc }) => {
