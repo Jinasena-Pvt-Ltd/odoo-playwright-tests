@@ -25,7 +25,9 @@ async function shot(page: Page, loc: Locator, file: string) {
 }
 
 test.describe("Export the Bank Payment File for Salaries @module:hr @step:business @e2e", () => {
+  test.use({ viewport: { width: 1920, height: 1080 }, actionTimeout: 15_000 });
   test("Export the Bank Payment File for Salaries", async ({ page }) => {
+    test.setTimeout(240000);
     await page.goto("/web");
     // Odoo keeps persistent long-polling/websocket connections open for
     // real-time notifications, so "networkidle" never naturally resolves —

@@ -54,7 +54,10 @@ export function genSpec(tour, domain) {
   lines.push(`}`);
   lines.push(``);
   lines.push(`test.describe(${jsString(`${tour.name} @module:${domain} @step:business @e2e`)}, () => {`);
+  // Wide viewport: at 1280px Odoo folds navbar section menus into the overflow "+" menu, hiding them.
+  lines.push(`  test.use({ viewport: { width: 1920, height: 1080 }, actionTimeout: 15_000 });`);
   lines.push(`  test(${jsString(tour.name)}, async ({ page }) => {`);
+  lines.push(`    test.setTimeout(${Math.max(120, total * 40) * 1000});`);
   lines.push(`    await page.goto(${jsString(START_PATH)});`);
   lines.push(`    // Odoo keeps persistent long-polling/websocket connections open for`);
   lines.push(`    // real-time notifications, so "networkidle" never naturally resolves —`);

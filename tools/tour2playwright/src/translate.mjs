@@ -37,6 +37,10 @@ export function selectorToLocator(selector) {
     tail += method;
   };
 
+  // Odoo clicks the dropdown container; Playwright clicks its centre, which can land on
+  // "Search More...". Target the first suggestion instead.
+  sel = sel.replace(/\.o-autocomplete--dropdown-menu\s*$/, ".o-autocomplete--dropdown-menu .o-autocomplete--dropdown-item");
+
   // :first / :last
   sel = sel.replace(/:first(?![-\w])/g, () => {
     applyTail(".first()");
@@ -173,7 +177,7 @@ export function actionFor(locExpr, step) {
       return { code: `await loc.fill(${v});${tab}`, todos };
     }
     case "select-bare": {
-      const m = step.content.match(/(By \w+)/);
+      const m = step.content.match(/(By \w+)/);
       const pick = m ? `{ label: ${jsString(m[1])} }` : `{ index: 1 }`;
       return { code: `await loc.selectOption(${pick}).catch(() => loc.selectOption({ index: 1 }));`, todos };
     }

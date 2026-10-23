@@ -25,7 +25,9 @@ async function shot(page: Page, loc: Locator, file: string) {
 }
 
 test.describe("Allocate Leave to Employees @module:hr @step:business @e2e", () => {
+  test.use({ viewport: { width: 1920, height: 1080 }, actionTimeout: 15_000 });
   test("Allocate Leave to Employees", async ({ page }) => {
+    test.setTimeout(520000);
     await page.goto("/web");
     // Odoo keeps persistent long-polling/websocket connections open for
     // real-time notifications, so "networkidle" never naturally resolves —
@@ -77,7 +79,7 @@ test.describe("Allocate Leave to Employees @module:hr @step:business @e2e", () =
     });
 
     await test.step("07. Choose the type", async () => {
-      const loc = (page.locator(".o-autocomplete--dropdown-menu")).first();
+      const loc = (page.locator(".o-autocomplete--dropdown-menu .o-autocomplete--dropdown-item")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-07.png");
       await loc.click();
@@ -95,7 +97,7 @@ test.describe("Allocate Leave to Employees @module:hr @step:business @e2e", () =
       const loc = (page.locator("[name=\"holiday_type\"] select")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-09.png");
-      await loc.selectOption({ index: 1 }).catch(() => loc.selectOption({ index: 1 }));
+      await loc.selectOption({ label: "By Department" }).catch(() => loc.selectOption({ index: 1 }));
     });
 
     await test.step("10. Search Department", async () => {
@@ -106,7 +108,7 @@ test.describe("Allocate Leave to Employees @module:hr @step:business @e2e", () =
     });
 
     await test.step("11. Choose the department", async () => {
-      const loc = (page.locator(".o-autocomplete--dropdown-menu")).first();
+      const loc = (page.locator(".o-autocomplete--dropdown-menu .o-autocomplete--dropdown-item")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-11.png");
       await loc.click();

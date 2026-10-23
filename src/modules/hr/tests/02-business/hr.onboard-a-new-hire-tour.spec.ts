@@ -25,7 +25,9 @@ async function shot(page: Page, loc: Locator, file: string) {
 }
 
 test.describe("Onboard a New Hire @module:hr @step:business @e2e", () => {
+  test.use({ viewport: { width: 1920, height: 1080 }, actionTimeout: 15_000 });
   test("Onboard a New Hire", async ({ page }) => {
+    test.setTimeout(600000);
     await page.goto("/web");
     // Odoo keeps persistent long-polling/websocket connections open for
     // real-time notifications, so "networkidle" never naturally resolves —
@@ -55,7 +57,7 @@ test.describe("Onboard a New Hire @module:hr @step:business @e2e", () => {
     });
 
     await test.step("04. Choose the manager", async () => {
-      const loc = (page.locator(".o-autocomplete--dropdown-menu")).first();
+      const loc = (page.locator(".o-autocomplete--dropdown-menu .o-autocomplete--dropdown-item")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-04.png");
       await loc.click();
@@ -76,7 +78,7 @@ test.describe("Onboard a New Hire @module:hr @step:business @e2e", () => {
     });
 
     await test.step("07. Choose the user", async () => {
-      const loc = (page.locator(".o-autocomplete--dropdown-menu")).first();
+      const loc = (page.locator(".o-autocomplete--dropdown-menu .o-autocomplete--dropdown-item")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-07.png");
       await loc.click();
