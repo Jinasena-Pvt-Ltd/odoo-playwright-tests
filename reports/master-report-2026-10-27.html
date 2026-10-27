@@ -193,7 +193,7 @@
   <div class="nav-section">
     <div class="nav-module-label"><span class="mod-dot" style="background:#64748b"></span>sales</div>
     <a class="nav-item" href="#sales-config"><span class="nav-dot amber"></span>Config<span class="nav-count skip">0p 1s</span></a>
-    <a class="nav-item" href="#sales-business"><span class="nav-dot red"></span>Business<span class="nav-count">12p 1f 2s</span></a>
+    <a class="nav-item" href="#sales-business"><span class="nav-dot red"></span>Business<span class="nav-count">13p 1f 1s</span></a>
     <a class="nav-item" href="#sales-reporting"><span class="nav-dot amber"></span>Reporting<span class="nav-count skip">0p 1s</span></a>
     <a class="nav-item" href="#sales-permissions"><span class="nav-dot amber"></span>Permissions<span class="nav-count skip">0p 1s</span></a>
     <a class="nav-item" href="#sales-validations"><span class="nav-dot amber"></span>Field Validations<span class="nav-count skip">12p 2s</span></a>
@@ -225,15 +225,15 @@
       <div class="hero-divider"></div>
       <div class="hero-stat"><div class="num">38</div><div class="lbl">Total Tests</div></div>
       <div class="hero-divider"></div>
-      <div class="hero-stat"><div class="num green">26</div><div class="lbl">Passed</div></div>
+      <div class="hero-stat"><div class="num green">27</div><div class="lbl">Passed</div></div>
       <div class="hero-divider"></div>
       <div class="hero-stat"><div class="num red">1</div><div class="lbl">Failed</div></div>
       <div class="hero-divider"></div>
-      <div class="hero-stat"><div class="num purple">10</div><div class="lbl">Skipped (SaaS)</div></div>
+      <div class="hero-stat"><div class="num purple">9</div><div class="lbl">Skipped (SaaS)</div></div>
       <div class="hero-divider"></div><div class="hero-stat"><div class="num amber">1</div><div class="lbl">Pending</div></div>
     </div>
     <div class="hero-bar-wrap">
-      <div class="hero-bar-label"><span>Pass rate (of tests that ran)</span><span>96% · 26/27</span></div>
+      <div class="hero-bar-label"><span>Pass rate (of tests that ran)</span><span>96% · 27/28</span></div>
       <div class="hero-bar-bg"><div class="hero-bar-fill" style="width:96%"></div></div>
     </div>
   </div>
@@ -244,14 +244,14 @@
       <div class="module-card-name">sales</div>
       <div class="module-card-sub"></div>
       <div class="module-card-stats">
-        <span class="p">✔ 26</span>
-        <span class="s">⏭ 10</span>
+        <span class="p">✔ 27</span>
+        <span class="s">⏭ 9</span>
         <span class="f">❌ 1</span>
         <span class="t">of 38</span>
       </div>
       <div class="module-mini-bar">
-        <div class="seg-pass" style="width:68%"></div>
-        <div class="seg-skip" style="width:26%"></div>
+        <div class="seg-pass" style="width:71%"></div>
+        <div class="seg-skip" style="width:24%"></div>
         <div class="seg-fail" style="width:3%"></div>
       </div>
       <div style="font-size:0.68rem;color:var(--muted);margin-top:6px;">13 spec files</div>
@@ -267,7 +267,7 @@
         <div class="mod-header-title">sales</div>
         <div class="mod-header-meta">src/modules/sales/ · 13 spec files · 38 tests</div>
       </div>
-      <div class="mod-header-pills"><span class="pill green">26 passed</span> <span class="pill red">1 failed</span> <span class="pill purple">10 skipped</span> <span class="pill amber">1 pending</span></div>
+      <div class="mod-header-pills"><span class="pill green">27 passed</span> <span class="pill red">1 failed</span> <span class="pill purple">9 skipped</span> <span class="pill amber">1 pending</span></div>
     </div>
     
     
@@ -305,7 +305,7 @@
       <div class="suite-hdr">
         <span class="suite-hdr-icon">💼</span>
         <span class="suite-hdr-title">Business</span>
-        <span class="pill green">12 passed</span> <span class="pill red">1 failed</span> <span class="pill purple">2 skipped</span> <span class="pill amber">1 pending</span>
+        <span class="pill green">13 passed</span> <span class="pill red">1 failed</span> <span class="pill purple">1 skipped</span> <span class="pill amber">1 pending</span>
         <span class="suite-hdr-file">5 files</span>
       </div>
       
@@ -538,7 +538,7 @@
       <div class="suite-hdr" style="margin-top:16px;">
         <span class="suite-hdr-icon">💼</span>
         <span class="suite-hdr-title">sales.return-cash</span>
-        <span class="pill green">5 passed</span> <span class="pill red">1 failed</span> <span class="pill purple">1 skipped</span>
+        <span class="pill green">6 passed</span> <span class="pill red">1 failed</span>
         <span class="suite-hdr-file">sales.return-cash.spec.ts</span>
       </div>
       <div class="test-list">
@@ -630,7 +630,7 @@
       await expect(dlg).toBeVisible({ timeout: 15_000 });
       await dlg.locator('[name=&quot;reason&quot;] input, [name=&quot;reason&quot;] textarea').first().fill(returnReason);
       await dlg.getByRole('button', { name: /^reverse$/i }).click();</pre></details></div>
-        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">5. credit note: reverse with a reason, approval, confirm</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('5. credit note: reverse with a reason, approval, confirm', async ({ page, browser }) =&gt; {
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">5. credit note: reverse with a reason, approval, confirm</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('5. credit note: reverse with a reason, approval, confirm', async ({ page, browser }) =&gt; {
     test.skip(!invoiceUrl, 'No invoice from step 4');
     await openRecord(page, invoiceUrl);
 

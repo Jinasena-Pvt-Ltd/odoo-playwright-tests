@@ -107,11 +107,12 @@ test.describe.serial('Sales return of a cash order @module:sales @step:business 
         const buttons = await headerButtons(page);
         if (buttons.some(b => /^confirm$/i.test(b.text) && b.enabled)) break;
         const req = buttons.find(b => /^request .*approval$/i.test(b.text) && b.enabled);
-        const appr = buttons.find(b => /^approve\b/i.test(b.text) && b.enabled && !b.waiting);
+        const appr = buttons.find(b => /^approve\b/i.test(b.text) && b.enabled);
         if (req) {
           await clickButton(page, new RegExp(`^${req.text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`, 'i'));
         } else if (appr) {
-          await clickButton(page, new RegExp(`^${appr.text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`, 'i'));
+          // accessible name includes the avatar img alt ("Approve Credit NoteUser avatar placeholder") → prefix match
+          await clickButton(page, new RegExp(`^${appr.text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`, 'i'));
         } else {
           break;
         }
@@ -120,7 +121,7 @@ test.describe.serial('Sales return of a cash order @module:sales @step:business 
       }
       const confirm = page.locator('.o_form_statusbar').getByRole('button', { name: /^confirm$/i }).first();
       test.skip(!(await confirm.isVisible({ timeout: 3_000 }).catch(() => false)),
-        'Credit note needs an approval from another user (set ODOO_APPROVER_EMAIL / ODOO_APPROVER_PASSWORD)');
+        `Credit note needs an approval from another user (set ODOO_APPROVER_EMAIL / ODOO_APPROVER_PASSWORD). Header buttons: ${JSON.stringify(await headerButtons(page))}`);
       await confirm.click();
       await throwIfOdooError(page);
       await expect(stage(page)).toContainText(/posted/i, { timeout: 30_000 });
