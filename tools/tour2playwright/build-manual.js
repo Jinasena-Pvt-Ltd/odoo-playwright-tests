@@ -49,6 +49,13 @@ const TOUR_NOTES = {
     adapted: new Set([200, 210, 220, 282, 291, 312, 318, 319, 320]),
     excluded: new Set(),
   },
+  'return-cash-sales-order': {
+    displayTitle: 'RETURN CASH SALES ORDER',
+    adapted: new Set([10, 50, 60, 70, 80, 100, 110, 140, 150, 160, 170, 180, 190, 200, 210, 280, 290, 300, 310, 320, 360, 380]),
+    // 420-481 = Create Advance Payment / Payments smart button: that button raises an Odoo error on this instance,
+    // so those steps are left out of the manual until it is fixed.
+    excluded: new Set([420, 430, 440, 450, 460, 470, 480, 481]),
+  },
   sales: {
     adapted: new Set([10, 50, 60, 70, 80, 83, 84, 97]),
     excluded: new Set(),

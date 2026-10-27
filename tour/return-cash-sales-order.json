@@ -1,0 +1,1374 @@
+{
+  "version": 2,
+  "tours": [
+    {
+      "name": "Return Cash Sales Order",
+      "name_i18n": {
+        "en_US": "Return Cash Sales Order",
+        "si_LK": "Return Cash Sales Order",
+        "ta_IN": "Return Cash Sales Order"
+      },
+      "description": "Step-by-step guide to returning a cash sale: create and confirm the cash order, deliver the goods, invoice the customer, then issue a credit note (request approval, approve, confirm) and reset the original invoice.",
+      "description_i18n": {
+        "en_US": "Step-by-step guide to returning a cash sale: create and confirm the cash order, deliver the goods, invoice the customer, then issue a credit note (request approval, approve, confirm) and reset the original invoice.",
+        "si_LK": "Step-by-step guide to returning a cash sale: create and confirm the cash order, deliver the goods, invoice the customer, then issue a credit note (request approval, approve, confirm) and reset the original invoice.",
+        "ta_IN": "Step-by-step guide to returning a cash sale: create and confirm the cash order, deliver the goods, invoice the customer, then issue a credit note (request approval, approve, confirm) and reset the original invoice."
+      },
+      "steps": [
+        {
+          "sequence": 10,
+          "title": "Open the Sales app from the Odoo home screen",
+          "title_i18n": {
+            "en_US": "Open the Sales app from the Odoo home screen",
+            "si_LK": "Open the Sales app from the Odoo home screen",
+            "ta_IN": "Open the Sales app from the Odoo home screen"
+          },
+          "trigger": "[data-menu-xmlid=\"sale.sale_menu_root\"]",
+          "content": "Log in to Odoo. On the home screen find the **Sales** icon and click it. The Sales app opens with its menu across the top.",
+          "content_i18n": {
+            "en_US": "Log in to Odoo. On the home screen find the **Sales** icon and click it. The Sales app opens with its menu across the top.",
+            "si_LK": "Log in to Odoo. On the home screen find the **Sales** icon and click it. The Sales app opens with its menu across the top.",
+            "ta_IN": "Log in to Odoo. On the home screen find the **Sales** icon and click it. The Sales app opens with its menu across the top."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: every sale and every return starts in the Sales app. Check: the Quotations list opens. If the Sales tile is missing, your user has no Sales access, so ask your administrator.",
+          "description_i18n": {
+            "en_US": "Why: every sale and every return starts in the Sales app. Check: the Quotations list opens. If the Sales tile is missing, your user has no Sales access, so ask your administrator.",
+            "si_LK": "Why: every sale and every return starts in the Sales app. Check: the Quotations list opens. If the Sales tile is missing, your user has no Sales access, so ask your administrator.",
+            "ta_IN": "Why: every sale and every return starts in the Sales app. Check: the Quotations list opens. If the Sales tile is missing, your user has no Sales access, so ask your administrator."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 20,
+          "title": "Click Orders in the top menu",
+          "title_i18n": {
+            "en_US": "Click Orders in the top menu",
+            "si_LK": "Click Orders in the top menu",
+            "ta_IN": "Click Orders in the top menu"
+          },
+          "trigger": "[data-menu-xmlid=\"sale.sale_order_menu\"]",
+          "content": "In the Sales menu bar (Orders, To Invoice, Products, Reporting, Configuration) click **Orders**. A small dropdown opens.",
+          "content_i18n": {
+            "en_US": "In the Sales menu bar (Orders, To Invoice, Products, Reporting, Configuration) click **Orders**. A small dropdown opens.",
+            "si_LK": "In the Sales menu bar (Orders, To Invoice, Products, Reporting, Configuration) click **Orders**. A small dropdown opens.",
+            "ta_IN": "In the Sales menu bar (Orders, To Invoice, Products, Reporting, Configuration) click **Orders**. A small dropdown opens."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: the Orders menu groups quotations and sales orders. Check: the dropdown lists Quotations and Orders.",
+          "description_i18n": {
+            "en_US": "Why: the Orders menu groups quotations and sales orders. Check: the dropdown lists Quotations and Orders.",
+            "si_LK": "Why: the Orders menu groups quotations and sales orders. Check: the dropdown lists Quotations and Orders.",
+            "ta_IN": "Why: the Orders menu groups quotations and sales orders. Check: the dropdown lists Quotations and Orders."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 30,
+          "title": "Click Quotations to open the quotation list",
+          "title_i18n": {
+            "en_US": "Click Quotations to open the quotation list",
+            "si_LK": "Click Quotations to open the quotation list",
+            "ta_IN": "Click Quotations to open the quotation list"
+          },
+          "trigger": "[data-menu-xmlid=\"sale.menu_sale_quotations\"]",
+          "content": "In the dropdown click **Quotations**. A list of existing quotations opens, showing customer, date and status.",
+          "content_i18n": {
+            "en_US": "In the dropdown click **Quotations**. A list of existing quotations opens, showing customer, date and status.",
+            "si_LK": "In the dropdown click **Quotations**. A list of existing quotations opens, showing customer, date and status.",
+            "ta_IN": "In the dropdown click **Quotations**. A list of existing quotations opens, showing customer, date and status."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: a quotation is the draft of a sale; it becomes a Sales Order only after you confirm it. Check: the list shows existing quotations.",
+          "description_i18n": {
+            "en_US": "Why: a quotation is the draft of a sale; it becomes a Sales Order only after you confirm it. Check: the list shows existing quotations.",
+            "si_LK": "Why: a quotation is the draft of a sale; it becomes a Sales Order only after you confirm it. Check: the list shows existing quotations.",
+            "ta_IN": "Why: a quotation is the draft of a sale; it becomes a Sales Order only after you confirm it. Check: the list shows existing quotations."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 40,
+          "title": "Click New to start a blank quotation",
+          "title_i18n": {
+            "en_US": "Click New to start a blank quotation",
+            "si_LK": "Click New to start a blank quotation",
+            "ta_IN": "Click New to start a blank quotation"
+          },
+          "trigger": "div.d-xl-inline-flex.gap-1 > button.btn.btn-primary",
+          "content": "At the top left click the purple **New** button. A blank quotation form opens and its title shows \"New\".",
+          "content_i18n": {
+            "en_US": "At the top left click the purple **New** button. A blank quotation form opens and its title shows \"New\".",
+            "si_LK": "At the top left click the purple **New** button. A blank quotation form opens and its title shows \"New\".",
+            "ta_IN": "At the top left click the purple **New** button. A blank quotation form opens and its title shows \"New\"."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: the real order number (for example S00131) is only assigned when the record is saved. Tip: do not click Confirm yet, because the fields below must be filled first.",
+          "description_i18n": {
+            "en_US": "Why: the real order number (for example S00131) is only assigned when the record is saved. Tip: do not click Confirm yet, because the fields below must be filled first.",
+            "si_LK": "Why: the real order number (for example S00131) is only assigned when the record is saved. Tip: do not click Confirm yet, because the fields below must be filled first.",
+            "ta_IN": "Why: the real order number (for example S00131) is only assigned when the record is saved. Tip: do not click Confirm yet, because the fields below must be filled first."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 50,
+          "title": "Click the Customer field and type the customer name",
+          "title_i18n": {
+            "en_US": "Click the Customer field and type the customer name",
+            "si_LK": "Click the Customer field and type the customer name",
+            "ta_IN": "Click the Customer field and type the customer name"
+          },
+          "trigger": "div.o_cell.o_wrap_input > div.o_field_widget.o_required_modifier > div.o_field_many2one_selection > div.o_input_dropdown > div.o-autocomplete.dropdown > input.o-autocomplete--input.o_input",
+          "content": "Click the **Customer** field and start typing the customer name. A dropdown of matching customers appears.",
+          "content_i18n": {
+            "en_US": "Click the **Customer** field and start typing the customer name. A dropdown of matching customers appears.",
+            "si_LK": "Click the **Customer** field and start typing the customer name. A dropdown of matching customers appears.",
+            "ta_IN": "Click the **Customer** field and start typing the customer name. A dropdown of matching customers appears."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: the customer decides the delivery and invoice addresses. Check: matching customers are listed under the field. Watch out: pick the right company if several names look alike.",
+          "description_i18n": {
+            "en_US": "Why: the customer decides the delivery and invoice addresses. Check: matching customers are listed under the field. Watch out: pick the right company if several names look alike.",
+            "si_LK": "Why: the customer decides the delivery and invoice addresses. Check: matching customers are listed under the field. Watch out: pick the right company if several names look alike.",
+            "ta_IN": "Why: the customer decides the delivery and invoice addresses. Check: matching customers are listed under the field. Watch out: pick the right company if several names look alike."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 60,
+          "title": "Select the customer from the dropdown",
+          "title_i18n": {
+            "en_US": "Select the customer from the dropdown",
+            "si_LK": "Select the customer from the dropdown",
+            "ta_IN": "Select the customer from the dropdown"
+          },
+          "trigger": "#autocomplete_0_2",
+          "content": "Click the customer in the list. The Customer, Invoice Address and Delivery Address fields fill in automatically.",
+          "content_i18n": {
+            "en_US": "Click the customer in the list. The Customer, Invoice Address and Delivery Address fields fill in automatically.",
+            "si_LK": "Click the customer in the list. The Customer, Invoice Address and Delivery Address fields fill in automatically.",
+            "ta_IN": "Click the customer in the list. The Customer, Invoice Address and Delivery Address fields fill in automatically."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: Odoo copies the customer addresses onto the order. Check: the three address fields show the customer.",
+          "description_i18n": {
+            "en_US": "Why: Odoo copies the customer addresses onto the order. Check: the three address fields show the customer.",
+            "si_LK": "Why: Odoo copies the customer addresses onto the order. Check: the three address fields show the customer.",
+            "ta_IN": "Why: Odoo copies the customer addresses onto the order. Check: the three address fields show the customer."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 70,
+          "title": "Choose Cash as the order payment method",
+          "title_i18n": {
+            "en_US": "Choose Cash as the order payment method",
+            "si_LK": "Choose Cash as the order payment method",
+            "ta_IN": "Choose Cash as the order payment method"
+          },
+          "trigger": "#x_studio_order_payment_method_0",
+          "content": "Open the **Order Payment Method** field and choose **Cash**.",
+          "content_i18n": {
+            "en_US": "Open the **Order Payment Method** field and choose **Cash**.",
+            "si_LK": "Open the **Order Payment Method** field and choose **Cash**.",
+            "ta_IN": "Open the **Order Payment Method** field and choose **Cash**."
+          },
+          "position": "bottom",
+          "run": "select",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: Cash orders are paid immediately, so they follow the cash flow (no credit period). Watch out: choosing Credit here would change the approvals and payment terms the order needs.",
+          "description_i18n": {
+            "en_US": "Why: Cash orders are paid immediately, so they follow the cash flow (no credit period). Watch out: choosing Credit here would change the approvals and payment terms the order needs.",
+            "si_LK": "Why: Cash orders are paid immediately, so they follow the cash flow (no credit period). Watch out: choosing Credit here would change the approvals and payment terms the order needs.",
+            "ta_IN": "Why: Cash orders are paid immediately, so they follow the cash flow (no credit period). Watch out: choosing Credit here would change the approvals and payment terms the order needs."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 80,
+          "title": "Choose the quotation type",
+          "title_i18n": {
+            "en_US": "Choose the quotation type",
+            "si_LK": "Choose the quotation type",
+            "ta_IN": "Choose the quotation type"
+          },
+          "trigger": "#x_studio_quotation_type_0",
+          "content": "Open the **Quotation Type** field and choose **Sales**.",
+          "content_i18n": {
+            "en_US": "Open the **Quotation Type** field and choose **Sales**.",
+            "si_LK": "Open the **Quotation Type** field and choose **Sales**.",
+            "ta_IN": "Open the **Quotation Type** field and choose **Sales**."
+          },
+          "position": "bottom",
+          "run": "select",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: the type controls which sales process and reports the order belongs to. Check: the field now shows \"Sales\".",
+          "description_i18n": {
+            "en_US": "Why: the type controls which sales process and reports the order belongs to. Check: the field now shows \"Sales\".",
+            "si_LK": "Why: the type controls which sales process and reports the order belongs to. Check: the field now shows \"Sales\".",
+            "ta_IN": "Why: the type controls which sales process and reports the order belongs to. Check: the field now shows \"Sales\"."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 90,
+          "title": "Click Add a product to add an order line",
+          "title_i18n": {
+            "en_US": "Click Add a product to add an order line",
+            "si_LK": "Click Add a product to add an order line",
+            "ta_IN": "Click Add a product to add an order line"
+          },
+          "trigger": "td.o_field_x2many_list_row_add > a:nth-of-type(1)",
+          "content": "Under the Order Lines tab click **Add a product**. A new empty line appears.",
+          "content_i18n": {
+            "en_US": "Under the Order Lines tab click **Add a product**. A new empty line appears.",
+            "si_LK": "Under the Order Lines tab click **Add a product**. A new empty line appears.",
+            "ta_IN": "Under the Order Lines tab click **Add a product**. A new empty line appears."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: an order needs at least one product line before it can be confirmed. Check: a new editable line is shown.",
+          "description_i18n": {
+            "en_US": "Why: an order needs at least one product line before it can be confirmed. Check: a new editable line is shown.",
+            "si_LK": "Why: an order needs at least one product line before it can be confirmed. Check: a new editable line is shown.",
+            "ta_IN": "Why: an order needs at least one product line before it can be confirmed. Check: a new editable line is shown."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 100,
+          "title": "Search for the product",
+          "title_i18n": {
+            "en_US": "Search for the product",
+            "si_LK": "Search for the product",
+            "ta_IN": "Search for the product"
+          },
+          "trigger": "td.o_data_cell.cursor-pointer:nth-of-type(2) > div.o_field_widget.o_required_modifier > div.o_field_many2one_selection > div.o_input_dropdown > div.o-autocomplete.dropdown > input.o-autocomplete--input.o_input",
+          "content": "In the new line, click the **Product** cell and type the product code, for example 02BB 023. A dropdown of matching products appears.",
+          "content_i18n": {
+            "en_US": "In the new line, click the **Product** cell and type the product code, for example 02BB 023. A dropdown of matching products appears.",
+            "si_LK": "In the new line, click the **Product** cell and type the product code, for example 02BB 023. A dropdown of matching products appears.",
+            "ta_IN": "In the new line, click the **Product** cell and type the product code, for example 02BB 023. A dropdown of matching products appears."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: typing the internal reference is the quickest way to find an item. Check: the matching product appears in the dropdown.",
+          "description_i18n": {
+            "en_US": "Why: typing the internal reference is the quickest way to find an item. Check: the matching product appears in the dropdown.",
+            "si_LK": "Why: typing the internal reference is the quickest way to find an item. Check: the matching product appears in the dropdown.",
+            "ta_IN": "Why: typing the internal reference is the quickest way to find an item. Check: the matching product appears in the dropdown."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 110,
+          "title": "Select the product",
+          "title_i18n": {
+            "en_US": "Select the product",
+            "si_LK": "Select the product",
+            "ta_IN": "Select the product"
+          },
+          "trigger": "#autocomplete_0_0",
+          "content": "Click **[02BB 023] BALL BEARING 6202-2RS** in the dropdown. The description, unit of measure and price fill in.",
+          "content_i18n": {
+            "en_US": "Click **[02BB 023] BALL BEARING 6202-2RS** in the dropdown. The description, unit of measure and price fill in.",
+            "si_LK": "Click **[02BB 023] BALL BEARING 6202-2RS** in the dropdown. The description, unit of measure and price fill in.",
+            "ta_IN": "Click **[02BB 023] BALL BEARING 6202-2RS** in the dropdown. The description, unit of measure and price fill in."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: Odoo fills the line from the product card. Check: the product name shows on the line.",
+          "description_i18n": {
+            "en_US": "Why: Odoo fills the line from the product card. Check: the product name shows on the line.",
+            "si_LK": "Why: Odoo fills the line from the product card. Check: the product name shows on the line.",
+            "ta_IN": "Why: Odoo fills the line from the product card. Check: the product name shows on the line."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 120,
+          "title": "Set the quantity",
+          "title_i18n": {
+            "en_US": "Set the quantity",
+            "si_LK": "Set the quantity",
+            "ta_IN": "Set the quantity"
+          },
+          "trigger": "td[name=\"product_uom_qty\"]",
+          "content": "Click the **Quantity** cell of the line. The default is 1.0000; type a different number if needed.",
+          "content_i18n": {
+            "en_US": "Click the **Quantity** cell of the line. The default is 1.0000; type a different number if needed.",
+            "si_LK": "Click the **Quantity** cell of the line. The default is 1.0000; type a different number if needed.",
+            "ta_IN": "Click the **Quantity** cell of the line. The default is 1.0000; type a different number if needed."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: the quantity is what will be delivered and invoiced, and later returned. Check: the Quantity column shows the value you want.",
+          "description_i18n": {
+            "en_US": "Why: the quantity is what will be delivered and invoiced, and later returned. Check: the Quantity column shows the value you want.",
+            "si_LK": "Why: the quantity is what will be delivered and invoiced, and later returned. Check: the Quantity column shows the value you want.",
+            "ta_IN": "Why: the quantity is what will be delivered and invoiced, and later returned. Check: the Quantity column shows the value you want."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 130,
+          "title": "Open the Other Info tab",
+          "title_i18n": {
+            "en_US": "Open the Other Info tab",
+            "si_LK": "Open the Other Info tab",
+            "ta_IN": "Open the Other Info tab"
+          },
+          "trigger": "a[name=\"other_information\"]",
+          "content": "Click the **Other Info** tab under the order lines.",
+          "content_i18n": {
+            "en_US": "Click the **Other Info** tab under the order lines.",
+            "si_LK": "Click the **Other Info** tab under the order lines.",
+            "ta_IN": "Click the **Other Info** tab under the order lines."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: the sales team, warehouse and payment terms are kept on this tab. Check: the tab shows the Sales, Delivery and Invoicing sections.",
+          "description_i18n": {
+            "en_US": "Why: the sales team, warehouse and payment terms are kept on this tab. Check: the tab shows the Sales, Delivery and Invoicing sections.",
+            "si_LK": "Why: the sales team, warehouse and payment terms are kept on this tab. Check: the tab shows the Sales, Delivery and Invoicing sections.",
+            "ta_IN": "Why: the sales team, warehouse and payment terms are kept on this tab. Check: the tab shows the Sales, Delivery and Invoicing sections."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 140,
+          "title": "Open the Payment Terms field",
+          "title_i18n": {
+            "en_US": "Open the Payment Terms field",
+            "si_LK": "Open the Payment Terms field",
+            "ta_IN": "Open the Payment Terms field"
+          },
+          "trigger": "#payment_term_id_0",
+          "content": "In the Invoicing section click the **Payment Terms** field. A dropdown of payment terms opens.",
+          "content_i18n": {
+            "en_US": "In the Invoicing section click the **Payment Terms** field. A dropdown of payment terms opens.",
+            "si_LK": "In the Invoicing section click the **Payment Terms** field. A dropdown of payment terms opens.",
+            "ta_IN": "In the Invoicing section click the **Payment Terms** field. A dropdown of payment terms opens."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: the payment terms set when the invoice is due. Check: a list of terms appears.",
+          "description_i18n": {
+            "en_US": "Why: the payment terms set when the invoice is due. Check: a list of terms appears.",
+            "si_LK": "Why: the payment terms set when the invoice is due. Check: a list of terms appears.",
+            "ta_IN": "Why: the payment terms set when the invoice is due. Check: a list of terms appears."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 150,
+          "title": "Select Immediate Payment",
+          "title_i18n": {
+            "en_US": "Select Immediate Payment",
+            "si_LK": "Select Immediate Payment",
+            "ta_IN": "Select Immediate Payment"
+          },
+          "trigger": "#payment_term_id_0_0_0",
+          "content": "Click **Immediate Payment**.",
+          "content_i18n": {
+            "en_US": "Click **Immediate Payment**.",
+            "si_LK": "Click **Immediate Payment**.",
+            "ta_IN": "Click **Immediate Payment**."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: this is a cash order, so the customer pays straight away and no credit period applies. Check: the field shows \"Immediate Payment\".",
+          "description_i18n": {
+            "en_US": "Why: this is a cash order, so the customer pays straight away and no credit period applies. Check: the field shows \"Immediate Payment\".",
+            "si_LK": "Why: this is a cash order, so the customer pays straight away and no credit period applies. Check: the field shows \"Immediate Payment\".",
+            "ta_IN": "Why: this is a cash order, so the customer pays straight away and no credit period applies. Check: the field shows \"Immediate Payment\"."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 160,
+          "title": "Open the Sales Team field",
+          "title_i18n": {
+            "en_US": "Open the Sales Team field",
+            "si_LK": "Open the Sales Team field",
+            "ta_IN": "Open the Sales Team field"
+          },
+          "trigger": "#team_id_0",
+          "content": "Click the **Sales Team** field. A short dropdown opens with the most used teams.",
+          "content_i18n": {
+            "en_US": "Click the **Sales Team** field. A short dropdown opens with the most used teams.",
+            "si_LK": "Click the **Sales Team** field. A short dropdown opens with the most used teams.",
+            "ta_IN": "Click the **Sales Team** field. A short dropdown opens with the most used teams."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: the team receives the sale in its reports and targets. Tip: if your team is not listed, use Search More.",
+          "description_i18n": {
+            "en_US": "Why: the team receives the sale in its reports and targets. Tip: if your team is not listed, use Search More.",
+            "si_LK": "Why: the team receives the sale in its reports and targets. Tip: if your team is not listed, use Search More.",
+            "ta_IN": "Why: the team receives the sale in its reports and targets. Tip: if your team is not listed, use Search More."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 170,
+          "title": "Click Search More to see all sales teams",
+          "title_i18n": {
+            "en_US": "Click Search More to see all sales teams",
+            "si_LK": "Click Search More to see all sales teams",
+            "ta_IN": "Click Search More to see all sales teams"
+          },
+          "trigger": "#team_id_0_0_8",
+          "content": "At the bottom of the dropdown click **Search More...**. A pop-up list of all sales teams opens.",
+          "content_i18n": {
+            "en_US": "At the bottom of the dropdown click **Search More...**. A pop-up list of all sales teams opens.",
+            "si_LK": "At the bottom of the dropdown click **Search More...**. A pop-up list of all sales teams opens.",
+            "ta_IN": "At the bottom of the dropdown click **Search More...**. A pop-up list of all sales teams opens."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: the dropdown only shows a few teams. Check: a pop-up lists every sales team.",
+          "description_i18n": {
+            "en_US": "Why: the dropdown only shows a few teams. Check: a pop-up lists every sales team.",
+            "si_LK": "Why: the dropdown only shows a few teams. Check: a pop-up lists every sales team.",
+            "ta_IN": "Why: the dropdown only shows a few teams. Check: a pop-up lists every sales team."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 180,
+          "title": "Select Colombo Sales Centre",
+          "title_i18n": {
+            "en_US": "Select Colombo Sales Centre",
+            "si_LK": "Select Colombo Sales Centre",
+            "ta_IN": "Select Colombo Sales Centre"
+          },
+          "trigger": "tr.o_data_row.o_row_draggable:nth-of-type(6) > td.o_data_cell.cursor-pointer:nth-of-type(2)",
+          "content": "Click the **Colombo Sales Centre** row. The pop-up closes and the team is filled in.",
+          "content_i18n": {
+            "en_US": "Click the **Colombo Sales Centre** row. The pop-up closes and the team is filled in.",
+            "si_LK": "Click the **Colombo Sales Centre** row. The pop-up closes and the team is filled in.",
+            "ta_IN": "Click the **Colombo Sales Centre** row. The pop-up closes and the team is filled in."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: the order is reported under this sales centre. Check: the Sales Team field shows Colombo Sales Centre.",
+          "description_i18n": {
+            "en_US": "Why: the order is reported under this sales centre. Check: the Sales Team field shows Colombo Sales Centre.",
+            "si_LK": "Why: the order is reported under this sales centre. Check: the Sales Team field shows Colombo Sales Centre.",
+            "ta_IN": "Why: the order is reported under this sales centre. Check: the Sales Team field shows Colombo Sales Centre."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 190,
+          "title": "Open the Warehouse field",
+          "title_i18n": {
+            "en_US": "Open the Warehouse field",
+            "si_LK": "Open the Warehouse field",
+            "ta_IN": "Open the Warehouse field"
+          },
+          "trigger": "#warehouse_id_1",
+          "content": "Click the **Warehouse** field. A short dropdown opens.",
+          "content_i18n": {
+            "en_US": "Click the **Warehouse** field. A short dropdown opens.",
+            "si_LK": "Click the **Warehouse** field. A short dropdown opens.",
+            "ta_IN": "Click the **Warehouse** field. A short dropdown opens."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: the delivery will be taken from this warehouse, so stock is reduced there. Tip: use Search More if the warehouse is not listed.",
+          "description_i18n": {
+            "en_US": "Why: the delivery will be taken from this warehouse, so stock is reduced there. Tip: use Search More if the warehouse is not listed.",
+            "si_LK": "Why: the delivery will be taken from this warehouse, so stock is reduced there. Tip: use Search More if the warehouse is not listed.",
+            "ta_IN": "Why: the delivery will be taken from this warehouse, so stock is reduced there. Tip: use Search More if the warehouse is not listed."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 200,
+          "title": "Click Search More to see all warehouses",
+          "title_i18n": {
+            "en_US": "Click Search More to see all warehouses",
+            "si_LK": "Click Search More to see all warehouses",
+            "ta_IN": "Click Search More to see all warehouses"
+          },
+          "trigger": "#warehouse_id_1_0_8",
+          "content": "Click **Search More...** at the bottom of the dropdown. A pop-up list of all warehouses opens.",
+          "content_i18n": {
+            "en_US": "Click **Search More...** at the bottom of the dropdown. A pop-up list of all warehouses opens.",
+            "si_LK": "Click **Search More...** at the bottom of the dropdown. A pop-up list of all warehouses opens.",
+            "ta_IN": "Click **Search More...** at the bottom of the dropdown. A pop-up list of all warehouses opens."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: it is the quickest way to find the right warehouse. Check: the pop-up lists every warehouse.",
+          "description_i18n": {
+            "en_US": "Why: it is the quickest way to find the right warehouse. Check: the pop-up lists every warehouse.",
+            "si_LK": "Why: it is the quickest way to find the right warehouse. Check: the pop-up lists every warehouse.",
+            "ta_IN": "Why: it is the quickest way to find the right warehouse. Check: the pop-up lists every warehouse."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 210,
+          "title": "Select JAM Warehouse Ekala (JM-EK)",
+          "title_i18n": {
+            "en_US": "Select JAM Warehouse Ekala (JM-EK)",
+            "si_LK": "Select JAM Warehouse Ekala (JM-EK)",
+            "ta_IN": "Select JAM Warehouse Ekala (JM-EK)"
+          },
+          "trigger": "tr.o_data_row.o_row_draggable:nth-of-type(4) > td.o_data_cell.cursor-pointer:nth-of-type(3)",
+          "content": "Click the **JAM Warehouse Ekala (JM-EK)** row. The pop-up closes and the warehouse is filled in.",
+          "content_i18n": {
+            "en_US": "Click the **JAM Warehouse Ekala (JM-EK)** row. The pop-up closes and the warehouse is filled in.",
+            "si_LK": "Click the **JAM Warehouse Ekala (JM-EK)** row. The pop-up closes and the warehouse is filled in.",
+            "ta_IN": "Click the **JAM Warehouse Ekala (JM-EK)** row. The pop-up closes and the warehouse is filled in."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: the delivery order will be created for this warehouse. Check: the Warehouse field shows JAM Warehouse Ekala.",
+          "description_i18n": {
+            "en_US": "Why: the delivery order will be created for this warehouse. Check: the Warehouse field shows JAM Warehouse Ekala.",
+            "si_LK": "Why: the delivery order will be created for this warehouse. Check: the Warehouse field shows JAM Warehouse Ekala.",
+            "ta_IN": "Why: the delivery order will be created for this warehouse. Check: the Warehouse field shows JAM Warehouse Ekala."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 220,
+          "title": "Click Confirm to turn the quotation into a Sales Order",
+          "title_i18n": {
+            "en_US": "Click Confirm to turn the quotation into a Sales Order",
+            "si_LK": "Click Confirm to turn the quotation into a Sales Order",
+            "ta_IN": "Click Confirm to turn the quotation into a Sales Order"
+          },
+          "trigger": "[data-hotkey=\"q\"]",
+          "content": "Click the **Confirm** button at the top left. The quotation becomes a Sales Order and gets its order number.",
+          "content_i18n": {
+            "en_US": "Click the **Confirm** button at the top left. The quotation becomes a Sales Order and gets its order number.",
+            "si_LK": "Click the **Confirm** button at the top left. The quotation becomes a Sales Order and gets its order number.",
+            "ta_IN": "Click the **Confirm** button at the top left. The quotation becomes a Sales Order and gets its order number."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: confirming locks the prices and creates the delivery order. Check: the status bar moves to \"Sales Order\" and a **Delivery** button appears at the top. Tip: if your instance needs approval first, request and approve it, then click Confirm.",
+          "description_i18n": {
+            "en_US": "Why: confirming locks the prices and creates the delivery order. Check: the status bar moves to \"Sales Order\" and a **Delivery** button appears at the top. Tip: if your instance needs approval first, request and approve it, then click Confirm.",
+            "si_LK": "Why: confirming locks the prices and creates the delivery order. Check: the status bar moves to \"Sales Order\" and a **Delivery** button appears at the top. Tip: if your instance needs approval first, request and approve it, then click Confirm.",
+            "ta_IN": "Why: confirming locks the prices and creates the delivery order. Check: the status bar moves to \"Sales Order\" and a **Delivery** button appears at the top. Tip: if your instance needs approval first, request and approve it, then click Confirm."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 230,
+          "title": "Open the Delivery from the smart button",
+          "title_i18n": {
+            "en_US": "Open the Delivery from the smart button",
+            "si_LK": "Open the Delivery from the smart button",
+            "ta_IN": "Open the Delivery from the smart button"
+          },
+          "trigger": "button[name=\"action_view_delivery\"]",
+          "content": "Click the **Delivery** smart button at the top of the order. The delivery order opens.",
+          "content_i18n": {
+            "en_US": "Click the **Delivery** smart button at the top of the order. The delivery order opens.",
+            "si_LK": "Click the **Delivery** smart button at the top of the order. The delivery order opens.",
+            "ta_IN": "Click the **Delivery** smart button at the top of the order. The delivery order opens."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: the goods must leave the warehouse before the sale can be invoiced and returned. Check: the delivery is in the Ready status.",
+          "description_i18n": {
+            "en_US": "Why: the goods must leave the warehouse before the sale can be invoiced and returned. Check: the delivery is in the Ready status.",
+            "si_LK": "Why: the goods must leave the warehouse before the sale can be invoiced and returned. Check: the delivery is in the Ready status.",
+            "ta_IN": "Why: the goods must leave the warehouse before the sale can be invoiced and returned. Check: the delivery is in the Ready status."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 240,
+          "title": "Click Validate to complete the delivery",
+          "title_i18n": {
+            "en_US": "Click Validate to complete the delivery",
+            "si_LK": "Click Validate to complete the delivery",
+            "ta_IN": "Click Validate to complete the delivery"
+          },
+          "trigger": "[data-hotkey=\"v\"]",
+          "content": "Click **Validate**. If Odoo asks for confirmation of the quantities, confirm it.",
+          "content_i18n": {
+            "en_US": "Click **Validate**. If Odoo asks for confirmation of the quantities, confirm it.",
+            "si_LK": "Click **Validate**. If Odoo asks for confirmation of the quantities, confirm it.",
+            "ta_IN": "Click **Validate**. If Odoo asks for confirmation of the quantities, confirm it."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: validating moves the stock out of the warehouse. Check: the delivery status becomes Done.",
+          "description_i18n": {
+            "en_US": "Why: validating moves the stock out of the warehouse. Check: the delivery status becomes Done.",
+            "si_LK": "Why: validating moves the stock out of the warehouse. Check: the delivery status becomes Done.",
+            "ta_IN": "Why: validating moves the stock out of the warehouse. Check: the delivery status becomes Done."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 250,
+          "title": "Go back to the Sales Order",
+          "title_i18n": {
+            "en_US": "Go back to the Sales Order",
+            "si_LK": "Go back to the Sales Order",
+            "ta_IN": "Go back to the Sales Order"
+          },
+          "trigger": "[data-hotkey=\"b\"]",
+          "content": "Click the order number in the breadcrumb at the top to return to the Sales Order.",
+          "content_i18n": {
+            "en_US": "Click the order number in the breadcrumb at the top to return to the Sales Order.",
+            "si_LK": "Click the order number in the breadcrumb at the top to return to the Sales Order.",
+            "ta_IN": "Click the order number in the breadcrumb at the top to return to the Sales Order."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: the invoice is created from the Sales Order, not from the delivery. Check: the Sales Order form is open again.",
+          "description_i18n": {
+            "en_US": "Why: the invoice is created from the Sales Order, not from the delivery. Check: the Sales Order form is open again.",
+            "si_LK": "Why: the invoice is created from the Sales Order, not from the delivery. Check: the Sales Order form is open again.",
+            "ta_IN": "Why: the invoice is created from the Sales Order, not from the delivery. Check: the Sales Order form is open again."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 260,
+          "title": "Click Create Invoice",
+          "title_i18n": {
+            "en_US": "Click Create Invoice",
+            "si_LK": "Click Create Invoice",
+            "ta_IN": "Click Create Invoice"
+          },
+          "trigger": "[data-hotkey=\"q\"]",
+          "content": "Click **Create Invoice**. A small wizard may open; choose a Regular invoice and confirm to create it.",
+          "content_i18n": {
+            "en_US": "Click **Create Invoice**. A small wizard may open; choose a Regular invoice and confirm to create it.",
+            "si_LK": "Click **Create Invoice**. A small wizard may open; choose a Regular invoice and confirm to create it.",
+            "ta_IN": "Click **Create Invoice**. A small wizard may open; choose a Regular invoice and confirm to create it."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: this creates the draft customer invoice for what was delivered. Check: the new draft invoice opens, or an Invoices smart button appears.",
+          "description_i18n": {
+            "en_US": "Why: this creates the draft customer invoice for what was delivered. Check: the new draft invoice opens, or an Invoices smart button appears.",
+            "si_LK": "Why: this creates the draft customer invoice for what was delivered. Check: the new draft invoice opens, or an Invoices smart button appears.",
+            "ta_IN": "Why: this creates the draft customer invoice for what was delivered. Check: the new draft invoice opens, or an Invoices smart button appears."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 270,
+          "title": "Confirm the invoice",
+          "title_i18n": {
+            "en_US": "Confirm the invoice",
+            "si_LK": "Confirm the invoice",
+            "ta_IN": "Confirm the invoice"
+          },
+          "trigger": "[data-hotkey=\"q\"]",
+          "content": "On the draft invoice click **Confirm**.",
+          "content_i18n": {
+            "en_US": "On the draft invoice click **Confirm**.",
+            "si_LK": "On the draft invoice click **Confirm**.",
+            "ta_IN": "On the draft invoice click **Confirm**."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: confirming posts the invoice, gives it its number (for example FTI/2026/00010) and books it in accounting. Check: the status bar shows \"Posted\".",
+          "description_i18n": {
+            "en_US": "Why: confirming posts the invoice, gives it its number (for example FTI/2026/00010) and books it in accounting. Check: the status bar shows \"Posted\".",
+            "si_LK": "Why: confirming posts the invoice, gives it its number (for example FTI/2026/00010) and books it in accounting. Check: the status bar shows \"Posted\".",
+            "ta_IN": "Why: confirming posts the invoice, gives it its number (for example FTI/2026/00010) and books it in accounting. Check: the status bar shows \"Posted\"."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 280,
+          "title": "Click Credit Note to start the return",
+          "title_i18n": {
+            "en_US": "Click Credit Note to start the return",
+            "si_LK": "Click Credit Note to start the return",
+            "ta_IN": "Click Credit Note to start the return"
+          },
+          "trigger": "button[name=\"action_reverse\"]",
+          "content": "On the posted invoice click **Credit Note**. A wizard opens.",
+          "content_i18n": {
+            "en_US": "On the posted invoice click **Credit Note**. A wizard opens.",
+            "si_LK": "On the posted invoice click **Credit Note**. A wizard opens.",
+            "ta_IN": "On the posted invoice click **Credit Note**. A wizard opens."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: a credit note is how a posted invoice is reversed when the customer returns the goods. Check: a Credit Note pop-up with Reason, Journal and Reversal date appears.",
+          "description_i18n": {
+            "en_US": "Why: a credit note is how a posted invoice is reversed when the customer returns the goods. Check: a Credit Note pop-up with Reason, Journal and Reversal date appears.",
+            "si_LK": "Why: a credit note is how a posted invoice is reversed when the customer returns the goods. Check: a Credit Note pop-up with Reason, Journal and Reversal date appears.",
+            "ta_IN": "Why: a credit note is how a posted invoice is reversed when the customer returns the goods. Check: a Credit Note pop-up with Reason, Journal and Reversal date appears."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 290,
+          "title": "Type the reason for the return",
+          "title_i18n": {
+            "en_US": "Type the reason for the return",
+            "si_LK": "Type the reason for the return",
+            "ta_IN": "Type the reason for the return"
+          },
+          "trigger": "#reason_0",
+          "content": "In **Reason displayed on Credit Note** type why the goods are returned, for example \"Customer return - goods sent back\".",
+          "content_i18n": {
+            "en_US": "In **Reason displayed on Credit Note** type why the goods are returned, for example \"Customer return - goods sent back\".",
+            "si_LK": "In **Reason displayed on Credit Note** type why the goods are returned, for example \"Customer return - goods sent back\".",
+            "ta_IN": "In **Reason displayed on Credit Note** type why the goods are returned, for example \"Customer return - goods sent back\"."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: the reason is printed on the credit note and helps the approver decide. Tip: be specific, because this text is visible to the customer.",
+          "description_i18n": {
+            "en_US": "Why: the reason is printed on the credit note and helps the approver decide. Tip: be specific, because this text is visible to the customer.",
+            "si_LK": "Why: the reason is printed on the credit note and helps the approver decide. Tip: be specific, because this text is visible to the customer.",
+            "ta_IN": "Why: the reason is printed on the credit note and helps the approver decide. Tip: be specific, because this text is visible to the customer."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 300,
+          "title": "Click Reverse to create the credit note",
+          "title_i18n": {
+            "en_US": "Click Reverse to create the credit note",
+            "si_LK": "Click Reverse to create the credit note",
+            "ta_IN": "Click Reverse to create the credit note"
+          },
+          "trigger": "[data-hotkey=\"q\"]",
+          "content": "Click the **Reverse** button in the pop-up. A new Draft Credit Note opens.",
+          "content_i18n": {
+            "en_US": "Click the **Reverse** button in the pop-up. A new Draft Credit Note opens.",
+            "si_LK": "Click the **Reverse** button in the pop-up. A new Draft Credit Note opens.",
+            "ta_IN": "Click the **Reverse** button in the pop-up. A new Draft Credit Note opens."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: this creates a draft credit note linked to the original invoice. Check: the title shows Draft Credit Note and its Reference says \"Reversal of: ...\". Watch out: choose Reverse, not \"Reverse and Create Invoice\", which also creates a new invoice.",
+          "description_i18n": {
+            "en_US": "Why: this creates a draft credit note linked to the original invoice. Check: the title shows Draft Credit Note and its Reference says \"Reversal of: ...\". Watch out: choose Reverse, not \"Reverse and Create Invoice\", which also creates a new invoice.",
+            "si_LK": "Why: this creates a draft credit note linked to the original invoice. Check: the title shows Draft Credit Note and its Reference says \"Reversal of: ...\". Watch out: choose Reverse, not \"Reverse and Create Invoice\", which also creates a new invoice.",
+            "ta_IN": "Why: this creates a draft credit note linked to the original invoice. Check: the title shows Draft Credit Note and its Reference says \"Reversal of: ...\". Watch out: choose Reverse, not \"Reverse and Create Invoice\", which also creates a new invoice."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 310,
+          "title": "Click Request Credit Note Approval",
+          "title_i18n": {
+            "en_US": "Click Request Credit Note Approval",
+            "si_LK": "Click Request Credit Note Approval",
+            "ta_IN": "Click Request Credit Note Approval"
+          },
+          "trigger": "button[name=\"1493\"]",
+          "content": "On the draft credit note click **Request Credit Note Approval**.",
+          "content_i18n": {
+            "en_US": "On the draft credit note click **Request Credit Note Approval**.",
+            "si_LK": "On the draft credit note click **Request Credit Note Approval**.",
+            "ta_IN": "On the draft credit note click **Request Credit Note Approval**."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: credit notes need approval from an authorised person before they can be posted. Check: the button changes to **Approve Credit Note** and an approval activity is created for the approver.",
+          "description_i18n": {
+            "en_US": "Why: credit notes need approval from an authorised person before they can be posted. Check: the button changes to **Approve Credit Note** and an approval activity is created for the approver.",
+            "si_LK": "Why: credit notes need approval from an authorised person before they can be posted. Check: the button changes to **Approve Credit Note** and an approval activity is created for the approver.",
+            "ta_IN": "Why: credit notes need approval from an authorised person before they can be posted. Check: the button changes to **Approve Credit Note** and an approval activity is created for the approver."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 320,
+          "title": "Approve the credit note (authorised person)",
+          "title_i18n": {
+            "en_US": "Approve the credit note (authorised person)",
+            "si_LK": "Approve the credit note (authorised person)",
+            "ta_IN": "Approve the credit note (authorised person)"
+          },
+          "trigger": "button[name=\"1495\"]",
+          "content": "The authorised person opens the credit note and clicks **Approve Credit Note**.",
+          "content_i18n": {
+            "en_US": "The authorised person opens the credit note and clicks **Approve Credit Note**.",
+            "si_LK": "The authorised person opens the credit note and clicks **Approve Credit Note**.",
+            "ta_IN": "The authorised person opens the credit note and clicks **Approve Credit Note**."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: only a user with the approval right can release the credit note. Check: the Approve button disappears and **Confirm** becomes available. Watch out: if you do not have approval rights the Confirm button stays hidden, so ask your approver.",
+          "description_i18n": {
+            "en_US": "Why: only a user with the approval right can release the credit note. Check: the Approve button disappears and **Confirm** becomes available. Watch out: if you do not have approval rights the Confirm button stays hidden, so ask your approver.",
+            "si_LK": "Why: only a user with the approval right can release the credit note. Check: the Approve button disappears and **Confirm** becomes available. Watch out: if you do not have approval rights the Confirm button stays hidden, so ask your approver.",
+            "ta_IN": "Why: only a user with the approval right can release the credit note. Check: the Approve button disappears and **Confirm** becomes available. Watch out: if you do not have approval rights the Confirm button stays hidden, so ask your approver."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 330,
+          "title": "Click Confirm to post the credit note",
+          "title_i18n": {
+            "en_US": "Click Confirm to post the credit note",
+            "si_LK": "Click Confirm to post the credit note",
+            "ta_IN": "Click Confirm to post the credit note"
+          },
+          "trigger": "[data-hotkey=\"q\"]",
+          "content": "After approval click **Confirm**.",
+          "content_i18n": {
+            "en_US": "After approval click **Confirm**.",
+            "si_LK": "After approval click **Confirm**.",
+            "ta_IN": "After approval click **Confirm**."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: confirming posts the credit note and reduces what the customer owes. Check: the status bar shows \"Posted\" and the title shows the credit note number (RFTI/...).",
+          "description_i18n": {
+            "en_US": "Why: confirming posts the credit note and reduces what the customer owes. Check: the status bar shows \"Posted\" and the title shows the credit note number (RFTI/...).",
+            "si_LK": "Why: confirming posts the credit note and reduces what the customer owes. Check: the status bar shows \"Posted\" and the title shows the credit note number (RFTI/...).",
+            "ta_IN": "Why: confirming posts the credit note and reduces what the customer owes. Check: the status bar shows \"Posted\" and the title shows the credit note number (RFTI/...)."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 340,
+          "title": "Open the Sales Order from the Sale Orders smart button",
+          "title_i18n": {
+            "en_US": "Open the Sales Order from the Sale Orders smart button",
+            "si_LK": "Open the Sales Order from the Sale Orders smart button",
+            "ta_IN": "Open the Sales Order from the Sale Orders smart button"
+          },
+          "trigger": "button[name=\"action_view_source_sale_orders\"]",
+          "content": "On the credit note click the **Sale Orders** smart button at the top. The original Sales Order opens.",
+          "content_i18n": {
+            "en_US": "On the credit note click the **Sale Orders** smart button at the top. The original Sales Order opens.",
+            "si_LK": "On the credit note click the **Sale Orders** smart button at the top. The original Sales Order opens.",
+            "ta_IN": "On the credit note click the **Sale Orders** smart button at the top. The original Sales Order opens."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: it lets you check which order the return belongs to. Check: the original Sales Order is shown.",
+          "description_i18n": {
+            "en_US": "Why: it lets you check which order the return belongs to. Check: the original Sales Order is shown.",
+            "si_LK": "Why: it lets you check which order the return belongs to. Check: the original Sales Order is shown.",
+            "ta_IN": "Why: it lets you check which order the return belongs to. Check: the original Sales Order is shown."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 350,
+          "title": "Open the Invoices smart button",
+          "title_i18n": {
+            "en_US": "Open the Invoices smart button",
+            "si_LK": "Open the Invoices smart button",
+            "ta_IN": "Open the Invoices smart button"
+          },
+          "trigger": "button[name=\"action_view_invoice\"]",
+          "content": "On the Sales Order click the **Invoices** smart button. The list of invoices for this order opens.",
+          "content_i18n": {
+            "en_US": "On the Sales Order click the **Invoices** smart button. The list of invoices for this order opens.",
+            "si_LK": "On the Sales Order click the **Invoices** smart button. The list of invoices for this order opens.",
+            "ta_IN": "On the Sales Order click the **Invoices** smart button. The list of invoices for this order opens."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: after the return the order has two documents, the original invoice and the credit note. Check: the list shows both rows.",
+          "description_i18n": {
+            "en_US": "Why: after the return the order has two documents, the original invoice and the credit note. Check: the list shows both rows.",
+            "si_LK": "Why: after the return the order has two documents, the original invoice and the credit note. Check: the list shows both rows.",
+            "ta_IN": "Why: after the return the order has two documents, the original invoice and the credit note. Check: the list shows both rows."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 360,
+          "title": "Open the reversed invoice (credit note)",
+          "title_i18n": {
+            "en_US": "Open the reversed invoice (credit note)",
+            "si_LK": "Open the reversed invoice (credit note)",
+            "ta_IN": "Open the reversed invoice (credit note)"
+          },
+          "trigger": "tr.o_data_row:nth-of-type(2) > td.o_data_cell.cursor-pointer:nth-of-type(6)",
+          "content": "Click the credit note row in the list. It opens so you can check it.",
+          "content_i18n": {
+            "en_US": "Click the credit note row in the list. It opens so you can check it.",
+            "si_LK": "Click the credit note row in the list. It opens so you can check it.",
+            "ta_IN": "Click the credit note row in the list. It opens so you can check it."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: this confirms the credit note is posted and linked to the original invoice. Check: the number starts with RFTI, the status is Posted/Paid and the amount is negative (it matches the returned goods).",
+          "description_i18n": {
+            "en_US": "Why: this confirms the credit note is posted and linked to the original invoice. Check: the number starts with RFTI, the status is Posted/Paid and the amount is negative (it matches the returned goods).",
+            "si_LK": "Why: this confirms the credit note is posted and linked to the original invoice. Check: the number starts with RFTI, the status is Posted/Paid and the amount is negative (it matches the returned goods).",
+            "ta_IN": "Why: this confirms the credit note is posted and linked to the original invoice. Check: the number starts with RFTI, the status is Posted/Paid and the amount is negative (it matches the returned goods)."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 370,
+          "title": "Go back to the Invoices list",
+          "title_i18n": {
+            "en_US": "Go back to the Invoices list",
+            "si_LK": "Go back to the Invoices list",
+            "ta_IN": "Go back to the Invoices list"
+          },
+          "trigger": "[data-hotkey=\"b\"]",
+          "content": "Click **Invoices** in the breadcrumb at the top to return to the list.",
+          "content_i18n": {
+            "en_US": "Click **Invoices** in the breadcrumb at the top to return to the list.",
+            "si_LK": "Click **Invoices** in the breadcrumb at the top to return to the list.",
+            "ta_IN": "Click **Invoices** in the breadcrumb at the top to return to the list."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: you now want to open the original invoice. Check: the list of invoices is shown again.",
+          "description_i18n": {
+            "en_US": "Why: you now want to open the original invoice. Check: the list of invoices is shown again.",
+            "si_LK": "Why: you now want to open the original invoice. Check: the list of invoices is shown again.",
+            "ta_IN": "Why: you now want to open the original invoice. Check: the list of invoices is shown again."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 380,
+          "title": "Open the original invoice",
+          "title_i18n": {
+            "en_US": "Open the original invoice",
+            "si_LK": "Open the original invoice",
+            "ta_IN": "Open the original invoice"
+          },
+          "trigger": "tr.o_data_row:nth-of-type(1) > td.o_data_cell.cursor-pointer:nth-of-type(6)",
+          "content": "Click the original customer invoice row (the one that is not the credit note).",
+          "content_i18n": {
+            "en_US": "Click the original customer invoice row (the one that is not the credit note).",
+            "si_LK": "Click the original customer invoice row (the one that is not the credit note).",
+            "ta_IN": "Click the original customer invoice row (the one that is not the credit note)."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: the original invoice is still posted and can be reset if it was wrong. Check: the number starts with FTI and the list showed its payment status as Reversed.",
+          "description_i18n": {
+            "en_US": "Why: the original invoice is still posted and can be reset if it was wrong. Check: the number starts with FTI and the list showed its payment status as Reversed.",
+            "si_LK": "Why: the original invoice is still posted and can be reset if it was wrong. Check: the number starts with FTI and the list showed its payment status as Reversed.",
+            "ta_IN": "Why: the original invoice is still posted and can be reset if it was wrong. Check: the number starts with FTI and the list showed its payment status as Reversed."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 390,
+          "title": "Click Reset to Draft",
+          "title_i18n": {
+            "en_US": "Click Reset to Draft",
+            "si_LK": "Click Reset to Draft",
+            "ta_IN": "Click Reset to Draft"
+          },
+          "trigger": "[data-hotkey=\"r\"]",
+          "content": "Click **Reset to Draft** at the top of the invoice.",
+          "content_i18n": {
+            "en_US": "Click **Reset to Draft** at the top of the invoice.",
+            "si_LK": "Click **Reset to Draft** at the top of the invoice.",
+            "ta_IN": "Click **Reset to Draft** at the top of the invoice."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: this puts the invoice back to Draft so it can be corrected. Check: the status bar moves back to \"Draft\". Watch out: this button is only offered if the invoice is allowed to be reset; ask your accountant if it is missing.",
+          "description_i18n": {
+            "en_US": "Why: this puts the invoice back to Draft so it can be corrected. Check: the status bar moves back to \"Draft\". Watch out: this button is only offered if the invoice is allowed to be reset; ask your accountant if it is missing.",
+            "si_LK": "Why: this puts the invoice back to Draft so it can be corrected. Check: the status bar moves back to \"Draft\". Watch out: this button is only offered if the invoice is allowed to be reset; ask your accountant if it is missing.",
+            "ta_IN": "Why: this puts the invoice back to Draft so it can be corrected. Check: the status bar moves back to \"Draft\". Watch out: this button is only offered if the invoice is allowed to be reset; ask your accountant if it is missing."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 400,
+          "title": "Confirm the invoice again",
+          "title_i18n": {
+            "en_US": "Confirm the invoice again",
+            "si_LK": "Confirm the invoice again",
+            "ta_IN": "Confirm the invoice again"
+          },
+          "trigger": "[data-hotkey=\"q\"]",
+          "content": "Click **Confirm** to post the invoice again.",
+          "content_i18n": {
+            "en_US": "Click **Confirm** to post the invoice again.",
+            "si_LK": "Click **Confirm** to post the invoice again.",
+            "ta_IN": "Click **Confirm** to post the invoice again."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: the invoice must be posted again to be valid. Check: the status bar shows \"Posted\" once more.",
+          "description_i18n": {
+            "en_US": "Why: the invoice must be posted again to be valid. Check: the status bar shows \"Posted\" once more.",
+            "si_LK": "Why: the invoice must be posted again to be valid. Check: the status bar shows \"Posted\" once more.",
+            "ta_IN": "Why: the invoice must be posted again to be valid. Check: the status bar shows \"Posted\" once more."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 410,
+          "title": "Return to the Sales Order to finish",
+          "title_i18n": {
+            "en_US": "Return to the Sales Order to finish",
+            "si_LK": "Return to the Sales Order to finish",
+            "ta_IN": "Return to the Sales Order to finish"
+          },
+          "trigger": "button[name=\"action_view_source_sale_orders\"]",
+          "content": "Click the **Sale Orders** smart button to go back to the Sales Order.",
+          "content_i18n": {
+            "en_US": "Click the **Sale Orders** smart button to go back to the Sales Order.",
+            "si_LK": "Click the **Sale Orders** smart button to go back to the Sales Order.",
+            "ta_IN": "Click the **Sale Orders** smart button to go back to the Sales Order."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: this closes the return process and shows the final state of the order. Check: the order shows its Delivery and Invoices smart buttons. The return of the cash sale is complete.",
+          "description_i18n": {
+            "en_US": "Why: this closes the return process and shows the final state of the order. Check: the order shows its Delivery and Invoices smart buttons. The return of the cash sale is complete.",
+            "si_LK": "Why: this closes the return process and shows the final state of the order. Check: the order shows its Delivery and Invoices smart buttons. The return of the cash sale is complete.",
+            "ta_IN": "Why: this closes the return process and shows the final state of the order. Check: the order shows its Delivery and Invoices smart buttons. The return of the cash sale is complete."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        }
+      ]
+    }
+  ]
+}
