@@ -318,5 +318,75 @@
   "title": "placeholder — replace with real test",
   "file": "sales.archive.spec.ts",
   "placeholder": true
+ },
+ {
+  "key": "admin|sales|business|Sales return of a cash order|1. quotation: Cash order for a Sales quotation",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Sales return of a cash order",
+  "title": "1. quotation: Cash order for a Sales quotation",
+  "file": "sales.return-cash.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Sales return of a cash order|2. confirm: quotation becomes a Sales Order",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Sales return of a cash order",
+  "title": "2. confirm: quotation becomes a Sales Order",
+  "file": "sales.return-cash.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Sales return of a cash order|3. delivery: validate → Done",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Sales return of a cash order",
+  "title": "3. delivery: validate → Done",
+  "file": "sales.return-cash.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Sales return of a cash order|4. invoice: create and confirm → Posted",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Sales return of a cash order",
+  "title": "4. invoice: create and confirm → Posted",
+  "file": "sales.return-cash.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Sales return of a cash order|5. credit note: reverse with a reason, approval, confirm",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Sales return of a cash order",
+  "title": "5. credit note: reverse with a reason, approval, confirm",
+  "file": "sales.return-cash.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Sales return of a cash order|6. original invoice: reset to draft and confirm again (when offered)",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Sales return of a cash order",
+  "title": "6. original invoice: reset to draft and confirm again (when offered)",
+  "file": "sales.return-cash.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Sales return of a cash order|7. advance payment on the sales order, then the Payments smart button",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Sales return of a cash order",
+  "title": "7. advance payment on the sales order, then the Payments smart button",
+  "file": "sales.return-cash.spec.ts",
+  "placeholder": false
  }
 ]

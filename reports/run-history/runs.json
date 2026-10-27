@@ -2082,5 +2082,149 @@
     "error": ""
    }
   }
+ },
+ {
+  "id": "2026-10-27T09:26:25.043Z",
+  "startedAt": "2026-10-27T09:26:25.043Z",
+  "label": "14th run",
+  "note": "",
+  "results": {
+   "setup|setup|setup||authenticate: auth-storage/admin.json": {
+    "status": "passed",
+    "durationMs": 14350,
+    "error": ""
+   },
+   "admin|sales|business|Sales return of a cash order|1. quotation: Cash order for a Sales quotation": {
+    "status": "passed",
+    "durationMs": 22907,
+    "error": ""
+   },
+   "admin|sales|business|Sales return of a cash order|2. confirm: quotation becomes a Sales Order": {
+    "status": "passed",
+    "durationMs": 8272,
+    "error": ""
+   },
+   "admin|sales|business|Sales return of a cash order|3. delivery: validate → Done": {
+    "status": "passed",
+    "durationMs": 13067,
+    "error": ""
+   },
+   "admin|sales|business|Sales return of a cash order|4. invoice: create and confirm → Posted": {
+    "status": "passed",
+    "durationMs": 11285,
+    "error": ""
+   },
+   "admin|sales|business|Sales return of a cash order|5. credit note: reverse with a reason, approval, confirm": {
+    "status": "failed",
+    "durationMs": 6674,
+    "error": "Error: expect(locator).toBeVisible() failed"
+   },
+   "admin|sales|business|Sales return of a cash order|6. original invoice: reset to draft and confirm again (when offered)": {
+    "status": "skipped",
+    "durationMs": 0,
+    "error": ""
+   },
+   "admin|sales|business|Sales return of a cash order|7. advance payment on the sales order, then the Payments smart button": {
+    "status": "skipped",
+    "durationMs": 0,
+    "error": ""
+   }
+  }
+ },
+ {
+  "id": "2026-10-27T09:28:02.280Z",
+  "startedAt": "2026-10-27T09:28:02.280Z",
+  "label": "15th run",
+  "note": "",
+  "results": {
+   "setup|setup|setup||authenticate: auth-storage/admin.json": {
+    "status": "passed",
+    "durationMs": 8628,
+    "error": ""
+   },
+   "admin|sales|business|Sales return of a cash order|1. quotation: Cash order for a Sales quotation": {
+    "status": "passed",
+    "durationMs": 18657,
+    "error": ""
+   },
+   "admin|sales|business|Sales return of a cash order|2. confirm: quotation becomes a Sales Order": {
+    "status": "passed",
+    "durationMs": 6132,
+    "error": ""
+   },
+   "admin|sales|business|Sales return of a cash order|3. delivery: validate → Done": {
+    "status": "passed",
+    "durationMs": 10714,
+    "error": ""
+   },
+   "admin|sales|business|Sales return of a cash order|4. invoice: create and confirm → Posted": {
+    "status": "passed",
+    "durationMs": 8196,
+    "error": ""
+   },
+   "admin|sales|business|Sales return of a cash order|5. credit note: reverse with a reason, approval, confirm": {
+    "status": "skipped",
+    "durationMs": 14210,
+    "error": ""
+   },
+   "admin|sales|business|Sales return of a cash order|6. original invoice: reset to draft and confirm again (when offered)": {
+    "status": "passed",
+    "durationMs": 9920,
+    "error": ""
+   },
+   "admin|sales|business|Sales return of a cash order|7. advance payment on the sales order, then the Payments smart button": {
+    "status": "failed",
+    "durationMs": 66611,
+    "error": "TimeoutError: locator.fill: Timeout 20000ms exceeded."
+   }
+  }
+ },
+ {
+  "id": "2026-10-27T09:31:43.413Z",
+  "startedAt": "2026-10-27T09:31:43.413Z",
+  "label": "16th run",
+  "note": "",
+  "results": {
+   "setup|setup|setup||authenticate: auth-storage/admin.json": {
+    "status": "passed",
+    "durationMs": 9810,
+    "error": ""
+   },
+   "admin|sales|business|Sales return of a cash order|1. quotation: Cash order for a Sales quotation": {
+    "status": "passed",
+    "durationMs": 31795,
+    "error": ""
+   },
+   "admin|sales|business|Sales return of a cash order|2. confirm: quotation becomes a Sales Order": {
+    "status": "passed",
+    "durationMs": 7122,
+    "error": ""
+   },
+   "admin|sales|business|Sales return of a cash order|3. delivery: validate → Done": {
+    "status": "passed",
+    "durationMs": 11251,
+    "error": ""
+   },
+   "admin|sales|business|Sales return of a cash order|4. invoice: create and confirm → Posted": {
+    "status": "passed",
+    "durationMs": 8128,
+    "error": ""
+   },
+   "admin|sales|business|Sales return of a cash order|5. credit note: reverse with a reason, approval, confirm": {
+    "status": "skipped",
+    "durationMs": 11996,
+    "error": ""
+   },
+   "admin|sales|business|Sales return of a cash order|6. original invoice: reset to draft and confirm again (when offered)": {
+    "status": "passed",
+    "durationMs": 7963,
+    "error": ""
+   },
+   "admin|sales|business|Sales return of a cash order|7. advance payment on the sales order, then the Payments smart button": {
+    "status": "failed",
+    "durationMs": 7815,
+    "error": "Error: Odoo Error: An error occurredPlease use the copy button to report the error to your support service.See details"
+   }
+  }
  }
 ]
