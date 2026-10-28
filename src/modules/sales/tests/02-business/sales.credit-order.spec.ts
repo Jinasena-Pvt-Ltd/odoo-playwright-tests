@@ -125,11 +125,15 @@ test.describe.serial('Credit sales order, invoice and cash receipt @module:sales
         const popup = page.locator('.modal:visible').last();
         const rows = popup.locator('.o_data_row');
         await expect(rows.first()).toBeVisible({ timeout: 15_000 });
+        // "Customer Receipts - Cash" is not a journal of this company; use the first cash-receipts journal
+        // that has an outstanding-receipts account (the plain "Cash" journal has none).
         let row = rows.filter({ hasText: CASH_JOURNAL }).first();
         if (!(await row.isVisible({ timeout: 1_000 }).catch(() => false))) {
-          chosen = 'Cash';
-          row = rows.filter({ has: page.locator('td', { hasText: /^Cash$/ }) }).first();
-          test.info().annotations.push({ type: 'note', description: `"${CASH_JOURNAL}" not found in this company; paid with the "Cash" journal` });
+          for (const name of ['Commercial - Cash Receipts', 'BOC - Cash Receipts', 'Cash']) {
+            const cand = rows.filter({ has: page.locator('td', { hasText: new RegExp(`^${escRx(name)}$`) }) }).first();
+            if (await cand.isVisible({ timeout: 1_000 }).catch(() => false)) { row = cand; chosen = name; break; }
+          }
+          test.info().annotations.push({ type: 'note', description: `"${CASH_JOURNAL}" not found in this company; paid with the "${chosen}" journal` });
         }
         await row.click();
       }
@@ -158,22 +162,15 @@ test.describe.serial('Credit sales order, invoice and cash receipt @module:sales
   test('6. trace: payment → Sales Orders smart button leads back to the order', async ({ page }) => {
     test.skip(!invoiceUrl, 'No invoice from step 4');
     await openRecord(page, invoiceUrl);
-    const payBtn = page.locator('button[name="open_payments"], button[name="action_view_payments"], .oe_button_box button').filter({ hasText: /payment/i }).first();
-    test.skip(!(await payBtn.isVisible({ timeout: 5_000 }).catch(() => false)),
-      'No payments smart button (payment not registered in step 5)');
-    await payBtn.click();
-    await throwIfOdooError(page);
-    await expect(page.locator('.o_form_view, .o_list_view').first()).toBeVisible({ timeout: 30_000 });
+    test.skip(!paymentUrl, 'Payment was not registered in step 5');
+    await expect(page.locator('.o_form_view .o_widget_web_ribbon, .o_form_view .ribbon').first())
+      .toContainText(/paid|in payment/i, { timeout: 30_000 });
 
     const soBtn = page.locator('button[name="action_view_source_sale_orders"]').first();
-    if (await soBtn.isVisible({ timeout: 5_000 }).catch(() => false)) {
-      await soBtn.click();
-      await throwIfOdooError(page);
-      await expect(page.locator('.o_form_view, .o_list_view').first()).toBeVisible({ timeout: 30_000 });
-      await expect(page.locator('body')).toContainText(orderNumber, { timeout: 15_000 });
-    } else {
-      test.info().annotations.push({ type: 'note', description: 'Payment has no "Sales Orders" smart button in this version' });
-    }
-    expect(paymentUrl || true).toBeTruthy();
+    await expect(soBtn).toBeVisible({ timeout: 15_000 });
+    await soBtn.click();
+    await throwIfOdooError(page);
+    await expect(page.locator('.o_form_view, .o_list_view').first()).toBeVisible({ timeout: 30_000 });
+    await expect(page.locator('body')).toContainText(orderNumber, { timeout: 15_000 });
   });
 });

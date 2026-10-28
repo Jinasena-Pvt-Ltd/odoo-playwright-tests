@@ -4,1131 +4,1236 @@
     {
       "name": "Credit Sales Order",
       "name_i18n": {
-        "en_US": "Credit Sales Order"
+        "en_US": "Credit Sales Order",
+        "si_LK": "Credit Sales Order",
+        "ta_IN": "Credit Sales Order"
       },
-      "description": "Step-by-step guide to selling to a credit customer on 14 Days payment terms: create the quotation, set the payment type to Credit and the payment terms to 14 Days, confirm it, deliver the goods, invoice the customer and record the payment. Before you start: you need access to the Sales app and an existing credit customer who has no overdue invoices (this guide uses DIDULA MOTORES). In every screenshot the red box shows exactly what to click or fill in.",
+      "description": "A friendly step-by-step guide for selling to a customer on credit. You will create a quotation for a credit customer with the 14 Days payment term, confirm it, deliver the goods and invoice the customer. Later, when the customer pays, you find the order again and open its invoice, where the accountant registers the payment. A credit customer must have a credit limit and no overdue invoices, otherwise Odoo asks for Request Overdue Approval or Request Credit Limit Approval.",
       "description_i18n": {
-        "en_US": "Step-by-step guide to selling to a credit customer on 14 Days payment terms: create the quotation, set the payment type to Credit and the payment terms to 14 Days, confirm it, deliver the goods, invoice the customer and record the payment. Before you start: you need access to the Sales app and an existing credit customer who has no overdue invoices (this guide uses DIDULA MOTORES). In every screenshot the red box shows exactly what to click or fill in."
+        "en_US": "A friendly step-by-step guide for selling to a customer on credit. You will create a quotation for a credit customer with the 14 Days payment term, confirm it, deliver the goods and invoice the customer. Later, when the customer pays, you find the order again and open its invoice, where the accountant registers the payment. A credit customer must have a credit limit and no overdue invoices, otherwise Odoo asks for Request Overdue Approval or Request Credit Limit Approval.",
+        "si_LK": "A friendly step-by-step guide for selling to a customer on credit. You will create a quotation for a credit customer with the 14 Days payment term, confirm it, deliver the goods and invoice the customer. Later, when the customer pays, you find the order again and open its invoice, where the accountant registers the payment. A credit customer must have a credit limit and no overdue invoices, otherwise Odoo asks for Request Overdue Approval or Request Credit Limit Approval.",
+        "ta_IN": "A friendly step-by-step guide for selling to a customer on credit. You will create a quotation for a credit customer with the 14 Days payment term, confirm it, deliver the goods and invoice the customer. Later, when the customer pays, you find the order again and open its invoice, where the accountant registers the payment. A credit customer must have a credit limit and no overdue invoices, otherwise Odoo asks for Request Overdue Approval or Request Credit Limit Approval."
       },
       "steps": [
         {
           "sequence": 10,
-          "title": "Open the Sales app from the Odoo home screen to start a new sale",
+          "title": "Open the Sales app from the home screen",
           "title_i18n": {
-            "en_US": "Open the Sales app from the Odoo home screen to start a new sale"
+            "en_US": "Open the Sales app from the home screen",
+            "si_LK": "Open the Sales app from the home screen",
+            "ta_IN": "Open the Sales app from the home screen"
           },
           "trigger": "[data-menu-xmlid=\"sale.sale_menu_root\"]",
-          "content": "Log in to Odoo. On the home screen you will see a grid of app icons. Find the **Sales** icon (red box) and click it. The Sales app opens and its menu appears across the top of the screen.",
+          "content": "After you log in to Odoo you land on the home screen, which shows a grid of app icons. Find the **Sales** icon and click it once. The Sales app opens and its menu bar appears across the top of the page.",
           "content_i18n": {
-            "en_US": "Log in to Odoo. On the home screen you will see a grid of app icons. Find the **Sales** icon (red box) and click it. The Sales app opens and its menu appears across the top of the screen."
+            "en_US": "After you log in to Odoo you land on the home screen, which shows a grid of app icons. Find the **Sales** icon and click it once. The Sales app opens and its menu bar appears across the top of the page.",
+            "si_LK": "After you log in to Odoo you land on the home screen, which shows a grid of app icons. Find the **Sales** icon and click it once. The Sales app opens and its menu bar appears across the top of the page.",
+            "ta_IN": "After you log in to Odoo you land on the home screen, which shows a grid of app icons. Find the **Sales** icon and click it once. The Sales app opens and its menu bar appears across the top of the page."
           },
           "position": "bottom",
           "run": "click",
           "is_check": false,
           "validation_type": "none",
-          "description": "Why: every sale starts in the Sales app. Check: you see the menu Orders, To Invoice, Products, Reporting, Configuration. Watch out: if the Sales icon is missing, your user has no Sales access, so ask your administrator.",
+          "description": "Why: every sale, and every return of a sale, begins in the Sales app. What you will see: the menu bar with Orders, To Invoice, Products, Reporting and Configuration. Tip: if you cannot find the Sales icon your user has no Sales access, so ask your administrator to give you the right.",
           "description_i18n": {
-            "en_US": "Why: every sale starts in the Sales app. Check: you see the menu Orders, To Invoice, Products, Reporting, Configuration. Watch out: if the Sales icon is missing, your user has no Sales access, so ask your administrator."
-          }
-        },
-        {
-          "sequence": 11,
-          "title": "Click Orders in the top menu to see the order options",
-          "title_i18n": {
-            "en_US": "Click Orders in the top menu to see the order options"
+            "en_US": "Why: every sale, and every return of a sale, begins in the Sales app. What you will see: the menu bar with Orders, To Invoice, Products, Reporting and Configuration. Tip: if you cannot find the Sales icon your user has no Sales access, so ask your administrator to give you the right.",
+            "si_LK": "Why: every sale, and every return of a sale, begins in the Sales app. What you will see: the menu bar with Orders, To Invoice, Products, Reporting and Configuration. Tip: if you cannot find the Sales icon your user has no Sales access, so ask your administrator to give you the right.",
+            "ta_IN": "Why: every sale, and every return of a sale, begins in the Sales app. What you will see: the menu bar with Orders, To Invoice, Products, Reporting and Configuration. Tip: if you cannot find the Sales icon your user has no Sales access, so ask your administrator to give you the right."
           },
-          "trigger": "[data-menu-xmlid=\"sale.sale_order_menu\"]",
-          "content": "Look at the menu bar at the top of the screen. Click **Orders**. A small dropdown opens just below it.",
-          "content_i18n": {
-            "en_US": "Look at the menu bar at the top of the screen. Click **Orders**. A small dropdown opens just below it."
-          },
-          "position": "bottom",
-          "run": "click",
-          "is_check": false,
-          "validation_type": "none",
-          "description": "Why: the Orders menu groups quotations and sales orders together. Check: the dropdown lists Quotations.",
-          "description_i18n": {
-            "en_US": "Why: the Orders menu groups quotations and sales orders together. Check: the dropdown lists Quotations."
-          }
-        },
-        {
-          "sequence": 12,
-          "title": "Click Quotations to open the list of existing quotations",
-          "title_i18n": {
-            "en_US": "Click Quotations to open the list of existing quotations"
-          },
-          "trigger": "[data-menu-xmlid=\"sale.menu_sale_quotations\"]",
-          "content": "In the dropdown, click **Quotations**. A list opens with the quotations that already exist, showing the customer, the date and the status of each one.",
-          "content_i18n": {
-            "en_US": "In the dropdown, click **Quotations**. A list opens with the quotations that already exist, showing the customer, the date and the status of each one."
-          },
-          "position": "bottom",
-          "run": "click",
-          "is_check": false,
-          "validation_type": "none",
-          "description": "Why: a quotation is the draft of a sale. It only becomes a Sales Order when you click Confirm. Check: you see a list with a **New** button at the top left.",
-          "description_i18n": {
-            "en_US": "Why: a quotation is the draft of a sale. It only becomes a Sales Order when you click Confirm. Check: you see a list with a **New** button at the top left."
-          }
-        },
-        {
-          "sequence": 13,
-          "title": "Click New to start a blank quotation",
-          "title_i18n": {
-            "en_US": "Click New to start a blank quotation"
-          },
-          "trigger": "div.d-xl-inline-flex.gap-1 > button.btn.btn-primary",
-          "content": "At the top left of the list, click the purple **New** button. A blank quotation form opens.",
-          "content_i18n": {
-            "en_US": "At the top left of the list, click the purple **New** button. A blank quotation form opens."
-          },
-          "position": "bottom",
-          "run": "click",
-          "is_check": false,
-          "validation_type": "none",
-          "description": "Check: the form shows the title \"New\" and empty fields such as Customer and Order Payment Type.",
-          "description_i18n": {
-            "en_US": "Check: the form shows the title \"New\" and empty fields such as Customer and Order Payment Type."
-          }
-        },
-        {
-          "sequence": 14,
-          "title": "Click the Customer field and type the credit customer name to search for them",
-          "title_i18n": {
-            "en_US": "Click the Customer field and type the credit customer name to search for them"
-          },
-          "trigger": "input.o-autocomplete--input.o_input",
-          "content": "On the form, find the **Customer** field near the top left. Click it and type the customer name, or part of it (in this example **DIDULA MOTORES**). A list of matching customers opens below the field.",
-          "content_i18n": {
-            "en_US": "On the form, find the **Customer** field near the top left. Click it and type the customer name, or part of it (in this example **DIDULA MOTORES**). A list of matching customers opens below the field."
-          },
-          "position": "bottom",
-          "run": "edit",
-          "is_check": false,
-          "validation_type": "none",
-          "description": "Why: Odoo needs a customer to price the order and to print the invoice. Watch out: for a credit sale choose a customer who is set up for credit and has no overdue invoices. A customer with overdue invoices is held back by the credit limit check and needs extra approvals, so pick another customer.",
-          "description_i18n": {
-            "en_US": "Why: Odoo needs a customer to price the order and to print the invoice. Watch out: for a credit sale choose a customer who is set up for credit and has no overdue invoices. A customer with overdue invoices is held back by the credit limit check and needs extra approvals, so pick another customer."
-          }
-        },
-        {
-          "sequence": 15,
-          "title": "Select the correct credit customer from the search results",
-          "title_i18n": {
-            "en_US": "Select the correct credit customer from the search results"
-          },
-          "trigger": "#autocomplete_0_1",
-          "content": "Look through the list and click **DIDULA MOTORES** (red box). The name now shows in the Customer field, and the Invoice Address and Delivery Address fill in by themselves.",
-          "content_i18n": {
-            "en_US": "Look through the list and click **DIDULA MOTORES** (red box). The name now shows in the Customer field, and the Invoice Address and Delivery Address fill in by themselves."
-          },
-          "position": "bottom",
-          "run": "click",
-          "is_check": false,
-          "validation_type": "none",
-          "description": "Check: the customer name and address appear, and the Invoice Address and Delivery Address are filled. Wrong customer? Click the field again and choose another one before saving.",
-          "description_i18n": {
-            "en_US": "Check: the customer name and address appear, and the Invoice Address and Delivery Address are filled. Wrong customer? Click the field again and choose another one before saving."
-          }
-        },
-        {
-          "sequence": 16,
-          "title": "Set Order Payment Type to Credit because the customer pays later",
-          "title_i18n": {
-            "en_US": "Set Order Payment Type to Credit because the customer pays later"
-          },
-          "trigger": "#x_studio_order_payment_method_0",
-          "content": "Find **Order Payment Type** on the right side of the form and choose **Credit** from the dropdown.",
-          "content_i18n": {
-            "en_US": "Find **Order Payment Type** on the right side of the form and choose **Credit** from the dropdown."
-          },
-          "position": "bottom",
-          "run": "select",
-          "is_check": false,
-          "validation_type": "none",
-          "description": "Why: this tells Odoo the customer will pay after the due date, not at once. Credit orders are checked against the customer credit limit. Check: the field shows \"Credit\".",
-          "description_i18n": {
-            "en_US": "Why: this tells Odoo the customer will pay after the due date, not at once. Credit orders are checked against the customer credit limit. Check: the field shows \"Credit\"."
-          }
-        },
-        {
-          "sequence": 17,
-          "title": "Select the Credit (duplicate recorded click)",
-          "title_i18n": {
-            "en_US": "Select the Credit (duplicate recorded click)"
-          },
-          "trigger": "#x_studio_order_payment_method_0",
-          "content": "Select the Credit",
-          "content_i18n": {
-            "en_US": "Select the Credit"
-          },
-          "position": "bottom",
-          "run": "select",
-          "is_check": false,
-          "validation_type": "none",
-          "description": "",
-          "description_i18n": {
-            "en_US": ""
-          }
-        },
-        {
-          "sequence": 18,
-          "title": "Set Quotation Type to Sales to mark this as a normal product sale",
-          "title_i18n": {
-            "en_US": "Set Quotation Type to Sales to mark this as a normal product sale"
-          },
-          "trigger": "#x_studio_quotation_type_0",
-          "content": "Just below, open **Quotation Type** and choose **Sales**.",
-          "content_i18n": {
-            "en_US": "Just below, open **Quotation Type** and choose **Sales**."
-          },
-          "position": "bottom",
-          "run": "select",
-          "is_check": false,
-          "validation_type": "none",
-          "description": "Check: the field shows \"Sales\". Watch out: Odoo will not let you save the quotation while this field is empty.",
-          "description_i18n": {
-            "en_US": "Check: the field shows \"Sales\". Watch out: Odoo will not let you save the quotation while this field is empty."
-          }
-        },
-        {
-          "sequence": 19,
-          "title": "Click Add a product to add a new row to the order lines",
-          "title_i18n": {
-            "en_US": "Click Add a product to add a new row to the order lines"
-          },
-          "trigger": "td.o_field_x2many_list_row_add > a:nth-of-type(1)",
-          "content": "Scroll down to the **Order Lines** tab at the bottom of the form and click **Add a product**. A new empty row appears.",
-          "content_i18n": {
-            "en_US": "Scroll down to the **Order Lines** tab at the bottom of the form and click **Add a product**. A new empty row appears."
-          },
-          "position": "bottom",
-          "run": "click",
-          "is_check": false,
-          "validation_type": "none",
-          "description": "Check: the new row is ready, with an empty Product cell.",
-          "description_i18n": {
-            "en_US": "Check: the new row is ready, with an empty Product cell."
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
           }
         },
         {
           "sequence": 20,
-          "title": "Type the product code in the Product field to search for the product",
+          "title": "Click Orders in the top menu",
           "title_i18n": {
-            "en_US": "Type the product code in the Product field to search for the product"
+            "en_US": "Click Orders in the top menu",
+            "si_LK": "Click Orders in the top menu",
+            "ta_IN": "Click Orders in the top menu"
           },
-          "trigger": "td.o_data_cell input.o-autocomplete--input.o_input",
-          "content": "Click the **Product** cell of the new row and type the product code **02BB 023**. A dropdown opens with the matching product.",
+          "trigger": "[data-menu-xmlid=\"sale.sale_order_menu\"]",
+          "content": "Look at the menu bar at the top of the screen and click **Orders**. A small dropdown list opens just below it.",
           "content_i18n": {
-            "en_US": "Click the **Product** cell of the new row and type the product code **02BB 023**. A dropdown opens with the matching product."
-          },
-          "position": "bottom",
-          "run": "edit",
-          "is_check": false,
-          "validation_type": "none",
-          "description": "Tip: part of the product name or code is enough. Check: the dropdown shows BALL BEARING 6202-2RS.",
-          "description_i18n": {
-            "en_US": "Tip: part of the product name or code is enough. Check: the dropdown shows BALL BEARING 6202-2RS."
-          }
-        },
-        {
-          "sequence": 21,
-          "title": "Select the product from the dropdown",
-          "title_i18n": {
-            "en_US": "Select the product from the dropdown"
-          },
-          "trigger": "#autocomplete_0_0",
-          "content": "Click **[02BB 023] BALL BEARING 6202-2RS** (red box). The product appears on the order line.",
-          "content_i18n": {
-            "en_US": "Click **[02BB 023] BALL BEARING 6202-2RS** (red box). The product appears on the order line."
+            "en_US": "Look at the menu bar at the top of the screen and click **Orders**. A small dropdown list opens just below it.",
+            "si_LK": "Look at the menu bar at the top of the screen and click **Orders**. A small dropdown list opens just below it.",
+            "ta_IN": "Look at the menu bar at the top of the screen and click **Orders**. A small dropdown list opens just below it."
           },
           "position": "bottom",
           "run": "click",
           "is_check": false,
           "validation_type": "none",
-          "description": "Check: the order line shows the product, quantity 1 and a price.",
+          "description": "Why: the Orders menu keeps all quotations and sales orders together. What you will see: a dropdown with Quotations and Orders. Tip: if nothing opens, click once more on the word Orders.",
           "description_i18n": {
-            "en_US": "Check: the order line shows the product, quantity 1 and a price."
-          }
-        },
-        {
-          "sequence": 22,
-          "title": "Open the Other Info tab to fill in payment terms, sales team and warehouse",
-          "title_i18n": {
-            "en_US": "Open the Other Info tab to fill in payment terms, sales team and warehouse"
+            "en_US": "Why: the Orders menu keeps all quotations and sales orders together. What you will see: a dropdown with Quotations and Orders. Tip: if nothing opens, click once more on the word Orders.",
+            "si_LK": "Why: the Orders menu keeps all quotations and sales orders together. What you will see: a dropdown with Quotations and Orders. Tip: if nothing opens, click once more on the word Orders.",
+            "ta_IN": "Why: the Orders menu keeps all quotations and sales orders together. What you will see: a dropdown with Quotations and Orders. Tip: if nothing opens, click once more on the word Orders."
           },
-          "trigger": "a[name=\"other_information\"]",
-          "content": "Click the **Other Info** tab (next to Order Lines). It holds the payment, delivery and sales team details of the order.",
-          "content_i18n": {
-            "en_US": "Click the **Other Info** tab (next to Order Lines). It holds the payment, delivery and sales team details of the order."
-          },
-          "position": "bottom",
-          "run": "click",
-          "is_check": false,
-          "validation_type": "none",
-          "description": "Check: you see fields such as Payment Terms, Salesperson, Sales Team and Warehouse.",
-          "description_i18n": {
-            "en_US": "Check: you see fields such as Payment Terms, Salesperson, Sales Team and Warehouse."
-          }
-        },
-        {
-          "sequence": 23,
-          "title": "Click the Payment Terms field to see the terms Odoo filled in",
-          "title_i18n": {
-            "en_US": "Click the Payment Terms field to see the terms Odoo filled in"
-          },
-          "trigger": "#payment_term_id_0",
-          "content": "When you selected the customer, Odoo filled in the **Payment Terms** from that customer record. Click the **Payment Terms** field (red box) to open the list of payment terms.",
-          "content_i18n": {
-            "en_US": "When you selected the customer, Odoo filled in the **Payment Terms** from that customer record. Click the **Payment Terms** field (red box) to open the list of payment terms."
-          },
-          "position": "bottom",
-          "run": "click",
-          "is_check": false,
-          "validation_type": "none",
-          "description": "Why: the payment terms decide the due date printed on the invoice. Check: the dropdown lists the payment terms, for example Immediate Payment, 14 Days, 30 Days. Tip: a credit sale must never use Immediate Payment.",
-          "description_i18n": {
-            "en_US": "Why: the payment terms decide the due date printed on the invoice. Check: the dropdown lists the payment terms, for example Immediate Payment, 14 Days, 30 Days. Tip: a credit sale must never use Immediate Payment."
-          }
-        },
-        {
-          "sequence": 24,
-          "title": "Select 14 Days as the Payment Terms",
-          "title_i18n": {
-            "en_US": "Select 14 Days as the Payment Terms"
-          },
-          "trigger": "#payment_term_id_0_0_5",
-          "content": "Click **14 Days** (red box) in the dropdown. If the field already shows **14 Days**, there is nothing to change.",
-          "content_i18n": {
-            "en_US": "Click **14 Days** (red box) in the dropdown. If the field already shows **14 Days**, there is nothing to change."
-          },
-          "position": "bottom",
-          "run": "click",
-          "is_check": false,
-          "validation_type": "none",
-          "description": "Why: with 14 Days the customer has two weeks after the invoice date to pay, and the invoice gets that due date. Check: the Payment Terms field shows \"14 Days\". Watch out: a wrong payment term gives the invoice the wrong due date.",
-          "description_i18n": {
-            "en_US": "Why: with 14 Days the customer has two weeks after the invoice date to pay, and the invoice gets that due date. Check: the Payment Terms field shows \"14 Days\". Watch out: a wrong payment term gives the invoice the wrong due date."
-          }
-        },
-        {
-          "sequence": 25,
-          "title": "Click the Sales Team field to choose the team making this sale",
-          "title_i18n": {
-            "en_US": "Click the Sales Team field to choose the team making this sale"
-          },
-          "trigger": "#team_id_0",
-          "content": "Click the **Sales Team** field. A dropdown opens with a few teams.",
-          "content_i18n": {
-            "en_US": "Click the **Sales Team** field. A dropdown opens with a few teams."
-          },
-          "position": "bottom",
-          "run": "click",
-          "is_check": false,
-          "validation_type": "none",
-          "description": "Why: the sales team decides the sales reports the order is counted in and, here, also the delivery warehouse.",
-          "description_i18n": {
-            "en_US": "Why: the sales team decides the sales reports the order is counted in and, here, also the delivery warehouse."
-          }
-        },
-        {
-          "sequence": 26,
-          "title": "Click Search More... to see every sales team",
-          "title_i18n": {
-            "en_US": "Click Search More... to see every sales team"
-          },
-          "trigger": "#team_id_0_0_8",
-          "content": "At the bottom of the dropdown, click **Search More...**. A window opens with the full list of sales teams.",
-          "content_i18n": {
-            "en_US": "At the bottom of the dropdown, click **Search More...**. A window opens with the full list of sales teams."
-          },
-          "position": "bottom",
-          "run": "click",
-          "is_check": false,
-          "validation_type": "none",
-          "description": "Check: the list of teams is shown. Tip: you can also type the team name directly in the field.",
-          "description_i18n": {
-            "en_US": "Check: the list of teams is shown. Tip: you can also type the team name directly in the field."
-          }
-        },
-        {
-          "sequence": 27,
-          "title": "Select the Colombo Sales Centre team",
-          "title_i18n": {
-            "en_US": "Select the Colombo Sales Centre team"
-          },
-          "trigger": "tr.o_data_row.o_row_draggable:nth-of-type(6) > td.o_data_cell.cursor-pointer:nth-of-type(2)",
-          "content": "Click **Colombo Sales Centre** (red box). The window closes and the team appears in the field.",
-          "content_i18n": {
-            "en_US": "Click **Colombo Sales Centre** (red box). The window closes and the team appears in the field."
-          },
-          "position": "bottom",
-          "run": "click",
-          "is_check": false,
-          "validation_type": "none",
-          "description": "Check: the Sales Team field shows \"Colombo Sales Centre\". Odoo now also fills the Warehouse on its own.",
-          "description_i18n": {
-            "en_US": "Check: the Sales Team field shows \"Colombo Sales Centre\". Odoo now also fills the Warehouse on its own."
-          }
-        },
-        {
-          "sequence": 28,
-          "title": "Check that the Warehouse is correct",
-          "title_i18n": {
-            "en_US": "Check that the Warehouse is correct"
-          },
-          "trigger": "#warehouse_id_1",
-          "content": "Look at the **Warehouse** field in the Delivery section (red box). Odoo fills it in from the Sales Team: **JAM Warehouse Ekala- (JM-EK)**.",
-          "content_i18n": {
-            "en_US": "Look at the **Warehouse** field in the Delivery section (red box). Odoo fills it in from the Sales Team: **JAM Warehouse Ekala- (JM-EK)**."
-          },
-          "position": "bottom",
-          "run": "click",
-          "is_check": false,
-          "validation_type": "none",
-          "description": "Why: the goods will be taken out of stock from this warehouse. Tip: if the field is empty, click it and choose the warehouse from the list.",
-          "description_i18n": {
-            "en_US": "Why: the goods will be taken out of stock from this warehouse. Tip: if the field is empty, click it and choose the warehouse from the list."
-          }
-        },
-        {
-          "sequence": 29,
-          "title": "Only if the Warehouse is empty: click Search More...",
-          "title_i18n": {
-            "en_US": "Only if the Warehouse is empty: click Search More..."
-          },
-          "trigger": "#warehouse_id_1_0_8",
-          "content": "If the Warehouse field was empty, click it and choose **Search More...** at the bottom of the dropdown. In this example the Warehouse was already filled, so you can skip this step.",
-          "content_i18n": {
-            "en_US": "If the Warehouse field was empty, click it and choose **Search More...** at the bottom of the dropdown. In this example the Warehouse was already filled, so you can skip this step."
-          },
-          "position": "bottom",
-          "run": "click",
-          "is_check": false,
-          "validation_type": "none",
-          "description": "Check: a list of warehouses opens when the field is empty.",
-          "description_i18n": {
-            "en_US": "Check: a list of warehouses opens when the field is empty."
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
           }
         },
         {
           "sequence": 30,
-          "title": "Confirm the delivery Warehouse (JAM Warehouse Ekala- (JM-EK))",
+          "title": "Click Quotations to open the quotation list",
           "title_i18n": {
-            "en_US": "Confirm the delivery Warehouse (JAM Warehouse Ekala- (JM-EK))"
+            "en_US": "Click Quotations to open the quotation list",
+            "si_LK": "Click Quotations to open the quotation list",
+            "ta_IN": "Click Quotations to open the quotation list"
           },
-          "trigger": "tr.o_data_row.o_row_draggable:nth-of-type(4) > td.o_data_cell.cursor-pointer:nth-of-type(3)",
-          "content": "The **Warehouse** field is filled automatically from the Sales Team, so normally no action is needed. Check that it reads **JAM Warehouse Ekala- (JM-EK)** (red box). Only if it is empty, select that warehouse from the list.",
+          "trigger": "[data-menu-xmlid=\"sale.menu_sale_quotations\"]",
+          "content": "In the dropdown click **Quotations**. A list opens showing every quotation that already exists, with the customer, the date and the status of each one.",
           "content_i18n": {
-            "en_US": "The **Warehouse** field is filled automatically from the Sales Team, so normally no action is needed. Check that it reads **JAM Warehouse Ekala- (JM-EK)** (red box). Only if it is empty, select that warehouse from the list."
+            "en_US": "In the dropdown click **Quotations**. A list opens showing every quotation that already exists, with the customer, the date and the status of each one.",
+            "si_LK": "In the dropdown click **Quotations**. A list opens showing every quotation that already exists, with the customer, the date and the status of each one.",
+            "ta_IN": "In the dropdown click **Quotations**. A list opens showing every quotation that already exists, with the customer, the date and the status of each one."
           },
           "position": "bottom",
           "run": "click",
           "is_check": false,
           "validation_type": "none",
-          "description": "Why: the Warehouse decides where the goods are picked from and which delivery document (for example JM-EK/OUT/...) is created when you confirm. Check: the Warehouse shows JAM Warehouse Ekala- (JM-EK).",
+          "description": "Why: a quotation is the draft of a sale. It only turns into a real Sales Order after you confirm it. What you will see: a list of quotations with a **New** button at the top left.",
           "description_i18n": {
-            "en_US": "Why: the Warehouse decides where the goods are picked from and which delivery document (for example JM-EK/OUT/...) is created when you confirm. Check: the Warehouse shows JAM Warehouse Ekala- (JM-EK)."
-          }
-        },
-        {
-          "sequence": 31,
-          "title": "Click Save to keep the quotation",
-          "title_i18n": {
-            "en_US": "Click Save to keep the quotation"
+            "en_US": "Why: a quotation is the draft of a sale. It only turns into a real Sales Order after you confirm it. What you will see: a list of quotations with a **New** button at the top left.",
+            "si_LK": "Why: a quotation is the draft of a sale. It only turns into a real Sales Order after you confirm it. What you will see: a list of quotations with a **New** button at the top left.",
+            "ta_IN": "Why: a quotation is the draft of a sale. It only turns into a real Sales Order after you confirm it. What you will see: a list of quotations with a **New** button at the top left."
           },
-          "trigger": "[data-hotkey=\"s\"]",
-          "content": "At the top left, next to the quotation title, click the **Save** (cloud) icon (red box). Odoo gives the quotation its number.",
-          "content_i18n": {
-            "en_US": "At the top left, next to the quotation title, click the **Save** (cloud) icon (red box). Odoo gives the quotation its number."
-          },
-          "position": "bottom",
-          "run": "click",
-          "is_check": false,
-          "validation_type": "none",
-          "description": "Check: the cloud icon disappears and the title changes from \"New\" to a number such as S02748.",
-          "description_i18n": {
-            "en_US": "Check: the cloud icon disappears and the title changes from \"New\" to a number such as S02748."
-          }
-        },
-        {
-          "sequence": 32,
-          "title": "Click Confirm to turn the quotation into a Sales Order",
-          "title_i18n": {
-            "en_US": "Click Confirm to turn the quotation into a Sales Order"
-          },
-          "trigger": "[data-hotkey=\"q\"]",
-          "content": "At the top of the form, click the purple **Confirm** button (red box). Odoo turns the quotation into a confirmed Sales Order.",
-          "content_i18n": {
-            "en_US": "At the top of the form, click the purple **Confirm** button (red box). Odoo turns the quotation into a confirmed Sales Order."
-          },
-          "position": "bottom",
-          "run": "click",
-          "is_check": false,
-          "validation_type": "none",
-          "description": "Why: confirming makes the order official and creates the delivery that you will process next. Check: the status bar moves to \"Sales Order\" and a **Delivery** button appears at the top. Watch out: if a **Request Credit Limit Approval** button shows instead of Confirm, the customer is over the credit limit or overdue; choose another customer.",
-          "description_i18n": {
-            "en_US": "Why: confirming makes the order official and creates the delivery that you will process next. Check: the status bar moves to \"Sales Order\" and a **Delivery** button appears at the top. Watch out: if a **Request Credit Limit Approval** button shows instead of Confirm, the customer is over the credit limit or overdue; choose another customer."
-          }
-        },
-        {
-          "sequence": 33,
-          "title": "Click the Delivery button to open the delivery",
-          "title_i18n": {
-            "en_US": "Click the Delivery button to open the delivery"
-          },
-          "trigger": "button[name=\"action_view_delivery\"]",
-          "content": "At the top of the order, click the **Delivery** smart button (red box). The delivery transfer opens, for example JM-EK/OUT/01060.",
-          "content_i18n": {
-            "en_US": "At the top of the order, click the **Delivery** smart button (red box). The delivery transfer opens, for example JM-EK/OUT/01060."
-          },
-          "position": "bottom",
-          "run": "click",
-          "is_check": false,
-          "validation_type": "none",
-          "description": "Why: the delivery is the document your warehouse uses to hand the goods to the customer. Check: you see the delivery with the product line.",
-          "description_i18n": {
-            "en_US": "Why: the delivery is the document your warehouse uses to hand the goods to the customer. Check: you see the delivery with the product line."
-          }
-        },
-        {
-          "sequence": 34,
-          "title": "Click Validate to deliver the goods",
-          "title_i18n": {
-            "en_US": "Click Validate to deliver the goods"
-          },
-          "trigger": "[data-hotkey=\"v\"]",
-          "content": "Click the purple **Validate** button at the top left (red box). If Odoo asks a question, confirm it.",
-          "content_i18n": {
-            "en_US": "Click the purple **Validate** button at the top left (red box). If Odoo asks a question, confirm it."
-          },
-          "position": "bottom",
-          "run": "click",
-          "is_check": false,
-          "validation_type": "none",
-          "description": "Why: this hands the goods to the customer and takes them out of stock. Check: the status bar at the top right moves to **Done**. Watch out: if the product is not in stock, Odoo cannot reserve it, so check the stock first.",
-          "description_i18n": {
-            "en_US": "Why: this hands the goods to the customer and takes them out of stock. Check: the status bar at the top right moves to **Done**. Watch out: if the product is not in stock, Odoo cannot reserve it, so check the stock first."
-          }
-        },
-        {
-          "sequence": 35,
-          "title": "Go back to the sales order",
-          "title_i18n": {
-            "en_US": "Go back to the sales order"
-          },
-          "trigger": "[data-hotkey=\"b\"]",
-          "content": "The delivery is now **Done**. At the top left, click the sales order number (red box, for example S02748) to go back to the order.",
-          "content_i18n": {
-            "en_US": "The delivery is now **Done**. At the top left, click the sales order number (red box, for example S02748) to go back to the order."
-          },
-          "position": "bottom",
-          "run": "click",
-          "is_check": false,
-          "validation_type": "none",
-          "description": "Check: the order opens again and now shows a **Create Invoice** button.",
-          "description_i18n": {
-            "en_US": "Check: the order opens again and now shows a **Create Invoice** button."
-          }
-        },
-        {
-          "sequence": 36,
-          "title": "Click Create Invoice to bill the customer",
-          "title_i18n": {
-            "en_US": "Click Create Invoice to bill the customer"
-          },
-          "trigger": "[data-hotkey=\"q\"]",
-          "content": "Click **Create Invoice** (red box). If a small window asks which kind of invoice to create, keep the default \"Regular invoice\" and click **Create Draft Invoice**.",
-          "content_i18n": {
-            "en_US": "Click **Create Invoice** (red box). If a small window asks which kind of invoice to create, keep the default \"Regular invoice\" and click **Create Draft Invoice**."
-          },
-          "position": "bottom",
-          "run": "click",
-          "is_check": false,
-          "validation_type": "none",
-          "description": "Why: the invoice is the document you give the customer to ask for payment. Check: a draft invoice opens with the customer, the product and the amount.",
-          "description_i18n": {
-            "en_US": "Why: the invoice is the document you give the customer to ask for payment. Check: a draft invoice opens with the customer, the product and the amount."
-          }
-        },
-        {
-          "sequence": 37,
-          "title": "Click Confirm to post the invoice",
-          "title_i18n": {
-            "en_US": "Click Confirm to post the invoice"
-          },
-          "trigger": "[data-hotkey=\"q\"]",
-          "content": "On the draft invoice, click **Confirm** (red box). The invoice gets its final number, for example FTI/2026/00612.",
-          "content_i18n": {
-            "en_US": "On the draft invoice, click **Confirm** (red box). The invoice gets its final number, for example FTI/2026/00612."
-          },
-          "position": "bottom",
-          "run": "click",
-          "is_check": false,
-          "validation_type": "none",
-          "description": "Why: a draft invoice has no accounting effect; confirming it records the sale in the books. Check: the status bar moves to **Posted** and a **Register Payment** button appears. The invoice Payment Terms show **14 Days**, so it is due 14 days after the invoice date.",
-          "description_i18n": {
-            "en_US": "Why: a draft invoice has no accounting effect; confirming it records the sale in the books. Check: the status bar moves to **Posted** and a **Register Payment** button appears. The invoice Payment Terms show **14 Days**, so it is due 14 days after the invoice date."
-          }
-        },
-        {
-          "sequence": 38,
-          "title": "14 days later: open the Sales app again to find the order",
-          "title_i18n": {
-            "en_US": "14 days later: open the Sales app again to find the order"
-          },
-          "trigger": "[data-menu-xmlid=\"sale.sale_menu_root\"]",
-          "content": "The customer pays on credit, about **14 days after the invoice date**. When the payment comes in, log in to Odoo and click the **Home menu** icon, then click **Sales** (red box).",
-          "content_i18n": {
-            "en_US": "The customer pays on credit, about **14 days after the invoice date**. When the payment comes in, log in to Odoo and click the **Home menu** icon, then click **Sales** (red box)."
-          },
-          "position": "bottom",
-          "run": "click",
-          "is_check": false,
-          "validation_type": "none",
-          "description": "Why: a credit sale is finished in two visits. Today you delivered and invoiced; on the payment day you come back from the Sales app. Check: the Sales app opens with its menu across the top.",
-          "description_i18n": {
-            "en_US": "Why: a credit sale is finished in two visits. Today you delivered and invoiced; on the payment day you come back from the Sales app. Check: the Sales app opens with its menu across the top."
-          }
-        },
-        {
-          "sequence": 39,
-          "title": "Click Orders in the top menu",
-          "title_i18n": {
-            "en_US": "Click Orders in the top menu"
-          },
-          "trigger": "[data-menu-xmlid=\"sale.sale_order_menu\"]",
-          "content": "Click **Orders** in the top menu. A dropdown opens.",
-          "content_i18n": {
-            "en_US": "Click **Orders** in the top menu. A dropdown opens."
-          },
-          "position": "bottom",
-          "run": "click",
-          "is_check": false,
-          "validation_type": "none",
-          "description": "Check: the dropdown lists Quotations and Orders.",
-          "description_i18n": {
-            "en_US": "Check: the dropdown lists Quotations and Orders."
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
           }
         },
         {
           "sequence": 40,
-          "title": "Click Orders to open the confirmed sales orders",
+          "title": "Click New to start a blank quotation",
           "title_i18n": {
-            "en_US": "Click Orders to open the confirmed sales orders"
+            "en_US": "Click New to start a blank quotation",
+            "si_LK": "Click New to start a blank quotation",
+            "ta_IN": "Click New to start a blank quotation"
           },
-          "trigger": "[data-menu-xmlid=\"sale.menu_sale_order\"]",
-          "content": "In the dropdown, click **Orders** (the second entry, red box). The list of confirmed Sales Orders opens.",
+          "trigger": "div.d-xl-inline-flex.gap-1 > button.btn.btn-primary",
+          "content": "At the top left of the list click the purple **New** button. A blank quotation form opens. Its title shows \"New\" until you save it.",
           "content_i18n": {
-            "en_US": "In the dropdown, click **Orders** (the second entry, red box). The list of confirmed Sales Orders opens."
+            "en_US": "At the top left of the list click the purple **New** button. A blank quotation form opens. Its title shows \"New\" until you save it.",
+            "si_LK": "At the top left of the list click the purple **New** button. A blank quotation form opens. Its title shows \"New\" until you save it.",
+            "ta_IN": "At the top left of the list click the purple **New** button. A blank quotation form opens. Its title shows \"New\" until you save it."
           },
           "position": "bottom",
           "run": "click",
           "is_check": false,
           "validation_type": "none",
-          "description": "Check: you see a list of sales orders with a search bar at the top.",
+          "description": "Why: you are creating the order for the customer who is buying with cash. Good to know: the real order number (for example S00131) is given automatically once the order is saved, so you do not type it. Tip: do not press Confirm yet, because the details below must be filled in first.",
           "description_i18n": {
-            "en_US": "Check: you see a list of sales orders with a search bar at the top."
-          }
-        },
-        {
-          "sequence": 41,
-          "title": "Search for the sales order by its number",
-          "title_i18n": {
-            "en_US": "Search for the sales order by its number"
+            "en_US": "Why: you are creating the order for the customer who is buying with cash. Good to know: the real order number (for example S00131) is given automatically once the order is saved, so you do not type it. Tip: do not press Confirm yet, because the details below must be filled in first.",
+            "si_LK": "Why: you are creating the order for the customer who is buying with cash. Good to know: the real order number (for example S00131) is given automatically once the order is saved, so you do not type it. Tip: do not press Confirm yet, because the details below must be filled in first.",
+            "ta_IN": "Why: you are creating the order for the customer who is buying with cash. Good to know: the real order number (for example S00131) is given automatically once the order is saved, so you do not type it. Tip: do not press Confirm yet, because the details below must be filled in first."
           },
-          "trigger": "input.o_searchview_input.o_input",
-          "content": "Click the search bar (red box), type the sales order number (for example **S02748**) and press **Enter**.",
-          "content_i18n": {
-            "en_US": "Click the search bar (red box), type the sales order number (for example **S02748**) and press **Enter**."
-          },
-          "position": "bottom",
-          "run": "edit",
-          "is_check": false,
-          "validation_type": "none",
-          "description": "Tip: you can also search by customer name. Check: the list shows only your order.",
-          "description_i18n": {
-            "en_US": "Tip: you can also search by customer name. Check: the list shows only your order."
-          }
-        },
-        {
-          "sequence": 42,
-          "title": "Open the sales order",
-          "title_i18n": {
-            "en_US": "Open the sales order"
-          },
-          "trigger": "td.o_data_cell",
-          "content": "Click the order row (red box). The sales order opens.",
-          "content_i18n": {
-            "en_US": "Click the order row (red box). The sales order opens."
-          },
-          "position": "bottom",
-          "run": "click",
-          "is_check": false,
-          "validation_type": "none",
-          "description": "Check: the status bar shows \"Sales Order\" and an **Invoices** button is at the top.",
-          "description_i18n": {
-            "en_US": "Check: the status bar shows \"Sales Order\" and an **Invoices** button is at the top."
-          }
-        },
-        {
-          "sequence": 43,
-          "title": "Click the Invoices button to open the invoice",
-          "title_i18n": {
-            "en_US": "Click the Invoices button to open the invoice"
-          },
-          "trigger": "button[name=\"action_view_invoice\"]",
-          "content": "At the top of the order, click the **Invoices** button (red box). The posted invoice opens.",
-          "content_i18n": {
-            "en_US": "At the top of the order, click the **Invoices** button (red box). The posted invoice opens."
-          },
-          "position": "bottom",
-          "run": "click",
-          "is_check": false,
-          "validation_type": "none",
-          "description": "Check: the invoice shows the status **Posted**, the Payment Terms **14 Days** and a **Register Payment** button.",
-          "description_i18n": {
-            "en_US": "Check: the invoice shows the status **Posted**, the Payment Terms **14 Days** and a **Register Payment** button."
-          }
-        },
-        {
-          "sequence": 44,
-          "title": "Click Register Payment to record the money received",
-          "title_i18n": {
-            "en_US": "Click Register Payment to record the money received"
-          },
-          "trigger": "[data-hotkey=\"g\"]",
-          "content": "When the customer pays, click **Register Payment** (red box) at the top of the invoice. A payment window opens.",
-          "content_i18n": {
-            "en_US": "When the customer pays, click **Register Payment** (red box) at the top of the invoice. A payment window opens."
-          },
-          "position": "bottom",
-          "run": "click",
-          "is_check": false,
-          "validation_type": "none",
-          "description": "Why: this records that the customer has paid. For a credit sale this normally happens on or before the 14-day due date. Check: the Register Payment window opens.",
-          "description_i18n": {
-            "en_US": "Why: this records that the customer has paid. For a credit sale this normally happens on or before the 14-day due date. Check: the Register Payment window opens."
-          }
-        },
-        {
-          "sequence": 45,
-          "title": "Click the Journal field to choose where the payment is recorded",
-          "title_i18n": {
-            "en_US": "Click the Journal field to choose where the payment is recorded"
-          },
-          "trigger": "#journal_id_0",
-          "content": "Click the **Journal** field at the top left of the window. A short list of journals opens.",
-          "content_i18n": {
-            "en_US": "Click the **Journal** field at the top left of the window. A short list of journals opens."
-          },
-          "position": "bottom",
-          "run": "click",
-          "is_check": false,
-          "validation_type": "none",
-          "description": "Why: the journal decides which account the money goes to: cash, cheque or bank. Check: the list of journals is open.",
-          "description_i18n": {
-            "en_US": "Why: the journal decides which account the money goes to: cash, cheque or bank. Check: the list of journals is open."
-          }
-        },
-        {
-          "sequence": 46,
-          "title": "Click Search More... to see all the journals",
-          "title_i18n": {
-            "en_US": "Click Search More... to see all the journals"
-          },
-          "trigger": "#journal_id_0_0_8",
-          "content": "At the bottom of the dropdown, click **Search More...**. A window opens with every journal.",
-          "content_i18n": {
-            "en_US": "At the bottom of the dropdown, click **Search More...**. A window opens with every journal."
-          },
-          "position": "bottom",
-          "run": "click",
-          "is_check": false,
-          "validation_type": "none",
-          "description": "Check: the full list of journals is shown.",
-          "description_i18n": {
-            "en_US": "Check: the full list of journals is shown."
-          }
-        },
-        {
-          "sequence": 47,
-          "title": "Select Customer Receipts - Cash",
-          "title_i18n": {
-            "en_US": "Select Customer Receipts - Cash"
-          },
-          "trigger": "tr.o_data_row.o_row_draggable:nth-of-type(4) > td.o_data_cell.cursor-pointer:nth-of-type(2)",
-          "content": "Click the row **Customer Receipts - Cash** (red box). If the customer paid by bank, choose the matching bank journal here instead (for example BOC BANK).",
-          "content_i18n": {
-            "en_US": "Click the row **Customer Receipts - Cash** (red box). If the customer paid by bank, choose the matching bank journal here instead (for example BOC BANK)."
-          },
-          "position": "bottom",
-          "run": "click",
-          "is_check": false,
-          "validation_type": "none",
-          "description": "Check: the Journal field shows \"Customer Receipts - Cash\". Watch out: choosing the wrong journal records the money in the wrong account.",
-          "description_i18n": {
-            "en_US": "Check: the Journal field shows \"Customer Receipts - Cash\". Watch out: choosing the wrong journal records the money in the wrong account."
-          }
-        },
-        {
-          "sequence": 48,
-          "title": "Click the sales app (accidental recorded click)",
-          "title_i18n": {
-            "en_US": "Click the sales app (accidental recorded click)"
-          },
-          "trigger": "[data-menu-xmlid=\"sale.sale_menu_root\"]",
-          "content": "Click the sales app",
-          "content_i18n": {
-            "en_US": "Click the sales app"
-          },
-          "position": "bottom",
-          "run": "click",
-          "is_check": false,
-          "validation_type": "none",
-          "description": "",
-          "description_i18n": {
-            "en_US": ""
-          }
-        },
-        {
-          "sequence": 49,
-          "title": "Click Create Payment to finish the payment",
-          "title_i18n": {
-            "en_US": "Click Create Payment to finish the payment"
-          },
-          "trigger": "[data-hotkey=\"q\"]",
-          "content": "Click **Create Payment** (red box). The window closes and the invoice is updated.",
-          "content_i18n": {
-            "en_US": "Click **Create Payment** (red box). The window closes and the invoice is updated."
-          },
-          "position": "bottom",
-          "run": "click",
-          "is_check": false,
-          "validation_type": "none",
-          "description": "Check: a green **IN PAYMENT** ribbon appears at the top right of the invoice, or **PAID** if the payment is already reconciled. Result: product delivered, customer invoiced on 14 Days credit terms, payment recorded.",
-          "description_i18n": {
-            "en_US": "Check: a green **IN PAYMENT** ribbon appears at the top right of the invoice, or **PAID** if the payment is already reconciled. Result: product delivered, customer invoiced on 14 Days credit terms, payment recorded."
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
           }
         },
         {
           "sequence": 50,
-          "title": "Check the IN PAYMENT ribbon on the invoice",
+          "title": "Click the Customer field and type the customer name",
           "title_i18n": {
-            "en_US": "Check the IN PAYMENT ribbon on the invoice"
+            "en_US": "Click the Customer field and type the customer name",
+            "si_LK": "Click the Customer field and type the customer name",
+            "ta_IN": "Click the Customer field and type the customer name"
           },
-          "trigger": ".ribbon",
-          "content": "Look at the top right corner of the invoice. The green **IN PAYMENT** ribbon (red box) shows that the payment has been registered. The credit sale is now complete.",
+          "trigger": "div.o_cell.o_wrap_input > div.o_field_widget.o_required_modifier > div.o_field_many2one_selection > div.o_input_dropdown > div.o-autocomplete.dropdown > input.o-autocomplete--input.o_input",
+          "content": "Click the **Customer** field and start typing **Credit Customer 1M**. Odoo shows a dropdown with the customers whose names match what you typed.",
           "content_i18n": {
-            "en_US": "Look at the top right corner of the invoice. The green **IN PAYMENT** ribbon (red box) shows that the payment has been registered. The credit sale is now complete."
-          },
-          "position": "bottom",
-          "run": "check",
-          "is_check": false,
-          "validation_type": "none",
-          "description": "Result: product delivered, customer invoiced on 14 Days credit terms, payment recorded. Check: the ribbon says IN PAYMENT, and the Amount Due is 0. Tip: IN PAYMENT becomes **PAID** once the payment is matched with your cash or bank statement.",
-          "description_i18n": {
-            "en_US": "Result: product delivered, customer invoiced on 14 Days credit terms, payment recorded. Check: the ribbon says IN PAYMENT, and the Amount Due is 0. Tip: IN PAYMENT becomes **PAID** once the payment is matched with your cash or bank statement."
-          }
-        },
-        {
-          "sequence": 410,
-          "title": "Invoices",
-          "title_i18n": {
-            "en_US": "Invoices"
-          },
-          "trigger": "button[name=\"action_view_invoice\"]",
-          "content": "Click the invoice smart button",
-          "content_i18n": {
-            "en_US": "Click the invoice smart button"
-          },
-          "position": "bottom",
-          "run": "click",
-          "is_check": false,
-          "validation_type": "none",
-          "description": "",
-          "description_i18n": {
-            "en_US": ""
-          }
-        },
-        {
-          "sequence": 420,
-          "title": "Create Advance Payment",
-          "title_i18n": {
-            "en_US": "Create Advance Payment"
-          },
-          "trigger": "button[name=\"2341\"]",
-          "content": "Click Create Advance Payment",
-          "content_i18n": {
-            "en_US": "Click Create Advance Payment"
-          },
-          "position": "bottom",
-          "run": "click",
-          "is_check": false,
-          "validation_type": "none",
-          "description": "",
-          "description_i18n": {
-            "en_US": ""
-          }
-        },
-        {
-          "sequence": 430,
-          "title": "",
-          "title_i18n": {
-            "en_US": ""
-          },
-          "trigger": "[data-menu-xmlid=\"sale.sale_menu_root\"]",
-          "content": "Again Click Sales Order",
-          "content_i18n": {
-            "en_US": "Again Click Sales Order"
-          },
-          "position": "bottom",
-          "run": "click",
-          "is_check": false,
-          "validation_type": "none",
-          "description": "",
-          "description_i18n": {
-            "en_US": ""
-          }
-        },
-        {
-          "sequence": 440,
-          "title": "Sales Orders",
-          "title_i18n": {
-            "en_US": "Sales Orders"
-          },
-          "trigger": "[data-menu-xmlid=\"sale.menu_sale_order\"]",
-          "content": "Click Sales Orders",
-          "content_i18n": {
-            "en_US": "Click Sales Orders"
-          },
-          "position": "bottom",
-          "run": "click",
-          "is_check": false,
-          "validation_type": "none",
-          "description": "",
-          "description_i18n": {
-            "en_US": ""
-          }
-        },
-        {
-          "sequence": 450,
-          "title": "To Invoice",
-          "title_i18n": {
-            "en_US": "To Invoice"
-          },
-          "trigger": "[data-menu-xmlid=\"sale.menu_sale_invoicing\"]",
-          "content": "Click the To Invoice button",
-          "content_i18n": {
-            "en_US": "Click the To Invoice button"
-          },
-          "position": "bottom",
-          "run": "click",
-          "is_check": false,
-          "validation_type": "none",
-          "description": "",
-          "description_i18n": {
-            "en_US": ""
-          }
-        },
-        {
-          "sequence": 460,
-          "title": "Orders to Invoice",
-          "title_i18n": {
-            "en_US": "Orders to Invoice"
-          },
-          "trigger": "[data-menu-xmlid=\"sale.menu_sale_order_invoice\"]",
-          "content": "Click Orders to Invoice",
-          "content_i18n": {
-            "en_US": "Click Orders to Invoice"
-          },
-          "position": "bottom",
-          "run": "click",
-          "is_check": false,
-          "validation_type": "none",
-          "description": "",
-          "description_i18n": {
-            "en_US": ""
-          }
-        },
-        {
-          "sequence": 470,
-          "title": "",
-          "title_i18n": {
-            "en_US": ""
-          },
-          "trigger": "input.o_searchview_input.o_input",
-          "content": "Type the invoice number",
-          "content_i18n": {
-            "en_US": "Type the invoice number"
+            "en_US": "Click the **Customer** field and start typing **Credit Customer 1M**. Odoo shows a dropdown with the customers whose names match what you typed.",
+            "si_LK": "Click the **Customer** field and start typing **Credit Customer 1M**. Odoo shows a dropdown with the customers whose names match what you typed.",
+            "ta_IN": "Click the **Customer** field and start typing **Credit Customer 1M**. Odoo shows a dropdown with the customers whose names match what you typed."
           },
           "position": "bottom",
           "run": "edit",
           "is_check": false,
           "validation_type": "none",
-          "description": "",
+          "description": "Why: the customer decides the invoice address and the delivery address. What you will see: a short list of matching customers under the field. Watch out: if several customers have similar names, read the full name carefully before you pick one. Good to know: for a credit sale pick a customer that has a **credit limit** (this guide uses \"Credit Customer 1M\", credit limit 1,000,000).",
           "description_i18n": {
-            "en_US": ""
+            "en_US": "Why: the customer decides the invoice address and the delivery address. What you will see: a short list of matching customers under the field. Watch out: if several customers have similar names, read the full name carefully before you pick one. Good to know: for a credit sale pick a customer that has a **credit limit** (this guide uses \"Credit Customer 1M\", credit limit 1,000,000).",
+            "si_LK": "Why: the customer decides the invoice address and the delivery address. What you will see: a short list of matching customers under the field. Watch out: if several customers have similar names, read the full name carefully before you pick one. Good to know: for a credit sale pick a customer that has a **credit limit** (this guide uses \"Credit Customer 1M\", credit limit 1,000,000).",
+            "ta_IN": "Why: the customer decides the invoice address and the delivery address. What you will see: a short list of matching customers under the field. Watch out: if several customers have similar names, read the full name carefully before you pick one. Good to know: for a credit sale pick a customer that has a **credit limit** (this guide uses \"Credit Customer 1M\", credit limit 1,000,000)."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
           }
         },
         {
-          "sequence": 480,
-          "title": "Orders",
+          "sequence": 60,
+          "title": "Select the customer from the dropdown",
           "title_i18n": {
-            "en_US": "Orders"
+            "en_US": "Select the customer from the dropdown",
+            "si_LK": "Select the customer from the dropdown",
+            "ta_IN": "Select the customer from the dropdown"
           },
-          "trigger": "[data-menu-xmlid=\"sale.sale_order_menu\"]",
-          "content": "Click Orders",
+          "trigger": "#autocomplete_0_1",
+          "content": "Click **Credit Customer 1M** in the dropdown. The Customer, Invoice Address and Delivery Address fields fill in by themselves.",
           "content_i18n": {
-            "en_US": "Click Orders"
+            "en_US": "Click **Credit Customer 1M** in the dropdown. The Customer, Invoice Address and Delivery Address fields fill in by themselves.",
+            "si_LK": "Click **Credit Customer 1M** in the dropdown. The Customer, Invoice Address and Delivery Address fields fill in by themselves.",
+            "ta_IN": "Click **Credit Customer 1M** in the dropdown. The Customer, Invoice Address and Delivery Address fields fill in by themselves."
           },
           "position": "bottom",
           "run": "click",
           "is_check": false,
           "validation_type": "none",
-          "description": "",
+          "description": "Why: Odoo copies the addresses from the customer card so you do not have to type them. What you will see: the same customer name in all three address fields. Watch out: a credit sale is only allowed for a customer that has a **credit limit** big enough for the order and **no overdue invoices**. \"Credit Customer 1M\" has a credit limit of 1,000,000. If a customer is overdue or over the limit, Odoo shows the buttons **Request Overdue Approval** or **Request Credit Limit Approval** instead of Confirm: ask your manager to approve before you carry on.",
           "description_i18n": {
-            "en_US": ""
+            "en_US": "Why: Odoo copies the addresses from the customer card so you do not have to type them. What you will see: the same customer name in all three address fields. Watch out: a credit sale is only allowed for a customer that has a **credit limit** big enough for the order and **no overdue invoices**. \"Credit Customer 1M\" has a credit limit of 1,000,000. If a customer is overdue or over the limit, Odoo shows the buttons **Request Overdue Approval** or **Request Credit Limit Approval** instead of Confirm: ask your manager to approve before you carry on.",
+            "si_LK": "Why: Odoo copies the addresses from the customer card so you do not have to type them. What you will see: the same customer name in all three address fields. Watch out: a credit sale is only allowed for a customer that has a **credit limit** big enough for the order and **no overdue invoices**. \"Credit Customer 1M\" has a credit limit of 1,000,000. If a customer is overdue or over the limit, Odoo shows the buttons **Request Overdue Approval** or **Request Credit Limit Approval** instead of Confirm: ask your manager to approve before you carry on.",
+            "ta_IN": "Why: Odoo copies the addresses from the customer card so you do not have to type them. What you will see: the same customer name in all three address fields. Watch out: a credit sale is only allowed for a customer that has a **credit limit** big enough for the order and **no overdue invoices**. \"Credit Customer 1M\" has a credit limit of 1,000,000. If a customer is overdue or over the limit, Odoo shows the buttons **Request Overdue Approval** or **Request Credit Limit Approval** instead of Confirm: ask your manager to approve before you carry on."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
           }
         },
         {
-          "sequence": 490,
-          "title": "Sales",
+          "sequence": 70,
+          "title": "Choose Credit as the order payment type",
           "title_i18n": {
-            "en_US": "Sales"
+            "en_US": "Choose Credit as the order payment type",
+            "si_LK": "Choose Credit as the order payment type",
+            "ta_IN": "Choose Credit as the order payment type"
           },
-          "trigger": "td[name=\"x_studio_quotation_type\"]",
-          "content": "Sales",
+          "trigger": "#x_studio_order_payment_method_0",
+          "content": "Open the **Order Payment Type** field and choose **Credit**.",
           "content_i18n": {
-            "en_US": "Sales"
+            "en_US": "Open the **Order Payment Type** field and choose **Credit**.",
+            "si_LK": "Open the **Order Payment Type** field and choose **Credit**.",
+            "ta_IN": "Open the **Order Payment Type** field and choose **Credit**."
+          },
+          "position": "bottom",
+          "run": "select",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: a credit order is not paid at once. The customer receives the goods now and pays later, within the credit period given by the payment terms. What you will see: the field shows the word Credit. Watch out: a Credit order is checked against the customer's credit limit and overdue invoices, so the customer must be set up as a credit customer. If you choose Cash by mistake, the order follows the cash process instead.",
+          "description_i18n": {
+            "en_US": "Why: a credit order is not paid at once. The customer receives the goods now and pays later, within the credit period given by the payment terms. What you will see: the field shows the word Credit. Watch out: a Credit order is checked against the customer's credit limit and overdue invoices, so the customer must be set up as a credit customer. If you choose Cash by mistake, the order follows the cash process instead.",
+            "si_LK": "Why: a credit order is not paid at once. The customer receives the goods now and pays later, within the credit period given by the payment terms. What you will see: the field shows the word Credit. Watch out: a Credit order is checked against the customer's credit limit and overdue invoices, so the customer must be set up as a credit customer. If you choose Cash by mistake, the order follows the cash process instead.",
+            "ta_IN": "Why: a credit order is not paid at once. The customer receives the goods now and pays later, within the credit period given by the payment terms. What you will see: the field shows the word Credit. Watch out: a Credit order is checked against the customer's credit limit and overdue invoices, so the customer must be set up as a credit customer. If you choose Cash by mistake, the order follows the cash process instead."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 90,
+          "title": "Choose the quotation type",
+          "title_i18n": {
+            "en_US": "Choose the quotation type",
+            "si_LK": "Choose the quotation type",
+            "ta_IN": "Choose the quotation type"
+          },
+          "trigger": "#x_studio_quotation_type_0",
+          "content": "Open the **Quotation Type** field and choose **Sales**.",
+          "content_i18n": {
+            "en_US": "Open the **Quotation Type** field and choose **Sales**.",
+            "si_LK": "Open the **Quotation Type** field and choose **Sales**.",
+            "ta_IN": "Open the **Quotation Type** field and choose **Sales**."
+          },
+          "position": "bottom",
+          "run": "select",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: the type tells the company which sales process this order belongs to, and it decides which reports it appears in. What you will see: the field now shows the word Sales.",
+          "description_i18n": {
+            "en_US": "Why: the type tells the company which sales process this order belongs to, and it decides which reports it appears in. What you will see: the field now shows the word Sales.",
+            "si_LK": "Why: the type tells the company which sales process this order belongs to, and it decides which reports it appears in. What you will see: the field now shows the word Sales.",
+            "ta_IN": "Why: the type tells the company which sales process this order belongs to, and it decides which reports it appears in. What you will see: the field now shows the word Sales."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 100,
+          "title": "Click Add a product to add an order line",
+          "title_i18n": {
+            "en_US": "Click Add a product to add an order line",
+            "si_LK": "Click Add a product to add an order line",
+            "ta_IN": "Click Add a product to add an order line"
+          },
+          "trigger": "td.o_field_x2many_list_row_add > a:nth-of-type(1)",
+          "content": "Below the order lines table click **Add a product**. A new empty line appears and the cursor moves into its Product cell.",
+          "content_i18n": {
+            "en_US": "Below the order lines table click **Add a product**. A new empty line appears and the cursor moves into its Product cell.",
+            "si_LK": "Below the order lines table click **Add a product**. A new empty line appears and the cursor moves into its Product cell.",
+            "ta_IN": "Below the order lines table click **Add a product**. A new empty line appears and the cursor moves into its Product cell."
           },
           "position": "bottom",
           "run": "click",
           "is_check": false,
           "validation_type": "none",
-          "description": "",
+          "description": "Why: an order cannot be confirmed until it has at least one product line. What you will see: a new editable row in the Order Lines table.",
           "description_i18n": {
-            "en_US": ""
+            "en_US": "Why: an order cannot be confirmed until it has at least one product line. What you will see: a new editable row in the Order Lines table.",
+            "si_LK": "Why: an order cannot be confirmed until it has at least one product line. What you will see: a new editable row in the Order Lines table.",
+            "ta_IN": "Why: an order cannot be confirmed until it has at least one product line. What you will see: a new editable row in the Order Lines table."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
           }
         },
         {
-          "sequence": 500,
-          "title": "Create Advance Payment",
+          "sequence": 110,
+          "title": "Search for the product",
           "title_i18n": {
-            "en_US": "Create Advance Payment"
+            "en_US": "Search for the product",
+            "si_LK": "Search for the product",
+            "ta_IN": "Search for the product"
           },
-          "trigger": "button[name=\"2341\"]",
-          "content": "Click create Advance Payment",
+          "trigger": "td.o_data_cell.cursor-pointer:nth-of-type(2) > div.o_field_widget.o_required_modifier > div.o_field_many2one_selection > div.o_input_dropdown > div.o-autocomplete.dropdown > input.o-autocomplete--input.o_input",
+          "content": "In the new line type the product code, for example **02BB 023**, into the Product cell. A dropdown of matching products appears.",
           "content_i18n": {
-            "en_US": "Click create Advance Payment"
+            "en_US": "In the new line type the product code, for example **02BB 023**, into the Product cell. A dropdown of matching products appears.",
+            "si_LK": "In the new line type the product code, for example **02BB 023**, into the Product cell. A dropdown of matching products appears.",
+            "ta_IN": "In the new line type the product code, for example **02BB 023**, into the Product cell. A dropdown of matching products appears."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: typing the internal code is the quickest and safest way to find the right item. What you will see: the product name and code in the dropdown. Tip: you can also type part of the product name.",
+          "description_i18n": {
+            "en_US": "Why: typing the internal code is the quickest and safest way to find the right item. What you will see: the product name and code in the dropdown. Tip: you can also type part of the product name.",
+            "si_LK": "Why: typing the internal code is the quickest and safest way to find the right item. What you will see: the product name and code in the dropdown. Tip: you can also type part of the product name.",
+            "ta_IN": "Why: typing the internal code is the quickest and safest way to find the right item. What you will see: the product name and code in the dropdown. Tip: you can also type part of the product name."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 120,
+          "title": "Select the product",
+          "title_i18n": {
+            "en_US": "Select the product",
+            "si_LK": "Select the product",
+            "ta_IN": "Select the product"
+          },
+          "trigger": "#autocomplete_0_0",
+          "content": "Click **[02BB 023] BALL BEARING 6202-2RS** in the dropdown. The description, unit of measure and unit price fill in on the line.",
+          "content_i18n": {
+            "en_US": "Click **[02BB 023] BALL BEARING 6202-2RS** in the dropdown. The description, unit of measure and unit price fill in on the line.",
+            "si_LK": "Click **[02BB 023] BALL BEARING 6202-2RS** in the dropdown. The description, unit of measure and unit price fill in on the line.",
+            "ta_IN": "Click **[02BB 023] BALL BEARING 6202-2RS** in the dropdown. The description, unit of measure and unit price fill in on the line."
           },
           "position": "bottom",
           "run": "click",
           "is_check": false,
           "validation_type": "none",
-          "description": "",
+          "description": "Why: Odoo takes these details from the product card, so every order uses the same name and price. What you will see: the product name on the line together with its price.",
           "description_i18n": {
-            "en_US": ""
+            "en_US": "Why: Odoo takes these details from the product card, so every order uses the same name and price. What you will see: the product name on the line together with its price.",
+            "si_LK": "Why: Odoo takes these details from the product card, so every order uses the same name and price. What you will see: the product name on the line together with its price.",
+            "ta_IN": "Why: Odoo takes these details from the product card, so every order uses the same name and price. What you will see: the product name on the line together with its price."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
           }
         },
         {
-          "sequence": 510,
-          "title": "Invoices",
+          "sequence": 130,
+          "title": "Open the Other Info tab",
           "title_i18n": {
-            "en_US": "Invoices"
+            "en_US": "Open the Other Info tab",
+            "si_LK": "Open the Other Info tab",
+            "ta_IN": "Open the Other Info tab"
           },
-          "trigger": "button[name=\"action_view_invoice\"]",
-          "content": "Click Invoices",
+          "trigger": "a[name=\"other_information\"]",
+          "content": "Under the order lines click the **Other Info** tab. It holds the sales team, warehouse and payment terms.",
           "content_i18n": {
-            "en_US": "Click Invoices"
+            "en_US": "Under the order lines click the **Other Info** tab. It holds the sales team, warehouse and payment terms.",
+            "si_LK": "Under the order lines click the **Other Info** tab. It holds the sales team, warehouse and payment terms.",
+            "ta_IN": "Under the order lines click the **Other Info** tab. It holds the sales team, warehouse and payment terms."
           },
           "position": "bottom",
           "run": "click",
           "is_check": false,
           "validation_type": "none",
-          "description": "",
+          "description": "Why: these details decide who gets credit for the sale, where the goods leave from and when the invoice is due. What you will see: the Sales, Delivery and Invoicing sections.",
           "description_i18n": {
-            "en_US": ""
+            "en_US": "Why: these details decide who gets credit for the sale, where the goods leave from and when the invoice is due. What you will see: the Sales, Delivery and Invoicing sections.",
+            "si_LK": "Why: these details decide who gets credit for the sale, where the goods leave from and when the invoice is due. What you will see: the Sales, Delivery and Invoicing sections.",
+            "ta_IN": "Why: these details decide who gets credit for the sale, where the goods leave from and when the invoice is due. What you will see: the Sales, Delivery and Invoicing sections."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
           }
         },
         {
-          "sequence": 520,
-          "title": "Register Payment",
+          "sequence": 140,
+          "title": "Check the Payment Terms field",
           "title_i18n": {
-            "en_US": "Register Payment"
+            "en_US": "Check the Payment Terms field",
+            "si_LK": "Check the Payment Terms field",
+            "ta_IN": "Check the Payment Terms field"
           },
-          "trigger": "[data-hotkey=\"g\"]",
-          "content": "Click Register Payment",
+          "trigger": "#payment_term_id_0",
+          "content": "In the Invoicing section look at the **Payment Terms** field and open it. Odoo may already have filled in a term taken from the customer card (for example 90 Days). A dropdown with all payment terms opens.",
           "content_i18n": {
-            "en_US": "Click Register Payment"
+            "en_US": "In the Invoicing section look at the **Payment Terms** field and open it. Odoo may already have filled in a term taken from the customer card (for example 90 Days). A dropdown with all payment terms opens.",
+            "si_LK": "In the Invoicing section look at the **Payment Terms** field and open it. Odoo may already have filled in a term taken from the customer card (for example 90 Days). A dropdown with all payment terms opens.",
+            "ta_IN": "In the Invoicing section look at the **Payment Terms** field and open it. Odoo may already have filled in a term taken from the customer card (for example 90 Days). A dropdown with all payment terms opens."
           },
           "position": "bottom",
           "run": "click",
           "is_check": false,
           "validation_type": "none",
-          "description": "",
+          "description": "Why: payment terms tell Odoo when the customer must pay the invoice, so they decide the due date. What you will see: a list of terms such as Immediate Payment, 14 Days and 90 Days. Watch out: Odoo fills this field by itself from the customer, so it may not be what you agreed with the customer. Always check it before you go on.",
           "description_i18n": {
-            "en_US": ""
+            "en_US": "Why: payment terms tell Odoo when the customer must pay the invoice, so they decide the due date. What you will see: a list of terms such as Immediate Payment, 14 Days and 90 Days. Watch out: Odoo fills this field by itself from the customer, so it may not be what you agreed with the customer. Always check it before you go on.",
+            "si_LK": "Why: payment terms tell Odoo when the customer must pay the invoice, so they decide the due date. What you will see: a list of terms such as Immediate Payment, 14 Days and 90 Days. Watch out: Odoo fills this field by itself from the customer, so it may not be what you agreed with the customer. Always check it before you go on.",
+            "ta_IN": "Why: payment terms tell Odoo when the customer must pay the invoice, so they decide the due date. What you will see: a list of terms such as Immediate Payment, 14 Days and 90 Days. Watch out: Odoo fills this field by itself from the customer, so it may not be what you agreed with the customer. Always check it before you go on."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
           }
         },
         {
-          "sequence": 530,
-          "title": "BOC BANK",
+          "sequence": 150,
+          "title": "Select 14 Days",
           "title_i18n": {
-            "en_US": "BOC BANK"
+            "en_US": "Select 14 Days",
+            "si_LK": "Select 14 Days",
+            "ta_IN": "Select 14 Days"
           },
-          "trigger": "#journal_id_0_0_2",
-          "content": "Click Bank",
+          "trigger": "#payment_term_id_0_0_5",
+          "content": "Click **14 Days** in the dropdown.",
           "content_i18n": {
-            "en_US": "Click Bank"
+            "en_US": "Click **14 Days** in the dropdown.",
+            "si_LK": "Click **14 Days** in the dropdown.",
+            "ta_IN": "Click **14 Days** in the dropdown."
           },
           "position": "bottom",
           "run": "click",
           "is_check": false,
           "validation_type": "none",
-          "description": "",
+          "description": "Why: this order is sold on credit with a 14 day credit period, so the invoice will be due 14 days after the invoice date. What you will see: the field shows the words 14 Days. Watch out: this is why the customer pays about two weeks after the invoice, not on the day of the sale.",
           "description_i18n": {
-            "en_US": ""
+            "en_US": "Why: this order is sold on credit with a 14 day credit period, so the invoice will be due 14 days after the invoice date. What you will see: the field shows the words 14 Days. Watch out: this is why the customer pays about two weeks after the invoice, not on the day of the sale.",
+            "si_LK": "Why: this order is sold on credit with a 14 day credit period, so the invoice will be due 14 days after the invoice date. What you will see: the field shows the words 14 Days. Watch out: this is why the customer pays about two weeks after the invoice, not on the day of the sale.",
+            "ta_IN": "Why: this order is sold on credit with a 14 day credit period, so the invoice will be due 14 days after the invoice date. What you will see: the field shows the words 14 Days. Watch out: this is why the customer pays about two weeks after the invoice, not on the day of the sale."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
           }
         },
         {
-          "sequence": 540,
-          "title": "Create Payment",
+          "sequence": 160,
+          "title": "Open the Sales Team field",
           "title_i18n": {
-            "en_US": "Create Payment"
+            "en_US": "Open the Sales Team field",
+            "si_LK": "Open the Sales Team field",
+            "ta_IN": "Open the Sales Team field"
+          },
+          "trigger": "#team_id_0",
+          "content": "In the Sales section click the **Sales Team** field. A short dropdown opens with the most used teams.",
+          "content_i18n": {
+            "en_US": "In the Sales section click the **Sales Team** field. A short dropdown opens with the most used teams.",
+            "si_LK": "In the Sales section click the **Sales Team** field. A short dropdown opens with the most used teams.",
+            "ta_IN": "In the Sales section click the **Sales Team** field. A short dropdown opens with the most used teams."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: the sales team receives the sale in its targets and reports. Tip: if your team is not in the short list, use Search More in the next step. Watch out: Odoo may already have filled in a Sales Team. Check it.",
+          "description_i18n": {
+            "en_US": "Why: the sales team receives the sale in its targets and reports. Tip: if your team is not in the short list, use Search More in the next step. Watch out: Odoo may already have filled in a Sales Team. Check it.",
+            "si_LK": "Why: the sales team receives the sale in its targets and reports. Tip: if your team is not in the short list, use Search More in the next step. Watch out: Odoo may already have filled in a Sales Team. Check it.",
+            "ta_IN": "Why: the sales team receives the sale in its targets and reports. Tip: if your team is not in the short list, use Search More in the next step. Watch out: Odoo may already have filled in a Sales Team. Check it."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 170,
+          "title": "Click Search More to see every sales team",
+          "title_i18n": {
+            "en_US": "Click Search More to see every sales team",
+            "si_LK": "Click Search More to see every sales team",
+            "ta_IN": "Click Search More to see every sales team"
+          },
+          "trigger": "#team_id_0_0_8",
+          "content": "At the bottom of the dropdown click **Search More...**. A pop-up window opens that lists all the sales teams.",
+          "content_i18n": {
+            "en_US": "At the bottom of the dropdown click **Search More...**. A pop-up window opens that lists all the sales teams.",
+            "si_LK": "At the bottom of the dropdown click **Search More...**. A pop-up window opens that lists all the sales teams.",
+            "ta_IN": "At the bottom of the dropdown click **Search More...**. A pop-up window opens that lists all the sales teams."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: the dropdown only shows a few teams, while the pop-up shows all of them. What you will see: a pop-up table of sales teams.",
+          "description_i18n": {
+            "en_US": "Why: the dropdown only shows a few teams, while the pop-up shows all of them. What you will see: a pop-up table of sales teams.",
+            "si_LK": "Why: the dropdown only shows a few teams, while the pop-up shows all of them. What you will see: a pop-up table of sales teams.",
+            "ta_IN": "Why: the dropdown only shows a few teams, while the pop-up shows all of them. What you will see: a pop-up table of sales teams."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 180,
+          "title": "Select Colombo Sales Centre",
+          "title_i18n": {
+            "en_US": "Select Colombo Sales Centre",
+            "si_LK": "Select Colombo Sales Centre",
+            "ta_IN": "Select Colombo Sales Centre"
+          },
+          "trigger": "tr.o_data_row.o_row_draggable:nth-of-type(6) > td.o_data_cell.cursor-pointer:nth-of-type(2)",
+          "content": "Click the **Colombo Sales Centre** row. The pop-up closes and the team is filled in on the order.",
+          "content_i18n": {
+            "en_US": "Click the **Colombo Sales Centre** row. The pop-up closes and the team is filled in on the order.",
+            "si_LK": "Click the **Colombo Sales Centre** row. The pop-up closes and the team is filled in on the order.",
+            "ta_IN": "Click the **Colombo Sales Centre** row. The pop-up closes and the team is filled in on the order."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: the sale will be reported under this sales centre. What you will see: Colombo Sales Centre in the Sales Team field.",
+          "description_i18n": {
+            "en_US": "Why: the sale will be reported under this sales centre. What you will see: Colombo Sales Centre in the Sales Team field.",
+            "si_LK": "Why: the sale will be reported under this sales centre. What you will see: Colombo Sales Centre in the Sales Team field.",
+            "ta_IN": "Why: the sale will be reported under this sales centre. What you will see: Colombo Sales Centre in the Sales Team field."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 190,
+          "title": "Open the Warehouse field",
+          "title_i18n": {
+            "en_US": "Open the Warehouse field",
+            "si_LK": "Open the Warehouse field",
+            "ta_IN": "Open the Warehouse field"
+          },
+          "trigger": "#warehouse_id_1",
+          "content": "In the Delivery section click the **Warehouse** field. A short dropdown opens.",
+          "content_i18n": {
+            "en_US": "In the Delivery section click the **Warehouse** field. A short dropdown opens.",
+            "si_LK": "In the Delivery section click the **Warehouse** field. A short dropdown opens.",
+            "ta_IN": "In the Delivery section click the **Warehouse** field. A short dropdown opens."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: the goods will be taken from this warehouse, so the stock of this warehouse goes down when the delivery is done. Tip: use Search More if your warehouse is not in the short list.",
+          "description_i18n": {
+            "en_US": "Why: the goods will be taken from this warehouse, so the stock of this warehouse goes down when the delivery is done. Tip: use Search More if your warehouse is not in the short list.",
+            "si_LK": "Why: the goods will be taken from this warehouse, so the stock of this warehouse goes down when the delivery is done. Tip: use Search More if your warehouse is not in the short list.",
+            "ta_IN": "Why: the goods will be taken from this warehouse, so the stock of this warehouse goes down when the delivery is done. Tip: use Search More if your warehouse is not in the short list."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 200,
+          "title": "Click Search More to see every warehouse",
+          "title_i18n": {
+            "en_US": "Click Search More to see every warehouse",
+            "si_LK": "Click Search More to see every warehouse",
+            "ta_IN": "Click Search More to see every warehouse"
+          },
+          "trigger": "#warehouse_id_1_0_8",
+          "content": "Click **Search More...** at the bottom of the dropdown. A pop-up window lists all the warehouses.",
+          "content_i18n": {
+            "en_US": "Click **Search More...** at the bottom of the dropdown. A pop-up window lists all the warehouses.",
+            "si_LK": "Click **Search More...** at the bottom of the dropdown. A pop-up window lists all the warehouses.",
+            "ta_IN": "Click **Search More...** at the bottom of the dropdown. A pop-up window lists all the warehouses."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: it is the easiest way to be sure you pick the right warehouse. What you will see: a pop-up table of warehouses.",
+          "description_i18n": {
+            "en_US": "Why: it is the easiest way to be sure you pick the right warehouse. What you will see: a pop-up table of warehouses.",
+            "si_LK": "Why: it is the easiest way to be sure you pick the right warehouse. What you will see: a pop-up table of warehouses.",
+            "ta_IN": "Why: it is the easiest way to be sure you pick the right warehouse. What you will see: a pop-up table of warehouses."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 210,
+          "title": "Select JAM Warehouse Ekala (JM-EK)",
+          "title_i18n": {
+            "en_US": "Select JAM Warehouse Ekala (JM-EK)",
+            "si_LK": "Select JAM Warehouse Ekala (JM-EK)",
+            "ta_IN": "Select JAM Warehouse Ekala (JM-EK)"
+          },
+          "trigger": "tr.o_data_row.o_row_draggable:nth-of-type(4) > td.o_data_cell.cursor-pointer:nth-of-type(3)",
+          "content": "Click the **JAM Warehouse Ekala (JM-EK)** row. The pop-up closes and the warehouse is filled in.",
+          "content_i18n": {
+            "en_US": "Click the **JAM Warehouse Ekala (JM-EK)** row. The pop-up closes and the warehouse is filled in.",
+            "si_LK": "Click the **JAM Warehouse Ekala (JM-EK)** row. The pop-up closes and the warehouse is filled in.",
+            "ta_IN": "Click the **JAM Warehouse Ekala (JM-EK)** row. The pop-up closes and the warehouse is filled in."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: the delivery order will be created for this warehouse. What you will see: JAM Warehouse Ekala in the Warehouse field. The quotation is now complete and ready to confirm.",
+          "description_i18n": {
+            "en_US": "Why: the delivery order will be created for this warehouse. What you will see: JAM Warehouse Ekala in the Warehouse field. The quotation is now complete and ready to confirm.",
+            "si_LK": "Why: the delivery order will be created for this warehouse. What you will see: JAM Warehouse Ekala in the Warehouse field. The quotation is now complete and ready to confirm.",
+            "ta_IN": "Why: the delivery order will be created for this warehouse. What you will see: JAM Warehouse Ekala in the Warehouse field. The quotation is now complete and ready to confirm."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 220,
+          "title": "Save the quotation",
+          "title_i18n": {
+            "en_US": "Save the quotation",
+            "si_LK": "Save the quotation",
+            "ta_IN": "Save the quotation"
+          },
+          "trigger": "[data-hotkey=\"s\"]",
+          "content": "Click the **Save** button (the small cloud icon next to the order title). The order now receives its real number (for example S01881).",
+          "content_i18n": {
+            "en_US": "Click the **Save** button (the small cloud icon next to the order title). The order now receives its real number (for example S01881).",
+            "si_LK": "Click the **Save** button (the small cloud icon next to the order title). The order now receives its real number (for example S01881).",
+            "ta_IN": "Click the **Save** button (the small cloud icon next to the order title). The order now receives its real number (for example S01881)."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: saving stores the quotation and gives it its order number. What you will see: the title changes from New to the order number. Tip: Odoo also saves when you press Confirm, but saving first lets you check that all the fields were accepted.",
+          "description_i18n": {
+            "en_US": "Why: saving stores the quotation and gives it its order number. What you will see: the title changes from New to the order number. Tip: Odoo also saves when you press Confirm, but saving first lets you check that all the fields were accepted.",
+            "si_LK": "Why: saving stores the quotation and gives it its order number. What you will see: the title changes from New to the order number. Tip: Odoo also saves when you press Confirm, but saving first lets you check that all the fields were accepted.",
+            "ta_IN": "Why: saving stores the quotation and gives it its order number. What you will see: the title changes from New to the order number. Tip: Odoo also saves when you press Confirm, but saving first lets you check that all the fields were accepted."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 230,
+          "title": "Click Confirm to turn the quotation into a Sales Order",
+          "title_i18n": {
+            "en_US": "Click Confirm to turn the quotation into a Sales Order",
+            "si_LK": "Click Confirm to turn the quotation into a Sales Order",
+            "ta_IN": "Click Confirm to turn the quotation into a Sales Order"
           },
           "trigger": "[data-hotkey=\"q\"]",
-          "content": "Create Payment Click",
+          "content": "Click the **Confirm** button at the top left of the form. The quotation becomes a Sales Order and receives its order number.",
           "content_i18n": {
-            "en_US": "Create Payment Click"
+            "en_US": "Click the **Confirm** button at the top left of the form. The quotation becomes a Sales Order and receives its order number.",
+            "si_LK": "Click the **Confirm** button at the top left of the form. The quotation becomes a Sales Order and receives its order number.",
+            "ta_IN": "Click the **Confirm** button at the top left of the form. The quotation becomes a Sales Order and receives its order number."
           },
           "position": "bottom",
           "run": "click",
           "is_check": false,
           "validation_type": "none",
-          "description": "",
+          "description": "Why: confirming fixes the prices and creates the delivery order for the warehouse. What you will see: the status bar moves to Sales Order and a **Delivery** button appears at the top. Tip: if your company asks for an approval before confirming, request and approve it first and then press Confirm. Credit orders: if the customer is overdue or over the credit limit, Odoo shows **Request Overdue Approval** or **Request Credit Limit Approval** here instead of Confirm. Once the approver has approved, Confirm appears.",
           "description_i18n": {
-            "en_US": ""
+            "en_US": "Why: confirming fixes the prices and creates the delivery order for the warehouse. What you will see: the status bar moves to Sales Order and a **Delivery** button appears at the top. Tip: if your company asks for an approval before confirming, request and approve it first and then press Confirm. Credit orders: if the customer is overdue or over the credit limit, Odoo shows **Request Overdue Approval** or **Request Credit Limit Approval** here instead of Confirm. Once the approver has approved, Confirm appears.",
+            "si_LK": "Why: confirming fixes the prices and creates the delivery order for the warehouse. What you will see: the status bar moves to Sales Order and a **Delivery** button appears at the top. Tip: if your company asks for an approval before confirming, request and approve it first and then press Confirm. Credit orders: if the customer is overdue or over the credit limit, Odoo shows **Request Overdue Approval** or **Request Credit Limit Approval** here instead of Confirm. Once the approver has approved, Confirm appears.",
+            "ta_IN": "Why: confirming fixes the prices and creates the delivery order for the warehouse. What you will see: the status bar moves to Sales Order and a **Delivery** button appears at the top. Tip: if your company asks for an approval before confirming, request and approve it first and then press Confirm. Credit orders: if the customer is overdue or over the credit limit, Odoo shows **Request Overdue Approval** or **Request Credit Limit Approval** here instead of Confirm. Once the approver has approved, Confirm appears."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
           }
         },
         {
-          "sequence": 550,
-          "title": "Orders",
+          "sequence": 240,
+          "title": "Open the delivery from the Delivery button",
           "title_i18n": {
-            "en_US": "Orders"
+            "en_US": "Open the delivery from the Delivery button",
+            "si_LK": "Open the delivery from the Delivery button",
+            "ta_IN": "Open the delivery from the Delivery button"
           },
-          "trigger": "[data-menu-xmlid=\"sale.sale_order_menu\"]",
-          "content": "Click the Orders",
+          "trigger": "button[name=\"action_view_delivery\"]",
+          "content": "At the top of the order click the **Delivery** button. The delivery order opens.",
           "content_i18n": {
-            "en_US": "Click the Orders"
+            "en_US": "At the top of the order click the **Delivery** button. The delivery order opens.",
+            "si_LK": "At the top of the order click the **Delivery** button. The delivery order opens.",
+            "ta_IN": "At the top of the order click the **Delivery** button. The delivery order opens."
           },
           "position": "bottom",
           "run": "click",
           "is_check": false,
           "validation_type": "none",
-          "description": "",
+          "description": "Why: the goods must be delivered before the sale can be invoiced and later returned. What you will see: a delivery order in the Ready status with the product and quantity.",
           "description_i18n": {
-            "en_US": ""
+            "en_US": "Why: the goods must be delivered before the sale can be invoiced and later returned. What you will see: a delivery order in the Ready status with the product and quantity.",
+            "si_LK": "Why: the goods must be delivered before the sale can be invoiced and later returned. What you will see: a delivery order in the Ready status with the product and quantity.",
+            "ta_IN": "Why: the goods must be delivered before the sale can be invoiced and later returned. What you will see: a delivery order in the Ready status with the product and quantity."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 250,
+          "title": "Click Validate to complete the delivery",
+          "title_i18n": {
+            "en_US": "Click Validate to complete the delivery",
+            "si_LK": "Click Validate to complete the delivery",
+            "ta_IN": "Click Validate to complete the delivery"
+          },
+          "trigger": "[data-hotkey=\"v\"]",
+          "content": "Click **Validate** at the top left. If Odoo asks you to confirm the quantities, confirm them.",
+          "content_i18n": {
+            "en_US": "Click **Validate** at the top left. If Odoo asks you to confirm the quantities, confirm them.",
+            "si_LK": "Click **Validate** at the top left. If Odoo asks you to confirm the quantities, confirm them.",
+            "ta_IN": "Click **Validate** at the top left. If Odoo asks you to confirm the quantities, confirm them."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: validating tells Odoo the goods have left the warehouse, which reduces the stock. What you will see: the status changes to Done. Watch out: do not skip this step, because an undelivered order cannot be invoiced.",
+          "description_i18n": {
+            "en_US": "Why: validating tells Odoo the goods have left the warehouse, which reduces the stock. What you will see: the status changes to Done. Watch out: do not skip this step, because an undelivered order cannot be invoiced.",
+            "si_LK": "Why: validating tells Odoo the goods have left the warehouse, which reduces the stock. What you will see: the status changes to Done. Watch out: do not skip this step, because an undelivered order cannot be invoiced.",
+            "ta_IN": "Why: validating tells Odoo the goods have left the warehouse, which reduces the stock. What you will see: the status changes to Done. Watch out: do not skip this step, because an undelivered order cannot be invoiced."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 260,
+          "title": "Go back to the Sales Order",
+          "title_i18n": {
+            "en_US": "Go back to the Sales Order",
+            "si_LK": "Go back to the Sales Order",
+            "ta_IN": "Go back to the Sales Order"
+          },
+          "trigger": "[data-hotkey=\"b\"]",
+          "content": "Click the order number (the first item at the top of the page) to go back to the Sales Order.",
+          "content_i18n": {
+            "en_US": "Click the order number (the first item at the top of the page) to go back to the Sales Order.",
+            "si_LK": "Click the order number (the first item at the top of the page) to go back to the Sales Order.",
+            "ta_IN": "Click the order number (the first item at the top of the page) to go back to the Sales Order."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: the invoice is created from the Sales Order and not from the delivery. What you will see: the Sales Order form again, now showing the Delivery as Done.",
+          "description_i18n": {
+            "en_US": "Why: the invoice is created from the Sales Order and not from the delivery. What you will see: the Sales Order form again, now showing the Delivery as Done.",
+            "si_LK": "Why: the invoice is created from the Sales Order and not from the delivery. What you will see: the Sales Order form again, now showing the Delivery as Done.",
+            "ta_IN": "Why: the invoice is created from the Sales Order and not from the delivery. What you will see: the Sales Order form again, now showing the Delivery as Done."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 270,
+          "title": "Click Create Invoice",
+          "title_i18n": {
+            "en_US": "Click Create Invoice",
+            "si_LK": "Click Create Invoice",
+            "ta_IN": "Click Create Invoice"
+          },
+          "trigger": "[data-hotkey=\"q\"]",
+          "content": "Click **Create Invoice**. If a small window opens, keep the default (Regular invoice) and confirm it. The draft invoice opens.",
+          "content_i18n": {
+            "en_US": "Click **Create Invoice**. If a small window opens, keep the default (Regular invoice) and confirm it. The draft invoice opens.",
+            "si_LK": "Click **Create Invoice**. If a small window opens, keep the default (Regular invoice) and confirm it. The draft invoice opens.",
+            "ta_IN": "Click **Create Invoice**. If a small window opens, keep the default (Regular invoice) and confirm it. The draft invoice opens."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: this prepares the bill for the goods that were delivered. What you will see: a draft customer invoice with the product line and the amount.",
+          "description_i18n": {
+            "en_US": "Why: this prepares the bill for the goods that were delivered. What you will see: a draft customer invoice with the product line and the amount.",
+            "si_LK": "Why: this prepares the bill for the goods that were delivered. What you will see: a draft customer invoice with the product line and the amount.",
+            "ta_IN": "Why: this prepares the bill for the goods that were delivered. What you will see: a draft customer invoice with the product line and the amount."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 280,
+          "title": "Confirm the invoice",
+          "title_i18n": {
+            "en_US": "Confirm the invoice",
+            "si_LK": "Confirm the invoice",
+            "ta_IN": "Confirm the invoice"
+          },
+          "trigger": "[data-hotkey=\"q\"]",
+          "content": "On the draft invoice click **Confirm**.",
+          "content_i18n": {
+            "en_US": "On the draft invoice click **Confirm**.",
+            "si_LK": "On the draft invoice click **Confirm**.",
+            "ta_IN": "On the draft invoice click **Confirm**."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: confirming posts the invoice, gives it its invoice number (for example FTI/2026/00010) and records it in accounting. What you will see: the status bar changes from Draft to Posted.",
+          "description_i18n": {
+            "en_US": "Why: confirming posts the invoice, gives it its invoice number (for example FTI/2026/00010) and records it in accounting. What you will see: the status bar changes from Draft to Posted.",
+            "si_LK": "Why: confirming posts the invoice, gives it its invoice number (for example FTI/2026/00010) and records it in accounting. What you will see: the status bar changes from Draft to Posted.",
+            "ta_IN": "Why: confirming posts the invoice, gives it its invoice number (for example FTI/2026/00010) and records it in accounting. What you will see: the status bar changes from Draft to Posted."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 290,
+          "title": "Go back to the Home menu",
+          "title_i18n": {
+            "en_US": "Go back to the Home menu",
+            "si_LK": "Go back to the Home menu",
+            "ta_IN": "Go back to the Home menu"
+          },
+          "trigger": "a.o_menu_toggle.hasImage",
+          "content": "Some time later, when the credit period is over and the customer is ready to pay, click the **Home menu** icon at the top left to return to the list of apps.",
+          "content_i18n": {
+            "en_US": "Some time later, when the credit period is over and the customer is ready to pay, click the **Home menu** icon at the top left to return to the list of apps.",
+            "si_LK": "Some time later, when the credit period is over and the customer is ready to pay, click the **Home menu** icon at the top left to return to the list of apps.",
+            "ta_IN": "Some time later, when the credit period is over and the customer is ready to pay, click the **Home menu** icon at the top left to return to the list of apps."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: with a credit sale the payment happens days or weeks after the invoice, so you come back to the order later. What you will see: the grid of app icons.",
+          "description_i18n": {
+            "en_US": "Why: with a credit sale the payment happens days or weeks after the invoice, so you come back to the order later. What you will see: the grid of app icons.",
+            "si_LK": "Why: with a credit sale the payment happens days or weeks after the invoice, so you come back to the order later. What you will see: the grid of app icons.",
+            "ta_IN": "Why: with a credit sale the payment happens days or weeks after the invoice, so you come back to the order later. What you will see: the grid of app icons."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 300,
+          "title": "Open the Sales app again",
+          "title_i18n": {
+            "en_US": "Open the Sales app again",
+            "si_LK": "Open the Sales app again",
+            "ta_IN": "Open the Sales app again"
+          },
+          "trigger": "[data-menu-xmlid=\"sale.sale_menu_root\"]",
+          "content": "Click the **Sales** icon again.",
+          "content_i18n": {
+            "en_US": "Click the **Sales** icon again.",
+            "si_LK": "Click the **Sales** icon again.",
+            "ta_IN": "Click the **Sales** icon again."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: this is the quickest way to find the order again. What you will see: the Sales app with its menu bar.",
+          "description_i18n": {
+            "en_US": "Why: this is the quickest way to find the order again. What you will see: the Sales app with its menu bar.",
+            "si_LK": "Why: this is the quickest way to find the order again. What you will see: the Sales app with its menu bar.",
+            "ta_IN": "Why: this is the quickest way to find the order again. What you will see: the Sales app with its menu bar."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 310,
+          "title": "Click Orders in the top menu",
+          "title_i18n": {
+            "en_US": "Click Orders in the top menu",
+            "si_LK": "Click Orders in the top menu",
+            "ta_IN": "Click Orders in the top menu"
+          },
+          "trigger": "[data-menu-xmlid=\"sale.sale_order_menu\"]",
+          "content": "Click **Orders** in the menu bar. A small dropdown list opens.",
+          "content_i18n": {
+            "en_US": "Click **Orders** in the menu bar. A small dropdown list opens.",
+            "si_LK": "Click **Orders** in the menu bar. A small dropdown list opens.",
+            "ta_IN": "Click **Orders** in the menu bar. A small dropdown list opens."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: the Orders menu keeps all quotations and sales orders together. What you will see: a dropdown with Quotations and Sales Orders.",
+          "description_i18n": {
+            "en_US": "Why: the Orders menu keeps all quotations and sales orders together. What you will see: a dropdown with Quotations and Sales Orders.",
+            "si_LK": "Why: the Orders menu keeps all quotations and sales orders together. What you will see: a dropdown with Quotations and Sales Orders.",
+            "ta_IN": "Why: the Orders menu keeps all quotations and sales orders together. What you will see: a dropdown with Quotations and Sales Orders."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 320,
+          "title": "Click Sales Orders",
+          "title_i18n": {
+            "en_US": "Click Sales Orders",
+            "si_LK": "Click Sales Orders",
+            "ta_IN": "Click Sales Orders"
+          },
+          "trigger": "[data-menu-xmlid=\"sale.menu_sale_order\"]",
+          "content": "In the dropdown click **Sales Orders**. A list opens with all confirmed orders.",
+          "content_i18n": {
+            "en_US": "In the dropdown click **Sales Orders**. A list opens with all confirmed orders.",
+            "si_LK": "In the dropdown click **Sales Orders**. A list opens with all confirmed orders.",
+            "ta_IN": "In the dropdown click **Sales Orders**. A list opens with all confirmed orders."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: a confirmed order is no longer a quotation, so it is found in the Sales Orders list. What you will see: a list of sales orders with a search box on top.",
+          "description_i18n": {
+            "en_US": "Why: a confirmed order is no longer a quotation, so it is found in the Sales Orders list. What you will see: a list of sales orders with a search box on top.",
+            "si_LK": "Why: a confirmed order is no longer a quotation, so it is found in the Sales Orders list. What you will see: a list of sales orders with a search box on top.",
+            "ta_IN": "Why: a confirmed order is no longer a quotation, so it is found in the Sales Orders list. What you will see: a list of sales orders with a search box on top."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 330,
+          "title": "Click the search box",
+          "title_i18n": {
+            "en_US": "Click the search box",
+            "si_LK": "Click the search box",
+            "ta_IN": "Click the search box"
+          },
+          "trigger": "input.o_searchview_input.o_input",
+          "content": "Click the **search box** at the top of the list.",
+          "content_i18n": {
+            "en_US": "Click the **search box** at the top of the list.",
+            "si_LK": "Click the **search box** at the top of the list.",
+            "ta_IN": "Click the **search box** at the top of the list."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: the list can be very long, so searching is faster than scrolling. What you will see: the cursor blinks in the search box.",
+          "description_i18n": {
+            "en_US": "Why: the list can be very long, so searching is faster than scrolling. What you will see: the cursor blinks in the search box.",
+            "si_LK": "Why: the list can be very long, so searching is faster than scrolling. What you will see: the cursor blinks in the search box.",
+            "ta_IN": "Why: the list can be very long, so searching is faster than scrolling. What you will see: the cursor blinks in the search box."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 340,
+          "title": "Type the sales order number",
+          "title_i18n": {
+            "en_US": "Type the sales order number",
+            "si_LK": "Type the sales order number",
+            "ta_IN": "Type the sales order number"
+          },
+          "trigger": "[data-hotkey=\"Q\"]",
+          "content": "Type the **order number** of your credit order (for example S01881) in the search box.",
+          "content_i18n": {
+            "en_US": "Type the **order number** of your credit order (for example S01881) in the search box.",
+            "si_LK": "Type the **order number** of your credit order (for example S01881) in the search box.",
+            "ta_IN": "Type the **order number** of your credit order (for example S01881) in the search box."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: the order number is unique, so it finds exactly one order. What you will see: the number you typed and a search suggestion under the box. Tip: you can also search by customer name.",
+          "description_i18n": {
+            "en_US": "Why: the order number is unique, so it finds exactly one order. What you will see: the number you typed and a search suggestion under the box. Tip: you can also search by customer name.",
+            "si_LK": "Why: the order number is unique, so it finds exactly one order. What you will see: the number you typed and a search suggestion under the box. Tip: you can also search by customer name.",
+            "ta_IN": "Why: the order number is unique, so it finds exactly one order. What you will see: the number you typed and a search suggestion under the box. Tip: you can also search by customer name."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 350,
+          "title": "Press Enter to search",
+          "title_i18n": {
+            "en_US": "Press Enter to search",
+            "si_LK": "Press Enter to search",
+            "ta_IN": "Press Enter to search"
+          },
+          "trigger": "[data-hotkey=\"Q\"]",
+          "content": "Press **Enter** on your keyboard. The list shows only your order.",
+          "content_i18n": {
+            "en_US": "Press **Enter** on your keyboard. The list shows only your order.",
+            "si_LK": "Press **Enter** on your keyboard. The list shows only your order.",
+            "ta_IN": "Press **Enter** on your keyboard. The list shows only your order."
+          },
+          "position": "bottom",
+          "run": "press Enter",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: Enter starts the search. What you will see: one row with your order and the customer \"Credit Customer 1M\".",
+          "description_i18n": {
+            "en_US": "Why: Enter starts the search. What you will see: one row with your order and the customer \"Credit Customer 1M\".",
+            "si_LK": "Why: Enter starts the search. What you will see: one row with your order and the customer \"Credit Customer 1M\".",
+            "ta_IN": "Why: Enter starts the search. What you will see: one row with your order and the customer \"Credit Customer 1M\"."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 360,
+          "title": "Open the Sales Order",
+          "title_i18n": {
+            "en_US": "Open the Sales Order",
+            "si_LK": "Open the Sales Order",
+            "ta_IN": "Open the Sales Order"
+          },
+          "trigger": "td[name=\"x_studio_quotation_type\"]",
+          "content": "Click the order row to open it.",
+          "content_i18n": {
+            "en_US": "Click the order row to open it.",
+            "si_LK": "Click the order row to open it.",
+            "ta_IN": "Click the order row to open it."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: the invoices of the sale are reached from the order. What you will see: the Sales Order with the Delivery and **Invoices** buttons at the top.",
+          "description_i18n": {
+            "en_US": "Why: the invoices of the sale are reached from the order. What you will see: the Sales Order with the Delivery and **Invoices** buttons at the top.",
+            "si_LK": "Why: the invoices of the sale are reached from the order. What you will see: the Sales Order with the Delivery and **Invoices** buttons at the top.",
+            "ta_IN": "Why: the invoices of the sale are reached from the order. What you will see: the Sales Order with the Delivery and **Invoices** buttons at the top."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 370,
+          "title": "Open the Invoices button",
+          "title_i18n": {
+            "en_US": "Open the Invoices button",
+            "si_LK": "Open the Invoices button",
+            "ta_IN": "Open the Invoices button"
+          },
+          "trigger": "button[name=\"action_view_invoice\"]",
+          "content": "On the Sales Order click the **Invoices** button. The posted customer invoice opens.",
+          "content_i18n": {
+            "en_US": "On the Sales Order click the **Invoices** button. The posted customer invoice opens.",
+            "si_LK": "On the Sales Order click the **Invoices** button. The posted customer invoice opens.",
+            "ta_IN": "On the Sales Order click the **Invoices** button. The posted customer invoice opens."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: this is the invoice that the customer has to pay within 14 days. What you will see: a Customer Invoice with the status Posted and its number (it starts with FTI).",
+          "description_i18n": {
+            "en_US": "Why: this is the invoice that the customer has to pay within 14 days. What you will see: a Customer Invoice with the status Posted and its number (it starts with FTI).",
+            "si_LK": "Why: this is the invoice that the customer has to pay within 14 days. What you will see: a Customer Invoice with the status Posted and its number (it starts with FTI).",
+            "ta_IN": "Why: this is the invoice that the customer has to pay within 14 days. What you will see: a Customer Invoice with the status Posted and its number (it starts with FTI)."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 380,
+          "title": "Register the payment (done by the accountant)",
+          "title_i18n": {
+            "en_US": "Register the payment (done by the accountant)",
+            "si_LK": "Register the payment (done by the accountant)",
+            "ta_IN": "Register the payment (done by the accountant)"
+          },
+          "trigger": "[data-hotkey=\"g\"]",
+          "content": "When the customer pays, the accountant clicks **Register Payment** at the top of this posted invoice, chooses the payment journal (for a cash receipt \"Customer Receipts - Cash\"), checks the amount and clicks **Create Payment**. This guide only shows the button: the payment itself is not registered here.",
+          "content_i18n": {
+            "en_US": "When the customer pays, the accountant clicks **Register Payment** at the top of this posted invoice, chooses the payment journal (for a cash receipt \"Customer Receipts - Cash\"), checks the amount and clicks **Create Payment**. This guide only shows the button: the payment itself is not registered here.",
+            "si_LK": "When the customer pays, the accountant clicks **Register Payment** at the top of this posted invoice, chooses the payment journal (for a cash receipt \"Customer Receipts - Cash\"), checks the amount and clicks **Create Payment**. This guide only shows the button: the payment itself is not registered here.",
+            "ta_IN": "When the customer pays, the accountant clicks **Register Payment** at the top of this posted invoice, chooses the payment journal (for a cash receipt \"Customer Receipts - Cash\"), checks the amount and clicks **Create Payment**. This guide only shows the button: the payment itself is not registered here."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: the Register Payment button records the money received from the customer and matches it to the invoice. What you will see after the accountant has done it: the invoice gets an IN PAYMENT or PAID ribbon and its payment status changes from Not Paid to Paid. Watch out: you need accounting rights to see this button. The journal decides where the money is recorded (cash journal for cash, bank journal for transfers and cheques). Until it is paid, the invoice stays open and appears in the overdue list once the 14 days have passed. Nothing is clicked in this step.",
+          "description_i18n": {
+            "en_US": "Why: the Register Payment button records the money received from the customer and matches it to the invoice. What you will see after the accountant has done it: the invoice gets an IN PAYMENT or PAID ribbon and its payment status changes from Not Paid to Paid. Watch out: you need accounting rights to see this button. The journal decides where the money is recorded (cash journal for cash, bank journal for transfers and cheques). Until it is paid, the invoice stays open and appears in the overdue list once the 14 days have passed. Nothing is clicked in this step.",
+            "si_LK": "Why: the Register Payment button records the money received from the customer and matches it to the invoice. What you will see after the accountant has done it: the invoice gets an IN PAYMENT or PAID ribbon and its payment status changes from Not Paid to Paid. Watch out: you need accounting rights to see this button. The journal decides where the money is recorded (cash journal for cash, bank journal for transfers and cheques). Until it is paid, the invoice stays open and appears in the overdue list once the 14 days have passed. Nothing is clicked in this step.",
+            "ta_IN": "Why: the Register Payment button records the money received from the customer and matches it to the invoice. What you will see after the accountant has done it: the invoice gets an IN PAYMENT or PAID ribbon and its payment status changes from Not Paid to Paid. Watch out: you need accounting rights to see this button. The journal decides where the money is recorded (cash journal for cash, bank journal for transfers and cheques). Until it is paid, the invoice stays open and appears in the overdue list once the 14 days have passed. Nothing is clicked in this step."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
           }
         }
       ]
