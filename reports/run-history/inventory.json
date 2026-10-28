@@ -388,5 +388,75 @@
   "title": "7. advance payment on the sales order, then the Payments smart button",
   "file": "sales.return-cash.spec.ts",
   "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Sales return and re-invoice of a cash order|1. quotation: Cash order for a Sales quotation",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Sales return and re-invoice of a cash order",
+  "title": "1. quotation: Cash order for a Sales quotation",
+  "file": "sales.return-reinvoice.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Sales return and re-invoice of a cash order|2. confirm: quotation becomes a Sales Order",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Sales return and re-invoice of a cash order",
+  "title": "2. confirm: quotation becomes a Sales Order",
+  "file": "sales.return-reinvoice.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Sales return and re-invoice of a cash order|3. delivery: validate → Done",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Sales return and re-invoice of a cash order",
+  "title": "3. delivery: validate → Done",
+  "file": "sales.return-reinvoice.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Sales return and re-invoice of a cash order|4. invoice: create and confirm → Posted",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Sales return and re-invoice of a cash order",
+  "title": "4. invoice: create and confirm → Posted",
+  "file": "sales.return-reinvoice.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Sales return and re-invoice of a cash order|5. reverse: Credit Note wizard → \"Reverse and Create Invoice\" gives a new draft invoice",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Sales return and re-invoice of a cash order",
+  "title": "5. reverse: Credit Note wizard → \"Reverse and Create Invoice\" gives a new draft invoice",
+  "file": "sales.return-reinvoice.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Sales return and re-invoice of a cash order|6. re-invoice: confirm the new invoice and register the cash payment",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Sales return and re-invoice of a cash order",
+  "title": "6. re-invoice: confirm the new invoice and register the cash payment",
+  "file": "sales.return-reinvoice.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Sales return and re-invoice of a cash order|7. credit note: open it from the order's Invoices list, request approval and approve",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Sales return and re-invoice of a cash order",
+  "title": "7. credit note: open it from the order's Invoices list, request approval and approve",
+  "file": "sales.return-reinvoice.spec.ts",
+  "placeholder": false
  }
 ]

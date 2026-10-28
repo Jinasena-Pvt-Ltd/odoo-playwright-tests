@@ -55,6 +55,8 @@ const TOUR_NOTES = {
     // 420-481 = Create Advance Payment / Payments smart button: that button raises an Odoo error on this instance,
     // so those steps are left out of the manual until it is fixed.
     excluded: new Set([420, 430, 440, 450, 460, 470, 480, 481]),
+    // Fields Odoo fills in by itself: the user only has to CHECK them (highlighted in the manual).
+    autoFill: new Set([140, 150, 160, 170, 180, 190, 200, 210]),
   },
   sales: {
     adapted: new Set([10, 50, 60, 70, 80, 83, 84, 97]),
@@ -75,8 +77,10 @@ const TOUR_NOTES = {
   },
 };
 const DISPLAY_TITLE = (TOUR_NOTES[tourName] || {}).displayTitle || null;
-const { adapted: ADAPTED_SEQUENCES, excluded: EXCLUDED_SEQUENCES, overrides: OVERRIDES = {} } =
+const { adapted: ADAPTED_SEQUENCES, excluded: EXCLUDED_SEQUENCES, overrides: OVERRIDES = {}, autoFill: AUTOFILL_SEQUENCES = new Set() } =
   TOUR_NOTES[tourName] || { adapted: new Set(), excluded: new Set() };
+
+const AUTOFILL_NOTE = 'Odoo normally fills in this field by itself. Do not just click past it: look at the value and check that it is correct for this customer, sales centre and warehouse. Only change it, as shown in the screenshot, if the value is wrong.';
 
 function screenshotFor(sequence) {
   const file = path.join(screenshotDir, `step-${String(sequence).padStart(3, '0')}.png`);
@@ -95,6 +99,7 @@ function buildLocale(locale, localeLabel) {
         description: override ? '' : (s.description_i18n?.[locale] || s.description || ''),
         screenshot: screenshotFor(s.sequence),
         adapted: ADAPTED_SEQUENCES.has(s.sequence),
+        autofill: AUTOFILL_SEQUENCES.has(s.sequence),
       };
     });
 
@@ -113,6 +118,9 @@ function buildLocale(locale, localeLabel) {
     md += `## ${i + 1}. ${heading}\n\n`;
     if (s.content) md += `${s.content}\n\n`;
     if (s.description && s.description !== s.content) md += `_${s.description}_\n\n`;
+    if (s.autofill) md += `> **⚠ AUTO-FILLED — PLEASE CHECK:** ${AUTOFILL_NOTE}
+
+`;
     if (s.adapted) md += `> **Note:** this step was adapted from the recorded tour — see REVIEW.md.\n\n`;
     if (s.screenshot) {
       const relPath = path.relative(manualDir, s.screenshot).replace(/\\/g, '/');
@@ -131,9 +139,10 @@ function buildLocale(locale, localeLabel) {
         : (fs.existsSync(screenshotDir) ? '<p class="missing">(no screenshot captured for this step)</p>' : '');
       return `
       <section class="step">
-        <h2><span class="step-num">${i + 1}</span>${heading}</h2>
+        <h2><span class="step-num">${i + 1}</span>${heading}${s.autofill ? '<span class="autobadge">AUTO-FILLED · CHECK</span>' : ''}</h2>
         ${s.content ? `<p class="content">${esc(s.content).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')}</p>` : ''}
         ${s.description && s.description !== s.content ? `<p class="desc">${esc(s.description).replace(/(Why:|Check:|Watch out:|Tip:|Result:)/g, '<b>$1</b>')}</p>` : ''}
+        ${s.autofill ? `<div class="autofill"><strong>⚠ AUTO-FILLED — PLEASE CHECK</strong><br>${esc(AUTOFILL_NOTE)}</div>` : ''}
         ${s.adapted ? '<p class="adapted">⚠ Adapted from the recorded tour — see REVIEW.md for details.</p>' : ''}
         ${img}
       </section>`;
@@ -161,6 +170,10 @@ function buildLocale(locale, localeLabel) {
   .desc { color: #1b4d2b; background: #e8f5e9; border-left: 6px solid #43a047; border-radius: 6px; padding: .9rem 1.1rem; font-size: 1.15rem; margin: 0 0 1.25rem; }
   .desc b { color: #0b5d1e; font-weight: 800; }
   .adapted { color: #8a5a00; background: #fff6e5; border: 1px solid #ffe2a8; border-radius: 6px; padding: .6rem .9rem; font-size: 1rem; margin: 0 0 .75rem; }
+  .autofill { background: #fff3cd; border: 3px solid #f59e0b; border-radius: 8px; padding: 1rem 1.2rem; font-size: 1.2rem; margin: 0 0 1.25rem; color: #5c3b00; }
+  .autofill strong { font-size: 1.3rem; color: #b45309; }
+  .autobadge { background: #f59e0b; color: #fff; border-radius: 999px; font-size: .8rem; padding: .25rem .7rem; margin-left: .6rem; white-space: nowrap; align-self: center; }
+  .step:has(.autofill) { border-left-color: #f59e0b; }
   .missing { color: #999; font-style: italic; }
   img { max-width: 100%; border: 2px solid #ccc; border-radius: 8px; display: block; }
   footer { max-width: 1000px; margin: 0 auto; padding: 0 2rem; color: #888; font-size: 1rem; }
