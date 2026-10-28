@@ -58,6 +58,31 @@ const TOUR_NOTES = {
     // Fields Odoo fills in by itself: the user only has to CHECK them (highlighted in the manual).
     autoFill: new Set([140, 150, 160, 170, 180, 190, 200, 210]),
   },
+  'return-reinvoice-cash-sales-order': {
+    displayTitle: 'RETURN & CREATE INVOICE - CASH SALES ORDER',
+    adapted: new Set([10, 50, 60, 70, 80, 100, 110, 140, 150, 160, 170, 180, 190, 200, 210, 280, 290, 300, 340, 360, 460]),
+    // 370-440 = Register Payment with the cash journal: this instance has no outstanding receipts account on the
+    // cash journal, so Odoo refuses the payment. Left out of the manual until it is configured.
+    excluded: new Set([370, 380, 390, 400, 410, 420, 430, 440]),
+    // Fields Odoo fills in by itself: the user only has to CHECK them (highlighted in the manual).
+    autoFill: new Set([140, 150, 160, 170, 180, 190, 200, 210]),
+    // "Documents in this guide" table shown above the steps, and "What is this document?" boxes on key steps
+    intro: [
+      ['Original invoice (FTI...)', 'The first invoice created from the sales order. After "Reverse and Create Invoice" it is cancelled by the credit note and shows a red **REVERSED** ribbon. It stays only for your records and the customer does not pay it.'],
+      ['Credit note (RFTI...)', 'The document that cancels the original invoice. It is shown as **Posted** with a green **PAID** ribbon because it settles the original invoice. It needs a manager approval.'],
+      ['New invoice (FTI...)', 'The corrected invoice created in the same click. This is the bill the customer pays. It starts as Draft and becomes **Posted** when you confirm it.'],
+    ],
+    infoBoxes: {
+      260: ['What is this?', 'This creates the **original invoice** (number starts with FTI). It is the first bill for the goods that were delivered. Later in this guide it is cancelled and replaced.'],
+      270: ['What is this?', 'The **original invoice** is now Posted. Remember that its number starts with FTI: later, in the Invoices list, this is the row that ends up marked **Reversed**.'],
+      300: ['What does this button do?', 'One click does two things: it creates the **credit note** (RFTI...) that cancels the original invoice, and it creates a **new draft invoice** (FTI...) with the same lines. The aim is to correct an invoice without typing it again.'],
+      310: ['What is this document?', 'This is the **new (corrected) invoice**. It is still Draft, so it is not valid yet. Confirming it makes it the bill the customer has to pay.'],
+      340: ['What is this document?', 'This is the **reversed invoice**: the original invoice that the credit note has cancelled. Its payment status in the list says **Reversed** and, once opened, it shows a red REVERSED ribbon. Its aim is only to keep the history; do not collect money against it.'],
+      360: ['What is this document?', 'This is the **created invoice**: the new invoice that replaced the reversed one. It is Posted and it is the invoice the customer pays. Because this is a cash order, the payment is normally registered here with the **Register Payment** button.'],
+      460: ['What is this document?', 'This is the **credit note**. Its number starts with RFTI and its Reference says "Reversal of:" followed by the original invoice number. The green **PAID** ribbon is normal: the credit note has been matched against the original invoice, so nothing is left to pay on either of them.'],
+      480: ['Why does the credit note say PAID?', 'The **PAID** ribbon on the credit note does not mean the customer paid money. It means the credit note and the original invoice cancel each other out. Approving it only records that your manager agrees with the return.'],
+    },
+  },
   sales: {
     adapted: new Set([10, 50, 60, 70, 80, 83, 84, 97]),
     excluded: new Set(),
@@ -77,7 +102,7 @@ const TOUR_NOTES = {
   },
 };
 const DISPLAY_TITLE = (TOUR_NOTES[tourName] || {}).displayTitle || null;
-const { adapted: ADAPTED_SEQUENCES, excluded: EXCLUDED_SEQUENCES, overrides: OVERRIDES = {}, autoFill: AUTOFILL_SEQUENCES = new Set() } =
+const { adapted: ADAPTED_SEQUENCES, excluded: EXCLUDED_SEQUENCES, overrides: OVERRIDES = {}, autoFill: AUTOFILL_SEQUENCES = new Set(), intro: INTRO = null, infoBoxes: INFO_BOXES = {} } =
   TOUR_NOTES[tourName] || { adapted: new Set(), excluded: new Set() };
 
 const AUTOFILL_NOTE = 'Odoo normally fills in this field by itself. Do not just click past it: look at the value and check that it is correct for this customer, sales centre and warehouse. Only change it, as shown in the screenshot, if the value is wrong.';
@@ -100,6 +125,7 @@ function buildLocale(locale, localeLabel) {
         screenshot: screenshotFor(s.sequence),
         adapted: ADAPTED_SEQUENCES.has(s.sequence),
         autofill: AUTOFILL_SEQUENCES.has(s.sequence),
+        info: INFO_BOXES[s.sequence] || null,
       };
     });
 
@@ -112,12 +138,20 @@ function buildLocale(locale, localeLabel) {
   if (EXCLUDED_SEQUENCES.size > 0) {
     md += `> ${EXCLUDED_SEQUENCES.size} recorded step(s) were excluded from the replay (fields/menus that no longer exist, or accidental trailing steps) — see REVIEW.md.\n\n`;
   }
+  if (INTRO) {
+    md += `## Documents in this guide\n\n| Document | What it is |\n|---|---|\n`;
+    INTRO.forEach(([a, b]) => { md += `| ${a} | ${b} |\n`; });
+    md += `\n`;
+  }
   md += `---\n\n`;
   steps.forEach((s, i) => {
     const heading = s.title || s.content || `Step ${i + 1}`;
     md += `## ${i + 1}. ${heading}\n\n`;
     if (s.content) md += `${s.content}\n\n`;
     if (s.description && s.description !== s.content) md += `_${s.description}_\n\n`;
+    if (s.info) md += `> **ℹ ${s.info[0].toUpperCase()}:** ${s.info[1]}
+
+`;
     if (s.autofill) md += `> **⚠ AUTO-FILLED — PLEASE CHECK:** ${AUTOFILL_NOTE}
 
 `;
@@ -142,6 +176,7 @@ function buildLocale(locale, localeLabel) {
         <h2><span class="step-num">${i + 1}</span>${heading}${s.autofill ? '<span class="autobadge">AUTO-FILLED · CHECK</span>' : ''}</h2>
         ${s.content ? `<p class="content">${esc(s.content).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')}</p>` : ''}
         ${s.description && s.description !== s.content ? `<p class="desc">${esc(s.description).replace(/(Why:|Check:|Watch out:|Tip:|Result:)/g, '<b>$1</b>')}</p>` : ''}
+        ${s.info ? `<div class="infobox"><strong>ℹ ${esc(s.info[0])}</strong><br>${esc(s.info[1]).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>')}</div>` : ''}
         ${s.autofill ? `<div class="autofill"><strong>⚠ AUTO-FILLED — PLEASE CHECK</strong><br>${esc(AUTOFILL_NOTE)}</div>` : ''}
         ${s.adapted ? '<p class="adapted">⚠ Adapted from the recorded tour — see REVIEW.md for details.</p>' : ''}
         ${img}
@@ -174,6 +209,14 @@ function buildLocale(locale, localeLabel) {
   .autofill strong { font-size: 1.3rem; color: #b45309; }
   .autobadge { background: #f59e0b; color: #fff; border-radius: 999px; font-size: .8rem; padding: .25rem .7rem; margin-left: .6rem; white-space: nowrap; align-self: center; }
   .step:has(.autofill) { border-left-color: #f59e0b; }
+  .infobox { background: #e3f2fd; border: 3px solid #1e88e5; border-radius: 8px; padding: 1rem 1.2rem; font-size: 1.2rem; margin: 0 0 1.25rem; color: #0d3c6e; }
+  .infobox strong { font-size: 1.3rem; color: #0b5cad; }
+  .guide { background: #fff; border: 1px solid #e3e3e3; border-left: 8px solid #1e88e5; border-radius: 12px; padding: 1.5rem 2rem; margin-bottom: 2.5rem; box-shadow: 0 2px 6px rgba(0,0,0,.08); }
+  .guide h2 { margin: 0 0 1rem; font-size: 1.7rem; color: #0b5cad; }
+  .guide table { border-collapse: collapse; width: 100%; font-size: 1.15rem; }
+  .guide th { text-align: left; vertical-align: top; width: 28%; padding: .7rem 1rem .7rem 0; color: #4a2c42; }
+  .guide td { padding: .7rem 0; border-bottom: 1px solid #eee; }
+  .guide tr { border-bottom: 1px solid #eee; }
   .missing { color: #999; font-style: italic; }
   img { max-width: 100%; border: 2px solid #ccc; border-radius: 8px; display: block; }
   footer { max-width: 1000px; margin: 0 auto; padding: 0 2rem; color: #888; font-size: 1rem; }
@@ -186,6 +229,7 @@ function buildLocale(locale, localeLabel) {
   ${EXCLUDED_SEQUENCES.size > 0 ? `<p style="opacity:.8;font-size:.9rem;margin-top:.5rem;">${EXCLUDED_SEQUENCES.size} recorded step(s) excluded from the replay — see REVIEW.md.</p>` : ''}
 </header>
 <main>
+${INTRO ? `<section class="guide"><h2>Documents in this guide</h2><table>${INTRO.map(([a, b]) => `<tr><th>${esc(a)}</th><td>${esc(b).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>')}</td></tr>`).join('')}</table></section>` : ''}
 ${stepsHtml}
 </main>
 <footer>Generated from an Odoo Tour Recorder export (${esc(path.basename(tourJsonPath))})${fs.existsSync(screenshotDir) ? ', replayed and screenshotted with Playwright' : ''}.</footer>

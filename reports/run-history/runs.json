@@ -2658,5 +2658,53 @@
     "error": ""
    }
   }
+ },
+ {
+  "id": "2026-10-28T04:07:29.512Z",
+  "startedAt": "2026-10-28T04:07:29.512Z",
+  "label": "26th run",
+  "note": "",
+  "results": {
+   "setup|setup|setup||authenticate: auth-storage/admin.json": {
+    "status": "passed",
+    "durationMs": 39924,
+    "error": ""
+   },
+   "admin|sales|business|Sales return and re-invoice of a cash order|1. quotation: Cash order for a Sales quotation": {
+    "status": "passed",
+    "durationMs": 26059,
+    "error": ""
+   },
+   "admin|sales|business|Sales return and re-invoice of a cash order|2. confirm: quotation becomes a Sales Order": {
+    "status": "passed",
+    "durationMs": 10523,
+    "error": ""
+   },
+   "admin|sales|business|Sales return and re-invoice of a cash order|3. delivery: validate → Done": {
+    "status": "passed",
+    "durationMs": 15582,
+    "error": ""
+   },
+   "admin|sales|business|Sales return and re-invoice of a cash order|4. invoice: create and confirm → Posted": {
+    "status": "passed",
+    "durationMs": 13350,
+    "error": ""
+   },
+   "admin|sales|business|Sales return and re-invoice of a cash order|5. reverse: Credit Note wizard → \"Reverse and Create Invoice\" gives a new draft invoice": {
+    "status": "passed",
+    "durationMs": 14909,
+    "error": ""
+   },
+   "admin|sales|business|Sales return and re-invoice of a cash order|6. re-invoice: confirm the new invoice and register the cash payment": {
+    "status": "skipped",
+    "durationMs": 13483,
+    "error": ""
+   },
+   "admin|sales|business|Sales return and re-invoice of a cash order|7. credit note: open it from the order's Invoices list, request approval and approve": {
+    "status": "passed",
+    "durationMs": 20314,
+    "error": ""
+   }
+  }
  }
 ]
