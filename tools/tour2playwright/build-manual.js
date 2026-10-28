@@ -66,22 +66,6 @@ const TOUR_NOTES = {
     excluded: new Set([370, 380, 390, 400, 410, 420, 430, 440]),
     // Fields Odoo fills in by itself: the user only has to CHECK them (highlighted in the manual).
     autoFill: new Set([140, 150, 160, 170, 180, 190, 200, 210]),
-    // "Documents in this guide" table shown above the steps, and "What is this document?" boxes on key steps
-    intro: [
-      ['Original invoice (FTI...)', 'The first invoice created from the sales order. After "Reverse and Create Invoice" it is cancelled by the credit note and shows a red **REVERSED** ribbon. It stays only for your records and the customer does not pay it.'],
-      ['Credit note (RFTI...)', 'The document that cancels the original invoice. It is shown as **Posted** with a green **PAID** ribbon because it settles the original invoice. It needs a manager approval.'],
-      ['New invoice (FTI...)', 'The corrected invoice created in the same click. This is the bill the customer pays. It starts as Draft and becomes **Posted** when you confirm it.'],
-    ],
-    infoBoxes: {
-      260: ['What is this?', 'This creates the **original invoice** (number starts with FTI). It is the first bill for the goods that were delivered. Later in this guide it is cancelled and replaced.'],
-      270: ['What is this?', 'The **original invoice** is now Posted. Remember that its number starts with FTI: later, in the Invoices list, this is the row that ends up marked **Reversed**.'],
-      300: ['What does this button do?', 'One click does two things: it creates the **credit note** (RFTI...) that cancels the original invoice, and it creates a **new draft invoice** (FTI...) with the same lines. The aim is to correct an invoice without typing it again.'],
-      310: ['What is this document?', 'This is the **new (corrected) invoice**. It is still Draft, so it is not valid yet. Confirming it makes it the bill the customer has to pay.'],
-      340: ['What is this document?', 'This is the **reversed invoice**: the original invoice that the credit note has cancelled. Its payment status in the list says **Reversed** and, once opened, it shows a red REVERSED ribbon. Its aim is only to keep the history; do not collect money against it.'],
-      360: ['What is this document?', 'This is the **created invoice**: the new invoice that replaced the reversed one. It is Posted and it is the invoice the customer pays. Because this is a cash order, the payment is normally registered here with the **Register Payment** button.'],
-      460: ['What is this document?', 'This is the **credit note**. Its number starts with RFTI and its Reference says "Reversal of:" followed by the original invoice number. The green **PAID** ribbon is normal: the credit note has been matched against the original invoice, so nothing is left to pay on either of them.'],
-      480: ['Why does the credit note say PAID?', 'The **PAID** ribbon on the credit note does not mean the customer paid money. It means the credit note and the original invoice cancel each other out. Approving it only records that your manager agrees with the return.'],
-    },
   },
   sales: {
     adapted: new Set([10, 50, 60, 70, 80, 83, 84, 97]),
