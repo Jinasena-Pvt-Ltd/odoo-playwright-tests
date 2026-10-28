@@ -34,8 +34,10 @@ export async function throwIfOdooError(page: Page): Promise<void> {
     const dlg = dialogs.nth(i);
     const title = ((await dlg.locator('.modal-title').first().textContent().catch(() => '')) ?? '').trim();
     if (!ERROR_TITLE.test(title)) continue;
+    const details = dlg.locator('a, button').filter({ hasText: /^see details$/i }).first();
+    if (await details.isVisible().catch(() => false)) await details.click().catch(() => {});
     const body = ((await dlg.locator('.modal-body').first().textContent().catch(() => '')) ?? '')
-      .replace(/\s+/g, ' ').trim();
+      .replace(/\s+/g, ' ').trim().replace(/^(.{120}).*(.{700})$/, '$1 … $2');
     const closeBtn = dlg.locator('button').filter({ hasText: /^(close|ok|stay here)$/i }).first();
     if (await closeBtn.isVisible().catch(() => false)) await closeBtn.click().catch(() => {});
     else await page.keyboard.press('Escape').catch(() => {});

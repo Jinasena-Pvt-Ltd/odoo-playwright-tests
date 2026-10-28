@@ -2706,5 +2706,177 @@
     "error": ""
    }
   }
+ },
+ {
+  "id": "2026-10-28T08:24:34.938Z",
+  "startedAt": "2026-10-28T08:24:34.938Z",
+  "label": "27th run",
+  "note": "",
+  "results": {
+   "setup|setup|setup||authenticate: auth-storage/admin.json": {
+    "status": "passed",
+    "durationMs": 43189,
+    "error": ""
+   },
+   "admin|sales|business|Credit sales order, invoice and cash receipt|1. quotation: Credit order with 14 Days payment terms": {
+    "status": "passed",
+    "durationMs": 31653,
+    "error": ""
+   },
+   "admin|sales|business|Credit sales order, invoice and cash receipt|2. confirm: quotation becomes a Sales Order": {
+    "status": "failed",
+    "durationMs": 17495,
+    "error": "Error: Odoo Error: An error occurredPlease use the copy button to report the error to your support service.See details"
+   },
+   "admin|sales|business|Credit sales order, invoice and cash receipt|3. delivery: validate → Done": {
+    "status": "skipped",
+    "durationMs": 0,
+    "error": ""
+   },
+   "admin|sales|business|Credit sales order, invoice and cash receipt|4. invoice: create and confirm → Posted": {
+    "status": "skipped",
+    "durationMs": 0,
+    "error": ""
+   },
+   "admin|sales|business|Credit sales order, invoice and cash receipt|5. payment: find the order in Sales Orders, open its invoice and register the cash payment": {
+    "status": "skipped",
+    "durationMs": 0,
+    "error": ""
+   },
+   "admin|sales|business|Credit sales order, invoice and cash receipt|6. trace: payment → Sales Orders smart button leads back to the order": {
+    "status": "skipped",
+    "durationMs": 0,
+    "error": ""
+   }
+  }
+ },
+ {
+  "id": "2026-10-28T08:26:50.846Z",
+  "startedAt": "2026-10-28T08:26:50.846Z",
+  "label": "28th run",
+  "note": "",
+  "results": {
+   "setup|setup|setup||authenticate: auth-storage/admin.json": {
+    "status": "passed",
+    "durationMs": 23697,
+    "error": ""
+   },
+   "admin|sales|business|Credit sales order, invoice and cash receipt|1. quotation: Credit order with 14 Days payment terms": {
+    "status": "passed",
+    "durationMs": 33163,
+    "error": ""
+   },
+   "admin|sales|business|Credit sales order, invoice and cash receipt|2. confirm: quotation becomes a Sales Order": {
+    "status": "failed",
+    "durationMs": 17337,
+    "error": "Error: Odoo Error: An error occurredPlease use the copy button to report the error to your support service.See detailsRPC_ERROROdoo Server ErrorTraceback (most recent call last): File \"/home/odoo/src/odoo/odoo/http.py\", line 1985, in _serve"
+   },
+   "admin|sales|business|Credit sales order, invoice and cash receipt|3. delivery: validate → Done": {
+    "status": "skipped",
+    "durationMs": 0,
+    "error": ""
+   },
+   "admin|sales|business|Credit sales order, invoice and cash receipt|4. invoice: create and confirm → Posted": {
+    "status": "skipped",
+    "durationMs": 0,
+    "error": ""
+   },
+   "admin|sales|business|Credit sales order, invoice and cash receipt|5. payment: find the order in Sales Orders, open its invoice and register the cash payment": {
+    "status": "skipped",
+    "durationMs": 0,
+    "error": ""
+   },
+   "admin|sales|business|Credit sales order, invoice and cash receipt|6. trace: payment → Sales Orders smart button leads back to the order": {
+    "status": "skipped",
+    "durationMs": 0,
+    "error": ""
+   }
+  }
+ },
+ {
+  "id": "2026-10-28T08:28:37.474Z",
+  "startedAt": "2026-10-28T08:28:37.474Z",
+  "label": "29th run",
+  "note": "",
+  "results": {
+   "setup|setup|setup||authenticate: auth-storage/admin.json": {
+    "status": "passed",
+    "durationMs": 25589,
+    "error": ""
+   },
+   "admin|sales|business|Credit sales order, invoice and cash receipt|1. quotation: Credit order with 14 Days payment terms": {
+    "status": "passed",
+    "durationMs": 37804,
+    "error": ""
+   },
+   "admin|sales|business|Credit sales order, invoice and cash receipt|2. confirm: quotation becomes a Sales Order": {
+    "status": "failed",
+    "durationMs": 9050,
+    "error": "Error: page.goto: net::ERR_NETWORK_IO_SUSPENDED at https://jinasena-upgrade-testing-39894820.dev.odoo.com/web"
+   },
+   "admin|sales|business|Credit sales order, invoice and cash receipt|3. delivery: validate → Done": {
+    "status": "skipped",
+    "durationMs": 0,
+    "error": ""
+   },
+   "admin|sales|business|Credit sales order, invoice and cash receipt|4. invoice: create and confirm → Posted": {
+    "status": "skipped",
+    "durationMs": 0,
+    "error": ""
+   },
+   "admin|sales|business|Credit sales order, invoice and cash receipt|5. payment: find the order in Sales Orders, open its invoice and register the cash payment": {
+    "status": "skipped",
+    "durationMs": 0,
+    "error": ""
+   },
+   "admin|sales|business|Credit sales order, invoice and cash receipt|6. trace: payment → Sales Orders smart button leads back to the order": {
+    "status": "skipped",
+    "durationMs": 0,
+    "error": ""
+   }
+  }
+ },
+ {
+  "id": "2026-10-28T08:32:42.698Z",
+  "startedAt": "2026-10-28T08:32:42.698Z",
+  "label": "30th run",
+  "note": "",
+  "results": {
+   "setup|setup|setup||authenticate: auth-storage/admin.json": {
+    "status": "passed",
+    "durationMs": 36738,
+    "error": ""
+   },
+   "admin|sales|business|Credit sales order, invoice and cash receipt|1. quotation: Credit order with 14 Days payment terms": {
+    "status": "passed",
+    "durationMs": 37279,
+    "error": ""
+   },
+   "admin|sales|business|Credit sales order, invoice and cash receipt|2. confirm: quotation becomes a Sales Order": {
+    "status": "failed",
+    "durationMs": 15491,
+    "error": "Error: Odoo Error: An error occurredPlease use the copy button to report the error to your support service.See detailsRPC_ERROROdoo Server  … l_context=eval_context) File \"/home/odoo/src/odoo/odoo/addons/base/models/ir_actions.py\", line 795"
+   },
+   "admin|sales|business|Credit sales order, invoice and cash receipt|3. delivery: validate → Done": {
+    "status": "skipped",
+    "durationMs": 0,
+    "error": ""
+   },
+   "admin|sales|business|Credit sales order, invoice and cash receipt|4. invoice: create and confirm → Posted": {
+    "status": "skipped",
+    "durationMs": 0,
+    "error": ""
+   },
+   "admin|sales|business|Credit sales order, invoice and cash receipt|5. payment: find the order in Sales Orders, open its invoice and register the cash payment": {
+    "status": "skipped",
+    "durationMs": 0,
+    "error": ""
+   },
+   "admin|sales|business|Credit sales order, invoice and cash receipt|6. trace: payment → Sales Orders smart button leads back to the order": {
+    "status": "skipped",
+    "durationMs": 0,
+    "error": ""
+   }
+  }
  }
 ]

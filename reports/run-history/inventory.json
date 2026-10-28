@@ -458,5 +458,65 @@
   "title": "7. credit note: open it from the order's Invoices list, request approval and approve",
   "file": "sales.return-reinvoice.spec.ts",
   "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Credit sales order, invoice and cash receipt|1. quotation: Credit order with 14 Days payment terms",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Credit sales order, invoice and cash receipt",
+  "title": "1. quotation: Credit order with 14 Days payment terms",
+  "file": "sales.credit-order.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Credit sales order, invoice and cash receipt|2. confirm: quotation becomes a Sales Order",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Credit sales order, invoice and cash receipt",
+  "title": "2. confirm: quotation becomes a Sales Order",
+  "file": "sales.credit-order.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Credit sales order, invoice and cash receipt|3. delivery: validate → Done",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Credit sales order, invoice and cash receipt",
+  "title": "3. delivery: validate → Done",
+  "file": "sales.credit-order.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Credit sales order, invoice and cash receipt|4. invoice: create and confirm → Posted",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Credit sales order, invoice and cash receipt",
+  "title": "4. invoice: create and confirm → Posted",
+  "file": "sales.credit-order.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Credit sales order, invoice and cash receipt|5. payment: find the order in Sales Orders, open its invoice and register the cash payment",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Credit sales order, invoice and cash receipt",
+  "title": "5. payment: find the order in Sales Orders, open its invoice and register the cash payment",
+  "file": "sales.credit-order.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Credit sales order, invoice and cash receipt|6. trace: payment → Sales Orders smart button leads back to the order",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Credit sales order, invoice and cash receipt",
+  "title": "6. trace: payment → Sales Orders smart button leads back to the order",
+  "file": "sales.credit-order.spec.ts",
+  "placeholder": false
  }
 ]
