@@ -94,7 +94,7 @@ test.describe.serial('Credit sales order, invoice and cash receipt @module:sales
       await search.press('Enter');
       const row = page.locator('.o_list_view .o_data_row').filter({ hasText: orderNumber }).first();
       await expect(row).toBeVisible({ timeout: 30_000 });
-      await row.locator('td[name="x_studio_quotation_type"], td').first().click();
+      await row.locator('td[name="name"]').click();
       await expect(page.locator('.o_form_view')).toBeVisible({ timeout: 30_000 });
     });
 
