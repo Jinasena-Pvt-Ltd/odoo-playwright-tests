@@ -1,101 +1,5 @@
 [
  {
-  "id": "2026-10-28T03:31:56.832Z",
-  "startedAt": "2026-10-28T03:31:56.832Z",
-  "label": "20th run",
-  "note": "",
-  "results": {
-   "setup|setup|setup||authenticate: auth-storage/admin.json": {
-    "status": "passed",
-    "durationMs": 30433,
-    "error": ""
-   },
-   "admin|sales|business|Sales return and re-invoice of a cash order|1. quotation: Cash order for a Sales quotation": {
-    "status": "passed",
-    "durationMs": 38395,
-    "error": ""
-   },
-   "admin|sales|business|Sales return and re-invoice of a cash order|2. confirm: quotation becomes a Sales Order": {
-    "status": "passed",
-    "durationMs": 14804,
-    "error": ""
-   },
-   "admin|sales|business|Sales return and re-invoice of a cash order|3. delivery: validate → Done": {
-    "status": "passed",
-    "durationMs": 16326,
-    "error": ""
-   },
-   "admin|sales|business|Sales return and re-invoice of a cash order|4. invoice: create and confirm → Posted": {
-    "status": "passed",
-    "durationMs": 16872,
-    "error": ""
-   },
-   "admin|sales|business|Sales return and re-invoice of a cash order|5. reverse: Credit Note wizard → \"Reverse and Create Invoice\" gives a new draft invoice": {
-    "status": "passed",
-    "durationMs": 14796,
-    "error": ""
-   },
-   "admin|sales|business|Sales return and re-invoice of a cash order|6. re-invoice: confirm the new invoice and register the cash payment": {
-    "status": "failed",
-    "durationMs": 35831,
-    "error": "Error: \"Customer Receipts - Cash\" was not offered in the journal_id dropdown. Offered: No records"
-   },
-   "admin|sales|business|Sales return and re-invoice of a cash order|7. credit note: open it from the order's Invoices list, request approval and approve": {
-    "status": "skipped",
-    "durationMs": 0,
-    "error": ""
-   }
-  }
- },
- {
-  "id": "2026-10-28T03:35:45.051Z",
-  "startedAt": "2026-10-28T03:35:45.051Z",
-  "label": "21st run",
-  "note": "",
-  "results": {
-   "setup|setup|setup||authenticate: auth-storage/admin.json": {
-    "status": "passed",
-    "durationMs": 16010,
-    "error": ""
-   },
-   "admin|sales|business|Sales return and re-invoice of a cash order|1. quotation: Cash order for a Sales quotation": {
-    "status": "passed",
-    "durationMs": 37062,
-    "error": ""
-   },
-   "admin|sales|business|Sales return and re-invoice of a cash order|2. confirm: quotation becomes a Sales Order": {
-    "status": "passed",
-    "durationMs": 11080,
-    "error": ""
-   },
-   "admin|sales|business|Sales return and re-invoice of a cash order|3. delivery: validate → Done": {
-    "status": "passed",
-    "durationMs": 17122,
-    "error": ""
-   },
-   "admin|sales|business|Sales return and re-invoice of a cash order|4. invoice: create and confirm → Posted": {
-    "status": "passed",
-    "durationMs": 13771,
-    "error": ""
-   },
-   "admin|sales|business|Sales return and re-invoice of a cash order|5. reverse: Credit Note wizard → \"Reverse and Create Invoice\" gives a new draft invoice": {
-    "status": "passed",
-    "durationMs": 19231,
-    "error": ""
-   },
-   "admin|sales|business|Sales return and re-invoice of a cash order|6. re-invoice: confirm the new invoice and register the cash payment": {
-    "status": "failed",
-    "durationMs": 27755,
-    "error": "Error: Button /^confirm$/i not visible"
-   },
-   "admin|sales|business|Sales return and re-invoice of a cash order|7. credit note: open it from the order's Invoices list, request approval and approve": {
-    "status": "skipped",
-    "durationMs": 0,
-    "error": ""
-   }
-  }
- },
- {
   "id": "2026-10-28T03:42:48.889Z",
   "startedAt": "2026-10-28T03:42:48.889Z",
   "label": "22nd run",
@@ -1375,6 +1279,92 @@
    "admin|sales|business|Sales return and re-invoice of a cash order|7. credit note: open it from the order's Invoices list, request approval and approve": {
     "status": "passed",
     "durationMs": 15712,
+    "error": ""
+   }
+  }
+ },
+ {
+  "id": "2026-10-29T04:40:59.749Z",
+  "startedAt": "2026-10-29T04:40:59.749Z",
+  "label": "31st run",
+  "note": "",
+  "results": {
+   "setup|setup|setup||authenticate: auth-storage/admin.json": {
+    "status": "passed",
+    "durationMs": 25579,
+    "error": ""
+   },
+   "admin|sales|business|Overdue credit sales order: approval, invoice and cash receipt|1. quotation: Credit order with 14 Days payment terms": {
+    "status": "passed",
+    "durationMs": 20340,
+    "error": ""
+   },
+   "admin|sales|business|Overdue credit sales order: approval, invoice and cash receipt|2. approval: Request Overdue Approval, approve, then confirm → Sales Order": {
+    "status": "failed",
+    "durationMs": 6968,
+    "error": "Error: Odoo Error: An error occurredPlease use the copy button to report the error to your support service.See detailsRPC_ERROROdoo Server  … l_context=eval_context) File \"/home/odoo/src/odoo/odoo/addons/base/models/ir_actions.py\", line 795"
+   },
+   "admin|sales|business|Overdue credit sales order: approval, invoice and cash receipt|3. delivery: validate → Done": {
+    "status": "skipped",
+    "durationMs": 0,
+    "error": ""
+   },
+   "admin|sales|business|Overdue credit sales order: approval, invoice and cash receipt|4. invoice: create and confirm → Posted": {
+    "status": "skipped",
+    "durationMs": 0,
+    "error": ""
+   },
+   "admin|sales|business|Overdue credit sales order: approval, invoice and cash receipt|5. payment: find the order in Sales Orders, open its invoice and register the cash payment": {
+    "status": "skipped",
+    "durationMs": 0,
+    "error": ""
+   },
+   "admin|sales|business|Overdue credit sales order: approval, invoice and cash receipt|6. trace: payment → Sales Orders smart button leads back to the order": {
+    "status": "skipped",
+    "durationMs": 0,
+    "error": ""
+   }
+  }
+ },
+ {
+  "id": "2026-10-29T05:43:11.339Z",
+  "startedAt": "2026-10-29T05:43:11.339Z",
+  "label": "31st run",
+  "note": "",
+  "results": {
+   "setup|setup|setup||authenticate: auth-storage/admin.json": {
+    "status": "passed",
+    "durationMs": 20025,
+    "error": ""
+   },
+   "admin|sales|business|High discount cash sales order: over-commission approval, invoice and receipt|1. quotation: Cash order with a high discount line": {
+    "status": "passed",
+    "durationMs": 19700,
+    "error": ""
+   },
+   "admin|sales|business|High discount cash sales order: over-commission approval, invoice and receipt|2. approval: Request Over Commission Approval, approve, then confirm → Sales Order": {
+    "status": "failed",
+    "durationMs": 6129,
+    "error": "Error: Odoo Error: An error occurredPlease use the copy button to report the error to your support service.See details"
+   },
+   "admin|sales|business|High discount cash sales order: over-commission approval, invoice and receipt|3. delivery: validate → Done": {
+    "status": "skipped",
+    "durationMs": 0,
+    "error": ""
+   },
+   "admin|sales|business|High discount cash sales order: over-commission approval, invoice and receipt|4. invoice: create and confirm → Posted": {
+    "status": "skipped",
+    "durationMs": 0,
+    "error": ""
+   },
+   "admin|sales|business|High discount cash sales order: over-commission approval, invoice and receipt|5. payment: find the order in Sales Orders, open its invoice and register the cash payment": {
+    "status": "skipped",
+    "durationMs": 0,
+    "error": ""
+   },
+   "admin|sales|business|High discount cash sales order: over-commission approval, invoice and receipt|6. trace: payment → Sales Orders smart button leads back to the order": {
+    "status": "skipped",
+    "durationMs": 0,
     "error": ""
    }
   }

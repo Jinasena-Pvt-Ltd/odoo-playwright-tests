@@ -578,5 +578,65 @@
   "title": "6. trace: payment → Sales Orders smart button leads back to the order",
   "file": "sales.overdue-credit.spec.ts",
   "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|High discount cash sales order: over-commission approval, invoice and receipt|1. quotation: Cash order with a high discount line",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "High discount cash sales order: over-commission approval, invoice and receipt",
+  "title": "1. quotation: Cash order with a high discount line",
+  "file": "sales.high-discount.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|High discount cash sales order: over-commission approval, invoice and receipt|2. approval: Request Over Commission Approval, approve, then confirm → Sales Order",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "High discount cash sales order: over-commission approval, invoice and receipt",
+  "title": "2. approval: Request Over Commission Approval, approve, then confirm → Sales Order",
+  "file": "sales.high-discount.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|High discount cash sales order: over-commission approval, invoice and receipt|3. delivery: validate → Done",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "High discount cash sales order: over-commission approval, invoice and receipt",
+  "title": "3. delivery: validate → Done",
+  "file": "sales.high-discount.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|High discount cash sales order: over-commission approval, invoice and receipt|4. invoice: create and confirm → Posted",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "High discount cash sales order: over-commission approval, invoice and receipt",
+  "title": "4. invoice: create and confirm → Posted",
+  "file": "sales.high-discount.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|High discount cash sales order: over-commission approval, invoice and receipt|5. payment: find the order in Sales Orders, open its invoice and register the cash payment",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "High discount cash sales order: over-commission approval, invoice and receipt",
+  "title": "5. payment: find the order in Sales Orders, open its invoice and register the cash payment",
+  "file": "sales.high-discount.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|High discount cash sales order: over-commission approval, invoice and receipt|6. trace: payment → Sales Orders smart button leads back to the order",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "High discount cash sales order: over-commission approval, invoice and receipt",
+  "title": "6. trace: payment → Sales Orders smart button leads back to the order",
+  "file": "sales.high-discount.spec.ts",
+  "placeholder": false
  }
 ]

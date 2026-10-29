@@ -237,6 +237,8 @@ export interface OrderInput {
   productName?: string;
   /** Payment Terms to select on the Other Info tab (e.g. '14 Days'); when omitted Odoo's default from the customer is kept. */
   paymentTerm?: string;
+  /** Discount % to type on the order line (e.g. 25 for a high-value discount that needs approval). */
+  discount?: number;
 }
 
 /** Creates and saves a quotation with one product line. Returns the order number (e.g. S02250). */
@@ -308,6 +310,14 @@ async function createQuotationImpl(page: Page, input: OrderInput): Promise<strin
       await page.waitForTimeout(1_500);
       if ((await shownPrice()) === wanted) break;
     }
+  }
+  if (input.discount !== undefined) {
+    // The tour clicks the Disc.% cell, types the percentage and presses Enter
+    const disc = page.locator('.o_data_row [name="discount"] input').first();
+    if (!(await disc.isVisible({ timeout: 1_500 }).catch(() => false))) await page.locator('.o_data_row [name="discount"]').first().click();
+    await expect(disc).toBeVisible({ timeout: 8_000 });
+    await disc.click(); await disc.selectText(); await disc.fill(String(input.discount)); await disc.press('Tab');
+    await page.waitForTimeout(1_000);
   }
   await throwIfOdooError(page);
   });
