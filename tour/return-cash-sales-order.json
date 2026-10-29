@@ -1354,7 +1354,7 @@
           "run": "click",
           "is_check": false,
           "validation_type": "none",
-          "description": "Why: this closes the return process and shows the final state of the order. What you will see: the Sales Order with its Delivery and Invoices buttons. The return of the cash sale is now complete.",
+          "description": "Why: the sales order is where the advance payment for this customer is created. What you will see: the Sales Order with its Delivery and Invoices buttons and, at the top, the **Create Advance Payment** button. The credit note part of the return is now complete; the next steps record the advance payment.",
           "description_i18n": {
             "en_US": "Why: this closes the return process and shows the final state of the order. What you will see: the Sales Order with its Delivery and Invoices buttons. The return of the cash sale is now complete.",
             "si_LK": "Why: this closes the return process and shows the final state of the order. What you will see: the Sales Order with its Delivery and Invoices buttons. The return of the cash sale is now complete.",
@@ -1362,6 +1362,204 @@
           },
           "validation_regex": "",
           "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 420,
+          "title": "Click Create Advance Payment",
+          "trigger": "button[name=\"2341\"]",
+          "content": "At the top of the Sales Order click **Create Advance Payment**.",
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: the customer pays part or all of the order up front, and this button prepares that payment for you. What you will see: Odoo opens a list called **Draft Payment** that contains one draft payment, with the journal **Advance Payment** and the amount already filled in from the order total. Watch out: if you get an error message instead of the list, ask your accountant to check that the customer has a receivable account.",
+          "validation_regex": "",
+          "validation_message": "",
+          "title_i18n": {
+            "en_US": "Click Create Advance Payment",
+            "si_LK": "Click Create Advance Payment",
+            "ta_IN": "Click Create Advance Payment"
+          },
+          "content_i18n": {
+            "en_US": "At the top of the Sales Order click **Create Advance Payment**.",
+            "si_LK": "At the top of the Sales Order click **Create Advance Payment**.",
+            "ta_IN": "At the top of the Sales Order click **Create Advance Payment**."
+          },
+          "description_i18n": {
+            "en_US": "Why: the customer pays part or all of the order up front, and this button prepares that payment for you. What you will see: Odoo opens a list called **Draft Payment** that contains one draft payment, with the journal **Advance Payment** and the amount already filled in from the order total. Watch out: if you get an error message instead of the list, ask your accountant to check that the customer has a receivable account.",
+            "si_LK": "Why: the customer pays part or all of the order up front, and this button prepares that payment for you. What you will see: Odoo opens a list called **Draft Payment** that contains one draft payment, with the journal **Advance Payment** and the amount already filled in from the order total. Watch out: if you get an error message instead of the list, ask your accountant to check that the customer has a receivable account.",
+            "ta_IN": "Why: the customer pays part or all of the order up front, and this button prepares that payment for you. What you will see: Odoo opens a list called **Draft Payment** that contains one draft payment, with the journal **Advance Payment** and the amount already filled in from the order total. Watch out: if you get an error message instead of the list, ask your accountant to check that the customer has a receivable account."
+          },
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 430,
+          "title": "Open the draft payment",
+          "trigger": "td[name=\"ref\"]",
+          "content": "Click the draft payment line in the list to open it.",
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: the payment is only a draft until you open it and confirm it. What you will see: the payment form with the customer, the journal **Advance Payment**, the amount and a **Confirm** button at the top left. Tip: click on the line itself, for example on its date or reference, not on a checkbox.",
+          "validation_regex": "",
+          "validation_message": "",
+          "title_i18n": {
+            "en_US": "Open the draft payment",
+            "si_LK": "Open the draft payment",
+            "ta_IN": "Open the draft payment"
+          },
+          "content_i18n": {
+            "en_US": "Click the draft payment line in the list to open it.",
+            "si_LK": "Click the draft payment line in the list to open it.",
+            "ta_IN": "Click the draft payment line in the list to open it."
+          },
+          "description_i18n": {
+            "en_US": "Why: the payment is only a draft until you open it and confirm it. What you will see: the payment form with the customer, the journal **Advance Payment**, the amount and a **Confirm** button at the top left. Tip: click on the line itself, for example on its date or reference, not on a checkbox.",
+            "si_LK": "Why: the payment is only a draft until you open it and confirm it. What you will see: the payment form with the customer, the journal **Advance Payment**, the amount and a **Confirm** button at the top left. Tip: click on the line itself, for example on its date or reference, not on a checkbox.",
+            "ta_IN": "Why: the payment is only a draft until you open it and confirm it. What you will see: the payment form with the customer, the journal **Advance Payment**, the amount and a **Confirm** button at the top left. Tip: click on the line itself, for example on its date or reference, not on a checkbox."
+          },
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 440,
+          "title": "Check the prefilled amount",
+          "trigger": "#amount_0",
+          "content": "Look at the **Amount** field. Odoo has already filled it in from the order total, so do not type anything.",
+          "position": "bottom",
+          "run": "none",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "Why: the amount comes from the Sales Order, so it is already correct for this customer. Check: make sure it matches the total of the order. What you will see: a number such as 280.00 in the highlighted field. Watch out: do not change it unless your manager asks you to take a smaller advance.",
+          "validation_regex": "",
+          "validation_message": "",
+          "title_i18n": {
+            "en_US": "Check the prefilled amount",
+            "si_LK": "Check the prefilled amount",
+            "ta_IN": "Check the prefilled amount"
+          },
+          "content_i18n": {
+            "en_US": "Look at the **Amount** field. Odoo has already filled it in from the order total, so do not type anything.",
+            "si_LK": "Look at the **Amount** field. Odoo has already filled it in from the order total, so do not type anything.",
+            "ta_IN": "Look at the **Amount** field. Odoo has already filled it in from the order total, so do not type anything."
+          },
+          "description_i18n": {
+            "en_US": "Why: the amount comes from the Sales Order, so it is already correct for this customer. Check: make sure it matches the total of the order. What you will see: a number such as 280.00 in the highlighted field. Watch out: do not change it unless your manager asks you to take a smaller advance.",
+            "si_LK": "Why: the amount comes from the Sales Order, so it is already correct for this customer. Check: make sure it matches the total of the order. What you will see: a number such as 280.00 in the highlighted field. Watch out: do not change it unless your manager asks you to take a smaller advance.",
+            "ta_IN": "Why: the amount comes from the Sales Order, so it is already correct for this customer. Check: make sure it matches the total of the order. What you will see: a number such as 280.00 in the highlighted field. Watch out: do not change it unless your manager asks you to take a smaller advance."
+          },
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 450,
+          "title": "Click Confirm to post the payment",
+          "trigger": "[data-hotkey=\"q\"]",
+          "content": "Click the **Confirm** button at the top left of the payment.",
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: confirming turns the draft into a real payment in accounting. What you will see: the payment receives its number, which starts with ADVN followed by the year, the month and a running number.",
+          "validation_regex": "",
+          "validation_message": "",
+          "title_i18n": {
+            "en_US": "Click Confirm to post the payment",
+            "si_LK": "Click Confirm to post the payment",
+            "ta_IN": "Click Confirm to post the payment"
+          },
+          "content_i18n": {
+            "en_US": "Click the **Confirm** button at the top left of the payment.",
+            "si_LK": "Click the **Confirm** button at the top left of the payment.",
+            "ta_IN": "Click the **Confirm** button at the top left of the payment."
+          },
+          "description_i18n": {
+            "en_US": "Why: confirming turns the draft into a real payment in accounting. What you will see: the payment receives its number, which starts with ADVN followed by the year, the month and a running number.",
+            "si_LK": "Why: confirming turns the draft into a real payment in accounting. What you will see: the payment receives its number, which starts with ADVN followed by the year, the month and a running number.",
+            "ta_IN": "Why: confirming turns the draft into a real payment in accounting. What you will see: the payment receives its number, which starts with ADVN followed by the year, the month and a running number."
+          },
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 460,
+          "title": "Check that the payment is Posted",
+          "trigger": ".o_form_statusbar .o_arrow_button_current",
+          "content": "Look at the status bar at the top of the payment. It must show **Posted**.",
+          "position": "bottom",
+          "run": "none",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "Why: Posted means the advance payment is recorded and the customer is credited. Check: the payment number starts with ADVN/ and the status is Posted. Watch out: if it still says Draft, press Confirm again.",
+          "validation_regex": "",
+          "validation_message": "",
+          "title_i18n": {
+            "en_US": "Check that the payment is Posted",
+            "si_LK": "Check that the payment is Posted",
+            "ta_IN": "Check that the payment is Posted"
+          },
+          "content_i18n": {
+            "en_US": "Look at the status bar at the top of the payment. It must show **Posted**.",
+            "si_LK": "Look at the status bar at the top of the payment. It must show **Posted**.",
+            "ta_IN": "Look at the status bar at the top of the payment. It must show **Posted**."
+          },
+          "description_i18n": {
+            "en_US": "Why: Posted means the advance payment is recorded and the customer is credited. Check: the payment number starts with ADVN/ and the status is Posted. Watch out: if it still says Draft, press Confirm again.",
+            "si_LK": "Why: Posted means the advance payment is recorded and the customer is credited. Check: the payment number starts with ADVN/ and the status is Posted. Watch out: if it still says Draft, press Confirm again.",
+            "ta_IN": "Why: Posted means the advance payment is recorded and the customer is credited. Check: the payment number starts with ADVN/ and the status is Posted. Watch out: if it still says Draft, press Confirm again."
+          },
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 470,
+          "title": "Go back to the Sales Order",
+          "trigger": "li.breadcrumb-item.d-inline-flex:nth-of-type(2) > a.fw-bold.text-truncate",
+          "content": "Click the Sales Order name in the breadcrumb at the top of the screen to return to the order.",
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: this finishes the advance payment and brings you back to the order. What you will see: the Sales Order again. Note: on some systems the **Payments** button at the top of the order is not shown. This is normal. If you do not see it, find the payment under Accounting, or open it from the Draft Payment list. The return of the cash sale and its advance payment are now complete.",
+          "validation_regex": "",
+          "validation_message": "",
+          "title_i18n": {
+            "en_US": "Go back to the Sales Order",
+            "si_LK": "Go back to the Sales Order",
+            "ta_IN": "Go back to the Sales Order"
+          },
+          "content_i18n": {
+            "en_US": "Click the Sales Order name in the breadcrumb at the top of the screen to return to the order.",
+            "si_LK": "Click the Sales Order name in the breadcrumb at the top of the screen to return to the order.",
+            "ta_IN": "Click the Sales Order name in the breadcrumb at the top of the screen to return to the order."
+          },
+          "description_i18n": {
+            "en_US": "Why: this finishes the advance payment and brings you back to the order. What you will see: the Sales Order again. Note: on some systems the **Payments** button at the top of the order is not shown. This is normal. If you do not see it, find the payment under Accounting, or open it from the Draft Payment list. The return of the cash sale and its advance payment are now complete.",
+            "si_LK": "Why: this finishes the advance payment and brings you back to the order. What you will see: the Sales Order again. Note: on some systems the **Payments** button at the top of the order is not shown. This is normal. If you do not see it, find the payment under Accounting, or open it from the Draft Payment list. The return of the cash sale and its advance payment are now complete.",
+            "ta_IN": "Why: this finishes the advance payment and brings you back to the order. What you will see: the Sales Order again. Note: on some systems the **Payments** button at the top of the order is not shown. This is normal. If you do not see it, find the payment under Accounting, or open it from the Draft Payment list. The return of the cash sale and its advance payment are now complete."
+          },
           "validation_message_i18n": {
             "en_US": "",
             "si_LK": "",

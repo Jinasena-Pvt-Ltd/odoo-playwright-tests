@@ -145,9 +145,12 @@ test.describe.serial('Sales return and re-invoice of a cash order @module:sales 
         // exact journal from the tour if this company has it, otherwise the plain "Cash" journal
         let row = rows.filter({ hasText: CASH_JOURNAL }).first();
         if (!(await row.isVisible({ timeout: 1_000 }).catch(() => false))) {
-          chosen = 'Cash';
-          row = rows.filter({ has: page.locator('td', { hasText: /^Cash$/ }) }).first();
-          test.info().annotations.push({ type: 'note', description: `"${CASH_JOURNAL}" not found in this company; paid with the "Cash" journal` });
+          // use the first cash-receipts journal that has an outstanding-receipts account (plain "Cash" has none)
+          for (const name of ['Commercial - Cash Receipts', 'BOC - Cash Receipts', 'Cash']) {
+            const cand = rows.filter({ has: page.locator('td', { hasText: new RegExp(`^${escRx(name)}$`) }) }).first();
+            if (await cand.isVisible({ timeout: 1_000 }).catch(() => false)) { row = cand; chosen = name; break; }
+          }
+          test.info().annotations.push({ type: 'note', description: `"${CASH_JOURNAL}" not found in this company; paid with the "${chosen}" journal` });
         }
         await row.click();
       }

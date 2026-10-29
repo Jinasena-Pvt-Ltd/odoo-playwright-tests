@@ -22,7 +22,7 @@ import { uniqueName } from '../../../../core/utils/RandomDataGenerator';
 import type { Page } from '@playwright/test';
 import {
   COMPANY, openSalesApp, switchCompany, createQuotation, approveAndConfirm, validateDelivery,
-  createInvoice, headerButtons, clickButton, saveRecord, selectMany2one, throwIfOdooError,
+  createInvoice, headerButtons, clickButton, selectMany2one, throwIfOdooError,
 } from '../../flows/flowHelpers';
 
 const CUSTOMER = process.env.FLOW_CONTROL_CUSTOMER ?? 'abc';
@@ -154,25 +154,33 @@ test.describe.serial('Sales return of a cash order @module:sales @step:business 
       await throwIfOdooError(page);
       // The tour opens an editable payments list (click the row's Reference cell, type the amount);
       // some instances open a wizard dialog instead.
-      const row = page.locator('td[name="ref"]').first();
-      if (await row.isVisible({ timeout: 5_000 }).catch(() => false)) await row.click();
-      const amount = page.locator('.modal:visible [name="amount"] input, .o_data_row.o_selected_row [name="amount"] input, .o_form_view [name="amount"] input').first();
-      await amount.fill('1');
-      await amount.press('Enter');
+      // Odoo opens the new draft payment in a list with the amount pre-filled from the order total
+      const row = page.locator('.o_list_view .o_data_row').first();
+      if (await row.isVisible({ timeout: 10_000 }).catch(() => false)) {
+        await expect(row).toContainText(/advance/i);
+        await row.locator('td[name="date"], td').nth(1).click();
+        await expect(page.locator('.o_form_view')).toBeVisible({ timeout: 30_000 });
+      }
+      await expect(page.locator('.o_form_view [name="amount"]').first()).toBeVisible({ timeout: 15_000 });
       await throwIfOdooError(page);
-      await saveRecord(page);
       const confirmBtn = page.locator('.o_form_statusbar').getByRole('button', { name: /^confirm$/i }).first();
       if (await confirmBtn.isVisible({ timeout: 3_000 }).catch(() => false)) {
         await confirmBtn.click();
         await throwIfOdooError(page);
       }
+      // the advance payment is posted (ADVN/...)
+      await expect(page.locator('.o_form_statusbar .o_arrow_button_current').first()).toContainText(/posted|in process|paid/i, { timeout: 30_000 });
     });
 
     await test.step('Open the Payments smart button', async () => {
       await openRecord(page, orderUrl);
       const payments = page.locator('.oe_button_box button').filter({ hasText: /payments?/i }).first();
-      test.skip(!(await payments.isVisible({ timeout: 5_000 }).catch(() => false)),
-        'Payments smart button not shown on this order');
+      if (!(await payments.isVisible({ timeout: 5_000 }).catch(() => false))) {
+        // Studio's payment-count field on the order can stay 0 on this instance, which hides the button;
+        // the payment itself is already verified as posted above.
+        test.info().annotations.push({ type: 'note', description: 'Payments smart button hidden (payment count on the order is 0)' });
+        return;
+      }
       await payments.click();
       await throwIfOdooError(page);
       await expect(page.locator('.o_list_view, .o_form_view').first()).toBeVisible({ timeout: 30_000 });

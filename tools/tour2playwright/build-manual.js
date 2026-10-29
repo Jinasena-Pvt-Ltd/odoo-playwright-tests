@@ -53,10 +53,11 @@ const TOUR_NOTES = {
   },
   'return-cash-sales-order': {
     displayTitle: 'RETURN CASH SALES ORDER',
-    adapted: new Set([10, 50, 60, 70, 80, 100, 110, 140, 150, 160, 170, 180, 190, 200, 210, 280, 290, 300, 310, 320, 360, 380]),
-    // 420-481 = Create Advance Payment / Payments smart button: that button raises an Odoo error on this instance,
-    // so those steps are left out of the manual until it is fixed.
-    excluded: new Set([420, 430, 440, 450, 460, 470, 480, 481]),
+    adapted: new Set([10, 50, 60, 70, 80, 100, 110, 140, 150, 160, 170, 180, 190, 200, 210, 280, 290, 300, 310, 320, 360, 380, 430, 460]),
+    // 420-470 = advance payment: Create Advance Payment -> open the draft payment -> check the prefilled amount ->
+    // Confirm -> Posted -> back to the order. The recorded typing of an amount (440/450/460) is replaced by highlighting
+    // the prefilled amount. The Payments smart button (481) is not clicked: it can stay hidden on this instance.
+    excluded: new Set(),
     // Fields Odoo fills in by itself: the user only has to CHECK them (highlighted in the manual).
     autoFill: new Set([140, 150, 160, 170, 180, 190, 200, 210]),
   },
