@@ -8,11 +8,11 @@
         "si_LK": "Credit Sales Order",
         "ta_IN": "Credit Sales Order"
       },
-      "description": "A friendly step-by-step guide for selling to a customer on credit. You will create a quotation for a credit customer with the 14 Days payment term, confirm it, deliver the goods and invoice the customer. Later, when the customer pays, you find the order again and open its invoice, where the accountant registers the payment. A credit customer must have a credit limit and no overdue invoices, otherwise Odoo asks for Request Overdue Approval or Request Credit Limit Approval.",
+      "description": "A friendly step-by-step guide for selling to a customer on credit. You will create a quotation for a credit customer with the 14 Days payment term, confirm it, deliver the goods and invoice the customer. Later, when the customer pays, you find the order again, open its invoice, register the payment with a cash receipts journal and follow the payment's Sales Orders button back to the order. A credit customer must have a credit limit and no overdue invoices, otherwise Odoo asks for Request Overdue Approval or Request Credit Limit Approval.",
       "description_i18n": {
-        "en_US": "A friendly step-by-step guide for selling to a customer on credit. You will create a quotation for a credit customer with the 14 Days payment term, confirm it, deliver the goods and invoice the customer. Later, when the customer pays, you find the order again and open its invoice, where the accountant registers the payment. A credit customer must have a credit limit and no overdue invoices, otherwise Odoo asks for Request Overdue Approval or Request Credit Limit Approval.",
-        "si_LK": "A friendly step-by-step guide for selling to a customer on credit. You will create a quotation for a credit customer with the 14 Days payment term, confirm it, deliver the goods and invoice the customer. Later, when the customer pays, you find the order again and open its invoice, where the accountant registers the payment. A credit customer must have a credit limit and no overdue invoices, otherwise Odoo asks for Request Overdue Approval or Request Credit Limit Approval.",
-        "ta_IN": "A friendly step-by-step guide for selling to a customer on credit. You will create a quotation for a credit customer with the 14 Days payment term, confirm it, deliver the goods and invoice the customer. Later, when the customer pays, you find the order again and open its invoice, where the accountant registers the payment. A credit customer must have a credit limit and no overdue invoices, otherwise Odoo asks for Request Overdue Approval or Request Credit Limit Approval."
+        "en_US": "A friendly step-by-step guide for selling to a customer on credit. You will create a quotation for a credit customer with the 14 Days payment term, confirm it, deliver the goods and invoice the customer. Later, when the customer pays, you find the order again, open its invoice, register the payment with a cash receipts journal and follow the payment's Sales Orders button back to the order. A credit customer must have a credit limit and no overdue invoices, otherwise Odoo asks for Request Overdue Approval or Request Credit Limit Approval.",
+        "si_LK": "A friendly step-by-step guide for selling to a customer on credit. You will create a quotation for a credit customer with the 14 Days payment term, confirm it, deliver the goods and invoice the customer. Later, when the customer pays, you find the order again, open its invoice, register the payment with a cash receipts journal and follow the payment's Sales Orders button back to the order. A credit customer must have a credit limit and no overdue invoices, otherwise Odoo asks for Request Overdue Approval or Request Credit Limit Approval.",
+        "ta_IN": "A friendly step-by-step guide for selling to a customer on credit. You will create a quotation for a credit customer with the 14 Days payment term, confirm it, deliver the goods and invoice the customer. Later, when the customer pays, you find the order again, open its invoice, register the payment with a cash receipts journal and follow the payment's Sales Orders button back to the order. A credit customer must have a credit limit and no overdue invoices, otherwise Odoo asks for Request Overdue Approval or Request Credit Limit Approval."
       },
       "steps": [
         {
@@ -1205,28 +1205,259 @@
         },
         {
           "sequence": 380,
-          "title": "Register the payment (done by the accountant)",
+          "title": "Click Register Payment",
           "title_i18n": {
-            "en_US": "Register the payment (done by the accountant)",
-            "si_LK": "Register the payment (done by the accountant)",
-            "ta_IN": "Register the payment (done by the accountant)"
+            "en_US": "Click Register Payment",
+            "si_LK": "Click Register Payment",
+            "ta_IN": "Click Register Payment"
           },
           "trigger": "[data-hotkey=\"g\"]",
-          "content": "When the customer pays, the accountant clicks **Register Payment** at the top of this posted invoice, chooses the payment journal (for a cash receipt \"Customer Receipts - Cash\"), checks the amount and clicks **Create Payment**. This guide only shows the button: the payment itself is not registered here.",
+          "content": "On the posted invoice click **Register Payment** (top left, next to the Posted status). A small \"Register Payment\" window opens.",
           "content_i18n": {
-            "en_US": "When the customer pays, the accountant clicks **Register Payment** at the top of this posted invoice, chooses the payment journal (for a cash receipt \"Customer Receipts - Cash\"), checks the amount and clicks **Create Payment**. This guide only shows the button: the payment itself is not registered here.",
-            "si_LK": "When the customer pays, the accountant clicks **Register Payment** at the top of this posted invoice, chooses the payment journal (for a cash receipt \"Customer Receipts - Cash\"), checks the amount and clicks **Create Payment**. This guide only shows the button: the payment itself is not registered here.",
-            "ta_IN": "When the customer pays, the accountant clicks **Register Payment** at the top of this posted invoice, chooses the payment journal (for a cash receipt \"Customer Receipts - Cash\"), checks the amount and clicks **Create Payment**. This guide only shows the button: the payment itself is not registered here."
+            "en_US": "On the posted invoice click **Register Payment** (top left, next to the Posted status). A small \"Register Payment\" window opens.",
+            "si_LK": "On the posted invoice click **Register Payment** (top left, next to the Posted status). A small \"Register Payment\" window opens.",
+            "ta_IN": "On the posted invoice click **Register Payment** (top left, next to the Posted status). A small \"Register Payment\" window opens."
           },
           "position": "bottom",
           "run": "click",
           "is_check": false,
           "validation_type": "none",
-          "description": "Why: the Register Payment button records the money received from the customer and matches it to the invoice. What you will see after the accountant has done it: the invoice gets an IN PAYMENT or PAID ribbon and its payment status changes from Not Paid to Paid. Watch out: you need accounting rights to see this button. The journal decides where the money is recorded (cash journal for cash, bank journal for transfers and cheques). Until it is paid, the invoice stays open and appears in the overdue list once the 14 days have passed. Nothing is clicked in this step.",
+          "description": "Why: this button records the money the customer has paid and matches it to the invoice, so the invoice is no longer shown as unpaid. What you will see: a pop-up window with the Journal, Payment Method, Amount, Payment Date and Memo fields already filled in by Odoo. Watch out: you need accounting rights to see this button. If you cannot see it, ask the accountant to register the payment.",
           "description_i18n": {
-            "en_US": "Why: the Register Payment button records the money received from the customer and matches it to the invoice. What you will see after the accountant has done it: the invoice gets an IN PAYMENT or PAID ribbon and its payment status changes from Not Paid to Paid. Watch out: you need accounting rights to see this button. The journal decides where the money is recorded (cash journal for cash, bank journal for transfers and cheques). Until it is paid, the invoice stays open and appears in the overdue list once the 14 days have passed. Nothing is clicked in this step.",
-            "si_LK": "Why: the Register Payment button records the money received from the customer and matches it to the invoice. What you will see after the accountant has done it: the invoice gets an IN PAYMENT or PAID ribbon and its payment status changes from Not Paid to Paid. Watch out: you need accounting rights to see this button. The journal decides where the money is recorded (cash journal for cash, bank journal for transfers and cheques). Until it is paid, the invoice stays open and appears in the overdue list once the 14 days have passed. Nothing is clicked in this step.",
-            "ta_IN": "Why: the Register Payment button records the money received from the customer and matches it to the invoice. What you will see after the accountant has done it: the invoice gets an IN PAYMENT or PAID ribbon and its payment status changes from Not Paid to Paid. Watch out: you need accounting rights to see this button. The journal decides where the money is recorded (cash journal for cash, bank journal for transfers and cheques). Until it is paid, the invoice stays open and appears in the overdue list once the 14 days have passed. Nothing is clicked in this step."
+            "en_US": "Why: this button records the money the customer has paid and matches it to the invoice, so the invoice is no longer shown as unpaid. What you will see: a pop-up window with the Journal, Payment Method, Amount, Payment Date and Memo fields already filled in by Odoo. Watch out: you need accounting rights to see this button. If you cannot see it, ask the accountant to register the payment.",
+            "si_LK": "Why: this button records the money the customer has paid and matches it to the invoice, so the invoice is no longer shown as unpaid. What you will see: a pop-up window with the Journal, Payment Method, Amount, Payment Date and Memo fields already filled in by Odoo. Watch out: you need accounting rights to see this button. If you cannot see it, ask the accountant to register the payment.",
+            "ta_IN": "Why: this button records the money the customer has paid and matches it to the invoice, so the invoice is no longer shown as unpaid. What you will see: a pop-up window with the Journal, Payment Method, Amount, Payment Date and Memo fields already filled in by Odoo. Watch out: you need accounting rights to see this button. If you cannot see it, ask the accountant to register the payment."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 390,
+          "title": "Open the Journal drop-down",
+          "title_i18n": {
+            "en_US": "Open the Journal drop-down",
+            "si_LK": "Open the Journal drop-down",
+            "ta_IN": "Open the Journal drop-down"
+          },
+          "trigger": "#journal_id_0",
+          "content": "Click the **Journal** field in the pop-up window to open its list of journals.",
+          "content_i18n": {
+            "en_US": "Click the **Journal** field in the pop-up window to open its list of journals.",
+            "si_LK": "Click the **Journal** field in the pop-up window to open its list of journals.",
+            "ta_IN": "Click the **Journal** field in the pop-up window to open its list of journals."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: the journal decides where Odoo records the money (cash, bank, cheque). What you will see: a short drop-down list of journals with a \"Search More...\" line at the bottom. Watch out: the Journal field is normally pre-filled with a bank journal. In this guide the customer pays in cash, so you must change it to a cash receipts journal.",
+          "description_i18n": {
+            "en_US": "Why: the journal decides where Odoo records the money (cash, bank, cheque). What you will see: a short drop-down list of journals with a \"Search More...\" line at the bottom. Watch out: the Journal field is normally pre-filled with a bank journal. In this guide the customer pays in cash, so you must change it to a cash receipts journal.",
+            "si_LK": "Why: the journal decides where Odoo records the money (cash, bank, cheque). What you will see: a short drop-down list of journals with a \"Search More...\" line at the bottom. Watch out: the Journal field is normally pre-filled with a bank journal. In this guide the customer pays in cash, so you must change it to a cash receipts journal.",
+            "ta_IN": "Why: the journal decides where Odoo records the money (cash, bank, cheque). What you will see: a short drop-down list of journals with a \"Search More...\" line at the bottom. Watch out: the Journal field is normally pre-filled with a bank journal. In this guide the customer pays in cash, so you must change it to a cash receipts journal."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 400,
+          "title": "Click Search More...",
+          "title_i18n": {
+            "en_US": "Click Search More...",
+            "si_LK": "Click Search More...",
+            "ta_IN": "Click Search More..."
+          },
+          "trigger": "#journal_id_0_0_8",
+          "content": "At the bottom of the drop-down click **Search More...** to see every journal in a list.",
+          "content_i18n": {
+            "en_US": "At the bottom of the drop-down click **Search More...** to see every journal in a list.",
+            "si_LK": "At the bottom of the drop-down click **Search More...** to see every journal in a list.",
+            "ta_IN": "At the bottom of the drop-down click **Search More...** to see every journal in a list."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: the short drop-down only shows a few journals and the cash receipts journal may not be among them. What you will see: a \"Search: Journal\" window listing all journals, one per row. Watch out: if the journal you need is already visible in the short list you may click it directly.",
+          "description_i18n": {
+            "en_US": "Why: the short drop-down only shows a few journals and the cash receipts journal may not be among them. What you will see: a \"Search: Journal\" window listing all journals, one per row. Watch out: if the journal you need is already visible in the short list you may click it directly.",
+            "si_LK": "Why: the short drop-down only shows a few journals and the cash receipts journal may not be among them. What you will see: a \"Search: Journal\" window listing all journals, one per row. Watch out: if the journal you need is already visible in the short list you may click it directly.",
+            "ta_IN": "Why: the short drop-down only shows a few journals and the cash receipts journal may not be among them. What you will see: a \"Search: Journal\" window listing all journals, one per row. Watch out: if the journal you need is already visible in the short list you may click it directly."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 410,
+          "title": "Pick the cash receipts journal",
+          "title_i18n": {
+            "en_US": "Pick the cash receipts journal",
+            "si_LK": "Pick the cash receipts journal",
+            "ta_IN": "Pick the cash receipts journal"
+          },
+          "trigger": "tr.o_data_row.o_row_draggable:nth-of-type(4) > td.o_data_cell.cursor-pointer:nth-of-type(2)",
+          "content": "In the list click the row of the cash receipts journal. The recorded tour used the journal \"Customer Receipts - Cash\"; on this instance that journal does not exist, so pick **Commercial - Cash Receipts**.",
+          "content_i18n": {
+            "en_US": "In the list click the row of the cash receipts journal. The recorded tour used the journal \"Customer Receipts - Cash\"; on this instance that journal does not exist, so pick **Commercial - Cash Receipts**.",
+            "si_LK": "In the list click the row of the cash receipts journal. The recorded tour used the journal \"Customer Receipts - Cash\"; on this instance that journal does not exist, so pick **Commercial - Cash Receipts**.",
+            "ta_IN": "In the list click the row of the cash receipts journal. The recorded tour used the journal \"Customer Receipts - Cash\"; on this instance that journal does not exist, so pick **Commercial - Cash Receipts**."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: the money must be booked on a journal that fits the way the customer paid. What you will see: the window closes and the Journal field shows \"Commercial - Cash Receipts\". Watch out: the journal name in the recorded tour (\"Customer Receipts - Cash\") differs from the journal on this instance. The cashier must always pick a cash receipts journal that has an outstanding receipts account configured. The plain \"Cash\" journal does not have one, and Odoo then refuses to create the payment with an error about the outstanding receipts account. Ask the accountant to set it up if you get that error.",
+          "description_i18n": {
+            "en_US": "Why: the money must be booked on a journal that fits the way the customer paid. What you will see: the window closes and the Journal field shows \"Commercial - Cash Receipts\". Watch out: the journal name in the recorded tour (\"Customer Receipts - Cash\") differs from the journal on this instance. The cashier must always pick a cash receipts journal that has an outstanding receipts account configured. The plain \"Cash\" journal does not have one, and Odoo then refuses to create the payment with an error about the outstanding receipts account. Ask the accountant to set it up if you get that error.",
+            "si_LK": "Why: the money must be booked on a journal that fits the way the customer paid. What you will see: the window closes and the Journal field shows \"Commercial - Cash Receipts\". Watch out: the journal name in the recorded tour (\"Customer Receipts - Cash\") differs from the journal on this instance. The cashier must always pick a cash receipts journal that has an outstanding receipts account configured. The plain \"Cash\" journal does not have one, and Odoo then refuses to create the payment with an error about the outstanding receipts account. Ask the accountant to set it up if you get that error.",
+            "ta_IN": "Why: the money must be booked on a journal that fits the way the customer paid. What you will see: the window closes and the Journal field shows \"Commercial - Cash Receipts\". Watch out: the journal name in the recorded tour (\"Customer Receipts - Cash\") differs from the journal on this instance. The cashier must always pick a cash receipts journal that has an outstanding receipts account configured. The plain \"Cash\" journal does not have one, and Odoo then refuses to create the payment with an error about the outstanding receipts account. Ask the accountant to set it up if you get that error."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 490,
+          "title": "Check the Amount",
+          "title_i18n": {
+            "en_US": "Check the Amount",
+            "si_LK": "Check the Amount",
+            "ta_IN": "Check the Amount"
+          },
+          "trigger": "#amount_0",
+          "content": "Look at the **Amount** field. Odoo has already filled in the full invoice total. Click on the amount to highlight it.",
+          "content_i18n": {
+            "en_US": "Look at the **Amount** field. Odoo has already filled in the full invoice total. Click on the amount to highlight it.",
+            "si_LK": "Look at the **Amount** field. Odoo has already filled in the full invoice total. Click on the amount to highlight it.",
+            "ta_IN": "Look at the **Amount** field. Odoo has already filled in the full invoice total. Click on the amount to highlight it."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: the amount is what the customer actually handed over; it must match the cash you received. What you will see: the invoice total (for example the full amount of this credit sale) in the Amount field. The recorded tour typed 1,200 here, but the amount on your invoice will be different, so do not type a number: keep the pre-filled invoice total unless the customer paid only part of it. Watch out: a smaller amount creates a partial payment and the invoice stays open for the remainder.",
+          "description_i18n": {
+            "en_US": "Why: the amount is what the customer actually handed over; it must match the cash you received. What you will see: the invoice total (for example the full amount of this credit sale) in the Amount field. The recorded tour typed 1,200 here, but the amount on your invoice will be different, so do not type a number: keep the pre-filled invoice total unless the customer paid only part of it. Watch out: a smaller amount creates a partial payment and the invoice stays open for the remainder.",
+            "si_LK": "Why: the amount is what the customer actually handed over; it must match the cash you received. What you will see: the invoice total (for example the full amount of this credit sale) in the Amount field. The recorded tour typed 1,200 here, but the amount on your invoice will be different, so do not type a number: keep the pre-filled invoice total unless the customer paid only part of it. Watch out: a smaller amount creates a partial payment and the invoice stays open for the remainder.",
+            "ta_IN": "Why: the amount is what the customer actually handed over; it must match the cash you received. What you will see: the invoice total (for example the full amount of this credit sale) in the Amount field. The recorded tour typed 1,200 here, but the amount on your invoice will be different, so do not type a number: keep the pre-filled invoice total unless the customer paid only part of it. Watch out: a smaller amount creates a partial payment and the invoice stays open for the remainder."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 500,
+          "title": "Press Enter to confirm the amount",
+          "title_i18n": {
+            "en_US": "Press Enter to confirm the amount",
+            "si_LK": "Press Enter to confirm the amount",
+            "ta_IN": "Press Enter to confirm the amount"
+          },
+          "trigger": "#amount_0",
+          "content": "With the amount highlighted press **Enter** on the keyboard to confirm it.",
+          "content_i18n": {
+            "en_US": "With the amount highlighted press **Enter** on the keyboard to confirm it.",
+            "si_LK": "With the amount highlighted press **Enter** on the keyboard to confirm it.",
+            "ta_IN": "With the amount highlighted press **Enter** on the keyboard to confirm it."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: pressing Enter makes Odoo accept the amount and recalculate the payment difference. What you will see: the amount stays as it is and no error message appears. Watch out: if Odoo shows a \"Payment Difference\" section below the amount, the amount is not equal to the invoice total, so check what the customer paid.",
+          "description_i18n": {
+            "en_US": "Why: pressing Enter makes Odoo accept the amount and recalculate the payment difference. What you will see: the amount stays as it is and no error message appears. Watch out: if Odoo shows a \"Payment Difference\" section below the amount, the amount is not equal to the invoice total, so check what the customer paid.",
+            "si_LK": "Why: pressing Enter makes Odoo accept the amount and recalculate the payment difference. What you will see: the amount stays as it is and no error message appears. Watch out: if Odoo shows a \"Payment Difference\" section below the amount, the amount is not equal to the invoice total, so check what the customer paid.",
+            "ta_IN": "Why: pressing Enter makes Odoo accept the amount and recalculate the payment difference. What you will see: the amount stays as it is and no error message appears. Watch out: if Odoo shows a \"Payment Difference\" section below the amount, the amount is not equal to the invoice total, so check what the customer paid."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 510,
+          "title": "Click Create Payment",
+          "title_i18n": {
+            "en_US": "Click Create Payment",
+            "si_LK": "Click Create Payment",
+            "ta_IN": "Click Create Payment"
+          },
+          "trigger": "[data-hotkey=\"q\"]",
+          "content": "Click **Create Payment** at the bottom of the window.",
+          "content_i18n": {
+            "en_US": "Click **Create Payment** at the bottom of the window.",
+            "si_LK": "Click **Create Payment** at the bottom of the window.",
+            "ta_IN": "Click **Create Payment** at the bottom of the window."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: this posts the payment and links it to the invoice. What you will see: the window closes and the invoice now shows a green PAID (or IN PAYMENT) ribbon and its payment status changes from Not Paid to Paid. Watch out: if Odoo shows an error about the outstanding receipts account, the journal you picked is not set up for receipts. Go back, pick another cash receipts journal or ask the accountant to configure it.",
+          "description_i18n": {
+            "en_US": "Why: this posts the payment and links it to the invoice. What you will see: the window closes and the invoice now shows a green PAID (or IN PAYMENT) ribbon and its payment status changes from Not Paid to Paid. Watch out: if Odoo shows an error about the outstanding receipts account, the journal you picked is not set up for receipts. Go back, pick another cash receipts journal or ask the accountant to configure it.",
+            "si_LK": "Why: this posts the payment and links it to the invoice. What you will see: the window closes and the invoice now shows a green PAID (or IN PAYMENT) ribbon and its payment status changes from Not Paid to Paid. Watch out: if Odoo shows an error about the outstanding receipts account, the journal you picked is not set up for receipts. Go back, pick another cash receipts journal or ask the accountant to configure it.",
+            "ta_IN": "Why: this posts the payment and links it to the invoice. What you will see: the window closes and the invoice now shows a green PAID (or IN PAYMENT) ribbon and its payment status changes from Not Paid to Paid. Watch out: if Odoo shows an error about the outstanding receipts account, the journal you picked is not set up for receipts. Go back, pick another cash receipts journal or ask the accountant to configure it."
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 520,
+          "title": "Open the Sales Orders button",
+          "title_i18n": {
+            "en_US": "Open the Sales Orders button",
+            "si_LK": "Open the Sales Orders button",
+            "ta_IN": "Open the Sales Orders button"
+          },
+          "trigger": "button[name=\"action_view_source_sale_orders\"]",
+          "content": "On the paid invoice click the **Sales Orders** smart button (shows the number 1).",
+          "content_i18n": {
+            "en_US": "On the paid invoice click the **Sales Orders** smart button (shows the number 1).",
+            "si_LK": "On the paid invoice click the **Sales Orders** smart button (shows the number 1).",
+            "ta_IN": "On the paid invoice click the **Sales Orders** smart button (shows the number 1)."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Why: this is the quick way to see which sales order the invoice belongs to, so the whole chain from order to payment can be traced. What you will see on the invoice: the PAID / IN PAYMENT ribbon and a Sales Orders button with the number 1. After the click the original Sales Order opens, with the invoice status Fully Invoiced and the delivery done. Watch out: the button is only on invoices created from a sales order.",
+          "description_i18n": {
+            "en_US": "Why: this is the quick way to see which sales order the invoice belongs to, so the whole chain from order to payment can be traced. What you will see on the invoice: the PAID / IN PAYMENT ribbon and a Sales Orders button with the number 1. After the click the original Sales Order opens, with the invoice status Fully Invoiced and the delivery done. Watch out: the button is only on invoices created from a sales order.",
+            "si_LK": "Why: this is the quick way to see which sales order the invoice belongs to, so the whole chain from order to payment can be traced. What you will see on the invoice: the PAID / IN PAYMENT ribbon and a Sales Orders button with the number 1. After the click the original Sales Order opens, with the invoice status Fully Invoiced and the delivery done. Watch out: the button is only on invoices created from a sales order.",
+            "ta_IN": "Why: this is the quick way to see which sales order the invoice belongs to, so the whole chain from order to payment can be traced. What you will see on the invoice: the PAID / IN PAYMENT ribbon and a Sales Orders button with the number 1. After the click the original Sales Order opens, with the invoice status Fully Invoiced and the delivery done. Watch out: the button is only on invoices created from a sales order."
           },
           "validation_regex": "",
           "validation_message": "",

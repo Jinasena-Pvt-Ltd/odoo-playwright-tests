@@ -38,10 +38,10 @@ const TOUR_NOTES = {
   },
   'credit-sales-order': {
     displayTitle: 'CREDIT SALES ORDER',
-    adapted: new Set([10, 50, 60, 70, 90, 140, 150, 160, 170, 180, 190, 200, 210, 220, 290, 300, 330, 340, 350, 380]),
-    // 80 = Credit selected twice. 390-520 = Register Payment with the cash journal: the cash journal has no outstanding
-    // receipts account on this instance, so Odoo refuses the payment. Step 380 only shows the Register Payment button.
-    excluded: new Set([80, 390, 400, 410, 420, 430, 440, 450, 460, 470, 480, 490, 500, 510, 520]),
+    adapted: new Set([10, 50, 60, 70, 90, 140, 150, 160, 170, 180, 190, 200, 210, 220, 290, 300, 330, 340, 350, 410]),
+    // 80 = Credit selected twice. 380-520 = Register Payment (journal 'Commercial - Cash Receipts' replaces the tour's
+    // non-existent 'Customer Receipts - Cash'; amount left as pre-filled). 420-480 do not exist in the export.
+    excluded: new Set([80]),
     // Fields Odoo fills in by itself: the user only has to CHECK them (highlighted in the manual).
     autoFill: new Set([140, 150, 160, 170, 180, 190, 200, 210]),
   },

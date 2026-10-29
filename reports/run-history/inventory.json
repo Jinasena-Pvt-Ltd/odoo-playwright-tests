@@ -518,5 +518,65 @@
   "title": "6. trace: payment → Sales Orders smart button leads back to the order",
   "file": "sales.credit-order.spec.ts",
   "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Overdue credit sales order: approval, invoice and cash receipt|1. quotation: Credit order with 14 Days payment terms",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Overdue credit sales order: approval, invoice and cash receipt",
+  "title": "1. quotation: Credit order with 14 Days payment terms",
+  "file": "sales.overdue-credit.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Overdue credit sales order: approval, invoice and cash receipt|2. approval: Request Overdue Approval, approve, then confirm → Sales Order",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Overdue credit sales order: approval, invoice and cash receipt",
+  "title": "2. approval: Request Overdue Approval, approve, then confirm → Sales Order",
+  "file": "sales.overdue-credit.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Overdue credit sales order: approval, invoice and cash receipt|3. delivery: validate → Done",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Overdue credit sales order: approval, invoice and cash receipt",
+  "title": "3. delivery: validate → Done",
+  "file": "sales.overdue-credit.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Overdue credit sales order: approval, invoice and cash receipt|4. invoice: create and confirm → Posted",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Overdue credit sales order: approval, invoice and cash receipt",
+  "title": "4. invoice: create and confirm → Posted",
+  "file": "sales.overdue-credit.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Overdue credit sales order: approval, invoice and cash receipt|5. payment: find the order in Sales Orders, open its invoice and register the cash payment",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Overdue credit sales order: approval, invoice and cash receipt",
+  "title": "5. payment: find the order in Sales Orders, open its invoice and register the cash payment",
+  "file": "sales.overdue-credit.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Overdue credit sales order: approval, invoice and cash receipt|6. trace: payment → Sales Orders smart button leads back to the order",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Overdue credit sales order: approval, invoice and cash receipt",
+  "title": "6. trace: payment → Sales Orders smart button leads back to the order",
+  "file": "sales.overdue-credit.spec.ts",
+  "placeholder": false
  }
 ]

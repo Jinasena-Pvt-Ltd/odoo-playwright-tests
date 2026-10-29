@@ -38,10 +38,16 @@ export async function throwIfOdooError(page: Page): Promise<void> {
     if (await details.isVisible().catch(() => false)) await details.click().catch(() => {});
     const body = ((await dlg.locator('.modal-body').first().textContent().catch(() => '')) ?? '')
       .replace(/\s+/g, ' ').trim().replace(/^(.{120}).*(.{700})$/, '$1 … $2');
+    try {
+      const full = ((await dlg.locator('.modal-body').first().textContent().catch(() => '')) ?? '');
+      (await import('fs')).writeFileSync('test-results/odoo-error-last.txt', full);
+    } catch { /* best effort */ }
+    const cause =/(?:[\w.]+(?:Error|Exception)|ValidationError|UserError): [^"]{5,300}?(?= File "|The above|$)/.exec(
+      ((await dlg.locator('.modal-body').first().textContent().catch(() => '')) ?? '').replace(/\s+/g, ' '))?.[0];
     const closeBtn = dlg.locator('button').filter({ hasText: /^(close|ok|stay here)$/i }).first();
     if (await closeBtn.isVisible().catch(() => false)) await closeBtn.click().catch(() => {});
     else await page.keyboard.press('Escape').catch(() => {});
-    throw new OdooSystemError(title || 'Odoo error dialog', body);
+    throw new OdooSystemError(title || 'Odoo error dialog', cause ? `${cause} | ${body}` : body);
   }
 
   const toast = page.locator('.o_notification:visible').first();
