@@ -1,144 +1,5 @@
 [
  {
-  "id": "2026-10-28T03:51:00.153Z",
-  "startedAt": "2026-10-28T03:51:00.153Z",
-  "label": "25th run",
-  "note": "",
-  "results": {
-   "setup|setup|setup||authenticate: auth-storage/admin.json": {
-    "status": "passed",
-    "durationMs": 13917,
-    "error": ""
-   },
-   "admin|sales|business|Sales return and re-invoice of a cash order|1. quotation: Cash order for a Sales quotation": {
-    "status": "passed",
-    "durationMs": 25176,
-    "error": ""
-   },
-   "admin|sales|business|Sales return and re-invoice of a cash order|2. confirm: quotation becomes a Sales Order": {
-    "status": "passed",
-    "durationMs": 9548,
-    "error": ""
-   },
-   "admin|sales|business|Sales return and re-invoice of a cash order|3. delivery: validate → Done": {
-    "status": "passed",
-    "durationMs": 13866,
-    "error": ""
-   },
-   "admin|sales|business|Sales return and re-invoice of a cash order|4. invoice: create and confirm → Posted": {
-    "status": "passed",
-    "durationMs": 12556,
-    "error": ""
-   },
-   "admin|sales|business|Sales return and re-invoice of a cash order|5. reverse: Credit Note wizard → \"Reverse and Create Invoice\" gives a new draft invoice": {
-    "status": "passed",
-    "durationMs": 18469,
-    "error": ""
-   },
-   "admin|sales|business|Sales return and re-invoice of a cash order|6. re-invoice: confirm the new invoice and register the cash payment": {
-    "status": "skipped",
-    "durationMs": 15622,
-    "error": ""
-   },
-   "admin|sales|business|Sales return and re-invoice of a cash order|7. credit note: open it from the order's Invoices list, request approval and approve": {
-    "status": "passed",
-    "durationMs": 18329,
-    "error": ""
-   }
-  }
- },
- {
-  "id": "2026-10-28T04:07:29.512Z",
-  "startedAt": "2026-10-28T04:07:29.512Z",
-  "label": "26th run",
-  "note": "",
-  "results": {
-   "setup|setup|setup||authenticate: auth-storage/admin.json": {
-    "status": "passed",
-    "durationMs": 39924,
-    "error": ""
-   },
-   "admin|sales|business|Sales return and re-invoice of a cash order|1. quotation: Cash order for a Sales quotation": {
-    "status": "passed",
-    "durationMs": 26059,
-    "error": ""
-   },
-   "admin|sales|business|Sales return and re-invoice of a cash order|2. confirm: quotation becomes a Sales Order": {
-    "status": "passed",
-    "durationMs": 10523,
-    "error": ""
-   },
-   "admin|sales|business|Sales return and re-invoice of a cash order|3. delivery: validate → Done": {
-    "status": "passed",
-    "durationMs": 15582,
-    "error": ""
-   },
-   "admin|sales|business|Sales return and re-invoice of a cash order|4. invoice: create and confirm → Posted": {
-    "status": "passed",
-    "durationMs": 13350,
-    "error": ""
-   },
-   "admin|sales|business|Sales return and re-invoice of a cash order|5. reverse: Credit Note wizard → \"Reverse and Create Invoice\" gives a new draft invoice": {
-    "status": "passed",
-    "durationMs": 14909,
-    "error": ""
-   },
-   "admin|sales|business|Sales return and re-invoice of a cash order|6. re-invoice: confirm the new invoice and register the cash payment": {
-    "status": "skipped",
-    "durationMs": 13483,
-    "error": ""
-   },
-   "admin|sales|business|Sales return and re-invoice of a cash order|7. credit note: open it from the order's Invoices list, request approval and approve": {
-    "status": "passed",
-    "durationMs": 20314,
-    "error": ""
-   }
-  }
- },
- {
-  "id": "2026-10-28T08:24:34.938Z",
-  "startedAt": "2026-10-28T08:24:34.938Z",
-  "label": "27th run",
-  "note": "",
-  "results": {
-   "setup|setup|setup||authenticate: auth-storage/admin.json": {
-    "status": "passed",
-    "durationMs": 43189,
-    "error": ""
-   },
-   "admin|sales|business|Credit sales order, invoice and cash receipt|1. quotation: Credit order with 14 Days payment terms": {
-    "status": "passed",
-    "durationMs": 31653,
-    "error": ""
-   },
-   "admin|sales|business|Credit sales order, invoice and cash receipt|2. confirm: quotation becomes a Sales Order": {
-    "status": "failed",
-    "durationMs": 17495,
-    "error": "Error: Odoo Error: An error occurredPlease use the copy button to report the error to your support service.See details"
-   },
-   "admin|sales|business|Credit sales order, invoice and cash receipt|3. delivery: validate → Done": {
-    "status": "skipped",
-    "durationMs": 0,
-    "error": ""
-   },
-   "admin|sales|business|Credit sales order, invoice and cash receipt|4. invoice: create and confirm → Posted": {
-    "status": "skipped",
-    "durationMs": 0,
-    "error": ""
-   },
-   "admin|sales|business|Credit sales order, invoice and cash receipt|5. payment: find the order in Sales Orders, open its invoice and register the cash payment": {
-    "status": "skipped",
-    "durationMs": 0,
-    "error": ""
-   },
-   "admin|sales|business|Credit sales order, invoice and cash receipt|6. trace: payment → Sales Orders smart button leads back to the order": {
-    "status": "skipped",
-    "durationMs": 0,
-    "error": ""
-   }
-  }
- },
- {
   "id": "2026-10-28T08:26:50.846Z",
   "startedAt": "2026-10-28T08:26:50.846Z",
   "label": "28th run",
@@ -1380,6 +1241,109 @@
    "admin|sales|business|High discount cash sales order: over-commission approval, invoice and receipt|6. trace: payment → Sales Orders smart button leads back to the order": {
     "status": "passed",
     "durationMs": 5855,
+    "error": ""
+   }
+  }
+ },
+ {
+  "id": "2026-11-02T06:59:35.819Z",
+  "startedAt": "2026-11-02T06:59:35.819Z",
+  "label": "31st run",
+  "note": "",
+  "results": {}
+ },
+ {
+  "id": "2026-11-02T07:10:04.180Z",
+  "startedAt": "2026-11-02T07:10:04.180Z",
+  "label": "31st run",
+  "note": "",
+  "results": {
+   "setup|setup|setup||authenticate: auth-storage/admin.json": {
+    "status": "passed",
+    "durationMs": 18718,
+    "error": ""
+   },
+   "admin|sales|business|Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt|1. quotation: Credit order for the overdue customer": {
+    "status": "passed",
+    "durationMs": 20472,
+    "error": ""
+   },
+   "admin|sales|business|Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt|2. gating: Confirm is blocked and the overdue details are viewable": {
+    "status": "skipped",
+    "durationMs": 6664,
+    "error": ""
+   },
+   "admin|sales|business|Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt|3. approvals: overdue + credit limit approvals, then confirm → Sales Order": {
+    "status": "passed",
+    "durationMs": 6579,
+    "error": ""
+   },
+   "admin|sales|business|Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt|4. delivery: validate → Done": {
+    "status": "passed",
+    "durationMs": 10478,
+    "error": ""
+   },
+   "admin|sales|business|Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt|5. invoice: create and confirm → Posted": {
+    "status": "passed",
+    "durationMs": 7851,
+    "error": ""
+   },
+   "admin|sales|business|Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt|6. payment: find the order in Sales Orders, open its invoice and register the full cash payment": {
+    "status": "passed",
+    "durationMs": 12435,
+    "error": ""
+   },
+   "admin|sales|business|Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt|7. trace: payment → Sales Orders smart button leads back to 1 source order": {
+    "status": "failed",
+    "durationMs": 15397,
+    "error": "Error: expect(locator).toContainText(expected) failed"
+   }
+  }
+ },
+ {
+  "id": "2026-11-02T07:12:03.343Z",
+  "startedAt": "2026-11-02T07:12:03.343Z",
+  "label": "31st run",
+  "note": "",
+  "results": {
+   "setup|setup|setup||authenticate: auth-storage/admin.json": {
+    "status": "passed",
+    "durationMs": 7733,
+    "error": ""
+   },
+   "admin|sales|business|Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt|1. quotation: Credit order for the overdue customer": {
+    "status": "passed",
+    "durationMs": 18623,
+    "error": ""
+   },
+   "admin|sales|business|Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt|2. gating: Confirm is blocked and the overdue details are viewable": {
+    "status": "skipped",
+    "durationMs": 5472,
+    "error": ""
+   },
+   "admin|sales|business|Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt|3. approvals: overdue + credit limit approvals, then confirm → Sales Order": {
+    "status": "passed",
+    "durationMs": 6167,
+    "error": ""
+   },
+   "admin|sales|business|Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt|4. delivery: validate → Done": {
+    "status": "passed",
+    "durationMs": 10740,
+    "error": ""
+   },
+   "admin|sales|business|Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt|5. invoice: create and confirm → Posted": {
+    "status": "passed",
+    "durationMs": 7789,
+    "error": ""
+   },
+   "admin|sales|business|Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt|6. payment: find the order in Sales Orders, open its invoice and register the full cash payment": {
+    "status": "passed",
+    "durationMs": 12713,
+    "error": ""
+   },
+   "admin|sales|business|Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt|7. trace: payment → Sales Orders smart button leads back to 1 source order": {
+    "status": "passed",
+    "durationMs": 8141,
     "error": ""
    }
   }
