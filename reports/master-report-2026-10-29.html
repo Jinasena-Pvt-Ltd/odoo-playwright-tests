@@ -193,7 +193,7 @@
   <div class="nav-section">
     <div class="nav-module-label"><span class="mod-dot" style="background:#64748b"></span>sales</div>
     <a class="nav-item" href="#sales-config"><span class="nav-dot amber"></span>Config<span class="nav-count skip">0p 1s</span></a>
-    <a class="nav-item" href="#sales-business"><span class="nav-dot red"></span>Business<span class="nav-count">22p 2f 9s</span></a>
+    <a class="nav-item" href="#sales-business"><span class="nav-dot red"></span>Business<span class="nav-count">27p 1f 5s</span></a>
     <a class="nav-item" href="#sales-reporting"><span class="nav-dot amber"></span>Reporting<span class="nav-count skip">0p 1s</span></a>
     <a class="nav-item" href="#sales-permissions"><span class="nav-dot amber"></span>Permissions<span class="nav-count skip">0p 1s</span></a>
     <a class="nav-item" href="#sales-validations"><span class="nav-dot amber"></span>Field Validations<span class="nav-count skip">0p 14s</span></a>
@@ -225,16 +225,16 @@
       <div class="hero-divider"></div>
       <div class="hero-stat"><div class="num">63</div><div class="lbl">Total Tests</div></div>
       <div class="hero-divider"></div>
-      <div class="hero-stat"><div class="num green">22</div><div class="lbl">Passed</div></div>
+      <div class="hero-stat"><div class="num green">27</div><div class="lbl">Passed</div></div>
       <div class="hero-divider"></div>
-      <div class="hero-stat"><div class="num red">2</div><div class="lbl">Failed</div></div>
+      <div class="hero-stat"><div class="num red">1</div><div class="lbl">Failed</div></div>
       <div class="hero-divider"></div>
-      <div class="hero-stat"><div class="num purple">15</div><div class="lbl">Skipped (SaaS)</div></div>
+      <div class="hero-stat"><div class="num purple">11</div><div class="lbl">Skipped (SaaS)</div></div>
       <div class="hero-divider"></div><div class="hero-stat"><div class="num amber">24</div><div class="lbl">Pending</div></div>
     </div>
     <div class="hero-bar-wrap">
-      <div class="hero-bar-label"><span>Pass rate (of tests that ran)</span><span>92% · 22/24</span></div>
-      <div class="hero-bar-bg"><div class="hero-bar-fill" style="width:92%"></div></div>
+      <div class="hero-bar-label"><span>Pass rate (of tests that ran)</span><span>96% · 27/28</span></div>
+      <div class="hero-bar-bg"><div class="hero-bar-fill" style="width:96%"></div></div>
     </div>
   </div>
 
@@ -244,15 +244,15 @@
       <div class="module-card-name">sales</div>
       <div class="module-card-sub"></div>
       <div class="module-card-stats">
-        <span class="p">✔ 22</span>
-        <span class="s">⏭ 15</span>
-        <span class="f">❌ 2</span>
+        <span class="p">✔ 27</span>
+        <span class="s">⏭ 11</span>
+        <span class="f">❌ 1</span>
         <span class="t">of 63</span>
       </div>
       <div class="module-mini-bar">
-        <div class="seg-pass" style="width:35%"></div>
-        <div class="seg-skip" style="width:24%"></div>
-        <div class="seg-fail" style="width:3%"></div>
+        <div class="seg-pass" style="width:43%"></div>
+        <div class="seg-skip" style="width:17%"></div>
+        <div class="seg-fail" style="width:2%"></div>
       </div>
       <div style="font-size:0.68rem;color:var(--muted);margin-top:6px;">17 spec files</div>
     </div>
@@ -267,7 +267,7 @@
         <div class="mod-header-title">sales</div>
         <div class="mod-header-meta">src/modules/sales/ · 17 spec files · 63 tests</div>
       </div>
-      <div class="mod-header-pills"><span class="pill green">22 passed</span> <span class="pill red">2 failed</span> <span class="pill purple">15 skipped</span> <span class="pill amber">24 pending</span></div>
+      <div class="mod-header-pills"><span class="pill green">27 passed</span> <span class="pill red">1 failed</span> <span class="pill purple">11 skipped</span> <span class="pill amber">24 pending</span></div>
     </div>
     
     
@@ -305,7 +305,7 @@
       <div class="suite-hdr">
         <span class="suite-hdr-icon">💼</span>
         <span class="suite-hdr-title">Business</span>
-        <span class="pill green">22 passed</span> <span class="pill red">2 failed</span> <span class="pill purple">9 skipped</span> <span class="pill amber">8 pending</span>
+        <span class="pill green">27 passed</span> <span class="pill red">1 failed</span> <span class="pill purple">5 skipped</span> <span class="pill amber">8 pending</span>
         <span class="suite-hdr-file">9 files</span>
       </div>
       
@@ -668,7 +668,7 @@
     await openRecord(page, orderUrl);
     expect(await validateDelivery(page)).toBeTruthy();
   });</pre></details></div>
-        <div class="test-row fail" data-error="Error: Odoo Error: An error occurredPlease use the copy button to report the error to your support service.See details"><span class="test-row-icon">❌</span><span class="test-row-name">2. approval: Request Over Commission Approval, approve, then confirm → Sales Order</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('2. approval: Request Over Commission Approval, approve, then confirm → Sales Order', async ({ page, browser }) =&gt; {
+        <div class="test-row fail" data-error="Error: Approval requested (Request Over Commission Approval). &quot;Approve Over Commission&quot; is now waiting for Tharaka HerathPlease approve the Over-Commission for this sales order. — normal behaviour, the requester cannot approve it. Add ODOO_"><span class="test-row-icon">❌</span><span class="test-row-name">2. approval: Request Over Commission Approval, approve, then confirm → Sales Order</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('2. approval: Request Over Commission Approval, approve, then confirm → Sales Order', async ({ page, browser }) =&gt; {
     test.skip(!orderUrl, 'No quotation from step 1');
     await openRecord(page, orderUrl);
     await approveAndConfirm(page, browser);
@@ -776,7 +776,7 @@
       <div class="suite-hdr" style="margin-top:16px;">
         <span class="suite-hdr-icon">💼</span>
         <span class="suite-hdr-title">sales.overdue-credit</span>
-        <span class="pill green">1 passed</span> <span class="pill red">1 failed</span> <span class="pill purple">4 skipped</span>
+        <span class="pill green">6 passed</span>
         <span class="suite-hdr-file">sales.overdue-credit.spec.ts</span>
       </div>
       <div class="test-list">
@@ -802,7 +802,7 @@
     expect(await validateDelivery(page)).toBeTruthy();
   });
 </pre></details></div>
-        <div class="test-row fail" data-error="Error: Odoo Error: An error occurredPlease use the copy button to report the error to your support service.See detailsRPC_ERROROdoo Server  … l_context=eval_context) File &quot;/home/odoo/src/odoo/odoo/addons/base/models/ir_actions.py&quot;, line 795"><span class="test-row-icon">❌</span><span class="test-row-name">2. approval: Request Overdue Approval, approve, then confirm → Sales Order</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('2. approval: Request Overdue Approval, approve, then confirm → Sales Order', async ({ page, browser }) =&gt; {
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">2. approval: Request Overdue Approval, approve, then confirm → Sales Order</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('2. approval: Request Overdue Approval, approve, then confirm → Sales Order', async ({ page, browser }) =&gt; {
     test.skip(!orderUrl, 'No quotation from step 1');
     await openRecord(page, orderUrl);
     await approveAndConfirm(page, browser);
@@ -824,7 +824,7 @@
   });
 
   test('5. payment: find the order in Sales Orders, open its invoice and register the cash payment', async ({ page }) =&gt; {</pre></details></div>
-        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">3. delivery: validate → Done</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('3. delivery: validate → Done', async ({ page }) =&gt; {
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">3. delivery: validate → Done</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('3. delivery: validate → Done', async ({ page }) =&gt; {
     test.skip(!orderUrl, 'No order from step 1');
     await openRecord(page, orderUrl);
     expect(await validateDelivery(page)).toBeTruthy();
@@ -846,7 +846,7 @@
       await page.locator('[data-menu-xmlid=&quot;sale.menu_sale_order&quot;]').click();
       const search = page.locator('input.o_searchview_input').first();
       await expect(search).toBeVisible({ timeout: 20_000 });</pre></details></div>
-        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">4. invoice: create and confirm → Posted</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('4. invoice: create and confirm → Posted', async ({ page }) =&gt; {
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">4. invoice: create and confirm → Posted</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('4. invoice: create and confirm → Posted', async ({ page }) =&gt; {
     test.skip(!orderUrl, 'No order from step 1');
     await openRecord(page, orderUrl);
     expect(await createInvoice(page)).toBeTruthy();
@@ -868,7 +868,7 @@
       await expect(row).toBeVisible({ timeout: 30_000 });
       await row.locator('td[name=&quot;name&quot;]').click();
       await expect(page.locator('.o_form_view')).toBeVisible({ timeout: 30_000 });</pre></details></div>
-        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">5. payment: find the order in Sales Orders, open its invoice and register the cash payment</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('5. payment: find the order in Sales Orders, open its invoice and register the cash payment', async ({ page }) =&gt; {
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">5. payment: find the order in Sales Orders, open its invoice and register the cash payment</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('5. payment: find the order in Sales Orders, open its invoice and register the cash payment', async ({ page }) =&gt; {
     test.skip(!orderNumber || !invoiceUrl, 'No invoiced order from steps 1-4');
 
     await test.step('Find the order by number (Sales → Orders → Sales Orders)', async () =&gt; {
@@ -890,7 +890,7 @@
       await expect(page.locator('.o_form_view')).toBeVisible({ timeout: 30_000 });
       await expect(stage(page)).toContainText(/posted/i);
     });</pre></details></div>
-        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">6. trace: payment → Sales Orders smart button leads back to the order</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('6. trace: payment → Sales Orders smart button leads back to the order', async ({ page }) =&gt; {
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">6. trace: payment → Sales Orders smart button leads back to the order</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('6. trace: payment → Sales Orders smart button leads back to the order', async ({ page }) =&gt; {
     test.skip(!invoiceUrl, 'No invoice from step 4');
     await openRecord(page, invoiceUrl);
     test.skip(!paymentUrl, 'Payment was not registered in step 5');

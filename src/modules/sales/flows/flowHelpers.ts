@@ -389,7 +389,20 @@ async function approveAndConfirmImpl(page: Page, browser: Browser): Promise<Appr
 
     const appr = buttons.find(b => /^approve\b/i.test(b.text));
     if (appr) {
-      if (appr.waiting || !appr.enabled) {
+      // Members of the approver group can often approve even when the activity names someone else:
+      // try the button as the current user once before falling back to a separate approver login.
+      const tried = requested.has(`approve:${appr.text}`);
+      if (appr.enabled && !tried) {
+        requested.add(`approve:${appr.text}`);
+        await clickButton(page, new RegExp(`^${escRx(appr.text)}`, 'i'), 10_000);
+        out.taken.push(`${appr.text} (as ${process.env.ADMIN_EMAIL ?? 'admin'})`);
+        await page.waitForTimeout(1_500);
+        await throwIfOdooError(page);
+        await page.reload({ waitUntil: 'domcontentloaded' });
+        await expect(page.locator('.o_form_view')).toBeVisible({ timeout: 60_000 });
+        continue;
+      }
+      if (appr.waiting || !appr.enabled || tried) {
         // The approval is assigned to another user — the requester cannot approve it.
         const who = await approverNameOnPage(page);
         if (!process.env.ODOO_APPROVER_EMAIL || !process.env.ODOO_APPROVER_PASSWORD) {
