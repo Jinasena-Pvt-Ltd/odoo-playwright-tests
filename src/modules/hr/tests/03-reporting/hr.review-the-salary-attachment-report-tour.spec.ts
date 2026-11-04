@@ -74,7 +74,7 @@ test.describe("Review the Salary Attachment Report @module:hr @step:reporting", 
       const loc = (page.locator(".o_pivot")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-06.png");
-      await loc.click();
+      // (click skipped: only ends the tour)
     });
 
   });

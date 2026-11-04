@@ -89,8 +89,15 @@ export function genSpec(tour, domain, step = "business") {
          'if (await page.locator(".o_view_nocontent").isVisible().catch(() => false)) test.skip(true, "No test records to clean up");']
           .map((l) => (l.startsWith("loc.") ? "await " + l : l)).join("\n")
       : null;
+    // A last "Click anywhere to finish/continue" step only ends the tour. The
+    // screenshot above already covers it, and clicking a big pivot or list
+    // header can hang on actionability checks, so don't click.
+    const endsTour =
+      step.number === total && /click\b.*\b(finish|continue)\b/i.test(step.content || "") &&
+      /^click$/i.test(String(step.run ?? "click").trim());
+    const finalCode = endsTour ? "// (click skipped: only ends the tour)" : (cleanupCode ?? code);
     // Indent multi-line action code (the "manual" case spans two lines).
-    const actionCode = (cleanupCode ?? code)
+    const actionCode = finalCode
       .split("\n")
       .map((l) => `      ${l}`)
       .join("\n");

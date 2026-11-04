@@ -74,7 +74,7 @@ test.describe("Filter and Group the Employee List @module:hr @step:reporting", (
       const loc = (page.locator(".o_list_view .o_list_table thead")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-06.png");
-      await loc.click();
+      // (click skipped: only ends the tour)
     });
 
   });
