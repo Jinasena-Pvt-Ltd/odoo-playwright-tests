@@ -8,11 +8,11 @@
         "si_LK": "Cash Sales Order (Profit Margin Control)",
         "ta_IN": "Cash Sales Order (Profit Margin Control)"
       },
-      "description": "New Sales Order  ",
+      "description": "A friendly step-by-step guide for selling for cash when the profit is too low. Odoo works out the profit margin of every sales order. When the margin is lower than the minimum the company allows, Odoo hides the Confirm button until a responsible person has approved the order. You will create a cash quotation for the customer \"abc\" with a product that is sold below its cost, read why Odoo asks for approval, request and give the Insufficient Margin approval, confirm the order, deliver the goods, invoice the customer and register the cash payment, and finally follow the invoice back to the order.",
       "description_i18n": {
-        "en_US": "New Sales Order  ",
-        "si_LK": "New Sales Order  ",
-        "ta_IN": "New Sales Order  "
+        "en_US": "A friendly step-by-step guide for selling for cash when the profit is too low. Odoo works out the profit margin of every sales order. When the margin is lower than the minimum the company allows, Odoo hides the Confirm button until a responsible person has approved the order. You will create a cash quotation for the customer \"abc\" with a product that is sold below its cost, read why Odoo asks for approval, request and give the Insufficient Margin approval, confirm the order, deliver the goods, invoice the customer and register the cash payment, and finally follow the invoice back to the order.",
+        "si_LK": "A friendly step-by-step guide for selling for cash when the profit is too low. Odoo works out the profit margin of every sales order. When the margin is lower than the minimum the company allows, Odoo hides the Confirm button until a responsible person has approved the order. You will create a cash quotation for the customer \"abc\" with a product that is sold below its cost, read why Odoo asks for approval, request and give the Insufficient Margin approval, confirm the order, deliver the goods, invoice the customer and register the cash payment, and finally follow the invoice back to the order.",
+        "ta_IN": "A friendly step-by-step guide for selling for cash when the profit is too low. Odoo works out the profit margin of every sales order. When the margin is lower than the minimum the company allows, Odoo hides the Confirm button until a responsible person has approved the order. You will create a cash quotation for the customer \"abc\" with a product that is sold below its cost, read why Odoo asks for approval, request and give the Insufficient Margin approval, confirm the order, deliver the goods, invoice the customer and register the cash payment, and finally follow the invoice back to the order."
       },
       "steps": [
         {
