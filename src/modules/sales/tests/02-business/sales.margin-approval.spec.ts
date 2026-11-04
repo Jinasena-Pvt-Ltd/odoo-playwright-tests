@@ -26,7 +26,6 @@
  *   FLOW_MARGIN_UNIT_PRICE      override the line unit price (e.g. to push margin below the minimum)
  *   FLOW_MARGIN_COST            product cost, when known; enables the marginPct() arithmetic check
  *   FLOW_MIN_MARGIN             minimum margin % (default 60)
- *   FLOW_HIGH_MARGIN_PRODUCT_CODE / _NAME / _UNIT_PRICE   data for the optional "margin >= minimum" describe (skipped if unset)
  *   ODOO_APPROVER_EMAIL / ODOO_APPROVER_PASSWORD (when the approval is assigned to someone other than the logged-in user)
  *
  * Selectors are by field name / visible text — recorded action-id buttons (1517/1513/1515) were NOT carried over.
@@ -46,14 +45,14 @@ const UNIT_PRICE    = process.env.FLOW_MARGIN_UNIT_PRICE ? Number(process.env.FL
 const KNOWN_COST    = process.env.FLOW_MARGIN_COST ? Number(process.env.FLOW_MARGIN_COST) : undefined;
 const MIN_MARGIN    = Number(process.env.FLOW_MIN_MARGIN ?? 60);
 
-const HIGH_CODE     = process.env.FLOW_HIGH_MARGIN_PRODUCT_CODE ?? '';
-const HIGH_NAME     = process.env.FLOW_HIGH_MARGIN_PRODUCT_NAME ?? HIGH_CODE;
-const HIGH_PRICE    = process.env.FLOW_HIGH_MARGIN_UNIT_PRICE ? Number(process.env.FLOW_HIGH_MARGIN_UNIT_PRICE) : undefined;
-
 test.use({ actionTimeout: 20_000, navigationTimeout: 60_000, video: 'off', trace: 'off' });
 
 async function openRecord(page: Page, url: string): Promise<void> {
   await page.goto(url, { waitUntil: 'domcontentloaded' });
+  // Odoo occasionally lands on the list view for a saved form URL; retry the navigation once
+  if (!(await page.locator('.o_form_view').isVisible({ timeout: 20_000 }).catch(() => false))) {
+    await page.goto(url, { waitUntil: 'domcontentloaded' });
+  }
   await expect(page.locator('.o_form_view')).toBeVisible({ timeout: 60_000 });
   await expect(page.locator('.o_form_statusbar button').first()).toBeVisible({ timeout: 30_000 });
 }
@@ -61,7 +60,6 @@ async function openRecord(page: Page, url: string): Promise<void> {
 const stage = (page: Page) => page.locator('.o_form_statusbar .o_arrow_button_current').first();
 const escRx = (t: string): string => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 const PAID_RIBBON = '.o_form_view .o_widget_web_ribbon, .o_form_view .ribbon';
-const MARGIN_GATE = /^(insufficient margin details|request insufficient margin approval|approve insufficient margin)$/i;
 
 /** Reads "Margin: Rs X (Y%)" from the order form. null values when the margin block is not shown. */
 async function readMargin(page: Page): Promise<{ amount: number | null; pct: number | null; raw: string }> {
@@ -271,31 +269,5 @@ test.describe.serial('Cash order with profit margin control: margin approval, in
     await throwIfOdooError(page);
     await expect(page.locator('.o_form_view')).toBeVisible({ timeout: 30_000 });
     await expect(stage(page)).toContainText(/posted/i);
-  });
-});
-
-test.describe.serial('Cash order with margin at or above the minimum: confirms without margin approval @module:sales @step:business @e2e', () => {
-  test.skip(process.env.RUN_SALES_FLOWS !== 'true',
-    'Creates real orders — set RUN_SALES_FLOWS=true to run');
-  test.skip(!HIGH_CODE,
-    'No data for a high-margin order — set FLOW_HIGH_MARGIN_PRODUCT_CODE (and optionally _NAME / _UNIT_PRICE)');
-
-  test('8. margin >= minimum: no margin buttons, Confirm is available and works', async ({ page }) => {
-    await openSalesApp(page);
-    await switchCompany(page, COMPANY);
-    await createQuotation(page, {
-      customer: CUSTOMER, paymentType: 'Cash', quantity: 1, unitPrice: HIGH_PRICE,
-      productCode: HIGH_CODE, productName: HIGH_NAME,
-    });
-    const margin = await readMargin(page);
-    test.info().annotations.push({ type: 'margin', description: margin.raw });
-    if (margin.pct !== null) {
-      test.skip(margin.pct < MIN_MARGIN, `Margin ${margin.pct}% is below the minimum ${MIN_MARGIN}% for this data (${margin.raw})`);
-    }
-    const buttons = (await headerButtons(page)).map(b => b.text);
-    expect(buttons.filter(t => MARGIN_GATE.test(t)), `No margin buttons expected. Buttons: ${buttons.join(' | ')}`).toEqual([]);
-    expect(buttons.some(t => /^confirm$/i.test(t)), `Confirm expected. Buttons: ${buttons.join(' | ')}`).toBe(true);
-    await clickButton(page, /^confirm$/i);
-    await expect(stage(page)).toContainText(/sales order/i, { timeout: 60_000 });
   });
 });

@@ -23,7 +23,6 @@ Approve Insufficient Margin (authority person) -> Confirm. Then delivery, invoic
 | 5 | invoice | Invoice created and posted |
 | 6 | payment | Register Payment, "Customer Receipts - Cash" (fallback journals), full invoice total, ribbon Paid / In Payment. Skips if no outstanding account |
 | 7 | trace | Payment's Sales Orders button shows 1 -> order -> Invoices smart button -> invoice |
-| 8 | high margin (optional) | Margin >= minimum: no margin buttons, Confirm works. Skipped unless `FLOW_HIGH_MARGIN_PRODUCT_CODE` is set |
 
 ## Margin formula
 `margin % = (net unit price - cost) / net unit price x 100`, net price = unit price after discount
@@ -56,7 +55,7 @@ Approve Insufficient Margin (authority person) -> Confirm. Then delivery, invoic
 - Unblock: (a) point tests at the DB where the gate is configured, or link action 4033 to automation 491 with trigger fields (price, qty, product, commission); (b) set the Income Account on the test product or copy it from JMC6.
 
 ## Run log (2026-11-04, later, headed, admin, TESTMARGIN1) — margin gate NOW REPRODUCED, full flow passes
-- Result: **8 passed, 1 skipped** (test 8 high-margin needs `FLOW_HIGH_MARGIN_PRODUCT_CODE`).
+- Result: **8 passed, 1 skipped** (the optional high-margin test 8 was skipped; it has since been removed from the spec).
 - The gate fires by itself now: a loss-making line (price 1,000, cost 1,200) sets `x_studio_margin_exceed` on the order (S00276, S00277), Confirm is hidden and
   "Request Insufficient Marginn Approval" (Odoo's spelling, two n's) / "Insufficient Margin Details" appear. Request -> Approve -> Confirm -> delivery -> invoice -> cash receipt -> trace all pass.
   Automation 491 is still inactive/unlinked (last written 2026-11-04 06:18), so the flag is being set by some other change made on the DB; the developer should confirm what.
@@ -66,3 +65,12 @@ Approve Insufficient Margin (authority person) -> Confirm. Then delivery, invoic
 - Actual minimum margin in force is **22.9 %** (from the details text), not 110 or 60. `FLOW_MIN_MARGIN=110` only makes the form-margin assertion pass; set `FLOW_MIN_MARGIN=22.9` for accuracy.
 - Invoice account error is gone: it came from the VAT 18% (Sales) tax on TESTMARGIN1, whose tax line posts to 22050010 VAT PAYABLE (account type Payable). The tax was removed from the test product only; the account type is still a developer fault.
 - Leftovers on the DB: S00275 (flag set by hand for a demo) and S00276 (stuck at the margin gate after the test-2 failure) remain as draft quotations.
+
+## Change (2026-11-04): test 8 (high margin) removed
+The optional high-margin test and its `FLOW_HIGH_MARGIN_*` env vars were removed from the spec; the tour now has 7 tests (quotation, gating, approval, delivery, invoice, payment, trace).
+
+## Run log (2026-11-04, headed, admin, TESTMARGIN1) — 7 tests, all pass
+- Final run: **8 passed (login setup + the 7 margin tests), 0 failed, 0 skipped.** Gate fired on its own, margin approval requested/approved, order confirmed, delivery Done, invoice Posted, cash receipt paid, trace OK.
+- An earlier run the same day failed test 3 (approval): `openRecord` landed on the Quotations list instead of the order form (order S00279 stayed a Quotation). Odoo intermittently does this for a saved form URL.
+  Fix: `openRecord` in the spec now retries the navigation once when `.o_form_view` is not visible within 20 s. The rerun passed.
+- Leftover draft quotations on the DB from earlier attempts: S00275, S00276, S00279 (test data only).

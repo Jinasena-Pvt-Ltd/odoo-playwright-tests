@@ -2270,26 +2270,28 @@
     const invBtn = page.locator('button[name=&quot;action_view_invoice&quot;]').first();
     await expect(invBtn).toBeVisible({ timeout: 15_000 });
     await invBtn.click();</pre></details></div>
-        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">8. margin &gt;= minimum: no margin buttons, Confirm is available and works</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('8. margin &gt;= minimum: no margin buttons, Confirm is available and works', async ({ page }) =&gt; {
-    await openSalesApp(page);
-    await switchCompany(page, COMPANY);
-    await createQuotation(page, {
-      customer: CUSTOMER, paymentType: 'Cash', quantity: 1, unitPrice: HIGH_PRICE,
-      productCode: HIGH_CODE, productName: HIGH_NAME,
+        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">8. margin &gt;= minimum: no margin buttons, Confirm is available and works</span><div class="test-row-tags"><span class="tag smoke">@smoke</span><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('1. quotation: Cash order, Immediate Payment, margin shown on the form @smoke', async ({ page }) =&gt; {
+    orderNumber = await createQuotation(page, {
+      customer: CUSTOMER, paymentType: 'Cash', quantity: 1, unitPrice: UNIT_PRICE,
+      productCode: PRODUCT_CODE, productName: PRODUCT_NAME,
     });
+    orderUrl = page.url();
+    expect(orderNumber).toMatch(/^S\d+/);
+    await expect(page.locator('[name=&quot;x_studio_order_payment_method&quot;] select').first()).toHaveValue(/cash/i);
+    await expect(page.locator('[name=&quot;x_studio_quotation_type&quot;] select').first()).toHaveValue(/sales/i).catch(() =&gt; {});
+    await expect(page.locator('.o_data_row').first()).toContainText(PRODUCT_CODE);
+    await page.getByRole('tab', { name: /other\s*info/i }).click();
+    await expect(page.locator('[name=&quot;payment_term_id&quot;] input').first()).toHaveValue(/immediate/i);
+    await expect(stage(page)).toContainText(/quotation/i);
+
     const margin = await readMargin(page);
     test.info().annotations.push({ type: 'margin', description: margin.raw });
-    if (margin.pct !== null) {
-      test.skip(margin.pct &lt; MIN_MARGIN, `Margin ${margin.pct}% is below the minimum ${MIN_MARGIN}% for this data (${margin.raw})`);
+    if (margin.pct === null) {
+      test.info().annotations.push({ type: 'note', description: 'Margin block not found on the form; arithmetic check skipped' });
+      return;
     }
-    const buttons = (await headerButtons(page)).map(b =&gt; b.text);
-    expect(buttons.filter(t =&gt; MARGIN_GATE.test(t)), `No margin buttons expected. Buttons: ${buttons.join(' | ')}`).toEqual([]);
-    expect(buttons.some(t =&gt; /^confirm$/i.test(t)), `Confirm expected. Buttons: ${buttons.join(' | ')}`).toBe(true);
-    await clickButton(page, /^confirm$/i);
-    await expect(stage(page)).toContainText(/sales order/i, { timeout: 60_000 });
-  });
-});
-</pre></details></div>
+    if (KNOWN_COST !== undefined) {
+      // net unit price as displayed on the line (after any override / discount)</pre></details></div>
       </div>
       <div class="suite-hdr" style="margin-top:16px;">
         <span class="suite-hdr-icon">💼</span>
