@@ -1,53 +1,5 @@
 [
  {
-  "id": "2026-10-29T03:50:57.436Z",
-  "startedAt": "2026-10-29T03:50:57.436Z",
-  "label": "31st run",
-  "note": "",
-  "results": {
-   "setup|setup|setup||authenticate: auth-storage/admin.json": {
-    "status": "passed",
-    "durationMs": 9784,
-    "error": ""
-   },
-   "admin|sales|business|Sales return and re-invoice of a cash order|1. quotation: Cash order for a Sales quotation": {
-    "status": "passed",
-    "durationMs": 20253,
-    "error": ""
-   },
-   "admin|sales|business|Sales return and re-invoice of a cash order|2. confirm: quotation becomes a Sales Order": {
-    "status": "passed",
-    "durationMs": 7747,
-    "error": ""
-   },
-   "admin|sales|business|Sales return and re-invoice of a cash order|3. delivery: validate → Done": {
-    "status": "passed",
-    "durationMs": 12290,
-    "error": ""
-   },
-   "admin|sales|business|Sales return and re-invoice of a cash order|4. invoice: create and confirm → Posted": {
-    "status": "failed",
-    "durationMs": 22184,
-    "error": "Error: The invoice stayed in Draft: Confirm was not available. Header buttons: Confirm | Preview | Cancel | Posted | Draft. A \"View Bank Guarantee Validity\" button means the customer has a mandatory Bank Guarantee that is not valid."
-   },
-   "admin|sales|business|Sales return and re-invoice of a cash order|5. reverse: Credit Note wizard → \"Reverse and Create Invoice\" gives a new draft invoice": {
-    "status": "skipped",
-    "durationMs": 0,
-    "error": ""
-   },
-   "admin|sales|business|Sales return and re-invoice of a cash order|6. re-invoice: confirm the new invoice and register the cash payment": {
-    "status": "skipped",
-    "durationMs": 0,
-    "error": ""
-   },
-   "admin|sales|business|Sales return and re-invoice of a cash order|7. credit note: open it from the order's Invoices list, request approval and approve": {
-    "status": "skipped",
-    "durationMs": 0,
-    "error": ""
-   }
-  }
- },
- {
   "id": "2026-10-29T03:52:38.209Z",
   "startedAt": "2026-10-29T03:52:38.209Z",
   "label": "31st run",
@@ -2230,5 +2182,12 @@
     "error": ""
    }
   }
+ },
+ {
+  "id": "2026-11-04T11:01:25.380Z",
+  "startedAt": "2026-11-04T11:01:25.380Z",
+  "label": "31st run",
+  "note": "",
+  "results": {}
  }
 ]

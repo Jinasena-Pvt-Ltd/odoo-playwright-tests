@@ -1,0 +1,1671 @@
+{
+  "version": 2,
+  "tours": [
+    {
+      "name": "Bank Guarantee Approval Credit Sales Order",
+      "name_i18n": {
+        "en_US": "Bank Guarantee Approval Credit Sales Order",
+        "si_LK": "Bank Guarantee Approval Credit Sales Order",
+        "ta_IN": "Bank Guarantee Approval Credit Sales Order"
+      },
+      "description": "Bank Guarantee Approval",
+      "description_i18n": {
+        "en_US": "Bank Guarantee Approval",
+        "si_LK": "Bank Guarantee Approval",
+        "ta_IN": "Bank Guarantee Approval"
+      },
+      "steps": [
+        {
+          "sequence": 10,
+          "title": "",
+          "title_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "trigger": "[data-menu-xmlid=\"sale.sale_menu_root\"]",
+          "content": "Click the sales module",
+          "content_i18n": {
+            "en_US": "Click the sales module",
+            "si_LK": "Click the sales module",
+            "ta_IN": "Click the sales module"
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 20,
+          "title": "Orders",
+          "title_i18n": {
+            "en_US": "Orders",
+            "si_LK": "Orders",
+            "ta_IN": "Orders"
+          },
+          "trigger": "[data-menu-xmlid=\"sale.sale_order_menu\"]",
+          "content": "Click the Orders",
+          "content_i18n": {
+            "en_US": "Click the Orders",
+            "si_LK": "Click the Orders",
+            "ta_IN": "Click the Orders"
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 30,
+          "title": "Quotations",
+          "title_i18n": {
+            "en_US": "Quotations",
+            "si_LK": "Quotations",
+            "ta_IN": "Quotations"
+          },
+          "trigger": "[data-menu-xmlid=\"sale.menu_sale_quotations\"]",
+          "content": "Click the Quotations",
+          "content_i18n": {
+            "en_US": "Click the Quotations",
+            "si_LK": "Click the Quotations",
+            "ta_IN": "Click the Quotations"
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 40,
+          "title": "New",
+          "title_i18n": {
+            "en_US": "New",
+            "si_LK": "New",
+            "ta_IN": "New"
+          },
+          "trigger": "div.d-xl-inline-flex.gap-1 > button.btn.btn-primary",
+          "content": "Click the new button",
+          "content_i18n": {
+            "en_US": "Click the new button",
+            "si_LK": "Click the new button",
+            "ta_IN": "Click the new button"
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 50,
+          "title": "",
+          "title_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "trigger": "div.o_cell.o_wrap_input > div.o_field_widget.o_required_modifier > div.o_field_many2one_selection > div.o_input_dropdown > div.o-autocomplete.dropdown > input.o-autocomplete--input.o_input",
+          "content": "find a customer...",
+          "content_i18n": {
+            "en_US": "find a customer...",
+            "si_LK": "find a customer...",
+            "ta_IN": "find a customer..."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 60,
+          "title": "Search More...",
+          "title_i18n": {
+            "en_US": "Search More...",
+            "si_LK": "Search More...",
+            "ta_IN": "Search More..."
+          },
+          "trigger": "#autocomplete_0_8",
+          "content": "click Search more...",
+          "content_i18n": {
+            "en_US": "click Search more...",
+            "si_LK": "click Search more...",
+            "ta_IN": "click Search more..."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 70,
+          "title": "",
+          "title_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "trigger": "input.o_searchview_input.o_input",
+          "content": "Type the Bank Guarantee Customer",
+          "content_i18n": {
+            "en_US": "Type the Bank Guarantee Customer",
+            "si_LK": "Type the Bank Guarantee Customer",
+            "ta_IN": "Type the Bank Guarantee Customer"
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 80,
+          "title": "",
+          "title_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "trigger": "input.o_searchview_input.o_input",
+          "content": "press enter",
+          "content_i18n": {
+            "en_US": "press enter",
+            "si_LK": "press enter",
+            "ta_IN": "press enter"
+          },
+          "position": "bottom",
+          "run": "press Enter",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 90,
+          "title": "Bank Guarantee customer No. 20, Colombo ",
+          "title_i18n": {
+            "en_US": "Bank Guarantee customer No. 20, Colombo ",
+            "si_LK": "Bank Guarantee customer No. 20, Colombo ",
+            "ta_IN": "Bank Guarantee customer No. 20, Colombo "
+          },
+          "trigger": "tr.o_data_row:nth-of-type(1) > td.o_data_cell.cursor-pointer:nth-of-type(1)",
+          "content": "Select Bank Guarantee customer\nNo. 20, Colombo 08\nSri Lanka ‒ 00001",
+          "content_i18n": {
+            "en_US": "Select Bank Guarantee customer\nNo. 20, Colombo 08\nSri Lanka ‒ 00001",
+            "si_LK": "Select Bank Guarantee customer\nNo. 20, Colombo 08\nSri Lanka ‒ 00001",
+            "ta_IN": "Select Bank Guarantee customer\nNo. 20, Colombo 08\nSri Lanka ‒ 00001"
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 100,
+          "title": "Cash Credit",
+          "title_i18n": {
+            "en_US": "Cash Credit",
+            "si_LK": "Cash Credit",
+            "ta_IN": "Cash Credit"
+          },
+          "trigger": "#x_studio_order_payment_method_0",
+          "content": "Select Credit",
+          "content_i18n": {
+            "en_US": "Select Credit",
+            "si_LK": "Select Credit",
+            "ta_IN": "Select Credit"
+          },
+          "position": "bottom",
+          "run": "select",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 110,
+          "title": "Cash Credit",
+          "title_i18n": {
+            "en_US": "Cash Credit",
+            "si_LK": "Cash Credit",
+            "ta_IN": "Cash Credit"
+          },
+          "trigger": "#x_studio_order_payment_method_0",
+          "content": "Select the Credit",
+          "content_i18n": {
+            "en_US": "Select the Credit",
+            "si_LK": "Select the Credit",
+            "ta_IN": "Select the Credit"
+          },
+          "position": "bottom",
+          "run": "select",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 120,
+          "title": "Sales Project Repair",
+          "title_i18n": {
+            "en_US": "Sales Project Repair",
+            "si_LK": "Sales Project Repair",
+            "ta_IN": "Sales Project Repair"
+          },
+          "trigger": "#x_studio_quotation_type_0",
+          "content": "select the sales",
+          "content_i18n": {
+            "en_US": "select the sales",
+            "si_LK": "select the sales",
+            "ta_IN": "select the sales"
+          },
+          "position": "bottom",
+          "run": "select",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 130,
+          "title": "Add a product",
+          "title_i18n": {
+            "en_US": "Add a product",
+            "si_LK": "Add a product",
+            "ta_IN": "Add a product"
+          },
+          "trigger": "td.o_field_x2many_list_row_add > a:nth-of-type(1)",
+          "content": "Click for dropdown box",
+          "content_i18n": {
+            "en_US": "Click for dropdown box",
+            "si_LK": "Click for dropdown box",
+            "ta_IN": "Click for dropdown box"
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 140,
+          "title": "",
+          "title_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "trigger": "td.o_data_cell.cursor-pointer:nth-of-type(2) > div.o_field_widget.o_required_modifier > div.o_field_many2one_selection > div.o_input_dropdown > div.o-autocomplete.dropdown > input.o-autocomplete--input.o_input",
+          "content": "Search the product",
+          "content_i18n": {
+            "en_US": "Search the product",
+            "si_LK": "Search the product",
+            "ta_IN": "Search the product"
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 150,
+          "title": "[02BB 023] BALL BEARING 6202-2RS",
+          "title_i18n": {
+            "en_US": "[02BB 023] BALL BEARING 6202-2RS",
+            "si_LK": "[02BB 023] BALL BEARING 6202-2RS",
+            "ta_IN": "[02BB 023] BALL BEARING 6202-2RS"
+          },
+          "trigger": "#autocomplete_0_0",
+          "content": "Add the product",
+          "content_i18n": {
+            "en_US": "Add the product",
+            "si_LK": "Add the product",
+            "ta_IN": "Add the product"
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 160,
+          "title": "Other Info",
+          "title_i18n": {
+            "en_US": "Other Info",
+            "si_LK": "Other Info",
+            "ta_IN": "Other Info"
+          },
+          "trigger": "a[name=\"other_information\"]",
+          "content": "Click Other Inform",
+          "content_i18n": {
+            "en_US": "Click Other Inform",
+            "si_LK": "Click Other Inform",
+            "ta_IN": "Click Other Inform"
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 170,
+          "title": "90 Days",
+          "title_i18n": {
+            "en_US": "90 Days",
+            "si_LK": "90 Days",
+            "ta_IN": "90 Days"
+          },
+          "trigger": "#payment_term_id_0",
+          "content": "Click Payment Terms",
+          "content_i18n": {
+            "en_US": "Click Payment Terms",
+            "si_LK": "Click Payment Terms",
+            "ta_IN": "Click Payment Terms"
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Click Payment Terms",
+          "description_i18n": {
+            "en_US": "Click Payment Terms",
+            "si_LK": "Click Payment Terms",
+            "ta_IN": "Click Payment Terms"
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 180,
+          "title": "14 Days",
+          "title_i18n": {
+            "en_US": "14 Days",
+            "si_LK": "14 Days",
+            "ta_IN": "14 Days"
+          },
+          "trigger": "#payment_term_id_0_0_5",
+          "content": "click 14 days",
+          "content_i18n": {
+            "en_US": "click 14 days",
+            "si_LK": "click 14 days",
+            "ta_IN": "click 14 days"
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 190,
+          "title": "Colombo Sales Centre",
+          "title_i18n": {
+            "en_US": "Colombo Sales Centre",
+            "si_LK": "Colombo Sales Centre",
+            "ta_IN": "Colombo Sales Centre"
+          },
+          "trigger": "#team_id_0",
+          "content": "Click the Sales Team",
+          "content_i18n": {
+            "en_US": "Click the Sales Team",
+            "si_LK": "Click the Sales Team",
+            "ta_IN": "Click the Sales Team"
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Click Sales Team",
+          "description_i18n": {
+            "en_US": "Click Sales Team",
+            "si_LK": "Click Sales Team",
+            "ta_IN": "Click Sales Team"
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 200,
+          "title": "Search More...",
+          "title_i18n": {
+            "en_US": "Search More...",
+            "si_LK": "Search More...",
+            "ta_IN": "Search More..."
+          },
+          "trigger": "#team_id_0_0_8",
+          "content": "Click Search More",
+          "content_i18n": {
+            "en_US": "Click Search More",
+            "si_LK": "Click Search More",
+            "ta_IN": "Click Search More"
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "click search more",
+          "description_i18n": {
+            "en_US": "click search more",
+            "si_LK": "click search more",
+            "ta_IN": "click search more"
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 210,
+          "title": "Colombo Sales Centre",
+          "title_i18n": {
+            "en_US": "Colombo Sales Centre",
+            "si_LK": "Colombo Sales Centre",
+            "ta_IN": "Colombo Sales Centre"
+          },
+          "trigger": "tr.o_data_row.o_row_draggable:nth-of-type(6) > td.o_data_cell.cursor-pointer:nth-of-type(2)",
+          "content": "Click Colombo Sales Centre",
+          "content_i18n": {
+            "en_US": "Click Colombo Sales Centre",
+            "si_LK": "Click Colombo Sales Centre",
+            "ta_IN": "Click Colombo Sales Centre"
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Click Colombo Sales Centre",
+          "description_i18n": {
+            "en_US": "Click Colombo Sales Centre",
+            "si_LK": "Click Colombo Sales Centre",
+            "ta_IN": "Click Colombo Sales Centre"
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 220,
+          "title": "JAM Warehouse Ekala- (JM-EK)",
+          "title_i18n": {
+            "en_US": "JAM Warehouse Ekala- (JM-EK)",
+            "si_LK": "JAM Warehouse Ekala- (JM-EK)",
+            "ta_IN": "JAM Warehouse Ekala- (JM-EK)"
+          },
+          "trigger": "#warehouse_id_1",
+          "content": "Click Warehouse",
+          "content_i18n": {
+            "en_US": "Click Warehouse",
+            "si_LK": "Click Warehouse",
+            "ta_IN": "Click Warehouse"
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Click Warehouse",
+          "description_i18n": {
+            "en_US": "Click Warehouse",
+            "si_LK": "Click Warehouse",
+            "ta_IN": "Click Warehouse"
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 230,
+          "title": "Search More...",
+          "title_i18n": {
+            "en_US": "Search More...",
+            "si_LK": "Search More...",
+            "ta_IN": "Search More..."
+          },
+          "trigger": "#warehouse_id_1_0_8",
+          "content": "Click Search More",
+          "content_i18n": {
+            "en_US": "Click Search More",
+            "si_LK": "Click Search More",
+            "ta_IN": "Click Search More"
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Click See more",
+          "description_i18n": {
+            "en_US": "Click See more",
+            "si_LK": "Click See more",
+            "ta_IN": "Click See more"
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 240,
+          "title": "JAM Warehouse Ekala- (JM-EK)",
+          "title_i18n": {
+            "en_US": "JAM Warehouse Ekala- (JM-EK)",
+            "si_LK": "JAM Warehouse Ekala- (JM-EK)",
+            "ta_IN": "JAM Warehouse Ekala- (JM-EK)"
+          },
+          "trigger": "tr.o_data_row.o_row_draggable:nth-of-type(4) > td.o_data_cell.cursor-pointer:nth-of-type(3)",
+          "content": "Click JAM Warehouse Ekala- (JM-EK)",
+          "content_i18n": {
+            "en_US": "Click JAM Warehouse Ekala- (JM-EK)",
+            "si_LK": "Click JAM Warehouse Ekala- (JM-EK)",
+            "ta_IN": "Click JAM Warehouse Ekala- (JM-EK)"
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Click JAM Warehouse EKALA",
+          "description_i18n": {
+            "en_US": "Click JAM Warehouse EKALA",
+            "si_LK": "Click JAM Warehouse EKALA",
+            "ta_IN": "Click JAM Warehouse EKALA"
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 250,
+          "title": "",
+          "title_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "trigger": "[data-hotkey=\"s\"]",
+          "content": "Click Save manually",
+          "content_i18n": {
+            "en_US": "Click Save manually",
+            "si_LK": "Click Save manually",
+            "ta_IN": "Click Save manually"
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 260,
+          "title": "Send Bank Guarantee Validity Notificatio",
+          "title_i18n": {
+            "en_US": "Send Bank Guarantee Validity Notificatio",
+            "si_LK": "Send Bank Guarantee Validity Notificatio",
+            "ta_IN": "Send Bank Guarantee Validity Notificatio"
+          },
+          "trigger": "button[name=\"1850\"]",
+          "content": "click",
+          "content_i18n": {
+            "en_US": "click",
+            "si_LK": "click",
+            "ta_IN": "click"
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 262,
+          "title": "Confirm",
+          "title_i18n": {
+            "en_US": "Confirm",
+            "si_LK": "Confirm",
+            "ta_IN": "Confirm"
+          },
+          "trigger": "[data-hotkey=\"q\"]",
+          "content": "Click confirm button",
+          "content_i18n": {
+            "en_US": "Click confirm button",
+            "si_LK": "Click confirm button",
+            "ta_IN": "Click confirm button"
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 263,
+          "title": "Delivery",
+          "title_i18n": {
+            "en_US": "Delivery",
+            "si_LK": "Delivery",
+            "ta_IN": "Delivery"
+          },
+          "trigger": "button[name=\"action_view_delivery\"]",
+          "content": "Click Delivery Smart Button",
+          "content_i18n": {
+            "en_US": "Click Delivery Smart Button",
+            "si_LK": "Click Delivery Smart Button",
+            "ta_IN": "Click Delivery Smart Button"
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 264,
+          "title": "Validate",
+          "title_i18n": {
+            "en_US": "Validate",
+            "si_LK": "Validate",
+            "ta_IN": "Validate"
+          },
+          "trigger": "[data-hotkey=\"v\"]",
+          "content": "Click Validate button",
+          "content_i18n": {
+            "en_US": "Click Validate button",
+            "si_LK": "Click Validate button",
+            "ta_IN": "Click Validate button"
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 265,
+          "title": "S01881",
+          "title_i18n": {
+            "en_US": "S01881",
+            "si_LK": "S01881",
+            "ta_IN": "S01881"
+          },
+          "trigger": "[data-hotkey=\"b\"]",
+          "content": "Back to sales order",
+          "content_i18n": {
+            "en_US": "Back to sales order",
+            "si_LK": "Back to sales order",
+            "ta_IN": "Back to sales order"
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 266,
+          "title": "Create Invoice",
+          "title_i18n": {
+            "en_US": "Create Invoice",
+            "si_LK": "Create Invoice",
+            "ta_IN": "Create Invoice"
+          },
+          "trigger": "[data-hotkey=\"q\"]",
+          "content": "Create Invoice",
+          "content_i18n": {
+            "en_US": "Create Invoice",
+            "si_LK": "Create Invoice",
+            "ta_IN": "Create Invoice"
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 267,
+          "title": "Send Bank Guarantee Validity Notificatio",
+          "title_i18n": {
+            "en_US": "Send Bank Guarantee Validity Notificatio",
+            "si_LK": "Send Bank Guarantee Validity Notificatio",
+            "ta_IN": "Send Bank Guarantee Validity Notificatio"
+          },
+          "trigger": "button[name=\"1851\"]",
+          "content": "Click Send Ban Guarantee Validity Notification",
+          "content_i18n": {
+            "en_US": "Click Send Ban Guarantee Validity Notification",
+            "si_LK": "Click Send Ban Guarantee Validity Notification",
+            "ta_IN": "Click Send Ban Guarantee Validity Notification"
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 268,
+          "title": "Confirm",
+          "title_i18n": {
+            "en_US": "Confirm",
+            "si_LK": "Confirm",
+            "ta_IN": "Confirm"
+          },
+          "trigger": "[data-hotkey=\"q\"]",
+          "content": "Click Confirm",
+          "content_i18n": {
+            "en_US": "Click Confirm",
+            "si_LK": "Click Confirm",
+            "ta_IN": "Click Confirm"
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 269,
+          "title": "Sales",
+          "title_i18n": {
+            "en_US": "Sales",
+            "si_LK": "Sales",
+            "ta_IN": "Sales"
+          },
+          "trigger": "a.o_menu_toggle.hasImage",
+          "content": "Back to Home menu",
+          "content_i18n": {
+            "en_US": "Back to Home menu",
+            "si_LK": "Back to Home menu",
+            "ta_IN": "Back to Home menu"
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 270,
+          "title": "Again sale App",
+          "title_i18n": {
+            "en_US": "Again sale App",
+            "si_LK": "Again sale App",
+            "ta_IN": "Again sale App"
+          },
+          "trigger": "[data-menu-xmlid=\"sale.sale_menu_root\"]",
+          "content": "Click Sales smart button ",
+          "content_i18n": {
+            "en_US": "Click Sales smart button ",
+            "si_LK": "Click Sales smart button ",
+            "ta_IN": "Click Sales smart button "
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 271,
+          "title": "Sale Orders",
+          "title_i18n": {
+            "en_US": "Sale Orders",
+            "si_LK": "Sale Orders",
+            "ta_IN": "Sale Orders"
+          },
+          "trigger": "[data-menu-xmlid=\"sale.sale_order_menu\"]",
+          "content": "Click Order button",
+          "content_i18n": {
+            "en_US": "Click Order button",
+            "si_LK": "Click Order button",
+            "ta_IN": "Click Order button"
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 272,
+          "title": "Sales Orders",
+          "title_i18n": {
+            "en_US": "Sales Orders",
+            "si_LK": "Sales Orders",
+            "ta_IN": "Sales Orders"
+          },
+          "trigger": "[data-menu-xmlid=\"sale.menu_sale_order\"]",
+          "content": "Click Sales Orders\n",
+          "content_i18n": {
+            "en_US": "Click Sales Orders\n",
+            "si_LK": "Click Sales Orders\n",
+            "ta_IN": "Click Sales Orders\n"
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 273,
+          "title": "",
+          "title_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "trigger": "input.o_searchview_input.o_input",
+          "content": "Click Search tab",
+          "content_i18n": {
+            "en_US": "Click Search tab",
+            "si_LK": "Click Search tab",
+            "ta_IN": "Click Search tab"
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 274,
+          "title": "",
+          "title_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "trigger": "[data-hotkey=\"Q\"]",
+          "content": "Type the sales order number",
+          "content_i18n": {
+            "en_US": "Type the sales order number",
+            "si_LK": "Type the sales order number",
+            "ta_IN": "Type the sales order number"
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 275,
+          "title": "S02805",
+          "title_i18n": {
+            "en_US": "S02805",
+            "si_LK": "S02805",
+            "ta_IN": "S02805"
+          },
+          "trigger": "[data-hotkey=\"Q\"]",
+          "content": "After type order number press enter",
+          "content_i18n": {
+            "en_US": "After type order number press enter",
+            "si_LK": "After type order number press enter",
+            "ta_IN": "After type order number press enter"
+          },
+          "position": "bottom",
+          "run": "press Enter",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 276,
+          "title": "Sales",
+          "title_i18n": {
+            "en_US": "Sales",
+            "si_LK": "Sales",
+            "ta_IN": "Sales"
+          },
+          "trigger": "td[name=\"x_studio_quotation_type\"]",
+          "content": "Click the Sales order Invoice",
+          "content_i18n": {
+            "en_US": "Click the Sales order Invoice",
+            "si_LK": "Click the Sales order Invoice",
+            "ta_IN": "Click the Sales order Invoice"
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 277,
+          "title": "Invoices",
+          "title_i18n": {
+            "en_US": "Invoices",
+            "si_LK": "Invoices",
+            "ta_IN": "Invoices"
+          },
+          "trigger": "button[name=\"action_view_invoice\"]",
+          "content": "Click invoice button",
+          "content_i18n": {
+            "en_US": "Click invoice button",
+            "si_LK": "Click invoice button",
+            "ta_IN": "Click invoice button"
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 278,
+          "title": "Register Payment",
+          "title_i18n": {
+            "en_US": "Register Payment",
+            "si_LK": "Register Payment",
+            "ta_IN": "Register Payment"
+          },
+          "trigger": "[data-hotkey=\"g\"]",
+          "content": "Click register payment",
+          "content_i18n": {
+            "en_US": "Click register payment",
+            "si_LK": "Click register payment",
+            "ta_IN": "Click register payment"
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 279,
+          "title": "12345",
+          "title_i18n": {
+            "en_US": "12345",
+            "si_LK": "12345",
+            "ta_IN": "12345"
+          },
+          "trigger": "#journal_id_0",
+          "content": "Click the bank",
+          "content_i18n": {
+            "en_US": "Click the bank",
+            "si_LK": "Click the bank",
+            "ta_IN": "Click the bank"
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 280,
+          "title": "Search More...",
+          "title_i18n": {
+            "en_US": "Search More...",
+            "si_LK": "Search More...",
+            "ta_IN": "Search More..."
+          },
+          "trigger": "#journal_id_0_0_8",
+          "content": "Click Search More",
+          "content_i18n": {
+            "en_US": "Click Search More",
+            "si_LK": "Click Search More",
+            "ta_IN": "Click Search More"
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Click Search More",
+          "description_i18n": {
+            "en_US": "Click Search More",
+            "si_LK": "Click Search More",
+            "ta_IN": "Click Search More"
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 281,
+          "title": "Customer Receipts - Cash",
+          "title_i18n": {
+            "en_US": "Customer Receipts - Cash",
+            "si_LK": "Customer Receipts - Cash",
+            "ta_IN": "Customer Receipts - Cash"
+          },
+          "trigger": "tr.o_data_row.o_row_draggable:nth-of-type(4) > td.o_data_cell.cursor-pointer:nth-of-type(2)",
+          "content": "Customer Receipts - Cash",
+          "content_i18n": {
+            "en_US": "Customer Receipts - Cash",
+            "si_LK": "Customer Receipts - Cash",
+            "ta_IN": "Customer Receipts - Cash"
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "Select the cash customer",
+          "description_i18n": {
+            "en_US": "Select the cash customer",
+            "si_LK": "Select the cash customer",
+            "ta_IN": "Select the cash customer"
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 282,
+          "title": "1,200.0000",
+          "title_i18n": {
+            "en_US": "1,200.0000",
+            "si_LK": "1,200.0000",
+            "ta_IN": "1,200.0000"
+          },
+          "trigger": "#amount_0",
+          "content": "Set the Amount",
+          "content_i18n": {
+            "en_US": "Set the Amount",
+            "si_LK": "Set the Amount",
+            "ta_IN": "Set the Amount"
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 283,
+          "title": "1,200.0000",
+          "title_i18n": {
+            "en_US": "1,200.0000",
+            "si_LK": "1,200.0000",
+            "ta_IN": "1,200.0000"
+          },
+          "trigger": "#amount_0",
+          "content": "After press enter ",
+          "content_i18n": {
+            "en_US": "After press enter ",
+            "si_LK": "After press enter ",
+            "ta_IN": "After press enter "
+          },
+          "position": "bottom",
+          "run": "press Enter",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 284,
+          "title": "Create Payment",
+          "title_i18n": {
+            "en_US": "Create Payment",
+            "si_LK": "Create Payment",
+            "ta_IN": "Create Payment"
+          },
+          "trigger": "[data-hotkey=\"q\"]",
+          "content": "Click create payment",
+          "content_i18n": {
+            "en_US": "Click create payment",
+            "si_LK": "Click create payment",
+            "ta_IN": "Click create payment"
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 285,
+          "title": "1",
+          "title_i18n": {
+            "en_US": "1",
+            "si_LK": "1",
+            "ta_IN": "1"
+          },
+          "trigger": "button[name=\"action_view_source_sale_orders\"]",
+          "content": "Click Sales Orders smart button",
+          "content_i18n": {
+            "en_US": "Click Sales Orders smart button",
+            "si_LK": "Click Sales Orders smart button",
+            "ta_IN": "Click Sales Orders smart button"
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        }
+      ]
+    }
+  ]
+}
