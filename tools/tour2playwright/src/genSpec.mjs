@@ -67,6 +67,7 @@ export function genSpec(tour, domain, step = "business") {
   lines.push(`    await page.waitForLoadState("networkidle", { timeout: 10_000 }).catch(() => {});`);
   lines.push(``);
 
+  const stepName = step; // the loop below shadows `step`
   for (const step of tour.steps) {
     const { expr, todos: selTodos } = selectorToLocator(step.trigger);
     const { code, todos: actTodos } = actionFor(expr, step);
@@ -77,8 +78,19 @@ export function genSpec(tour, domain, step = "business") {
       allTodos.push({ step: step.number, msg: t });
     }
 
+    // Archive-step tours are cleanup for records the earlier tours created
+    // (names come from uniqueName(), i.e. "[TEST] ..."): search for those only,
+    // and skip rather than touch real data when none exist.
+    const isCleanupSearch =
+      stepName === "archive" && /o_searchview_input/.test(step.trigger || "") && /press/i.test(step.run || "");
+    const cleanupCode = isCleanupSearch
+      ? ['loc.fill("[TEST] Tour");', 'loc.press("Enter");',
+         'await page.waitForTimeout(1500);',
+         'if (await page.locator(".o_view_nocontent").isVisible().catch(() => false)) test.skip(true, "No test records to clean up");']
+          .map((l) => (l.startsWith("loc.") ? "await " + l : l)).join("\n")
+      : null;
     // Indent multi-line action code (the "manual" case spans two lines).
-    const actionCode = code
+    const actionCode = (cleanupCode ?? code)
       .split("\n")
       .map((l) => `      ${l}`)
       .join("\n");
@@ -89,11 +101,13 @@ export function genSpec(tour, domain, step = "business") {
     }
     // `.first()` guards against Odoo selectors that match several nodes
     // (Playwright's strict mode would otherwise throw).
+    // `:visible` skips hidden duplicates (e.g. Odoo renders a second, hidden
+    // control-panel button), which `.first()` alone would pick and never see.
     // Timeout is generous (45s, not Playwright's usual default) because
     // staging/dev Odoo.sh databases can be slow to wake from idle on the
     // first real request — the element itself is often correct, it just
     // hasn't finished rendering yet.
-    lines.push(`      const loc = (${expr}).first();`);
+    lines.push(`      const loc = (${expr}).and(page.locator(":visible")).first();`);
     lines.push(`      await loc.waitFor({ state: "visible", timeout: 45000 });`);
     lines.push(`      await shot(page, loc, ${jsString(file)});`);
     lines.push(actionCode);
