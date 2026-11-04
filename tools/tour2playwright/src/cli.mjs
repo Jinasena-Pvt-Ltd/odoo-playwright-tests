@@ -23,14 +23,14 @@ import "./env.mjs";
 import { loadTours } from "./loadTours.mjs";
 import { genSpec } from "./genSpec.mjs";
 import { genManuals } from "./genManual.mjs";
-import { REPO_ROOT, GENERATED_DIR, assertModuleExists, specsDirFor, docsDirFor } from "./names.mjs";
+import { REPO_ROOT, GENERATED_DIR, assertModuleExists, specsDirFor, docsDirFor, assertStep } from "./names.mjs";
 
 function usage(msg) {
   if (msg) console.error(`Error: ${msg}\n`);
   console.error(
     [
       "Usage:",
-      "  node src/cli.mjs generate <domain> <export.json>   Write specs into src/modules/<domain>/tests/02-business/",
+      "  node src/cli.mjs generate <domain> <export.json>   Write specs into src/modules/<domain>/tests/02-business/ (--step <name> to change)",
       "  node src/cli.mjs manual   <domain> <export.json>   Write HTML manuals into src/modules/<domain>/documentation/",
       "  node src/cli.mjs build    <domain> <export.json>   generate → run (via main suite) → manuals",
       "",
@@ -44,15 +44,16 @@ function ensureDir(dir) {
   fs.mkdirSync(dir, { recursive: true });
 }
 
-function doGenerate(domain, exportFile) {
+function doGenerate(domain, exportFile, step) {
   assertModuleExists(domain);
+  assertStep(step);
   const { tours } = loadTours(exportFile);
-  const specsDir = specsDirFor(domain);
+  const specsDir = specsDirFor(domain, step);
   ensureDir(specsDir);
   const report = [];
   const specPaths = [];
   for (const tour of tours) {
-    const { filename, source, todos } = genSpec(tour, domain);
+    const { filename, source, todos } = genSpec(tour, domain, step);
     const outPath = path.join(specsDir, filename);
     fs.writeFileSync(outPath, source, "utf8");
     specPaths.push(outPath);
@@ -115,14 +116,22 @@ function runViaMainSuite(specAbsPath) {
 }
 
 function main() {
-  const [, , cmd, domain, exportFile] = process.argv;
+  // Optional `--step <name>` (default "business") picks the tests/ folder and @step tag.
+  const argv = process.argv.slice(2);
+  let step = "business";
+  const si = argv.indexOf("--step");
+  if (si !== -1) {
+    step = argv[si + 1];
+    argv.splice(si, 2);
+  }
+  const [cmd, domain, exportFile] = argv;
   if (!cmd || cmd === "-h" || cmd === "--help") return usage();
 
   if (cmd === "generate" || cmd === "gen") {
     if (!domain) return usage("missing <domain>");
     if (!exportFile) return usage("missing <export.json>");
     console.log(`Generating specs for module "${domain}" from ${exportFile}`);
-    doGenerate(domain, exportFile);
+    doGenerate(domain, exportFile, step);
     console.log("\nNext: `npm run build -- " + domain + " <export.json>` to run it and capture screenshots.");
   } else if (cmd === "manual") {
     if (!domain) return usage("missing <domain>");
@@ -133,7 +142,7 @@ function main() {
     if (!domain) return usage("missing <domain>");
     if (!exportFile) return usage("missing <export.json>");
     console.log(`Building specs for module "${domain}" from ${exportFile}`);
-    const { specPaths } = doGenerate(domain, exportFile);
+    const { specPaths } = doGenerate(domain, exportFile, step);
     for (const specPath of specPaths) runViaMainSuite(specPath);
     console.log("\nGenerating manuals…");
     doManual(domain, exportFile);

@@ -50,6 +50,10 @@ Run from `tools/tour2playwright/`:
 # 1) Generate a spec into the target module
 npm run gen -- hr ../../path/to/tour_export.json
 
+# 1b) Other kinds of tour: --step picks the folder and tag
+#     (config | business | reporting | permissions | validations | edge | archive; default business)
+npm run gen -- hr ../../path/to/config_tour.json --step config
+
 # 2) Run it via the main suite — verifies the flow AND captures per-step screenshots
 npx playwright test src/modules/hr/tests/02-business/hr.<slug>-tour.spec.ts --project=admin
 

@@ -19,9 +19,10 @@ const START_PATH = process.env.ODOO_START_PATH || "/web";
 /**
  * @param {object} tour normalized tour (from loadTours)
  * @param {string} domain target module (e.g. "hr")
+ * @param {string} [step] test step the spec belongs to (default "business")
  * @returns {{ filename: string, source: string, todos: Array<{step:number,msg:string}> }}
  */
-export function genSpec(tour, domain) {
+export function genSpec(tour, domain, step = "business") {
   const total = tour.steps.length;
   const dir = shotDirFromRepoRoot(tour.slug);
   const allTodos = [];
@@ -53,7 +54,7 @@ export function genSpec(tour, domain) {
   lines.push(`  try { await loc.evaluate((el) => el.removeAttribute("data-t2p")); } catch {}`);
   lines.push(`}`);
   lines.push(``);
-  lines.push(`test.describe(${jsString(`${tour.name} @module:${domain} @step:business @e2e`)}, () => {`);
+  lines.push(`test.describe(${jsString(`${tour.name} @module:${domain} @step:${step}${step === "business" ? " @e2e" : ""}`)}, () => {`);
   // Wide viewport: at 1280px Odoo folds navbar section menus into the overflow "+" menu, hiding them.
   lines.push(`  test.use({ viewport: { width: 1920, height: 1080 }, actionTimeout: 15_000 });`);
   lines.push(`  test(${jsString(tour.name)}, async ({ page }) => {`);
