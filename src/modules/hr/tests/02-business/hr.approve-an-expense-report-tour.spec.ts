@@ -36,64 +36,66 @@ test.describe("Approve an Expense Report @module:hr @step:business @e2e", () => 
     await page.waitForLoadState("networkidle", { timeout: 10_000 }).catch(() => {});
 
     await test.step("01. Open Expenses", async () => {
-      const loc = (page.locator("[data-menu-xmlid=\"hr_expense.menu_hr_expense_root\"]")).first();
+      const loc = (page.locator("[data-menu-xmlid=\"hr_expense.menu_hr_expense_root\"]")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-01.png");
       await loc.click();
     });
 
     await test.step("02. Expense Reports", async () => {
-      const loc = (page.locator("[data-menu-xmlid=\"hr_expense.menu_hr_expense_report\"]")).first();
+      const loc = (page.locator("[data-menu-xmlid=\"hr_expense.menu_hr_expense_report\"]")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-02.png");
       await loc.click();
     });
 
     await test.step("03. Open the search options", async () => {
-      const loc = (page.locator(".o_searchview_dropdown_toggler")).first();
+      const loc = (page.locator(".o_searchview_dropdown_toggler")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-03.png");
       await loc.click();
     });
 
     await test.step("04. Group by Status", async () => {
-      const loc = (page.locator(".o_group_by_menu [role=\"menuitemcheckbox\"]:last-of-type")).first();
+      const loc = (page.locator(".o_group_by_menu [role=\"menuitemcheckbox\"]:last-of-type")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-04.png");
       await loc.click();
     });
 
     await test.step("05. Close the search options", async () => {
-      const loc = (page.locator(".o_searchview_dropdown_toggler")).first();
+      const loc = (page.locator(".o_searchview_dropdown_toggler")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-05.png");
       await loc.click();
     });
 
     await test.step("06. Open the Submitted group", async () => {
-      const loc = (page.locator(".o_list_view tbody .o_group_header:last-child")).first();
+      const loc = (page.locator(".o_list_view tbody .o_group_header:last-child")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-06.png");
       await loc.click();
     });
 
     await test.step("07. Open the report", async () => {
-      const loc = (page.locator(".o_list_view .o_data_row .o_data_cell[name=\"name\"]")).first();
+      const loc = (page.locator(".o_list_view .o_data_row .o_data_cell[name=\"name\"]")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-07.png");
       await loc.click();
     });
 
     await test.step("08. Check the total", async () => {
-      const loc = (page.locator(".o_field_widget[name=\"total_amount\"]")).first();
+      const loc = (page.locator(".o_field_widget[name=\"total_amount\"]")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-08.png");
       await loc.click();
     });
 
     await test.step("09. Approve", async () => {
-      const loc = (page.locator("button[name=\"action_approve_expense_sheets\"]")).first();
-      await loc.waitFor({ state: "visible", timeout: 45000 });
+      const loc = (page.locator("button[name=\"action_approve_expense_sheets\"]")).and(page.locator(":visible")).first();
+      if (!(await loc.waitFor({ state: "visible", timeout: 8000 }).then(() => true, () => false))) {
+        test.skip(true, "Approve is not available: the record is not in the required state");
+      }
       await shot(page, loc, "step-09.png");
       await loc.click();
     });

@@ -56,7 +56,7 @@ test.describe("Reject an Expense Report @module:hr @step:archive", () => {
       await loc.fill("[TEST] Tour");
       await loc.press("Enter");
       await page.waitForTimeout(1500);
-      if (await page.locator(".o_view_nocontent").isVisible().catch(() => false)) test.skip(true, "No test records to clean up");
+      if (!(await page.locator(".o_data_row, .o_group_header, .o_kanban_record").first().isVisible().catch(() => false))) test.skip(true, "No test records to clean up");
     });
 
     await test.step("04. Open the report", async () => {

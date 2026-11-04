@@ -63,11 +63,11 @@ test.describe("Archive a Salary Rule @module:hr @step:archive", () => {
       await loc.fill("[TEST] Tour");
       await loc.press("Enter");
       await page.waitForTimeout(1500);
-      if (await page.locator(".o_view_nocontent").isVisible().catch(() => false)) test.skip(true, "No test records to clean up");
+      if (!(await page.locator(".o_data_row, .o_group_header, .o_kanban_record").first().isVisible().catch(() => false))) test.skip(true, "No test records to clean up");
     });
 
     await test.step("05. Open the group", async () => {
-      const loc = (page.locator(".o_list_view .o_group_header")).and(page.locator(":visible")).first();
+      const loc = (page.locator(".o_list_view .o_group_header").filter({ hasNotText: "(0)" })).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-05.png");
       await loc.click();
@@ -88,8 +88,11 @@ test.describe("Archive a Salary Rule @module:hr @step:archive", () => {
     });
 
     await test.step("08. Archive", async () => {
-      const loc = (page.locator(".o_cp_action_menus .dropdown-item:nth-child(2)")).and(page.locator(":visible")).first();
-      await loc.waitFor({ state: "visible", timeout: 45000 });
+      const loc = (page.locator(".o_cp_action_menus .dropdown-item").filter({ hasText: "Archive" })).and(page.locator(":visible")).first();
+      await expect(async () => {
+        if (!(await loc.isVisible())) await page.locator(".o_cp_action_menus .dropdown-toggle").first().click();
+        await expect(loc).toBeVisible({ timeout: 3000 });
+      }).toPass({ timeout: 45000 });
       await shot(page, loc, "step-08.png");
       await loc.click();
     });

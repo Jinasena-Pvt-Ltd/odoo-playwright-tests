@@ -36,35 +36,35 @@ test.describe("Create and Assign a Contract @module:hr @step:business @e2e", () 
     await page.waitForLoadState("networkidle", { timeout: 10_000 }).catch(() => {});
 
     await test.step("01. Open Employees", async () => {
-      const loc = (page.locator("[data-menu-xmlid=\"hr.menu_hr_root\"]")).first();
+      const loc = (page.locator("[data-menu-xmlid=\"hr.menu_hr_root\"]")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-01.png");
       await loc.click();
     });
 
     await test.step("02. Employees menu", async () => {
-      const loc = (page.locator(".o_main_navbar .o_menu_sections .dropdown-toggle")).first();
+      const loc = (page.locator(".o_main_navbar .o_menu_sections .dropdown-toggle")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-02.png");
       await loc.click();
     });
 
     await test.step("03. Contracts", async () => {
-      const loc = (page.locator("[data-menu-xmlid=\"hr_contract.hr_menu_contract\"]")).first();
+      const loc = (page.locator("[data-menu-xmlid=\"hr_contract.hr_menu_contract\"]")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-03.png");
       await loc.click();
     });
 
     await test.step("04. New contract", async () => {
-      const loc = (page.locator(".o_control_panel_main_buttons .d-xl-inline-flex .o_list_button_add")).first();
+      const loc = (page.locator(".o_control_panel_main_buttons .d-xl-inline-flex .o_list_button_add")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-04.png");
       await loc.click();
     });
 
     await test.step("05. Contract reference", async () => {
-      const loc = (page.locator("[name=\"name\"] input")).first();
+      const loc = (page.locator("[name=\"name\"] input")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-05.png");
       await loc.fill(uniqueName("Tour"));
@@ -72,46 +72,54 @@ test.describe("Create and Assign a Contract @module:hr @step:business @e2e", () 
     });
 
     await test.step("06. Search the employee", async () => {
-      const loc = (page.locator("[name=\"employee_id\"] input")).first();
+      const loc = (page.locator("[name=\"employee_id\"] input")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-06.png");
       await loc.click();
     });
 
     await test.step("07. Choose the employee", async () => {
-      const loc = (page.locator(".o-autocomplete--dropdown-menu .o-autocomplete--dropdown-item")).first();
+      const loc = (page.locator(".o-autocomplete--dropdown-menu .o-autocomplete--dropdown-item")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-07.png");
       await loc.click();
     });
 
     await test.step("08. Monthly wage", async () => {
-      const loc = (page.locator("[name=\"wage\"] input")).first();
+      const loc = (page.locator("[name=\"wage\"] input")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-08.png");
       await loc.fill("100");
             await loc.press("Tab");
     });
 
+    // Added by hand: this database requires a Working Schedule, which the tour
+    // did not fill, so the contract could not be saved.
+    await test.step("08b. Working schedule", async () => {
+      const field = page.locator('[name="resource_calendar_id"] input').first();
+      await field.click();
+      await page.locator(".o-autocomplete--dropdown-menu li").first().click();
+    });
+
     await test.step("09. Save", async () => {
-      const loc = (page.locator(".o_form_button_save")).first();
+      const loc = (page.locator(".o_form_button_save")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-09.png");
       await loc.click();
     });
 
     await test.step("10. Start the contract", async () => {
-      const loc = (page.locator(".o_statusbar_status button[data-value=\"open\"]")).first();
+      const loc = (page.locator(".o_statusbar_status button[data-value=\"open\"]")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-10.png");
       await loc.click();
     });
 
     await test.step("11. Contract is running", async () => {
-      const loc = (page.locator(".o_breadcrumb .active")).first();
+      const loc = (page.locator(".o_breadcrumb .active")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-11.png");
-      await loc.click();
+      // (click skipped: only ends the tour)
     });
 
   });

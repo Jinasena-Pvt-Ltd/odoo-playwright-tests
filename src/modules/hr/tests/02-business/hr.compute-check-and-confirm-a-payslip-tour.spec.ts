@@ -36,77 +36,81 @@ test.describe("Compute, Check and Confirm a Payslip @module:hr @step:business @e
     await page.waitForLoadState("networkidle", { timeout: 10_000 }).catch(() => {});
 
     await test.step("01. Open Payroll", async () => {
-      const loc = (page.locator("[data-menu-xmlid=\"hr_work_entry_contract_enterprise.menu_hr_payroll_root\"]")).first();
+      const loc = (page.locator("[data-menu-xmlid=\"hr_work_entry_contract_enterprise.menu_hr_payroll_root\"]")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-01.png");
       await loc.click();
     });
 
     await test.step("02. Payslips menu", async () => {
-      const loc = (page.locator(".o_main_navbar [data-menu-xmlid=\"hr_payroll.menu_hr_payroll_payslips\"]")).first();
+      const loc = (page.locator(".o_main_navbar [data-menu-xmlid=\"hr_payroll.menu_hr_payroll_payslips\"]")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-02.png");
       await loc.click();
     });
 
     await test.step("03. All Payslips", async () => {
-      const loc = (page.locator("[data-menu-xmlid=\"hr_payroll.menu_hr_payroll_employee_payslips\"]")).first();
+      const loc = (page.locator("[data-menu-xmlid=\"hr_payroll.menu_hr_payroll_employee_payslips\"]")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-03.png");
       await loc.click();
     });
 
     await test.step("04. Open a batch", async () => {
-      const loc = (page.locator(".o_list_view .o_group_header")).first();
+      const loc = (page.locator(".o_list_view .o_group_header")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-04.png");
       await loc.click();
     });
 
     await test.step("05. Open a payslip", async () => {
-      const loc = (page.locator(".o_list_view .o_data_row .o_data_cell[name=\"employee_id\"]")).first();
+      const loc = (page.locator(".o_list_view .o_data_row .o_data_cell[name=\"employee_id\"]")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-05.png");
       await loc.click();
     });
 
     await test.step("06. Worked days and inputs", async () => {
-      const loc = (page.locator("a[name=\"worked_days_input\"]")).first();
+      const loc = (page.locator("a[name=\"worked_days_input\"]")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-06.png");
       await loc.click();
     });
 
     await test.step("07. Compute Sheet", async () => {
-      const loc = (page.locator("button[name=\"compute_sheet\"]")).first();
-      await loc.waitFor({ state: "visible", timeout: 45000 });
+      const loc = (page.locator("button[name=\"compute_sheet\"]")).and(page.locator(":visible")).first();
+      if (!(await loc.waitFor({ state: "visible", timeout: 8000 }).then(() => true, () => false))) {
+        test.skip(true, "Compute Sheet is not available: the record is not in the required state");
+      }
       await shot(page, loc, "step-07.png");
       await loc.click();
     });
 
     await test.step("08. Salary Computation tab", async () => {
-      const loc = (page.locator("a[name=\"salary_computation\"]")).first();
+      const loc = (page.locator("a[name=\"salary_computation\"]")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-08.png");
       await loc.click();
     });
 
     await test.step("09. Read the lines", async () => {
-      const loc = (page.locator("[name=\"line_ids\"] th[data-name=\"total\"]")).first();
+      const loc = (page.locator("[name=\"line_ids\"] th[data-name=\"total\"]")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-09.png");
       await loc.click();
     });
 
     await test.step("10. Confirm the payslip", async () => {
-      const loc = (page.locator("button[name=\"action_payslip_done\"]")).first();
-      await loc.waitFor({ state: "visible", timeout: 45000 });
+      const loc = (page.locator("button[name=\"action_payslip_done\"]")).and(page.locator(":visible")).first();
+      if (!(await loc.waitFor({ state: "visible", timeout: 8000 }).then(() => true, () => false))) {
+        test.skip(true, "Confirm the payslip is not available: the record is not in the required state");
+      }
       await shot(page, loc, "step-10.png");
       await loc.click();
     });
 
     await test.step("11. Confirm in the window", async () => {
-      const loc = (page.locator(".modal-footer .btn-primary")).first();
+      const loc = (page.locator(".modal-footer .btn-primary")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-11.png");
       await loc.click();

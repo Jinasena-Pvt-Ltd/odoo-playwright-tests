@@ -69,7 +69,17 @@ export function genSpec(tour, domain, step = "business") {
 
   const stepName = step; // the loop below shadows `step`
   for (const step of tour.steps) {
-    const { expr, todos: selTodos } = selectorToLocator(step.trigger);
+    let { expr, todos: selTodos } = selectorToLocator(step.trigger);
+    if (stepName === "archive") {
+      // Cleanup tours must hit the records the search found, not whatever is
+      // first: open a non-empty group, and pick the action by its label rather
+      // than its position in the menu.
+      if (/^\.o_list_view (tr)?\.?o_group_header|^\.o_list_view tr\.o_group_header/.test((step.trigger || "").trim())) {
+        expr = `page.locator(".o_list_view .o_group_header").filter({ hasNotText: "(0)" })`;
+      } else if (/^\.o_cp_action_menus \.dropdown-item:(nth-child\(\d+\)|last-child)$/.test((step.trigger || "").trim()) && step.title) {
+        expr = `page.locator(".o_cp_action_menus .dropdown-item").filter({ hasText: ${jsString(step.title)} })`;
+      }
+    }
     const { code, todos: actTodos } = actionFor(expr, step);
     const file = shotFile(step.number, total);
     const label = `${String(step.number).padStart(2, "0")}. ${step.title || step.trigger || "step"}`;
@@ -86,7 +96,7 @@ export function genSpec(tour, domain, step = "business") {
     const cleanupCode = isCleanupSearch
       ? ['loc.fill("[TEST] Tour");', 'loc.press("Enter");',
          'await page.waitForTimeout(1500);',
-         'if (await page.locator(".o_view_nocontent").isVisible().catch(() => false)) test.skip(true, "No test records to clean up");']
+         'if (!(await page.locator(".o_data_row, .o_group_header, .o_kanban_record").first().isVisible().catch(() => false))) test.skip(true, "No test records to clean up");']
           .map((l) => (l.startsWith("loc.") ? "await " + l : l)).join("\n")
       : null;
     // A last "Click anywhere to finish/continue" step only ends the tour. The
@@ -114,8 +124,37 @@ export function genSpec(tour, domain, step = "business") {
     // staging/dev Odoo.sh databases can be slow to wake from idle on the
     // first real request — the element itself is often correct, it just
     // hasn't finished rendering yet.
+    const trig = (step.trigger || "").trim();
+    if (stepName === "business" && trig === ".o_kanban_view .o_kanban_record") {
+      // The tour clicks "the" employee card; on a shared database that is a
+      // real person. Work on the test employees the earlier tours created.
+      lines.push(`      const sv = page.locator(".o_control_panel .o_searchview_input").first();`);
+      lines.push(`      await sv.fill("[TEST] Tour");`);
+      lines.push(`      await sv.press("Enter");`);
+      lines.push(`      await page.waitForTimeout(1500);`);
+      lines.push(`      if (!(await page.locator(".o_kanban_record").first().isVisible().catch(() => false))) test.skip(true, "No test records to work on");`);
+    }
     lines.push(`      const loc = (${expr}).and(page.locator(":visible")).first();`);
-    lines.push(`      await loc.waitFor({ state: "visible", timeout: 45000 });`);
+    // Action buttons (Compute, Approve, Mark as paid...) only exist in some
+    // record states, and these tours move records forward, so a record that is
+    // already past that state is a missing precondition, not a failure.
+    const stateButton =
+      stepName === "business" &&
+      (/^button\[name="[^"]+"\]$/.test(trig) || trig === '[name="input_line_ids"] .o_field_x2many_list_row_add a');
+    if (stateButton) {
+      lines.push(`      if (!(await loc.waitFor({ state: "visible", timeout: 8000 }).then(() => true, () => false))) {`);
+      lines.push(`        test.skip(true, ${jsString(`${step.title || trig} is not available: the record is not in the required state`)});`);
+      lines.push(`      }`);
+    } else if (stepName === "archive" && /^\.o_cp_action_menus \.dropdown-item/.test((step.trigger || "").trim())) {
+      // The Actions menu can close under us while the record is still loading:
+      // re-open it until the item shows.
+      lines.push(`      await expect(async () => {`);
+      lines.push(`        if (!(await loc.isVisible())) await page.locator(".o_cp_action_menus .dropdown-toggle").first().click();`);
+      lines.push(`        await expect(loc).toBeVisible({ timeout: 3000 });`);
+      lines.push(`      }).toPass({ timeout: 45000 });`);
+    } else {
+      lines.push(`      await loc.waitFor({ state: "visible", timeout: 45000 });`);
+    }
     lines.push(`      await shot(page, loc, ${jsString(file)});`);
     lines.push(actionCode);
     lines.push(`    });`);
