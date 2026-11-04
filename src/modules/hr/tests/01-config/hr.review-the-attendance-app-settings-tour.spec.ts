@@ -36,31 +36,31 @@ test.describe("Review the Attendance App Settings @module:hr @step:config", () =
     await page.waitForLoadState("networkidle", { timeout: 10_000 }).catch(() => {});
 
     await test.step("01. Open Attendances", async () => {
-      const loc = (page.locator("[data-menu-xmlid=\"hr_attendance.menu_hr_attendance_root\"]")).first();
+      const loc = (page.locator("[data-menu-xmlid=\"hr_attendance.menu_hr_attendance_root\"]")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-01.png");
       await loc.click();
     });
 
     await test.step("02. Configuration", async () => {
-      const loc = (page.locator(".o_main_navbar [data-menu-xmlid=\"hr_attendance.menu_hr_attendance_settings\"]")).first();
+      const loc = (page.locator(".o_main_navbar [data-menu-xmlid=\"hr_attendance.menu_hr_attendance_settings\"]")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-02.png");
       await loc.click();
     });
 
     await test.step("03. Modes section", async () => {
-      const loc = (page.locator(".app_settings_block[data-key=\"hr_attendance\"] h2:nth-of-type(1)")).first();
+      const loc = (page.locator(".app_settings_block[data-key=\"hr_attendance\"] h2:nth-of-type(1)")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-03.png");
       await loc.click();
     });
 
     await test.step("04. Extra Hours section", async () => {
-      const loc = (page.locator(".app_settings_block[data-key=\"hr_attendance\"] h2:nth-of-type(3)")).first();
+      const loc = (page.locator(".app_settings_block[data-key=\"hr_attendance\"] h2:nth-of-type(3)")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-04.png");
-      await loc.click();
+      await loc.click({ force: true });
     });
 
   });

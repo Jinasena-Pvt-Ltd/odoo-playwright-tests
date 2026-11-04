@@ -79,9 +79,7 @@ test.describe("Add an Extra Input to a Single Payslip @module:hr @step:business 
 
     await test.step("07. Add a line", async () => {
       const loc = (page.locator("[name=\"input_line_ids\"] .o_field_x2many_list_row_add a")).and(page.locator(":visible")).first();
-      if (!(await loc.waitFor({ state: "visible", timeout: 8000 }).then(() => true, () => false))) {
-        test.skip(true, "Add a line is not available: the record is not in the required state");
-      }
+      await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-07.png");
       await loc.click();
     });
@@ -113,13 +111,12 @@ test.describe("Add an Extra Input to a Single Payslip @module:hr @step:business 
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-11.png");
       await loc.click();
+      await expect(page.locator(".o_error_dialog"), "the server rejected the save").toHaveCount(0);
     });
 
     await test.step("12. Compute Sheet", async () => {
       const loc = (page.locator("button[name=\"compute_sheet\"]")).and(page.locator(":visible")).first();
-      if (!(await loc.waitFor({ state: "visible", timeout: 8000 }).then(() => true, () => false))) {
-        test.skip(true, "Compute Sheet is not available: the record is not in the required state");
-      }
+      await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-12.png");
       await loc.click();
     });

@@ -93,9 +93,7 @@ test.describe("Approve an Expense Report @module:hr @step:business @e2e", () => 
 
     await test.step("09. Approve", async () => {
       const loc = (page.locator("button[name=\"action_approve_expense_sheets\"]")).and(page.locator(":visible")).first();
-      if (!(await loc.waitFor({ state: "visible", timeout: 8000 }).then(() => true, () => false))) {
-        test.skip(true, "Approve is not available: the record is not in the required state");
-      }
+      await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-09.png");
       await loc.click();
     });

@@ -70,6 +70,10 @@ export function genSpec(tour, domain, step = "business") {
   const stepName = step; // the loop below shadows `step`
   for (const step of tour.steps) {
     let { expr, todos: selTodos } = selectorToLocator(step.trigger);
+    if ((step.trigger || "").trim() === ".o-dropdown--menu span.o_menu_item" && step.title) {
+      // Pick an Actions-menu entry by its label, not by position.
+      expr = `page.locator(".o-dropdown--menu .dropdown-item, .o-dropdown--menu span.o_menu_item").filter({ hasText: ${jsString(step.title)} })`;
+    }
     if (stepName === "archive") {
       // Cleanup tours must hit the records the search found, not whatever is
       // first: open a non-empty group, and pick the action by its label rather
@@ -99,13 +103,13 @@ export function genSpec(tour, domain, step = "business") {
          'if (!(await page.locator(".o_data_row, .o_group_header, .o_kanban_record").first().isVisible().catch(() => false))) test.skip(true, "No test records to clean up");']
           .map((l) => (l.startsWith("loc.") ? "await " + l : l)).join("\n")
       : null;
-    // A last "Click anywhere to finish/continue" step only ends the tour. The
-    // screenshot above already covers it, and clicking a big pivot or list
-    // header can hang on actionability checks, so don't click.
+    // A last "Click anywhere to finish/continue" step only ends the tour. Clicking
+    // a big pivot or list header can hang on Playwright's stability check, so
+    // force the click (it is still performed, just without the wait).
     const endsTour =
       step.number === total && /click\b.*\b(finish|continue)\b/i.test(step.content || "") &&
       /^click$/i.test(String(step.run ?? "click").trim());
-    const finalCode = endsTour ? "// (click skipped: only ends the tour)" : (cleanupCode ?? code);
+    const finalCode = endsTour ? code.replace("loc.click()", "loc.click({ force: true })") : (cleanupCode ?? code);
     // Indent multi-line action code (the "manual" case spans two lines).
     const actionCode = finalCode
       .split("\n")
@@ -132,20 +136,10 @@ export function genSpec(tour, domain, step = "business") {
       lines.push(`      await sv.fill("[TEST] Tour");`);
       lines.push(`      await sv.press("Enter");`);
       lines.push(`      await page.waitForTimeout(1500);`);
-      lines.push(`      if (!(await page.locator(".o_kanban_record").first().isVisible().catch(() => false))) test.skip(true, "No test records to work on");`);
+      lines.push(`      await expect(page.locator(".o_kanban_record").first(), "no [TEST] Tour record to work on").toBeVisible({ timeout: 10_000 });`);
     }
     lines.push(`      const loc = (${expr}).and(page.locator(":visible")).first();`);
-    // Action buttons (Compute, Approve, Mark as paid...) only exist in some
-    // record states, and these tours move records forward, so a record that is
-    // already past that state is a missing precondition, not a failure.
-    const stateButton =
-      stepName === "business" &&
-      (/^button\[name="[^"]+"\]$/.test(trig) || trig === '[name="input_line_ids"] .o_field_x2many_list_row_add a');
-    if (stateButton) {
-      lines.push(`      if (!(await loc.waitFor({ state: "visible", timeout: 8000 }).then(() => true, () => false))) {`);
-      lines.push(`        test.skip(true, ${jsString(`${step.title || trig} is not available: the record is not in the required state`)});`);
-      lines.push(`      }`);
-    } else if (stepName === "archive" && /^\.o_cp_action_menus \.dropdown-item/.test((step.trigger || "").trim())) {
+    if (/^\.o_cp_action_menus \.dropdown-item|^\.o-dropdown--menu span\.o_menu_item/.test(trig)) {
       // The Actions menu can close under us while the record is still loading:
       // re-open it until the item shows.
       lines.push(`      await expect(async () => {`);
@@ -157,6 +151,13 @@ export function genSpec(tour, domain, step = "business") {
     }
     lines.push(`      await shot(page, loc, ${jsString(file)});`);
     lines.push(actionCode);
+    // A save must actually save: without this a spec stays green even when the
+    // Save click is removed or the server rejects the record. Not for the
+    // validations step, where the failed save is the expected outcome.
+    if (stepName !== "validations" && /(^|[._-])(form_button_save|list_button_save)\b/.test(trig)) {
+      lines.push(`      await expect(page.locator(".o_error_dialog"), "the server rejected the save").toHaveCount(0);`);
+      lines.push(`      __SAVED_CHECK__`);
+    }
     lines.push(`    });`);
     lines.push(``);
   }
@@ -165,9 +166,31 @@ export function genSpec(tour, domain, step = "business") {
   lines.push(`});`);
   lines.push(``);
 
+  let source = lines.join("\n");
+  // One generated name per spec, so the post-save check can look for it.
+  if (source.includes('uniqueName("Tour")')) {
+    source = source.replaceAll('uniqueName("Tour")', "tourName");
+    source = source.replace(/(    await page\.goto\([^\n]*\n)/, "    // uniqueName() repeats within one run, so add a per-spec suffix to tell specs apart.\n" +
+        '    const tourName = `${uniqueName("Tour")} ${Date.now().toString(36).toUpperCase()}`;\n$1');
+    source = source.replaceAll(
+      "__SAVED_CHECK__",
+      [
+        "// Saved = its name is shown as text (a row still being edited holds it in an input),",
+        "      // or an open form has left the \"New\" state.",
+        "      const savedForm = page",
+        "        .locator(\".o_action\", { has: page.locator(\".o_form_view\") })",
+        "        .locator(\".o_breadcrumb .active\")",
+        "        .filter({ hasNotText: /^\\s*New\\s*$/ });",
+        "      await expect(page.getByText(tourName).first().or(savedForm), \"the record was not saved\").toBeVisible({ timeout: 15_000 });",
+      ].join("\n")
+    );
+  } else {
+    source = source.replaceAll("      __SAVED_CHECK__\n", "");
+  }
+
   return {
     filename: `${domain}.${tour.slug}-tour.spec.ts`,
-    source: lines.join("\n"),
+    source,
     todos: allTodos,
   };
 }

@@ -65,9 +65,7 @@ test.describe("Confirm a Payslip Batch and Create the Accounting Entries @module
 
     await test.step("05. Create Draft Entry", async () => {
       const loc = (page.locator("button[name=\"action_validate\"]")).and(page.locator(":visible")).first();
-      if (!(await loc.waitFor({ state: "visible", timeout: 8000 }).then(() => true, () => false))) {
-        test.skip(true, "Create Draft Entry is not available: the record is not in the required state");
-      }
+      await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-05.png");
       await loc.click();
     });
@@ -83,7 +81,7 @@ test.describe("Confirm a Payslip Batch and Create the Accounting Entries @module
       const loc = (page.locator(".o_breadcrumb .active")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-07.png");
-      // (click skipped: only ends the tour)
+      await loc.click({ force: true });
     });
 
   });

@@ -36,45 +36,45 @@ test.describe("Review the Employees App Settings @module:hr @step:config", () =>
     await page.waitForLoadState("networkidle", { timeout: 10_000 }).catch(() => {});
 
     await test.step("01. Open Employees", async () => {
-      const loc = (page.locator("[data-menu-xmlid=\"hr.menu_hr_root\"]")).first();
+      const loc = (page.locator("[data-menu-xmlid=\"hr.menu_hr_root\"]")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-01.png");
       await loc.click();
     });
 
     await test.step("02. Configuration menu", async () => {
-      const loc = (page.locator(".o_main_navbar [data-menu-xmlid=\"hr.menu_human_resources_configuration\"]")).first();
+      const loc = (page.locator(".o_main_navbar [data-menu-xmlid=\"hr.menu_human_resources_configuration\"]")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-02.png");
       await loc.click();
     });
 
     await test.step("03. Settings", async () => {
-      const loc = (page.locator("[data-menu-xmlid=\"hr.hr_menu_configuration\"]")).first();
+      const loc = (page.locator("[data-menu-xmlid=\"hr.hr_menu_configuration\"]")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-03.png");
       await loc.click();
     });
 
     await test.step("04. Employees section", async () => {
-      const loc = (page.locator(".app_settings_block[data-key=\"hr\"] h2:nth-of-type(1)")).first();
+      const loc = (page.locator(".app_settings_block[data-key=\"hr\"] h2:nth-of-type(1)")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-04.png");
       await loc.click();
     });
 
     await test.step("05. Work Organization section", async () => {
-      const loc = (page.locator(".app_settings_block[data-key=\"hr\"] h2:nth-of-type(2)")).first();
+      const loc = (page.locator(".app_settings_block[data-key=\"hr\"] h2:nth-of-type(2)")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-05.png");
       await loc.click();
     });
 
     await test.step("06. Employee Update Rights", async () => {
-      const loc = (page.locator(".app_settings_block[data-key=\"hr\"] h2:nth-of-type(3)")).first();
+      const loc = (page.locator(".app_settings_block[data-key=\"hr\"] h2:nth-of-type(3)")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-06.png");
-      await loc.click();
+      await loc.click({ force: true });
     });
 
   });

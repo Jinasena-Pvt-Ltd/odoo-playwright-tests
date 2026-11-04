@@ -28,6 +28,8 @@ test.describe("Create and Assign a Contract @module:hr @step:business @e2e", () 
   test.use({ viewport: { width: 1920, height: 1080 }, actionTimeout: 15_000 });
   test("Create and Assign a Contract", async ({ page }) => {
     test.setTimeout(440000);
+    // uniqueName() repeats within one run, so add a per-spec suffix to tell specs apart.
+    const tourName = `${uniqueName("Tour")} ${Date.now().toString(36).toUpperCase()}`;
     await page.goto("/web");
     // Odoo keeps persistent long-polling/websocket connections open for
     // real-time notifications, so "networkidle" never naturally resolves —
@@ -67,7 +69,7 @@ test.describe("Create and Assign a Contract @module:hr @step:business @e2e", () 
       const loc = (page.locator("[name=\"name\"] input")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-05.png");
-      await loc.fill(uniqueName("Tour"));
+      await loc.fill(tourName);
             await loc.press("Tab");
     });
 
@@ -106,6 +108,14 @@ test.describe("Create and Assign a Contract @module:hr @step:business @e2e", () 
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-09.png");
       await loc.click();
+      await expect(page.locator(".o_error_dialog"), "the server rejected the save").toHaveCount(0);
+      // Saved = its name is shown as text (a row still being edited holds it in an input),
+      // or an open form has left the "New" state.
+      const savedForm = page
+        .locator(".o_action", { has: page.locator(".o_form_view") })
+        .locator(".o_breadcrumb .active")
+        .filter({ hasNotText: /^\s*New\s*$/ });
+      await expect(page.getByText(tourName).first().or(savedForm), "the record was not saved").toBeVisible({ timeout: 15_000 });
     });
 
     await test.step("10. Start the contract", async () => {
@@ -119,7 +129,7 @@ test.describe("Create and Assign a Contract @module:hr @step:business @e2e", () 
       const loc = (page.locator(".o_breadcrumb .active")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-11.png");
-      // (click skipped: only ends the tour)
+      await loc.click({ force: true });
     });
 
   });

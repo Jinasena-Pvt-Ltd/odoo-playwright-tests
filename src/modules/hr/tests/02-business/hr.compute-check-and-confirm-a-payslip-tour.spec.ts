@@ -79,9 +79,7 @@ test.describe("Compute, Check and Confirm a Payslip @module:hr @step:business @e
 
     await test.step("07. Compute Sheet", async () => {
       const loc = (page.locator("button[name=\"compute_sheet\"]")).and(page.locator(":visible")).first();
-      if (!(await loc.waitFor({ state: "visible", timeout: 8000 }).then(() => true, () => false))) {
-        test.skip(true, "Compute Sheet is not available: the record is not in the required state");
-      }
+      await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-07.png");
       await loc.click();
     });
@@ -102,9 +100,7 @@ test.describe("Compute, Check and Confirm a Payslip @module:hr @step:business @e
 
     await test.step("10. Confirm the payslip", async () => {
       const loc = (page.locator("button[name=\"action_payslip_done\"]")).and(page.locator(":visible")).first();
-      if (!(await loc.waitFor({ state: "visible", timeout: 8000 }).then(() => true, () => false))) {
-        test.skip(true, "Confirm the payslip is not available: the record is not in the required state");
-      }
+      await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-10.png");
       await loc.click();
     });

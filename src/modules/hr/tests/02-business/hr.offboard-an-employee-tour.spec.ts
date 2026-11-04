@@ -28,6 +28,7 @@ test.describe("Offboard an Employee @module:hr @step:business @e2e", () => {
   test.use({ viewport: { width: 1920, height: 1080 }, actionTimeout: 15_000 });
   test("Offboard an Employee", async ({ page }) => {
     test.setTimeout(400000);
+    const tourName = uniqueName("Tour");
     await page.goto("/web");
     // Odoo keeps persistent long-polling/websocket connections open for
     // real-time notifications, so "networkidle" never naturally resolves —
@@ -47,7 +48,7 @@ test.describe("Offboard an Employee @module:hr @step:business @e2e", () => {
       await sv.fill("[TEST] Tour");
       await sv.press("Enter");
       await page.waitForTimeout(1500);
-      if (!(await page.locator(".o_kanban_record").first().isVisible().catch(() => false))) test.skip(true, "No test records to work on");
+      await expect(page.locator(".o_kanban_record").first(), "no [TEST] Tour record to work on").toBeVisible({ timeout: 10_000 });
       const loc = (page.locator(".o_kanban_view .o_kanban_record")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-02.png");
@@ -63,7 +64,10 @@ test.describe("Offboard an Employee @module:hr @step:business @e2e", () => {
 
     await test.step("04. Archive", async () => {
       const loc = (page.locator(".o-dropdown--menu .dropdown-item, .o-dropdown--menu span.o_menu_item").filter({ hasText: "Archive" })).and(page.locator(":visible")).first();
-      await loc.waitFor({ state: "visible", timeout: 45000 });
+      await expect(async () => {
+        if (!(await loc.isVisible())) await page.locator(".o_cp_action_menus .dropdown-toggle").first().click();
+        await expect(loc).toBeVisible({ timeout: 3000 });
+      }).toPass({ timeout: 45000 });
       await shot(page, loc, "step-04.png");
       await loc.click();
     });
@@ -86,7 +90,7 @@ test.describe("Offboard an Employee @module:hr @step:business @e2e", () => {
       const loc = (page.locator("[name=\"departure_description\"] .odoo-editor-editable")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-07.png");
-      await loc.fill(uniqueName("Tour"));
+      await loc.fill(tourName);
     });
 
     await test.step("08. Departure date", async () => {
@@ -98,9 +102,7 @@ test.describe("Offboard an Employee @module:hr @step:business @e2e", () => {
 
     await test.step("09. Apply", async () => {
       const loc = (page.locator("button[name=\"action_register_departure\"]")).and(page.locator(":visible")).first();
-      if (!(await loc.waitFor({ state: "visible", timeout: 8000 }).then(() => true, () => false))) {
-        test.skip(true, "Apply is not available: the record is not in the required state");
-      }
+      await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-09.png");
       await loc.click();
     });
@@ -109,7 +111,7 @@ test.describe("Offboard an Employee @module:hr @step:business @e2e", () => {
       const loc = (page.locator(".o_breadcrumb .active")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-10.png");
-      // (click skipped: only ends the tour)
+      await loc.click({ force: true });
     });
 
   });

@@ -47,7 +47,7 @@ test.describe("Onboard a New Hire @module:hr @step:business @e2e", () => {
       await sv.fill("[TEST] Tour");
       await sv.press("Enter");
       await page.waitForTimeout(1500);
-      if (!(await page.locator(".o_kanban_record").first().isVisible().catch(() => false))) test.skip(true, "No test records to work on");
+      await expect(page.locator(".o_kanban_record").first(), "no [TEST] Tour record to work on").toBeVisible({ timeout: 10_000 });
       const loc = (page.locator(".o_kanban_view .o_kanban_record")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-02.png");
@@ -75,14 +75,26 @@ test.describe("Onboard a New Hire @module:hr @step:business @e2e", () => {
       await loc.click();
     });
 
-    // Steps 06-07 of the tour linked a Related User. The first user in the list
-    // is already linked to another employee, so saving fails with "A user cannot
-    // be linked to multiple employees"; launching the plan does not need one.
+    await test.step("06. Search Related User", async () => {
+      const loc = (page.locator("[name=\"user_id\"] input")).and(page.locator(":visible")).first();
+      await loc.waitFor({ state: "visible", timeout: 45000 });
+      await shot(page, loc, "step-06.png");
+      await loc.click();
+    });
+
+    await test.step("07. Choose the user", async () => {
+      const loc = (page.locator(".o-autocomplete--dropdown-menu .o-autocomplete--dropdown-item")).and(page.locator(":visible")).first();
+      await loc.waitFor({ state: "visible", timeout: 45000 });
+      await shot(page, loc, "step-07.png");
+      await loc.click();
+    });
+
     await test.step("08. Save", async () => {
       const loc = (page.locator(".o_form_button_save")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-08.png");
       await loc.click();
+      await expect(page.locator(".o_error_dialog"), "the server rejected the save").toHaveCount(0);
     });
 
     await test.step("09. Launch Plan", async () => {
@@ -102,20 +114,14 @@ test.describe("Onboard a New Hire @module:hr @step:business @e2e", () => {
     await test.step("11. Schedule the plan", async () => {
       // TODO: unsupported jQuery pseudo(s) :not — verify selector
       const loc = (page.locator(".modal-footer .btn-primary:not(.d-none)")).and(page.locator(":visible")).first();
-      // Added by hand: the plan only launches when the employee and their manager are
-      // linked to users, which a freshly created test employee is not.
-      if (!(await loc.waitFor({ state: "visible", timeout: 8000 }).then(() => true, () => false))) {
-        test.skip(true, "Onboarding plan cannot be launched: the employee and manager must be linked to users");
-      }
+      await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-11.png");
       await loc.click();
     });
 
     await test.step("12. Documents", async () => {
       const loc = (page.locator("button[name=\"action_open_documents\"]")).and(page.locator(":visible")).first();
-      if (!(await loc.waitFor({ state: "visible", timeout: 8000 }).then(() => true, () => false))) {
-        test.skip(true, "Documents is not available: the record is not in the required state");
-      }
+      await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-12.png");
       await loc.click();
     });
@@ -129,9 +135,7 @@ test.describe("Onboard a New Hire @module:hr @step:business @e2e", () => {
 
     await test.step("14. Equipment", async () => {
       const loc = (page.locator("button[name=\"671\"]")).and(page.locator(":visible")).first();
-      if (!(await loc.waitFor({ state: "visible", timeout: 8000 }).then(() => true, () => false))) {
-        test.skip(true, "Equipment is not available: the record is not in the required state");
-      }
+      await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-14.png");
       await loc.click();
     });
@@ -140,7 +144,7 @@ test.describe("Onboard a New Hire @module:hr @step:business @e2e", () => {
       const loc = (page.locator(".o_cp_searchview")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-15.png");
-      // (click skipped: only ends the tour)
+      await loc.click({ force: true });
     });
 
   });

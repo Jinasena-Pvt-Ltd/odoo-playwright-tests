@@ -8,6 +8,8 @@ Three user roles are tested independently: admin, manager, and employee.
 
 **Tech stack:** Playwright 1.50, TypeScript 5.7, Allure reporting, Odoo RPC API
 
+**Rules:** follow [RULES.md](RULES.md) on every test change — expected results come from the request, not the code; show a test go red before calling it done; never weaken a test to make it pass.
+
 ---
 
 ## Quick Start
