@@ -174,12 +174,20 @@ test.describe.serial('Cash order with profit margin control: margin approval, in
       return;
     }
     await details.click();
-    await throwIfOdooError(page);
-    const dlg = page.locator('.modal:visible').first();
-    await expect(dlg).toBeVisible({ timeout: 20_000 });
-    expect(((await dlg.locator('.modal-body').textContent()) ?? '').replace(/\s+/g, ' ').trim().length,
-      'Margin details modal is empty').toBeGreaterThan(0);
-    await dlg.locator('footer button').filter({ hasText: /^close$/i }).first().click();
+    // In this database the button raises a UserError whose text IS the details (item, base price, cost, net margin, minimum margin)
+    let detailText = '';
+    try {
+      await throwIfOdooError(page);
+      const dlg = page.locator('.modal:visible').first();
+      await expect(dlg).toBeVisible({ timeout: 20_000 });
+      detailText = ((await dlg.locator('.modal-body').textContent()) ?? '').replace(/\s+/g, ' ').trim();
+      await dlg.locator('footer button').filter({ hasText: /^(close|ok)$/i }).first().click();
+    } catch (e) {
+      detailText = String(e).replace(/\s+/g, ' ');
+    }
+    test.info().annotations.push({ type: 'margin-details', description: detailText.slice(0, 400) });
+    expect(detailText, 'Margin details must explain the shortfall').toMatch(/insufficient margin/i);
+    expect(detailText).toMatch(/net margin/i);
     await expect(page.locator('.modal:visible')).toHaveCount(0, { timeout: 10_000 });
     await expect(page.locator('.o_form_view')).toBeVisible();
   });

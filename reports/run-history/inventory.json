@@ -2188,5 +2188,15 @@
   "title": "8. margin >= minimum: no margin buttons, Confirm is available and works",
   "file": "sales.margin-approval.spec.ts",
   "placeholder": false
+ },
+ {
+  "key": "admin|sales|business||demo: low-profit product shows margin approval buttons",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "",
+  "title": "demo: low-profit product shows margin approval buttons",
+  "file": "tmp-margin-demo.spec.ts",
+  "placeholder": false
  }
 ]

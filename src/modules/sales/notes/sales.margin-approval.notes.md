@@ -48,3 +48,21 @@ Approve Insufficient Margin (authority person) -> Confirm. Then delivery, invoic
 - Findings: product `standard_price` (Cost) is NOT what the order-line margin uses. Order lines carry a custom `x_studio_cost_value` (0 even with Cost 1,200). Setting it to 1,200 by RPC on a draft line did not set `x_studio_margin_exceed` either.
 - Minimum margin: Settings UI shows 60 but `ir.config_parameter bugfix_sales.minimum_sales_margin.2` = 110.0 (user says 110 applies).
 - Open: what actually triggers "Insufficient Margin Details" (Studio automation / server action) and what populates the line cost.
+
+## Run log (2026-11-04, headed, admin, TESTMARGIN1) — same result, gate still not reproduced
+- 4 passed / 1 failed / 2 skipped. Test 2 (gate) skipped: no margin buttons; orders confirmed directly.
+- Test 5 (invoice) failed: "Account 22050010 is of payable type, but is used in a sale operation" (TESTMARGIN1 income account); tests 6-7 skipped as a result.
+- Target DB: jinasena-upgrade-testing-39894820 (neutralized). Automation 491 "SLS - Validate Margin in SO Line" was inactive there and has no server action (4033) linked and no trigger fields, so the line flag `x_studio_margin_exceed` is never set. The margin UI the user showed earlier came from a different DB (jinstage-jindbconfigure-39652022).
+- Unblock: (a) point tests at the DB where the gate is configured, or link action 4033 to automation 491 with trigger fields (price, qty, product, commission); (b) set the Income Account on the test product or copy it from JMC6.
+
+## Run log (2026-11-04, later, headed, admin, TESTMARGIN1) — margin gate NOW REPRODUCED, full flow passes
+- Result: **8 passed, 1 skipped** (test 8 high-margin needs `FLOW_HIGH_MARGIN_PRODUCT_CODE`).
+- The gate fires by itself now: a loss-making line (price 1,000, cost 1,200) sets `x_studio_margin_exceed` on the order (S00276, S00277), Confirm is hidden and
+  "Request Insufficient Marginn Approval" (Odoo's spelling, two n's) / "Insufficient Margin Details" appear. Request -> Approve -> Confirm -> delivery -> invoice -> cash receipt -> trace all pass.
+  Automation 491 is still inactive/unlinked (last written 2026-11-04 06:18), so the flag is being set by some other change made on the DB; the developer should confirm what.
+- "Insufficient Margin Details" does NOT open a modal: it raises a UserError whose text is the details, e.g.
+  `Item Code: [TEST] Margin Request Product Base Price: 1000.0 Discounts: 0.0 Other Charges (Commission): 0.0 Cost: 1200.0 Net Margin: -20.0 Min. Sales Margin %: 22.9`.
+  Test 2 was changed to read that error text and assert it mentions "insufficient margin" and "net margin" (the earlier version expected a modal and failed).
+- Actual minimum margin in force is **22.9 %** (from the details text), not 110 or 60. `FLOW_MIN_MARGIN=110` only makes the form-margin assertion pass; set `FLOW_MIN_MARGIN=22.9` for accuracy.
+- Invoice account error is gone: it came from the VAT 18% (Sales) tax on TESTMARGIN1, whose tax line posts to 22050010 VAT PAYABLE (account type Payable). The tax was removed from the test product only; the account type is still a developer fault.
+- Leftovers on the DB: S00275 (flag set by hand for a demo) and S00276 (stuck at the margin gate after the test-2 failure) remain as draft quotations.
