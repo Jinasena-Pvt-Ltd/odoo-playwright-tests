@@ -150,7 +150,15 @@ export function genSpec(tour, domain, step = "business") {
       lines.push(`      await loc.waitFor({ state: "visible", timeout: 45000 });`);
     }
     lines.push(`      await shot(page, loc, ${jsString(file)});`);
-    lines.push(actionCode);
+    if (/^\.o_cp_action_menus \.dropdown-item|^\.o-dropdown--menu span\.o_menu_item/.test(trig) && /^\s*await loc\.click\(\);\s*$/.test(code)) {
+      // Same retry for the click itself: the menu can close between seeing the item and clicking it.
+      lines.push(`      await expect(async () => {`);
+      lines.push(`        if (!(await loc.isVisible())) await page.locator(".o_cp_action_menus .dropdown-toggle").first().click();`);
+      lines.push(`        await loc.click({ timeout: 3000 });`);
+      lines.push(`      }).toPass({ timeout: 20_000 });`);
+    } else {
+      lines.push(actionCode);
+    }
     // A save must actually save: without this a spec stays green even when the
     // Save click is removed or the server rejects the record. Not for the
     // validations step, where the failed save is the expected outcome.

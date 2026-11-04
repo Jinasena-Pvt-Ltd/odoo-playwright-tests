@@ -28,7 +28,8 @@ test.describe("Offboard an Employee @module:hr @step:business @e2e", () => {
   test.use({ viewport: { width: 1920, height: 1080 }, actionTimeout: 15_000 });
   test("Offboard an Employee", async ({ page }) => {
     test.setTimeout(400000);
-    const tourName = uniqueName("Tour");
+    // uniqueName() repeats within one run, so add a per-spec suffix to tell specs apart.
+    const tourName = `${uniqueName("Tour")} ${Date.now().toString(36).toUpperCase()}`;
     await page.goto("/web");
     // Odoo keeps persistent long-polling/websocket connections open for
     // real-time notifications, so "networkidle" never naturally resolves —
@@ -69,7 +70,10 @@ test.describe("Offboard an Employee @module:hr @step:business @e2e", () => {
         await expect(loc).toBeVisible({ timeout: 3000 });
       }).toPass({ timeout: 45000 });
       await shot(page, loc, "step-04.png");
-      await loc.click();
+      await expect(async () => {
+        if (!(await loc.isVisible())) await page.locator(".o_cp_action_menus .dropdown-toggle").first().click();
+        await loc.click({ timeout: 3000 });
+      }).toPass({ timeout: 20_000 });
     });
 
     await test.step("05. Departure reason", async () => {

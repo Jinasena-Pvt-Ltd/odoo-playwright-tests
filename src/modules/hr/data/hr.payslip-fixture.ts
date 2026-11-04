@@ -124,13 +124,27 @@ export async function createPendingLeave(
     { fields: ["id", "leave_validation_type"], order: "leave_validation_type", limit: 1 },
   );
   if (!employee || !type) throw new Error("Need an employee the login user approves (in the current company) and a leave type that needs approval");
-  // A random working day far ahead, so requests from other runs do not overlap.
-  const day = new Date(Date.UTC(2035, Math.floor(Math.random() * 12), 1 + Math.floor(Math.random() * 28)));
-  while (day.getUTCDay() === 0 || day.getUTCDay() === 6) day.setUTCDate(day.getUTCDate() + 1);
-  const date = day.toISOString().slice(0, 10);
+  // A random working day far ahead; if it collides with a request from an earlier run, try another.
   const name = uniqueName("Tour");
-  const id = await call("hr.leave", "create", [
-    { name, employee_id: employee.id, holiday_status_id: type.id, request_date_from: date, request_date_to: date },
-  ]);
-  return { id, name, employeeName: employee.name };
+  for (let attempt = 0; ; attempt++) {
+    const day = new Date(Date.UTC(2035, Math.floor(Math.random() * 12), 1 + Math.floor(Math.random() * 28)));
+    while (day.getUTCDay() === 0 || day.getUTCDay() === 6) day.setUTCDate(day.getUTCDate() + 1);
+    const date = day.toISOString().slice(0, 10);
+    try {
+      const id = await call("hr.leave", "create", [
+        { name, employee_id: employee.id, holiday_status_id: type.id, request_date_from: date, request_date_to: date },
+      ]);
+      return { id, name, employeeName: employee.name };
+    } catch (e) {
+      if (attempt >= 20 || !/overlap/i.test(String(e))) throw e;
+    }
+  }
+
+}
+
+/** A fresh payslip batch in the Done state, ready for "Mark as paid". */
+export async function createDoneBatch(page: Page, call: BrowserCall): Promise<{ batchId: number; slipId: number; name: string }> {
+  const batch = await createConfirmedBatch(page, call);
+  await call("hr.payslip.run", "action_validate", [[batch.batchId]]);
+  return batch;
 }

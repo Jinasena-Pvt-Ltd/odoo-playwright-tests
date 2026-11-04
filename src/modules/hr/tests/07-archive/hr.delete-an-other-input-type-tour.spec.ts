@@ -87,7 +87,10 @@ test.describe("Delete an Other Input Type @module:hr @step:archive", () => {
         await expect(loc).toBeVisible({ timeout: 3000 });
       }).toPass({ timeout: 45000 });
       await shot(page, loc, "step-07.png");
-      await loc.click();
+      await expect(async () => {
+        if (!(await loc.isVisible())) await page.locator(".o_cp_action_menus .dropdown-toggle").first().click();
+        await loc.click({ timeout: 3000 });
+      }).toPass({ timeout: 20_000 });
     });
 
     await test.step("08. Confirm", async () => {

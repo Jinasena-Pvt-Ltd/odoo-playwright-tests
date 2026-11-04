@@ -28,6 +28,8 @@ test.describe("Reject an Expense Report @module:hr @step:archive", () => {
   test.use({ viewport: { width: 1920, height: 1080 }, actionTimeout: 15_000 });
   test("Reject an Expense Report", async ({ page }) => {
     test.setTimeout(280000);
+    // uniqueName() repeats within one run, so add a per-spec suffix to tell specs apart.
+    const tourName = `${uniqueName("Tour")} ${Date.now().toString(36).toUpperCase()}`;
     await page.goto("/web");
     // Odoo keeps persistent long-polling/websocket connections open for
     // real-time notifications, so "networkidle" never naturally resolves —
@@ -77,7 +79,7 @@ test.describe("Reject an Expense Report @module:hr @step:archive", () => {
       const loc = (page.locator("[name=\"reason\"] input")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-06.png");
-      await loc.fill(uniqueName("Tour"));
+      await loc.fill(tourName);
     });
 
     await test.step("07. Confirm refusal", async () => {

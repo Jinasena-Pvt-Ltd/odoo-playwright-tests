@@ -5,6 +5,7 @@
 // don't all map 1:1 onto Playwright.
 import { test, expect } from "../../../../core/fixtures/index";
 import { uniqueName, uniqueEmail, uniqueRef } from "../../../../core/utils/RandomDataGenerator";
+import { browserCall, createDoneBatch, dropBatch } from "../../data/hr.payslip-fixture";
 import type { Page, Locator } from "@playwright/test";
 import fs from "node:fs";
 
@@ -28,6 +29,10 @@ test.describe("Mark a Payslip Batch as Paid @module:hr @step:business @e2e", () 
   test.use({ viewport: { width: 1920, height: 1080 }, actionTimeout: 15_000 });
   test("Mark a Payslip Batch as Paid", async ({ page }) => {
     test.setTimeout(240000);
+    // Added by hand: marking as paid needs a batch in the Done state. The first batch in the list
+    // is whatever earlier runs left (usually already paid), so build a fresh one.
+    const call = browserCall(page);
+    const { batchId, slipId, name } = await createDoneBatch(page, call);
     await page.goto("/web");
     // Odoo keeps persistent long-polling/websocket connections open for
     // real-time notifications, so "networkidle" never naturally resolves —
@@ -57,7 +62,7 @@ test.describe("Mark a Payslip Batch as Paid @module:hr @step:business @e2e", () 
     });
 
     await test.step("04. Open the batch", async () => {
-      const loc = (page.locator(".o_list_view .o_data_row .o_data_cell[name=\"name\"]")).and(page.locator(":visible")).first();
+      const loc = (page.locator(".o_list_view .o_data_row").filter({ hasText: name }).locator(".o_data_cell[name=\"name\"]")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-04.png");
       await loc.click();
@@ -77,5 +82,11 @@ test.describe("Mark a Payslip Batch as Paid @module:hr @step:business @e2e", () 
       await loc.click({ force: true });
     });
 
+    // Hand-written check: marking as paid must move the batch to Paid.
+    await expect.poll(async () => (await call("hr.payslip.run", "read", [[batchId], ["state"]]))[0].state, {
+      message: "the payslip batch was not marked as paid",
+      timeout: 15_000,
+    }).toBe("paid");
+    await dropBatch(call, batchId, slipId);
   });
 });
