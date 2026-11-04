@@ -36,80 +36,81 @@ test.describe("Add or Correct an Attendance Record Manually @module:hr @step:bus
     await page.waitForLoadState("networkidle", { timeout: 10_000 }).catch(() => {});
 
     await test.step("01. Open Attendances", async () => {
-      const loc = (page.locator("[data-menu-xmlid=\"hr_attendance.menu_hr_attendance_root\"]")).first();
+      const loc = (page.locator("[data-menu-xmlid=\"hr_attendance.menu_hr_attendance_root\"]")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-01.png");
       await loc.click();
     });
 
     await test.step("02. Switch to List", async () => {
-      const loc = (page.locator(".o_cp_switch_buttons .o_switch_view.o_list")).first();
+      const loc = (page.locator(".o_cp_switch_buttons .o_switch_view.o_list")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-02.png");
       await loc.click();
     });
 
     await test.step("03. New record", async () => {
-      const loc = (page.locator(".o_control_panel_main_buttons .d-xl-inline-flex .o_list_button_add")).first();
+      const loc = (page.locator(".o_control_panel_main_buttons .d-xl-inline-flex .o_list_button_add")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-03.png");
       await loc.click();
     });
 
     await test.step("04. Open Employee", async () => {
-      const loc = (page.locator("[name=\"employee_id\"] input")).first();
+      const loc = (page.locator("[name=\"employee_id\"] input")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-04.png");
       await loc.click();
     });
 
     await test.step("05. Choose the employee", async () => {
-      const loc = (page.locator(".o-autocomplete--dropdown-menu .o-autocomplete--dropdown-item")).first();
+      const loc = (page.locator(".o-autocomplete--dropdown-menu .o-autocomplete--dropdown-item")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-05.png");
       await loc.click();
     });
 
     await test.step("06. Check-in time", async () => {
-      const loc = (page.locator("[name=\"check_in\"] input")).first();
+      const loc = (page.locator("[name=\"check_in\"] input")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-06.png");
       await loc.click();
     });
 
     await test.step("07. Pick the check-in date and time", async () => {
-      const loc = (page.locator(".o_datetime_picker")).first();
+      const loc = (page.locator(".o_datetime_picker")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-07.png");
       await loc.getByRole("button", { name: "Apply" }).click();
     });
 
     await test.step("08. Check-out time", async () => {
-      const loc = (page.locator("[name=\"check_out\"] input")).first();
+      const loc = (page.locator("[name=\"check_out\"] input")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-08.png");
       await loc.click();
     });
 
     await test.step("09. Pick the check-out date and time", async () => {
-      const loc = (page.locator(".o_datetime_picker")).first();
+      const loc = (page.locator(".o_datetime_picker")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-09.png");
       await loc.getByRole("button", { name: "Apply" }).click();
     });
 
     await test.step("10. Save", async () => {
-      const loc = (page.locator(".o_form_button_save")).first();
+      const loc = (page.locator(".o_form_button_save")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-10.png");
       await loc.click();
+      await expect(page.locator(".o_error_dialog"), "the server rejected the save").toHaveCount(0);
     });
 
     await test.step("11. Worked hours", async () => {
-      const loc = (page.locator("[name=\"worked_hours\"]")).first();
+      const loc = (page.locator("[name=\"worked_hours\"]")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-11.png");
-      await loc.click();
+      await loc.click({ force: true });
     });
 
   });

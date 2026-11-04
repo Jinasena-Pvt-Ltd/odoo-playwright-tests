@@ -5,6 +5,7 @@
 // don't all map 1:1 onto Playwright.
 import { test, expect } from "../../../../core/fixtures/index";
 import { uniqueName, uniqueEmail, uniqueRef } from "../../../../core/utils/RandomDataGenerator";
+import { browserCall, createDraftPayslip, dropPayslip } from "../../data/hr.payslip-fixture";
 import type { Page, Locator } from "@playwright/test";
 import fs from "node:fs";
 
@@ -28,6 +29,11 @@ test.describe("Add an Extra Input to a Single Payslip @module:hr @step:business 
   test.use({ viewport: { width: 1920, height: 1080 }, actionTimeout: 15_000 });
   test("Add an Extra Input to a Single Payslip", async ({ page }) => {
     test.setTimeout(480000);
+    // Added by hand: these tours act on a draft payslip. The first payslip in the list is
+    // whatever earlier runs left (usually already confirmed), so make a fresh draft one.
+    const call = browserCall(page);
+    const slipId = await createDraftPayslip(page, call);
+    test.info().annotations.push({ type: "payslip", description: String(slipId) });
     await page.goto("/web");
     // Odoo keeps persistent long-polling/websocket connections open for
     // real-time notifications, so "networkidle" never naturally resolves —
@@ -56,18 +62,12 @@ test.describe("Add an Extra Input to a Single Payslip @module:hr @step:business 
       await loc.click();
     });
 
-    await test.step("04. Open a batch", async () => {
-      const loc = (page.locator(".o_list_view .o_group_header")).and(page.locator(":visible")).first();
-      await loc.waitFor({ state: "visible", timeout: 45000 });
-      await shot(page, loc, "step-04.png");
-      await loc.click();
-    });
-
-    await test.step("05. Open the payslip", async () => {
-      const loc = (page.locator(".o_list_view .o_data_row .o_data_cell[name=\"employee_id\"]")).and(page.locator(":visible")).first();
-      await loc.waitFor({ state: "visible", timeout: 45000 });
-      await shot(page, loc, "step-05.png");
-      await loc.click();
+    await test.step("04-05. Open the new payslip", async () => {
+      // The tour clicked the first batch and its first payslip; open the fresh one from the same action.
+      const [, actionId] = await call("ir.model.data", "check_object_reference", ["hr_payroll", "action_view_hr_payslip_form"]);
+      const cids = page.url().match(/cids=([\d-]+)/)?.[1] ?? "1";
+      await page.goto(`/web#action=${actionId}&model=hr.payslip&view_type=form&id=${slipId}&cids=${cids}`);
+      await expect(page.locator(".o_form_view").first()).toBeVisible({ timeout: 45000 });
     });
 
     await test.step("06. Worked days and inputs", async () => {
@@ -121,5 +121,11 @@ test.describe("Add an Extra Input to a Single Payslip @module:hr @step:business 
       await loc.click();
     });
 
+    // Hand-written check: the extra input line must exist on the payslip.
+    await expect.poll(async () => call("hr.payslip.input", "search_count", [[["payslip_id", "=", slipId]]]), {
+      message: "the extra input was not saved on the payslip",
+      timeout: 15_000,
+    }).toBeGreaterThan(0);
+    await dropPayslip(call, slipId);
   });
 });

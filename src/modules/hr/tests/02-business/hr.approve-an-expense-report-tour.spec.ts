@@ -5,6 +5,7 @@
 // don't all map 1:1 onto Playwright.
 import { test, expect } from "../../../../core/fixtures/index";
 import { uniqueName, uniqueEmail, uniqueRef } from "../../../../core/utils/RandomDataGenerator";
+import { browserCall, createSubmittedExpenseSheet, dropExpenseSheet } from "../../data/hr.payslip-fixture";
 import type { Page, Locator } from "@playwright/test";
 import fs from "node:fs";
 
@@ -28,6 +29,10 @@ test.describe("Approve an Expense Report @module:hr @step:business @e2e", () => 
   test.use({ viewport: { width: 1920, height: 1080 }, actionTimeout: 15_000 });
   test("Approve an Expense Report", async ({ page }) => {
     test.setTimeout(360000);
+    // Added by hand: approving needs a report in the Submitted state. The first one in the list
+    // is whatever earlier runs left (usually already approved), so submit a fresh one.
+    const call = browserCall(page);
+    const sheetId = await createSubmittedExpenseSheet(page, call);
     await page.goto("/web");
     // Odoo keeps persistent long-polling/websocket connections open for
     // real-time notifications, so "networkidle" never naturally resolves —
@@ -49,39 +54,12 @@ test.describe("Approve an Expense Report @module:hr @step:business @e2e", () => 
       await loc.click();
     });
 
-    await test.step("03. Open the search options", async () => {
-      const loc = (page.locator(".o_searchview_dropdown_toggler")).and(page.locator(":visible")).first();
-      await loc.waitFor({ state: "visible", timeout: 45000 });
-      await shot(page, loc, "step-03.png");
-      await loc.click();
-    });
-
-    await test.step("04. Group by Status", async () => {
-      const loc = (page.locator(".o_group_by_menu [role=\"menuitemcheckbox\"]:last-of-type")).and(page.locator(":visible")).first();
-      await loc.waitFor({ state: "visible", timeout: 45000 });
-      await shot(page, loc, "step-04.png");
-      await loc.click();
-    });
-
-    await test.step("05. Close the search options", async () => {
-      const loc = (page.locator(".o_searchview_dropdown_toggler")).and(page.locator(":visible")).first();
-      await loc.waitFor({ state: "visible", timeout: 45000 });
-      await shot(page, loc, "step-05.png");
-      await loc.click();
-    });
-
-    await test.step("06. Open the Submitted group", async () => {
-      const loc = (page.locator(".o_list_view tbody .o_group_header:last-child")).and(page.locator(":visible")).first();
-      await loc.waitFor({ state: "visible", timeout: 45000 });
-      await shot(page, loc, "step-06.png");
-      await loc.click();
-    });
-
-    await test.step("07. Open the report", async () => {
-      const loc = (page.locator(".o_list_view .o_data_row .o_data_cell[name=\"name\"]")).and(page.locator(":visible")).first();
-      await loc.waitFor({ state: "visible", timeout: 45000 });
-      await shot(page, loc, "step-07.png");
-      await loc.click();
+    await test.step("03-07. Open the new report", async () => {
+      // The tour grouped by status and opened the first Submitted report; open the fresh one instead.
+      const [, actionId] = await call("ir.model.data", "check_object_reference", ["hr_expense", "action_hr_expense_sheet_all_all"]);
+      const cids = page.url().match(/cids=([\d-]+)/)?.[1] ?? "1";
+      await page.goto(`/web#action=${actionId}&model=hr.expense.sheet&view_type=form&id=${sheetId}&cids=${cids}`);
+      await expect(page.locator(".o_form_view").first()).toBeVisible({ timeout: 45000 });
     });
 
     await test.step("08. Check the total", async () => {
@@ -98,5 +76,11 @@ test.describe("Approve an Expense Report @module:hr @step:business @e2e", () => 
       await loc.click();
     });
 
+    // Hand-written check: approving must move the report to Approved.
+    await expect.poll(async () => (await call("hr.expense.sheet", "read", [[sheetId], ["state"]]))[0].state, {
+      message: "the expense report was not approved",
+      timeout: 15_000,
+    }).toBe("approve");
+    await dropExpenseSheet(call, sheetId);
   });
 });

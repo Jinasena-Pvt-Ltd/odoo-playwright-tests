@@ -99,8 +99,12 @@ test.describe("Create and Assign a Contract @module:hr @step:business @e2e", () 
     // did not fill, so the contract could not be saved.
     await test.step("08b. Working schedule", async () => {
       const field = page.locator('[name="resource_calendar_id"] input').first();
-      await field.click();
-      await page.locator(".o-autocomplete--dropdown-menu li").first().click();
+      // The list can open before its items load, or close under the click: retry until the value sticks.
+      await expect(async () => {
+        await field.fill("Standard 40");
+        await page.locator(".o-autocomplete--dropdown-item").filter({ hasText: "Standard 40" }).first().click({ timeout: 3000 });
+        await expect(field).toHaveValue(/\S/, { timeout: 3000 });
+      }).toPass({ timeout: 20_000 });
     });
 
     await test.step("09. Save", async () => {
@@ -109,13 +113,14 @@ test.describe("Create and Assign a Contract @module:hr @step:business @e2e", () 
       await shot(page, loc, "step-09.png");
       await loc.click();
       await expect(page.locator(".o_error_dialog"), "the server rejected the save").toHaveCount(0);
-      // Saved = its name is shown as text (a row still being edited holds it in an input),
-      // or an open form has left the "New" state.
-      const savedForm = page
-        .locator(".o_action", { has: page.locator(".o_form_view") })
-        .locator(".o_breadcrumb .active")
-        .filter({ hasNotText: /^\s*New\s*$/ });
-      await expect(page.getByText(tourName).first().or(savedForm), "the record was not saved").toBeVisible({ timeout: 15_000 });
+      // Saved = an open form has nothing left to save; in a list (where a row still being
+      // edited keeps the name in an input) the name is shown as text. An error dialog fails fast.
+      await expect.poll(async () => {
+        if (await page.locator(".o_error_dialog").count()) return "the server rejected the save";
+        if (await page.locator(".o_form_view .o_form_status_indicator_buttons.invisible").count()) return "saved";
+        if (!(await page.locator(".o_form_view").count()) && (await page.getByText(tourName).first().isVisible().catch(() => false))) return "saved";
+        return "not saved yet";
+      }, { message: "the record was not saved", timeout: 15_000 }).toBe("saved");
     });
 
     await test.step("10. Start the contract", async () => {

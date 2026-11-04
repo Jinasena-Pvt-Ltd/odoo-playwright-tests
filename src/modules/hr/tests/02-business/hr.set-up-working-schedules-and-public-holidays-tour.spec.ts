@@ -28,6 +28,17 @@ test.describe("Set Up Working Schedules and Public Holidays @module:hr @step:bus
   test.use({ viewport: { width: 1920, height: 1080 }, actionTimeout: 15_000 });
   test("Set Up Working Schedules and Public Holidays", async ({ page }) => {
     test.setTimeout(600000);
+    // Added by hand: two public holidays cannot overlap, and this tour saves one dated today,
+    // so remove the ones earlier runs left behind before saving another.
+    // Uses the browser session: logging in over RPC would end it on this database.
+    const call = async (model: string, method: string, args: unknown[], kwargs: object = {}) =>
+      (await page.request.post(`/web/dataset/call_kw/${model}/${method}`, {
+        data: { jsonrpc: "2.0", method: "call", params: { model, method, args, kwargs } },
+      })).json();
+    const stale = (await call("resource.calendar.leaves", "search", [[["name", "ilike", "[TEST] Tour"]]])).result ?? [];
+    if (stale.length) await call("resource.calendar.leaves", "unlink", [stale]);
+    // uniqueName() repeats within one run, so add a per-spec suffix to tell specs apart.
+    const tourName = `${uniqueName("Tour")} ${Date.now().toString(36).toUpperCase()}`;
     await page.goto("/web");
     // Odoo keeps persistent long-polling/websocket connections open for
     // real-time notifications, so "networkidle" never naturally resolves —
@@ -36,43 +47,43 @@ test.describe("Set Up Working Schedules and Public Holidays @module:hr @step:bus
     await page.waitForLoadState("networkidle", { timeout: 10_000 }).catch(() => {});
 
     await test.step("01. Open Employees", async () => {
-      const loc = (page.locator("[data-menu-xmlid=\"hr.menu_hr_root\"]")).first();
+      const loc = (page.locator("[data-menu-xmlid=\"hr.menu_hr_root\"]")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-01.png");
       await loc.click();
     });
 
     await test.step("02. Configuration menu", async () => {
-      const loc = (page.locator(".o_main_navbar [data-menu-xmlid=\"hr.menu_human_resources_configuration\"]")).first();
+      const loc = (page.locator(".o_main_navbar [data-menu-xmlid=\"hr.menu_human_resources_configuration\"]")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-02.png");
       await loc.click();
     });
 
     await test.step("03. Working Schedules", async () => {
-      const loc = (page.locator("[data-menu-xmlid=\"hr.menu_resource_calendar_view\"]")).first();
+      const loc = (page.locator("[data-menu-xmlid=\"hr.menu_resource_calendar_view\"]")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-03.png");
       await loc.click();
     });
 
     await test.step("04. New schedule", async () => {
-      const loc = (page.locator(".o_control_panel_main_buttons .d-xl-inline-flex .o_list_button_add")).first();
+      const loc = (page.locator(".o_control_panel_main_buttons .d-xl-inline-flex .o_list_button_add")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-04.png");
       await loc.click();
     });
 
     await test.step("05. Schedule name", async () => {
-      const loc = (page.locator("[name=\"name\"] input")).first();
+      const loc = (page.locator("[name=\"name\"] input")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-05.png");
-      await loc.fill(uniqueName("Tour"));
+      await loc.fill(tourName);
             await loc.press("Tab");
     });
 
     await test.step("06. Full-time hours", async () => {
-      const loc = (page.locator("[name=\"full_time_required_hours\"] input")).first();
+      const loc = (page.locator("[name=\"full_time_required_hours\"] input")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-06.png");
       await loc.fill("40");
@@ -80,67 +91,83 @@ test.describe("Set Up Working Schedules and Public Holidays @module:hr @step:bus
     });
 
     await test.step("07. Save", async () => {
-      const loc = (page.locator(".o_form_button_save")).first();
+      const loc = (page.locator(".o_form_button_save")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-07.png");
       await loc.click();
+      await expect(page.locator(".o_error_dialog"), "the server rejected the save").toHaveCount(0);
+      // Saved = its name is shown as text (a row still being edited holds it in an input),
+      // or an open form has left the "New" state.
+      const savedForm = page
+        .locator(".o_action", { has: page.locator(".o_form_view") })
+        .locator(".o_breadcrumb .active")
+        .filter({ hasNotText: /^\s*New\s*$/ });
+      await expect(page.getByText(tourName).first().or(savedForm), "the record was not saved").toBeVisible({ timeout: 15_000 });
     });
 
     await test.step("08. Home menu", async () => {
-      const loc = (page.locator(".o_main_navbar a.o_menu_toggle")).first();
+      const loc = (page.locator(".o_main_navbar a.o_menu_toggle")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-08.png");
       await loc.click();
     });
 
     await test.step("09. Open Time Off", async () => {
-      const loc = (page.locator("[data-menu-xmlid=\"hr_holidays.menu_hr_holidays_root\"]")).first();
+      const loc = (page.locator("[data-menu-xmlid=\"hr_holidays.menu_hr_holidays_root\"]")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-09.png");
       await loc.click();
     });
 
     await test.step("10. Time Off configuration", async () => {
-      const loc = (page.locator(".o_main_navbar [data-menu-xmlid=\"hr_holidays.menu_hr_holidays_configuration\"]")).first();
+      const loc = (page.locator(".o_main_navbar [data-menu-xmlid=\"hr_holidays.menu_hr_holidays_configuration\"]")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-10.png");
       await loc.click();
     });
 
     await test.step("11. Public Holidays", async () => {
-      const loc = (page.locator("[data-menu-xmlid=\"hr_holidays.hr_holidays_public_time_off_menu_configuration\"]")).first();
+      const loc = (page.locator("[data-menu-xmlid=\"hr_holidays.hr_holidays_public_time_off_menu_configuration\"]")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-11.png");
       await loc.click();
     });
 
     await test.step("12. New public holiday", async () => {
-      const loc = (page.locator(".o_control_panel_main_buttons .d-xl-inline-flex .o_list_button_add")).first();
+      const loc = (page.locator(".o_control_panel_main_buttons .d-xl-inline-flex .o_list_button_add")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-12.png");
       await loc.click();
     });
 
     await test.step("13. Holiday name", async () => {
-      const loc = (page.locator(".o_selected_row .o_data_cell[name=\"name\"] input")).first();
+      const loc = (page.locator(".o_selected_row .o_data_cell[name=\"name\"] input")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-13.png");
-      await loc.fill(uniqueName("Tour"));
+      await loc.fill(tourName);
             await loc.press("Tab");
     });
 
     await test.step("14. Save the holiday", async () => {
-      const loc = (page.locator(".o_control_panel_main_buttons button.btn-primary.o_list_button_save")).first();
+      const loc = (page.locator(".o_control_panel_main_buttons button.btn-primary.o_list_button_save")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-14.png");
       await loc.click();
+      await expect(page.locator(".o_error_dialog"), "the server rejected the save").toHaveCount(0);
+      // Saved = its name is shown as text (a row still being edited holds it in an input),
+      // or an open form has left the "New" state.
+      const savedForm = page
+        .locator(".o_action", { has: page.locator(".o_form_view") })
+        .locator(".o_breadcrumb .active")
+        .filter({ hasNotText: /^\s*New\s*$/ });
+      await expect(page.getByText(tourName).first().or(savedForm), "the record was not saved").toBeVisible({ timeout: 15_000 });
     });
 
     await test.step("15. Holiday saved", async () => {
-      const loc = (page.locator(".o_list_view .o_list_table thead")).first();
+      const loc = (page.locator(".o_list_view .o_list_table thead")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-15.png");
-      await loc.click();
+      await loc.click({ force: true });
     });
 
   });

@@ -87,13 +87,14 @@ test.describe("Add a Salary Attachment Type @module:hr @step:config", () => {
       await shot(page, loc, "step-07.png");
       await loc.click();
       await expect(page.locator(".o_error_dialog"), "the server rejected the save").toHaveCount(0);
-      // Saved = its name is shown as text (a row still being edited holds it in an input),
-      // or an open form has left the "New" state.
-      const savedForm = page
-        .locator(".o_action", { has: page.locator(".o_form_view") })
-        .locator(".o_breadcrumb .active")
-        .filter({ hasNotText: /^\s*New\s*$/ });
-      await expect(page.getByText(tourName).first().or(savedForm), "the record was not saved").toBeVisible({ timeout: 15_000 });
+      // Saved = an open form has nothing left to save; in a list (where a row still being
+      // edited keeps the name in an input) the name is shown as text. An error dialog fails fast.
+      await expect.poll(async () => {
+        if (await page.locator(".o_error_dialog").count()) return "the server rejected the save";
+        if (await page.locator(".o_form_view .o_form_status_indicator_buttons.invisible").count()) return "saved";
+        if (!(await page.locator(".o_form_view").count()) && (await page.getByText(tourName).first().isVisible().catch(() => false))) return "saved";
+        return "not saved yet";
+      }, { message: "the record was not saved", timeout: 15_000 }).toBe("saved");
     });
 
     await test.step("08. Saved", async () => {

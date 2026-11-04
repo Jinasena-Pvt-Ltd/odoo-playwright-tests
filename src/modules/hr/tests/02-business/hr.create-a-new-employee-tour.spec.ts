@@ -28,6 +28,8 @@ test.describe("Create a New Employee @module:hr @step:business @e2e", () => {
   test.use({ viewport: { width: 1920, height: 1080 }, actionTimeout: 15_000 });
   test("Create a New Employee", async ({ page }) => {
     test.setTimeout(520000);
+    // uniqueName() repeats within one run, so add a per-spec suffix to tell specs apart.
+    const tourName = `${uniqueName("Tour")} ${Date.now().toString(36).toUpperCase()}`;
     await page.goto("/web");
     // Odoo keeps persistent long-polling/websocket connections open for
     // real-time notifications, so "networkidle" never naturally resolves —
@@ -36,65 +38,65 @@ test.describe("Create a New Employee @module:hr @step:business @e2e", () => {
     await page.waitForLoadState("networkidle", { timeout: 10_000 }).catch(() => {});
 
     await test.step("01. Open Employees", async () => {
-      const loc = (page.locator("[data-menu-xmlid=\"hr.menu_hr_root\"]")).first();
+      const loc = (page.locator("[data-menu-xmlid=\"hr.menu_hr_root\"]")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-01.png");
       await loc.click();
     });
 
     await test.step("02. New employee", async () => {
-      const loc = (page.locator(".o_control_panel_main_buttons .d-xl-inline-flex .o-kanban-button-new")).first();
+      const loc = (page.locator(".o_control_panel_main_buttons .d-xl-inline-flex .o-kanban-button-new")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-02.png");
       await loc.click();
     });
 
     await test.step("03. Employee name", async () => {
-      const loc = (page.locator("[name=\"name\"] input")).first();
+      const loc = (page.locator("[name=\"name\"] input")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-03.png");
-      await loc.fill(uniqueName("Tour"));
+      await loc.fill(tourName);
             await loc.press("Tab");
     });
 
     await test.step("04. Job title", async () => {
-      const loc = (page.locator("[name=\"job_title\"] input")).first();
+      const loc = (page.locator("[name=\"job_title\"] input")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-04.png");
-      await loc.fill(uniqueName("Tour"));
+      await loc.fill(tourName);
             await loc.press("Tab");
     });
 
     await test.step("05. Search Department", async () => {
-      const loc = (page.locator("[name=\"department_id\"] input")).first();
+      const loc = (page.locator("[name=\"department_id\"] input")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-05.png");
       await loc.click();
     });
 
     await test.step("06. Choose the department", async () => {
-      const loc = (page.locator(".o-autocomplete--dropdown-menu .o-autocomplete--dropdown-item")).first();
+      const loc = (page.locator(".o-autocomplete--dropdown-menu .o-autocomplete--dropdown-item")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-06.png");
       await loc.click();
     });
 
     await test.step("07. Check the manager", async () => {
-      const loc = (page.locator("[name=\"parent_id\"] input")).first();
+      const loc = (page.locator("[name=\"parent_id\"] input")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-07.png");
       await loc.click();
     });
 
     await test.step("08. Work Information tab", async () => {
-      const loc = (page.locator("a[name=\"public\"]")).first();
+      const loc = (page.locator("a[name=\"public\"]")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-08.png");
       await loc.click();
     });
 
     await test.step("09. Work email", async () => {
-      const loc = (page.locator("[name=\"work_email\"] input")).first();
+      const loc = (page.locator("[name=\"work_email\"] input")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-09.png");
       await loc.fill(uniqueEmail("tour"));
@@ -102,31 +104,40 @@ test.describe("Create a New Employee @module:hr @step:business @e2e", () => {
     });
 
     await test.step("10. Private Information tab", async () => {
-      const loc = (page.locator("a[name=\"personal_information\"]")).first();
+      const loc = (page.locator("a[name=\"personal_information\"]")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-10.png");
       await loc.click();
     });
 
     await test.step("11. HR Settings tab", async () => {
-      const loc = (page.locator("a[name=\"hr_settings\"]")).first();
+      const loc = (page.locator("a[name=\"hr_settings\"]")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-11.png");
       await loc.click();
     });
 
     await test.step("12. Save", async () => {
-      const loc = (page.locator(".o_form_button_save")).first();
+      const loc = (page.locator(".o_form_button_save")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-12.png");
       await loc.click();
+      await expect(page.locator(".o_error_dialog"), "the server rejected the save").toHaveCount(0);
+      // Saved = an open form has nothing left to save; in a list (where a row still being
+      // edited keeps the name in an input) the name is shown as text. An error dialog fails fast.
+      await expect.poll(async () => {
+        if (await page.locator(".o_error_dialog").count()) return "the server rejected the save";
+        if (await page.locator(".o_form_view .o_form_status_indicator_buttons.invisible").count()) return "saved";
+        if (!(await page.locator(".o_form_view").count()) && (await page.getByText(tourName).first().isVisible().catch(() => false))) return "saved";
+        return "not saved yet";
+      }, { message: "the record was not saved", timeout: 15_000 }).toBe("saved");
     });
 
     await test.step("13. Saved employee", async () => {
-      const loc = (page.locator(".o_breadcrumb .active")).first();
+      const loc = (page.locator(".o_breadcrumb .active")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-13.png");
-      await loc.click();
+      await loc.click({ force: true });
     });
 
   });

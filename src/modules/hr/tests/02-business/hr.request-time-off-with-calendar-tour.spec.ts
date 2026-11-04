@@ -28,6 +28,17 @@ test.describe("Request Time Off (with calendar) @module:hr @step:business @e2e",
   test.use({ viewport: { width: 1920, height: 1080 }, actionTimeout: 15_000 });
   test("Request Time Off (with calendar)", async ({ page }) => {
     test.setTimeout(480000);
+    // Added by hand: Odoo rejects a request that overlaps an existing one, and this tour books
+    // today, so refuse the requests earlier runs left behind (refused ones do not overlap).
+    // Uses the browser session: logging in over RPC would end it on this database.
+    const call = async (model: string, method: string, args: unknown[], kwargs: object = {}) =>
+      (await page.request.post(`/web/dataset/call_kw/${model}/${method}`, {
+        data: { jsonrpc: "2.0", method: "call", params: { model, method, args, kwargs } },
+      })).json();
+    const stale = (await call("hr.leave", "search", [[["name", "ilike", "[TEST] Tour"], ["state", "!=", "refuse"]]])).result ?? [];
+    if (stale.length) await call("hr.leave", "action_refuse", [stale]);
+    // uniqueName() repeats within one run, so add a per-spec suffix to tell specs apart.
+    const tourName = `${uniqueName("Tour")} ${Date.now().toString(36).toUpperCase()}`;
     await page.goto("/web");
     // Odoo keeps persistent long-polling/websocket connections open for
     // real-time notifications, so "networkidle" never naturally resolves —
@@ -36,88 +47,95 @@ test.describe("Request Time Off (with calendar) @module:hr @step:business @e2e",
     await page.waitForLoadState("networkidle", { timeout: 10_000 }).catch(() => {});
 
     await test.step("01. Open Time Off", async () => {
-      const loc = (page.locator("[data-menu-xmlid=\"hr_holidays.menu_hr_holidays_root\"]")).first();
+      const loc = (page.locator("[data-menu-xmlid=\"hr_holidays.menu_hr_holidays_root\"]")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-01.png");
       await loc.click();
     });
 
     await test.step("02. New request", async () => {
-      const loc = (page.locator(".o_control_panel_main_buttons .d-xl-inline-flex .btn-time-off")).first();
+      const loc = (page.locator(".o_control_panel_main_buttons .d-xl-inline-flex .btn-time-off")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-02.png");
       await loc.click();
     });
 
     await test.step("03. Time Off Type", async () => {
-      const loc = (page.locator("[name=\"holiday_status_id\"] input")).first();
+      const loc = (page.locator("[name=\"holiday_status_id\"] input")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-03.png");
       await loc.click();
     });
 
     await test.step("04. Choose the type", async () => {
-      const loc = (page.locator(".o-autocomplete--dropdown-menu .o-autocomplete--dropdown-item")).first();
+      const loc = (page.locator(".o-autocomplete--dropdown-menu .o-autocomplete--dropdown-item")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-04.png");
       await loc.click();
     });
 
     await test.step("05. Reason", async () => {
-      const loc = (page.locator("[name=\"name\"] textarea")).first();
+      const loc = (page.locator("[name=\"name\"] textarea")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-05.png");
-      await loc.fill(uniqueName("Tour"));
+      await loc.fill(tourName);
             await loc.press("Tab");
     });
 
     await test.step("06. Open the calendar", async () => {
-      const loc = (page.locator("[data-field=\"request_date_from\"]")).first();
+      const loc = (page.locator("[data-field=\"request_date_from\"]")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-06.png");
       await loc.click();
     });
 
     await test.step("07. Pick your last day", async () => {
-      const loc = (page.locator(".o_datetime_picker")).first();
+      const loc = (page.locator(".o_datetime_picker")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-07.png");
       await loc.click();
     });
 
     await test.step("08. Apply", async () => {
-      const loc = (page.locator(".o_datetime_picker .o_apply")).first();
+      const loc = (page.locator(".o_datetime_picker .o_apply")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-08.png");
       await loc.click();
     });
 
     await test.step("09. Save & Close", async () => {
-      const loc = (page.locator(".o_form_button_save")).first();
+      const loc = (page.locator(".o_form_button_save")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-09.png");
       await loc.click();
+      await expect(page.locator(".o_error_dialog"), "the server rejected the save").toHaveCount(0);
+      // Hand-written check: the calendar does not print the description, so ask the server
+      // whether the request exists.
+      await expect.poll(async () => ((await call("hr.leave", "search", [[["name", "=", tourName]]])).result ?? []).length, {
+        message: "the time off request was not created",
+        timeout: 15_000,
+      }).toBe(1);
     });
 
     await test.step("10. My Time", async () => {
-      const loc = (page.locator(".o_main_navbar [data-menu-xmlid=\"hr_holidays.menu_hr_holidays_my_leaves\"]")).first();
+      const loc = (page.locator(".o_main_navbar [data-menu-xmlid=\"hr_holidays.menu_hr_holidays_my_leaves\"]")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-10.png");
       await loc.click();
     });
 
     await test.step("11. My Time Off", async () => {
-      const loc = (page.locator("[data-menu-xmlid=\"hr_holidays.hr_leave_menu_my\"]")).first();
+      const loc = (page.locator("[data-menu-xmlid=\"hr_holidays.hr_leave_menu_my\"]")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-11.png");
       await loc.click();
     });
 
     await test.step("12. Check the status", async () => {
-      const loc = (page.locator(".o_list_view .o_data_row:first-child .o_data_cell[name=\"state\"]")).first();
+      const loc = (page.locator(".o_list_view .o_data_row:first-child .o_data_cell[name=\"state\"]")).and(page.locator(":visible")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-12.png");
-      await loc.click();
+      await loc.click({ force: true });
     });
 
   });

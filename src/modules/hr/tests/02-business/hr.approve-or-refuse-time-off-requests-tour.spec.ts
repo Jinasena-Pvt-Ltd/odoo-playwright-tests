@@ -5,6 +5,7 @@
 // don't all map 1:1 onto Playwright.
 import { test, expect } from "../../../../core/fixtures/index";
 import { uniqueName, uniqueEmail, uniqueRef } from "../../../../core/utils/RandomDataGenerator";
+import { browserCall, createPendingLeave } from "../../data/hr.payslip-fixture";
 import type { Page, Locator } from "@playwright/test";
 import fs from "node:fs";
 
@@ -28,6 +29,10 @@ test.describe("Approve or Refuse Time Off Requests @module:hr @step:business @e2
   test.use({ viewport: { width: 1920, height: 1080 }, actionTimeout: 15_000 });
   test("Approve or Refuse Time Off Requests", async ({ page }) => {
     test.setTimeout(320000);
+    // Added by hand: approving needs a request waiting for this user. The first one in the list
+    // is whatever earlier runs left, so file a fresh one for an employee this user approves.
+    const call = browserCall(page);
+    const leave = await createPendingLeave(page, call);
     await page.goto("/web");
     // Odoo keeps persistent long-polling/websocket connections open for
     // real-time notifications, so "networkidle" never naturally resolves —
@@ -78,18 +83,23 @@ test.describe("Approve or Refuse Time Off Requests @module:hr @step:business @e2
     });
 
     await test.step("07. Open the employee group", async () => {
-      const loc = (page.locator(".o_list_view .o_group_header")).first();
+      const loc = (page.locator(".o_list_view .o_group_header").filter({ hasText: leave.employeeName })).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-07.png");
       await loc.click();
     });
 
     await test.step("08. Approve", async () => {
-      const loc = (page.locator(".o_list_view .o_data_row button[name=\"action_approve\"]")).first();
+      const loc = (page.locator(".o_list_view .o_data_row").filter({ hasText: leave.name }).locator("button[name=\"action_approve\"]")).first();
       await loc.waitFor({ state: "visible", timeout: 45000 });
       await shot(page, loc, "step-08.png");
       await loc.click();
     });
 
+    // Hand-written check: approving must move the request out of To Approve.
+    await expect.poll(async () => (await call("hr.leave", "read", [[leave.id], ["state"]]))[0].state, {
+      message: "the time off request was not approved",
+      timeout: 15_000,
+    }).toMatch(/^validate/);
   });
 });
