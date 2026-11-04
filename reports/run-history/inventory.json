@@ -2198,5 +2198,15 @@
   "title": "demo: low-profit product shows margin approval buttons",
   "file": "tmp-margin-demo.spec.ts",
   "placeholder": false
+ },
+ {
+  "key": "admin|sales|business||capture margin approval guide screenshots",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "",
+  "title": "capture margin approval guide screenshots",
+  "file": "tmp-margin-guide.spec.ts",
+  "placeholder": false
  }
 ]

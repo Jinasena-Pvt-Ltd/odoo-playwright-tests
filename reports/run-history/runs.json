@@ -1,197 +1,5 @@
 [
  {
-  "id": "2026-10-29T03:41:26.108Z",
-  "startedAt": "2026-10-29T03:41:26.108Z",
-  "label": "31st run",
-  "note": "",
-  "results": {
-   "setup|setup|setup||authenticate: auth-storage/admin.json": {
-    "status": "passed",
-    "durationMs": 11592,
-    "error": ""
-   },
-   "admin|sales|business|Sales return of a cash order|1. quotation: Cash order for a Sales quotation": {
-    "status": "passed",
-    "durationMs": 20767,
-    "error": ""
-   },
-   "admin|sales|business|Sales return of a cash order|2. confirm: quotation becomes a Sales Order": {
-    "status": "passed",
-    "durationMs": 7145,
-    "error": ""
-   },
-   "admin|sales|business|Sales return of a cash order|3. delivery: validate → Done": {
-    "status": "passed",
-    "durationMs": 11678,
-    "error": ""
-   },
-   "admin|sales|business|Sales return of a cash order|4. invoice: create and confirm → Posted": {
-    "status": "passed",
-    "durationMs": 9232,
-    "error": ""
-   },
-   "admin|sales|business|Sales return of a cash order|5. credit note: reverse with a reason, approval, confirm": {
-    "status": "passed",
-    "durationMs": 15732,
-    "error": ""
-   },
-   "admin|sales|business|Sales return of a cash order|6. original invoice: reset to draft and confirm again (when offered)": {
-    "status": "passed",
-    "durationMs": 8025,
-    "error": ""
-   },
-   "admin|sales|business|Sales return of a cash order|7. advance payment on the sales order, then the Payments smart button": {
-    "status": "failed",
-    "durationMs": 28903,
-    "error": "TimeoutError: locator.fill: Timeout 20000ms exceeded."
-   }
-  }
- },
- {
-  "id": "2026-10-29T03:43:54.708Z",
-  "startedAt": "2026-10-29T03:43:54.708Z",
-  "label": "31st run",
-  "note": "",
-  "results": {
-   "setup|setup|setup||authenticate: auth-storage/admin.json": {
-    "status": "passed",
-    "durationMs": 10094,
-    "error": ""
-   },
-   "admin|sales|business|Sales return of a cash order|1. quotation: Cash order for a Sales quotation": {
-    "status": "passed",
-    "durationMs": 21342,
-    "error": ""
-   },
-   "admin|sales|business|Sales return of a cash order|2. confirm: quotation becomes a Sales Order": {
-    "status": "passed",
-    "durationMs": 9581,
-    "error": ""
-   },
-   "admin|sales|business|Sales return of a cash order|3. delivery: validate → Done": {
-    "status": "passed",
-    "durationMs": 11393,
-    "error": ""
-   },
-   "admin|sales|business|Sales return of a cash order|4. invoice: create and confirm → Posted": {
-    "status": "passed",
-    "durationMs": 9624,
-    "error": ""
-   },
-   "admin|sales|business|Sales return of a cash order|5. credit note: reverse with a reason, approval, confirm": {
-    "status": "passed",
-    "durationMs": 15708,
-    "error": ""
-   },
-   "admin|sales|business|Sales return of a cash order|6. original invoice: reset to draft and confirm again (when offered)": {
-    "status": "passed",
-    "durationMs": 8316,
-    "error": ""
-   },
-   "admin|sales|business|Sales return of a cash order|7. advance payment on the sales order, then the Payments smart button": {
-    "status": "skipped",
-    "durationMs": 11883,
-    "error": ""
-   }
-  }
- },
- {
-  "id": "2026-10-29T03:46:12.993Z",
-  "startedAt": "2026-10-29T03:46:12.993Z",
-  "label": "31st run",
-  "note": "",
-  "results": {
-   "setup|setup|setup||authenticate: auth-storage/admin.json": {
-    "status": "passed",
-    "durationMs": 9485,
-    "error": ""
-   },
-   "admin|sales|business|Sales return of a cash order|1. quotation: Cash order for a Sales quotation": {
-    "status": "passed",
-    "durationMs": 19653,
-    "error": ""
-   },
-   "admin|sales|business|Sales return of a cash order|2. confirm: quotation becomes a Sales Order": {
-    "status": "passed",
-    "durationMs": 6422,
-    "error": ""
-   },
-   "admin|sales|business|Sales return of a cash order|3. delivery: validate → Done": {
-    "status": "passed",
-    "durationMs": 12517,
-    "error": ""
-   },
-   "admin|sales|business|Sales return of a cash order|4. invoice: create and confirm → Posted": {
-    "status": "passed",
-    "durationMs": 9950,
-    "error": ""
-   },
-   "admin|sales|business|Sales return of a cash order|5. credit note: reverse with a reason, approval, confirm": {
-    "status": "passed",
-    "durationMs": 16348,
-    "error": ""
-   },
-   "admin|sales|business|Sales return of a cash order|6. original invoice: reset to draft and confirm again (when offered)": {
-    "status": "passed",
-    "durationMs": 8820,
-    "error": ""
-   },
-   "admin|sales|business|Sales return of a cash order|7. advance payment on the sales order, then the Payments smart button": {
-    "status": "skipped",
-    "durationMs": 11106,
-    "error": ""
-   }
-  }
- },
- {
-  "id": "2026-10-29T03:48:30.945Z",
-  "startedAt": "2026-10-29T03:48:30.945Z",
-  "label": "31st run",
-  "note": "",
-  "results": {
-   "setup|setup|setup||authenticate: auth-storage/admin.json": {
-    "status": "passed",
-    "durationMs": 11661,
-    "error": ""
-   },
-   "admin|sales|business|Sales return of a cash order|1. quotation: Cash order for a Sales quotation": {
-    "status": "passed",
-    "durationMs": 19889,
-    "error": ""
-   },
-   "admin|sales|business|Sales return of a cash order|2. confirm: quotation becomes a Sales Order": {
-    "status": "passed",
-    "durationMs": 9019,
-    "error": ""
-   },
-   "admin|sales|business|Sales return of a cash order|3. delivery: validate → Done": {
-    "status": "passed",
-    "durationMs": 13275,
-    "error": ""
-   },
-   "admin|sales|business|Sales return of a cash order|4. invoice: create and confirm → Posted": {
-    "status": "passed",
-    "durationMs": 8772,
-    "error": ""
-   },
-   "admin|sales|business|Sales return of a cash order|5. credit note: reverse with a reason, approval, confirm": {
-    "status": "passed",
-    "durationMs": 19798,
-    "error": ""
-   },
-   "admin|sales|business|Sales return of a cash order|6. original invoice: reset to draft and confirm again (when offered)": {
-    "status": "passed",
-    "durationMs": 9453,
-    "error": ""
-   },
-   "admin|sales|business|Sales return of a cash order|7. advance payment on the sales order, then the Payments smart button": {
-    "status": "passed",
-    "durationMs": 14311,
-    "error": ""
-   }
-  }
- },
- {
   "id": "2026-10-29T03:50:57.436Z",
   "startedAt": "2026-10-29T03:50:57.436Z",
   "label": "31st run",
@@ -2347,6 +2155,78 @@
    "admin|sales|business|Cash order with profit margin control: margin approval, invoice and cash receipt|7. trace: payment → Sales Orders → order → Invoices smart button → invoice": {
     "status": "passed",
     "durationMs": 6477,
+    "error": ""
+   }
+  }
+ },
+ {
+  "id": "2026-11-04T08:01:02.927Z",
+  "startedAt": "2026-11-04T08:01:02.927Z",
+  "label": "31st run",
+  "note": "",
+  "results": {
+   "setup|setup|setup||authenticate: auth-storage/admin.json": {
+    "status": "passed",
+    "durationMs": 16313,
+    "error": ""
+   },
+   "admin|sales|business||capture margin approval guide screenshots": {
+    "status": "failed",
+    "durationMs": 25045,
+    "error": "Error: Invalid Operation: Insufficient margin. You need approval to proceed. Item Code: [TEST] Margin Request Product Base Price: 1000.0 Discounts: 0.0 Other Charges (Commission): 0.0 Cost: 1200.0 Net Margin: -20.0 Min. Sales Margin %: 22.9"
+   }
+  }
+ },
+ {
+  "id": "2026-11-04T08:02:04.101Z",
+  "startedAt": "2026-11-04T08:02:04.101Z",
+  "label": "31st run",
+  "note": "",
+  "results": {
+   "setup|setup|setup||authenticate: auth-storage/admin.json": {
+    "status": "passed",
+    "durationMs": 9481,
+    "error": ""
+   },
+   "admin|sales|business||capture margin approval guide screenshots": {
+    "status": "failed",
+    "durationMs": 54550,
+    "error": "Error: Button /^create invoice$/i is disabled"
+   }
+  }
+ },
+ {
+  "id": "2026-11-04T08:03:23.994Z",
+  "startedAt": "2026-11-04T08:03:23.994Z",
+  "label": "31st run",
+  "note": "",
+  "results": {
+   "setup|setup|setup||authenticate: auth-storage/admin.json": {
+    "status": "passed",
+    "durationMs": 7603,
+    "error": ""
+   },
+   "admin|sales|business||capture margin approval guide screenshots": {
+    "status": "failed",
+    "durationMs": 102510,
+    "error": "Error: expect(locator).toContainText(expected) failed"
+   }
+  }
+ },
+ {
+  "id": "2026-11-04T08:05:54.115Z",
+  "startedAt": "2026-11-04T08:05:54.115Z",
+  "label": "31st run",
+  "note": "",
+  "results": {
+   "setup|setup|setup||authenticate: auth-storage/admin.json": {
+    "status": "passed",
+    "durationMs": 8110,
+    "error": ""
+   },
+   "admin|sales|business||capture margin approval guide screenshots": {
+    "status": "passed",
+    "durationMs": 59096,
     "error": ""
    }
   }
