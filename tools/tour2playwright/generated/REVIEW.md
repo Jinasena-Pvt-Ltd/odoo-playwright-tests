@@ -131,3 +131,16 @@ Manual built from `tour/credit-sales-order-serial.json` (46 steps) and the repla
 - **Not part of the tour but needed for the replay:** one unit of the new serial number is put into stock (inventory adjustment) before Validate, because Odoo refuses to deliver a serial number with no stock.
 - **Journal:** the recording says "bank" in places but the clicked row is "Customer Receipts - Cash"; the manual follows the clicked row and mentions a bank journal for bank payments.
 - **Payment day (300-316):** after the invoice is confirmed, the manual returns through the Sales app (Home menu > Sales > Orders > Orders > search order number > Invoices > Register Payment), because a credit sale is paid about 14 days later.
+
+
+## profit-margin-sales-order (replayed, illustrated manual)
+
+Manual built from `tour/profit-margin-sales-order.json` (Odoo export "tour_export (19)", 38 recorded steps, all 38 in the manual with a screenshot) and the replay `generated/specs/profit-margin-sales-order.spec.ts`. The replay ran headed with no failures and created a real Cash sales order **S00286** (margin approval, delivery, invoice FTI/2026/00100, cash payment). An earlier replay attempt that stopped at the Request step left a draft quotation **S00285** (margin approval not requested) on the testing database.
+
+- **Product changed (adapted 100, 110, 120):** the recording used JMC6, whose cost is 0 on this database, so the margin is always 100 % and the gate never fires. The replay sells `[TESTMARGIN1] [TEST] Margin Request Product` (cost 1,200) at a unit price of 1,000 => margin -20 % against a company minimum of 22.9 %. The unit price is typed after the product is chosen.
+- **Journal (adapted 251):** "Customer Receipts - Cash" does not exist in this company; "Commercial - Cash Receipts" is used (amount left as pre-filled).
+- **Step 230 (Insufficient Margin Details):** Odoo shows an "Invalid Operation" dialog whose text is the details (Item Code, Base Price 1000.0, Discounts 0.0, Other Charges (Commission) 0.0, Cost 1200.0, Net Margin -20.0, Min. Sales Margin % 22.9). It is screenshotted open and closed at 240; not treated as a failure.
+- **Locators:** recorded action-id buttons (1517/1513/1515) are not used; buttons are located by visible text. The Request button is spelled "Request Insufficient Marginn Approval" (sic) in Odoo; the manual carries an info box about it.
+- **Step 247 (Create Invoice):** the recording has no separate step for confirming the invoice; the replay clicks Confirm on the draft invoice (not screenshotted separately) and the manual text covers it.
+- **Auto-filled (160-210):** Sales Team and Warehouse are normally filled by Odoo; the manual marks them "check".
+- After Confirm the page is reloaded if the Delivery button does not appear.
