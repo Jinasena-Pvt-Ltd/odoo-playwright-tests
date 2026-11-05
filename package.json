@@ -14,7 +14,6 @@
     "test:edge": "playwright test --grep \"@step:edge\"",
     "test:archive": "playwright test --grep \"@step:archive\"",
     "test:fix_repair": "playwright test --grep \"@module:fix_repair\"",
-    "test:helpdesk": "playwright test --grep \"@module:helpdesk\"",
     "report": "playwright show-report",
     "report:generate": "node scripts/generate-report.js",
     "report:consolidate": "node scripts/report-consolidate.js",
