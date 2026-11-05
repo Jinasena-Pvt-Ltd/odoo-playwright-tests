@@ -14,7 +14,7 @@
  * Creates REAL records → opt-in:
  *   RUN_SALES_FLOWS=true npx playwright test sales.bank-guarantee-approval --project=setup --project=admin --workers=1
  * Optional env:
- *   FLOW_BG_CUSTOMER   customer that has a mandatory Bank Guarantee (default "Bank Guarantee customer")
+ *   FLOW_BG_CUSTOMER   customer that has a mandatory Bank Guarantee (default "[TEST] DLRS Bank Guarantee Customer"; the DISTR one is "[TEST] DISTR Bank Guarantee Customer")
  *   ODOO_APPROVER_EMAIL / ODOO_APPROVER_PASSWORD (when another approval is assigned to someone other than the logged-in user)
  *
  * Selectors are by field name / visible text — recorded action-id buttons (1850/1851) and #autocomplete ids were NOT carried over.
@@ -26,7 +26,7 @@ import {
   validateDelivery, createInvoice, clickButton, throwIfOdooError,
 } from '../../flows/flowHelpers';
 
-const CUSTOMER = process.env.FLOW_BG_CUSTOMER ?? 'Bank Guarantee customer';
+const CUSTOMER = process.env.FLOW_BG_CUSTOMER ?? '[TEST] DLRS Bank Guarantee Customer';
 const BG_NOTIFY = /^send bank guarantee validity notification$/i;
 
 test.use({ actionTimeout: 20_000, navigationTimeout: 60_000, video: 'off', trace: 'off' });
@@ -211,5 +211,48 @@ test.describe.serial('Credit order, bank guarantee customer: validity notificati
     await throwIfOdooError(page);
     await expect(page.locator('.o_form_view, .o_list_view').first()).toBeVisible({ timeout: 30_000 });
     await expect(page.locator('body')).toContainText(orderNumber, { timeout: 15_000 });
+  });
+});
+
+/**
+ * Over-guarantee path: the order is bigger than the customer's Bank Guarantee Amount, so Odoo hides Confirm and asks for
+ * "Request Bank Guarantee Approval" -> "Approve Bank Guarantee". Uses a dealer whose guarantee (100) is far below any order.
+ *   FLOW_BG_LOW_CUSTOMER (default "[TEST] DLRS Low Guarantee Customer")
+ */
+const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guarantee Customer';
+
+test.describe.serial('Credit order above the bank guarantee amount: Request / Approve Bank Guarantee @module:sales @step:business @e2e', () => {
+  test.skip(process.env.RUN_SALES_FLOWS !== 'true',
+    'Creates real orders — set RUN_SALES_FLOWS=true to run');
+
+  let lowOrderUrl = '';
+
+  test.beforeEach(async ({ page }) => {
+    await openSalesApp(page);
+    await switchCompany(page, COMPANY);
+  });
+
+  test('8. over guarantee: Confirm is hidden and Request Bank Guarantee Approval is offered', async ({ page }) => {
+    await createQuotation(page, { customer: LOW_CUSTOMER, paymentType: 'Credit', paymentTerm: '14 Days' });
+    lowOrderUrl = page.url();
+    await page.reload({ waitUntil: 'domcontentloaded' });
+    await expect(page.locator('.o_form_view')).toBeVisible({ timeout: 60_000 });
+    const buttons = (await headerButtons(page)).map(b => b.text);
+    test.info().annotations.push({ type: 'buttons', description: buttons.join(' | ') });
+    expect(buttons.some(t => /^request bank guarantee approval$/i.test(t)),
+      `"Request Bank Guarantee Approval" expected. Buttons: ${buttons.join(' | ')}`).toBe(true);
+    expect(buttons.some(t => /^confirm$/i.test(t)),
+      `Confirm must be hidden until the bank guarantee is approved. Buttons: ${buttons.join(' | ')}`).toBe(false);
+    await expect(stage(page)).toContainText(/quotation/i);
+  });
+
+  test('9. approval: Request Bank Guarantee Approval, Approve Bank Guarantee, then Confirm → Sales Order', async ({ page, browser }) => {
+    test.skip(!lowOrderUrl, 'No quotation from step 8');
+    await openRecord(page, lowOrderUrl);
+    const outcome = await approveAndConfirm(page, browser);
+    test.info().annotations.push({ type: 'approvals', description: outcome.taken.join(' → ') || '(none needed)' });
+    expect(outcome.taken.some(t => /bank guarantee/i.test(t)),
+      `Expected a bank guarantee approval step. Taken: ${outcome.taken.join(', ')}`).toBe(true);
+    await expect(stage(page)).toContainText(/sales order/i);
   });
 });

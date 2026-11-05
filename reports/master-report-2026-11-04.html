@@ -193,7 +193,7 @@
   <div class="nav-section">
     <div class="nav-module-label"><span class="mod-dot" style="background:#64748b"></span>sales</div>
     <a class="nav-item" href="#sales-config"><span class="nav-dot red"></span>Config<span class="nav-count">0p 2f 1s</span></a>
-    <a class="nav-item" href="#sales-business"><span class="nav-dot red"></span>Business<span class="nav-count">47p 21f 84s</span></a>
+    <a class="nav-item" href="#sales-business"><span class="nav-dot red"></span>Business<span class="nav-count">53p 21f 85s</span></a>
     <a class="nav-item" href="#sales-reporting"><span class="nav-dot red"></span>Reporting<span class="nav-count">0p 2f 1s</span></a>
     <a class="nav-item" href="#sales-permissions"><span class="nav-dot red"></span>Permissions<span class="nav-count">0p 2f 1s</span></a>
     <a class="nav-item" href="#sales-validations"><span class="nav-dot red"></span>Field Validations<span class="nav-count">11p 29f 2s</span></a>
@@ -225,16 +225,16 @@
       <div class="hero-divider"></div>
       <div class="hero-stat"><div class="num">225</div><div class="lbl">Total Tests</div></div>
       <div class="hero-divider"></div>
-      <div class="hero-stat"><div class="num green">58</div><div class="lbl">Passed</div></div>
+      <div class="hero-stat"><div class="num green">64</div><div class="lbl">Passed</div></div>
       <div class="hero-divider"></div>
       <div class="hero-stat"><div class="num red">69</div><div class="lbl">Failed</div></div>
       <div class="hero-divider"></div>
-      <div class="hero-stat"><div class="num purple">91</div><div class="lbl">Skipped (SaaS)</div></div>
-      <div class="hero-divider"></div><div class="hero-stat"><div class="num amber">7</div><div class="lbl">Pending</div></div>
+      <div class="hero-stat"><div class="num purple">92</div><div class="lbl">Skipped (SaaS)</div></div>
+      
     </div>
     <div class="hero-bar-wrap">
-      <div class="hero-bar-label"><span>Pass rate (of tests that ran)</span><span>46% · 58/127</span></div>
-      <div class="hero-bar-bg"><div class="hero-bar-fill" style="width:46%"></div></div>
+      <div class="hero-bar-label"><span>Pass rate (of tests that ran)</span><span>48% · 64/133</span></div>
+      <div class="hero-bar-bg"><div class="hero-bar-fill" style="width:48%"></div></div>
     </div>
   </div>
 
@@ -244,14 +244,14 @@
       <div class="module-card-name">sales</div>
       <div class="module-card-sub"></div>
       <div class="module-card-stats">
-        <span class="p">✔ 58</span>
-        <span class="s">⏭ 91</span>
+        <span class="p">✔ 64</span>
+        <span class="s">⏭ 92</span>
         <span class="f">❌ 69</span>
         <span class="t">of 225</span>
       </div>
       <div class="module-mini-bar">
-        <div class="seg-pass" style="width:26%"></div>
-        <div class="seg-skip" style="width:40%"></div>
+        <div class="seg-pass" style="width:28%"></div>
+        <div class="seg-skip" style="width:41%"></div>
         <div class="seg-fail" style="width:31%"></div>
       </div>
       <div style="font-size:0.68rem;color:var(--muted);margin-top:6px;">20 spec files</div>
@@ -267,7 +267,7 @@
         <div class="mod-header-title">sales</div>
         <div class="mod-header-meta">src/modules/sales/ · 20 spec files · 225 tests</div>
       </div>
-      <div class="mod-header-pills"><span class="pill green">58 passed</span> <span class="pill red">69 failed</span> <span class="pill purple">91 skipped</span> <span class="pill amber">7 pending</span></div>
+      <div class="mod-header-pills"><span class="pill green">64 passed</span> <span class="pill red">69 failed</span> <span class="pill purple">92 skipped</span></div>
     </div>
     
     
@@ -341,18 +341,18 @@
       <div class="suite-hdr">
         <span class="suite-hdr-icon">💼</span>
         <span class="suite-hdr-title">Business</span>
-        <span class="pill green">47 passed</span> <span class="pill red">21 failed</span> <span class="pill purple">84 skipped</span> <span class="pill amber">7 pending</span>
+        <span class="pill green">53 passed</span> <span class="pill red">21 failed</span> <span class="pill purple">85 skipped</span>
         <span class="suite-hdr-file">12 files</span>
       </div>
       
       <div class="suite-hdr" style="margin-top:4px;">
         <span class="suite-hdr-icon">💼</span>
         <span class="suite-hdr-title">sales.bank-guarantee-approval</span>
-        <span class="pill amber">7 pending</span>
+        <span class="pill green">6 passed</span> <span class="pill purple">1 skipped</span>
         <span class="suite-hdr-file">sales.bank-guarantee-approval.spec.ts</span>
       </div>
       <div class="test-list">
-        <div class="test-row hist"><span class="test-row-icon">⬜</span><span class="test-row-name">1. quotation: Credit order for the bank guarantee customer</span><div class="test-row-tags"><span class="tag smoke">@smoke</span><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('1. quotation: Credit order for the bank guarantee customer @smoke', async ({ page }) =&gt; {
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">1. quotation: Credit order for the bank guarantee customer</span><div class="test-row-tags"><span class="tag smoke">@smoke</span><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('1. quotation: Credit order for the bank guarantee customer @smoke', async ({ page }) =&gt; {
     orderNumber = await createQuotation(page, { customer: CUSTOMER, paymentType: 'Credit', paymentTerm: '14 Days' });
     orderUrl = page.url();
     expect(orderNumber).toMatch(/^S\d+/);
@@ -374,7 +374,7 @@
       `Confirm must be hidden until the notification is sent. Buttons: ${buttons.join(' | ')}`).toBe(false);
     await expect(stage(page)).toContainText(/quotation/i);
   });</pre></details></div>
-        <div class="test-row hist"><span class="test-row-icon">⬜</span><span class="test-row-name">2. gating: Confirm is not offered until the bank guarantee notification is sent</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('2. gating: Confirm is not offered until the bank guarantee notification is sent', async ({ page }) =&gt; {
+        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">2. gating: Confirm is not offered until the bank guarantee notification is sent</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('2. gating: Confirm is not offered until the bank guarantee notification is sent', async ({ page }) =&gt; {
     test.skip(!orderUrl, 'No quotation from step 1');
     await openRecord(page, orderUrl);
     const buttons = (await headerButtons(page)).map(b =&gt; b.text);
@@ -396,7 +396,7 @@
       await throwIfOdooError(page);
       await page.waitForTimeout(1_500);
       await page.reload({ waitUntil: 'domcontentloaded' });</pre></details></div>
-        <div class="test-row hist"><span class="test-row-icon">⬜</span><span class="test-row-name">3. notify and confirm: Send Bank Guarantee Validity Notification, then Confirm → Sales Order</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('3. notify and confirm: Send Bank Guarantee Validity Notification, then Confirm → Sales Order', async ({ page, browser }) =&gt; {
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">3. notify and confirm: Send Bank Guarantee Validity Notification, then Confirm → Sales Order</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('3. notify and confirm: Send Bank Guarantee Validity Notification, then Confirm → Sales Order', async ({ page, browser }) =&gt; {
     test.skip(!orderUrl, 'No quotation from step 1');
     await openRecord(page, orderUrl);
 
@@ -418,7 +418,7 @@
     test.info().annotations.push({ type: 'approvals', description: outcome.taken.join(' → ') || '(none needed)' });
     await expect(stage(page)).toContainText(/sales order/i);
   });</pre></details></div>
-        <div class="test-row hist"><span class="test-row-icon">⬜</span><span class="test-row-name">4. delivery: validate → Done</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('4. delivery: validate → Done', async ({ page }) =&gt; {
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">4. delivery: validate → Done</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('4. delivery: validate → Done', async ({ page }) =&gt; {
     test.skip(!orderUrl, 'No order from step 1');
     await openRecord(page, orderUrl);
     expect(await validateDelivery(page)).toBeTruthy();
@@ -440,7 +440,7 @@
     await test.step('Find the order by number (Sales → Orders → Sales Orders)', async () =&gt; {
       await page.locator('[data-menu-xmlid=&quot;sale.sale_order_menu&quot;]').click();
       await page.locator('[data-menu-xmlid=&quot;sale.menu_sale_order&quot;]').click();</pre></details></div>
-        <div class="test-row hist"><span class="test-row-icon">⬜</span><span class="test-row-name">5. invoice: create, send the bank guarantee notification if asked, confirm → Posted</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('5. invoice: create, send the bank guarantee notification if asked, confirm → Posted', async ({ page }) =&gt; {
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">5. invoice: create, send the bank guarantee notification if asked, confirm → Posted</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('5. invoice: create, send the bank guarantee notification if asked, confirm → Posted', async ({ page }) =&gt; {
     test.skip(!orderUrl, 'No order from step 1');
     await openRecord(page, orderUrl);
     // createInvoice() also clicks &quot;Send Bank Guarantee Validity Notification&quot; on the invoice when Confirm is hidden
@@ -462,7 +462,7 @@
       await search.press('Enter');
       const row = page.locator('.o_list_view .o_data_row').filter({ hasText: orderNumber }).first();
       await expect(row).toBeVisible({ timeout: 30_000 });</pre></details></div>
-        <div class="test-row hist"><span class="test-row-icon">⬜</span><span class="test-row-name">6. payment: find the order in Sales Orders, open its invoice and register the full cash payment</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('6. payment: find the order in Sales Orders, open its invoice and register the full cash payment', async ({ page }) =&gt; {
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">6. payment: find the order in Sales Orders, open its invoice and register the full cash payment</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('6. payment: find the order in Sales Orders, open its invoice and register the full cash payment', async ({ page }) =&gt; {
     test.skip(!orderNumber || !invoiceUrl, 'No invoiced order from steps 1-5');
 
     await test.step('Find the order by number (Sales → Orders → Sales Orders)', async () =&gt; {
@@ -484,7 +484,7 @@
       await expect(page.locator('.o_form_view')).toBeVisible({ timeout: 30_000 });
       await expect(stage(page)).toContainText(/posted/i);
     });</pre></details></div>
-        <div class="test-row hist"><span class="test-row-icon">⬜</span><span class="test-row-name">7. trace: payment → Sales Orders smart button leads back to 1 source order</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('7. trace: payment → Sales Orders smart button leads back to 1 source order', async ({ page }) =&gt; {
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">7. trace: payment → Sales Orders smart button leads back to 1 source order</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('7. trace: payment → Sales Orders smart button leads back to 1 source order', async ({ page }) =&gt; {
     test.skip(!invoiceUrl, 'No invoice from step 5');
     await openRecord(page, invoiceUrl);
     test.skip(!paymentUrl, 'Payment was not registered in step 6');
