@@ -653,11 +653,13 @@ test.describe('Fix Repair - Under Warranty - RUG (Reject) - Factory Full Flow @m
       const slug = pk.name.replace(/\W+/g, '-');
       const isLast = i === pickings.length - 1;
       const row = page.locator('tr.o_data_row:visible', { hasText: pk.name }).first();
-      await expect(row).toBeVisible({ timeout: 10_000 });
-      await shot(`${step}-open-${slug}.png`, row);
-      await row.locator('td.o_data_cell').nth(1).click();
-      await page.waitForTimeout(2_000);
-      step++;
+      // With a single transfer the Delivery button opens it directly (no list).
+      if (await appears(row, pickings.length > 1 ? 10_000 : 4_000)) {
+        await shot(`${step}-open-${slug}.png`, row);
+        await row.locator('td.o_data_cell').nth(1).click();
+        await page.waitForTimeout(2_000);
+        step++;
+      }
 
       const validateUi = page.locator('button:visible', { hasText: /^Validate$/ }).first();
       await expect(validateUi).toBeVisible({ timeout: 10_000 });
