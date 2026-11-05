@@ -519,18 +519,22 @@ async function assignSerialsImpl(page: Page): Promise<string[]> {
   const serial = `SN${Date.now().toString(36).toUpperCase()}`;
   // Type the new name and pick "Create" from the dropdown; retry until the field really holds the serial.
   let committed = false;
+  let everClicked = false; // a Create/pick click already happened in an earlier attempt
   let seen = '';
   for (let attempt = 0; attempt < 4 && !committed; attempt++) {
     await lot.click();
+    // Let the first (empty) search list arrive before typing, otherwise its late reply overwrites the typed text's results.
+    await page.locator('.o-autocomplete--dropdown-item:visible').first().waitFor({ timeout: 10_000 }).catch(() => undefined);
+    await page.waitForTimeout(600);
     await lot.fill('');
-    await lot.pressSequentially(serial, { delay: 60 });
+    await lot.pressSequentially(serial, { delay: 90 });
     const create = page.locator('.o-autocomplete--dropdown-item:visible')
       .filter({ hasText: /create/i }).filter({ hasText: serial }).first();
     // After a slow first "Create" the serial already exists, so Odoo lists it instead of offering Create: pick it.
     const existing = page.locator('.o-autocomplete--dropdown-item:visible').filter({ hasText: serial })
       .filter({ hasNotText: /create/i }).first();
     let clicked = false;
-    if (await create.isVisible({ timeout: 8_000 }).catch(() => false)) {
+    if (await create.isVisible({ timeout: 15_000 }).catch(() => false)) {
       await create.click();
       clicked = true;
       await page.waitForTimeout(800);
@@ -543,7 +547,8 @@ async function assignSerialsImpl(page: Page): Promise<string[]> {
     }
     const shown = await lot.inputValue().catch(() => '');
     // only counts when the Create option was really used (plain typed text creates no serial)
-    committed = clicked && shown === serial;
+    everClicked = everClicked || clicked;
+    committed = (clicked || everClicked) && shown === serial;
   }
   if (!committed) throw new Error(`Could not create serial ${serial} in the Create Move Line popup (Create option never accepted; dropdown showed: ${seen || 'nothing'})`);
   used.push(serial);
