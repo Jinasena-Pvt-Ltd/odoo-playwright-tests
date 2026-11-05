@@ -526,9 +526,16 @@ async function assignSerialsImpl(page: Page): Promise<string[]> {
     await lot.pressSequentially(serial, { delay: 60 });
     const create = page.locator('.o-autocomplete--dropdown-item:visible')
       .filter({ hasText: /create/i }).filter({ hasText: serial }).first();
+    // After a slow first "Create" the serial already exists, so Odoo lists it instead of offering Create: pick it.
+    const existing = page.locator('.o-autocomplete--dropdown-item:visible').filter({ hasText: serial })
+      .filter({ hasNotText: /create/i }).first();
     let clicked = false;
     if (await create.isVisible({ timeout: 8_000 }).catch(() => false)) {
       await create.click();
+      clicked = true;
+      await page.waitForTimeout(800);
+    } else if (await existing.isVisible({ timeout: 2_000 }).catch(() => false)) {
+      await existing.click();
       clicked = true;
       await page.waitForTimeout(800);
     } else {

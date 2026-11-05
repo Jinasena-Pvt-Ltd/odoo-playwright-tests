@@ -193,10 +193,10 @@
   <div class="nav-section">
     <div class="nav-module-label"><span class="mod-dot" style="background:#64748b"></span>sales</div>
     <a class="nav-item" href="#sales-config"><span class="nav-dot red"></span>Config<span class="nav-count">0p 2f 1s</span></a>
-    <a class="nav-item" href="#sales-business"><span class="nav-dot red"></span>Business<span class="nav-count">43p 8f 142s</span></a>
+    <a class="nav-item" href="#sales-business"><span class="nav-dot red"></span>Business<span class="nav-count">41p 9f 143s</span></a>
     <a class="nav-item" href="#sales-reporting"><span class="nav-dot red"></span>Reporting<span class="nav-count">0p 2f 1s</span></a>
     <a class="nav-item" href="#sales-permissions"><span class="nav-dot red"></span>Permissions<span class="nav-count">0p 2f 1s</span></a>
-    <a class="nav-item" href="#sales-validations"><span class="nav-dot red"></span>Field Validations<span class="nav-count">11p 24f 7s</span></a>
+    <a class="nav-item" href="#sales-validations"><span class="nav-dot red"></span>Field Validations<span class="nav-count">12p 24f 6s</span></a>
     <a class="nav-item" href="#sales-edge"><span class="nav-dot red"></span>Edge Cases<span class="nav-count">0p 11f 1s</span></a>
     <a class="nav-item" href="#sales-archive"><span class="nav-dot red"></span>Archive<span class="nav-count">0p 2f 1s</span></a>
   </div>
@@ -225,16 +225,16 @@
       <div class="hero-divider"></div>
       <div class="hero-stat"><div class="num">259</div><div class="lbl">Total Tests</div></div>
       <div class="hero-divider"></div>
-      <div class="hero-stat"><div class="num green">54</div><div class="lbl">Passed</div></div>
+      <div class="hero-stat"><div class="num green">53</div><div class="lbl">Passed</div></div>
       <div class="hero-divider"></div>
-      <div class="hero-stat"><div class="num red">51</div><div class="lbl">Failed</div></div>
+      <div class="hero-stat"><div class="num red">52</div><div class="lbl">Failed</div></div>
       <div class="hero-divider"></div>
       <div class="hero-stat"><div class="num purple">154</div><div class="lbl">Skipped (SaaS)</div></div>
       
     </div>
     <div class="hero-bar-wrap">
-      <div class="hero-bar-label"><span>Pass rate (of tests that ran)</span><span>51% · 54/105</span></div>
-      <div class="hero-bar-bg"><div class="hero-bar-fill" style="width:51%"></div></div>
+      <div class="hero-bar-label"><span>Pass rate (of tests that ran)</span><span>50% · 53/105</span></div>
+      <div class="hero-bar-bg"><div class="hero-bar-fill" style="width:50%"></div></div>
     </div>
   </div>
 
@@ -244,13 +244,13 @@
       <div class="module-card-name">sales</div>
       <div class="module-card-sub"></div>
       <div class="module-card-stats">
-        <span class="p">✔ 54</span>
+        <span class="p">✔ 53</span>
         <span class="s">⏭ 154</span>
-        <span class="f">❌ 51</span>
+        <span class="f">❌ 52</span>
         <span class="t">of 259</span>
       </div>
       <div class="module-mini-bar">
-        <div class="seg-pass" style="width:21%"></div>
+        <div class="seg-pass" style="width:20%"></div>
         <div class="seg-skip" style="width:59%"></div>
         <div class="seg-fail" style="width:20%"></div>
       </div>
@@ -267,7 +267,7 @@
         <div class="mod-header-title">sales</div>
         <div class="mod-header-meta">src/modules/sales/ · 20 spec files · 259 tests</div>
       </div>
-      <div class="mod-header-pills"><span class="pill green">54 passed</span> <span class="pill red">51 failed</span> <span class="pill purple">154 skipped</span></div>
+      <div class="mod-header-pills"><span class="pill green">53 passed</span> <span class="pill red">52 failed</span> <span class="pill purple">154 skipped</span></div>
     </div>
     
     
@@ -341,7 +341,7 @@
       <div class="suite-hdr">
         <span class="suite-hdr-icon">💼</span>
         <span class="suite-hdr-title">Business</span>
-        <span class="pill green">43 passed</span> <span class="pill red">8 failed</span> <span class="pill purple">142 skipped</span>
+        <span class="pill green">41 passed</span> <span class="pill red">9 failed</span> <span class="pill purple">143 skipped</span>
         <span class="suite-hdr-file">12 files</span>
       </div>
       
@@ -1817,7 +1817,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
       <div class="suite-hdr" style="margin-top:16px;">
         <span class="suite-hdr-icon">💼</span>
         <span class="suite-hdr-title">sales.credit-serial</span>
-        <span class="pill green">1 passed</span> <span class="pill red">1 failed</span> <span class="pill purple">16 skipped</span>
+        <span class="pill green">3 passed</span> <span class="pill red">1 failed</span> <span class="pill purple">14 skipped</span>
         <span class="suite-hdr-file">sales.credit-serial.spec.ts</span>
       </div>
       <div class="test-list">
@@ -1843,7 +1843,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
     await test.step('Customer is set to Credit', async () =&gt; {
       expect(partner.x_studio_payment_method, `${CUSTOMER} must be a Credit customer`).toBe('Credit');
     });</pre></details></div>
-        <div class="test-row fail" data-error="Error: expect(locator).toBeVisible() failed"><span class="test-row-icon">❌</span><span class="test-row-name">1. quotation: Credit order, serial product, Payment Terms 14 Days</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('1. quotation: Credit order, serial product, Payment Terms 14 Days', async ({ page }) =&gt; {
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">1. quotation: Credit order, serial product, Payment Terms 14 Days</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('1. quotation: Credit order, serial product, Payment Terms 14 Days', async ({ page }) =&gt; {
     orderNumber = await createQuotation(page, {
       customer: CUSTOMER, paymentType: 'Credit',
       productCode: SERIAL_CODE, productName: SERIAL_NAME, paymentTerm: PAYMENT_TERM,
@@ -1865,7 +1865,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
 
   test('2. confirm: no approval needed, quotation becomes a Sales Order', async ({ page, browser }) =&gt; {
     await openOrder(page, orderUrl);</pre></details></div>
-        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">2. confirm: no approval needed, quotation becomes a Sales Order</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('2. confirm: no approval needed, quotation becomes a Sales Order', async ({ page, browser }) =&gt; {
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">2. confirm: no approval needed, quotation becomes a Sales Order</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('2. confirm: no approval needed, quotation becomes a Sales Order', async ({ page, browser }) =&gt; {
     await openOrder(page, orderUrl);
     await test.step('No approval request is offered (customer within limit)', async () =&gt; {
       const buttons = (await headerButtons(page)).map(b =&gt; b.text);
@@ -1887,7 +1887,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
     const ref = await validateDelivery(page); // creates the serial, puts it in stock, validates, returns to the order
     await test.step(`Delivery ${ref} validated (status Done)`, async () =&gt; { expect(ref).toBeTruthy(); });
     await test.step('Order shows the Create Invoice button after delivery', async () =&gt; {</pre></details></div>
-        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">3. delivery: new serial number, validate → Done</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('3. delivery: new serial number, validate → Done', async ({ page }) =&gt; {
+        <div class="test-row fail" data-error="Error: Could not create serial SNMW3B8XMF in the Create Move Line popup (Create option never accepted; dropdown showed: nothing)"><span class="test-row-icon">❌</span><span class="test-row-name">3. delivery: new serial number, validate → Done</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('3. delivery: new serial number, validate → Done', async ({ page }) =&gt; {
     await openOrder(page, orderUrl);
     const ref = await validateDelivery(page); // creates the serial, puts it in stock, validates, returns to the order
     await test.step(`Delivery ${ref} validated (status Done)`, async () =&gt; { expect(ref).toBeTruthy(); });
@@ -2295,11 +2295,11 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
       <div class="suite-hdr" style="margin-top:16px;">
         <span class="suite-hdr-icon">💼</span>
         <span class="suite-hdr-title">sales.high-discount</span>
-        <span class="pill red">1 failed</span> <span class="pill purple">17 skipped</span>
+        <span class="pill green">2 passed</span> <span class="pill red">1 failed</span> <span class="pill purple">15 skipped</span>
         <span class="suite-hdr-file">sales.high-discount.spec.ts</span>
       </div>
       <div class="test-list">
-        <div class="test-row fail" data-error="Error: Odoo did not load (neither the navbar nor the login form appeared). Check ODOO_BASE_URL."><span class="test-row-icon">❌</span><span class="test-row-name">1. quotation: Cash order with a high discount line</span><div class="test-row-tags"><span class="tag smoke">@smoke</span><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('1. quotation: Cash order with a high discount line @smoke', async ({ page }) =&gt; {
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">1. quotation: Cash order with a high discount line</span><div class="test-row-tags"><span class="tag smoke">@smoke</span><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('1. quotation: Cash order with a high discount line @smoke', async ({ page }) =&gt; {
     orderNumber = await createQuotation(page, { customer: CUSTOMER, paymentType: 'Cash', discount: DISCOUNT });
     orderUrl = page.url();
     expect(orderNumber).toMatch(/^S\d+/);
@@ -2321,7 +2321,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
     await openRecord(page, orderUrl);
     expect(await validateDelivery(page)).toBeTruthy();
   });</pre></details></div>
-        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">2. approval: Request Over Commission Approval, approve, then confirm → Sales Order</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('2. approval: Request Over Commission Approval, approve, then confirm → Sales Order', async ({ page, browser }) =&gt; {
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">2. approval: Request Over Commission Approval, approve, then confirm → Sales Order</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('2. approval: Request Over Commission Approval, approve, then confirm → Sales Order', async ({ page, browser }) =&gt; {
     test.skip(!orderUrl, 'No quotation from step 1');
     await openRecord(page, orderUrl);
     await approveAndConfirm(page, browser);
@@ -2343,7 +2343,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
   });
 
   test('5. payment: find the order in Sales Orders, open its invoice and register the cash payment', async ({ page }) =&gt; {</pre></details></div>
-        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">3. delivery: validate → Done</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('3. delivery: validate → Done', async ({ page }) =&gt; {
+        <div class="test-row fail" data-error="Error: Could not create serial SNMW3CZ892 in the Create Move Line popup (Create option never accepted; dropdown showed: SNMW3BQGKS | SNMW3BUIU4 | SNMW3BYJDQ | SNMW3C2JP7 | SNMW3C7DDJ | SNMW3CBGNN | SNMW3CGAP3 | SNMW3CKJFQ | Search More... |"><span class="test-row-icon">❌</span><span class="test-row-name">3. delivery: validate → Done</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('3. delivery: validate → Done', async ({ page }) =&gt; {
     test.skip(!orderUrl, 'No order from step 1');
     await openRecord(page, orderUrl);
     expect(await validateDelivery(page)).toBeTruthy();
@@ -2681,11 +2681,11 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
       <div class="suite-hdr" style="margin-top:16px;">
         <span class="suite-hdr-icon">💼</span>
         <span class="suite-hdr-title">sales.margin-approval</span>
-        <span class="pill red">1 failed</span> <span class="pill purple">21 skipped</span>
+        <span class="pill green">7 passed</span> <span class="pill purple">15 skipped</span>
         <span class="suite-hdr-file">sales.margin-approval.spec.ts</span>
       </div>
       <div class="test-list">
-        <div class="test-row fail" data-error="Test timeout of 120000ms exceeded while running &quot;beforeEach&quot; hook."><span class="test-row-icon">❌</span><span class="test-row-name">1. quotation: Cash order, Immediate Payment, margin shown on the form</span><div class="test-row-tags"><span class="tag smoke">@smoke</span><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('1. quotation: Cash order, Immediate Payment, margin shown on the form @smoke', async ({ page }) =&gt; {
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">1. quotation: Cash order, Immediate Payment, margin shown on the form</span><div class="test-row-tags"><span class="tag smoke">@smoke</span><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('1. quotation: Cash order, Immediate Payment, margin shown on the form @smoke', async ({ page }) =&gt; {
     orderNumber = await createQuotation(page, {
       customer: CUSTOMER, paymentType: 'Cash', quantity: 1, unitPrice: UNIT_PRICE,
       productCode: PRODUCT_CODE, productName: PRODUCT_NAME,
@@ -2707,7 +2707,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
     }
     if (KNOWN_COST !== undefined) {
       // net unit price as displayed on the line (after any override / discount)</pre></details></div>
-        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">2. gating: Confirm hidden; &quot;Insufficient Margin Details&quot; opens a modal and closes</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('2. gating: Confirm hidden; &quot;Insufficient Margin Details&quot; opens a modal and closes', async ({ page }) =&gt; {
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">2. gating: Confirm hidden; &quot;Insufficient Margin Details&quot; opens a modal and closes</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('2. gating: Confirm hidden; &quot;Insufficient Margin Details&quot; opens a modal and closes', async ({ page }) =&gt; {
     test.skip(!orderUrl, 'No quotation from step 1');
     await openRecord(page, orderUrl);
     const buttons = (await headerButtons(page)).map(b =&gt; b.text);
@@ -2729,7 +2729,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
     // In this database the button raises a UserError whose text IS the details (item, base price, cost, net margin, minimum margin)
     let detailText = '';
     try {</pre></details></div>
-        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">3. approval: Request Insufficient Margin Approval, approve, then confirm → Sales Order</span><span class="test-row-note">Cannot register the payment: ${(e as Error).message}</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('3. approval: Request Insufficient Margin Approval, approve, then confirm → Sales Order', async ({ page, browser }) =&gt; {
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">3. approval: Request Insufficient Margin Approval, approve, then confirm → Sales Order</span><span class="test-row-note">Cannot register the payment: ${(e as Error).message}</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('3. approval: Request Insufficient Margin Approval, approve, then confirm → Sales Order', async ({ page, browser }) =&gt; {
     test.skip(!orderUrl, 'No quotation from step 1');
     await openRecord(page, orderUrl);
     const outcome = await approveAndConfirm(page, browser);
@@ -2751,7 +2751,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
 
   test('5. invoice: create and confirm → Posted', async ({ page }) =&gt; {
     test.skip(!orderUrl, 'No order from step 1');</pre></details></div>
-        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">4. delivery: validate → Done</span><span class="test-row-note">Cannot register the payment: ${(e as Error).message}</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('4. delivery: validate → Done', async ({ page }) =&gt; {
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">4. delivery: validate → Done</span><span class="test-row-note">Cannot register the payment: ${(e as Error).message}</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('4. delivery: validate → Done', async ({ page }) =&gt; {
     test.skip(!orderUrl, 'No order from step 1');
     await openRecord(page, orderUrl);
     expect(await validateDelivery(page)).toBeTruthy();
@@ -2773,7 +2773,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
     const dlg = page.locator('.modal:visible').first();
     await expect(dlg).toBeVisible({ timeout: 15_000 });
     await pickCashJournal(page, dlg);</pre></details></div>
-        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">5. invoice: create and confirm → Posted</span><span class="test-row-note">Cannot register the payment: ${(e as Error).message}</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('5. invoice: create and confirm → Posted', async ({ page }) =&gt; {
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">5. invoice: create and confirm → Posted</span><span class="test-row-note">Cannot register the payment: ${(e as Error).message}</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('5. invoice: create and confirm → Posted', async ({ page }) =&gt; {
     test.skip(!orderUrl, 'No order from step 1');
     await openRecord(page, orderUrl);
     expect(await createInvoice(page)).toBeTruthy();
@@ -2795,7 +2795,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
     if (invoiceTotal) expect(parseAmount(await amount.inputValue())).toBeCloseTo(parseAmount(invoiceTotal), 2);
 
     await dlg.locator('footer button').filter({ hasText: /^create payment$/i }).first().click();</pre></details></div>
-        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">6. payment: register the full cash payment on the invoice</span><span class="test-row-note">Cannot register the payment: ${(e as Error).message}</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('6. payment: register the full cash payment on the invoice', async ({ page }) =&gt; {
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">6. payment: register the full cash payment on the invoice</span><span class="test-row-note">Cannot register the payment: ${(e as Error).message}</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('6. payment: register the full cash payment on the invoice', async ({ page }) =&gt; {
     test.skip(!invoiceUrl, 'No invoice from step 5');
     await openRecord(page, invoiceUrl);
     await clickButton(page, /^register payment$/i, 20_000);
@@ -2817,7 +2817,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
       throw e;
     }
     await expect(page.locator(PAID_RIBBON).first()).toContainText(/paid|in payment/i, { timeout: 30_000 });</pre></details></div>
-        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">7. trace: payment → Sales Orders → order → Invoices smart button → invoice</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('7. trace: payment → Sales Orders → order → Invoices smart button → invoice', async ({ page }) =&gt; {
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">7. trace: payment → Sales Orders → order → Invoices smart button → invoice</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('7. trace: payment → Sales Orders → order → Invoices smart button → invoice', async ({ page }) =&gt; {
     test.skip(!invoiceUrl, 'No invoice from step 5');
     await openRecord(page, invoiceUrl);
     test.skip(!paymentUrl, 'Payment was not registered in step 6');
@@ -3173,7 +3173,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
       <div class="suite-hdr" style="margin-top:16px;">
         <span class="suite-hdr-icon">💼</span>
         <span class="suite-hdr-title">sales.overdue-credit</span>
-        <span class="pill green">6 passed</span> <span class="pill purple">12 skipped</span>
+        <span class="pill green">2 passed</span> <span class="pill red">1 failed</span> <span class="pill purple">15 skipped</span>
         <span class="suite-hdr-file">sales.overdue-credit.spec.ts</span>
       </div>
       <div class="test-list">
@@ -3221,7 +3221,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
   });
 
   test('5. payment: find the order in Sales Orders, open its invoice and register the cash payment', async ({ page }) =&gt; {</pre></details></div>
-        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">3. delivery: validate → Done</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('3. delivery: validate → Done', async ({ page }) =&gt; {
+        <div class="test-row fail" data-error="Error: Could not create serial SNMW3D3HY8 in the Create Move Line popup (Create option never accepted; dropdown showed: SNMW3BQGKS | SNMW3BUIU4 | SNMW3BYJDQ | SNMW3C2JP7 | SNMW3C7DDJ | SNMW3CBGNN | SNMW3CGAP3 | SNMW3CKJFQ | Search More... |"><span class="test-row-icon">❌</span><span class="test-row-name">3. delivery: validate → Done</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('3. delivery: validate → Done', async ({ page }) =&gt; {
     test.skip(!orderUrl, 'No order from step 1');
     await openRecord(page, orderUrl);
     expect(await validateDelivery(page)).toBeTruthy();
@@ -3243,7 +3243,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
       await page.locator('[data-menu-xmlid=&quot;sale.menu_sale_order&quot;]').click();
       const search = page.locator('input.o_searchview_input').first();
       await expect(search).toBeVisible({ timeout: 20_000 });</pre></details></div>
-        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">4. invoice: create and confirm → Posted</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('4. invoice: create and confirm → Posted', async ({ page }) =&gt; {
+        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">4. invoice: create and confirm → Posted</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('4. invoice: create and confirm → Posted', async ({ page }) =&gt; {
     test.skip(!orderUrl, 'No order from step 1');
     await openRecord(page, orderUrl);
     expect(await createInvoice(page)).toBeTruthy();
@@ -3265,7 +3265,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
       await expect(row).toBeVisible({ timeout: 30_000 });
       await row.locator('td[name=&quot;name&quot;]').click();
       await expect(page.locator('.o_form_view')).toBeVisible({ timeout: 30_000 });</pre></details></div>
-        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">5. payment: find the order in Sales Orders, open its invoice and register the cash payment</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('5. payment: find the order in Sales Orders, open its invoice and register the cash payment', async ({ page }) =&gt; {
+        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">5. payment: find the order in Sales Orders, open its invoice and register the cash payment</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('5. payment: find the order in Sales Orders, open its invoice and register the cash payment', async ({ page }) =&gt; {
     test.skip(!orderNumber || !invoiceUrl, 'No invoiced order from steps 1-4');
 
     await test.step('Find the order by number (Sales → Orders → Sales Orders)', async () =&gt; {
@@ -3287,7 +3287,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
       await expect(page.locator('.o_form_view')).toBeVisible({ timeout: 30_000 });
       await expect(stage(page)).toContainText(/posted/i);
     });</pre></details></div>
-        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">6. trace: payment → Sales Orders smart button leads back to the order</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('6. trace: payment → Sales Orders smart button leads back to the order', async ({ page }) =&gt; {
+        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">6. trace: payment → Sales Orders smart button leads back to the order</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('6. trace: payment → Sales Orders smart button leads back to the order', async ({ page }) =&gt; {
     test.skip(!invoiceUrl, 'No invoice from step 4');
     await openRecord(page, invoiceUrl);
     test.skip(!paymentUrl, 'Payment was not registered in step 5');
@@ -3633,7 +3633,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
       <div class="suite-hdr" style="margin-top:16px;">
         <span class="suite-hdr-icon">💼</span>
         <span class="suite-hdr-title">sales.return-cash</span>
-        <span class="pill green">6 passed</span> <span class="pill red">1 failed</span> <span class="pill purple">14 skipped</span>
+        <span class="pill green">2 passed</span> <span class="pill red">1 failed</span> <span class="pill purple">18 skipped</span>
         <span class="suite-hdr-file">sales.return-cash.spec.ts</span>
       </div>
       <div class="test-list">
@@ -3681,7 +3681,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
     await expect(stage(page)).toContainText(/posted/i);
     invoiceUrl = page.url();
   });</pre></details></div>
-        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">3. delivery: validate → Done</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('3. delivery: validate → Done', async ({ page }) =&gt; {
+        <div class="test-row fail" data-error="Error: Could not create serial SNMW3D5ZGC in the Create Move Line popup (Create option never accepted; dropdown showed: SNMW3BQGKS | SNMW3BUIU4 | SNMW3BYJDQ | SNMW3C2JP7 | SNMW3C7DDJ | SNMW3CBGNN | SNMW3CGAP3 | SNMW3CKJFQ | Search More... |"><span class="test-row-icon">❌</span><span class="test-row-name">3. delivery: validate → Done</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('3. delivery: validate → Done', async ({ page }) =&gt; {
     test.skip(!orderUrl, 'No order from step 1');
     await openRecord(page, orderUrl);
     const ref = await validateDelivery(page);
@@ -3703,7 +3703,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
 
     await test.step('Reverse the invoice with a reason', async () =&gt; {
       const credit = page.locator('.o_form_statusbar button[name=&quot;action_reverse&quot;]').first();</pre></details></div>
-        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">4. invoice: create and confirm → Posted</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('4. invoice: create and confirm → Posted', async ({ page }) =&gt; {
+        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">4. invoice: create and confirm → Posted</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('4. invoice: create and confirm → Posted', async ({ page }) =&gt; {
     test.skip(!orderUrl, 'No order from step 1');
     await openRecord(page, orderUrl);
     const name = await createInvoice(page);
@@ -3725,7 +3725,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
       await expect(dlg).toBeVisible({ timeout: 15_000 });
       await dlg.locator('[name=&quot;reason&quot;] input, [name=&quot;reason&quot;] textarea').first().fill(returnReason);
       await dlg.getByRole('button', { name: /^reverse$/i }).click();</pre></details></div>
-        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">5. credit note: reverse with a reason, approval, confirm</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('5. credit note: reverse with a reason, approval, confirm', async ({ page, browser }) =&gt; {
+        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">5. credit note: reverse with a reason, approval, confirm</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('5. credit note: reverse with a reason, approval, confirm', async ({ page, browser }) =&gt; {
     test.skip(!invoiceUrl, 'No invoice from step 4');
     await openRecord(page, invoiceUrl);
 
@@ -3747,7 +3747,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
 
     await test.step('Request approval, approve (if the instance requires it) and confirm', async () =&gt; {
       for (let i = 0; i &lt; 6; i++) {</pre></details></div>
-        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">6. original invoice: reset to draft and confirm again (when offered)</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('6. original invoice: reset to draft and confirm again (when offered)', async ({ page }) =&gt; {
+        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">6. original invoice: reset to draft and confirm again (when offered)</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('6. original invoice: reset to draft and confirm again (when offered)', async ({ page }) =&gt; {
     test.skip(!invoiceUrl, 'No invoice from step 4');
     await openRecord(page, invoiceUrl);
     const reset = page.locator('.o_form_statusbar').getByRole('button', { name: /reset to draft/i }).first();
@@ -3769,7 +3769,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
       test.skip(!(await advance.isVisible({ timeout: 3_000 }).catch(() =&gt; false)),
         'Advance Payment button not available on this order');
       await advance.click();</pre></details></div>
-        <div class="test-row fail" data-error="Error: Odoo Error: An error occurredPlease use the copy button to report the error to your support service.See details"><span class="test-row-icon">❌</span><span class="test-row-name">7. advance payment on the sales order, then the Payments smart button</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('7. advance payment on the sales order, then the Payments smart button', async ({ page }) =&gt; {
+        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">7. advance payment on the sales order, then the Payments smart button</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('7. advance payment on the sales order, then the Payments smart button', async ({ page }) =&gt; {
     test.skip(!orderUrl, 'No order from step 1');
     await openRecord(page, orderUrl);
 
@@ -4103,7 +4103,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
       <div class="suite-hdr" style="margin-top:16px;">
         <span class="suite-hdr-icon">💼</span>
         <span class="suite-hdr-title">sales.return-reinvoice</span>
-        <span class="pill green">7 passed</span> <span class="pill purple">14 skipped</span>
+        <span class="pill green">2 passed</span> <span class="pill red">1 failed</span> <span class="pill purple">18 skipped</span>
         <span class="suite-hdr-file">sales.return-reinvoice.spec.ts</span>
       </div>
       <div class="test-list">
@@ -4151,7 +4151,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
   });
 
   test('5. reverse: Credit Note wizard → &quot;Reverse and Create Invoice&quot; gives a new draft invoice', async ({ page }) =&gt; {</pre></details></div>
-        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">3. delivery: validate → Done</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('3. delivery: validate → Done', async ({ page }) =&gt; {
+        <div class="test-row fail" data-error="Error: Could not create serial SNMW3D98DQ in the Create Move Line popup (Create option never accepted; dropdown showed: SNMW3BQGKS | SNMW3BUIU4 | SNMW3BYJDQ | SNMW3C2JP7 | SNMW3C7DDJ | SNMW3CBGNN | SNMW3CGAP3 | SNMW3CKJFQ | Search More... |"><span class="test-row-icon">❌</span><span class="test-row-name">3. delivery: validate → Done</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('3. delivery: validate → Done', async ({ page }) =&gt; {
     test.skip(!orderUrl, 'No order from step 1');
     await openRecord(page, orderUrl);
     expect(await validateDelivery(page)).toBeTruthy();
@@ -4173,7 +4173,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
     test.skip(!(await credit.isVisible({ timeout: 5_000 }).catch(() =&gt; false)),
       'Credit Note (reverse) button not available on this invoice');
     await credit.click();</pre></details></div>
-        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">4. invoice: create and confirm → Posted</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('4. invoice: create and confirm → Posted', async ({ page }) =&gt; {
+        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">4. invoice: create and confirm → Posted</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('4. invoice: create and confirm → Posted', async ({ page }) =&gt; {
     test.skip(!invoiceUrl &amp;&amp; !orderUrl, 'No order from step 1');
     await openRecord(page, orderUrl);
     expect(await createInvoice(page)).toBeTruthy();
@@ -4195,7 +4195,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
     await dlg.locator('[name=&quot;reason&quot;] input, [name=&quot;reason&quot;] textarea').first().fill(returnReason);
     // button[name=&quot;modify_moves&quot;] is the recorded selector; the visible label is the stable contract
     const reverseAndInvoice = dlg.getByRole('button', { name: /reverse and create invoice/i });</pre></details></div>
-        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">5. reverse: Credit Note wizard → &quot;Reverse and Create Invoice&quot; gives a new draft invoice</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('5. reverse: Credit Note wizard → &quot;Reverse and Create Invoice&quot; gives a new draft invoice', async ({ page }) =&gt; {
+        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">5. reverse: Credit Note wizard → &quot;Reverse and Create Invoice&quot; gives a new draft invoice</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('5. reverse: Credit Note wizard → &quot;Reverse and Create Invoice&quot; gives a new draft invoice', async ({ page }) =&gt; {
     test.skip(!invoiceUrl, 'No invoice from step 4');
     await openRecord(page, invoiceUrl);
 
@@ -4217,7 +4217,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
     await expect(page.locator('.modal:visible')).toHaveCount(0, { timeout: 30_000 });
     await expect(page.locator('.o_form_view')).toBeVisible({ timeout: 30_000 });
     // Odoo opens the NEW invoice, still in Draft, ready to be confirmed</pre></details></div>
-        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">6. re-invoice: confirm the new invoice and register the cash payment</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('6. re-invoice: confirm the new invoice and register the cash payment', async ({ page }) =&gt; {
+        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">6. re-invoice: confirm the new invoice and register the cash payment</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('6. re-invoice: confirm the new invoice and register the cash payment', async ({ page }) =&gt; {
     test.skip(!newInvoiceUrl, 'No replacement invoice from step 5');
     await openRecord(page, newInvoiceUrl);
 
@@ -4239,7 +4239,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
       // typing the full name finds nothing on this instance, so open the list empty instead.
       const journal = dlg.locator('[name=&quot;journal_id&quot;] input').first();
       await journal.click();</pre></details></div>
-        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">7. credit note: open it from the order's Invoices list, request approval and approve</span><div class="test-row-tags"><span class="tag smoke">@smoke</span><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('1. quotation: Cash order for a Sales quotation @smoke', async ({ page }) =&gt; {
+        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">7. credit note: open it from the order's Invoices list, request approval and approve</span><div class="test-row-tags"><span class="tag smoke">@smoke</span><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('1. quotation: Cash order for a Sales quotation @smoke', async ({ page }) =&gt; {
     const orderNumber = await createQuotation(page, { customer: CUSTOMER, paymentType: 'Cash' });
     orderUrl = page.url();
     expect(orderNumber).toMatch(/^S\d+/);
@@ -4708,14 +4708,14 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
       <div class="suite-hdr">
         <span class="suite-hdr-icon">🧪</span>
         <span class="suite-hdr-title">Field Validations</span>
-        <span class="pill green">11 passed</span> <span class="pill red">24 failed</span> <span class="pill purple">7 skipped</span>
+        <span class="pill green">12 passed</span> <span class="pill red">24 failed</span> <span class="pill purple">6 skipped</span>
         <span class="suite-hdr-file">2 files</span>
       </div>
       
       <div class="suite-hdr" style="margin-top:4px;">
         <span class="suite-hdr-icon">🧪</span>
         <span class="suite-hdr-title">sales.quotation-validations</span>
-        <span class="pill green">11 passed</span> <span class="pill red">22 failed</span> <span class="pill purple">6 skipped</span>
+        <span class="pill green">12 passed</span> <span class="pill red">22 failed</span> <span class="pill purple">5 skipped</span>
         <span class="suite-hdr-file">sales.quotation-validations.spec.ts</span>
       </div>
       <div class="test-list">
@@ -4785,7 +4785,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
   test.describe('order lines: confirm blocked for invalid lines', () =&gt; {
     test.skip(process.env.RUN_SALES_FLOWS !== 'true',
       'May leave a confirmed order if Odoo has no such control — set RUN_SALES_FLOWS=true to run');</pre></details></div>
-        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">blank Payment Terms cannot be saved (Cash)</span><span class="test-row-note">${f.label} is not shown on the form in this configuration</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">        test(`blank ${f.label} cannot be saved (${c.type})`, async ({ page }) =&gt; {
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">blank Payment Terms cannot be saved (Cash)</span><span class="test-row-note">${f.label} is not shown on the form in this configuration</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">        test(`blank ${f.label} cannot be saved (${c.type})`, async ({ page }) =&gt; {
           test.setTimeout(180_000);
           await createQuotation(page, { customer: c.customer, paymentType: c.type, save: false });
           const result = await blankFieldAndTrySave(page, f);

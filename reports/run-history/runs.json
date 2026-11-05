@@ -1,58 +1,5 @@
 [
  {
-  "id": "2026-11-02T10:17:57.377Z",
-  "startedAt": "2026-11-02T10:17:57.377Z",
-  "label": "31st run",
-  "note": "",
-  "results": {
-   "setup|setup|setup||authenticate: auth-storage/admin.json": {
-    "status": "passed",
-    "durationMs": 10800,
-    "error": ""
-   },
-   "admin|sales|business|Cash order with profit margin control: margin approval, invoice and cash receipt|1. quotation: Cash order, Immediate Payment, margin shown on the form": {
-    "status": "failed",
-    "durationMs": 32539,
-    "error": "Error: expect(locator).toContainText(expected) failed"
-   },
-   "admin|sales|business|Cash order with profit margin control: margin approval, invoice and cash receipt|2. gating: Confirm hidden; \"Insufficient Margin Details\" opens a modal and closes": {
-    "status": "skipped",
-    "durationMs": 0,
-    "error": ""
-   },
-   "admin|sales|business|Cash order with profit margin control: margin approval, invoice and cash receipt|3. approval: Request Insufficient Margin Approval, approve, then confirm → Sales Order": {
-    "status": "skipped",
-    "durationMs": 0,
-    "error": ""
-   },
-   "admin|sales|business|Cash order with profit margin control: margin approval, invoice and cash receipt|4. delivery: validate → Done": {
-    "status": "skipped",
-    "durationMs": 0,
-    "error": ""
-   },
-   "admin|sales|business|Cash order with profit margin control: margin approval, invoice and cash receipt|5. invoice: create and confirm → Posted": {
-    "status": "skipped",
-    "durationMs": 0,
-    "error": ""
-   },
-   "admin|sales|business|Cash order with profit margin control: margin approval, invoice and cash receipt|6. payment: register the full cash payment on the invoice": {
-    "status": "skipped",
-    "durationMs": 0,
-    "error": ""
-   },
-   "admin|sales|business|Cash order with profit margin control: margin approval, invoice and cash receipt|7. trace: payment → Sales Orders → order → Invoices smart button → invoice": {
-    "status": "skipped",
-    "durationMs": 0,
-    "error": ""
-   },
-   "admin|sales|business|Cash order with margin at or above the minimum: confirms without margin approval|8. margin >= minimum: no margin buttons, Confirm is available and works": {
-    "status": "skipped",
-    "durationMs": 0,
-    "error": ""
-   }
-  }
- },
- {
   "id": "2026-11-02T10:19:05.853Z",
   "startedAt": "2026-11-02T10:19:05.853Z",
   "label": "31st run",
@@ -3864,6 +3811,449 @@
     "status": "skipped",
     "durationMs": 0,
     "error": ""
+   }
+  }
+ },
+ {
+  "id": "2026-11-05T08:44:23.472Z",
+  "startedAt": "2026-11-05T08:44:23.472Z",
+  "label": "31st run",
+  "note": "",
+  "results": {
+   "setup|setup|setup||authenticate: auth-storage/admin.json": {
+    "status": "passed",
+    "durationMs": 11091,
+    "error": ""
+   },
+   "admin|sales|config|Sales Configuration Setup|placeholder — replace with real test": {
+    "status": "skipped",
+    "durationMs": 944,
+    "error": ""
+   },
+   "admin|sales|business|Sales Business Logic|placeholder — replace with real test": {
+    "status": "skipped",
+    "durationMs": 929,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting|placeholder — replace with real test": {
+    "status": "skipped",
+    "durationMs": 888,
+    "error": ""
+   },
+   "admin|sales|permissions|Sales User Permissions|placeholder — replace with real test": {
+    "status": "skipped",
+    "durationMs": 980,
+    "error": ""
+   },
+   "admin|sales|validations|Sales Field Validations|placeholder — replace with real test": {
+    "status": "skipped",
+    "durationMs": 993,
+    "error": ""
+   },
+   "admin|sales|edge|Sales Edge Cases|placeholder — replace with real test": {
+    "status": "skipped",
+    "durationMs": 922,
+    "error": ""
+   },
+   "admin|sales|archive|Sales Archive & Cleanup|placeholder — replace with real test": {
+    "status": "skipped",
+    "durationMs": 1003,
+    "error": ""
+   },
+   "admin|sales|business|Credit order, bank guarantee customer: validity notification, invoice and cash receipt|1. quotation: Credit order for the bank guarantee customer": {
+    "status": "passed",
+    "durationMs": 19616,
+    "error": ""
+   },
+   "admin|sales|business|Credit order, bank guarantee customer: validity notification, invoice and cash receipt|2. gating: Confirm is not offered until the bank guarantee notification is sent": {
+    "status": "skipped",
+    "durationMs": 7857,
+    "error": ""
+   },
+   "admin|sales|business|Credit order, bank guarantee customer: validity notification, invoice and cash receipt|3. notify and confirm: Send Bank Guarantee Validity Notification, then Confirm → Sales Order": {
+    "status": "passed",
+    "durationMs": 8901,
+    "error": ""
+   },
+   "admin|sales|business|Credit order, bank guarantee customer: validity notification, invoice and cash receipt|4. delivery: validate → Done": {
+    "status": "passed",
+    "durationMs": 13869,
+    "error": ""
+   },
+   "admin|sales|business|Credit order, bank guarantee customer: validity notification, invoice and cash receipt|5. invoice: create, send the bank guarantee notification if asked, confirm → Posted": {
+    "status": "passed",
+    "durationMs": 14050,
+    "error": ""
+   },
+   "admin|sales|business|Credit order, bank guarantee customer: validity notification, invoice and cash receipt|6. payment: find the order in Sales Orders, open its invoice and register the full cash payment": {
+    "status": "passed",
+    "durationMs": 14650,
+    "error": ""
+   },
+   "admin|sales|business|Credit order, bank guarantee customer: validity notification, invoice and cash receipt|7. trace: payment → Sales Orders smart button leads back to 1 source order": {
+    "status": "passed",
+    "durationMs": 8700,
+    "error": ""
+   },
+   "admin|sales|business|Credit order above the bank guarantee amount: Request / Approve Bank Guarantee|8. over guarantee: Confirm is hidden and Request Bank Guarantee Approval is offered": {
+    "status": "passed",
+    "durationMs": 22990,
+    "error": ""
+   },
+   "admin|sales|business|Credit order above the bank guarantee amount: Request / Approve Bank Guarantee|9. approval: Request Bank Guarantee Approval, Approve Bank Guarantee, then Confirm → Sales Order": {
+    "status": "passed",
+    "durationMs": 21335,
+    "error": ""
+   },
+   "admin|sales|business|Credit sales order, invoice and cash receipt|1. quotation: Credit order with 14 Days payment terms": {
+    "status": "passed",
+    "durationMs": 17896,
+    "error": ""
+   },
+   "admin|sales|business|Credit sales order, invoice and cash receipt|2. confirm: quotation becomes a Sales Order": {
+    "status": "passed",
+    "durationMs": 18305,
+    "error": ""
+   },
+   "admin|sales|business|Credit sales order, invoice and cash receipt|3. delivery: validate → Done": {
+    "status": "passed",
+    "durationMs": 14131,
+    "error": ""
+   },
+   "admin|sales|business|Credit sales order, invoice and cash receipt|4. invoice: create and confirm → Posted": {
+    "status": "passed",
+    "durationMs": 9757,
+    "error": ""
+   },
+   "admin|sales|business|Credit sales order, invoice and cash receipt|5. payment: find the order in Sales Orders, open its invoice and register the cash payment": {
+    "status": "passed",
+    "durationMs": 16768,
+    "error": ""
+   },
+   "admin|sales|business|Credit sales order, invoice and cash receipt|6. trace: payment → Sales Orders smart button leads back to the order": {
+    "status": "passed",
+    "durationMs": 8776,
+    "error": ""
+   },
+   "admin|sales|business|Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt|1. quotation: Credit order for the overdue customer": {
+    "status": "passed",
+    "durationMs": 19288,
+    "error": ""
+   },
+   "admin|sales|business|Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt|2. gating: Confirm is blocked and the overdue details are viewable": {
+    "status": "passed",
+    "durationMs": 8097,
+    "error": ""
+   },
+   "admin|sales|business|Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt|3. approvals: overdue + credit limit approvals, then confirm → Sales Order": {
+    "status": "passed",
+    "durationMs": 20385,
+    "error": ""
+   },
+   "admin|sales|business|Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt|4. delivery: validate → Done": {
+    "status": "passed",
+    "durationMs": 13952,
+    "error": ""
+   },
+   "admin|sales|business|Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt|5. invoice: create and confirm → Posted": {
+    "status": "passed",
+    "durationMs": 12241,
+    "error": ""
+   },
+   "admin|sales|business|Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt|6. payment: find the order in Sales Orders, open its invoice and register the full cash payment": {
+    "status": "passed",
+    "durationMs": 16088,
+    "error": ""
+   },
+   "admin|sales|business|Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt|7. trace: payment → Sales Orders smart button leads back to 1 source order": {
+    "status": "passed",
+    "durationMs": 8711,
+    "error": ""
+   },
+   "admin|sales|business|Sales credit order with serial product|precondition: credit customer is set to Credit and has no overdue invoices": {
+    "status": "passed",
+    "durationMs": 8033,
+    "error": ""
+   },
+   "admin|sales|business|Sales credit order with serial product|1. quotation: Credit order, serial product, Payment Terms 14 Days": {
+    "status": "passed",
+    "durationMs": 18554,
+    "error": ""
+   },
+   "admin|sales|business|Sales credit order with serial product|2. confirm: no approval needed, quotation becomes a Sales Order": {
+    "status": "passed",
+    "durationMs": 9130,
+    "error": ""
+   },
+   "admin|sales|business|Sales credit order with serial product|3. delivery: new serial number, validate → Done": {
+    "status": "failed",
+    "durationMs": 17318,
+    "error": "Error: Could not create serial SNMW3B8XMF in the Create Move Line popup (Create option never accepted; dropdown showed: nothing)"
+   },
+   "admin|sales|business|Sales credit order with serial product|4. invoice: posted, keeps 14 Days, due 14 days after the invoice date": {
+    "status": "skipped",
+    "durationMs": 0,
+    "error": ""
+   },
+   "admin|sales|business|Sales credit order with serial product|5. payment day: come back through the Sales app, register the payment → IN PAYMENT": {
+    "status": "skipped",
+    "durationMs": 0,
+    "error": ""
+   },
+   "admin|sales|business|Sales Cash & Credit flows by Customer Group|walk Cash and Credit flow for every Customer Group and collect bugs": {
+    "status": "passed",
+    "durationMs": 2785654,
+    "error": ""
+   },
+   "admin|sales|business|High discount cash sales order: over-commission approval, invoice and receipt|1. quotation: Cash order with a high discount line": {
+    "status": "passed",
+    "durationMs": 21578,
+    "error": ""
+   },
+   "admin|sales|business|High discount cash sales order: over-commission approval, invoice and receipt|2. approval: Request Over Commission Approval, approve, then confirm → Sales Order": {
+    "status": "passed",
+    "durationMs": 19468,
+    "error": ""
+   },
+   "admin|sales|business|High discount cash sales order: over-commission approval, invoice and receipt|3. delivery: validate → Done": {
+    "status": "failed",
+    "durationMs": 16066,
+    "error": "Error: Could not create serial SNMW3CZ892 in the Create Move Line popup (Create option never accepted; dropdown showed: SNMW3BQGKS | SNMW3BUIU4 | SNMW3BYJDQ | SNMW3C2JP7 | SNMW3C7DDJ | SNMW3CBGNN | SNMW3CGAP3 | SNMW3CKJFQ | Search More... |"
+   },
+   "admin|sales|business|High discount cash sales order: over-commission approval, invoice and receipt|4. invoice: create and confirm → Posted": {
+    "status": "skipped",
+    "durationMs": 0,
+    "error": ""
+   },
+   "admin|sales|business|High discount cash sales order: over-commission approval, invoice and receipt|5. payment: find the order in Sales Orders, open its invoice and register the cash payment": {
+    "status": "skipped",
+    "durationMs": 0,
+    "error": ""
+   },
+   "admin|sales|business|High discount cash sales order: over-commission approval, invoice and receipt|6. trace: payment → Sales Orders smart button leads back to the order": {
+    "status": "skipped",
+    "durationMs": 0,
+    "error": ""
+   },
+   "admin|sales|business|Cash order with profit margin control: margin approval, invoice and cash receipt|1. quotation: Cash order, Immediate Payment, margin shown on the form": {
+    "status": "passed",
+    "durationMs": 25867,
+    "error": ""
+   },
+   "admin|sales|business|Cash order with profit margin control: margin approval, invoice and cash receipt|2. gating: Confirm hidden; \"Insufficient Margin Details\" opens a modal and closes": {
+    "status": "passed",
+    "durationMs": 12528,
+    "error": ""
+   },
+   "admin|sales|business|Cash order with profit margin control: margin approval, invoice and cash receipt|3. approval: Request Insufficient Margin Approval, approve, then confirm → Sales Order": {
+    "status": "passed",
+    "durationMs": 20852,
+    "error": ""
+   },
+   "admin|sales|business|Cash order with profit margin control: margin approval, invoice and cash receipt|4. delivery: validate → Done": {
+    "status": "passed",
+    "durationMs": 13218,
+    "error": ""
+   },
+   "admin|sales|business|Cash order with profit margin control: margin approval, invoice and cash receipt|5. invoice: create and confirm → Posted": {
+    "status": "passed",
+    "durationMs": 10633,
+    "error": ""
+   },
+   "admin|sales|business|Cash order with profit margin control: margin approval, invoice and cash receipt|6. payment: register the full cash payment on the invoice": {
+    "status": "passed",
+    "durationMs": 14630,
+    "error": ""
+   },
+   "admin|sales|business|Cash order with profit margin control: margin approval, invoice and cash receipt|7. trace: payment → Sales Orders → order → Invoices smart button → invoice": {
+    "status": "passed",
+    "durationMs": 10770,
+    "error": ""
+   },
+   "admin|sales|business|Overdue credit sales order: approval, invoice and cash receipt|1. quotation: Credit order with 14 Days payment terms": {
+    "status": "passed",
+    "durationMs": 18298,
+    "error": ""
+   },
+   "admin|sales|business|Overdue credit sales order: approval, invoice and cash receipt|2. approval: Request Overdue Approval, approve, then confirm → Sales Order": {
+    "status": "passed",
+    "durationMs": 10029,
+    "error": ""
+   },
+   "admin|sales|business|Overdue credit sales order: approval, invoice and cash receipt|3. delivery: validate → Done": {
+    "status": "failed",
+    "durationMs": 15586,
+    "error": "Error: Could not create serial SNMW3D3HY8 in the Create Move Line popup (Create option never accepted; dropdown showed: SNMW3BQGKS | SNMW3BUIU4 | SNMW3BYJDQ | SNMW3C2JP7 | SNMW3C7DDJ | SNMW3CBGNN | SNMW3CGAP3 | SNMW3CKJFQ | Search More... |"
+   },
+   "admin|sales|business|Overdue credit sales order: approval, invoice and cash receipt|4. invoice: create and confirm → Posted": {
+    "status": "skipped",
+    "durationMs": 0,
+    "error": ""
+   },
+   "admin|sales|business|Overdue credit sales order: approval, invoice and cash receipt|5. payment: find the order in Sales Orders, open its invoice and register the cash payment": {
+    "status": "skipped",
+    "durationMs": 0,
+    "error": ""
+   },
+   "admin|sales|business|Overdue credit sales order: approval, invoice and cash receipt|6. trace: payment → Sales Orders smart button leads back to the order": {
+    "status": "skipped",
+    "durationMs": 0,
+    "error": ""
+   },
+   "admin|sales|business|Sales quotation calculations|line, untaxed and total amounts follow the quantity × price arithmetic": {
+    "status": "passed",
+    "durationMs": 22176,
+    "error": ""
+   },
+   "admin|sales|business|Sales return of a cash order|1. quotation: Cash order for a Sales quotation": {
+    "status": "passed",
+    "durationMs": 21061,
+    "error": ""
+   },
+   "admin|sales|business|Sales return of a cash order|2. confirm: quotation becomes a Sales Order": {
+    "status": "passed",
+    "durationMs": 8609,
+    "error": ""
+   },
+   "admin|sales|business|Sales return of a cash order|3. delivery: validate → Done": {
+    "status": "failed",
+    "durationMs": 15904,
+    "error": "Error: Could not create serial SNMW3D5ZGC in the Create Move Line popup (Create option never accepted; dropdown showed: SNMW3BQGKS | SNMW3BUIU4 | SNMW3BYJDQ | SNMW3C2JP7 | SNMW3C7DDJ | SNMW3CBGNN | SNMW3CGAP3 | SNMW3CKJFQ | Search More... |"
+   },
+   "admin|sales|business|Sales return of a cash order|4. invoice: create and confirm → Posted": {
+    "status": "skipped",
+    "durationMs": 0,
+    "error": ""
+   },
+   "admin|sales|business|Sales return of a cash order|5. credit note: reverse with a reason, approval, confirm": {
+    "status": "skipped",
+    "durationMs": 0,
+    "error": ""
+   },
+   "admin|sales|business|Sales return of a cash order|6. original invoice: reset to draft and confirm again (when offered)": {
+    "status": "skipped",
+    "durationMs": 0,
+    "error": ""
+   },
+   "admin|sales|business|Sales return of a cash order|7. advance payment on the sales order, then the Payments smart button": {
+    "status": "skipped",
+    "durationMs": 0,
+    "error": ""
+   },
+   "admin|sales|business|Sales return and re-invoice of a cash order|1. quotation: Cash order for a Sales quotation": {
+    "status": "passed",
+    "durationMs": 21082,
+    "error": ""
+   },
+   "admin|sales|business|Sales return and re-invoice of a cash order|2. confirm: quotation becomes a Sales Order": {
+    "status": "passed",
+    "durationMs": 9151,
+    "error": ""
+   },
+   "admin|sales|business|Sales return and re-invoice of a cash order|3. delivery: validate → Done": {
+    "status": "failed",
+    "durationMs": 15278,
+    "error": "Error: Could not create serial SNMW3D98DQ in the Create Move Line popup (Create option never accepted; dropdown showed: SNMW3BQGKS | SNMW3BUIU4 | SNMW3BYJDQ | SNMW3C2JP7 | SNMW3C7DDJ | SNMW3CBGNN | SNMW3CGAP3 | SNMW3CKJFQ | Search More... |"
+   },
+   "admin|sales|business|Sales return and re-invoice of a cash order|4. invoice: create and confirm → Posted": {
+    "status": "skipped",
+    "durationMs": 0,
+    "error": ""
+   },
+   "admin|sales|business|Sales return and re-invoice of a cash order|5. reverse: Credit Note wizard → \"Reverse and Create Invoice\" gives a new draft invoice": {
+    "status": "skipped",
+    "durationMs": 0,
+    "error": ""
+   },
+   "admin|sales|business|Sales return and re-invoice of a cash order|6. re-invoice: confirm the new invoice and register the cash payment": {
+    "status": "skipped",
+    "durationMs": 0,
+    "error": ""
+   },
+   "admin|sales|business|Sales return and re-invoice of a cash order|7. credit note: open it from the order's Invoices list, request approval and approve": {
+    "status": "skipped",
+    "durationMs": 0,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Customer cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 27701,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Order Payment Type cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 20619,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Quotation Type cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 20955,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Payment Terms cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 23535,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Salesperson cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 20225,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Sales Team cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 20628,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Warehouse cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 21198,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Company cannot be saved (Cash)": {
+    "status": "skipped",
+    "durationMs": 17448,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Credit quotation: required fields|blank Customer cannot be saved (Credit)": {
+    "status": "passed",
+    "durationMs": 20245,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Credit quotation: required fields|blank Order Payment Type cannot be saved (Credit)": {
+    "status": "passed",
+    "durationMs": 19382,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Credit quotation: required fields|blank Payment Terms cannot be saved (Credit)": {
+    "status": "passed",
+    "durationMs": 19377,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › order lines: confirm blocked for invalid lines|quotation with zero quantity cannot be confirmed": {
+    "status": "passed",
+    "durationMs": 20116,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › order lines: confirm blocked for invalid lines|quotation with zero unit price cannot be confirmed": {
+    "status": "passed",
+    "durationMs": 22941,
+    "error": ""
+   },
+   "admin|sales|edge|Sales credit limit control|within the credit limit: Confirm is available, no approval needed": {
+    "status": "failed",
+    "durationMs": 38803,
+    "error": "Error: Quotation was not saved (title shows \"New\")."
+   },
+   "admin|sales|edge|Sales credit limit control|over the credit limit: Confirm is blocked, approval must be requested": {
+    "status": "failed",
+    "durationMs": 38952,
+    "error": "Error: Quotation was not saved (title shows \"New\")."
+   },
+   "admin|sales|edge|Sales credit limit control|customer with overdue invoices: Confirm is blocked, approval must be requested": {
+    "status": "failed",
+    "durationMs": 38296,
+    "error": "Error: Quotation was not saved (title shows \"New\")."
    }
   }
  }
