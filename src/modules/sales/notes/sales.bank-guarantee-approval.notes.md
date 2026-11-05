@@ -55,3 +55,9 @@ All three: Mandatory Bank Guarantee on, Valid Bank Guarantee on, Payment Type Cr
 - The recorded journal "Customer Receipts - Cash" does not exist in this company; the payment step falls back to "Commercial - Cash Receipts".
 - Smart button text is `"1Sale Orders"`; match with `/^\s*1(?!\d)/`.
 - Each run creates real records (order, delivery, invoice, payment).
+
+## Extra finding (2026-11-05, from building the user manual)
+- With the low-guarantee customer (guarantee 100) the order can be approved and confirmed, but posting its **invoice** fails:
+  "The credit limit is higher than the bank guarantee amount. Bank guarantee amount: 100.0 ... New balance: 560.0". The invoice has no approval button for this case,
+  so tests 8-9 stop at Sales Order. The full user manual therefore runs the main flow for the 5,000,000 customer and shows the approval buttons from a second quotation.
+- User manual: `tools/tour2playwright/generated/manuals/bank-guarantee-credit-sales-order.en_US.html` (+ `.md`), 51 steps.

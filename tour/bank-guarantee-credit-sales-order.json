@@ -8,11 +8,11 @@
         "si_LK": "Bank Guarantee Approval Credit Sales Order",
         "ta_IN": "Bank Guarantee Approval Credit Sales Order"
       },
-      "description": "Bank Guarantee Approval",
+      "description": "A friendly step-by-step guide for selling on credit to a dealer who has a bank guarantee. A bank guarantee is a promise from a bank to pay the company if the customer does not pay, and Odoo checks it before a credit sale can go ahead. You will create a credit quotation for a dealer, check the bank guarantee buttons (the validity notification, or the request and approval when the order is bigger than the guarantee), confirm the order, deliver the goods, invoice the customer, find the order again later, register the cash payment, and finally follow the invoice back to the order.",
       "description_i18n": {
-        "en_US": "Bank Guarantee Approval",
-        "si_LK": "Bank Guarantee Approval",
-        "ta_IN": "Bank Guarantee Approval"
+        "en_US": "A friendly step-by-step guide for selling on credit to a dealer who has a bank guarantee. A bank guarantee is a promise from a bank to pay the company if the customer does not pay, and Odoo checks it before a credit sale can go ahead. You will create a credit quotation for a dealer, check the bank guarantee buttons (the validity notification, or the request and approval when the order is bigger than the guarantee), confirm the order, deliver the goods, invoice the customer, find the order again later, register the cash payment, and finally follow the invoice back to the order.",
+        "si_LK": "A friendly step-by-step guide for selling on credit to a dealer who has a bank guarantee. A bank guarantee is a promise from a bank to pay the company if the customer does not pay, and Odoo checks it before a credit sale can go ahead. You will create a credit quotation for a dealer, check the bank guarantee buttons (the validity notification, or the request and approval when the order is bigger than the guarantee), confirm the order, deliver the goods, invoice the customer, find the order again later, register the cash payment, and finally follow the invoice back to the order.",
+        "ta_IN": "A friendly step-by-step guide for selling on credit to a dealer who has a bank guarantee. A bank guarantee is a promise from a bank to pay the company if the customer does not pay, and Odoo checks it before a credit sale can go ahead. You will create a credit quotation for a dealer, check the bank guarantee buttons (the validity notification, or the request and approval when the order is bigger than the guarantee), confirm the order, deliver the goods, invoice the customer, find the order again later, register the cash payment, and finally follow the invoice back to the order."
       },
       "steps": [
         {
@@ -854,6 +854,39 @@
             "en_US": "click",
             "si_LK": "click",
             "ta_IN": "click"
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 261,
+          "title": "Approve Bank Guarantee",
+          "title_i18n": {
+            "en_US": "Approve Bank Guarantee",
+            "si_LK": "Approve Bank Guarantee",
+            "ta_IN": "Approve Bank Guarantee"
+          },
+          "trigger": "[data-hotkey=\"n\"]",
+          "content": "Click Approve Bank Guarantee",
+          "content_i18n": {
+            "en_US": "Click Approve Bank Guarantee",
+            "si_LK": "Click Approve Bank Guarantee",
+            "ta_IN": "Click Approve Bank Guarantee"
           },
           "position": "bottom",
           "run": "click",

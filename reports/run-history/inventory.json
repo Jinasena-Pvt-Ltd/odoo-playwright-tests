@@ -2298,5 +2298,325 @@
   "title": "9. approval: Request Bank Guarantee Approval, Approve Bank Guarantee, then Confirm → Sales Order",
   "file": "sales.bank-guarantee-approval.spec.ts",
   "placeholder": false
+ },
+ {
+  "key": "manager|sales|business|Credit order, bank guarantee customer: validity notification, invoice and cash receipt|1. quotation: Credit order for the bank guarantee customer",
+  "project": "manager",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Credit order, bank guarantee customer: validity notification, invoice and cash receipt",
+  "title": "1. quotation: Credit order for the bank guarantee customer",
+  "file": "sales.bank-guarantee-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "manager|sales|business|Credit order, bank guarantee customer: validity notification, invoice and cash receipt|2. gating: Confirm is not offered until the bank guarantee notification is sent",
+  "project": "manager",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Credit order, bank guarantee customer: validity notification, invoice and cash receipt",
+  "title": "2. gating: Confirm is not offered until the bank guarantee notification is sent",
+  "file": "sales.bank-guarantee-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "manager|sales|business|Credit order, bank guarantee customer: validity notification, invoice and cash receipt|3. notify and confirm: Send Bank Guarantee Validity Notification, then Confirm → Sales Order",
+  "project": "manager",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Credit order, bank guarantee customer: validity notification, invoice and cash receipt",
+  "title": "3. notify and confirm: Send Bank Guarantee Validity Notification, then Confirm → Sales Order",
+  "file": "sales.bank-guarantee-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "manager|sales|business|Credit order, bank guarantee customer: validity notification, invoice and cash receipt|4. delivery: validate → Done",
+  "project": "manager",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Credit order, bank guarantee customer: validity notification, invoice and cash receipt",
+  "title": "4. delivery: validate → Done",
+  "file": "sales.bank-guarantee-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "manager|sales|business|Credit order, bank guarantee customer: validity notification, invoice and cash receipt|5. invoice: create, send the bank guarantee notification if asked, confirm → Posted",
+  "project": "manager",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Credit order, bank guarantee customer: validity notification, invoice and cash receipt",
+  "title": "5. invoice: create, send the bank guarantee notification if asked, confirm → Posted",
+  "file": "sales.bank-guarantee-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "manager|sales|business|Credit order, bank guarantee customer: validity notification, invoice and cash receipt|6. payment: find the order in Sales Orders, open its invoice and register the full cash payment",
+  "project": "manager",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Credit order, bank guarantee customer: validity notification, invoice and cash receipt",
+  "title": "6. payment: find the order in Sales Orders, open its invoice and register the full cash payment",
+  "file": "sales.bank-guarantee-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "manager|sales|business|Credit order, bank guarantee customer: validity notification, invoice and cash receipt|7. trace: payment → Sales Orders smart button leads back to 1 source order",
+  "project": "manager",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Credit order, bank guarantee customer: validity notification, invoice and cash receipt",
+  "title": "7. trace: payment → Sales Orders smart button leads back to 1 source order",
+  "file": "sales.bank-guarantee-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "manager|sales|business|Credit order above the bank guarantee amount: Request / Approve Bank Guarantee|8. over guarantee: Confirm is hidden and Request Bank Guarantee Approval is offered",
+  "project": "manager",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Credit order above the bank guarantee amount: Request / Approve Bank Guarantee",
+  "title": "8. over guarantee: Confirm is hidden and Request Bank Guarantee Approval is offered",
+  "file": "sales.bank-guarantee-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "manager|sales|business|Credit order above the bank guarantee amount: Request / Approve Bank Guarantee|9. approval: Request Bank Guarantee Approval, Approve Bank Guarantee, then Confirm → Sales Order",
+  "project": "manager",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Credit order above the bank guarantee amount: Request / Approve Bank Guarantee",
+  "title": "9. approval: Request Bank Guarantee Approval, Approve Bank Guarantee, then Confirm → Sales Order",
+  "file": "sales.bank-guarantee-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "manager|sales|business|Cash order with profit margin control: margin approval, invoice and cash receipt|1. quotation: Cash order, Immediate Payment, margin shown on the form",
+  "project": "manager",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Cash order with profit margin control: margin approval, invoice and cash receipt",
+  "title": "1. quotation: Cash order, Immediate Payment, margin shown on the form",
+  "file": "sales.margin-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "manager|sales|business|Cash order with profit margin control: margin approval, invoice and cash receipt|2. gating: Confirm hidden; \"Insufficient Margin Details\" opens a modal and closes",
+  "project": "manager",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Cash order with profit margin control: margin approval, invoice and cash receipt",
+  "title": "2. gating: Confirm hidden; \"Insufficient Margin Details\" opens a modal and closes",
+  "file": "sales.margin-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "manager|sales|business|Cash order with profit margin control: margin approval, invoice and cash receipt|3. approval: Request Insufficient Margin Approval, approve, then confirm → Sales Order",
+  "project": "manager",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Cash order with profit margin control: margin approval, invoice and cash receipt",
+  "title": "3. approval: Request Insufficient Margin Approval, approve, then confirm → Sales Order",
+  "file": "sales.margin-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "manager|sales|business|Cash order with profit margin control: margin approval, invoice and cash receipt|4. delivery: validate → Done",
+  "project": "manager",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Cash order with profit margin control: margin approval, invoice and cash receipt",
+  "title": "4. delivery: validate → Done",
+  "file": "sales.margin-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "manager|sales|business|Cash order with profit margin control: margin approval, invoice and cash receipt|5. invoice: create and confirm → Posted",
+  "project": "manager",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Cash order with profit margin control: margin approval, invoice and cash receipt",
+  "title": "5. invoice: create and confirm → Posted",
+  "file": "sales.margin-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "manager|sales|business|Cash order with profit margin control: margin approval, invoice and cash receipt|6. payment: register the full cash payment on the invoice",
+  "project": "manager",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Cash order with profit margin control: margin approval, invoice and cash receipt",
+  "title": "6. payment: register the full cash payment on the invoice",
+  "file": "sales.margin-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "manager|sales|business|Cash order with profit margin control: margin approval, invoice and cash receipt|7. trace: payment → Sales Orders → order → Invoices smart button → invoice",
+  "project": "manager",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Cash order with profit margin control: margin approval, invoice and cash receipt",
+  "title": "7. trace: payment → Sales Orders → order → Invoices smart button → invoice",
+  "file": "sales.margin-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "employee|sales|business|Credit order, bank guarantee customer: validity notification, invoice and cash receipt|1. quotation: Credit order for the bank guarantee customer",
+  "project": "employee",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Credit order, bank guarantee customer: validity notification, invoice and cash receipt",
+  "title": "1. quotation: Credit order for the bank guarantee customer",
+  "file": "sales.bank-guarantee-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "employee|sales|business|Credit order, bank guarantee customer: validity notification, invoice and cash receipt|2. gating: Confirm is not offered until the bank guarantee notification is sent",
+  "project": "employee",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Credit order, bank guarantee customer: validity notification, invoice and cash receipt",
+  "title": "2. gating: Confirm is not offered until the bank guarantee notification is sent",
+  "file": "sales.bank-guarantee-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "employee|sales|business|Credit order, bank guarantee customer: validity notification, invoice and cash receipt|3. notify and confirm: Send Bank Guarantee Validity Notification, then Confirm → Sales Order",
+  "project": "employee",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Credit order, bank guarantee customer: validity notification, invoice and cash receipt",
+  "title": "3. notify and confirm: Send Bank Guarantee Validity Notification, then Confirm → Sales Order",
+  "file": "sales.bank-guarantee-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "employee|sales|business|Credit order, bank guarantee customer: validity notification, invoice and cash receipt|4. delivery: validate → Done",
+  "project": "employee",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Credit order, bank guarantee customer: validity notification, invoice and cash receipt",
+  "title": "4. delivery: validate → Done",
+  "file": "sales.bank-guarantee-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "employee|sales|business|Credit order, bank guarantee customer: validity notification, invoice and cash receipt|5. invoice: create, send the bank guarantee notification if asked, confirm → Posted",
+  "project": "employee",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Credit order, bank guarantee customer: validity notification, invoice and cash receipt",
+  "title": "5. invoice: create, send the bank guarantee notification if asked, confirm → Posted",
+  "file": "sales.bank-guarantee-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "employee|sales|business|Credit order, bank guarantee customer: validity notification, invoice and cash receipt|6. payment: find the order in Sales Orders, open its invoice and register the full cash payment",
+  "project": "employee",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Credit order, bank guarantee customer: validity notification, invoice and cash receipt",
+  "title": "6. payment: find the order in Sales Orders, open its invoice and register the full cash payment",
+  "file": "sales.bank-guarantee-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "employee|sales|business|Credit order, bank guarantee customer: validity notification, invoice and cash receipt|7. trace: payment → Sales Orders smart button leads back to 1 source order",
+  "project": "employee",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Credit order, bank guarantee customer: validity notification, invoice and cash receipt",
+  "title": "7. trace: payment → Sales Orders smart button leads back to 1 source order",
+  "file": "sales.bank-guarantee-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "employee|sales|business|Credit order above the bank guarantee amount: Request / Approve Bank Guarantee|8. over guarantee: Confirm is hidden and Request Bank Guarantee Approval is offered",
+  "project": "employee",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Credit order above the bank guarantee amount: Request / Approve Bank Guarantee",
+  "title": "8. over guarantee: Confirm is hidden and Request Bank Guarantee Approval is offered",
+  "file": "sales.bank-guarantee-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "employee|sales|business|Credit order above the bank guarantee amount: Request / Approve Bank Guarantee|9. approval: Request Bank Guarantee Approval, Approve Bank Guarantee, then Confirm → Sales Order",
+  "project": "employee",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Credit order above the bank guarantee amount: Request / Approve Bank Guarantee",
+  "title": "9. approval: Request Bank Guarantee Approval, Approve Bank Guarantee, then Confirm → Sales Order",
+  "file": "sales.bank-guarantee-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "employee|sales|business|Cash order with profit margin control: margin approval, invoice and cash receipt|1. quotation: Cash order, Immediate Payment, margin shown on the form",
+  "project": "employee",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Cash order with profit margin control: margin approval, invoice and cash receipt",
+  "title": "1. quotation: Cash order, Immediate Payment, margin shown on the form",
+  "file": "sales.margin-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "employee|sales|business|Cash order with profit margin control: margin approval, invoice and cash receipt|2. gating: Confirm hidden; \"Insufficient Margin Details\" opens a modal and closes",
+  "project": "employee",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Cash order with profit margin control: margin approval, invoice and cash receipt",
+  "title": "2. gating: Confirm hidden; \"Insufficient Margin Details\" opens a modal and closes",
+  "file": "sales.margin-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "employee|sales|business|Cash order with profit margin control: margin approval, invoice and cash receipt|3. approval: Request Insufficient Margin Approval, approve, then confirm → Sales Order",
+  "project": "employee",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Cash order with profit margin control: margin approval, invoice and cash receipt",
+  "title": "3. approval: Request Insufficient Margin Approval, approve, then confirm → Sales Order",
+  "file": "sales.margin-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "employee|sales|business|Cash order with profit margin control: margin approval, invoice and cash receipt|4. delivery: validate → Done",
+  "project": "employee",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Cash order with profit margin control: margin approval, invoice and cash receipt",
+  "title": "4. delivery: validate → Done",
+  "file": "sales.margin-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "employee|sales|business|Cash order with profit margin control: margin approval, invoice and cash receipt|5. invoice: create and confirm → Posted",
+  "project": "employee",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Cash order with profit margin control: margin approval, invoice and cash receipt",
+  "title": "5. invoice: create and confirm → Posted",
+  "file": "sales.margin-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "employee|sales|business|Cash order with profit margin control: margin approval, invoice and cash receipt|6. payment: register the full cash payment on the invoice",
+  "project": "employee",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Cash order with profit margin control: margin approval, invoice and cash receipt",
+  "title": "6. payment: register the full cash payment on the invoice",
+  "file": "sales.margin-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "employee|sales|business|Cash order with profit margin control: margin approval, invoice and cash receipt|7. trace: payment → Sales Orders → order → Invoices smart button → invoice",
+  "project": "employee",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Cash order with profit margin control: margin approval, invoice and cash receipt",
+  "title": "7. trace: payment → Sales Orders → order → Invoices smart button → invoice",
+  "file": "sales.margin-approval.spec.ts",
+  "placeholder": false
  }
 ]

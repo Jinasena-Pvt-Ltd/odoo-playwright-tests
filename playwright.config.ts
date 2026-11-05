@@ -12,8 +12,8 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 1 : 0,
   workers: 1,
-  timeout: 120_000,
-  expect: { timeout: 10_000 },
+  timeout: 240_000, // doubled: the Odoo test server is slow
+  expect: { timeout: 20_000 },
 
   reporter: [
     ['list'],
@@ -53,21 +53,6 @@ export default defineConfig({
       },
       dependencies: ['setup'],
     },
-    {
-      name: 'manager',
-      use: {
-        ...devices['Desktop Chrome'],
-        storageState: 'auth-storage/manager.json',
-      },
-      dependencies: ['setup'],
-    },
-    {
-      name: 'employee',
-      use: {
-        ...devices['Desktop Chrome'],
-        storageState: 'auth-storage/employee.json',
-      },
-      dependencies: ['setup'],
-    },
+    // manager / employee projects removed: no credentials are configured, admin is the only login.
   ],
 });

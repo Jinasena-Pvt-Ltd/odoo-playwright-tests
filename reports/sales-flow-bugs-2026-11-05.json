@@ -1,0 +1,82 @@
+{
+  "bugs": [
+    {
+      "id": "BUG-001",
+      "group": "All",
+      "flow": "Setup",
+      "step": "Read Customer Groups",
+      "severity": "Info",
+      "title": "Customer Group names differ between companies",
+      "detail": "Groups exist per company. Only in \"Jinasena Agricultural Machinery (Pvt) Ltd.\": CAC, CENT-ISSUE, DISTR, DLRS, EXPT, LEGAL, SBU1, SVAT-CAC, SVAT-CRC, TC, WELFARE, COMM. Only in other companies: -."
+    },
+    {
+      "id": "BUG-002",
+      "group": "Control (existing customer \"[TEST] Overdue Credit Customer\"), CAC",
+      "flow": "Cash",
+      "step": "5 Register cash payment",
+      "severity": "Medium",
+      "title": "Step could not be completed (needs review)",
+      "detail": "\"Customer Receipts - Cash\" was not offered in the journal_id dropdown. Offered: No records",
+      "screenshot": "C:\\Users\\Urliyas\\Documents\\GitHub\\odoo-playwright-tests\\test-results\\flow-bugs\\Control_existing_customer_TEST_Overdue_Credit_Customer_Cash_5_Register_cash_payment.png"
+    },
+    {
+      "id": "BUG-003",
+      "group": "CAC",
+      "flow": "Credit",
+      "step": "1 Create quotation (Credit)",
+      "severity": "Medium",
+      "title": "Step could not be completed (needs review)",
+      "detail": "Quotation was not saved (title shows \"New\").",
+      "screenshot": "C:\\Users\\Urliyas\\Documents\\GitHub\\odoo-playwright-tests\\test-results\\flow-bugs\\CAC_Credit_1_Create_quotation_Credit_.png"
+    },
+    {
+      "id": "BUG-004",
+      "group": "CAC",
+      "flow": "Validation (Credit)",
+      "step": "Confirm order with zero quantity",
+      "severity": "Medium",
+      "title": "Validation check could not be completed (needs review)",
+      "detail": "zero quantity: Quotation was not saved (title shows \"New\")."
+    },
+    {
+      "id": "BUG-005",
+      "group": "CAC",
+      "flow": "Validation (Credit)",
+      "step": "Confirm order with zero unit price",
+      "severity": "Medium",
+      "title": "Validation check could not be completed (needs review)",
+      "detail": "zero unit price: Quotation was not saved (title shows \"New\")."
+    }
+  ],
+  "passed": [
+    "Control (existing customer \"[TEST] Overdue Credit Customer\") / Cash / 1 Create quotation (Cash)",
+    "Control (existing customer \"[TEST] Overdue Credit Customer\") / Cash / 2 Confirm order",
+    "Control (existing customer \"[TEST] Overdue Credit Customer\") / Cash / 3 Validate delivery",
+    "Control (existing customer \"[TEST] Overdue Credit Customer\") / Cash / 4 Create invoice",
+    "CAC / Cash customer / create customer",
+    "CAC / Cash / 1 Create quotation (Cash)",
+    "CAC / Cash / 2 Confirm order",
+    "CAC / Cash / 3 Validate delivery",
+    "CAC / Cash / 4 Create invoice",
+    "CAC / Credit customer / create customer",
+    "CAC / Validation (Cash) / Save with blank Customer: blocked by Odoo (OK)",
+    "CAC / Validation (Cash) / Save with blank Order Payment Type: blocked by Odoo (OK)",
+    "CAC / Validation (Cash) / Save with blank Quotation Type: blocked by Odoo (OK)",
+    "CAC / Validation (Cash) / Save with blank Payment Terms: blocked by Odoo (OK)",
+    "CAC / Validation (Cash) / Save with blank Salesperson: blocked by Odoo (OK)",
+    "CAC / Validation (Cash) / Save with blank Sales Team: blocked by Odoo (OK)",
+    "CAC / Validation (Cash) / Save with blank Warehouse: blocked by Odoo (OK)",
+    "CAC / Validation (Cash) / Save with blank Company: field-not-shown",
+    "CAC / Validation (Cash) / Confirm order with zero quantity: confirm-hidden (OK)",
+    "CAC / Validation (Cash) / Confirm order with zero unit price: confirm-hidden (OK)",
+    "CAC / Validation (Credit) / Save with blank Customer: blocked by Odoo (OK)",
+    "CAC / Validation (Credit) / Save with blank Order Payment Type: blocked by Odoo (OK)",
+    "CAC / Validation (Credit) / Save with blank Quotation Type: blocked by Odoo (OK)",
+    "CAC / Validation (Credit) / Save with blank Payment Terms: blocked by Odoo (OK)",
+    "CAC / Validation (Credit) / Save with blank Salesperson: blocked by Odoo (OK)",
+    "CAC / Validation (Credit) / Save with blank Sales Team: blocked by Odoo (OK)",
+    "CAC / Validation (Credit) / Save with blank Warehouse: blocked by Odoo (OK)",
+    "CAC / Validation (Credit) / Save with blank Company: field-not-shown"
+  ],
+  "notes": []
+}
