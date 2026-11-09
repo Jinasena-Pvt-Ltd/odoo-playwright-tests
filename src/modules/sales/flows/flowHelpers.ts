@@ -516,7 +516,7 @@ async function assignSerialsImpl(page: Page): Promise<string[]> {
   await expect(line, 'Create Move Line popup did not open').toBeVisible({ timeout: 10_000 });
   const lot = line.locator('[name="lot_id"] input, [name="lot_name"] input, .o_field_widget input').first();
   await expect(lot, 'No Lot/Serial Number field on the new move line').toBeVisible({ timeout: 10_000 });
-  const serial = `SN${Date.now().toString(36).toUpperCase()}`;
+  const serial = `TSN${Date.now()}`; // digits only: a different format from the earlier SN<base36> serials
   // Type the new name and pick "Create" from the dropdown; retry until the field really holds the serial.
   let committed = false;
   let everClicked = false; // a Create/pick click already happened in an earlier attempt
@@ -553,6 +553,8 @@ async function assignSerialsImpl(page: Page): Promise<string[]> {
   if (!committed) throw new Error(`Could not create serial ${serial} in the Create Move Line popup (Create option never accepted; dropdown showed: ${seen || 'nothing'})`);
   used.push(serial);
   const dbg = (n: string) => process.env.FLOW_DEBUG ? page.screenshot({ path: `test-results/dbg-${n}.png` }) : Promise.resolve();
+  // Give Odoo time to link the freshly created lot to the line before the popup is saved (saving at once left lot empty, qty 0).
+  await page.waitForTimeout(2_500);
   await dbg('1-before-saveclose');
   await line.locator('footer button').filter({ hasText: /save & close|save/i }).first().click();
   await throwIfOdooError(page);

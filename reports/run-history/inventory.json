@@ -1,902 +1,902 @@
 [
-  {
-    "key": "setup|setup|setup||authenticate: auth-storage/admin.json",
-    "project": "setup",
-    "mod": "setup",
-    "stepKey": "setup",
-    "describe": "",
-    "title": "authenticate: auth-storage/admin.json",
-    "file": "auth.setup.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|config|Sales Configuration Setup|placeholder — replace with real test",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "config",
-    "describe": "Sales Configuration Setup",
-    "title": "placeholder — replace with real test",
-    "file": "sales.config.spec.ts",
-    "placeholder": true
-  },
-  {
-    "key": "admin|sales|business|Sales Business Logic|placeholder — replace with real test",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Sales Business Logic",
-    "title": "placeholder — replace with real test",
-    "file": "sales.business.spec.ts",
-    "placeholder": true
-  },
-  {
-    "key": "admin|sales|business|Sales credit order with serial product|precondition: credit customer is set to Credit and has no overdue invoices",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Sales credit order with serial product",
-    "title": "precondition: credit customer is set to Credit and has no overdue invoices",
-    "file": "sales.credit-serial.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|Sales credit order with serial product|1. quotation: Credit order, serial product, Payment Terms 14 Days",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Sales credit order with serial product",
-    "title": "1. quotation: Credit order, serial product, Payment Terms 14 Days",
-    "file": "sales.credit-serial.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|Sales credit order with serial product|2. confirm: no approval needed, quotation becomes a Sales Order",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Sales credit order with serial product",
-    "title": "2. confirm: no approval needed, quotation becomes a Sales Order",
-    "file": "sales.credit-serial.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|Sales credit order with serial product|3. delivery: new serial number, validate → Done",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Sales credit order with serial product",
-    "title": "3. delivery: new serial number, validate → Done",
-    "file": "sales.credit-serial.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|Sales credit order with serial product|4. invoice: posted, keeps 14 Days, due 14 days after the invoice date",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Sales credit order with serial product",
-    "title": "4. invoice: posted, keeps 14 Days, due 14 days after the invoice date",
-    "file": "sales.credit-serial.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|Sales credit order with serial product|5. payment day: come back through the Sales app, register the payment → IN PAYMENT",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Sales credit order with serial product",
-    "title": "5. payment day: come back through the Sales app, register the payment → IN PAYMENT",
-    "file": "sales.credit-serial.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|Sales Cash & Credit flows by Customer Group|walk Cash and Credit flow for every Customer Group and collect bugs",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Sales Cash & Credit flows by Customer Group",
-    "title": "walk Cash and Credit flow for every Customer Group and collect bugs",
-    "file": "sales.customer-flows.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|Sales quotation calculations|line, untaxed and total amounts follow the quantity × price arithmetic",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Sales quotation calculations",
-    "title": "line, untaxed and total amounts follow the quantity × price arithmetic",
-    "file": "sales.quotation-calculations.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|reporting|Sales Reporting|placeholder — replace with real test",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "reporting",
-    "describe": "Sales Reporting",
-    "title": "placeholder — replace with real test",
-    "file": "sales.reports.spec.ts",
-    "placeholder": true
-  },
-  {
-    "key": "admin|sales|permissions|Sales User Permissions|placeholder — replace with real test",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "permissions",
-    "describe": "Sales User Permissions",
-    "title": "placeholder — replace with real test",
-    "file": "sales.permissions.spec.ts",
-    "placeholder": true
-  },
-  {
-    "key": "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Customer cannot be saved (Cash)",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "validations",
-    "describe": "Sales quotation validations › Cash quotation: required fields",
-    "title": "blank Customer cannot be saved (Cash)",
-    "file": "sales.quotation-validations.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Order Payment Type cannot be saved (Cash)",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "validations",
-    "describe": "Sales quotation validations › Cash quotation: required fields",
-    "title": "blank Order Payment Type cannot be saved (Cash)",
-    "file": "sales.quotation-validations.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Quotation Type cannot be saved (Cash)",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "validations",
-    "describe": "Sales quotation validations › Cash quotation: required fields",
-    "title": "blank Quotation Type cannot be saved (Cash)",
-    "file": "sales.quotation-validations.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Payment Terms cannot be saved (Cash)",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "validations",
-    "describe": "Sales quotation validations › Cash quotation: required fields",
-    "title": "blank Payment Terms cannot be saved (Cash)",
-    "file": "sales.quotation-validations.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Salesperson cannot be saved (Cash)",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "validations",
-    "describe": "Sales quotation validations › Cash quotation: required fields",
-    "title": "blank Salesperson cannot be saved (Cash)",
-    "file": "sales.quotation-validations.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Sales Team cannot be saved (Cash)",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "validations",
-    "describe": "Sales quotation validations › Cash quotation: required fields",
-    "title": "blank Sales Team cannot be saved (Cash)",
-    "file": "sales.quotation-validations.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Warehouse cannot be saved (Cash)",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "validations",
-    "describe": "Sales quotation validations › Cash quotation: required fields",
-    "title": "blank Warehouse cannot be saved (Cash)",
-    "file": "sales.quotation-validations.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Company cannot be saved (Cash)",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "validations",
-    "describe": "Sales quotation validations › Cash quotation: required fields",
-    "title": "blank Company cannot be saved (Cash)",
-    "file": "sales.quotation-validations.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|validations|Sales quotation validations › Credit quotation: required fields|blank Customer cannot be saved (Credit)",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "validations",
-    "describe": "Sales quotation validations › Credit quotation: required fields",
-    "title": "blank Customer cannot be saved (Credit)",
-    "file": "sales.quotation-validations.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|validations|Sales quotation validations › Credit quotation: required fields|blank Order Payment Type cannot be saved (Credit)",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "validations",
-    "describe": "Sales quotation validations › Credit quotation: required fields",
-    "title": "blank Order Payment Type cannot be saved (Credit)",
-    "file": "sales.quotation-validations.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|validations|Sales quotation validations › Credit quotation: required fields|blank Payment Terms cannot be saved (Credit)",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "validations",
-    "describe": "Sales quotation validations › Credit quotation: required fields",
-    "title": "blank Payment Terms cannot be saved (Credit)",
-    "file": "sales.quotation-validations.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|validations|Sales quotation validations › order lines: confirm blocked for invalid lines|quotation with zero quantity cannot be confirmed",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "validations",
-    "describe": "Sales quotation validations › order lines: confirm blocked for invalid lines",
-    "title": "quotation with zero quantity cannot be confirmed",
-    "file": "sales.quotation-validations.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|validations|Sales quotation validations › order lines: confirm blocked for invalid lines|quotation with zero unit price cannot be confirmed",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "validations",
-    "describe": "Sales quotation validations › order lines: confirm blocked for invalid lines",
-    "title": "quotation with zero unit price cannot be confirmed",
-    "file": "sales.quotation-validations.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|validations|Sales Field Validations|placeholder — replace with real test",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "validations",
-    "describe": "Sales Field Validations",
-    "title": "placeholder — replace with real test",
-    "file": "sales.validations.spec.ts",
-    "placeholder": true
-  },
-  {
-    "key": "admin|sales|edge|Sales credit limit control|within the credit limit: Confirm is available, no approval needed",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "edge",
-    "describe": "Sales credit limit control",
-    "title": "within the credit limit: Confirm is available, no approval needed",
-    "file": "sales.credit-control.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|edge|Sales credit limit control|over the credit limit: Confirm is blocked, approval must be requested",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "edge",
-    "describe": "Sales credit limit control",
-    "title": "over the credit limit: Confirm is blocked, approval must be requested",
-    "file": "sales.credit-control.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|edge|Sales credit limit control|customer with overdue invoices: Confirm is blocked, approval must be requested",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "edge",
-    "describe": "Sales credit limit control",
-    "title": "customer with overdue invoices: Confirm is blocked, approval must be requested",
-    "file": "sales.credit-control.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|edge|Sales Edge Cases|placeholder — replace with real test",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "edge",
-    "describe": "Sales Edge Cases",
-    "title": "placeholder — replace with real test",
-    "file": "sales.edge-cases.spec.ts",
-    "placeholder": true
-  },
-  {
-    "key": "admin|sales|archive|Sales Archive & Cleanup|placeholder — replace with real test",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "archive",
-    "describe": "Sales Archive & Cleanup",
-    "title": "placeholder — replace with real test",
-    "file": "sales.archive.spec.ts",
-    "placeholder": true
-  },
-  {
-    "key": "admin|sales|business|Sales return of a cash order|1. quotation: Cash order for a Sales quotation",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Sales return of a cash order",
-    "title": "1. quotation: Cash order for a Sales quotation",
-    "file": "sales.return-cash.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|Sales return of a cash order|2. confirm: quotation becomes a Sales Order",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Sales return of a cash order",
-    "title": "2. confirm: quotation becomes a Sales Order",
-    "file": "sales.return-cash.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|Sales return of a cash order|3. delivery: validate → Done",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Sales return of a cash order",
-    "title": "3. delivery: validate → Done",
-    "file": "sales.return-cash.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|Sales return of a cash order|4. invoice: create and confirm → Posted",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Sales return of a cash order",
-    "title": "4. invoice: create and confirm → Posted",
-    "file": "sales.return-cash.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|Sales return of a cash order|5. credit note: reverse with a reason, approval, confirm",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Sales return of a cash order",
-    "title": "5. credit note: reverse with a reason, approval, confirm",
-    "file": "sales.return-cash.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|Sales return of a cash order|6. original invoice: reset to draft and confirm again (when offered)",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Sales return of a cash order",
-    "title": "6. original invoice: reset to draft and confirm again (when offered)",
-    "file": "sales.return-cash.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|Sales return of a cash order|7. advance payment on the sales order, then the Payments smart button",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Sales return of a cash order",
-    "title": "7. advance payment on the sales order, then the Payments smart button",
-    "file": "sales.return-cash.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|Sales return and re-invoice of a cash order|1. quotation: Cash order for a Sales quotation",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Sales return and re-invoice of a cash order",
-    "title": "1. quotation: Cash order for a Sales quotation",
-    "file": "sales.return-reinvoice.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|Sales return and re-invoice of a cash order|2. confirm: quotation becomes a Sales Order",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Sales return and re-invoice of a cash order",
-    "title": "2. confirm: quotation becomes a Sales Order",
-    "file": "sales.return-reinvoice.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|Sales return and re-invoice of a cash order|3. delivery: validate → Done",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Sales return and re-invoice of a cash order",
-    "title": "3. delivery: validate → Done",
-    "file": "sales.return-reinvoice.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|Sales return and re-invoice of a cash order|4. invoice: create and confirm → Posted",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Sales return and re-invoice of a cash order",
-    "title": "4. invoice: create and confirm → Posted",
-    "file": "sales.return-reinvoice.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|Sales return and re-invoice of a cash order|5. reverse: Credit Note wizard → \"Reverse and Create Invoice\" gives a new draft invoice",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Sales return and re-invoice of a cash order",
-    "title": "5. reverse: Credit Note wizard → \"Reverse and Create Invoice\" gives a new draft invoice",
-    "file": "sales.return-reinvoice.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|Sales return and re-invoice of a cash order|6. re-invoice: confirm the new invoice and register the cash payment",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Sales return and re-invoice of a cash order",
-    "title": "6. re-invoice: confirm the new invoice and register the cash payment",
-    "file": "sales.return-reinvoice.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|Sales return and re-invoice of a cash order|7. credit note: open it from the order's Invoices list, request approval and approve",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Sales return and re-invoice of a cash order",
-    "title": "7. credit note: open it from the order's Invoices list, request approval and approve",
-    "file": "sales.return-reinvoice.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|Credit sales order, invoice and cash receipt|1. quotation: Credit order with 14 Days payment terms",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Credit sales order, invoice and cash receipt",
-    "title": "1. quotation: Credit order with 14 Days payment terms",
-    "file": "sales.credit-order.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|Credit sales order, invoice and cash receipt|2. confirm: quotation becomes a Sales Order",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Credit sales order, invoice and cash receipt",
-    "title": "2. confirm: quotation becomes a Sales Order",
-    "file": "sales.credit-order.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|Credit sales order, invoice and cash receipt|3. delivery: validate → Done",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Credit sales order, invoice and cash receipt",
-    "title": "3. delivery: validate → Done",
-    "file": "sales.credit-order.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|Credit sales order, invoice and cash receipt|4. invoice: create and confirm → Posted",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Credit sales order, invoice and cash receipt",
-    "title": "4. invoice: create and confirm → Posted",
-    "file": "sales.credit-order.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|Credit sales order, invoice and cash receipt|5. payment: find the order in Sales Orders, open its invoice and register the cash payment",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Credit sales order, invoice and cash receipt",
-    "title": "5. payment: find the order in Sales Orders, open its invoice and register the cash payment",
-    "file": "sales.credit-order.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|Credit sales order, invoice and cash receipt|6. trace: payment → Sales Orders smart button leads back to the order",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Credit sales order, invoice and cash receipt",
-    "title": "6. trace: payment → Sales Orders smart button leads back to the order",
-    "file": "sales.credit-order.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|Overdue credit sales order: approval, invoice and cash receipt|1. quotation: Credit order with 14 Days payment terms",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Overdue credit sales order: approval, invoice and cash receipt",
-    "title": "1. quotation: Credit order with 14 Days payment terms",
-    "file": "sales.overdue-credit.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|Overdue credit sales order: approval, invoice and cash receipt|2. approval: Request Overdue Approval, approve, then confirm → Sales Order",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Overdue credit sales order: approval, invoice and cash receipt",
-    "title": "2. approval: Request Overdue Approval, approve, then confirm → Sales Order",
-    "file": "sales.overdue-credit.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|Overdue credit sales order: approval, invoice and cash receipt|3. delivery: validate → Done",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Overdue credit sales order: approval, invoice and cash receipt",
-    "title": "3. delivery: validate → Done",
-    "file": "sales.overdue-credit.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|Overdue credit sales order: approval, invoice and cash receipt|4. invoice: create and confirm → Posted",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Overdue credit sales order: approval, invoice and cash receipt",
-    "title": "4. invoice: create and confirm → Posted",
-    "file": "sales.overdue-credit.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|Overdue credit sales order: approval, invoice and cash receipt|5. payment: find the order in Sales Orders, open its invoice and register the cash payment",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Overdue credit sales order: approval, invoice and cash receipt",
-    "title": "5. payment: find the order in Sales Orders, open its invoice and register the cash payment",
-    "file": "sales.overdue-credit.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|Overdue credit sales order: approval, invoice and cash receipt|6. trace: payment → Sales Orders smart button leads back to the order",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Overdue credit sales order: approval, invoice and cash receipt",
-    "title": "6. trace: payment → Sales Orders smart button leads back to the order",
-    "file": "sales.overdue-credit.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|High discount cash sales order: over-commission approval, invoice and receipt|1. quotation: Cash order with a high discount line",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "High discount cash sales order: over-commission approval, invoice and receipt",
-    "title": "1. quotation: Cash order with a high discount line",
-    "file": "sales.high-discount.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|High discount cash sales order: over-commission approval, invoice and receipt|2. approval: Request Over Commission Approval, approve, then confirm → Sales Order",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "High discount cash sales order: over-commission approval, invoice and receipt",
-    "title": "2. approval: Request Over Commission Approval, approve, then confirm → Sales Order",
-    "file": "sales.high-discount.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|High discount cash sales order: over-commission approval, invoice and receipt|3. delivery: validate → Done",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "High discount cash sales order: over-commission approval, invoice and receipt",
-    "title": "3. delivery: validate → Done",
-    "file": "sales.high-discount.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|High discount cash sales order: over-commission approval, invoice and receipt|4. invoice: create and confirm → Posted",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "High discount cash sales order: over-commission approval, invoice and receipt",
-    "title": "4. invoice: create and confirm → Posted",
-    "file": "sales.high-discount.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|High discount cash sales order: over-commission approval, invoice and receipt|5. payment: find the order in Sales Orders, open its invoice and register the cash payment",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "High discount cash sales order: over-commission approval, invoice and receipt",
-    "title": "5. payment: find the order in Sales Orders, open its invoice and register the cash payment",
-    "file": "sales.high-discount.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|High discount cash sales order: over-commission approval, invoice and receipt|6. trace: payment → Sales Orders smart button leads back to the order",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "High discount cash sales order: over-commission approval, invoice and receipt",
-    "title": "6. trace: payment → Sales Orders smart button leads back to the order",
-    "file": "sales.high-discount.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt|1. quotation: Credit order for the overdue customer",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt",
-    "title": "1. quotation: Credit order for the overdue customer",
-    "file": "sales.credit-overdue-approval.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt|2. gating: Confirm is blocked and the overdue details are viewable",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt",
-    "title": "2. gating: Confirm is blocked and the overdue details are viewable",
-    "file": "sales.credit-overdue-approval.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt|3. approvals: overdue + credit limit approvals, then confirm → Sales Order",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt",
-    "title": "3. approvals: overdue + credit limit approvals, then confirm → Sales Order",
-    "file": "sales.credit-overdue-approval.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt|4. delivery: validate → Done",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt",
-    "title": "4. delivery: validate → Done",
-    "file": "sales.credit-overdue-approval.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt|5. invoice: create and confirm → Posted",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt",
-    "title": "5. invoice: create and confirm → Posted",
-    "file": "sales.credit-overdue-approval.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt|6. payment: find the order in Sales Orders, open its invoice and register the full cash payment",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt",
-    "title": "6. payment: find the order in Sales Orders, open its invoice and register the full cash payment",
-    "file": "sales.credit-overdue-approval.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt|7. trace: payment → Sales Orders smart button leads back to 1 source order",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt",
-    "title": "7. trace: payment → Sales Orders smart button leads back to 1 source order",
-    "file": "sales.credit-overdue-approval.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|Cash order with profit margin control: margin approval, invoice and cash receipt|1. quotation: Cash order, Immediate Payment, margin shown on the form",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Cash order with profit margin control: margin approval, invoice and cash receipt",
-    "title": "1. quotation: Cash order, Immediate Payment, margin shown on the form",
-    "file": "sales.margin-approval.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|Cash order with profit margin control: margin approval, invoice and cash receipt|2. gating: Confirm hidden; \"Insufficient Margin Details\" opens a modal and closes",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Cash order with profit margin control: margin approval, invoice and cash receipt",
-    "title": "2. gating: Confirm hidden; \"Insufficient Margin Details\" opens a modal and closes",
-    "file": "sales.margin-approval.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|Cash order with profit margin control: margin approval, invoice and cash receipt|3. approval: Request Insufficient Margin Approval, approve, then confirm → Sales Order",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Cash order with profit margin control: margin approval, invoice and cash receipt",
-    "title": "3. approval: Request Insufficient Margin Approval, approve, then confirm → Sales Order",
-    "file": "sales.margin-approval.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|Cash order with profit margin control: margin approval, invoice and cash receipt|4. delivery: validate → Done",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Cash order with profit margin control: margin approval, invoice and cash receipt",
-    "title": "4. delivery: validate → Done",
-    "file": "sales.margin-approval.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|Cash order with profit margin control: margin approval, invoice and cash receipt|5. invoice: create and confirm → Posted",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Cash order with profit margin control: margin approval, invoice and cash receipt",
-    "title": "5. invoice: create and confirm → Posted",
-    "file": "sales.margin-approval.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|Cash order with profit margin control: margin approval, invoice and cash receipt|6. payment: register the full cash payment on the invoice",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Cash order with profit margin control: margin approval, invoice and cash receipt",
-    "title": "6. payment: register the full cash payment on the invoice",
-    "file": "sales.margin-approval.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|Cash order with profit margin control: margin approval, invoice and cash receipt|7. trace: payment → Sales Orders → order → Invoices smart button → invoice",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Cash order with profit margin control: margin approval, invoice and cash receipt",
-    "title": "7. trace: payment → Sales Orders → order → Invoices smart button → invoice",
-    "file": "sales.margin-approval.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|Cash order with margin at or above the minimum: confirms without margin approval|8. margin >= minimum: no margin buttons, Confirm is available and works",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Cash order with margin at or above the minimum: confirms without margin approval",
-    "title": "8. margin >= minimum: no margin buttons, Confirm is available and works",
-    "file": "sales.margin-approval.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business||demo: low-profit product shows margin approval buttons",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "",
-    "title": "demo: low-profit product shows margin approval buttons",
-    "file": "tmp-margin-demo.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business||capture margin approval guide screenshots",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "",
-    "title": "capture margin approval guide screenshots",
-    "file": "tmp-margin-guide.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|Credit order, bank guarantee customer: validity notification, invoice and cash receipt|1. quotation: Credit order for the bank guarantee customer",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Credit order, bank guarantee customer: validity notification, invoice and cash receipt",
-    "title": "1. quotation: Credit order for the bank guarantee customer",
-    "file": "sales.bank-guarantee-approval.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|Credit order, bank guarantee customer: validity notification, invoice and cash receipt|2. gating: Confirm is not offered until the bank guarantee notification is sent",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Credit order, bank guarantee customer: validity notification, invoice and cash receipt",
-    "title": "2. gating: Confirm is not offered until the bank guarantee notification is sent",
-    "file": "sales.bank-guarantee-approval.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|Credit order, bank guarantee customer: validity notification, invoice and cash receipt|3. notify and confirm: Send Bank Guarantee Validity Notification, then Confirm → Sales Order",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Credit order, bank guarantee customer: validity notification, invoice and cash receipt",
-    "title": "3. notify and confirm: Send Bank Guarantee Validity Notification, then Confirm → Sales Order",
-    "file": "sales.bank-guarantee-approval.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|Credit order, bank guarantee customer: validity notification, invoice and cash receipt|4. delivery: validate → Done",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Credit order, bank guarantee customer: validity notification, invoice and cash receipt",
-    "title": "4. delivery: validate → Done",
-    "file": "sales.bank-guarantee-approval.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|Credit order, bank guarantee customer: validity notification, invoice and cash receipt|5. invoice: create, send the bank guarantee notification if asked, confirm → Posted",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Credit order, bank guarantee customer: validity notification, invoice and cash receipt",
-    "title": "5. invoice: create, send the bank guarantee notification if asked, confirm → Posted",
-    "file": "sales.bank-guarantee-approval.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|Credit order, bank guarantee customer: validity notification, invoice and cash receipt|6. payment: find the order in Sales Orders, open its invoice and register the full cash payment",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Credit order, bank guarantee customer: validity notification, invoice and cash receipt",
-    "title": "6. payment: find the order in Sales Orders, open its invoice and register the full cash payment",
-    "file": "sales.bank-guarantee-approval.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|Credit order, bank guarantee customer: validity notification, invoice and cash receipt|7. trace: payment → Sales Orders smart button leads back to 1 source order",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Credit order, bank guarantee customer: validity notification, invoice and cash receipt",
-    "title": "7. trace: payment → Sales Orders smart button leads back to 1 source order",
-    "file": "sales.bank-guarantee-approval.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|Credit order above the bank guarantee amount: Request / Approve Bank Guarantee|8. over guarantee: Confirm is hidden and Request Bank Guarantee Approval is offered",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Credit order above the bank guarantee amount: Request / Approve Bank Guarantee",
-    "title": "8. over guarantee: Confirm is hidden and Request Bank Guarantee Approval is offered",
-    "file": "sales.bank-guarantee-approval.spec.ts",
-    "placeholder": false
-  },
-  {
-    "key": "admin|sales|business|Credit order above the bank guarantee amount: Request / Approve Bank Guarantee|9. approval: Request Bank Guarantee Approval, Approve Bank Guarantee, then Confirm → Sales Order",
-    "project": "admin",
-    "mod": "sales",
-    "stepKey": "business",
-    "describe": "Credit order above the bank guarantee amount: Request / Approve Bank Guarantee",
-    "title": "9. approval: Request Bank Guarantee Approval, Approve Bank Guarantee, then Confirm → Sales Order",
-    "file": "sales.bank-guarantee-approval.spec.ts",
-    "placeholder": false
-  }
+ {
+  "key": "setup|setup|setup||authenticate: auth-storage/admin.json",
+  "project": "setup",
+  "mod": "setup",
+  "stepKey": "setup",
+  "describe": "",
+  "title": "authenticate: auth-storage/admin.json",
+  "file": "auth.setup.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|config|Sales Configuration Setup|placeholder — replace with real test",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "config",
+  "describe": "Sales Configuration Setup",
+  "title": "placeholder — replace with real test",
+  "file": "sales.config.spec.ts",
+  "placeholder": true
+ },
+ {
+  "key": "admin|sales|business|Sales Business Logic|placeholder — replace with real test",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Sales Business Logic",
+  "title": "placeholder — replace with real test",
+  "file": "sales.business.spec.ts",
+  "placeholder": true
+ },
+ {
+  "key": "admin|sales|business|Sales credit order with serial product|precondition: credit customer is set to Credit and has no overdue invoices",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Sales credit order with serial product",
+  "title": "precondition: credit customer is set to Credit and has no overdue invoices",
+  "file": "sales.credit-serial.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Sales credit order with serial product|1. quotation: Credit order, serial product, Payment Terms 14 Days",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Sales credit order with serial product",
+  "title": "1. quotation: Credit order, serial product, Payment Terms 14 Days",
+  "file": "sales.credit-serial.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Sales credit order with serial product|2. confirm: no approval needed, quotation becomes a Sales Order",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Sales credit order with serial product",
+  "title": "2. confirm: no approval needed, quotation becomes a Sales Order",
+  "file": "sales.credit-serial.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Sales credit order with serial product|3. delivery: new serial number, validate → Done",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Sales credit order with serial product",
+  "title": "3. delivery: new serial number, validate → Done",
+  "file": "sales.credit-serial.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Sales credit order with serial product|4. invoice: posted, keeps 14 Days, due 14 days after the invoice date",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Sales credit order with serial product",
+  "title": "4. invoice: posted, keeps 14 Days, due 14 days after the invoice date",
+  "file": "sales.credit-serial.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Sales credit order with serial product|5. payment day: come back through the Sales app, register the payment → IN PAYMENT",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Sales credit order with serial product",
+  "title": "5. payment day: come back through the Sales app, register the payment → IN PAYMENT",
+  "file": "sales.credit-serial.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Sales Cash & Credit flows by Customer Group|walk Cash and Credit flow for every Customer Group and collect bugs",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Sales Cash & Credit flows by Customer Group",
+  "title": "walk Cash and Credit flow for every Customer Group and collect bugs",
+  "file": "sales.customer-flows.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Sales quotation calculations|line, untaxed and total amounts follow the quantity × price arithmetic",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Sales quotation calculations",
+  "title": "line, untaxed and total amounts follow the quantity × price arithmetic",
+  "file": "sales.quotation-calculations.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|reporting|Sales Reporting|placeholder — replace with real test",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "reporting",
+  "describe": "Sales Reporting",
+  "title": "placeholder — replace with real test",
+  "file": "sales.reports.spec.ts",
+  "placeholder": true
+ },
+ {
+  "key": "admin|sales|permissions|Sales User Permissions|placeholder — replace with real test",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "permissions",
+  "describe": "Sales User Permissions",
+  "title": "placeholder — replace with real test",
+  "file": "sales.permissions.spec.ts",
+  "placeholder": true
+ },
+ {
+  "key": "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Customer cannot be saved (Cash)",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "validations",
+  "describe": "Sales quotation validations › Cash quotation: required fields",
+  "title": "blank Customer cannot be saved (Cash)",
+  "file": "sales.quotation-validations.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Order Payment Type cannot be saved (Cash)",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "validations",
+  "describe": "Sales quotation validations › Cash quotation: required fields",
+  "title": "blank Order Payment Type cannot be saved (Cash)",
+  "file": "sales.quotation-validations.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Quotation Type cannot be saved (Cash)",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "validations",
+  "describe": "Sales quotation validations › Cash quotation: required fields",
+  "title": "blank Quotation Type cannot be saved (Cash)",
+  "file": "sales.quotation-validations.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Payment Terms cannot be saved (Cash)",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "validations",
+  "describe": "Sales quotation validations › Cash quotation: required fields",
+  "title": "blank Payment Terms cannot be saved (Cash)",
+  "file": "sales.quotation-validations.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Salesperson cannot be saved (Cash)",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "validations",
+  "describe": "Sales quotation validations › Cash quotation: required fields",
+  "title": "blank Salesperson cannot be saved (Cash)",
+  "file": "sales.quotation-validations.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Sales Team cannot be saved (Cash)",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "validations",
+  "describe": "Sales quotation validations › Cash quotation: required fields",
+  "title": "blank Sales Team cannot be saved (Cash)",
+  "file": "sales.quotation-validations.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Warehouse cannot be saved (Cash)",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "validations",
+  "describe": "Sales quotation validations › Cash quotation: required fields",
+  "title": "blank Warehouse cannot be saved (Cash)",
+  "file": "sales.quotation-validations.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Company cannot be saved (Cash)",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "validations",
+  "describe": "Sales quotation validations › Cash quotation: required fields",
+  "title": "blank Company cannot be saved (Cash)",
+  "file": "sales.quotation-validations.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|validations|Sales quotation validations › Credit quotation: required fields|blank Customer cannot be saved (Credit)",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "validations",
+  "describe": "Sales quotation validations › Credit quotation: required fields",
+  "title": "blank Customer cannot be saved (Credit)",
+  "file": "sales.quotation-validations.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|validations|Sales quotation validations › Credit quotation: required fields|blank Order Payment Type cannot be saved (Credit)",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "validations",
+  "describe": "Sales quotation validations › Credit quotation: required fields",
+  "title": "blank Order Payment Type cannot be saved (Credit)",
+  "file": "sales.quotation-validations.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|validations|Sales quotation validations › Credit quotation: required fields|blank Payment Terms cannot be saved (Credit)",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "validations",
+  "describe": "Sales quotation validations › Credit quotation: required fields",
+  "title": "blank Payment Terms cannot be saved (Credit)",
+  "file": "sales.quotation-validations.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|validations|Sales quotation validations › order lines: confirm blocked for invalid lines|quotation with zero quantity cannot be confirmed",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "validations",
+  "describe": "Sales quotation validations › order lines: confirm blocked for invalid lines",
+  "title": "quotation with zero quantity cannot be confirmed",
+  "file": "sales.quotation-validations.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|validations|Sales quotation validations › order lines: confirm blocked for invalid lines|quotation with zero unit price cannot be confirmed",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "validations",
+  "describe": "Sales quotation validations › order lines: confirm blocked for invalid lines",
+  "title": "quotation with zero unit price cannot be confirmed",
+  "file": "sales.quotation-validations.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|validations|Sales Field Validations|placeholder — replace with real test",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "validations",
+  "describe": "Sales Field Validations",
+  "title": "placeholder — replace with real test",
+  "file": "sales.validations.spec.ts",
+  "placeholder": true
+ },
+ {
+  "key": "admin|sales|edge|Sales credit limit control|within the credit limit: Confirm is available, no approval needed",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "edge",
+  "describe": "Sales credit limit control",
+  "title": "within the credit limit: Confirm is available, no approval needed",
+  "file": "sales.credit-control.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|edge|Sales credit limit control|over the credit limit: Confirm is blocked, approval must be requested",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "edge",
+  "describe": "Sales credit limit control",
+  "title": "over the credit limit: Confirm is blocked, approval must be requested",
+  "file": "sales.credit-control.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|edge|Sales credit limit control|customer with overdue invoices: Confirm is blocked, approval must be requested",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "edge",
+  "describe": "Sales credit limit control",
+  "title": "customer with overdue invoices: Confirm is blocked, approval must be requested",
+  "file": "sales.credit-control.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|edge|Sales Edge Cases|placeholder — replace with real test",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "edge",
+  "describe": "Sales Edge Cases",
+  "title": "placeholder — replace with real test",
+  "file": "sales.edge-cases.spec.ts",
+  "placeholder": true
+ },
+ {
+  "key": "admin|sales|archive|Sales Archive & Cleanup|placeholder — replace with real test",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "archive",
+  "describe": "Sales Archive & Cleanup",
+  "title": "placeholder — replace with real test",
+  "file": "sales.archive.spec.ts",
+  "placeholder": true
+ },
+ {
+  "key": "admin|sales|business|Sales return of a cash order|1. quotation: Cash order for a Sales quotation",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Sales return of a cash order",
+  "title": "1. quotation: Cash order for a Sales quotation",
+  "file": "sales.return-cash.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Sales return of a cash order|2. confirm: quotation becomes a Sales Order",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Sales return of a cash order",
+  "title": "2. confirm: quotation becomes a Sales Order",
+  "file": "sales.return-cash.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Sales return of a cash order|3. delivery: validate → Done",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Sales return of a cash order",
+  "title": "3. delivery: validate → Done",
+  "file": "sales.return-cash.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Sales return of a cash order|4. invoice: create and confirm → Posted",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Sales return of a cash order",
+  "title": "4. invoice: create and confirm → Posted",
+  "file": "sales.return-cash.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Sales return of a cash order|5. credit note: reverse with a reason, approval, confirm",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Sales return of a cash order",
+  "title": "5. credit note: reverse with a reason, approval, confirm",
+  "file": "sales.return-cash.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Sales return of a cash order|6. original invoice: reset to draft and confirm again (when offered)",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Sales return of a cash order",
+  "title": "6. original invoice: reset to draft and confirm again (when offered)",
+  "file": "sales.return-cash.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Sales return of a cash order|7. advance payment on the sales order, then the Payments smart button",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Sales return of a cash order",
+  "title": "7. advance payment on the sales order, then the Payments smart button",
+  "file": "sales.return-cash.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Sales return and re-invoice of a cash order|1. quotation: Cash order for a Sales quotation",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Sales return and re-invoice of a cash order",
+  "title": "1. quotation: Cash order for a Sales quotation",
+  "file": "sales.return-reinvoice.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Sales return and re-invoice of a cash order|2. confirm: quotation becomes a Sales Order",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Sales return and re-invoice of a cash order",
+  "title": "2. confirm: quotation becomes a Sales Order",
+  "file": "sales.return-reinvoice.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Sales return and re-invoice of a cash order|3. delivery: validate → Done",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Sales return and re-invoice of a cash order",
+  "title": "3. delivery: validate → Done",
+  "file": "sales.return-reinvoice.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Sales return and re-invoice of a cash order|4. invoice: create and confirm → Posted",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Sales return and re-invoice of a cash order",
+  "title": "4. invoice: create and confirm → Posted",
+  "file": "sales.return-reinvoice.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Sales return and re-invoice of a cash order|5. reverse: Credit Note wizard → \"Reverse and Create Invoice\" gives a new draft invoice",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Sales return and re-invoice of a cash order",
+  "title": "5. reverse: Credit Note wizard → \"Reverse and Create Invoice\" gives a new draft invoice",
+  "file": "sales.return-reinvoice.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Sales return and re-invoice of a cash order|6. re-invoice: confirm the new invoice and register the cash payment",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Sales return and re-invoice of a cash order",
+  "title": "6. re-invoice: confirm the new invoice and register the cash payment",
+  "file": "sales.return-reinvoice.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Sales return and re-invoice of a cash order|7. credit note: open it from the order's Invoices list, request approval and approve",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Sales return and re-invoice of a cash order",
+  "title": "7. credit note: open it from the order's Invoices list, request approval and approve",
+  "file": "sales.return-reinvoice.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Credit sales order, invoice and cash receipt|1. quotation: Credit order with 14 Days payment terms",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Credit sales order, invoice and cash receipt",
+  "title": "1. quotation: Credit order with 14 Days payment terms",
+  "file": "sales.credit-order.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Credit sales order, invoice and cash receipt|2. confirm: quotation becomes a Sales Order",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Credit sales order, invoice and cash receipt",
+  "title": "2. confirm: quotation becomes a Sales Order",
+  "file": "sales.credit-order.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Credit sales order, invoice and cash receipt|3. delivery: validate → Done",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Credit sales order, invoice and cash receipt",
+  "title": "3. delivery: validate → Done",
+  "file": "sales.credit-order.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Credit sales order, invoice and cash receipt|4. invoice: create and confirm → Posted",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Credit sales order, invoice and cash receipt",
+  "title": "4. invoice: create and confirm → Posted",
+  "file": "sales.credit-order.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Credit sales order, invoice and cash receipt|5. payment: find the order in Sales Orders, open its invoice and register the cash payment",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Credit sales order, invoice and cash receipt",
+  "title": "5. payment: find the order in Sales Orders, open its invoice and register the cash payment",
+  "file": "sales.credit-order.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Credit sales order, invoice and cash receipt|6. trace: payment → Sales Orders smart button leads back to the order",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Credit sales order, invoice and cash receipt",
+  "title": "6. trace: payment → Sales Orders smart button leads back to the order",
+  "file": "sales.credit-order.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Overdue credit sales order: approval, invoice and cash receipt|1. quotation: Credit order with 14 Days payment terms",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Overdue credit sales order: approval, invoice and cash receipt",
+  "title": "1. quotation: Credit order with 14 Days payment terms",
+  "file": "sales.overdue-credit.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Overdue credit sales order: approval, invoice and cash receipt|2. approval: Request Overdue Approval, approve, then confirm → Sales Order",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Overdue credit sales order: approval, invoice and cash receipt",
+  "title": "2. approval: Request Overdue Approval, approve, then confirm → Sales Order",
+  "file": "sales.overdue-credit.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Overdue credit sales order: approval, invoice and cash receipt|3. delivery: validate → Done",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Overdue credit sales order: approval, invoice and cash receipt",
+  "title": "3. delivery: validate → Done",
+  "file": "sales.overdue-credit.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Overdue credit sales order: approval, invoice and cash receipt|4. invoice: create and confirm → Posted",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Overdue credit sales order: approval, invoice and cash receipt",
+  "title": "4. invoice: create and confirm → Posted",
+  "file": "sales.overdue-credit.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Overdue credit sales order: approval, invoice and cash receipt|5. payment: find the order in Sales Orders, open its invoice and register the cash payment",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Overdue credit sales order: approval, invoice and cash receipt",
+  "title": "5. payment: find the order in Sales Orders, open its invoice and register the cash payment",
+  "file": "sales.overdue-credit.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Overdue credit sales order: approval, invoice and cash receipt|6. trace: payment → Sales Orders smart button leads back to the order",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Overdue credit sales order: approval, invoice and cash receipt",
+  "title": "6. trace: payment → Sales Orders smart button leads back to the order",
+  "file": "sales.overdue-credit.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|High discount cash sales order: over-commission approval, invoice and receipt|1. quotation: Cash order with a high discount line",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "High discount cash sales order: over-commission approval, invoice and receipt",
+  "title": "1. quotation: Cash order with a high discount line",
+  "file": "sales.high-discount.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|High discount cash sales order: over-commission approval, invoice and receipt|2. approval: Request Over Commission Approval, approve, then confirm → Sales Order",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "High discount cash sales order: over-commission approval, invoice and receipt",
+  "title": "2. approval: Request Over Commission Approval, approve, then confirm → Sales Order",
+  "file": "sales.high-discount.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|High discount cash sales order: over-commission approval, invoice and receipt|3. delivery: validate → Done",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "High discount cash sales order: over-commission approval, invoice and receipt",
+  "title": "3. delivery: validate → Done",
+  "file": "sales.high-discount.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|High discount cash sales order: over-commission approval, invoice and receipt|4. invoice: create and confirm → Posted",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "High discount cash sales order: over-commission approval, invoice and receipt",
+  "title": "4. invoice: create and confirm → Posted",
+  "file": "sales.high-discount.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|High discount cash sales order: over-commission approval, invoice and receipt|5. payment: find the order in Sales Orders, open its invoice and register the cash payment",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "High discount cash sales order: over-commission approval, invoice and receipt",
+  "title": "5. payment: find the order in Sales Orders, open its invoice and register the cash payment",
+  "file": "sales.high-discount.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|High discount cash sales order: over-commission approval, invoice and receipt|6. trace: payment → Sales Orders smart button leads back to the order",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "High discount cash sales order: over-commission approval, invoice and receipt",
+  "title": "6. trace: payment → Sales Orders smart button leads back to the order",
+  "file": "sales.high-discount.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt|1. quotation: Credit order for the overdue customer",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt",
+  "title": "1. quotation: Credit order for the overdue customer",
+  "file": "sales.credit-overdue-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt|2. gating: Confirm is blocked and the overdue details are viewable",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt",
+  "title": "2. gating: Confirm is blocked and the overdue details are viewable",
+  "file": "sales.credit-overdue-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt|3. approvals: overdue + credit limit approvals, then confirm → Sales Order",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt",
+  "title": "3. approvals: overdue + credit limit approvals, then confirm → Sales Order",
+  "file": "sales.credit-overdue-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt|4. delivery: validate → Done",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt",
+  "title": "4. delivery: validate → Done",
+  "file": "sales.credit-overdue-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt|5. invoice: create and confirm → Posted",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt",
+  "title": "5. invoice: create and confirm → Posted",
+  "file": "sales.credit-overdue-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt|6. payment: find the order in Sales Orders, open its invoice and register the full cash payment",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt",
+  "title": "6. payment: find the order in Sales Orders, open its invoice and register the full cash payment",
+  "file": "sales.credit-overdue-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt|7. trace: payment → Sales Orders smart button leads back to 1 source order",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt",
+  "title": "7. trace: payment → Sales Orders smart button leads back to 1 source order",
+  "file": "sales.credit-overdue-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Cash order with profit margin control: margin approval, invoice and cash receipt|1. quotation: Cash order, Immediate Payment, margin shown on the form",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Cash order with profit margin control: margin approval, invoice and cash receipt",
+  "title": "1. quotation: Cash order, Immediate Payment, margin shown on the form",
+  "file": "sales.margin-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Cash order with profit margin control: margin approval, invoice and cash receipt|2. gating: Confirm hidden; \"Insufficient Margin Details\" opens a modal and closes",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Cash order with profit margin control: margin approval, invoice and cash receipt",
+  "title": "2. gating: Confirm hidden; \"Insufficient Margin Details\" opens a modal and closes",
+  "file": "sales.margin-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Cash order with profit margin control: margin approval, invoice and cash receipt|3. approval: Request Insufficient Margin Approval, approve, then confirm → Sales Order",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Cash order with profit margin control: margin approval, invoice and cash receipt",
+  "title": "3. approval: Request Insufficient Margin Approval, approve, then confirm → Sales Order",
+  "file": "sales.margin-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Cash order with profit margin control: margin approval, invoice and cash receipt|4. delivery: validate → Done",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Cash order with profit margin control: margin approval, invoice and cash receipt",
+  "title": "4. delivery: validate → Done",
+  "file": "sales.margin-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Cash order with profit margin control: margin approval, invoice and cash receipt|5. invoice: create and confirm → Posted",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Cash order with profit margin control: margin approval, invoice and cash receipt",
+  "title": "5. invoice: create and confirm → Posted",
+  "file": "sales.margin-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Cash order with profit margin control: margin approval, invoice and cash receipt|6. payment: register the full cash payment on the invoice",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Cash order with profit margin control: margin approval, invoice and cash receipt",
+  "title": "6. payment: register the full cash payment on the invoice",
+  "file": "sales.margin-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Cash order with profit margin control: margin approval, invoice and cash receipt|7. trace: payment → Sales Orders → order → Invoices smart button → invoice",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Cash order with profit margin control: margin approval, invoice and cash receipt",
+  "title": "7. trace: payment → Sales Orders → order → Invoices smart button → invoice",
+  "file": "sales.margin-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Cash order with margin at or above the minimum: confirms without margin approval|8. margin >= minimum: no margin buttons, Confirm is available and works",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Cash order with margin at or above the minimum: confirms without margin approval",
+  "title": "8. margin >= minimum: no margin buttons, Confirm is available and works",
+  "file": "sales.margin-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business||demo: low-profit product shows margin approval buttons",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "",
+  "title": "demo: low-profit product shows margin approval buttons",
+  "file": "tmp-margin-demo.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business||capture margin approval guide screenshots",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "",
+  "title": "capture margin approval guide screenshots",
+  "file": "tmp-margin-guide.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Credit order, bank guarantee customer: validity notification, invoice and cash receipt|1. quotation: Credit order for the bank guarantee customer",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Credit order, bank guarantee customer: validity notification, invoice and cash receipt",
+  "title": "1. quotation: Credit order for the bank guarantee customer",
+  "file": "sales.bank-guarantee-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Credit order, bank guarantee customer: validity notification, invoice and cash receipt|2. gating: Confirm is not offered until the bank guarantee notification is sent",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Credit order, bank guarantee customer: validity notification, invoice and cash receipt",
+  "title": "2. gating: Confirm is not offered until the bank guarantee notification is sent",
+  "file": "sales.bank-guarantee-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Credit order, bank guarantee customer: validity notification, invoice and cash receipt|3. notify and confirm: Send Bank Guarantee Validity Notification, then Confirm → Sales Order",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Credit order, bank guarantee customer: validity notification, invoice and cash receipt",
+  "title": "3. notify and confirm: Send Bank Guarantee Validity Notification, then Confirm → Sales Order",
+  "file": "sales.bank-guarantee-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Credit order, bank guarantee customer: validity notification, invoice and cash receipt|4. delivery: validate → Done",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Credit order, bank guarantee customer: validity notification, invoice and cash receipt",
+  "title": "4. delivery: validate → Done",
+  "file": "sales.bank-guarantee-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Credit order, bank guarantee customer: validity notification, invoice and cash receipt|5. invoice: create, send the bank guarantee notification if asked, confirm → Posted",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Credit order, bank guarantee customer: validity notification, invoice and cash receipt",
+  "title": "5. invoice: create, send the bank guarantee notification if asked, confirm → Posted",
+  "file": "sales.bank-guarantee-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Credit order, bank guarantee customer: validity notification, invoice and cash receipt|6. payment: find the order in Sales Orders, open its invoice and register the full cash payment",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Credit order, bank guarantee customer: validity notification, invoice and cash receipt",
+  "title": "6. payment: find the order in Sales Orders, open its invoice and register the full cash payment",
+  "file": "sales.bank-guarantee-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Credit order, bank guarantee customer: validity notification, invoice and cash receipt|7. trace: payment → Sales Orders smart button leads back to 1 source order",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Credit order, bank guarantee customer: validity notification, invoice and cash receipt",
+  "title": "7. trace: payment → Sales Orders smart button leads back to 1 source order",
+  "file": "sales.bank-guarantee-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Credit order above the bank guarantee amount: Request / Approve Bank Guarantee|8. over guarantee: Confirm is hidden and Request Bank Guarantee Approval is offered",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Credit order above the bank guarantee amount: Request / Approve Bank Guarantee",
+  "title": "8. over guarantee: Confirm is hidden and Request Bank Guarantee Approval is offered",
+  "file": "sales.bank-guarantee-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Credit order above the bank guarantee amount: Request / Approve Bank Guarantee|9. approval: Request Bank Guarantee Approval, Approve Bank Guarantee, then Confirm → Sales Order",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Credit order above the bank guarantee amount: Request / Approve Bank Guarantee",
+  "title": "9. approval: Request Bank Guarantee Approval, Approve Bank Guarantee, then Confirm → Sales Order",
+  "file": "sales.bank-guarantee-approval.spec.ts",
+  "placeholder": false
+ }
 ]

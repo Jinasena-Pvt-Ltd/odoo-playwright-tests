@@ -94,6 +94,8 @@ test.describe.serial('Sales credit order with serial product @module:sales @step
     orderNumber = await createQuotation(page, {
       customer: CUSTOMER, paymentType: 'Credit',
       productCode: SERIAL_CODE, productName: SERIAL_NAME, paymentTerm: PAYMENT_TERM,
+      // Optional: a price above cost, so a low list price (e.g. JMC6 = 1) does not trigger the margin approval.
+      ...(process.env.SERIAL_UNIT_PRICE ? { unitPrice: Number(process.env.SERIAL_UNIT_PRICE) } : {}),
     });
     orderUrl = page.url();
     await test.step(`Quotation number assigned (${orderNumber})`, async () => {
