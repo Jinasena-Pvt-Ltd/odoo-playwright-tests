@@ -193,7 +193,7 @@
   <div class="nav-section">
     <div class="nav-module-label"><span class="mod-dot" style="background:#64748b"></span>sales</div>
     <a class="nav-item" href="#sales-config"><span class="nav-dot amber"></span>Config<span class="nav-count skip">0p 1s</span></a>
-    <a class="nav-item" href="#sales-business"><span class="nav-dot red"></span>Business<span class="nav-count">44p 5f 15s</span></a>
+    <a class="nav-item" href="#sales-business"><span class="nav-dot red"></span>Business<span class="nav-count">39p 6f 19s</span></a>
     <a class="nav-item" href="#sales-reporting"><span class="nav-dot amber"></span>Reporting<span class="nav-count skip">0p 1s</span></a>
     <a class="nav-item" href="#sales-permissions"><span class="nav-dot amber"></span>Permissions<span class="nav-count skip">0p 1s</span></a>
     <a class="nav-item" href="#sales-validations"><span class="nav-dot amber"></span>Field Validations<span class="nav-count skip">12p 2s</span></a>
@@ -225,16 +225,16 @@
       <div class="hero-divider"></div>
       <div class="hero-stat"><div class="num">87</div><div class="lbl">Total Tests</div></div>
       <div class="hero-divider"></div>
-      <div class="hero-stat"><div class="num green">59</div><div class="lbl">Passed</div></div>
+      <div class="hero-stat"><div class="num green">54</div><div class="lbl">Passed</div></div>
       <div class="hero-divider"></div>
-      <div class="hero-stat"><div class="num red">5</div><div class="lbl">Failed</div></div>
+      <div class="hero-stat"><div class="num red">6</div><div class="lbl">Failed</div></div>
       <div class="hero-divider"></div>
-      <div class="hero-stat"><div class="num purple">22</div><div class="lbl">Skipped (SaaS)</div></div>
+      <div class="hero-stat"><div class="num purple">26</div><div class="lbl">Skipped (SaaS)</div></div>
       <div class="hero-divider"></div><div class="hero-stat"><div class="num amber">1</div><div class="lbl">Pending</div></div>
     </div>
     <div class="hero-bar-wrap">
-      <div class="hero-bar-label"><span>Pass rate (of tests that ran)</span><span>92% · 59/64</span></div>
-      <div class="hero-bar-bg"><div class="hero-bar-fill" style="width:92%"></div></div>
+      <div class="hero-bar-label"><span>Pass rate (of tests that ran)</span><span>90% · 54/60</span></div>
+      <div class="hero-bar-bg"><div class="hero-bar-fill" style="width:90%"></div></div>
     </div>
   </div>
 
@@ -244,15 +244,15 @@
       <div class="module-card-name">sales</div>
       <div class="module-card-sub"></div>
       <div class="module-card-stats">
-        <span class="p">✔ 59</span>
-        <span class="s">⏭ 22</span>
-        <span class="f">❌ 5</span>
+        <span class="p">✔ 54</span>
+        <span class="s">⏭ 26</span>
+        <span class="f">❌ 6</span>
         <span class="t">of 87</span>
       </div>
       <div class="module-mini-bar">
-        <div class="seg-pass" style="width:68%"></div>
-        <div class="seg-skip" style="width:25%"></div>
-        <div class="seg-fail" style="width:6%"></div>
+        <div class="seg-pass" style="width:62%"></div>
+        <div class="seg-skip" style="width:30%"></div>
+        <div class="seg-fail" style="width:7%"></div>
       </div>
       <div style="font-size:0.68rem;color:var(--muted);margin-top:6px;">20 spec files</div>
     </div>
@@ -267,7 +267,7 @@
         <div class="mod-header-title">sales</div>
         <div class="mod-header-meta">src/modules/sales/ · 20 spec files · 87 tests</div>
       </div>
-      <div class="mod-header-pills"><span class="pill green">59 passed</span> <span class="pill red">5 failed</span> <span class="pill purple">22 skipped</span> <span class="pill amber">1 pending</span></div>
+      <div class="mod-header-pills"><span class="pill green">54 passed</span> <span class="pill red">6 failed</span> <span class="pill purple">26 skipped</span> <span class="pill amber">1 pending</span></div>
     </div>
     
     
@@ -305,7 +305,7 @@
       <div class="suite-hdr">
         <span class="suite-hdr-icon">💼</span>
         <span class="suite-hdr-title">Business</span>
-        <span class="pill green">44 passed</span> <span class="pill red">5 failed</span> <span class="pill purple">15 skipped</span> <span class="pill amber">1 pending</span>
+        <span class="pill green">39 passed</span> <span class="pill red">6 failed</span> <span class="pill purple">19 skipped</span> <span class="pill amber">1 pending</span>
         <span class="suite-hdr-file">12 files</span>
       </div>
       
@@ -382,7 +382,7 @@
     test.info().annotations.push({ type: 'approvals', description: outcome.taken.join(' → ') || '(none needed)' });
     await expect(stage(page)).toContainText(/sales order/i);
   });</pre></details></div>
-        <div class="test-row fail" data-error="Error: Could not create serial SNMW3DN47B in the Create Move Line popup (Create option never accepted; dropdown showed: SNMW3BQGKS | SNMW3BUIU4 | SNMW3BYJDQ | SNMW3C2JP7 | SNMW3C7DDJ | SNMW3CBGNN | SNMW3CGAP3 | SNMW3CKJFQ | Search More... |"><span class="test-row-icon">❌</span><span class="test-row-name">4. delivery: validate → Done</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('4. delivery: validate → Done', async ({ page }) =&gt; {
+        <div class="test-row fail" data-error="Error: Validation Error: You cannot validate this stock operation because the stock level of the product '[02BB 023] BALL BEARING 6202-2RS' would become negative (-1.0) on the stock location 'JM-EK/Stock' and negative stock is not allowed f"><span class="test-row-icon">❌</span><span class="test-row-name">4. delivery: validate → Done</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('4. delivery: validate → Done', async ({ page }) =&gt; {
     test.skip(!orderUrl, 'No order from step 1');
     await openRecord(page, orderUrl);
     expect(await validateDelivery(page)).toBeTruthy();
@@ -854,7 +854,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
       customer: CUSTOMER, paymentType: 'Credit',
       productCode: SERIAL_CODE, productName: SERIAL_NAME, paymentTerm: PAYMENT_TERM,
       // Optional: a price above cost, so a low list price (e.g. JMC6 = 1) does not trigger the margin approval.
-      ...(process.env.SERIAL_UNIT_PRICE ? { unitPrice: Number(process.env.SERIAL_UNIT_PRICE) } : {}),
+      unitPrice: Number(process.env.SERIAL_UNIT_PRICE ?? 15000),
     });
     orderUrl = page.url();
     await test.step(`Quotation number assigned (${orderNumber})`, async () =&gt; {
@@ -1041,7 +1041,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
   });
 
   test('5. payment: find the order in Sales Orders, open its invoice and register the cash payment', async ({ page }) =&gt; {</pre></details></div>
-        <div class="test-row fail" data-error="Error: Could not create serial SNMW3DQJEI in the Create Move Line popup (Create option never accepted; dropdown showed: SNMW3BQGKS | SNMW3BUIU4 | SNMW3BYJDQ | SNMW3C2JP7 | SNMW3C7DDJ | SNMW3CBGNN | SNMW3CGAP3 | SNMW3CKJFQ | Search More... |"><span class="test-row-icon">❌</span><span class="test-row-name">3. delivery: validate → Done</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('3. delivery: validate → Done', async ({ page }) =&gt; {
+        <div class="test-row fail" data-error="Error: Validation Error: You cannot validate this stock operation because the stock level of the product '[02BB 023] BALL BEARING 6202-2RS' would become negative (-1.0) on the stock location 'JM-EK/Stock' and negative stock is not allowed f"><span class="test-row-icon">❌</span><span class="test-row-name">3. delivery: validate → Done</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('3. delivery: validate → Done', async ({ page }) =&gt; {
     test.skip(!orderUrl, 'No order from step 1');
     await openRecord(page, orderUrl);
     expect(await validateDelivery(page)).toBeTruthy();
@@ -1359,7 +1359,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
   });
 
   test('5. payment: find the order in Sales Orders, open its invoice and register the cash payment', async ({ page }) =&gt; {</pre></details></div>
-        <div class="test-row fail" data-error="Error: Could not create serial SNMW3DRID8 in the Create Move Line popup (Create option never accepted; dropdown showed: SNMW3BQGKS | SNMW3BUIU4 | SNMW3BYJDQ | SNMW3C2JP7 | SNMW3C7DDJ | SNMW3CBGNN | SNMW3CGAP3 | SNMW3CKJFQ | Search More... |"><span class="test-row-icon">❌</span><span class="test-row-name">3. delivery: validate → Done</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('3. delivery: validate → Done', async ({ page }) =&gt; {
+        <div class="test-row fail" data-error="Error: Validation Error: You cannot validate this stock operation because the stock level of the product '[02BB 023] BALL BEARING 6202-2RS' would become negative (-1.0) on the stock location 'JM-EK/Stock' and negative stock is not allowed f"><span class="test-row-icon">❌</span><span class="test-row-name">3. delivery: validate → Done</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('3. delivery: validate → Done', async ({ page }) =&gt; {
     test.skip(!orderUrl, 'No order from step 1');
     await openRecord(page, orderUrl);
     expect(await validateDelivery(page)).toBeTruthy();
@@ -1475,7 +1475,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
       <div class="suite-hdr" style="margin-top:16px;">
         <span class="suite-hdr-icon">💼</span>
         <span class="suite-hdr-title">sales.return-cash</span>
-        <span class="pill green">7 passed</span>
+        <span class="pill green">2 passed</span> <span class="pill red">1 failed</span> <span class="pill purple">4 skipped</span>
         <span class="suite-hdr-file">sales.return-cash.spec.ts</span>
       </div>
       <div class="test-list">
@@ -1523,7 +1523,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
     await expect(stage(page)).toContainText(/posted/i);
     invoiceUrl = page.url();
   });</pre></details></div>
-        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">3. delivery: validate → Done</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('3. delivery: validate → Done', async ({ page }) =&gt; {
+        <div class="test-row fail" data-error="Error: Validation Error: You cannot validate this stock operation because the stock level of the product '[02BB 023] BALL BEARING 6202-2RS' would become negative (-1.0) on the stock location 'JM-EK/Stock' and negative stock is not allowed f"><span class="test-row-icon">❌</span><span class="test-row-name">3. delivery: validate → Done</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('3. delivery: validate → Done', async ({ page }) =&gt; {
     test.skip(!orderUrl, 'No order from step 1');
     await openRecord(page, orderUrl);
     const ref = await validateDelivery(page);
@@ -1545,7 +1545,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
 
     await test.step('Reverse the invoice with a reason', async () =&gt; {
       const credit = page.locator('.o_form_statusbar button[name=&quot;action_reverse&quot;]').first();</pre></details></div>
-        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">4. invoice: create and confirm → Posted</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('4. invoice: create and confirm → Posted', async ({ page }) =&gt; {
+        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">4. invoice: create and confirm → Posted</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('4. invoice: create and confirm → Posted', async ({ page }) =&gt; {
     test.skip(!orderUrl, 'No order from step 1');
     await openRecord(page, orderUrl);
     const name = await createInvoice(page);
@@ -1567,7 +1567,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
       await expect(dlg).toBeVisible({ timeout: 15_000 });
       await dlg.locator('[name=&quot;reason&quot;] input, [name=&quot;reason&quot;] textarea').first().fill(returnReason);
       await dlg.getByRole('button', { name: /^reverse$/i }).click();</pre></details></div>
-        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">5. credit note: reverse with a reason, approval, confirm</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('5. credit note: reverse with a reason, approval, confirm', async ({ page, browser }) =&gt; {
+        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">5. credit note: reverse with a reason, approval, confirm</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('5. credit note: reverse with a reason, approval, confirm', async ({ page, browser }) =&gt; {
     test.skip(!invoiceUrl, 'No invoice from step 4');
     await openRecord(page, invoiceUrl);
 
@@ -1589,7 +1589,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
 
     await test.step('Request approval, approve (if the instance requires it) and confirm', async () =&gt; {
       for (let i = 0; i &lt; 6; i++) {</pre></details></div>
-        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">6. original invoice: reset to draft and confirm again (when offered)</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('6. original invoice: reset to draft and confirm again (when offered)', async ({ page }) =&gt; {
+        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">6. original invoice: reset to draft and confirm again (when offered)</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('6. original invoice: reset to draft and confirm again (when offered)', async ({ page }) =&gt; {
     test.skip(!invoiceUrl, 'No invoice from step 4');
     await openRecord(page, invoiceUrl);
     const reset = page.locator('.o_form_statusbar').getByRole('button', { name: /reset to draft/i }).first();
@@ -1611,7 +1611,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
       test.skip(!(await advance.isVisible({ timeout: 3_000 }).catch(() =&gt; false)),
         'Advance Payment button not available on this order');
       await advance.click();</pre></details></div>
-        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">7. advance payment on the sales order, then the Payments smart button</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('7. advance payment on the sales order, then the Payments smart button', async ({ page }) =&gt; {
+        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">7. advance payment on the sales order, then the Payments smart button</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('7. advance payment on the sales order, then the Payments smart button', async ({ page }) =&gt; {
     test.skip(!orderUrl, 'No order from step 1');
     await openRecord(page, orderUrl);
 
@@ -1685,7 +1685,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
   });
 
   test('5. reverse: Credit Note wizard → &quot;Reverse and Create Invoice&quot; gives a new draft invoice', async ({ page }) =&gt; {</pre></details></div>
-        <div class="test-row fail" data-error="Error: Could not create serial SNMW3DTK7A in the Create Move Line popup (Create option never accepted; dropdown showed: SNMW3BQGKS | SNMW3BUIU4 | SNMW3BYJDQ | SNMW3C2JP7 | SNMW3C7DDJ | SNMW3CBGNN | SNMW3CGAP3 | SNMW3CKJFQ | Search More... |"><span class="test-row-icon">❌</span><span class="test-row-name">3. delivery: validate → Done</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('3. delivery: validate → Done', async ({ page }) =&gt; {
+        <div class="test-row fail" data-error="Error: Validation Error: You cannot validate this stock operation because the stock level of the product '[02BB 023] BALL BEARING 6202-2RS' would become negative (-1.0) on the stock location 'JM-EK/Stock' and negative stock is not allowed f"><span class="test-row-icon">❌</span><span class="test-row-name">3. delivery: validate → Done</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('3. delivery: validate → Done', async ({ page }) =&gt; {
     test.skip(!orderUrl, 'No order from step 1');
     await openRecord(page, orderUrl);
     expect(await validateDelivery(page)).toBeTruthy();

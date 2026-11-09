@@ -680,7 +680,13 @@ async function registerCashPaymentImpl(page: Page): Promise<void> {
   await clickButton(page, /^register payment$/i, 20_000);
   const dlg = page.locator('.modal:visible').first();
   await expect(dlg).toBeVisible({ timeout: 15_000 });
-  await selectMany2one(page, 'journal_id', CASH_JOURNAL, dlg);
+  // "Customer Receipts - Cash" does not exist in this company: fall back to the cash receipts journals that do.
+  let paidWith = '';
+  for (const name of [CASH_JOURNAL, 'Commercial - Cash Receipts', 'BOC - Cash Receipts']) {
+    try { await selectMany2one(page, 'journal_id', name, dlg); paidWith = name; break; } catch { /* try the next journal */ }
+  }
+  if (!paidWith) throw new Error('No cash receipts journal could be selected in the Register Payment window.');
+  if (paidWith !== CASH_JOURNAL) test.info().annotations.push({ type: 'note', description: `"${CASH_JOURNAL}" not found in this company; paid with the "${paidWith}" journal` });
   await dlg.locator('footer button').filter({ hasText: /^create payment$/i }).first().click();
   await throwIfOdooError(page);
   await expect(page.locator('.o_form_view .o_widget_web_ribbon, .o_form_view .ribbon').first())
