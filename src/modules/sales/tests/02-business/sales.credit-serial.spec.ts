@@ -13,7 +13,7 @@
  * Creates REAL records (order, delivery, serial number, invoice, payment) → opt-in:
  *   RUN_SALES_FLOWS=true npx playwright test sales.credit-serial --project=setup --project=admin
  * Optional env: CREDIT_CUSTOMER (default DIDULA MOTORES — must be a Credit customer with NO overdue invoices),
- *   SERIAL_PRODUCT_CODE / SERIAL_PRODUCT_NAME (default EY20KP), ODOO_APPROVER_EMAIL / ODOO_APPROVER_PASSWORD.
+ *   SERIAL_PRODUCT_CODE / SERIAL_PRODUCT_NAME / SERIAL_UNIT_PRICE (default JMC6, the only serial-tracked sellable product, at 15000), ODOO_APPROVER_EMAIL / ODOO_APPROVER_PASSWORD.
  */
 import { test, expect } from '../../../../core/fixtures/index';
 import type { Page } from '@playwright/test';
@@ -23,8 +23,8 @@ import {
 } from '../../flows/flowHelpers';
 
 const CUSTOMER = process.env.CREDIT_CUSTOMER ?? 'DIDULA MOTORES';
-const SERIAL_CODE = process.env.SERIAL_PRODUCT_CODE ?? 'EY20KP';
-const SERIAL_NAME = process.env.SERIAL_PRODUCT_NAME ?? 'EY20KP';
+const SERIAL_CODE = process.env.SERIAL_PRODUCT_CODE ?? 'JMC6';
+const SERIAL_NAME = process.env.SERIAL_PRODUCT_NAME ?? 'Multi Chopper 6Hp';
 const PAYMENT_TERM = '14 Days';
 const TERM_DAYS = 14;
 
@@ -95,7 +95,7 @@ test.describe.serial('Sales credit order with serial product @module:sales @step
       customer: CUSTOMER, paymentType: 'Credit',
       productCode: SERIAL_CODE, productName: SERIAL_NAME, paymentTerm: PAYMENT_TERM,
       // Optional: a price above cost, so a low list price (e.g. JMC6 = 1) does not trigger the margin approval.
-      ...(process.env.SERIAL_UNIT_PRICE ? { unitPrice: Number(process.env.SERIAL_UNIT_PRICE) } : {}),
+      unitPrice: Number(process.env.SERIAL_UNIT_PRICE ?? 15000),
     });
     orderUrl = page.url();
     await test.step(`Quotation number assigned (${orderNumber})`, async () => {

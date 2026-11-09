@@ -498,6 +498,40 @@ async function assignSerialsImpl(page: Page): Promise<string[]> {
   // The button at the right end of the product line in the Operations tab opens the line's Detailed Operations popup.
   const productRow = page.locator('.o_form_view [name="move_ids_without_package"] .o_data_row').first();
   await expect(productRow, 'No product line on the delivery').toBeVisible({ timeout: 10_000 });
+
+  // Serial numbers are only created for a product that is really serial-tracked. Any other product just gets its quantity encoded.
+  const tracking = await page.evaluate(async () => {
+    const id = Number((location.pathname.match(/(\d+)\/?$/) ?? location.hash.match(/id=(\d+)/) ?? [])[1]);
+    const call = async (model: string, method: string, args: unknown[], kwargs: Record<string, unknown> = {}) => {
+      const r = await fetch('/web/dataset/call_kw', {
+        method: 'POST', headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ jsonrpc: '2.0', params: { model, method, args, kwargs } }),
+      });
+      return (await r.json()).result;
+    };
+    if (!id) return 'unknown';
+    const moves: Array<{ product_id: [number, string] }> = await call('stock.move', 'search_read', [[['picking_id', '=', id]]], { fields: ['product_id'] });
+    const prods: Array<{ tracking: string }> = await call('product.product', 'read', [moves.map(m => m.product_id[0]), ['tracking']]);
+    return prods.some(p => p.tracking === 'serial') ? 'serial' : 'none';
+  });
+  if (tracking === 'none') {
+    test.info().annotations.push({ type: 'serial', description: 'Product is not serial-tracked: no serial number created, quantity encoded instead' });
+    const demand = ((await productRow.locator('[name="product_uom_qty"]').first().textContent().catch(() => '')) ?? '').replace(/[^0-9.]/g, '') || '1';
+    const qty = productRow.locator('[name="quantity"]').first();
+    await qty.click();
+    const input = qty.locator('input').first();
+    if (await input.isVisible({ timeout: 3_000 }).catch(() => false)) {
+      await input.fill(demand);
+      await input.press('Tab');
+    }
+    const save = page.locator('.o_form_status_indicator .o_form_button_save, button.o_form_button_save').first();
+    if (await save.isVisible({ timeout: 3_000 }).catch(() => false)) {
+      await save.click();
+      await throwIfOdooError(page);
+      await expect(save).toBeHidden({ timeout: 15_000 });
+    }
+    return used;
+  }
   // List icon at the right end of the product line ("Open Move") -> "Open: Stock move" popup.
   const move = page.locator('.modal:visible').first();
   await expect(async () => {
