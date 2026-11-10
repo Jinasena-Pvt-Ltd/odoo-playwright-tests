@@ -193,7 +193,7 @@
   <div class="nav-section">
     <div class="nav-module-label"><span class="mod-dot" style="background:#64748b"></span>sales</div>
     <a class="nav-item" href="#sales-config"><span class="nav-dot amber"></span>Config<span class="nav-count skip">0p 1s</span></a>
-    <a class="nav-item" href="#sales-business"><span class="nav-dot red"></span>Business<span class="nav-count">39p 6f 19s</span></a>
+    <a class="nav-item" href="#sales-business"><span class="nav-dot amber"></span>Business<span class="nav-count skip">66p 1s</span></a>
     <a class="nav-item" href="#sales-reporting"><span class="nav-dot amber"></span>Reporting<span class="nav-count skip">0p 1s</span></a>
     <a class="nav-item" href="#sales-permissions"><span class="nav-dot amber"></span>Permissions<span class="nav-count skip">0p 1s</span></a>
     <a class="nav-item" href="#sales-validations"><span class="nav-dot amber"></span>Field Validations<span class="nav-count skip">12p 2s</span></a>
@@ -216,25 +216,25 @@
     <div class="hero-top">
       <div>
         <div class="hero-title">odoo-playwright-tests — Master E2E Report</div>
-        <div class="hero-sub">1 Modules · 87 tests · 2026-11-09</div>
+        <div class="hero-sub">1 Modules · 89 tests · 2026-11-09</div>
       </div>
       <div class="hero-badge">Auto-generated</div>
     </div>
     <div class="hero-stats">
       <div class="hero-stat"><div class="num">1</div><div class="lbl">Modules</div></div>
       <div class="hero-divider"></div>
-      <div class="hero-stat"><div class="num">87</div><div class="lbl">Total Tests</div></div>
+      <div class="hero-stat"><div class="num">89</div><div class="lbl">Total Tests</div></div>
       <div class="hero-divider"></div>
-      <div class="hero-stat"><div class="num green">54</div><div class="lbl">Passed</div></div>
+      <div class="hero-stat"><div class="num green">81</div><div class="lbl">Passed</div></div>
       <div class="hero-divider"></div>
-      <div class="hero-stat"><div class="num red">6</div><div class="lbl">Failed</div></div>
+      <div class="hero-stat"><div class="num red">0</div><div class="lbl">Failed</div></div>
       <div class="hero-divider"></div>
-      <div class="hero-stat"><div class="num purple">26</div><div class="lbl">Skipped (SaaS)</div></div>
-      <div class="hero-divider"></div><div class="hero-stat"><div class="num amber">1</div><div class="lbl">Pending</div></div>
+      <div class="hero-stat"><div class="num purple">8</div><div class="lbl">Skipped (SaaS)</div></div>
+      
     </div>
     <div class="hero-bar-wrap">
-      <div class="hero-bar-label"><span>Pass rate (of tests that ran)</span><span>90% · 54/60</span></div>
-      <div class="hero-bar-bg"><div class="hero-bar-fill" style="width:90%"></div></div>
+      <div class="hero-bar-label"><span>Pass rate (of tests that ran)</span><span>100% · 81/81</span></div>
+      <div class="hero-bar-bg"><div class="hero-bar-fill" style="width:100%"></div></div>
     </div>
   </div>
 
@@ -244,15 +244,15 @@
       <div class="module-card-name">sales</div>
       <div class="module-card-sub"></div>
       <div class="module-card-stats">
-        <span class="p">✔ 54</span>
-        <span class="s">⏭ 26</span>
-        <span class="f">❌ 6</span>
-        <span class="t">of 87</span>
+        <span class="p">✔ 81</span>
+        <span class="s">⏭ 8</span>
+        
+        <span class="t">of 89</span>
       </div>
       <div class="module-mini-bar">
-        <div class="seg-pass" style="width:62%"></div>
-        <div class="seg-skip" style="width:30%"></div>
-        <div class="seg-fail" style="width:7%"></div>
+        <div class="seg-pass" style="width:91%"></div>
+        <div class="seg-skip" style="width:9%"></div>
+        <div class="seg-fail" style="width:0%"></div>
       </div>
       <div style="font-size:0.68rem;color:var(--muted);margin-top:6px;">20 spec files</div>
     </div>
@@ -265,9 +265,9 @@
       <span class="mod-header-icon">📦</span>
       <div>
         <div class="mod-header-title">sales</div>
-        <div class="mod-header-meta">src/modules/sales/ · 20 spec files · 87 tests</div>
+        <div class="mod-header-meta">src/modules/sales/ · 20 spec files · 89 tests</div>
       </div>
-      <div class="mod-header-pills"><span class="pill green">54 passed</span> <span class="pill red">6 failed</span> <span class="pill purple">26 skipped</span> <span class="pill amber">1 pending</span></div>
+      <div class="mod-header-pills"><span class="pill green">81 passed</span> <span class="pill purple">8 skipped</span></div>
     </div>
     
     
@@ -305,14 +305,14 @@
       <div class="suite-hdr">
         <span class="suite-hdr-icon">💼</span>
         <span class="suite-hdr-title">Business</span>
-        <span class="pill green">39 passed</span> <span class="pill red">6 failed</span> <span class="pill purple">19 skipped</span> <span class="pill amber">1 pending</span>
+        <span class="pill green">66 passed</span> <span class="pill purple">1 skipped</span>
         <span class="suite-hdr-file">12 files</span>
       </div>
       
       <div class="suite-hdr" style="margin-top:4px;">
         <span class="suite-hdr-icon">💼</span>
         <span class="suite-hdr-title">sales.bank-guarantee-approval</span>
-        <span class="pill green">4 passed</span> <span class="pill red">1 failed</span> <span class="pill purple">4 skipped</span>
+        <span class="pill green">12 passed</span>
         <span class="suite-hdr-file">sales.bank-guarantee-approval.spec.ts</span>
       </div>
       <div class="test-list">
@@ -327,62 +327,18 @@
     await expect(stage(page)).toContainText(/quotation/i);
   });
 
-  test('2. gating: Confirm is not offered until the bank guarantee notification is sent', async ({ page }) =&gt; {
+  test('3. approvals and confirm: any approval the order needs, then Confirm → Sales Order', async ({ page, browser }) =&gt; {
     test.skip(!orderUrl, 'No quotation from step 1');
     await openRecord(page, orderUrl);
-    const buttons = (await headerButtons(page)).map(b =&gt; b.text);
-    needsNotification = buttons.some(t =&gt; BG_NOTIFY.test(t));
-    test.skip(!needsNotification,
-      `${CUSTOMER} has no mandatory Bank Guarantee notification in this database. Buttons: ${buttons.join(' | ')}`);
-    expect(buttons.some(t =&gt; /^confirm$/i.test(t)),
-      `Confirm must be hidden until the notification is sent. Buttons: ${buttons.join(' | ')}`).toBe(false);
-    await expect(stage(page)).toContainText(/quotation/i);
-  });</pre></details></div>
-        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">2. gating: Confirm is not offered until the bank guarantee notification is sent</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('2. gating: Confirm is not offered until the bank guarantee notification is sent', async ({ page }) =&gt; {
-    test.skip(!orderUrl, 'No quotation from step 1');
-    await openRecord(page, orderUrl);
-    const buttons = (await headerButtons(page)).map(b =&gt; b.text);
-    needsNotification = buttons.some(t =&gt; BG_NOTIFY.test(t));
-    test.skip(!needsNotification,
-      `${CUSTOMER} has no mandatory Bank Guarantee notification in this database. Buttons: ${buttons.join(' | ')}`);
-    expect(buttons.some(t =&gt; /^confirm$/i.test(t)),
-      `Confirm must be hidden until the notification is sent. Buttons: ${buttons.join(' | ')}`).toBe(false);
-    await expect(stage(page)).toContainText(/quotation/i);
-  });
-
-  test('3. notify and confirm: Send Bank Guarantee Validity Notification, then Confirm → Sales Order', async ({ page, browser }) =&gt; {
-    test.skip(!orderUrl, 'No quotation from step 1');
-    await openRecord(page, orderUrl);
-
-    const notify = page.locator('.o_form_statusbar').getByRole('button', { name: BG_NOTIFY }).first();
-    if (await notify.isVisible({ timeout: 3_000 }).catch(() =&gt; false)) {
-      await notify.click();
-      await throwIfOdooError(page);
-      await page.waitForTimeout(1_500);
-      await page.reload({ waitUntil: 'domcontentloaded' });</pre></details></div>
-        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">3. notify and confirm: Send Bank Guarantee Validity Notification, then Confirm → Sales Order</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('3. notify and confirm: Send Bank Guarantee Validity Notification, then Confirm → Sales Order', async ({ page, browser }) =&gt; {
-    test.skip(!orderUrl, 'No quotation from step 1');
-    await openRecord(page, orderUrl);
-
-    const notify = page.locator('.o_form_statusbar').getByRole('button', { name: BG_NOTIFY }).first();
-    if (await notify.isVisible({ timeout: 3_000 }).catch(() =&gt; false)) {
-      await notify.click();
-      await throwIfOdooError(page);
-      await page.waitForTimeout(1_500);
-      await page.reload({ waitUntil: 'domcontentloaded' });
-      await expect(page.locator('.o_form_view')).toBeVisible({ timeout: 60_000 });
-      await expect(page.locator('.o_form_statusbar').getByRole('button', { name: /^confirm$/i }).first(),
-        'Confirm must be available once the notification is sent').toBeVisible({ timeout: 15_000 });
-    } else {
-      test.info().annotations.push({ type: 'note', description: 'No bank guarantee notification button; went straight to Confirm' });
-    }
-
-    // any further approvals (credit limit, overdue, ...) are handled by the shared helper
+    // the bank guarantee approval (and credit limit, overdue, ...) is handled by the shared helper
     const outcome = await approveAndConfirm(page, browser);
     test.info().annotations.push({ type: 'approvals', description: outcome.taken.join(' → ') || '(none needed)' });
     await expect(stage(page)).toContainText(/sales order/i);
-  });</pre></details></div>
-        <div class="test-row fail" data-error="Error: Validation Error: You cannot validate this stock operation because the stock level of the product '[02BB 023] BALL BEARING 6202-2RS' would become negative (-1.0) on the stock location 'JM-EK/Stock' and negative stock is not allowed f"><span class="test-row-icon">❌</span><span class="test-row-name">4. delivery: validate → Done</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('4. delivery: validate → Done', async ({ page }) =&gt; {
+  });
+
+  test('4. delivery: validate → Done', async ({ page }) =&gt; {
+    test.skip(!orderUrl, 'No order from step 1');</pre></details></div>
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">4. delivery: validate → Done</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('4. delivery: validate → Done', async ({ page }) =&gt; {
     test.skip(!orderUrl, 'No order from step 1');
     await openRecord(page, orderUrl);
     expect(await validateDelivery(page)).toBeTruthy();
@@ -404,7 +360,7 @@
     await test.step('Find the order by number (Sales → Orders → Sales Orders)', async () =&gt; {
       await page.locator('[data-menu-xmlid=&quot;sale.sale_order_menu&quot;]').click();
       await page.locator('[data-menu-xmlid=&quot;sale.menu_sale_order&quot;]').click();</pre></details></div>
-        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">5. invoice: create, send the bank guarantee notification if asked, confirm → Posted</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('5. invoice: create, send the bank guarantee notification if asked, confirm → Posted', async ({ page }) =&gt; {
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">5. invoice: create, send the bank guarantee notification if asked, confirm → Posted</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('5. invoice: create, send the bank guarantee notification if asked, confirm → Posted', async ({ page }) =&gt; {
     test.skip(!orderUrl, 'No order from step 1');
     await openRecord(page, orderUrl);
     // createInvoice() also clicks &quot;Send Bank Guarantee Validity Notification&quot; on the invoice when Confirm is hidden
@@ -426,7 +382,7 @@
       await search.press('Enter');
       const row = page.locator('.o_list_view .o_data_row').filter({ hasText: orderNumber }).first();
       await expect(row).toBeVisible({ timeout: 30_000 });</pre></details></div>
-        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">6. payment: find the order in Sales Orders, open its invoice and register the full cash payment</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('6. payment: find the order in Sales Orders, open its invoice and register the full cash payment', async ({ page }) =&gt; {
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">6. payment: find the order in Sales Orders, open its invoice and register the full cash payment</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('6. payment: find the order in Sales Orders, open its invoice and register the full cash payment', async ({ page }) =&gt; {
     test.skip(!orderNumber || !invoiceUrl, 'No invoiced order from steps 1-5');
 
     await test.step('Find the order by number (Sales → Orders → Sales Orders)', async () =&gt; {
@@ -448,7 +404,7 @@
       await expect(page.locator('.o_form_view')).toBeVisible({ timeout: 30_000 });
       await expect(stage(page)).toContainText(/posted/i);
     });</pre></details></div>
-        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">7. trace: payment → Sales Orders smart button leads back to 1 source order</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('7. trace: payment → Sales Orders smart button leads back to 1 source order', async ({ page }) =&gt; {
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">7. trace: payment → Sales Orders smart button leads back to 1 source order</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('7. trace: payment → Sales Orders smart button leads back to 1 source order', async ({ page }) =&gt; {
     test.skip(!invoiceUrl, 'No invoice from step 5');
     await openRecord(page, invoiceUrl);
     test.skip(!paymentUrl, 'Payment was not registered in step 6');
@@ -502,7 +458,117 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
     await expect(stage(page)).toContainText(/sales order/i);
   });
 });
+
+/**
+ * Customer WITH a valid 5,000,000 bank guarantee, order ABOVE that amount (default 6,000,000, still below the
+ * 10,000,000 credit limit, so only the bank guarantee check can stop it): is the Bank Guarantee approval button offered?
+ * Env: FLOW_BG_CUSTOMER (the 5,000,000 customer), FLOW_BG_OVER_AMOUNT (unit price of the single line, default 6000000)
+ */
+const OVER_AMOUNT = Number(process.env.FLOW_BG_OVER_AMOUNT ?? 6_000_000);
+
+test.describe.serial('Order above a 5,000,000 bank guarantee: Request / Approve Bank Guarantee @module:sales @step:business @e2e', () =&gt; {
+  test.skip(process.env.RUN_SALES_FLOWS !== 'true',
+    'Creates real orders — set RUN_SALES_FLOWS=true to run');
 </pre></details></div>
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">10. order above the 5,000,000 guarantee: Confirm is hidden and Request Bank Guarantee Approval is offered</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('10. order above the 5,000,000 guarantee: Confirm is hidden and Request Bank Guarantee Approval is offered', async ({ page }) =&gt; {
+    await createQuotation(page, { customer: CUSTOMER, paymentType: 'Credit', paymentTerm: '14 Days', unitPrice: OVER_AMOUNT });
+    overOrderUrl = page.url();
+    await page.reload({ waitUntil: 'domcontentloaded' });
+    await expect(page.locator('.o_form_view')).toBeVisible({ timeout: 60_000 });
+    const buttons = (await headerButtons(page)).map(b =&gt; b.text);
+    test.info().annotations.push({ type: 'buttons', description: `order ${OVER_AMOUNT}: ${buttons.join(' | ')}` });
+    expect(buttons.some(t =&gt; /^request bank guarantee approval$/i.test(t)),
+      `Order of ${OVER_AMOUNT} is above the customer's 5,000,000 guarantee, so &quot;Request Bank Guarantee Approval&quot; is expected. Buttons: ${buttons.join(' | ')}`).toBe(true);
+    expect(buttons.some(t =&gt; /^confirm$/i.test(t)),
+      `Confirm must be hidden until the bank guarantee is approved. Buttons: ${buttons.join(' | ')}`).toBe(false);
+  });
+
+  test('11. approval: Request Bank Guarantee Approval, Approve Bank Guarantee, then Confirm → Sales Order', async ({ page, browser }) =&gt; {
+    test.skip(!overOrderUrl, 'No quotation from step 10');
+    await openRecord(page, overOrderUrl);
+    const outcome = await approveAndConfirm(page, browser);
+    test.info().annotations.push({ type: 'approvals', description: outcome.taken.join(' → ') || '(none needed)' });
+    expect(outcome.taken.some(t =&gt; /bank guarantee/i.test(t)),
+      `Expected a bank guarantee approval step. Taken: ${outcome.taken.join(', ')}`).toBe(true);
+    await expect(stage(page)).toContainText(/sales order/i);
+  });</pre></details></div>
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">11. approval: Request Bank Guarantee Approval, Approve Bank Guarantee, then Confirm → Sales Order</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('11. approval: Request Bank Guarantee Approval, Approve Bank Guarantee, then Confirm → Sales Order', async ({ page, browser }) =&gt; {
+    test.skip(!overOrderUrl, 'No quotation from step 10');
+    await openRecord(page, overOrderUrl);
+    const outcome = await approveAndConfirm(page, browser);
+    test.info().annotations.push({ type: 'approvals', description: outcome.taken.join(' → ') || '(none needed)' });
+    expect(outcome.taken.some(t =&gt; /bank guarantee/i.test(t)),
+      `Expected a bank guarantee approval step. Taken: ${outcome.taken.join(', ')}`).toBe(true);
+    await expect(stage(page)).toContainText(/sales order/i);
+  });
+});
+
+/**
+ * Margin approval on a bank guarantee customer: a low-profit product (sold below cost) must show the margin approval
+ * button on the same order type. Env: FLOW_MARGIN_PRODUCT_CODE / FLOW_MARGIN_PRODUCT_NAME / FLOW_MARGIN_UNIT_PRICE
+ * (defaults: TESTMARGIN1 sold at 1000 against a cost of 1200).
+ */
+const MARGIN_CODE = process.env.FLOW_MARGIN_PRODUCT_CODE ?? 'TESTMARGIN1';
+const MARGIN_NAME = process.env.FLOW_MARGIN_PRODUCT_NAME ?? '[TESTMARGIN1] [TEST] Margin Request Product';
+const MARGIN_PRICE = Number(process.env.FLOW_MARGIN_UNIT_PRICE ?? 1000);
+
+test.describe.serial('Low-profit product on a bank guarantee customer: Request / Approve Margin @module:sales @step:business @e2e', () =&gt; {
+  test.skip(process.env.RUN_SALES_FLOWS !== 'true',</pre></details></div>
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">12. low-profit product: Confirm is hidden and the margin approval button is offered</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('12. low-profit product: Confirm is hidden and the margin approval button is offered', async ({ page }) =&gt; {
+    await createQuotation(page, {
+      customer: CUSTOMER, paymentType: 'Credit', paymentTerm: '14 Days',
+      productCode: MARGIN_CODE, productName: MARGIN_NAME, unitPrice: MARGIN_PRICE,
+    });
+    marginOrderUrl = page.url();
+    await page.reload({ waitUntil: 'domcontentloaded' });
+    await expect(page.locator('.o_form_view')).toBeVisible({ timeout: 60_000 });
+    const buttons = (await headerButtons(page)).map(b =&gt; b.text);
+    test.info().annotations.push({ type: 'buttons', description: buttons.join(' | ') });
+    expect(buttons.some(t =&gt; /^request .*margin.* approval$/i.test(t)),
+      `A margin approval request button is expected for a low-profit product. Buttons: ${buttons.join(' | ')}`).toBe(true);
+    expect(buttons.some(t =&gt; /^confirm$/i.test(t)),
+      `Confirm must be hidden until the margin is approved. Buttons: ${buttons.join(' | ')}`).toBe(false);
+  });
+
+  test('13. approval: Request Margin Approval, Approve Margin, then Confirm → Sales Order', async ({ page, browser }) =&gt; {
+    test.skip(!marginOrderUrl, 'No quotation from step 12');
+    await openRecord(page, marginOrderUrl);
+    const outcome = await approveAndConfirm(page, browser);
+    test.info().annotations.push({ type: 'approvals', description: outcome.taken.join(' → ') || '(none needed)' });
+    expect(outcome.taken.some(t =&gt; /margin/i.test(t)),</pre></details></div>
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">13. approval: Request Margin Approval, Approve Margin, then Confirm → Sales Order</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('13. approval: Request Margin Approval, Approve Margin, then Confirm → Sales Order', async ({ page, browser }) =&gt; {
+    test.skip(!marginOrderUrl, 'No quotation from step 12');
+    await openRecord(page, marginOrderUrl);
+    const outcome = await approveAndConfirm(page, browser);
+    test.info().annotations.push({ type: 'approvals', description: outcome.taken.join(' → ') || '(none needed)' });
+    expect(outcome.taken.some(t =&gt; /margin/i.test(t)),
+      `Expected a margin approval step. Taken: ${outcome.taken.join(', ')}`).toBe(true);
+    await expect(stage(page)).toContainText(/sales order/i);
+  });
+});
+</pre></details></div>
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">3. approvals and confirm: any approval the order needs, then Confirm → Sales Order</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('3. approvals and confirm: any approval the order needs, then Confirm → Sales Order', async ({ page, browser }) =&gt; {
+    test.skip(!orderUrl, 'No quotation from step 1');
+    await openRecord(page, orderUrl);
+    // the bank guarantee approval (and credit limit, overdue, ...) is handled by the shared helper
+    const outcome = await approveAndConfirm(page, browser);
+    test.info().annotations.push({ type: 'approvals', description: outcome.taken.join(' → ') || '(none needed)' });
+    await expect(stage(page)).toContainText(/sales order/i);
+  });
+
+  test('4. delivery: validate → Done', async ({ page }) =&gt; {
+    test.skip(!orderUrl, 'No order from step 1');
+    await openRecord(page, orderUrl);
+    expect(await validateDelivery(page)).toBeTruthy();
+  });
+
+  test('5. invoice: create, send the bank guarantee notification if asked, confirm → Posted', async ({ page }) =&gt; {
+    test.skip(!orderUrl, 'No order from step 1');
+    await openRecord(page, orderUrl);
+    // createInvoice() also clicks &quot;Send Bank Guarantee Validity Notification&quot; on the invoice when Confirm is hidden
+    expect(await createInvoice(page)).toBeTruthy();
+    await expect(stage(page)).toContainText(/posted/i);
+    invoiceUrl = page.url();</pre></details></div>
       </div>
       <div class="suite-hdr" style="margin-top:16px;">
         <span class="suite-hdr-icon">💼</span>
@@ -823,7 +889,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
       <div class="suite-hdr" style="margin-top:16px;">
         <span class="suite-hdr-icon">💼</span>
         <span class="suite-hdr-title">sales.credit-serial</span>
-        <span class="pill green">5 passed</span> <span class="pill red">1 failed</span>
+        <span class="pill green">6 passed</span>
         <span class="suite-hdr-file">sales.credit-serial.spec.ts</span>
       </div>
       <div class="test-list">
@@ -937,7 +1003,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
     });
     await test.step('Payment state is Not Paid', async () =&gt; {
       expect(move.payment_state).toBe('not_paid');</pre></details></div>
-        <div class="test-row fail" data-error="Error: &quot;Customer Receipts - Cash&quot; was not offered in the journal_id dropdown. Offered: No records"><span class="test-row-icon">❌</span><span class="test-row-name">5. payment day: come back through the Sales app, register the payment → IN PAYMENT</span><div class="test-row-tags"><span class="tag ui">UI</span><span class="tag rpc">RPC</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('5. payment day: come back through the Sales app, register the payment → IN PAYMENT', async ({ page, rpc }) =&gt; {
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">5. payment day: come back through the Sales app, register the payment → IN PAYMENT</span><div class="test-row-tags"><span class="tag ui">UI</span><span class="tag rpc">RPC</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('5. payment day: come back through the Sales app, register the payment → IN PAYMENT', async ({ page, rpc }) =&gt; {
     // &quot;14 days later&quot;: start from the Sales app, not from a saved link.
     await openSalesApp(page);
     await test.step('Orders &gt; Orders: open the list of confirmed orders', async () =&gt; {
@@ -993,7 +1059,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
       <div class="suite-hdr" style="margin-top:16px;">
         <span class="suite-hdr-icon">💼</span>
         <span class="suite-hdr-title">sales.high-discount</span>
-        <span class="pill green">2 passed</span> <span class="pill red">1 failed</span> <span class="pill purple">3 skipped</span>
+        <span class="pill green">6 passed</span>
         <span class="suite-hdr-file">sales.high-discount.spec.ts</span>
       </div>
       <div class="test-list">
@@ -1041,7 +1107,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
   });
 
   test('5. payment: find the order in Sales Orders, open its invoice and register the cash payment', async ({ page }) =&gt; {</pre></details></div>
-        <div class="test-row fail" data-error="Error: Validation Error: You cannot validate this stock operation because the stock level of the product '[02BB 023] BALL BEARING 6202-2RS' would become negative (-1.0) on the stock location 'JM-EK/Stock' and negative stock is not allowed f"><span class="test-row-icon">❌</span><span class="test-row-name">3. delivery: validate → Done</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('3. delivery: validate → Done', async ({ page }) =&gt; {
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">3. delivery: validate → Done</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('3. delivery: validate → Done', async ({ page }) =&gt; {
     test.skip(!orderUrl, 'No order from step 1');
     await openRecord(page, orderUrl);
     expect(await validateDelivery(page)).toBeTruthy();
@@ -1063,7 +1129,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
       await page.locator('[data-menu-xmlid=&quot;sale.menu_sale_order&quot;]').click();
       const search = page.locator('input.o_searchview_input').first();
       await expect(search).toBeVisible({ timeout: 20_000 });</pre></details></div>
-        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">4. invoice: create and confirm → Posted</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('4. invoice: create and confirm → Posted', async ({ page }) =&gt; {
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">4. invoice: create and confirm → Posted</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('4. invoice: create and confirm → Posted', async ({ page }) =&gt; {
     test.skip(!orderUrl, 'No order from step 1');
     await openRecord(page, orderUrl);
     expect(await createInvoice(page)).toBeTruthy();
@@ -1085,7 +1151,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
       await expect(row).toBeVisible({ timeout: 30_000 });
       await row.locator('td[name=&quot;name&quot;]').click();
       await expect(page.locator('.o_form_view')).toBeVisible({ timeout: 30_000 });</pre></details></div>
-        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">5. payment: find the order in Sales Orders, open its invoice and register the cash payment</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('5. payment: find the order in Sales Orders, open its invoice and register the cash payment', async ({ page }) =&gt; {
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">5. payment: find the order in Sales Orders, open its invoice and register the cash payment</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('5. payment: find the order in Sales Orders, open its invoice and register the cash payment', async ({ page }) =&gt; {
     test.skip(!orderNumber || !invoiceUrl, 'No invoiced order from steps 1-4');
 
     await test.step('Find the order by number (Sales → Orders → Sales Orders)', async () =&gt; {
@@ -1107,7 +1173,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
       await expect(page.locator('.o_form_view')).toBeVisible({ timeout: 30_000 });
       await expect(stage(page)).toContainText(/posted/i);
     });</pre></details></div>
-        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">6. trace: payment → Sales Orders smart button leads back to the order</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('6. trace: payment → Sales Orders smart button leads back to the order', async ({ page }) =&gt; {
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">6. trace: payment → Sales Orders smart button leads back to the order</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('6. trace: payment → Sales Orders smart button leads back to the order', async ({ page }) =&gt; {
     test.skip(!invoiceUrl, 'No invoice from step 4');
     await openRecord(page, invoiceUrl);
     test.skip(!paymentUrl, 'Payment was not registered in step 5');
@@ -1127,7 +1193,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
       <div class="suite-hdr" style="margin-top:16px;">
         <span class="suite-hdr-icon">💼</span>
         <span class="suite-hdr-title">sales.margin-approval</span>
-        <span class="pill green">7 passed</span> <span class="pill amber">1 pending</span>
+        <span class="pill green">7 passed</span>
         <span class="suite-hdr-file">sales.margin-approval.spec.ts</span>
       </div>
       <div class="test-list">
@@ -1285,33 +1351,11 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
     const invBtn = page.locator('button[name=&quot;action_view_invoice&quot;]').first();
     await expect(invBtn).toBeVisible({ timeout: 15_000 });
     await invBtn.click();</pre></details></div>
-        <div class="test-row hist"><span class="test-row-icon">⬜</span><span class="test-row-name">8. margin &gt;= minimum: no margin buttons, Confirm is available and works</span><div class="test-row-tags"><span class="tag smoke">@smoke</span><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('1. quotation: Cash order, Immediate Payment, margin shown on the form @smoke', async ({ page }) =&gt; {
-    orderNumber = await createQuotation(page, {
-      customer: CUSTOMER, paymentType: 'Cash', quantity: 1, unitPrice: UNIT_PRICE,
-      productCode: PRODUCT_CODE, productName: PRODUCT_NAME,
-    });
-    orderUrl = page.url();
-    expect(orderNumber).toMatch(/^S\d+/);
-    await expect(page.locator('[name=&quot;x_studio_order_payment_method&quot;] select').first()).toHaveValue(/cash/i);
-    await expect(page.locator('[name=&quot;x_studio_quotation_type&quot;] select').first()).toHaveValue(/sales/i).catch(() =&gt; {});
-    await expect(page.locator('.o_data_row').first()).toContainText(PRODUCT_CODE);
-    await page.getByRole('tab', { name: /other\s*info/i }).click();
-    await expect(page.locator('[name=&quot;payment_term_id&quot;] input').first()).toHaveValue(/immediate/i);
-    await expect(stage(page)).toContainText(/quotation/i);
-
-    const margin = await readMargin(page);
-    test.info().annotations.push({ type: 'margin', description: margin.raw });
-    if (margin.pct === null) {
-      test.info().annotations.push({ type: 'note', description: 'Margin block not found on the form; arithmetic check skipped' });
-      return;
-    }
-    if (KNOWN_COST !== undefined) {
-      // net unit price as displayed on the line (after any override / discount)</pre></details></div>
       </div>
       <div class="suite-hdr" style="margin-top:16px;">
         <span class="suite-hdr-icon">💼</span>
         <span class="suite-hdr-title">sales.overdue-credit</span>
-        <span class="pill green">2 passed</span> <span class="pill red">1 failed</span> <span class="pill purple">3 skipped</span>
+        <span class="pill green">6 passed</span>
         <span class="suite-hdr-file">sales.overdue-credit.spec.ts</span>
       </div>
       <div class="test-list">
@@ -1359,7 +1403,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
   });
 
   test('5. payment: find the order in Sales Orders, open its invoice and register the cash payment', async ({ page }) =&gt; {</pre></details></div>
-        <div class="test-row fail" data-error="Error: Validation Error: You cannot validate this stock operation because the stock level of the product '[02BB 023] BALL BEARING 6202-2RS' would become negative (-1.0) on the stock location 'JM-EK/Stock' and negative stock is not allowed f"><span class="test-row-icon">❌</span><span class="test-row-name">3. delivery: validate → Done</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('3. delivery: validate → Done', async ({ page }) =&gt; {
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">3. delivery: validate → Done</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('3. delivery: validate → Done', async ({ page }) =&gt; {
     test.skip(!orderUrl, 'No order from step 1');
     await openRecord(page, orderUrl);
     expect(await validateDelivery(page)).toBeTruthy();
@@ -1381,7 +1425,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
       await page.locator('[data-menu-xmlid=&quot;sale.menu_sale_order&quot;]').click();
       const search = page.locator('input.o_searchview_input').first();
       await expect(search).toBeVisible({ timeout: 20_000 });</pre></details></div>
-        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">4. invoice: create and confirm → Posted</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('4. invoice: create and confirm → Posted', async ({ page }) =&gt; {
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">4. invoice: create and confirm → Posted</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('4. invoice: create and confirm → Posted', async ({ page }) =&gt; {
     test.skip(!orderUrl, 'No order from step 1');
     await openRecord(page, orderUrl);
     expect(await createInvoice(page)).toBeTruthy();
@@ -1403,7 +1447,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
       await expect(row).toBeVisible({ timeout: 30_000 });
       await row.locator('td[name=&quot;name&quot;]').click();
       await expect(page.locator('.o_form_view')).toBeVisible({ timeout: 30_000 });</pre></details></div>
-        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">5. payment: find the order in Sales Orders, open its invoice and register the cash payment</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('5. payment: find the order in Sales Orders, open its invoice and register the cash payment', async ({ page }) =&gt; {
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">5. payment: find the order in Sales Orders, open its invoice and register the cash payment</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('5. payment: find the order in Sales Orders, open its invoice and register the cash payment', async ({ page }) =&gt; {
     test.skip(!orderNumber || !invoiceUrl, 'No invoiced order from steps 1-4');
 
     await test.step('Find the order by number (Sales → Orders → Sales Orders)', async () =&gt; {
@@ -1425,7 +1469,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
       await expect(page.locator('.o_form_view')).toBeVisible({ timeout: 30_000 });
       await expect(stage(page)).toContainText(/posted/i);
     });</pre></details></div>
-        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">6. trace: payment → Sales Orders smart button leads back to the order</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('6. trace: payment → Sales Orders smart button leads back to the order', async ({ page }) =&gt; {
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">6. trace: payment → Sales Orders smart button leads back to the order</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('6. trace: payment → Sales Orders smart button leads back to the order', async ({ page }) =&gt; {
     test.skip(!invoiceUrl, 'No invoice from step 4');
     await openRecord(page, invoiceUrl);
     test.skip(!paymentUrl, 'Payment was not registered in step 5');
@@ -1475,7 +1519,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
       <div class="suite-hdr" style="margin-top:16px;">
         <span class="suite-hdr-icon">💼</span>
         <span class="suite-hdr-title">sales.return-cash</span>
-        <span class="pill green">2 passed</span> <span class="pill red">1 failed</span> <span class="pill purple">4 skipped</span>
+        <span class="pill green">7 passed</span>
         <span class="suite-hdr-file">sales.return-cash.spec.ts</span>
       </div>
       <div class="test-list">
@@ -1523,7 +1567,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
     await expect(stage(page)).toContainText(/posted/i);
     invoiceUrl = page.url();
   });</pre></details></div>
-        <div class="test-row fail" data-error="Error: Validation Error: You cannot validate this stock operation because the stock level of the product '[02BB 023] BALL BEARING 6202-2RS' would become negative (-1.0) on the stock location 'JM-EK/Stock' and negative stock is not allowed f"><span class="test-row-icon">❌</span><span class="test-row-name">3. delivery: validate → Done</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('3. delivery: validate → Done', async ({ page }) =&gt; {
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">3. delivery: validate → Done</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('3. delivery: validate → Done', async ({ page }) =&gt; {
     test.skip(!orderUrl, 'No order from step 1');
     await openRecord(page, orderUrl);
     const ref = await validateDelivery(page);
@@ -1545,7 +1589,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
 
     await test.step('Reverse the invoice with a reason', async () =&gt; {
       const credit = page.locator('.o_form_statusbar button[name=&quot;action_reverse&quot;]').first();</pre></details></div>
-        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">4. invoice: create and confirm → Posted</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('4. invoice: create and confirm → Posted', async ({ page }) =&gt; {
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">4. invoice: create and confirm → Posted</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('4. invoice: create and confirm → Posted', async ({ page }) =&gt; {
     test.skip(!orderUrl, 'No order from step 1');
     await openRecord(page, orderUrl);
     const name = await createInvoice(page);
@@ -1567,7 +1611,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
       await expect(dlg).toBeVisible({ timeout: 15_000 });
       await dlg.locator('[name=&quot;reason&quot;] input, [name=&quot;reason&quot;] textarea').first().fill(returnReason);
       await dlg.getByRole('button', { name: /^reverse$/i }).click();</pre></details></div>
-        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">5. credit note: reverse with a reason, approval, confirm</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('5. credit note: reverse with a reason, approval, confirm', async ({ page, browser }) =&gt; {
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">5. credit note: reverse with a reason, approval, confirm</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('5. credit note: reverse with a reason, approval, confirm', async ({ page, browser }) =&gt; {
     test.skip(!invoiceUrl, 'No invoice from step 4');
     await openRecord(page, invoiceUrl);
 
@@ -1589,7 +1633,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
 
     await test.step('Request approval, approve (if the instance requires it) and confirm', async () =&gt; {
       for (let i = 0; i &lt; 6; i++) {</pre></details></div>
-        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">6. original invoice: reset to draft and confirm again (when offered)</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('6. original invoice: reset to draft and confirm again (when offered)', async ({ page }) =&gt; {
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">6. original invoice: reset to draft and confirm again (when offered)</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('6. original invoice: reset to draft and confirm again (when offered)', async ({ page }) =&gt; {
     test.skip(!invoiceUrl, 'No invoice from step 4');
     await openRecord(page, invoiceUrl);
     const reset = page.locator('.o_form_statusbar').getByRole('button', { name: /reset to draft/i }).first();
@@ -1611,7 +1655,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
       test.skip(!(await advance.isVisible({ timeout: 3_000 }).catch(() =&gt; false)),
         'Advance Payment button not available on this order');
       await advance.click();</pre></details></div>
-        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">7. advance payment on the sales order, then the Payments smart button</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('7. advance payment on the sales order, then the Payments smart button', async ({ page }) =&gt; {
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">7. advance payment on the sales order, then the Payments smart button</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('7. advance payment on the sales order, then the Payments smart button', async ({ page }) =&gt; {
     test.skip(!orderUrl, 'No order from step 1');
     await openRecord(page, orderUrl);
 
@@ -1637,7 +1681,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
       <div class="suite-hdr" style="margin-top:16px;">
         <span class="suite-hdr-icon">💼</span>
         <span class="suite-hdr-title">sales.return-reinvoice</span>
-        <span class="pill green">2 passed</span> <span class="pill red">1 failed</span> <span class="pill purple">4 skipped</span>
+        <span class="pill green">7 passed</span>
         <span class="suite-hdr-file">sales.return-reinvoice.spec.ts</span>
       </div>
       <div class="test-list">
@@ -1685,7 +1729,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
   });
 
   test('5. reverse: Credit Note wizard → &quot;Reverse and Create Invoice&quot; gives a new draft invoice', async ({ page }) =&gt; {</pre></details></div>
-        <div class="test-row fail" data-error="Error: Validation Error: You cannot validate this stock operation because the stock level of the product '[02BB 023] BALL BEARING 6202-2RS' would become negative (-1.0) on the stock location 'JM-EK/Stock' and negative stock is not allowed f"><span class="test-row-icon">❌</span><span class="test-row-name">3. delivery: validate → Done</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('3. delivery: validate → Done', async ({ page }) =&gt; {
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">3. delivery: validate → Done</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('3. delivery: validate → Done', async ({ page }) =&gt; {
     test.skip(!orderUrl, 'No order from step 1');
     await openRecord(page, orderUrl);
     expect(await validateDelivery(page)).toBeTruthy();
@@ -1707,7 +1751,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
     test.skip(!(await credit.isVisible({ timeout: 5_000 }).catch(() =&gt; false)),
       'Credit Note (reverse) button not available on this invoice');
     await credit.click();</pre></details></div>
-        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">4. invoice: create and confirm → Posted</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('4. invoice: create and confirm → Posted', async ({ page }) =&gt; {
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">4. invoice: create and confirm → Posted</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('4. invoice: create and confirm → Posted', async ({ page }) =&gt; {
     test.skip(!invoiceUrl &amp;&amp; !orderUrl, 'No order from step 1');
     await openRecord(page, orderUrl);
     expect(await createInvoice(page)).toBeTruthy();
@@ -1729,7 +1773,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
     await dlg.locator('[name=&quot;reason&quot;] input, [name=&quot;reason&quot;] textarea').first().fill(returnReason);
     // button[name=&quot;modify_moves&quot;] is the recorded selector; the visible label is the stable contract
     const reverseAndInvoice = dlg.getByRole('button', { name: /reverse and create invoice/i });</pre></details></div>
-        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">5. reverse: Credit Note wizard → &quot;Reverse and Create Invoice&quot; gives a new draft invoice</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('5. reverse: Credit Note wizard → &quot;Reverse and Create Invoice&quot; gives a new draft invoice', async ({ page }) =&gt; {
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">5. reverse: Credit Note wizard → &quot;Reverse and Create Invoice&quot; gives a new draft invoice</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('5. reverse: Credit Note wizard → &quot;Reverse and Create Invoice&quot; gives a new draft invoice', async ({ page }) =&gt; {
     test.skip(!invoiceUrl, 'No invoice from step 4');
     await openRecord(page, invoiceUrl);
 
@@ -1751,7 +1795,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
     await expect(page.locator('.modal:visible')).toHaveCount(0, { timeout: 30_000 });
     await expect(page.locator('.o_form_view')).toBeVisible({ timeout: 30_000 });
     // Odoo opens the NEW invoice, still in Draft, ready to be confirmed</pre></details></div>
-        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">6. re-invoice: confirm the new invoice and register the cash payment</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('6. re-invoice: confirm the new invoice and register the cash payment', async ({ page }) =&gt; {
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">6. re-invoice: confirm the new invoice and register the cash payment</span><div class="test-row-tags"><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('6. re-invoice: confirm the new invoice and register the cash payment', async ({ page }) =&gt; {
     test.skip(!newInvoiceUrl, 'No replacement invoice from step 5');
     await openRecord(page, newInvoiceUrl);
 
@@ -1773,7 +1817,7 @@ const LOW_CUSTOMER = process.env.FLOW_BG_LOW_CUSTOMER ?? '[TEST] DLRS Low Guaran
       // typing the full name finds nothing on this instance, so open the list empty instead.
       const journal = dlg.locator('[name=&quot;journal_id&quot;] input').first();
       await journal.click();</pre></details></div>
-        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">7. credit note: open it from the order's Invoices list, request approval and approve</span><div class="test-row-tags"><span class="tag smoke">@smoke</span><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('1. quotation: Cash order for a Sales quotation @smoke', async ({ page }) =&gt; {
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">7. credit note: open it from the order's Invoices list, request approval and approve</span><div class="test-row-tags"><span class="tag smoke">@smoke</span><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('1. quotation: Cash order for a Sales quotation @smoke', async ({ page }) =&gt; {
     const orderNumber = await createQuotation(page, { customer: CUSTOMER, paymentType: 'Cash' });
     orderUrl = page.url();
     expect(orderNumber).toMatch(/^S\d+/);

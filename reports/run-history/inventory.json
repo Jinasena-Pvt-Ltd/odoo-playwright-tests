@@ -200,16 +200,6 @@
   "placeholder": false
  },
  {
-  "key": "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Company cannot be saved (Cash)",
-  "project": "admin",
-  "mod": "sales",
-  "stepKey": "validations",
-  "describe": "Sales quotation validations › Cash quotation: required fields",
-  "title": "blank Company cannot be saved (Cash)",
-  "file": "sales.quotation-validations.spec.ts",
-  "placeholder": false
- },
- {
   "key": "admin|sales|validations|Sales quotation validations › Credit quotation: required fields|blank Customer cannot be saved (Credit)",
   "project": "admin",
   "mod": "sales",
@@ -780,62 +770,12 @@
   "placeholder": false
  },
  {
-  "key": "admin|sales|business|Cash order with margin at or above the minimum: confirms without margin approval|8. margin >= minimum: no margin buttons, Confirm is available and works",
-  "project": "admin",
-  "mod": "sales",
-  "stepKey": "business",
-  "describe": "Cash order with margin at or above the minimum: confirms without margin approval",
-  "title": "8. margin >= minimum: no margin buttons, Confirm is available and works",
-  "file": "sales.margin-approval.spec.ts",
-  "placeholder": false
- },
- {
-  "key": "admin|sales|business||demo: low-profit product shows margin approval buttons",
-  "project": "admin",
-  "mod": "sales",
-  "stepKey": "business",
-  "describe": "",
-  "title": "demo: low-profit product shows margin approval buttons",
-  "file": "tmp-margin-demo.spec.ts",
-  "placeholder": false
- },
- {
-  "key": "admin|sales|business||capture margin approval guide screenshots",
-  "project": "admin",
-  "mod": "sales",
-  "stepKey": "business",
-  "describe": "",
-  "title": "capture margin approval guide screenshots",
-  "file": "tmp-margin-guide.spec.ts",
-  "placeholder": false
- },
- {
   "key": "admin|sales|business|Credit order, bank guarantee customer: validity notification, invoice and cash receipt|1. quotation: Credit order for the bank guarantee customer",
   "project": "admin",
   "mod": "sales",
   "stepKey": "business",
   "describe": "Credit order, bank guarantee customer: validity notification, invoice and cash receipt",
   "title": "1. quotation: Credit order for the bank guarantee customer",
-  "file": "sales.bank-guarantee-approval.spec.ts",
-  "placeholder": false
- },
- {
-  "key": "admin|sales|business|Credit order, bank guarantee customer: validity notification, invoice and cash receipt|2. gating: Confirm is not offered until the bank guarantee notification is sent",
-  "project": "admin",
-  "mod": "sales",
-  "stepKey": "business",
-  "describe": "Credit order, bank guarantee customer: validity notification, invoice and cash receipt",
-  "title": "2. gating: Confirm is not offered until the bank guarantee notification is sent",
-  "file": "sales.bank-guarantee-approval.spec.ts",
-  "placeholder": false
- },
- {
-  "key": "admin|sales|business|Credit order, bank guarantee customer: validity notification, invoice and cash receipt|3. notify and confirm: Send Bank Guarantee Validity Notification, then Confirm → Sales Order",
-  "project": "admin",
-  "mod": "sales",
-  "stepKey": "business",
-  "describe": "Credit order, bank guarantee customer: validity notification, invoice and cash receipt",
-  "title": "3. notify and confirm: Send Bank Guarantee Validity Notification, then Confirm → Sales Order",
   "file": "sales.bank-guarantee-approval.spec.ts",
   "placeholder": false
  },
@@ -896,6 +836,56 @@
   "stepKey": "business",
   "describe": "Credit order above the bank guarantee amount: Request / Approve Bank Guarantee",
   "title": "9. approval: Request Bank Guarantee Approval, Approve Bank Guarantee, then Confirm → Sales Order",
+  "file": "sales.bank-guarantee-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Order above a 5,000,000 bank guarantee: Request / Approve Bank Guarantee|10. order above the 5,000,000 guarantee: Confirm is hidden and Request Bank Guarantee Approval is offered",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Order above a 5,000,000 bank guarantee: Request / Approve Bank Guarantee",
+  "title": "10. order above the 5,000,000 guarantee: Confirm is hidden and Request Bank Guarantee Approval is offered",
+  "file": "sales.bank-guarantee-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Order above a 5,000,000 bank guarantee: Request / Approve Bank Guarantee|11. approval: Request Bank Guarantee Approval, Approve Bank Guarantee, then Confirm → Sales Order",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Order above a 5,000,000 bank guarantee: Request / Approve Bank Guarantee",
+  "title": "11. approval: Request Bank Guarantee Approval, Approve Bank Guarantee, then Confirm → Sales Order",
+  "file": "sales.bank-guarantee-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Low-profit product on a bank guarantee customer: Request / Approve Margin|12. low-profit product: Confirm is hidden and the margin approval button is offered",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Low-profit product on a bank guarantee customer: Request / Approve Margin",
+  "title": "12. low-profit product: Confirm is hidden and the margin approval button is offered",
+  "file": "sales.bank-guarantee-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Low-profit product on a bank guarantee customer: Request / Approve Margin|13. approval: Request Margin Approval, Approve Margin, then Confirm → Sales Order",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Low-profit product on a bank guarantee customer: Request / Approve Margin",
+  "title": "13. approval: Request Margin Approval, Approve Margin, then Confirm → Sales Order",
+  "file": "sales.bank-guarantee-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|business|Credit order, bank guarantee customer: validity notification, invoice and cash receipt|3. approvals and confirm: any approval the order needs, then Confirm → Sales Order",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "business",
+  "describe": "Credit order, bank guarantee customer: validity notification, invoice and cash receipt",
+  "title": "3. approvals and confirm: any approval the order needs, then Confirm → Sales Order",
   "file": "sales.bank-guarantee-approval.spec.ts",
   "placeholder": false
  }

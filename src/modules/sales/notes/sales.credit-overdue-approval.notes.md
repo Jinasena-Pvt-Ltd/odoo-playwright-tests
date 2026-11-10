@@ -8,7 +8,7 @@ RUN_SALES_FLOWS=true HEADLESS=false npx playwright test sales.credit-overdue-app
 ```
 
 ## Scenario (from the recorded tour)
-Customer `abc` (override with `FLOW_CONTROL_CUSTOMER`) buys on Credit while overdue / over limit.
+Customer `[TEST] Overdue Credit Customer` (override with `FLOW_OVERDUE_CUSTOMER`; the tour customer `abc` is not overdue on the test database) buys on Credit while overdue / over limit.
 The order needs overdue and credit-limit approval before it can be confirmed, then runs through
 delivery, invoice and a cash receipt.
 
@@ -26,7 +26,7 @@ delivery, invoice and a cash receipt.
 ## Last run (2026-11-02, headed, admin)
 7 passed, 1 skipped (test 2). Test 2 skipped because customer `abc` showed none of the overdue /
 credit-limit buttons in this database, so the gating assertions were not exercised. To cover them,
-use a customer that is actually overdue/over limit (`FLOW_CONTROL_CUSTOMER=<name>`).
+use a customer that is actually overdue/over limit (`FLOW_OVERDUE_CUSTOMER=<name>`).
 
 ## Gotchas
 - The smart button text is `"1Sale Orders"` (count and label run together), so there is no word

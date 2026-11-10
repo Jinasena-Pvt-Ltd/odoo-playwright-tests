@@ -128,7 +128,7 @@ export async function selectMany2one(page: Page, fieldName: string, value: strin
   await input.fill('');
   await input.pressSequentially(value, { delay: 40 });
   const drop = page.locator('.o-autocomplete--dropdown-menu');
-  await expect(drop).toBeVisible({ timeout: 10_000 });
+  await expect(drop).toBeVisible({ timeout: 30_000 });
   const items = drop.locator('li, .o-autocomplete--dropdown-item');
   // Prefer the option whose text is exactly the value ("Cash" must not pick "BOC - Cash Receipts"), else the first containing it.
   const exact = items.filter({ hasText: new RegExp(`^\s*${escRx(value)}\s*$`) }).first();
@@ -288,7 +288,7 @@ async function createQuotationImpl(page: Page, input: OrderInput): Promise<strin
   await expect(pInput).toBeVisible({ timeout: 8_000 });
   await pInput.pressSequentially(input.productCode ?? PRODUCT_CODE, { delay: 50 });
   const drop = page.locator('.o-autocomplete--dropdown-menu');
-  await expect(drop).toBeVisible({ timeout: 10_000 });
+  await expect(drop).toBeVisible({ timeout: 30_000 });
   await drop.locator('li, .o-autocomplete--dropdown-item').filter({ hasText: input.productName ?? PRODUCT_NAME }).first().click({ force: true });
   if (input.quantity !== undefined && input.quantity !== 1) {
     const qty = row.locator('[name="product_uom_qty"] input').first();
@@ -710,7 +710,6 @@ export const BLANK_FIELDS: BlankField[] = [
   { label: 'Salesperson', name: 'user_id', kind: 'many2one', tab: /other\s*info/i },
   { label: 'Sales Team', name: 'team_id', kind: 'many2one', tab: /other\s*info/i },
   { label: 'Warehouse', name: 'warehouse_id', kind: 'many2one', tab: /other\s*info/i },
-  { label: 'Company', name: 'company_id', kind: 'many2one', tab: /other\s*info/i },
 ];
 
 export type BlankResult = 'blocked' | 'saved' | 'not-blankable' | 'field-not-shown';

@@ -17,7 +17,7 @@
  *
  * Creates REAL records → opt-in:
  *   RUN_SALES_FLOWS=true npx playwright test sales.credit-overdue-approval --project=setup --project=admin
- * Optional env: FLOW_CONTROL_CUSTOMER (default "abc"), ODOO_APPROVER_EMAIL / ODOO_APPROVER_PASSWORD
+ * Optional env: FLOW_OVERDUE_CUSTOMER (default "[TEST] Overdue Credit Customer", a Credit customer with an overdue invoice; "abc" is the tour customer but is not overdue), ODOO_APPROVER_EMAIL / ODOO_APPROVER_PASSWORD
  * (when the approvals are assigned to someone other than the logged-in user).
  *
  * Selectors are by field name / visible text — recorded action-id buttons and #autocomplete ids were NOT carried over.
@@ -29,7 +29,8 @@ import {
   validateDelivery, createInvoice, clickButton, throwIfOdooError,
 } from '../../flows/flowHelpers';
 
-const CUSTOMER = process.env.FLOW_CONTROL_CUSTOMER ?? 'abc';
+// Own setting (not FLOW_CONTROL_CUSTOMER, which the other flow specs share for a normal customer).
+const CUSTOMER = process.env.FLOW_OVERDUE_CUSTOMER ?? '[TEST] Overdue Credit Customer';
 
 test.use({ actionTimeout: 20_000, navigationTimeout: 60_000, video: 'off', trace: 'off' });
 

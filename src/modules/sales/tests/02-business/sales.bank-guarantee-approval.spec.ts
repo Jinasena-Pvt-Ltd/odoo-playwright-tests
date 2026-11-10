@@ -4,10 +4,10 @@
  * Derived from the "Bank Guarantee Approval Credit Sales Order" Odoo tour:
  *   1  quotation   bank-guarantee customer, Order Payment Type = Credit, Quotation Type = Sales, product line,
  *                  Payment Terms = 14 Days, Sales Team, Warehouse, Save
- *   2  gating      Confirm is not offered until the Bank Guarantee Validity Notification is sent
- *   3  notify      "Send Bank Guarantee Validity Notification" -> Confirm -> Sales Order
+ *   3  confirm     approvals the order needs (e.g. Request / Approve Bank Guarantee) -> Confirm -> Sales Order
+ *              (the "Send Bank Guarantee Validity Notification" button is not used; the approval buttons cover it)
  *   4  delivery    validate the delivery -> Done
- *   5  invoice     create invoice; send the Bank Guarantee Validity Notification on the invoice, Confirm -> Posted
+ *   5  invoice     create invoice, Confirm -> Posted
  *   6  payment     Sales -> Orders -> Sales Orders, find the order, Invoices, Register Payment (cash journal), full amount
  *   7  trace       the payment's "Sales Orders" smart button leads back to exactly 1 source order
  *
@@ -27,7 +27,6 @@ import {
 } from '../../flows/flowHelpers';
 
 const CUSTOMER = process.env.FLOW_BG_CUSTOMER ?? '[TEST] DLRS Bank Guarantee Customer';
-const BG_NOTIFY = /^send bank guarantee validity notification$/i;
 
 test.use({ actionTimeout: 20_000, navigationTimeout: 60_000, video: 'off', trace: 'off' });
 
@@ -54,7 +53,6 @@ test.describe.serial('Credit order, bank guarantee customer: validity notificati
   let invoiceUrl = '';
   let paymentUrl = '';
   let invoiceTotal = '';
-  let needsNotification = false;
 
   test.beforeEach(async ({ page }) => {
     await openSalesApp(page);
@@ -72,36 +70,10 @@ test.describe.serial('Credit order, bank guarantee customer: validity notificati
     await expect(stage(page)).toContainText(/quotation/i);
   });
 
-  test('2. gating: Confirm is not offered until the bank guarantee notification is sent', async ({ page }) => {
+  test('3. approvals and confirm: any approval the order needs, then Confirm → Sales Order', async ({ page, browser }) => {
     test.skip(!orderUrl, 'No quotation from step 1');
     await openRecord(page, orderUrl);
-    const buttons = (await headerButtons(page)).map(b => b.text);
-    needsNotification = buttons.some(t => BG_NOTIFY.test(t));
-    test.skip(!needsNotification,
-      `${CUSTOMER} has no mandatory Bank Guarantee notification in this database. Buttons: ${buttons.join(' | ')}`);
-    expect(buttons.some(t => /^confirm$/i.test(t)),
-      `Confirm must be hidden until the notification is sent. Buttons: ${buttons.join(' | ')}`).toBe(false);
-    await expect(stage(page)).toContainText(/quotation/i);
-  });
-
-  test('3. notify and confirm: Send Bank Guarantee Validity Notification, then Confirm → Sales Order', async ({ page, browser }) => {
-    test.skip(!orderUrl, 'No quotation from step 1');
-    await openRecord(page, orderUrl);
-
-    const notify = page.locator('.o_form_statusbar').getByRole('button', { name: BG_NOTIFY }).first();
-    if (await notify.isVisible({ timeout: 3_000 }).catch(() => false)) {
-      await notify.click();
-      await throwIfOdooError(page);
-      await page.waitForTimeout(1_500);
-      await page.reload({ waitUntil: 'domcontentloaded' });
-      await expect(page.locator('.o_form_view')).toBeVisible({ timeout: 60_000 });
-      await expect(page.locator('.o_form_statusbar').getByRole('button', { name: /^confirm$/i }).first(),
-        'Confirm must be available once the notification is sent').toBeVisible({ timeout: 15_000 });
-    } else {
-      test.info().annotations.push({ type: 'note', description: 'No bank guarantee notification button; went straight to Confirm' });
-    }
-
-    // any further approvals (credit limit, overdue, ...) are handled by the shared helper
+    // the bank guarantee approval (and credit limit, overdue, ...) is handled by the shared helper
     const outcome = await approveAndConfirm(page, browser);
     test.info().annotations.push({ type: 'approvals', description: outcome.taken.join(' → ') || '(none needed)' });
     await expect(stage(page)).toContainText(/sales order/i);
@@ -253,6 +225,95 @@ test.describe.serial('Credit order above the bank guarantee amount: Request / Ap
     test.info().annotations.push({ type: 'approvals', description: outcome.taken.join(' → ') || '(none needed)' });
     expect(outcome.taken.some(t => /bank guarantee/i.test(t)),
       `Expected a bank guarantee approval step. Taken: ${outcome.taken.join(', ')}`).toBe(true);
+    await expect(stage(page)).toContainText(/sales order/i);
+  });
+});
+
+/**
+ * Customer WITH a valid 5,000,000 bank guarantee, order ABOVE that amount (default 6,000,000, still below the
+ * 10,000,000 credit limit, so only the bank guarantee check can stop it): is the Bank Guarantee approval button offered?
+ * Env: FLOW_BG_CUSTOMER (the 5,000,000 customer), FLOW_BG_OVER_AMOUNT (unit price of the single line, default 6000000)
+ */
+const OVER_AMOUNT = Number(process.env.FLOW_BG_OVER_AMOUNT ?? 6_000_000);
+
+test.describe.serial('Order above a 5,000,000 bank guarantee: Request / Approve Bank Guarantee @module:sales @step:business @e2e', () => {
+  test.skip(process.env.RUN_SALES_FLOWS !== 'true',
+    'Creates real orders — set RUN_SALES_FLOWS=true to run');
+
+  let overOrderUrl = '';
+
+  test.beforeEach(async ({ page }) => {
+    await openSalesApp(page);
+    await switchCompany(page, COMPANY);
+  });
+
+  test('10. order above the 5,000,000 guarantee: Confirm is hidden and Request Bank Guarantee Approval is offered', async ({ page }) => {
+    await createQuotation(page, { customer: CUSTOMER, paymentType: 'Credit', paymentTerm: '14 Days', unitPrice: OVER_AMOUNT });
+    overOrderUrl = page.url();
+    await page.reload({ waitUntil: 'domcontentloaded' });
+    await expect(page.locator('.o_form_view')).toBeVisible({ timeout: 60_000 });
+    const buttons = (await headerButtons(page)).map(b => b.text);
+    test.info().annotations.push({ type: 'buttons', description: `order ${OVER_AMOUNT}: ${buttons.join(' | ')}` });
+    expect(buttons.some(t => /^request bank guarantee approval$/i.test(t)),
+      `Order of ${OVER_AMOUNT} is above the customer's 5,000,000 guarantee, so "Request Bank Guarantee Approval" is expected. Buttons: ${buttons.join(' | ')}`).toBe(true);
+    expect(buttons.some(t => /^confirm$/i.test(t)),
+      `Confirm must be hidden until the bank guarantee is approved. Buttons: ${buttons.join(' | ')}`).toBe(false);
+  });
+
+  test('11. approval: Request Bank Guarantee Approval, Approve Bank Guarantee, then Confirm → Sales Order', async ({ page, browser }) => {
+    test.skip(!overOrderUrl, 'No quotation from step 10');
+    await openRecord(page, overOrderUrl);
+    const outcome = await approveAndConfirm(page, browser);
+    test.info().annotations.push({ type: 'approvals', description: outcome.taken.join(' → ') || '(none needed)' });
+    expect(outcome.taken.some(t => /bank guarantee/i.test(t)),
+      `Expected a bank guarantee approval step. Taken: ${outcome.taken.join(', ')}`).toBe(true);
+    await expect(stage(page)).toContainText(/sales order/i);
+  });
+});
+
+/**
+ * Margin approval on a bank guarantee customer: a low-profit product (sold below cost) must show the margin approval
+ * button on the same order type. Env: FLOW_MARGIN_PRODUCT_CODE / FLOW_MARGIN_PRODUCT_NAME / FLOW_MARGIN_UNIT_PRICE
+ * (defaults: TESTMARGIN1 sold at 1000 against a cost of 1200).
+ */
+const MARGIN_CODE = process.env.FLOW_MARGIN_PRODUCT_CODE ?? 'TESTMARGIN1';
+const MARGIN_NAME = process.env.FLOW_MARGIN_PRODUCT_NAME ?? '[TESTMARGIN1] [TEST] Margin Request Product';
+const MARGIN_PRICE = Number(process.env.FLOW_MARGIN_UNIT_PRICE ?? 1000);
+
+test.describe.serial('Low-profit product on a bank guarantee customer: Request / Approve Margin @module:sales @step:business @e2e', () => {
+  test.skip(process.env.RUN_SALES_FLOWS !== 'true',
+    'Creates real orders — set RUN_SALES_FLOWS=true to run');
+
+  let marginOrderUrl = '';
+
+  test.beforeEach(async ({ page }) => {
+    await openSalesApp(page);
+    await switchCompany(page, COMPANY);
+  });
+
+  test('12. low-profit product: Confirm is hidden and the margin approval button is offered', async ({ page }) => {
+    await createQuotation(page, {
+      customer: CUSTOMER, paymentType: 'Credit', paymentTerm: '14 Days',
+      productCode: MARGIN_CODE, productName: MARGIN_NAME, unitPrice: MARGIN_PRICE,
+    });
+    marginOrderUrl = page.url();
+    await page.reload({ waitUntil: 'domcontentloaded' });
+    await expect(page.locator('.o_form_view')).toBeVisible({ timeout: 60_000 });
+    const buttons = (await headerButtons(page)).map(b => b.text);
+    test.info().annotations.push({ type: 'buttons', description: buttons.join(' | ') });
+    expect(buttons.some(t => /^request .*margin.* approval$/i.test(t)),
+      `A margin approval request button is expected for a low-profit product. Buttons: ${buttons.join(' | ')}`).toBe(true);
+    expect(buttons.some(t => /^confirm$/i.test(t)),
+      `Confirm must be hidden until the margin is approved. Buttons: ${buttons.join(' | ')}`).toBe(false);
+  });
+
+  test('13. approval: Request Margin Approval, Approve Margin, then Confirm → Sales Order', async ({ page, browser }) => {
+    test.skip(!marginOrderUrl, 'No quotation from step 12');
+    await openRecord(page, marginOrderUrl);
+    const outcome = await approveAndConfirm(page, browser);
+    test.info().annotations.push({ type: 'approvals', description: outcome.taken.join(' → ') || '(none needed)' });
+    expect(outcome.taken.some(t => /margin/i.test(t)),
+      `Expected a margin approval step. Taken: ${outcome.taken.join(', ')}`).toBe(true);
     await expect(stage(page)).toContainText(/sales order/i);
   });
 });

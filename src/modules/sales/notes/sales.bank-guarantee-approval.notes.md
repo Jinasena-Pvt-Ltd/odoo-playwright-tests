@@ -28,23 +28,30 @@ All three: Mandatory Bank Guarantee on, Valid Bank Guarantee on, Payment Type Cr
 | # | Test | What it checks |
 |---|------|----------------|
 | 1 | quotation | Credit order, Quotation Type Sales, Payment Terms 14 Days, stage Quotation |
-| 2 | gating | Confirm hidden until the Bank Guarantee Validity Notification is sent. **Skips** when the notification button is not shown |
-| 3 | notify and confirm | Click the notification button if present, then approvals + Confirm -> Sales Order |
+| 3 | approvals and confirm | Any approval the order needs (e.g. Request / Approve Bank Guarantee), then Confirm -> Sales Order. Test 2 (validity-notification gating) was removed: the "Send Bank Guarantee Validity Notification" button is not needed, the approval buttons cover it |
 | 4 | delivery | Delivery validated, stage Done |
 | 5 | invoice | Invoice created; notification clicked if Confirm is hidden; Posted |
 | 6 | payment | Order found via Sales > Orders > Sales Orders; Register Payment with the cash journal for the full total; ribbon Paid / In Payment |
 | 7 | trace | Payment's "Sales Orders" smart button shows 1 and leads back to the order |
 | 8 | over guarantee | Low-guarantee customer: Confirm hidden and "Request Bank Guarantee Approval" offered |
 | 9 | approval | Request -> Approve Bank Guarantee -> Confirm -> Sales Order |
+| 10 | order above the 5,000,000 guarantee | Customer with the valid 5,000,000 guarantee, one line at 6,000,000 (`FLOW_BG_OVER_AMOUNT`, below the 10,000,000 credit limit): Confirm hidden, "Request Bank Guarantee Approval" offered |
+| 11 | approval (5,000,000 customer) | Request Bank Guarantee Approval -> Approve Bank Guarantee -> Confirm -> Sales Order |
+| 12 | low-profit product | Bank guarantee customer, TESTMARGIN1 sold at 1000 against a cost of 1200: Confirm hidden, margin approval request button offered |
+| 13 | margin approval | Request Margin Approval -> Approve Margin -> Confirm -> Sales Order |
 
-## Last run (2026-11-05, headed, admin)
-**9 passed, 1 skipped** (test 2). Tests 1, 3-7 passed for the DLRS and the DISTR customer; tests 8-9 passed for the low-guarantee customer.
+## Last run
+**2026-11-09, headed, admin:** all 12 tests passed (tests 1, 3-13).
+
+**2026-11-09, headed, admin:** tests 12 and 13 passed: the margin approval button also works on a bank guarantee customer.
+
+**2026-11-09, headed, admin:** tests 10 and 11 passed (order of 6,000,000 for the 5,000,000 customer showed "Request Bank Guarantee Approval", Confirm hidden; approval then Confirm gave a Sales Order). The small order of test 3 gets no approval button, only the validity notification.
+
+**2026-11-05, headed, admin:** 9 passed, 1 skipped (test 2). Tests 1, 3-7 passed for the DLRS and the DISTR customer; tests 8-9 passed for the low-guarantee customer.
 
 ## Findings for the developer
-- **Validity notification never triggers.** The "Send Bank Guarantee Validity Notification" button (order: server action 4061, invoice: 4211)
-  needs `x_studio_bank_guarantee_notification` = true. That flag is only written by automation **493 "SLS - Validate Bank Guarantee in SO Confirm"**
-  (server action 4026), which is **inactive** on `jinasena-upgrade-testing-39894820`. Automation **492 "SLS - Validate Credit Limit & Bank Guarantee Amount - 1"** (Contact) is inactive too.
-  Same pattern as the margin automation 491. Result: test 2 skips and test 3 confirms without a notification.
+- **Validity notification button: not needed.** The "Send Bank Guarantee Validity Notification" button never appears (automation 493 inactive); the Bank Guarantee approval buttons are used instead, so the gating test was removed.
+- Over-guarantee confirmed for BOTH a tiny guarantee (100, tests 8-9) and a normal 5,000,000 guarantee with a 6,000,000 order (tests 10-11).
 - The over-guarantee approval buttons ("Request Bank Guarantee Approval" 4055 / "Approve Bank Guarantee" 4050) work; they depend on the computed
   `x_studio_over_bank_guarantee` (order total + customer credit above the customer's guarantee amount).
 
