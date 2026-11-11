@@ -82,6 +82,7 @@ src/
 | `@module:<domain>` | The Odoo module being tested |
 | `@module:helpdesk` | Helpdesk module |
 | `@module:fix_repair` | Fix Repair module (custom Studio app on top of Helpdesk) |
+| `@module:plm` | PLM module (Odoo Enterprise mrp_plm - ECOs and BOM revisions) |
 | `@module:security-audit` | Daily user group & CRUD permission audit |
 | `@step:config` | Step 1 — configuration/setup |
 | `@step:business` | Step 2 — business logic |
