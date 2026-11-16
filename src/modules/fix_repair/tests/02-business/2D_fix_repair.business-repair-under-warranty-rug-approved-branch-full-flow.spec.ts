@@ -23,6 +23,7 @@ import { Page, Locator } from '@playwright/test';
 import { test, expect } from '../../../../core/fixtures/index';
 import { FixRepairTicketPage } from '../../pages/FixRepairTicketPage';
 import { FIX_REPAIR_TEST_CONFIG } from '../../data/fix_repair.master-data';
+import { isVisibleWhenIdle } from '../../../../core/utils/OdooIdle';
 
 async function gotoRecord(page: Page, model: string, id: number) {
   const url = new URL(page.url());
@@ -43,9 +44,9 @@ async function closeStrayDialogs(page: Page, attempts = 3) {
   await dismissNotifications(page);
   for (let i = 0; i < attempts; i++) {
     const dialog = page.locator('.modal.show, .o_technical_modal').first();
-    if (!(await dialog.isVisible({ timeout: 1_000 }).catch(() => false))) return;
+    if (!(await isVisibleWhenIdle(dialog).catch(() => false))) return;
     const closeButton = dialog.locator('button[aria-label="Close"], .btn-close, button:has-text("Close")').first();
-    if (await closeButton.isVisible({ timeout: 1_000 }).catch(() => false)) {
+    if (await isVisibleWhenIdle(closeButton).catch(() => false)) {
       await closeButton.click({ force: true }).catch(() => undefined);
     } else {
       await page.keyboard.press('Escape');
@@ -134,14 +135,14 @@ test.describe('Fix Repair - Under Warranty - RUG (Approved) - Branch Full Flow @
     let ticketId = 0;
 
     const waitForStatusBtn = async (label: string) => {
-      let visible = await statusBtn(label).isVisible({ timeout: 5_000 }).catch(() => false);
+      let visible = await isVisibleWhenIdle(statusBtn(label)).catch(() => false);
       for (let i = 0; i < 6 && !visible; i++) {
         await page.waitForTimeout(3_000);
         await closeStrayDialogs(page);
         await gotoRecord(page, 'helpdesk.ticket', ticketId);
         await page.reload(); // hash-only change does not refresh the record
         await page.waitForTimeout(1_500);
-        visible = await statusBtn(label).isVisible({ timeout: 5_000 }).catch(() => false);
+        visible = await isVisibleWhenIdle(statusBtn(label)).catch(() => false);
       }
       expect(visible, `${label} button visible`).toBeTruthy();
     };
@@ -195,7 +196,7 @@ test.describe('Fix Repair - Under Warranty - RUG (Approved) - Branch Full Flow @
     await ticketPage.clickNewTicket();
 
     // 4. Assign to Me
-    if (!(await statusBtn('Assign to Me').isVisible({ timeout: 5_000 }).catch(() => false))) {
+    if (!(await isVisibleWhenIdle(statusBtn('Assign to Me')).catch(() => false))) {
       test.skip(true, 'Assign to Me not available on this instance');
       return;
     }
@@ -204,7 +205,7 @@ test.describe('Fix Repair - Under Warranty - RUG (Approved) - Branch Full Flow @
     await page.locator('div.o_statusbar_buttons button', { hasText: 'Assign to Me' }).waitFor({ state: 'hidden', timeout: 10_000 });
 
     // 5. Type = Repair - Under Warranty - RUG
-    if (!(await field('ticket_type_id').isVisible({ timeout: 3_000 }).catch(() => false))) {
+    if (!(await isVisibleWhenIdle(field('ticket_type_id')).catch(() => false))) {
       test.skip(true, 'Fix Repair Studio customization not installed on this instance');
       return;
     }
@@ -377,7 +378,7 @@ test.describe('Fix Repair - Under Warranty - RUG (Approved) - Branch Full Flow @
       await shot(n, cell);
       await cell.click();
       const input = cell.locator('input').first();
-      if (await input.isVisible({ timeout: 1_000 }).catch(() => false)) await input.fill(searchText);
+      if (await isVisibleWhenIdle(input).catch(() => false)) await input.fill(searchText);
       await pickOption(searchText);
     };
     await pickInCell('20-diagnosis-area.png', 'x_studio_diagnosis_area', FIX_REPAIR_TEST_CONFIG.diagnosisArea);
@@ -412,7 +413,7 @@ test.describe('Fix Repair - Under Warranty - RUG (Approved) - Branch Full Flow @
 
     // 29. Add the spare part
     const catalogSearch = page.locator('.o_kanban_renderer input.o_searchview_input, .modal .o_searchview_input').first();
-    if (await catalogSearch.isVisible({ timeout: 3_000 }).catch(() => false)) {
+    if (await catalogSearch.waitFor({ state: 'visible', timeout: 15_000 }).then(() => true).catch(() => false)) {
       await catalogSearch.fill(FIX_REPAIR_TEST_CONFIG.quotationProductSearchTerm);
       await catalogSearch.press('Enter');
       await page.waitForTimeout(1_000);
@@ -521,7 +522,7 @@ test.describe('Fix Repair - Under Warranty - RUG (Approved) - Branch Full Flow @
       await page.waitForTimeout(2_500);
       // Confirmation wizards (immediate transfer / backorder), if any.
       const wiz = page.locator('.modal:visible button', { hasText: /^(Apply|Process|Confirm)$/ }).first();
-      if (await wiz.isVisible({ timeout: 1_500 }).catch(() => false)) {
+      if (await isVisibleWhenIdle(wiz).catch(() => false)) {
         await wiz.click();
         await page.waitForTimeout(2_000);
       }

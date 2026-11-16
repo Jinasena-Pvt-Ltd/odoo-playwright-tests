@@ -173,8 +173,8 @@ test.describe('<Module> <Step Label> @module:<module> @step:<step>', () => {
     //   1. Interact only through the browser UI — page objects and form fills, never RPC
     //   2. Use uniqueName() for every record name
     //   3. Wrap config-dependent assertions in graceful skip:
-    //      const visible = await page.locator('button', { hasText: 'X' })
-    //        .isVisible({ timeout: 3_000 }).catch(() => false);
+    //      const visible = await isVisibleWhenIdle(page.locator('button', { hasText: 'X' })).catch(() => false);
+    //      (isVisibleWhenIdle from core/utils/OdooIdle; isVisible({ timeout }) does not wait)
     //      if (!visible) test.skip(true, 'X not available in this configuration');
     test.skip(true, 'Not yet implemented — replace this placeholder with real test logic');
   });

@@ -1,4 +1,5 @@
 import { Page } from '@playwright/test';
+import { isVisibleWhenIdle } from '../utils/OdooIdle';
 
 export class SelectionField {
   constructor(
@@ -8,7 +9,7 @@ export class SelectionField {
 
   async selectByValue(value: string): Promise<void> {
     const select = this.page.locator(`.o_field_widget[name="${this.fieldName}"] select`).first();
-    if (await select.isVisible({ timeout: 500 }).catch(() => false)) {
+    if (await isVisibleWhenIdle(select).catch(() => false)) {
       await select.selectOption({ value });
       return;
     }
@@ -18,7 +19,7 @@ export class SelectionField {
 
   async selectByLabel(label: string): Promise<void> {
     const select = this.page.locator(`.o_field_widget[name="${this.fieldName}"] select`).first();
-    if (await select.isVisible({ timeout: 500 }).catch(() => false)) {
+    if (await isVisibleWhenIdle(select).catch(() => false)) {
       await select.selectOption({ label });
       return;
     }
@@ -29,7 +30,7 @@ export class SelectionField {
 
   async getValue(): Promise<string> {
     const select = this.page.locator(`.o_field_widget[name="${this.fieldName}"] select`).first();
-    if (await select.isVisible({ timeout: 500 }).catch(() => false)) {
+    if (await isVisibleWhenIdle(select).catch(() => false)) {
       return select.evaluate((el: HTMLSelectElement) => el.options[el.selectedIndex]?.text ?? '');
     }
     // Read mode: span text

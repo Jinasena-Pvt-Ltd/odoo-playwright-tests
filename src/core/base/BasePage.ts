@@ -1,4 +1,5 @@
 import { Page, Locator, expect } from '@playwright/test';
+import { isVisibleWhenIdle, waitForOdooIdle } from '../utils/OdooIdle';
 
 export abstract class BasePage {
   protected readonly page: Page;
@@ -49,7 +50,7 @@ export abstract class BasePage {
       // Click the "Employees" app option to leave the home menu and load any Odoo view.
       // Once an action is loaded, popstate navigation works without triggering the overlay.
       const employeesOption = this.page.getByRole('option', { name: 'Employees' });
-      const isHomeMenu = await employeesOption.isVisible({ timeout: 6_000 }).catch(() => false);
+      const isHomeMenu = await isVisibleWhenIdle(employeesOption).catch(() => false);
       if (isHomeMenu) {
         await employeesOption.click();
         // Wait for the home-menu app-picker listbox to fully unmount before asserting
@@ -76,7 +77,7 @@ export abstract class BasePage {
     // home-menu app-picker (listbox) instead of routing to the target view.
     // Detected via [role=listbox] being visible after the pushState fires.
     // Fix: click Employees to exit the home menu, then re-fire pushState.
-    const listboxVisible = await this.page.locator('[role=listbox]').isVisible({ timeout: 300 }).catch(() => false);
+    const listboxVisible = await isVisibleWhenIdle(this.page.locator('[role=listbox]')).catch(() => false);
     if (listboxVisible) {
       await this.page.getByRole('option', { name: 'Employees' }).click().catch(() => {});
       await this.page.waitForSelector('[role=listbox]', { state: 'detached', timeout: 10_000 }).catch(() => {});
@@ -141,8 +142,8 @@ export abstract class BasePage {
         { state: 'visible', timeout: 5_000 },
       ).catch(() => {});
     });
-    // Wait for Odoo's loading overlay to clear (it may not appear for fast navigations)
-    await this.page.waitForSelector('.o_loading_indicator', { state: 'hidden', timeout: 8_000 }).catch(() => {});
+    // Wait until Odoo has no RPC in flight (its loading indicator only shows for RPCs over 250 ms)
+    await waitForOdooIdle(this.page, { timeout: 8_000 }).catch(() => {});
   }
 
   // ── Toasts / Notifications ──────────────────────────────────────────────────

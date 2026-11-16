@@ -51,9 +51,8 @@ test.describe('<Descriptive Suite Name> @module:<module> @step:<step>', () => {
     await formPage.navigate();
     await formPage.name.setValue(uniqueName('<Meaningful Base Name>'));
 
-    const buttonVisible = await page
-      .locator('button', { hasText: '<Config-Dependent Button>' })
-      .isVisible({ timeout: 3_000 })
+    // isVisibleWhenIdle (core/utils/OdooIdle) waits for Odoo to be idle; isVisible({ timeout }) does not wait
+    const buttonVisible = await isVisibleWhenIdle(page.locator('button', { hasText: '<Config-Dependent Button>' }))
       .catch(() => false);
     if (!buttonVisible) {
       test.skip(true, '<Config-Dependent Button> not available in this Odoo configuration');

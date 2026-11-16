@@ -1,4 +1,5 @@
 import { Page, expect } from '@playwright/test';
+import { isVisibleWhenIdle } from '../utils/OdooIdle';
 
 export class StatusBar {
   constructor(private readonly page: Page) {}
@@ -34,11 +35,10 @@ export class StatusBar {
 
   /** Checks whether an action button with the given label is visible */
   async isButtonVisible(label: string): Promise<boolean> {
-    return this.page
+    return isVisibleWhenIdle(this.page
       .locator('.o_statusbar_buttons button, .o_statusbar_buttons .btn')
       .filter({ hasText: label })
-      .first()
-      .isVisible({ timeout: 1_000 })
+      .first())
       .catch(() => false);
   }
 }

@@ -1,5 +1,6 @@
 import { Page, expect } from '@playwright/test';
 import { BasePage } from './BasePage';
+import { isVisibleWhenIdle } from '../utils/OdooIdle';
 
 export abstract class BaseSettingsPage extends BasePage {
   constructor(page: Page) {
@@ -54,7 +55,7 @@ export abstract class BaseSettingsPage extends BasePage {
   /** Resets settings to default (if the discard button is available) */
   async discardSettings(): Promise<void> {
     const discardBtn = this.page.locator('.o_settings_container .o_discard_button, button[class*="o_settings_discard"]');
-    if (await discardBtn.isVisible({ timeout: 1_000 }).catch(() => false)) {
+    if (await isVisibleWhenIdle(discardBtn).catch(() => false)) {
       await discardBtn.click();
       await this.waitForOdooReady();
     }

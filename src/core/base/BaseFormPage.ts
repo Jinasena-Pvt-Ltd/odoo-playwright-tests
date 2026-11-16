@@ -1,5 +1,6 @@
 import { Page, expect, Locator } from '@playwright/test';
 import { BasePage } from './BasePage';
+import { isVisibleWhenIdle } from '../utils/OdooIdle';
 
 export abstract class BaseFormPage extends BasePage {
   constructor(page: Page) {
@@ -23,7 +24,7 @@ export abstract class BaseFormPage extends BasePage {
     await discardBtn.click();
     // Handle "Discard changes?" confirmation if it appears
     const confirmBtn = this.page.locator('.modal .btn-primary').first();
-    const hasConfirm = await confirmBtn.isVisible({ timeout: 1_500 }).catch(() => false);
+    const hasConfirm = await isVisibleWhenIdle(confirmBtn).catch(() => false);
     if (hasConfirm) {
       await confirmBtn.click();
       await this.page.waitForSelector('.modal', { state: 'hidden', timeout: 5_000 });
@@ -63,7 +64,7 @@ export abstract class BaseFormPage extends BasePage {
 
     // Try input first, then span/div display
     const input = widget.locator('input').first();
-    if (await input.isVisible({ timeout: 500 }).catch(() => false)) {
+    if (await isVisibleWhenIdle(input).catch(() => false)) {
       return (await input.inputValue()) ?? '';
     }
     return (await widget.textContent())?.trim() ?? '';
@@ -73,13 +74,13 @@ export abstract class BaseFormPage extends BasePage {
   async getFieldError(fieldName: string): Promise<string> {
     // --- Signal 1: field has .o_field_invalid class (standard Odoo validation) ---
     const invalidWidget = this.page.locator(`.o_field_widget[name="${fieldName}"].o_field_invalid`);
-    if (await invalidWidget.isVisible({ timeout: 1_500 }).catch(() => false)) {
+    if (await isVisibleWhenIdle(invalidWidget).catch(() => false)) {
       // Hover to trigger the validation tooltip/popover
       await invalidWidget.hover().catch(() => {});
       const tooltip = this.page.locator(
         '.o-tooltip--validation-error, .o_tooltip_info, .tooltip .tooltip-inner',
       ).first();
-      if (await tooltip.isVisible({ timeout: 1_000 }).catch(() => false)) {
+      if (await isVisibleWhenIdle(tooltip).catch(() => false)) {
         const text = (await tooltip.textContent())?.trim() ?? '';
         if (text) return text;
       }
@@ -92,7 +93,7 @@ export abstract class BaseFormPage extends BasePage {
        [name="${fieldName}"] .o_error_message,
        .o_form_view .invalid-feedback[data-field="${fieldName}"]`,
     ).first();
-    if (await inlineError.isVisible({ timeout: 500 }).catch(() => false)) {
+    if (await isVisibleWhenIdle(inlineError).catch(() => false)) {
       return (await inlineError.textContent())?.trim() ?? '';
     }
 
@@ -102,7 +103,7 @@ export abstract class BaseFormPage extends BasePage {
     const expandedCombo = this.page.locator(
       `.o_field_widget[name="${fieldName}"] [aria-expanded="true"]`,
     ).first();
-    if (await expandedCombo.isVisible({ timeout: 500 }).catch(() => false)) {
+    if (await isVisibleWhenIdle(expandedCombo).catch(() => false)) {
       return 'This field is required';
     }
 
@@ -110,7 +111,7 @@ export abstract class BaseFormPage extends BasePage {
     const notification = this.page.locator(
       '.o_notification_manager .o_notification',
     ).first();
-    if (await notification.isVisible({ timeout: 1_000 }).catch(() => false)) {
+    if (await isVisibleWhenIdle(notification).catch(() => false)) {
       const notifText = (await notification.textContent())?.trim() ?? '';
       if (notifText.length > 0) return notifText;
     }

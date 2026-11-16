@@ -21,6 +21,7 @@ import { Page, Locator } from '@playwright/test';
 import { test, expect } from '../../../../core/fixtures/index';
 import { FixRepairTicketPage } from '../../pages/FixRepairTicketPage';
 import { FIX_REPAIR_TEST_CONFIG } from '../../data/fix_repair.master-data';
+import { isVisibleWhenIdle } from '../../../../core/utils/OdooIdle';
 
 async function gotoRecord(page: Page, model: string, id: number) {
   const url = new URL(page.url());
@@ -41,9 +42,9 @@ async function closeStrayDialogs(page: Page, attempts = 3) {
   await dismissNotifications(page);
   for (let i = 0; i < attempts; i++) {
     const dialog = page.locator('.modal.show, .o_technical_modal').first();
-    if (!(await dialog.isVisible({ timeout: 1_000 }).catch(() => false))) return;
+    if (!(await isVisibleWhenIdle(dialog).catch(() => false))) return;
     const closeButton = dialog.locator('button[aria-label="Close"], .btn-close, button:has-text("Close")').first();
-    if (await closeButton.isVisible({ timeout: 1_000 }).catch(() => false)) {
+    if (await isVisibleWhenIdle(closeButton).catch(() => false)) {
       await closeButton.click({ force: true }).catch(() => undefined);
     } else {
       await page.keyboard.press('Escape');
@@ -132,14 +133,14 @@ test.describe('Fix Repair - Under Warranty - RUG - Factory Tested OK @module:fix
     let ticketId = 0;
 
     const waitForStatusBtn = async (label: string) => {
-      let visible = await statusBtn(label).isVisible({ timeout: 5_000 }).catch(() => false);
+      let visible = await isVisibleWhenIdle(statusBtn(label)).catch(() => false);
       for (let i = 0; i < 6 && !visible; i++) {
         await page.waitForTimeout(3_000);
         await closeStrayDialogs(page);
         await gotoRecord(page, 'helpdesk.ticket', ticketId);
         await page.reload(); // hash-only change does not refresh the record
         await page.waitForTimeout(1_500);
-        visible = await statusBtn(label).isVisible({ timeout: 5_000 }).catch(() => false);
+        visible = await isVisibleWhenIdle(statusBtn(label)).catch(() => false);
       }
       expect(visible, `${label} button visible`).toBeTruthy();
     };
@@ -193,7 +194,7 @@ test.describe('Fix Repair - Under Warranty - RUG - Factory Tested OK @module:fix
     await ticketPage.clickNewTicket();
 
     // 4. Assign to Me
-    if (!(await statusBtn('Assign to Me').isVisible({ timeout: 5_000 }).catch(() => false))) {
+    if (!(await isVisibleWhenIdle(statusBtn('Assign to Me')).catch(() => false))) {
       test.skip(true, 'Assign to Me not available on this instance');
       return;
     }
@@ -202,7 +203,7 @@ test.describe('Fix Repair - Under Warranty - RUG - Factory Tested OK @module:fix
     await page.locator('div.o_statusbar_buttons button', { hasText: 'Assign to Me' }).waitFor({ state: 'hidden', timeout: 10_000 });
 
     // 5. Type = Repair - Under Warranty - RUG
-    if (!(await field('ticket_type_id').isVisible({ timeout: 3_000 }).catch(() => false))) {
+    if (!(await isVisibleWhenIdle(field('ticket_type_id')).catch(() => false))) {
       test.skip(true, 'Fix Repair Studio customization not installed on this instance');
       return;
     }
@@ -466,6 +467,9 @@ test.describe('Fix Repair - Under Warranty - RUG - Factory Tested OK @module:fix
 
 
     // ---------- Section G - Dispatch ----------
+    // The task dialog from step 25 is still open when there was nothing to invoice; it would
+    // cover the ticket (navigating does not close it) and block the Dispatch click.
+    await closeStrayDialogs(page);
     // 31. Dispatch (visibility lags - poll with reload)
     await gotoRecord(page, 'helpdesk.ticket', ticketId);
     await waitForStatusBtn('Dispatch');

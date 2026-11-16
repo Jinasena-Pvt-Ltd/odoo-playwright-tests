@@ -1,4 +1,5 @@
 import { Page, expect } from '@playwright/test';
+import { isVisibleWhenIdle, waitForOdooIdle } from '../utils/OdooIdle';
 
 export class Many2OneField {
   constructor(
@@ -10,18 +11,25 @@ export class Many2OneField {
     const widget = this.page.locator(`.o_field_widget[name="${this.fieldName}"]`).first();
     const input = widget.locator('input').first();
 
+    // An earlier change (e.g. an onchange) may still be re-rendering the form; typing into
+    // the old input then loses the text and the option never appears.
+    await waitForOdooIdle(this.page).catch(() => undefined);
     await input.waitFor({ state: 'visible', timeout: 5_000 });
-    await input.fill(displayName);
-
-    // Wait for the dropdown to appear
-    const dropdown = this.page.locator('.o_field_many2one_dropdown, .ui-autocomplete, .o-dropdown--menu').first();
-    await dropdown.waitFor({ state: 'visible', timeout: 8_000 });
-
-    // Click the first matching option
     const option = this.page
-      .locator('.o_field_many2one_dropdown .o_menu_item, .ui-autocomplete .ui-menu-item, .o-dropdown--menu .o_menu_item')
+      .locator('.o_field_many2one_dropdown .o_menu_item, .ui-autocomplete .ui-menu-item, .o-dropdown--menu .o_menu_item, .o-autocomplete--dropdown-item')
       .filter({ hasText: displayName })
       .first();
+    for (let attempt = 1; ; attempt++) {
+      await input.fill(displayName);
+      // Odoo searches ~250 ms after typing stops; wait for the searched option itself
+      // (another field's dropdown may still be open).
+      const shown = await option.waitFor({ state: 'visible', timeout: 15_000 }).then(() => true, () => false);
+      if (shown) break;
+      if (attempt === 2) {
+        throw new Error(`Many2OneField ${this.fieldName}: no option "${displayName}" after typing it twice`);
+      }
+      await waitForOdooIdle(this.page).catch(() => undefined);
+    }
     await option.click();
   }
 
@@ -30,13 +38,13 @@ export class Many2OneField {
 
     // In edit mode
     const input = widget.locator('input').first();
-    if (await input.isVisible({ timeout: 300 }).catch(() => false)) {
+    if (await isVisibleWhenIdle(input).catch(() => false)) {
       return input.inputValue();
     }
 
     // In read mode
     const link = widget.locator('.o_form_uri').first();
-    if (await link.isVisible({ timeout: 300 }).catch(() => false)) {
+    if (await isVisibleWhenIdle(link).catch(() => false)) {
       return (await link.textContent())?.trim() ?? '';
     }
 
@@ -49,7 +57,7 @@ export class Many2OneField {
     await widget.hover().catch(() => {});
     await this.page.waitForTimeout(150);
     const clearBtn = widget.locator('.o_field_many2one .o_delete, .o_delete').first();
-    if (await clearBtn.isVisible({ timeout: 1_000 }).catch(() => false)) {
+    if (await isVisibleWhenIdle(clearBtn).catch(() => false)) {
       await clearBtn.click();
       // Close any autocomplete dropdown that may open after clearing.
       await this.page.keyboard.press('Escape').catch(() => {});
