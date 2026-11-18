@@ -336,7 +336,7 @@ test.describe('Fix Repair - Not Under Warranty (With Serial No) - Branch Tested 
     let returnPickingIds: number[] =
       (await callKw(page, 'helpdesk.ticket', 'read', [[ticketId], ['repair_picking_ids']]))?.[0]?.repair_picking_ids ?? [];
     if (!returnPickingIds.length) {
-      note('Return click did not create the picking; calling fix_repair_action_direct_return through RPC.');
+      throw new Error('Return click did not create the picking (strict: no RPC fallback)');
       try {
         await callKw(page, 'helpdesk.ticket', 'fix_repair_action_direct_return', [[ticketId]]);
       } catch (err) {

@@ -314,7 +314,7 @@ test.describe('Fix Repair - Under Warranty - RUG (Approved) - Branch Full Flow @
     let returnPickingIds: number[] =
       (await callKw(page, 'helpdesk.ticket', 'read', [[ticketId], ['repair_picking_ids']]))?.[0]?.repair_picking_ids ?? [];
     if (!returnPickingIds.length) {
-      note('Return click did not create the picking; calling fix_repair_action_direct_return through RPC.');
+      throw new Error('Return click did not create the picking (strict: no RPC fallback)');
       try {
         await callKw(page, 'helpdesk.ticket', 'fix_repair_action_direct_return', [[ticketId]]);
       } catch (err) {
@@ -473,7 +473,7 @@ test.describe('Fix Repair - Under Warranty - RUG (Approved) - Branch Full Flow @
       await confirmBtn.click();
       await page.waitForTimeout(2_500);
     } else {
-      note('Confirm hidden by Studio views; confirming through action_confirm RPC.');
+      throw new Error('Confirm hidden by Studio views (strict: no RPC fallback)');
       await shot('34-confirm-order.png', page.locator('.o_statusbar_status:visible'));
     }
     if ((await callKw(page, 'sale.order', 'read', [[soId], ['state']]))[0].state !== 'sale') {
@@ -534,7 +534,7 @@ test.describe('Fix Repair - Under Warranty - RUG (Approved) - Branch Full Flow @
         [pstate] = await callKw(page, 'stock.picking', 'read', [[pk.id], ['state']]);
       }
       if (pstate.state !== 'done') {
-        note(`${pk.name}: Validate click did not complete the transfer (state ${pstate.state}); validated through RPC.`);
+        throw new Error(`${pk.name}: Validate click did not complete the transfer (state ${pstate.state}) (strict: no RPC fallback)`);
         await callKw(page, 'stock.picking', 'button_validate', [[pk.id]]);
         [pstate] = await callKw(page, 'stock.picking', 'read', [[pk.id], ['state']]);
       }
@@ -594,7 +594,7 @@ test.describe('Fix Repair - Under Warranty - RUG (Approved) - Branch Full Flow @
       await postBtn.click();
       await page.waitForTimeout(2_500);
     } else {
-      note('Invoice Confirm hidden by Studio views; posting through RPC.');
+      throw new Error('Invoice Confirm hidden by Studio views (strict: no RPC fallback)');
       await shot('45-confirm-invoice.png', page.locator('.o_statusbar_status:visible'));
     }
     const soInv: number[] = (await callKw(page, 'sale.order', 'read', [[soId], ['invoice_ids']]))[0].invoice_ids ?? [];

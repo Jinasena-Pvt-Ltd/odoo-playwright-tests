@@ -353,7 +353,7 @@ test.describe('Fix Repair - Under Warranty - RUG (Reject) - Factory Full Flow @m
     let returnPickingIds: number[] =
       (await callKw(page, 'helpdesk.ticket', 'read', [[ticketId], ['repair_picking_ids']]))?.[0]?.repair_picking_ids ?? [];
     if (!returnPickingIds.length) {
-      note('Return click did not create the picking; calling fix_repair_action_direct_return through RPC.');
+      throw new Error('Return click did not create the picking (strict: no RPC fallback)');
       try {
         await callKw(page, 'helpdesk.ticket', 'fix_repair_action_direct_return', [[ticketId]]);
       } catch (err) {
@@ -539,20 +539,40 @@ test.describe('Fix Repair - Under Warranty - RUG (Reject) - Factory Full Flow @m
     await ticketToTask('39-tasks-confirmation.png');
     await taskToSalesOrder('40-sales-order-confirmation.png');
 
-    // 41. Confirm the sales order (customer accepted the e-mailed quotation)
+    // 41. The customer accepts the e-mailed quotation on the portal (Accept & Sign). After a RUG
+    // rejection the customer pays, and Fix-repair offers Confirm only once the customer has signed
+    // (sale_order.action_confirm leaves the confirmation itself to the salesperson).
+    const portalUrlRaw = await callKw(page, 'sale.order', 'get_portal_url', [[soId]]);
+    expect(typeof portalUrlRaw).toBe('string');
+    const absoluteUrl = String(portalUrlRaw).startsWith('http') ? portalUrlRaw : `${new URL(page.url()).origin}${portalUrlRaw}`;
+    const portalPage = await page.context().newPage();
+    await portalPage.goto(absoluteUrl);
+    const acceptSign = portalPage.locator('button:visible, a:visible', { hasText: 'Accept & Sign' }).first();
+    await expect(acceptSign, 'the customer can Accept & Sign on the portal').toBeVisible({ timeout: 15_000 });
+    await shot('41a-portal-quotation.png', acceptSign, portalPage);
+    await acceptSign.click();
+    const signatureModal = portalPage.locator('.modal:visible, .o_portal_sign_modal:visible').first();
+    const finalAccept = signatureModal.locator('button:visible', { hasText: 'Accept & Sign' }).first();
+    await expect(finalAccept, 'the signature dialog offers Accept & Sign').toBeVisible({ timeout: 15_000 });
+    await shot('41b-portal-signature.png', finalAccept, portalPage);
+    await finalAccept.click();
+    await signatureModal.waitFor({ state: 'hidden', timeout: 15_000 }).catch(() => undefined);
+    await shot('41c-portal-signed.png', undefined, portalPage);
+    await portalPage.close();
+    const [signedSo] = await callKw(page, 'sale.order', 'read', [[soId], ['state', 'signed_by']]);
+    expect(signedSo.signed_by, 'the customer signed the quotation on the portal').toBeTruthy();
+    expect(signedSo.state, 'a portal signature does not confirm a repair quotation').not.toBe('sale');
+
+    // 41d. Confirm the sales order in the backend (salesperson)
+    await closeStrayDialogs(page);
+    await gotoRecord(page, 'sale.order', soId);
     const confirmBtn = page.locator('div.o_statusbar_buttons button:visible', { hasText: /^Confirm$/ }).first();
-    if (await appears(confirmBtn, 8_000)) {
-      await shot('41-confirm-order.png', confirmBtn);
-      await confirmBtn.click();
-      await page.waitForTimeout(2_500);
-    } else {
-      note('Confirm hidden by Studio views; confirming through action_confirm RPC.');
-      await shot('41-confirm-order.png', page.locator('.modal:visible .o_statusbar_status').first());
-    }
-    if ((await callKw(page, 'sale.order', 'read', [[soId], ['state']]))[0].state !== 'sale') {
-      await callKwWithRetry(page, 'sale.order', 'action_confirm', [[soId]]);
-    }
-    expect((await callKw(page, 'sale.order', 'read', [[soId], ['state']]))[0].state).toBe('sale');
+    await expect(confirmBtn, 'Confirm offered to the salesperson once the customer has signed').toBeVisible({ timeout: 15_000 });
+    await shot('41d-confirm-order.png', confirmBtn);
+    await confirmBtn.click();
+    await expect
+      .poll(async () => (await callKw(page, 'sale.order', 'read', [[soId], ['state']]))[0].state, { timeout: 20_000 })
+      .toBe('sale');
     await closeStrayDialogs(page);
     await gotoRecord(page, 'sale.order', soId);
     await page.reload();
@@ -586,21 +606,13 @@ test.describe('Fix Repair - Under Warranty - RUG (Reject) - Factory Full Flow @m
 
     // 43. Confirm (post) the deposit invoice
     const postBtn = page.locator('div.o_statusbar_buttons button:visible', { hasText: /^Confirm$/ }).first();
-    if (await appears(postBtn, 6_000)) {
-      await shot('43-confirm-invoice.png', postBtn);
-      await postBtn.click();
-      await page.waitForTimeout(2_500);
-    } else {
-      note('Invoice Confirm hidden by Studio views; posting through RPC.');
-      await shot('43-confirm-invoice.png', page.locator('.o_statusbar_status:visible').first());
-    }
+    await expect(postBtn, 'Confirm offered on the draft deposit invoice').toBeVisible({ timeout: 15_000 });
+    await shot('43-confirm-invoice.png', postBtn);
+    await postBtn.click();
+    await expect
+      .poll(async () => (await callKw(page, 'account.move', 'read', [[invoiceId], ['state']]))[0].state, { timeout: 20_000 })
+      .toBe('posted');
     let invRead = (await callKw(page, 'account.move', 'read', [[invoiceId], ['state', 'amount_total']]))[0];
-    if (invRead.state !== 'posted') {
-      await callKw(page, 'account.move', 'action_post', [[invoiceId]]);
-      invRead = (await callKw(page, 'account.move', 'read', [[invoiceId], ['state', 'amount_total']]))[0];
-      await page.reload().catch(() => undefined);
-      await page.waitForTimeout(1_500);
-    }
     expect(invRead.state, 'deposit invoice posted').toBe('posted');
 
     // 44-47. Register the 50% deposit (UI wizard; RPC fallback when the button is hidden)
@@ -609,7 +621,7 @@ test.describe('Fix Repair - Under Warranty - RUG (Reject) - Factory Full Flow @m
       invRead.amount_total / 2,
     );
     if (!depositViaUi) {
-      note('Register Payment hidden on the invoice; deposit created via account.payment.register RPC.');
+      throw new Error('Register Payment hidden on the invoice (strict: no RPC fallback)');
       await shot('44-register-payment.png', page.locator('.o_form_view:visible').first());
       const journals = await callKw(page, 'account.journal', 'search_read', [[['name', 'ilike', 'Commercial Bank']], ['id']]);
       expect(journals?.[0]?.id, 'Commercial Bank journal').toBeTruthy();
@@ -678,7 +690,7 @@ test.describe('Fix Repair - Under Warranty - RUG (Reject) - Factory Full Flow @m
         [pstate] = await callKw(page, 'stock.picking', 'read', [[pk.id], ['state']]);
       }
       if (pstate.state !== 'done') {
-        note(`${pk.name}: Validate click did not complete the transfer (state ${pstate.state}); validated through RPC.`);
+        throw new Error(`${pk.name}: Validate click did not complete the transfer (state ${pstate.state}) (strict: no RPC fallback)`);
         await callKw(page, 'stock.picking', 'button_validate', [[pk.id]]);
         [pstate] = await callKw(page, 'stock.picking', 'read', [[pk.id], ['state']]);
       }

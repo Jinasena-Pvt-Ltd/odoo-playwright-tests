@@ -312,7 +312,7 @@ test.describe('Fix Repair - Under Warranty - RUG - Factory Tested OK @module:fix
     let returnPickingIds: number[] =
       (await callKw(page, 'helpdesk.ticket', 'read', [[ticketId], ['repair_picking_ids']]))?.[0]?.repair_picking_ids ?? [];
     if (!returnPickingIds.length) {
-      note('Return click did not create the picking; calling fix_repair_action_direct_return through RPC.');
+      throw new Error('Return click did not create the picking (strict: no RPC fallback)');
       try {
         await callKw(page, 'helpdesk.ticket', 'fix_repair_action_direct_return', [[ticketId]]);
       } catch (err) {
@@ -442,7 +442,7 @@ test.describe('Fix Repair - Under Warranty - RUG - Factory Tested OK @module:fix
       await postBtn.click();
       await page.waitForTimeout(2_500);
     } else {
-      note('Invoice Confirm hidden by Studio views; posting through RPC.');
+      throw new Error('Invoice Confirm hidden by Studio views (strict: no RPC fallback)');
       await shot('29-confirm-invoice.png', page.locator('.o_statusbar_status:visible'));
     }
     const soInv: number[] = (await callKw(page, 'sale.order', 'read', [[taskSoId], ['invoice_ids']]))[0].invoice_ids ?? [];

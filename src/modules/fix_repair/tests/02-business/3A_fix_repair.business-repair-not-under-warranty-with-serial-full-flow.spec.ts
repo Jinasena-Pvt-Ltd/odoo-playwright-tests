@@ -340,7 +340,7 @@ test.describe('Fix Repair - Not Under Warranty (With Serial No) - Factory Full F
     let returnPickingIds: number[] =
       (await callKw(page, 'helpdesk.ticket', 'read', [[ticketId], ['repair_picking_ids']]))?.[0]?.repair_picking_ids ?? [];
     if (!returnPickingIds.length) {
-      note('Return click did not create the picking; calling fix_repair_action_direct_return through RPC.');
+      throw new Error('Return click did not create the picking (strict: no RPC fallback)');
       try {
         await callKw(page, 'helpdesk.ticket', 'fix_repair_action_direct_return', [[ticketId]]);
       } catch (err) {
@@ -527,30 +527,37 @@ test.describe('Fix Repair - Not Under Warranty (With Serial No) - Factory Full F
     await portalPage.goto(absoluteUrl);
     await portalPage.waitForTimeout(2_000);
     const acceptSign = portalPage.locator('button:visible, a:visible', { hasText: 'Accept & Sign' }).first();
-    if (await isVisibleWhenIdle(acceptSign).catch(() => false)) {
+    await expect(acceptSign, 'the customer can Accept & Sign on the portal').toBeVisible({ timeout: 15_000 });
+    {
       await shot('+b-portal-quotation', acceptSign, portalPage);
       await acceptSign.click();
       await portalPage.waitForTimeout(1_500);
       const signatureModal = portalPage.locator('.modal:visible, .o_portal_sign_modal:visible').first();
       const finalAccept = signatureModal.locator('button:visible', { hasText: 'Accept & Sign' }).first();
-      if (await isVisibleWhenIdle(finalAccept).catch(() => false)) {
+      await expect(finalAccept, 'the signature dialog offers Accept & Sign').toBeVisible({ timeout: 15_000 });
+      {
         await shot('+c-portal-signature', finalAccept, portalPage);
         await finalAccept.click();
         await signatureModal.waitFor({ state: 'hidden', timeout: 15_000 }).catch(() => undefined);
         await portalPage.waitForTimeout(2_000);
       }
       await shot('+d-portal-confirmed', undefined, portalPage);
-    } else {
-      note('Portal Accept & Sign not available; falling back to action_confirm.');
     }
     await portalPage.close();
-    const [soRec] = await callKw(page, 'sale.order', 'read', [[soId], ['state']]);
-    if (soRec.state !== 'sale') {
-      note(`SO state after portal flow was "${soRec.state}"; confirming via action_confirm.`);
-      await closeStrayDialogs(page);
-      await callKwWithRetry(page, 'sale.order', 'action_confirm', [[soId]]);
-    }
-    expect((await callKw(page, 'sale.order', 'read', [[soId], ['state']]))[0].state).toBe('sale');
+    // The portal only records the signature: Fix-repair (sale_order.action_confirm) leaves
+    // confirming a signed customer-pays quotation to the salesperson, in the backend.
+    const [signedSo] = await callKw(page, 'sale.order', 'read', [[soId], ['state', 'signed_by']]);
+    expect(signedSo.signed_by, 'the customer signed the quotation on the portal').toBeTruthy();
+    expect(signedSo.state, 'a portal signature does not confirm a repair quotation').not.toBe('sale');
+    await closeStrayDialogs(page);
+    await gotoRecord(page, 'sale.order', soId);
+    const backendConfirm = page.locator('div.o_statusbar_buttons button:visible', { hasText: /^Confirm$/ }).first();
+    await expect(backendConfirm, 'Confirm offered to the salesperson once the customer has signed').toBeVisible({ timeout: 15_000 });
+    await shot('portal-signed-confirm-order.png', backendConfirm);
+    await backendConfirm.click();
+    await expect
+      .poll(async () => (await callKw(page, 'sale.order', 'read', [[soId], ['state']]))[0].state, { timeout: 20_000 })
+      .toBe('sale');
     await closeStrayDialogs(page);
     await gotoRecord(page, 'sale.order', soId);
     await page.waitForTimeout(2_000);
@@ -596,7 +603,7 @@ test.describe('Fix Repair - Not Under Warranty (With Serial No) - Factory Full F
       invoiceTotal / 2,
     );
     if (!depositViaUi) {
-      note('Register Payment hidden on the invoice; deposit created via account.payment.register RPC.');
+      throw new Error('Register Payment hidden on the invoice (strict: no RPC fallback)');
       await shot('register-payment', page.locator('.o_form_view:visible').first());
       const journals = await callKw(page, 'account.journal', 'search_read', [[['name', 'ilike', 'Commercial Bank']], ['id']]);
       expect(journals?.[0]?.id, 'Commercial Bank journal').toBeTruthy();
@@ -673,7 +680,7 @@ test.describe('Fix Repair - Not Under Warranty (With Serial No) - Factory Full F
         [pstate] = await callKw(page, 'stock.picking', 'read', [[pk.id], ['state']]);
       }
       if (pstate.state !== 'done') {
-        note(`${pk.name}: Validate click did not complete the transfer (state ${pstate.state}); validated through RPC.`);
+        throw new Error(`${pk.name}: Validate click did not complete the transfer (state ${pstate.state}) (strict: no RPC fallback)`);
         await callKw(page, 'stock.picking', 'button_validate', [[pk.id]]);
         [pstate] = await callKw(page, 'stock.picking', 'read', [[pk.id], ['state']]);
       }

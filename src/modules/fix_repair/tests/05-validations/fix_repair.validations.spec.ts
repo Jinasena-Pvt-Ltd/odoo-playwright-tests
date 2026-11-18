@@ -109,7 +109,8 @@ test.describe('Fix Repair Field Validations @module:fix_repair @step:validations
     await page.locator('.o_field_widget[name="x_name"]').first().waitFor({ state: 'visible', timeout: 30_000 });
     await waitForOdooIdle(page);
     const message = await saveExpectingInvalid(page);
-    expect(message).toContain('Name');
+    // The Name field of this catalogue is labelled "Resolution".
+    expect(message).toContain('Resolution');
     await expect(field(page, 'x_name')).toHaveClass(/o_field_invalid/);
   });
 });
