@@ -8,6 +8,8 @@ Three user roles are tested independently: admin, manager, and employee.
 
 **Tech stack:** Playwright 1.50, TypeScript 5.7, Allure reporting, Odoo RPC API
 
+**Rules:** follow [RULES.md](RULES.md) on every test change — expected results come from the request, not the code; show a test go red before calling it done; never weaken a test to make it pass.
+
 ---
 
 ## Quick Start
@@ -82,6 +84,9 @@ src/
 |-----|---------|
 | `@module:<domain>` | The Odoo module being tested |
 | `@module:security-audit` | Daily user group & CRUD permission audit |
+| `@module:accounting` | Accounting module |
+| `@module:inventory` | Inventory module |
+| `@module:manufacturing` | Manufacturing module |
 | `@step:config` | Step 1 — configuration/setup |
 | `@step:business` | Step 2 — business logic |
 | `@step:reporting` | Step 3 — views and exports |
@@ -91,6 +96,7 @@ src/
 | `@step:archive` | Step 7 — soft-delete and reactivation |
 | `@e2e` | Full end-to-end flows (02-business only) |
 | `@smoke` | Critical path smoke tests |
+| `@audit` | Read-only discovery audits (custom finance reports) |
 
 When adding a new domain, register `@module:<domain>` in this table and add `"test:<domain>"` to `package.json`.
 

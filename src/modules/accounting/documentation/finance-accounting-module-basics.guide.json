@@ -1,0 +1,297 @@
+{
+  "audience": "New finance users who need a first tour of where things live in the Odoo Accounting app.",
+  "goal": "Find your way around the **Accounting** app: open the **Settings**, then visit **Customer Invoices**, **Vendor Bills**, the **Bank and Cash** journals, **Journal Entries**, the **Chart of Accounts**, the **Trial Balance**, and the **Customer** and **Vendor Payments** screens.",
+  "before": [
+    "You can open the **Accounting** app.",
+    "This guide only **opens** each screen — it does not create or change anything, so you can follow it on a live system."
+  ],
+  "outcome": [
+    "You know which top menu each accounting area is under.",
+    "You have seen the nine key screens: Settings, Invoices, Bills, Bank and Cash, Journal Entries, Chart of Accounts, Trial Balance, Customer Payments and Vendor Payments."
+  ],
+  "notes": [
+    "The screenshots were captured by an automated run on a **test database**. The numbers you see in the lists (for example how many invoices there are) are test data and will differ from yours.",
+    "The red banner at the top of the screenshots (\"Database neutralized for testing\") only appears on test databases.",
+    "The top menu in your Odoo may show more or fewer entries than in the screenshots, depending on the apps installed and your access rights."
+  ],
+  "phases": [
+    {
+      "title": "Open Accounting and its Settings",
+      "summary": "Start the app and look at the company-wide accounting preferences.",
+      "from": 1,
+      "to": 3,
+      "checkpoint": "You are on the **Settings** screen and have not changed anything."
+    },
+    {
+      "title": "Money owed to you and by you",
+      "summary": "Customer invoices (Accounts Receivable) and vendor bills (Accounts Payable).",
+      "from": 4,
+      "to": 7,
+      "checkpoint": "You have seen the customer **Invoices** list and the vendor **Bills** list."
+    },
+    {
+      "title": "Bank, cash and journal entries",
+      "summary": "Where bank and cash movements are recorded and where every transaction is posted to the ledger.",
+      "from": 8,
+      "to": 11,
+      "checkpoint": "You have opened **Bank and Cash** and **Journal Entries**."
+    },
+    {
+      "title": "The chart of accounts and the Trial Balance",
+      "summary": "The list of General Ledger accounts, and the report that proves the books balance.",
+      "from": 12,
+      "to": 15,
+      "checkpoint": "You have seen the **Chart of Accounts** list and the **Trial Balance** report."
+    },
+    {
+      "title": "Payments",
+      "summary": "Payments received from customers and payments made to vendors.",
+      "from": 16,
+      "to": 19,
+      "checkpoint": "You have opened both the **Customer Payments** and **Vendor Payments** lists. The tour is complete."
+    }
+  ],
+  "glossary": [
+    {
+      "term": "Accounts Receivable (AR)",
+      "meaning": "Money your customers owe you. Customer invoices and the payments you receive live here."
+    },
+    {
+      "term": "Accounts Payable (AP)",
+      "meaning": "Money you owe your suppliers. Vendor bills and the payments you make live here."
+    },
+    {
+      "term": "Journal",
+      "meaning": "A book in which Odoo records one kind of transaction — for example sales, purchases, bank or cash."
+    },
+    {
+      "term": "Journal entry",
+      "meaning": "A posted accounting transaction made of debit and credit lines. Every invoice, bill and payment ends up as one."
+    },
+    {
+      "term": "General Ledger (GL)",
+      "meaning": "The complete record of all accounts and their movements. The Chart of Accounts is the list of its accounts."
+    },
+    {
+      "term": "Chart of Accounts",
+      "meaning": "The list of GL accounts. Each has a **code**, a **name** and a **type** (Asset, Liability, Equity, Income, Expense) that decides where it appears on financial reports."
+    },
+    {
+      "term": "Trial Balance",
+      "meaning": "A report listing the debit and credit balance of every GL account for a period, used to check that the books balance before closing."
+    }
+  ],
+  "steps": {
+    "1": {
+      "title": "Open the Accounting app",
+      "do": "On the Odoo home screen, click the **Accounting** app.",
+      "see": "The Accounting app opens with its menu bar across the top (Dashboard, Customers, Vendors, Accounting, Reporting, Configuration …).",
+      "tip": "This is where you manage all finance work: customer invoices, vendor bills, bank transactions, the general ledger and financial reports.",
+      "where": "Odoo home screen > Accounting app",
+      "actions": [
+        "Go to the Odoo home screen (the grid of app icons).",
+        "Find the **Accounting** icon.",
+        "Click it."
+      ]
+    },
+    "2": {
+      "title": "Open the Configuration menu",
+      "do": "In the top menu bar, click **Configuration**.",
+      "see": "A drop-down list of configuration options, including **Settings** and **Chart of Accounts**.",
+      "where": "Accounting app > top menu bar > Configuration",
+      "actions": [
+        "Look at the menu bar across the top of the screen.",
+        "Click **Configuration**."
+      ]
+    },
+    "3": {
+      "title": "Open Settings",
+      "do": "In the Configuration menu, click **Settings**.",
+      "see": "The **Settings** screen with **Save** and **Discard** buttons at the top.",
+      "tip": "Settings is where the finance side of Odoo is set up company-wide: fiscal localization, default taxes, currency, invoicing and payment terms. Only change something here if you know what it affects.",
+      "where": "Accounting app > Configuration > Settings",
+      "actions": [
+        "With the Configuration menu open, find **Settings** in the list.",
+        "Click **Settings**.",
+        "Wait for the screen to load — **Save** and **Discard** appear at the top."
+      ]
+    },
+    "4": {
+      "title": "Open the Customers menu",
+      "do": "In the top menu bar, click **Customers**.",
+      "see": "A drop-down with the customer-side screens, including **Invoices** and **Payments**.",
+      "where": "Accounting app > Customers",
+      "actions": [
+        "Look at the menu bar across the top.",
+        "Click **Customers**."
+      ]
+    },
+    "5": {
+      "title": "Open Customer Invoices",
+      "do": "In the Customers menu, click **Invoices**.",
+      "see": "The list of customer invoices, with **New** and **Upload Invoices** buttons at the top.",
+      "tip": "This is the Accounts Receivable (AR) area: create and manage customer invoices, see what customers owe you, and register incoming payments.",
+      "where": "Accounting app > Customers > Invoices",
+      "actions": [
+        "With the Customers menu open, find **Invoices**.",
+        "Click **Invoices**.",
+        "Wait for the invoice list to load."
+      ]
+    },
+    "6": {
+      "title": "Open the Vendors menu",
+      "do": "In the top menu bar, click **Vendors**.",
+      "see": "A drop-down with the vendor-side screens, including **Bills** and **Payments**.",
+      "where": "Accounting app > Vendors",
+      "actions": [
+        "Look at the menu bar across the top.",
+        "Click **Vendors**."
+      ]
+    },
+    "7": {
+      "title": "Open Vendor Bills",
+      "do": "In the Vendors menu, click **Bills**.",
+      "see": "The list of vendor bills, with **New** and **Upload Bills** buttons at the top.",
+      "tip": "This is the Accounts Payable (AP) area: record vendor bills, see what the company owes suppliers, and process outgoing payments.",
+      "where": "Accounting app > Vendors > Bills",
+      "actions": [
+        "With the Vendors menu open, find **Bills**.",
+        "Click **Bills**.",
+        "Wait for the bill list to load."
+      ]
+    },
+    "8": {
+      "title": "Open the Accounting menu",
+      "do": "In the top menu bar, click **Accounting** (the menu entry, not the app name at the far left).",
+      "see": "A drop-down with the groups Miscellaneous, Journals, Ledgers, Management and Actions.",
+      "tip": "Two things are called \"Accounting\": the app (left of the menu bar) and this menu entry. You want the menu entry.",
+      "where": "Accounting app > Accounting (menu entry)",
+      "actions": [
+        "Look along the top menu bar for the entry named **Accounting** — not the app name at the far left.",
+        "Click it."
+      ]
+    },
+    "9": {
+      "title": "Open Bank and Cash",
+      "do": "In the **Journals** group, click **Bank and Cash**.",
+      "see": "A list of the bank and cash journal items, grouped by journal entry, with the filters **Posted** and **Bank or Cash** already applied.",
+      "tip": "Use this to review deposits and withdrawals. Reconciling bank statements against your accounting records starts from the bank journals.",
+      "where": "Accounting app > Accounting > Journals > Bank and Cash",
+      "actions": [
+        "With the Accounting menu open, find the **Journals** group.",
+        "Click **Bank and Cash**.",
+        "Wait for the list to load."
+      ]
+    },
+    "10": {
+      "title": "Open the Accounting menu again",
+      "do": "Click **Accounting** in the top menu bar once more.",
+      "see": "The same drop-down opens again.",
+      "where": "Accounting app > Accounting (menu entry)",
+      "actions": [
+        "Look along the top menu bar for **Accounting** again.",
+        "Click it."
+      ]
+    },
+    "11": {
+      "title": "Open Journal Entries",
+      "do": "In the **Miscellaneous** group, click **Journal Entries**.",
+      "see": "The list of journal entries, with a **New** button and a **Posted** filter.",
+      "tip": "Every financial transaction is posted to the General Ledger here, including manual entries. To make one yourself you would click **New**, add debit and credit lines, then click **Post** — this guide only shows you where the screen is.",
+      "where": "Accounting app > Accounting > Miscellaneous > Journal Entries",
+      "actions": [
+        "With the Accounting menu open, find the **Miscellaneous** group at the top.",
+        "Click **Journal Entries**.",
+        "Wait for the list to load."
+      ]
+    },
+    "12": {
+      "title": "Open the Configuration menu again",
+      "do": "Click **Configuration** in the top menu bar once more.",
+      "see": "The Configuration drop-down opens again.",
+      "where": "Accounting app > Configuration",
+      "actions": [
+        "Look at the menu bar across the top.",
+        "Click **Configuration**."
+      ]
+    },
+    "13": {
+      "title": "Open the Chart of Accounts",
+      "do": "In the Configuration menu, click **Chart of Accounts**.",
+      "see": "The list of General Ledger accounts, with **New** and **Import** buttons.",
+      "tip": "Each account has a code, a name and a type (Asset, Liability, Equity, Income, Expense). The type decides how the account appears on financial reports.",
+      "where": "Accounting app > Configuration > Chart of Accounts",
+      "actions": [
+        "With the Configuration menu open, find **Chart of Accounts**.",
+        "Click it.",
+        "Wait for the list of accounts to load."
+      ]
+    },
+    "14": {
+      "title": "Open the Reporting menu",
+      "do": "In the top menu bar, click **Reporting**.",
+      "see": "A drop-down of financial reports, including **Trial Balance**.",
+      "where": "Accounting app > Reporting",
+      "actions": [
+        "Look at the menu bar across the top.",
+        "Click **Reporting**."
+      ]
+    },
+    "15": {
+      "title": "Open the Trial Balance",
+      "do": "In the Reporting menu, click **Trial Balance**.",
+      "see": "The **Trial Balance** report with **PDF** and **XLSX** buttons and options for the period, comparison, journals and posted entries.",
+      "tip": "It lists the debit and credit balance of every GL account for the period you choose, so you can check the books are balanced before closing.",
+      "where": "Accounting app > Reporting > Trial Balance",
+      "actions": [
+        "With the Reporting menu open, find **Trial Balance**.",
+        "Click it.",
+        "Wait for the report to load."
+      ]
+    },
+    "16": {
+      "title": "Open the Customers menu again",
+      "do": "Click **Customers** in the top menu bar once more.",
+      "see": "The Customers drop-down opens again.",
+      "where": "Accounting app > Customers",
+      "actions": [
+        "Look at the menu bar across the top.",
+        "Click **Customers** again."
+      ]
+    },
+    "17": {
+      "title": "Open Customer Payments",
+      "do": "In the Customers menu, click **Payments**.",
+      "see": "The **Customer Payments** list, with a **New** button.",
+      "tip": "Register and view payments received from customers, and match them against open invoices (Accounts Receivable).",
+      "where": "Accounting app > Customers > Payments",
+      "actions": [
+        "With the Customers menu open, find **Payments**.",
+        "Click it.",
+        "Wait for the list of customer payments to load."
+      ]
+    },
+    "18": {
+      "title": "Open the Vendors menu again",
+      "do": "Click **Vendors** in the top menu bar once more.",
+      "see": "The Vendors drop-down opens again.",
+      "where": "Accounting app > Vendors",
+      "actions": [
+        "Look at the menu bar across the top.",
+        "Click **Vendors** again."
+      ]
+    },
+    "19": {
+      "title": "Open Vendor Payments",
+      "do": "In the Vendors menu, click **Payments**.",
+      "see": "The **Vendor Payments** list, with a **New** button.",
+      "tip": "Register and view payments made to suppliers, and match them against open vendor bills (Accounts Payable). That completes the tour.",
+      "where": "Accounting app > Vendors > Payments",
+      "actions": [
+        "With the Vendors menu open, find **Payments**.",
+        "Click it.",
+        "Wait for the list of vendor payments to load."
+      ]
+    }
+  }
+}

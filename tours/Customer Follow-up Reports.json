@@ -1,0 +1,1539 @@
+{
+  "version": 2,
+  "tours": [
+    {
+      "name": "Finance: Customer Follow-up Reports ( Levels - Review - Send ) - Full Flow",
+      "name_i18n": {
+        "en_US": "Finance: Customer Follow-up Reports ( Levels - Review - Send ) - Full Flow",
+        "si_LK": "Finance: Customer Follow-up Reports ( Levels - Review - Send ) - Full Flow",
+        "ta_IN": "Finance: Customer Follow-up Reports ( Levels - Review - Send ) - Full Flow"
+      },
+      "description": "End-to-end customer follow-up process: configure the follow-up levels (15-day email, 30-day letter, 60-day SMS + call activity), read the Follow-up Reports worklist, work a single customer's overdue lines, and send a reminder through the Send and Print wizard - plus the bulk Process Automatic Follow-ups run.",
+      "description_i18n": {
+        "en_US": "End-to-end customer follow-up process: configure the follow-up levels (15-day email, 30-day letter, 60-day SMS + call activity), read the Follow-up Reports worklist, work a single customer's overdue lines, and send a reminder through the Send and Print wizard - plus the bulk Process Automatic Follow-ups run.",
+        "si_LK": "End-to-end customer follow-up process: configure the follow-up levels (15-day email, 30-day letter, 60-day SMS + call activity), read the Follow-up Reports worklist, work a single customer's overdue lines, and send a reminder through the Send and Print wizard - plus the bulk Process Automatic Follow-ups run.",
+        "ta_IN": "End-to-end customer follow-up process: configure the follow-up levels (15-day email, 30-day letter, 60-day SMS + call activity), read the Follow-up Reports worklist, work a single customer's overdue lines, and send a reminder through the Send and Print wizard - plus the bulk Process Automatic Follow-ups run."
+      },
+      "steps": [
+        {
+          "sequence": 10,
+          "title": "01 - Open Accounting app",
+          "title_i18n": {
+            "en_US": "01 - Open Accounting app",
+            "si_LK": "01 - Open Accounting app",
+            "ta_IN": "01 - Open Accounting app"
+          },
+          "trigger": "[data-menu-xmlid=\"account_accountant.menu_accounting\"]",
+          "content": "Customer follow-ups live inside Accounting. Click the Accounting app to start.",
+          "content_i18n": {
+            "en_US": "Customer follow-ups live inside Accounting. Click the Accounting app to start.",
+            "si_LK": "Customer follow-ups live inside Accounting. Click the Accounting app to start.",
+            "ta_IN": "Customer follow-ups live inside Accounting. Click the Accounting app to start."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 20,
+          "title": "02 - Open the Configuration menu",
+          "title_i18n": {
+            "en_US": "02 - Open the Configuration menu",
+            "si_LK": "02 - Open the Configuration menu",
+            "ta_IN": "02 - Open the Configuration menu"
+          },
+          "trigger": "[data-menu-xmlid=\"account.menu_finance_configuration\"]",
+          "content": "Follow-up stages are set up first. Open the Configuration menu.",
+          "content_i18n": {
+            "en_US": "Follow-up stages are set up first. Open the Configuration menu.",
+            "si_LK": "Follow-up stages are set up first. Open the Configuration menu.",
+            "ta_IN": "Follow-up stages are set up first. Open the Configuration menu."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 30,
+          "title": "03 - Open Follow-up Levels",
+          "title_i18n": {
+            "en_US": "03 - Open Follow-up Levels",
+            "si_LK": "03 - Open Follow-up Levels",
+            "ta_IN": "03 - Open Follow-up Levels"
+          },
+          "trigger": "[data-menu-xmlid=\"account_followup.account_followup_menu\"]",
+          "content": "Under Invoicing, click Follow-up Levels. These are the reminder stages Odoo walks a customer through as an invoice ages.",
+          "content_i18n": {
+            "en_US": "Under Invoicing, click Follow-up Levels. These are the reminder stages Odoo walks a customer through as an invoice ages.",
+            "si_LK": "Under Invoicing, click Follow-up Levels. These are the reminder stages Odoo walks a customer through as an invoice ages.",
+            "ta_IN": "Under Invoicing, click Follow-up Levels. These are the reminder stages Odoo walks a customer through as an invoice ages."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 40,
+          "title": "04 - Create a new follow-up level",
+          "title_i18n": {
+            "en_US": "04 - Create a new follow-up level",
+            "si_LK": "04 - Create a new follow-up level",
+            "ta_IN": "04 - Create a new follow-up level"
+          },
+          "trigger": "button.o_list_button_add",
+          "content": "The list is empty on a fresh database. Click New to add the first reminder stage.",
+          "content_i18n": {
+            "en_US": "The list is empty on a fresh database. Click New to add the first reminder stage.",
+            "si_LK": "The list is empty on a fresh database. Click New to add the first reminder stage.",
+            "ta_IN": "The list is empty on a fresh database. Click New to add the first reminder stage."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 50,
+          "title": "05 - Name the first stage",
+          "title_i18n": {
+            "en_US": "05 - Name the first stage",
+            "si_LK": "05 - Name the first stage",
+            "ta_IN": "05 - Name the first stage"
+          },
+          "trigger": "#name_0",
+          "content": "Type a clear description for the stage, e.g. \"1st Reminder - Email\". This name appears on the customer's Follow-up Level.",
+          "content_i18n": {
+            "en_US": "Type a clear description for the stage, e.g. \"1st Reminder - Email\". This name appears on the customer's Follow-up Level.",
+            "si_LK": "Type a clear description for the stage, e.g. \"1st Reminder - Email\". This name appears on the customer's Follow-up Level.",
+            "ta_IN": "Type a clear description for the stage, e.g. \"1st Reminder - Email\". This name appears on the customer's Follow-up Level."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 60,
+          "title": "06 - Set the delay in days",
+          "title_i18n": {
+            "en_US": "06 - Set the delay in days",
+            "si_LK": "06 - Set the delay in days",
+            "ta_IN": "06 - Set the delay in days"
+          },
+          "trigger": "#delay_0",
+          "content": "Enter how many days after the invoice due date this stage triggers. Enter 15 for the first reminder.",
+          "content_i18n": {
+            "en_US": "Enter how many days after the invoice due date this stage triggers. Enter 15 for the first reminder.",
+            "si_LK": "Enter how many days after the invoice due date this stage triggers. Enter 15 for the first reminder.",
+            "ta_IN": "Enter how many days after the invoice due date this stage triggers. Enter 15 for the first reminder."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 70,
+          "title": "07 - Actions: what the stage does",
+          "title_i18n": {
+            "en_US": "07 - Actions: what the stage does",
+            "si_LK": "07 - Actions: what the stage does",
+            "ta_IN": "07 - Actions: what the stage does"
+          },
+          "trigger": "#send_email_0",
+          "content": "ACTIONS decides how the customer is contacted at this stage. Send Email is ticked by default; Send a Letter and Send SMS Message can be added.",
+          "content_i18n": {
+            "en_US": "ACTIONS decides how the customer is contacted at this stage. Send Email is ticked by default; Send a Letter and Send SMS Message can be added.",
+            "si_LK": "ACTIONS decides how the customer is contacted at this stage. Send Email is ticked by default; Send a Letter and Send SMS Message can be added.",
+            "ta_IN": "ACTIONS decides how the customer is contacted at this stage. Send Email is ticked by default; Send a Letter and Send SMS Message can be added."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 80,
+          "title": "08 - Content Template (optional)",
+          "title_i18n": {
+            "en_US": "08 - Content Template (optional)",
+            "si_LK": "08 - Content Template (optional)",
+            "ta_IN": "08 - Content Template (optional)"
+          },
+          "trigger": "#mail_template_id_0",
+          "content": "Leave blank to use the standard follow-up wording, or pick an email template here to send a specific message at this stage.",
+          "content_i18n": {
+            "en_US": "Leave blank to use the standard follow-up wording, or pick an email template here to send a specific message at this stage.",
+            "si_LK": "Leave blank to use the standard follow-up wording, or pick an email template here to send a specific message at this stage.",
+            "ta_IN": "Leave blank to use the standard follow-up wording, or pick an email template here to send a specific message at this stage."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 90,
+          "title": "09 - Tick Automatic",
+          "title_i18n": {
+            "en_US": "09 - Tick Automatic",
+            "si_LK": "09 - Tick Automatic",
+            "ta_IN": "09 - Tick Automatic"
+          },
+          "trigger": "#auto_execute_0",
+          "content": "Tick Automatic so Odoo sends this stage on its own when the delay is reached. Leave it off if Finance wants to review each reminder before it goes out.",
+          "content_i18n": {
+            "en_US": "Tick Automatic so Odoo sends this stage on its own when the delay is reached. Leave it off if Finance wants to review each reminder before it goes out.",
+            "si_LK": "Tick Automatic so Odoo sends this stage on its own when the delay is reached. Leave it off if Finance wants to review each reminder before it goes out.",
+            "ta_IN": "Tick Automatic so Odoo sends this stage on its own when the delay is reached. Leave it off if Finance wants to review each reminder before it goes out."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 100,
+          "title": "10 - Attach Invoices",
+          "title_i18n": {
+            "en_US": "10 - Attach Invoices",
+            "si_LK": "10 - Attach Invoices",
+            "ta_IN": "10 - Attach Invoices"
+          },
+          "trigger": "#join_invoices_0",
+          "content": "Keep Attach Invoices ticked so the overdue invoice PDFs travel with the reminder. Customers settle faster when the invoice is attached.",
+          "content_i18n": {
+            "en_US": "Keep Attach Invoices ticked so the overdue invoice PDFs travel with the reminder. Customers settle faster when the invoice is attached.",
+            "si_LK": "Keep Attach Invoices ticked so the overdue invoice PDFs travel with the reminder. Customers settle faster when the invoice is attached.",
+            "ta_IN": "Keep Attach Invoices ticked so the overdue invoice PDFs travel with the reminder. Customers settle faster when the invoice is attached."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 110,
+          "title": "11 - Open the Activity tab",
+          "title_i18n": {
+            "en_US": "11 - Open the Activity tab",
+            "si_LK": "11 - Open the Activity tab",
+            "ta_IN": "11 - Open the Activity tab"
+          },
+          "trigger": "a[name=\"activity\"]",
+          "content": "Open the Activity tab to also raise an internal task for the credit controller when this stage fires.",
+          "content_i18n": {
+            "en_US": "Open the Activity tab to also raise an internal task for the credit controller when this stage fires.",
+            "si_LK": "Open the Activity tab to also raise an internal task for the credit controller when this stage fires.",
+            "ta_IN": "Open the Activity tab to also raise an internal task for the credit controller when this stage fires."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 120,
+          "title": "12 - Schedule Activity (optional)",
+          "title_i18n": {
+            "en_US": "12 - Schedule Activity (optional)",
+            "si_LK": "12 - Schedule Activity (optional)",
+            "ta_IN": "12 - Schedule Activity (optional)"
+          },
+          "trigger": "#create_activity_0",
+          "content": "Tick Schedule Activity to create a to-do (e.g. Call) for a responsible user each time this stage is reached. Optional - leave it off for a purely automated email stage.",
+          "content_i18n": {
+            "en_US": "Tick Schedule Activity to create a to-do (e.g. Call) for a responsible user each time this stage is reached. Optional - leave it off for a purely automated email stage.",
+            "si_LK": "Tick Schedule Activity to create a to-do (e.g. Call) for a responsible user each time this stage is reached. Optional - leave it off for a purely automated email stage.",
+            "ta_IN": "Tick Schedule Activity to create a to-do (e.g. Call) for a responsible user each time this stage is reached. Optional - leave it off for a purely automated email stage."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 130,
+          "title": "13 - Save the first stage",
+          "title_i18n": {
+            "en_US": "13 - Save the first stage",
+            "si_LK": "13 - Save the first stage",
+            "ta_IN": "13 - Save the first stage"
+          },
+          "trigger": "[data-hotkey=\"s\"]",
+          "content": "Click the cloud icon to save. Stage 1 is now live.",
+          "content_i18n": {
+            "en_US": "Click the cloud icon to save. Stage 1 is now live.",
+            "si_LK": "Click the cloud icon to save. Stage 1 is now live.",
+            "ta_IN": "Click the cloud icon to save. Stage 1 is now live."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 140,
+          "title": "14 - Add the second stage",
+          "title_i18n": {
+            "en_US": "14 - Add the second stage",
+            "si_LK": "14 - Add the second stage",
+            "ta_IN": "14 - Add the second stage"
+          },
+          "trigger": ".o_control_panel button.btn-outline-primary",
+          "content": "Click New again. One follow-up level per escalation step - the sequence is driven purely by the number of days.",
+          "content_i18n": {
+            "en_US": "Click New again. One follow-up level per escalation step - the sequence is driven purely by the number of days.",
+            "si_LK": "Click New again. One follow-up level per escalation step - the sequence is driven purely by the number of days.",
+            "ta_IN": "Click New again. One follow-up level per escalation step - the sequence is driven purely by the number of days."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 150,
+          "title": "15 - Name the second stage",
+          "title_i18n": {
+            "en_US": "15 - Name the second stage",
+            "si_LK": "15 - Name the second stage",
+            "ta_IN": "15 - Name the second stage"
+          },
+          "trigger": "#name_0",
+          "content": "Name it \"2nd Reminder - Letter\". This stage escalates from an email to a printed letter.",
+          "content_i18n": {
+            "en_US": "Name it \"2nd Reminder - Letter\". This stage escalates from an email to a printed letter.",
+            "si_LK": "Name it \"2nd Reminder - Letter\". This stage escalates from an email to a printed letter.",
+            "ta_IN": "Name it \"2nd Reminder - Letter\". This stage escalates from an email to a printed letter."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 160,
+          "title": "16 - Set the second delay",
+          "title_i18n": {
+            "en_US": "16 - Set the second delay",
+            "si_LK": "16 - Set the second delay",
+            "ta_IN": "16 - Set the second delay"
+          },
+          "trigger": "#delay_0",
+          "content": "Enter 30. Each stage must have a longer delay than the one before it.",
+          "content_i18n": {
+            "en_US": "Enter 30. Each stage must have a longer delay than the one before it.",
+            "si_LK": "Enter 30. Each stage must have a longer delay than the one before it.",
+            "ta_IN": "Enter 30. Each stage must have a longer delay than the one before it."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 170,
+          "title": "17 - Back to the Notification tab",
+          "title_i18n": {
+            "en_US": "17 - Back to the Notification tab",
+            "si_LK": "17 - Back to the Notification tab",
+            "ta_IN": "17 - Back to the Notification tab"
+          },
+          "trigger": "a[name=\"notification\"]",
+          "content": "Click Notification to choose the actions for this stage.",
+          "content_i18n": {
+            "en_US": "Click Notification to choose the actions for this stage.",
+            "si_LK": "Click Notification to choose the actions for this stage.",
+            "ta_IN": "Click Notification to choose the actions for this stage."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 180,
+          "title": "18 - Tick Send a Letter",
+          "title_i18n": {
+            "en_US": "18 - Tick Send a Letter",
+            "si_LK": "18 - Tick Send a Letter",
+            "ta_IN": "18 - Tick Send a Letter"
+          },
+          "trigger": "#send_letter_0",
+          "content": "Tick Send a Letter. At 30 days overdue the customer gets a printed reminder as well as the email.",
+          "content_i18n": {
+            "en_US": "Tick Send a Letter. At 30 days overdue the customer gets a printed reminder as well as the email.",
+            "si_LK": "Tick Send a Letter. At 30 days overdue the customer gets a printed reminder as well as the email.",
+            "ta_IN": "Tick Send a Letter. At 30 days overdue the customer gets a printed reminder as well as the email."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 190,
+          "title": "19 - Save the second stage",
+          "title_i18n": {
+            "en_US": "19 - Save the second stage",
+            "si_LK": "19 - Save the second stage",
+            "ta_IN": "19 - Save the second stage"
+          },
+          "trigger": "[data-hotkey=\"s\"]",
+          "content": "Save. Automatic was left off here, so Finance reviews the 30-day letter before it goes out.",
+          "content_i18n": {
+            "en_US": "Save. Automatic was left off here, so Finance reviews the 30-day letter before it goes out.",
+            "si_LK": "Save. Automatic was left off here, so Finance reviews the 30-day letter before it goes out.",
+            "ta_IN": "Save. Automatic was left off here, so Finance reviews the 30-day letter before it goes out."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 200,
+          "title": "20 - Add the final stage",
+          "title_i18n": {
+            "en_US": "20 - Add the final stage",
+            "si_LK": "20 - Add the final stage",
+            "ta_IN": "20 - Add the final stage"
+          },
+          "trigger": ".o_control_panel button.btn-outline-primary",
+          "content": "Click New once more for the final notice stage.",
+          "content_i18n": {
+            "en_US": "Click New once more for the final notice stage.",
+            "si_LK": "Click New once more for the final notice stage.",
+            "ta_IN": "Click New once more for the final notice stage."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 210,
+          "title": "21 - Name the final stage",
+          "title_i18n": {
+            "en_US": "21 - Name the final stage",
+            "si_LK": "21 - Name the final stage",
+            "ta_IN": "21 - Name the final stage"
+          },
+          "trigger": "#name_0",
+          "content": "Name it \"Final Notice - SMS + Call\".",
+          "content_i18n": {
+            "en_US": "Name it \"Final Notice - SMS + Call\".",
+            "si_LK": "Name it \"Final Notice - SMS + Call\".",
+            "ta_IN": "Name it \"Final Notice - SMS + Call\"."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 220,
+          "title": "22 - Set the final delay",
+          "title_i18n": {
+            "en_US": "22 - Set the final delay",
+            "si_LK": "22 - Set the final delay",
+            "ta_IN": "22 - Set the final delay"
+          },
+          "trigger": "#delay_0",
+          "content": "Enter 60. Anything still unpaid 60 days past due reaches the last stage and stays there.",
+          "content_i18n": {
+            "en_US": "Enter 60. Anything still unpaid 60 days past due reaches the last stage and stays there.",
+            "si_LK": "Enter 60. Anything still unpaid 60 days past due reaches the last stage and stays there.",
+            "ta_IN": "Enter 60. Anything still unpaid 60 days past due reaches the last stage and stays there."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 230,
+          "title": "23 - Tick Send SMS Message",
+          "title_i18n": {
+            "en_US": "23 - Tick Send SMS Message",
+            "si_LK": "23 - Tick Send SMS Message",
+            "ta_IN": "23 - Tick Send SMS Message"
+          },
+          "trigger": "#send_sms_0",
+          "content": "Tick Send SMS Message. SMS needs credits and a mobile number on the customer record.",
+          "content_i18n": {
+            "en_US": "Tick Send SMS Message. SMS needs credits and a mobile number on the customer record.",
+            "si_LK": "Tick Send SMS Message. SMS needs credits and a mobile number on the customer record.",
+            "ta_IN": "Tick Send SMS Message. SMS needs credits and a mobile number on the customer record."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 240,
+          "title": "24 - Open the Activity tab",
+          "title_i18n": {
+            "en_US": "24 - Open the Activity tab",
+            "si_LK": "24 - Open the Activity tab",
+            "ta_IN": "24 - Open the Activity tab"
+          },
+          "trigger": "a[name=\"activity\"]",
+          "content": "For the final notice, also raise an internal task. Open the Activity tab.",
+          "content_i18n": {
+            "en_US": "For the final notice, also raise an internal task. Open the Activity tab.",
+            "si_LK": "For the final notice, also raise an internal task. Open the Activity tab.",
+            "ta_IN": "For the final notice, also raise an internal task. Open the Activity tab."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 250,
+          "title": "25 - Tick Schedule Activity",
+          "title_i18n": {
+            "en_US": "25 - Tick Schedule Activity",
+            "si_LK": "25 - Tick Schedule Activity",
+            "ta_IN": "25 - Tick Schedule Activity"
+          },
+          "trigger": "#create_activity_0",
+          "content": "Tick Schedule Activity, then pick the activity type and the responsible user so a call is logged for the credit controller.",
+          "content_i18n": {
+            "en_US": "Tick Schedule Activity, then pick the activity type and the responsible user so a call is logged for the credit controller.",
+            "si_LK": "Tick Schedule Activity, then pick the activity type and the responsible user so a call is logged for the credit controller.",
+            "ta_IN": "Tick Schedule Activity, then pick the activity type and the responsible user so a call is logged for the credit controller."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 260,
+          "title": "26 - Choose the Activity Type",
+          "title_i18n": {
+            "en_US": "26 - Choose the Activity Type",
+            "si_LK": "26 - Choose the Activity Type",
+            "ta_IN": "26 - Choose the Activity Type"
+          },
+          "trigger": "#activity_type_id_0",
+          "content": "Pick an Activity Type such as Call, and set Responsible. Odoo will create that activity on the customer when the stage fires.",
+          "content_i18n": {
+            "en_US": "Pick an Activity Type such as Call, and set Responsible. Odoo will create that activity on the customer when the stage fires.",
+            "si_LK": "Pick an Activity Type such as Call, and set Responsible. Odoo will create that activity on the customer when the stage fires.",
+            "ta_IN": "Pick an Activity Type such as Call, and set Responsible. Odoo will create that activity on the customer when the stage fires."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 270,
+          "title": "27 - Save the final stage",
+          "title_i18n": {
+            "en_US": "27 - Save the final stage",
+            "si_LK": "27 - Save the final stage",
+            "ta_IN": "27 - Save the final stage"
+          },
+          "trigger": "[data-hotkey=\"s\"]",
+          "content": "Enter a Summary for the activity (e.g. Call customer - final notice), then click the cloud icon to save. The three stages are now in place: 15 days email, 30 days letter, 60 days SMS plus a call.",
+          "content_i18n": {
+            "en_US": "Enter a Summary for the activity (e.g. Call customer - final notice), then click the cloud icon to save. The three stages are now in place: 15 days email, 30 days letter, 60 days SMS plus a call.",
+            "si_LK": "Enter a Summary for the activity (e.g. Call customer - final notice), then click the cloud icon to save. The three stages are now in place: 15 days email, 30 days letter, 60 days SMS plus a call.",
+            "ta_IN": "Enter a Summary for the activity (e.g. Call customer - final notice), then click the cloud icon to save. The three stages are now in place: 15 days email, 30 days letter, 60 days SMS plus a call."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 280,
+          "title": "28 - Review the three stages",
+          "title_i18n": {
+            "en_US": "28 - Review the three stages",
+            "si_LK": "28 - Review the three stages",
+            "ta_IN": "28 - Review the three stages"
+          },
+          "trigger": "[data-hotkey=\"b\"]",
+          "content": "Click the Follow-up Levels breadcrumb to see the full ladder. Configuration is done - now the day-to-day work.",
+          "content_i18n": {
+            "en_US": "Click the Follow-up Levels breadcrumb to see the full ladder. Configuration is done - now the day-to-day work.",
+            "si_LK": "Click the Follow-up Levels breadcrumb to see the full ladder. Configuration is done - now the day-to-day work.",
+            "ta_IN": "Click the Follow-up Levels breadcrumb to see the full ladder. Configuration is done - now the day-to-day work."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 290,
+          "title": "29 - Open the Customers menu",
+          "title_i18n": {
+            "en_US": "29 - Open the Customers menu",
+            "si_LK": "29 - Open the Customers menu",
+            "ta_IN": "29 - Open the Customers menu"
+          },
+          "trigger": "[data-hotkey=\"2\"]",
+          "content": "Now the daily routine. Open the Customers menu.",
+          "content_i18n": {
+            "en_US": "Now the daily routine. Open the Customers menu.",
+            "si_LK": "Now the daily routine. Open the Customers menu.",
+            "ta_IN": "Now the daily routine. Open the Customers menu."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 300,
+          "title": "30 - Open Follow-up Reports",
+          "title_i18n": {
+            "en_US": "30 - Open Follow-up Reports",
+            "si_LK": "30 - Open Follow-up Reports",
+            "ta_IN": "30 - Open Follow-up Reports"
+          },
+          "trigger": "a.dropdown-item:nth-of-type(4)",
+          "content": "Click Follow-up Reports. This is the credit control worklist - one line per customer with money outstanding.",
+          "content_i18n": {
+            "en_US": "Click Follow-up Reports. This is the credit control worklist - one line per customer with money outstanding.",
+            "si_LK": "Click Follow-up Reports. This is the credit control worklist - one line per customer with money outstanding.",
+            "ta_IN": "Click Follow-up Reports. This is the credit control worklist - one line per customer with money outstanding."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 310,
+          "title": "31 - Read the worklist",
+          "title_i18n": {
+            "en_US": "31 - Read the worklist",
+            "si_LK": "31 - Read the worklist",
+            "ta_IN": "31 - Read the worklist"
+          },
+          "trigger": "th[data-name=\"followup_status\"]",
+          "content": "Follow-up Status shows who needs chasing today; Follow-up Level shows which stage each customer has reached. Next reminder is the date the next stage is due.",
+          "content_i18n": {
+            "en_US": "Follow-up Status shows who needs chasing today; Follow-up Level shows which stage each customer has reached. Next reminder is the date the next stage is due.",
+            "si_LK": "Follow-up Status shows who needs chasing today; Follow-up Level shows which stage each customer has reached. Next reminder is the date the next stage is due.",
+            "ta_IN": "Follow-up Status shows who needs chasing today; Follow-up Level shows which stage each customer has reached. Next reminder is the date the next stage is due."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 320,
+          "title": "32 - Open a customer's follow-up",
+          "title_i18n": {
+            "en_US": "32 - Open a customer's follow-up",
+            "si_LK": "32 - Open a customer's follow-up",
+            "ta_IN": "32 - Open a customer's follow-up"
+          },
+          "trigger": ".o_data_row td[name=\"name\"]",
+          "content": "Click a customer line to open their follow-up report. This walkthrough uses Test Credit Customer, but any line on the list works the same way.",
+          "content_i18n": {
+            "en_US": "Click a customer line to open their follow-up report. This walkthrough uses Test Credit Customer, but any line on the list works the same way.",
+            "si_LK": "Click a customer line to open their follow-up report. This walkthrough uses Test Credit Customer, but any line on the list works the same way.",
+            "ta_IN": "Click a customer line to open their follow-up report. This walkthrough uses Test Credit Customer, but any line on the list works the same way."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 330,
+          "title": "33 - The stage bar",
+          "title_i18n": {
+            "en_US": "33 - The stage bar",
+            "si_LK": "33 - The stage bar",
+            "ta_IN": "33 - The stage bar"
+          },
+          "trigger": "div.o_statusbar_status",
+          "content": "The bar at the top shows every stage you configured and highlights where this customer sits. Clicking a stage moves the customer manually.",
+          "content_i18n": {
+            "en_US": "The bar at the top shows every stage you configured and highlights where this customer sits. Clicking a stage moves the customer manually.",
+            "si_LK": "The bar at the top shows every stage you configured and highlights where this customer sits. Clicking a stage moves the customer manually.",
+            "ta_IN": "The bar at the top shows every stage you configured and highlights where this customer sits. Clicking a stage moves the customer manually."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 340,
+          "title": "34 - Exclude a line from follow-ups",
+          "title_i18n": {
+            "en_US": "34 - Exclude a line from follow-ups",
+            "si_LK": "34 - Exclude a line from follow-ups",
+            "ta_IN": "34 - Exclude a line from follow-ups"
+          },
+          "trigger": "th[data-name=\"blocked\"]",
+          "content": "Toggle Exclude from Follow-ups on any line that is disputed, already paid or under a payment plan. Excluded lines are ignored when the stage is calculated.",
+          "content_i18n": {
+            "en_US": "Toggle Exclude from Follow-ups on any line that is disputed, already paid or under a payment plan. Excluded lines are ignored when the stage is calculated.",
+            "si_LK": "Toggle Exclude from Follow-ups on any line that is disputed, already paid or under a payment plan. Excluded lines are ignored when the stage is calculated.",
+            "ta_IN": "Toggle Exclude from Follow-ups on any line that is disputed, already paid or under a payment plan. Excluded lines are ignored when the stage is calculated."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 350,
+          "title": "35 - Automatic or Manual reminders",
+          "title_i18n": {
+            "en_US": "35 - Automatic or Manual reminders",
+            "si_LK": "35 - Automatic or Manual reminders",
+            "ta_IN": "35 - Automatic or Manual reminders"
+          },
+          "trigger": "#radio_field_2_manual",
+          "content": "Automatic lets Odoo follow the stage schedule for this customer. Switch to Manual for a customer you want to chase by hand, e.g. a key account under negotiation.",
+          "content_i18n": {
+            "en_US": "Automatic lets Odoo follow the stage schedule for this customer. Switch to Manual for a customer you want to chase by hand, e.g. a key account under negotiation.",
+            "si_LK": "Automatic lets Odoo follow the stage schedule for this customer. Switch to Manual for a customer you want to chase by hand, e.g. a key account under negotiation.",
+            "ta_IN": "Automatic lets Odoo follow the stage schedule for this customer. Switch to Manual for a customer you want to chase by hand, e.g. a key account under negotiation."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 360,
+          "title": "36 - Next reminder date",
+          "title_i18n": {
+            "en_US": "36 - Next reminder date",
+            "si_LK": "36 - Next reminder date",
+            "ta_IN": "36 - Next reminder date"
+          },
+          "trigger": "#followup_next_action_date_0",
+          "content": "Next reminder is when this customer comes back onto the worklist. Push it forward if the customer has promised payment by a certain date.",
+          "content_i18n": {
+            "en_US": "Next reminder is when this customer comes back onto the worklist. Push it forward if the customer has promised payment by a certain date.",
+            "si_LK": "Next reminder is when this customer comes back onto the worklist. Push it forward if the customer has promised payment by a certain date.",
+            "ta_IN": "Next reminder is when this customer comes back onto the worklist. Push it forward if the customer has promised payment by a certain date."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 370,
+          "title": "37 - Click Follow up to send",
+          "title_i18n": {
+            "en_US": "37 - Click Follow up to send",
+            "si_LK": "37 - Click Follow up to send",
+            "ta_IN": "37 - Click Follow up to send"
+          },
+          "trigger": "button[name=\"2991\"]",
+          "content": "Click Follow up. This opens the Send and Print wizard where you choose the channels for this reminder.",
+          "content_i18n": {
+            "en_US": "Click Follow up. This opens the Send and Print wizard where you choose the channels for this reminder.",
+            "si_LK": "Click Follow up. This opens the Send and Print wizard where you choose the channels for this reminder.",
+            "ta_IN": "Click Follow up. This opens the Send and Print wizard where you choose the channels for this reminder."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 380,
+          "title": "38 - Choose the send channels",
+          "title_i18n": {
+            "en_US": "38 - Choose the send channels",
+            "si_LK": "38 - Choose the send channels",
+            "ta_IN": "38 - Choose the send channels"
+          },
+          "trigger": "#email_0",
+          "content": "ACTIONS is pre-ticked from the stage the customer is on - here Email. Tick Print for a hard copy, Sms, or By post to route it through the postal service.",
+          "content_i18n": {
+            "en_US": "ACTIONS is pre-ticked from the stage the customer is on - here Email. Tick Print for a hard copy, Sms, or By post to route it through the postal service.",
+            "si_LK": "ACTIONS is pre-ticked from the stage the customer is on - here Email. Tick Print for a hard copy, Sms, or By post to route it through the postal service.",
+            "ta_IN": "ACTIONS is pre-ticked from the stage the customer is on - here Email. Tick Print for a hard copy, Sms, or By post to route it through the postal service."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 390,
+          "title": "39 - Check the message body",
+          "title_i18n": {
+            "en_US": "39 - Check the message body",
+            "si_LK": "39 - Check the message body",
+            "ta_IN": "39 - Check the message body"
+          },
+          "trigger": "div.o_form_renderer.o_form_nosheet > div.o_group.row:nth-of-type(3) > div.o_inner_group.grid > div.o_wrap_field.d-flex:nth-of-type(1) > div.o_cell.flex-grow-1 > label.o_form_label",
+          "content": "The body comes from the stage's template. Edit it here for a one-off note - e.g. reference a cheque the customer says they posted. The overdue table is added automatically.",
+          "content_i18n": {
+            "en_US": "The body comes from the stage's template. Edit it here for a one-off note - e.g. reference a cheque the customer says they posted. The overdue table is added automatically.",
+            "si_LK": "The body comes from the stage's template. Edit it here for a one-off note - e.g. reference a cheque the customer says they posted. The overdue table is added automatically.",
+            "ta_IN": "The body comes from the stage's template. Edit it here for a one-off note - e.g. reference a cheque the customer says they posted. The overdue table is added automatically."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 400,
+          "title": "40 - Attach the invoices",
+          "title_i18n": {
+            "en_US": "40 - Attach the invoices",
+            "si_LK": "40 - Attach the invoices",
+            "ta_IN": "40 - Attach the invoices"
+          },
+          "trigger": "#join_invoices_0",
+          "content": "Attach Invoices carries the overdue invoice PDFs with the reminder. Use Attachment below to add anything else, such as a signed delivery note.",
+          "content_i18n": {
+            "en_US": "Attach Invoices carries the overdue invoice PDFs with the reminder. Use Attachment below to add anything else, such as a signed delivery note.",
+            "si_LK": "Attach Invoices carries the overdue invoice PDFs with the reminder. Use Attachment below to add anything else, such as a signed delivery note.",
+            "ta_IN": "Attach Invoices carries the overdue invoice PDFs with the reminder. Use Attachment below to add anything else, such as a signed delivery note."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 410,
+          "title": "41 - The Send button",
+          "title_i18n": {
+            "en_US": "41 - The Send button",
+            "si_LK": "41 - The Send button",
+            "ta_IN": "41 - The Send button"
+          },
+          "trigger": "[data-hotkey=\"q\"]",
+          "content": "In daily use this is the button that dispatches the reminder, logs it in the chatter and moves the customer to the next stage. The label changes to Send & Print when Print is also ticked.",
+          "content_i18n": {
+            "en_US": "In daily use this is the button that dispatches the reminder, logs it in the chatter and moves the customer to the next stage. The label changes to Send & Print when Print is also ticked.",
+            "si_LK": "In daily use this is the button that dispatches the reminder, logs it in the chatter and moves the customer to the next stage. The label changes to Send & Print when Print is also ticked.",
+            "ta_IN": "In daily use this is the button that dispatches the reminder, logs it in the chatter and moves the customer to the next stage. The label changes to Send & Print when Print is also ticked."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 420,
+          "title": "42 - Close the wizard",
+          "title_i18n": {
+            "en_US": "42 - Close the wizard",
+            "si_LK": "42 - Close the wizard",
+            "ta_IN": "42 - Close the wizard"
+          },
+          "trigger": "[data-hotkey=\"x\"]",
+          "content": "For this walkthrough click Cancel to close without sending. Nothing is dispatched and the customer stays on the same stage.",
+          "content_i18n": {
+            "en_US": "For this walkthrough click Cancel to close without sending. Nothing is dispatched and the customer stays on the same stage.",
+            "si_LK": "For this walkthrough click Cancel to close without sending. Nothing is dispatched and the customer stays on the same stage.",
+            "ta_IN": "For this walkthrough click Cancel to close without sending. Nothing is dispatched and the customer stays on the same stage."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 430,
+          "title": "43 - Back to the worklist",
+          "title_i18n": {
+            "en_US": "43 - Back to the worklist",
+            "si_LK": "43 - Back to the worklist",
+            "ta_IN": "43 - Back to the worklist"
+          },
+          "trigger": "[data-hotkey=\"b\"]",
+          "content": "Click the Follow-up Reports breadcrumb. Reminders can also be sent to many customers at once.",
+          "content_i18n": {
+            "en_US": "Click the Follow-up Reports breadcrumb. Reminders can also be sent to many customers at once.",
+            "si_LK": "Click the Follow-up Reports breadcrumb. Reminders can also be sent to many customers at once.",
+            "ta_IN": "Click the Follow-up Reports breadcrumb. Reminders can also be sent to many customers at once."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 440,
+          "title": "44 - Select customers for a batch",
+          "title_i18n": {
+            "en_US": "44 - Select customers for a batch",
+            "si_LK": "44 - Select customers for a batch",
+            "ta_IN": "44 - Select customers for a batch"
+          },
+          "trigger": "thead .o_list_record_selector input",
+          "content": "Tick the header box to select every customer on the page, or tick individual rows. This is how the monthly reminder run is done.",
+          "content_i18n": {
+            "en_US": "Tick the header box to select every customer on the page, or tick individual rows. This is how the monthly reminder run is done.",
+            "si_LK": "Tick the header box to select every customer on the page, or tick individual rows. This is how the monthly reminder run is done.",
+            "ta_IN": "Tick the header box to select every customer on the page, or tick individual rows. This is how the monthly reminder run is done."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 450,
+          "title": "45 - Open the Actions menu",
+          "title_i18n": {
+            "en_US": "45 - Open the Actions menu",
+            "si_LK": "45 - Open the Actions menu",
+            "ta_IN": "45 - Open the Actions menu"
+          },
+          "trigger": "[data-hotkey=\"u\"]",
+          "content": "With rows selected, open Actions to process the whole batch in one go.",
+          "content_i18n": {
+            "en_US": "With rows selected, open Actions to process the whole batch in one go.",
+            "si_LK": "With rows selected, open Actions to process the whole batch in one go.",
+            "ta_IN": "With rows selected, open Actions to process the whole batch in one go."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 460,
+          "title": "46 - Process Automatic Follow-ups",
+          "title_i18n": {
+            "en_US": "46 - Process Automatic Follow-ups",
+            "si_LK": "46 - Process Automatic Follow-ups",
+            "ta_IN": "46 - Process Automatic Follow-ups"
+          },
+          "trigger": "span.dropdown-item.o_menu_item:nth-of-type(7)",
+          "content": "Process Automatic Follow-ups sends every due reminder for the selected customers in one run, using each customer's own stage. Send email and Send SMS Text Message above are the manual bulk alternatives.",
+          "content_i18n": {
+            "en_US": "Process Automatic Follow-ups sends every due reminder for the selected customers in one run, using each customer's own stage. Send email and Send SMS Text Message above are the manual bulk alternatives.",
+            "si_LK": "Process Automatic Follow-ups sends every due reminder for the selected customers in one run, using each customer's own stage. Send email and Send SMS Text Message above are the manual bulk alternatives.",
+            "ta_IN": "Process Automatic Follow-ups sends every due reminder for the selected customers in one run, using each customer's own stage. Send email and Send SMS Text Message above are the manual bulk alternatives."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "audience": "Accountants who match customer invoices with the payments received for them.",
+  "goal": "**Reconcile journal items**: open the **Reconcile** screen, find the customer's lines on the **receivable account**, tick the **payment** line and the **invoice** line, press **Reconcile**, and check that the account is matched to zero.",
+  "before": [
+    "You can open the **Accounting** app and its **Accounting** menu.",
+    "An unreconciled **customer invoice** and an unreconciled **payment** exist for the same customer on the same receivable account.",
+    "The invoice and the payment have the same amount, so the match is complete (otherwise Odoo keeps the difference open)."
+  ],
+  "outcome": [
+    "The invoice line and the payment line are **matched**, with a matching number.",
+    "The receivable account shows a balance of **0** and **(0)** lines in the unreconciled list.",
+    "You know the Reconcile screen only lists items still waiting to be matched."
+  ],
+  "notes": [
+    "The screenshots were captured by an automated run on a **test database**. The red banner at the top (\"Database neutralized for testing\") only appears on test databases. The figures are test data: a **1.00** invoice (Sales/2026/00001) and a **1.00** payment (PBNK1/2026/00001) for the customer **Engineer - Production**.",
+    "The automated run **really reconciles** the two lines, and a reconciliation cannot be undone by the test. So each run **uses up one invoice and payment pair**. The run finds a pair by itself, preferring a small one, and it is skipped unless `TOUR_ALLOW_WRITES=true`.",
+    "The Reconcile screen opens grouped by **Account**, then **Partner**. Always reconcile **within one account and one partner**.",
+    "Debit and credit must add up to zero for a full match. If they do not, Odoo keeps the difference open as a partial reconciliation.",
+    "The matched lines **do not come back** into this list, even after you remove the **Unreconciled** filter: the screen only ever shows items still waiting to be matched. To see the **Matching number** itself, open **Accounting › Journal Items**."
+  ],
+  "phases": [
+    { "title": "Open the Reconcile screen", "summary": "Find the Reconcile tool in the Accounting menu and check its filter.", "from": 1, "to": 3, "checkpoint": "The **Journal Items to reconcile** list is open with the **Unreconciled** filter." },
+    { "title": "Pick the invoice and the payment", "summary": "Open the customer's group and tick the two lines.", "from": 4, "to": 6, "checkpoint": "The **payment** and the **invoice** are both ticked, and the totals at the bottom add up to zero." },
+    { "title": "Reconcile and check", "summary": "Press Reconcile and confirm the account is clear.", "from": 7, "to": 9, "checkpoint": "The receivable account shows **(0)** lines and a zero balance." }
+  ],
+  "glossary": [
+    { "term": "Reconcile", "meaning": "Match an invoice with the payment that settles it, so that Odoo knows the invoice is paid." },
+    { "term": "Unreconciled", "meaning": "A journal item that has not been matched yet." },
+    { "term": "Account Receivable", "meaning": "The account that holds what customers owe you. Invoices are debits, payments are credits." },
+    { "term": "Matching number", "meaning": "A number Odoo gives to the lines that were matched together." },
+    { "term": "Residual", "meaning": "The part of a line that is still not matched." },
+    { "term": "Partial reconciliation", "meaning": "A match where debit and credit do not cancel out; the difference stays open." }
+  ],
+  "steps": {
+    "1": { "title": "Open the Accounting menu", "kind": "CLICK", "do": "In the top menu bar, click **Accounting**.", "where": "Accounting app > Accounting", "actions": ["Look at the menu bar across the top.", "Click **Accounting**."], "see": "A drop-down with the Accounting entries, including the **Actions** group.", "why": "Every accounting action lives here, including the Reconcile tool.", "tip": "If **Accounting** is hidden, widen the window; narrow windows hide the last entries behind a **+**." },
+    "2": { "title": "Click Reconcile under Actions", "kind": "CLICK", "do": "Scroll to the **Actions** group and click **Reconcile**.", "where": "Accounting app > Accounting > Actions > Reconcile", "actions": ["Scroll down the menu to the **Actions** group.", "Click **Reconcile**."], "see": "The **Journal Items to reconcile** list.", "why": "This opens the list of journal items that are still waiting to be matched." },
+    "3": { "title": "Check the Unreconciled filter", "kind": "REVIEW", "do": "Look at the search box: the **Unreconciled** filter is already on.", "where": "Journal Items to reconcile > search box", "actions": ["Look at the search box at the top.", "Find the **Unreconciled** filter and the **Account › Partner** grouping."], "see": "The **Unreconciled** filter, with the lines grouped by **Account**, then **Partner**.", "why": "Only journal items still waiting to be matched are listed here." },
+    "4": { "title": "Expand the customer group", "kind": "CLICK", "do": "Open the receivable account, then the customer.", "where": "Journal Items to reconcile > 121000 Account Receivable > customer", "actions": ["Find the account you need: **121000 Account Receivable**, holding 1.00 debit (the invoice) and 1.00 credit (the payment).", "Click the partner line **Engineer - Production** under it to open the individual journal items."], "see": "The customer's journal items: the payment and the invoice.", "why": "Always reconcile within one account and one partner.", "warning": "The same customer also appears under other accounts (outstanding receipts, payable, sales). Open the group under the **receivable** account." },
+    "5": { "title": "Select the payment line", "kind": "CLICK", "do": "Tick the box on the **payment** line.", "where": "Journal Items > payment line (PBNK1/2026/00001)", "actions": ["Find the payment line **PBNK1/2026/00001**, the 1.00 credit received from the customer.", "Tick the box at its left."], "see": "The line is ticked and the top shows **1 selected**.", "why": "The payment is one half of the match." },
+    "6": { "title": "Select the invoice line", "kind": "CLICK", "do": "Tick the box on the customer **invoice** line.", "where": "Journal Items > invoice line (Sales/2026/00001)", "actions": ["Find the customer invoice line **Sales/2026/00001**, the 1.00 debit.", "Tick the box at its left."], "see": "**2 selected**. The totals at the bottom show 1.00 debit and 1.00 credit.", "why": "Debit and credit must add up to zero for a full match. If they do not, Odoo keeps the difference open as a partial reconciliation.", "warning": "Check the two lines are for the **same customer** before you go on." },
+    "7": { "title": "Click the Reconcile button", "kind": "CLICK", "do": "Click **Reconcile**.", "where": "Journal Items > Reconcile", "actions": ["Click the **Reconcile** button at the top.", "Wait a moment."], "see": "The two lines disappear from the list.", "why": "Odoo matches them, drops the residual to zero, gives them a Matching number and marks the invoice as paid.", "warning": "Click **Reconcile** only once. Odoo applies it a moment after the click." },
+    "8": { "title": "Confirm the lines are matched", "kind": "REVIEW", "do": "Look at **121000 Account Receivable**: it now shows **(0)**.", "where": "Journal Items to reconcile > 121000 Account Receivable", "actions": ["Find the receivable account in the list.", "Read the number of lines and the balance."], "see": "**121000 Account Receivable (0)** with a zero balance. The customer's group is gone.", "why": "Both lines have left the unreconciled list, which means the match worked." },
+    "9": { "title": "Remove the Unreconciled filter", "kind": "CLICK", "do": "Click the **×** on the **Unreconciled** filter.", "where": "Journal Items to reconcile > Unreconciled filter", "actions": ["Click the **×** next to **Unreconciled** in the search box."], "see": "The filter is removed, but the matched lines do not come back.", "why": "This screen only ever shows items still waiting to be matched, so an account that has disappeared from here is fully reconciled.", "tip": "To see the **Matching number** itself, open **Accounting › Journal Items**. That completes the tour: pick the invoice and the payment, reconcile, and check the account." }
+  }
+}

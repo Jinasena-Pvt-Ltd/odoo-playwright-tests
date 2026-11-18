@@ -1,0 +1,813 @@
+{
+  "version": 2,
+  "tours": [
+    {
+      "name": "Finance: Module Required Settings for New Users ( Configuration > Settings - All Sections ) - Full Flow",
+      "name_i18n": {
+        "en_US": "Finance: Module Required Settings for New Users ( Configuration > Settings - All Sections ) - Full Flow",
+        "si_LK": "Finance: Module Required Settings for New Users ( Configuration > Settings - All Sections ) - Full Flow",
+        "ta_IN": "Finance: Module Required Settings for New Users ( Configuration > Settings - All Sections ) - Full Flow"
+      },
+      "description": "Read-only walkthrough of Accounting > Configuration > Settings for a new Finance user: fiscal localisation, default taxes and tax return periodicity, rounding, currencies, customer invoices and payments, vendor bills and cheques, default accounts, bank and cash imports, fiscal year, analytics and reporting. Nothing is changed - the guide only explains what each setting does.",
+      "description_i18n": {
+        "en_US": "Read-only walkthrough of Accounting > Configuration > Settings for a new Finance user: fiscal localisation, default taxes and tax return periodicity, rounding, currencies, customer invoices and payments, vendor bills and cheques, default accounts, bank and cash imports, fiscal year, analytics and reporting. Nothing is changed - the guide only explains what each setting does.",
+        "si_LK": "Read-only walkthrough of Accounting > Configuration > Settings for a new Finance user: fiscal localisation, default taxes and tax return periodicity, rounding, currencies, customer invoices and payments, vendor bills and cheques, default accounts, bank and cash imports, fiscal year, analytics and reporting. Nothing is changed - the guide only explains what each setting does.",
+        "ta_IN": "Read-only walkthrough of Accounting > Configuration > Settings for a new Finance user: fiscal localisation, default taxes and tax return periodicity, rounding, currencies, customer invoices and payments, vendor bills and cheques, default accounts, bank and cash imports, fiscal year, analytics and reporting. Nothing is changed - the guide only explains what each setting does."
+      },
+      "steps": [
+        {
+          "sequence": 10,
+          "title": "01 - Open the Accounting app",
+          "title_i18n": {
+            "en_US": "01 - Open the Accounting app",
+            "si_LK": "01 - Open the Accounting app",
+            "ta_IN": "01 - Open the Accounting app"
+          },
+          "trigger": "[data-menu-xmlid=\"account_accountant.menu_accounting\"]",
+          "content": "Welcome. This guide walks a new Finance user through the settings that must be reviewed before the Accounting module goes live. Start by opening the Accounting app.",
+          "content_i18n": {
+            "en_US": "Welcome. This guide walks a new Finance user through the settings that must be reviewed before the Accounting module goes live. Start by opening the Accounting app.",
+            "si_LK": "Welcome. This guide walks a new Finance user through the settings that must be reviewed before the Accounting module goes live. Start by opening the Accounting app.",
+            "ta_IN": "Welcome. This guide walks a new Finance user through the settings that must be reviewed before the Accounting module goes live. Start by opening the Accounting app."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 20,
+          "title": "02 - Open the extra menu (+)",
+          "title_i18n": {
+            "en_US": "02 - Open the extra menu (+)",
+            "si_LK": "02 - Open the extra menu (+)",
+            "ta_IN": "02 - Open the extra menu (+)"
+          },
+          "trigger": "[data-hotkey=\"4\"]",
+          "content": "Not every menu fits on the screen. Click the + button to reveal the rest of the Accounting menu, including Reporting and Configuration.",
+          "content_i18n": {
+            "en_US": "Not every menu fits on the screen. Click the + button to reveal the rest of the Accounting menu, including Reporting and Configuration.",
+            "si_LK": "Not every menu fits on the screen. Click the + button to reveal the rest of the Accounting menu, including Reporting and Configuration.",
+            "ta_IN": "Not every menu fits on the screen. Click the + button to reveal the rest of the Accounting menu, including Reporting and Configuration."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 30,
+          "title": "03 - Open Configuration > Settings",
+          "title_i18n": {
+            "en_US": "03 - Open Configuration > Settings",
+            "si_LK": "03 - Open Configuration > Settings",
+            "ta_IN": "03 - Open Configuration > Settings"
+          },
+          "trigger": "[data-menu-xmlid=\"account.menu_account_config\"]",
+          "content": "Under the Configuration heading, click Settings. This one page controls how the entire Finance module behaves: taxes, currencies, invoicing, payments, default accounts, period locks and reporting.",
+          "content_i18n": {
+            "en_US": "Under the Configuration heading, click Settings. This one page controls how the entire Finance module behaves: taxes, currencies, invoicing, payments, default accounts, period locks and reporting.",
+            "si_LK": "Under the Configuration heading, click Settings. This one page controls how the entire Finance module behaves: taxes, currencies, invoicing, payments, default accounts, period locks and reporting.",
+            "ta_IN": "Under the Configuration heading, click Settings. This one page controls how the entire Finance module behaves: taxes, currencies, invoicing, payments, default accounts, period locks and reporting."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 40,
+          "title": "04 - You are on the Accounting settings tab",
+          "title_i18n": {
+            "en_US": "04 - You are on the Accounting settings tab",
+            "si_LK": "04 - You are on the Accounting settings tab",
+            "ta_IN": "04 - You are on the Accounting settings tab"
+          },
+          "trigger": "div.tab.selected",
+          "content": "The left panel lists every app that has settings. Accounting is highlighted, so everything on the right belongs to the Finance module. Work down the sections in order.",
+          "content_i18n": {
+            "en_US": "The left panel lists every app that has settings. Accounting is highlighted, so everything on the right belongs to the Finance module. Work down the sections in order.",
+            "si_LK": "The left panel lists every app that has settings. Accounting is highlighted, so everything on the right belongs to the Finance module. Work down the sections in order.",
+            "ta_IN": "The left panel lists every app that has settings. Accounting is highlighted, so everything on the right belongs to the Finance module. Work down the sections in order."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 50,
+          "title": "05 - Fiscal Localization",
+          "title_i18n": {
+            "en_US": "05 - Fiscal Localization",
+            "si_LK": "05 - Fiscal Localization",
+            "ta_IN": "05 - Fiscal Localization"
+          },
+          "trigger": "div.row.mt16:nth-of-type(1) > div.o_setting_box.col-12 > div.o_setting_right_pane > span.o_form_label > span",
+          "content": "The foundation of the module. The localisation package installs the country's chart of accounts, taxes, fiscal positions and legal statements. It is set once at implementation and must NOT be changed once journal entries exist.",
+          "content_i18n": {
+            "en_US": "The foundation of the module. The localisation package installs the country's chart of accounts, taxes, fiscal positions and legal statements. It is set once at implementation and must NOT be changed once journal entries exist.",
+            "si_LK": "The foundation of the module. The localisation package installs the country's chart of accounts, taxes, fiscal positions and legal statements. It is set once at implementation and must NOT be changed once journal entries exist.",
+            "ta_IN": "The foundation of the module. The localisation package installs the country's chart of accounts, taxes, fiscal positions and legal statements. It is set once at implementation and must NOT be changed once journal entries exist."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 60,
+          "title": "06 - Taxes: Default Taxes",
+          "title_i18n": {
+            "en_US": "06 - Taxes: Default Taxes",
+            "si_LK": "06 - Taxes: Default Taxes",
+            "ta_IN": "06 - Taxes: Default Taxes"
+          },
+          "trigger": "div.row.mt16:nth-of-type(3) > div.o_setting_box.col-12:nth-of-type(1) > div.o_setting_right_pane > span.o_form_label > span",
+          "content": "Default Taxes are applied automatically when a product carries no tax of its own. Set the Sales Tax and the Purchase Tax the company uses most - here VAT 18%. Fix these before creating any invoice or bill.",
+          "content_i18n": {
+            "en_US": "Default Taxes are applied automatically when a product carries no tax of its own. Set the Sales Tax and the Purchase Tax the company uses most - here VAT 18%. Fix these before creating any invoice or bill.",
+            "si_LK": "Default Taxes are applied automatically when a product carries no tax of its own. Set the Sales Tax and the Purchase Tax the company uses most - here VAT 18%. Fix these before creating any invoice or bill.",
+            "ta_IN": "Default Taxes are applied automatically when a product carries no tax of its own. Set the Sales Tax and the Purchase Tax the company uses most - here VAT 18%. Fix these before creating any invoice or bill."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 70,
+          "title": "07 - Taxes: Tax Return Periodicity",
+          "title_i18n": {
+            "en_US": "07 - Taxes: Tax Return Periodicity",
+            "si_LK": "07 - Taxes: Tax Return Periodicity",
+            "ta_IN": "07 - Taxes: Tax Return Periodicity"
+          },
+          "trigger": "div.row.mt16:nth-of-type(3) > div.o_setting_box.col-12:nth-of-type(2) > div.o_setting_right_pane > span.o_form_label > span",
+          "content": "Tell Odoo how often the tax return is filed (monthly here), how many days after period end you want the reminder activity, and which journal the tax closing entry is posted to - TAX JOURNAL. The Configure your tax accounts link below sets the tax payable, receivable and advance accounts.",
+          "content_i18n": {
+            "en_US": "Tell Odoo how often the tax return is filed (monthly here), how many days after period end you want the reminder activity, and which journal the tax closing entry is posted to - TAX JOURNAL. The Configure your tax accounts link below sets the tax payable, receivable and advance accounts.",
+            "si_LK": "Tell Odoo how often the tax return is filed (monthly here), how many days after period end you want the reminder activity, and which journal the tax closing entry is posted to - TAX JOURNAL. The Configure your tax accounts link below sets the tax payable, receivable and advance accounts.",
+            "ta_IN": "Tell Odoo how often the tax return is filed (monthly here), how many days after period end you want the reminder activity, and which journal the tax closing entry is posted to - TAX JOURNAL. The Configure your tax accounts link below sets the tax payable, receivable and advance accounts."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 80,
+          "title": "08 - Taxes: Rounding Method",
+          "title_i18n": {
+            "en_US": "08 - Taxes: Rounding Method",
+            "si_LK": "08 - Taxes: Rounding Method",
+            "ta_IN": "08 - Taxes: Rounding Method"
+          },
+          "trigger": "div.row.mt16:nth-of-type(3) > div.o_setting_box.col-12:nth-of-type(3) > div.o_setting_right_pane > label.o_form_label",
+          "content": "Decides how the tax total is computed. Round per Line rounds tax on every invoice line; Round Globally rounds once on the invoice total. Jinasena uses Round Globally. Changing this later changes the totals on new documents, so agree it with the tax team first.",
+          "content_i18n": {
+            "en_US": "Decides how the tax total is computed. Round per Line rounds tax on every invoice line; Round Globally rounds once on the invoice total. Jinasena uses Round Globally. Changing this later changes the totals on new documents, so agree it with the tax team first.",
+            "si_LK": "Decides how the tax total is computed. Round per Line rounds tax on every invoice line; Round Globally rounds once on the invoice total. Jinasena uses Round Globally. Changing this later changes the totals on new documents, so agree it with the tax team first.",
+            "ta_IN": "Decides how the tax total is computed. Round per Line rounds tax on every invoice line; Round Globally rounds once on the invoice total. Jinasena uses Round Globally. Changing this later changes the totals on new documents, so agree it with the tax team first."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 90,
+          "title": "09 - Currencies: Main Currency",
+          "title_i18n": {
+            "en_US": "09 - Currencies: Main Currency",
+            "si_LK": "09 - Currencies: Main Currency",
+            "ta_IN": "09 - Currencies: Main Currency"
+          },
+          "trigger": "div.row.mt16:nth-of-type(4) > div.o_setting_box.col-12:nth-of-type(1) > div.o_setting_right_pane > span.o_form_label > span",
+          "content": "The company currency - every ledger balance and report is expressed in it. It is fixed at go-live and cannot be changed once entries are posted. Foreign-currency invoices are converted to this currency using the rate on the document date.",
+          "content_i18n": {
+            "en_US": "The company currency - every ledger balance and report is expressed in it. It is fixed at go-live and cannot be changed once entries are posted. Foreign-currency invoices are converted to this currency using the rate on the document date.",
+            "si_LK": "The company currency - every ledger balance and report is expressed in it. It is fixed at go-live and cannot be changed once entries are posted. Foreign-currency invoices are converted to this currency using the rate on the document date.",
+            "ta_IN": "The company currency - every ledger balance and report is expressed in it. It is fixed at go-live and cannot be changed once entries are posted. Foreign-currency invoices are converted to this currency using the rate on the document date."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 100,
+          "title": "10 - Currencies: Automatic Currency Rates",
+          "title_i18n": {
+            "en_US": "10 - Currencies: Automatic Currency Rates",
+            "si_LK": "10 - Currencies: Automatic Currency Rates",
+            "ta_IN": "10 - Currencies: Automatic Currency Rates"
+          },
+          "trigger": "div.row.mt16:nth-of-type(4) > div.o_setting_box.col-12:nth-of-type(2) > div.o_setting_right_pane > label.o_form_label",
+          "content": "If you trade in foreign currency, pick a rate Service (here Central Bank), the update Interval and the Next Run date. Odoo then refreshes exchange rates on its own instead of someone keying them in every morning.",
+          "content_i18n": {
+            "en_US": "If you trade in foreign currency, pick a rate Service (here Central Bank), the update Interval and the Next Run date. Odoo then refreshes exchange rates on its own instead of someone keying them in every morning.",
+            "si_LK": "If you trade in foreign currency, pick a rate Service (here Central Bank), the update Interval and the Next Run date. Odoo then refreshes exchange rates on its own instead of someone keying them in every morning.",
+            "ta_IN": "If you trade in foreign currency, pick a rate Service (here Central Bank), the update Interval and the Next Run date. Odoo then refreshes exchange rates on its own instead of someone keying them in every morning."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 110,
+          "title": "11 - Customer Invoices: Default Sending Options",
+          "title_i18n": {
+            "en_US": "11 - Customer Invoices: Default Sending Options",
+            "si_LK": "11 - Customer Invoices: Default Sending Options",
+            "ta_IN": "11 - Customer Invoices: Default Sending Options"
+          },
+          "trigger": "div.row.mt16:nth-of-type(5) > div.o_setting_box.col-12:nth-of-type(1) > div.o_setting_right_pane > span.o_form_label > span",
+          "content": "Choose how customer invoices leave Odoo by default - Download, Send Email, Peppol or Send by Post. Whatever you tick here is pre-selected on every invoice, so set it to the way Finance actually sends documents.",
+          "content_i18n": {
+            "en_US": "Choose how customer invoices leave Odoo by default - Download, Send Email, Peppol or Send by Post. Whatever you tick here is pre-selected on every invoice, so set it to the way Finance actually sends documents.",
+            "si_LK": "Choose how customer invoices leave Odoo by default - Download, Send Email, Peppol or Send by Post. Whatever you tick here is pre-selected on every invoice, so set it to the way Finance actually sends documents.",
+            "ta_IN": "Choose how customer invoices leave Odoo by default - Download, Send Email, Peppol or Send by Post. Whatever you tick here is pre-selected on every invoice, so set it to the way Finance actually sends documents."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 120,
+          "title": "12 - Customer Invoices: Default Terms & Conditions",
+          "title_i18n": {
+            "en_US": "12 - Customer Invoices: Default Terms & Conditions",
+            "si_LK": "12 - Customer Invoices: Default Terms & Conditions",
+            "ta_IN": "12 - Customer Invoices: Default Terms & Conditions"
+          },
+          "trigger": "div.o_setting_box.col-12:nth-of-type(9) > div.o_setting_right_pane > label.o_form_label",
+          "content": "Switch this on to print your standard terms at the bottom of every invoice, sales order and quotation. Choose Add a Note to hold the text inside Odoo, or Add a link to a Web Page to point at the published version. Use Update Terms to edit the wording.",
+          "content_i18n": {
+            "en_US": "Switch this on to print your standard terms at the bottom of every invoice, sales order and quotation. Choose Add a Note to hold the text inside Odoo, or Add a link to a Web Page to point at the published version. Use Update Terms to edit the wording.",
+            "si_LK": "Switch this on to print your standard terms at the bottom of every invoice, sales order and quotation. Choose Add a Note to hold the text inside Odoo, or Add a link to a Web Page to point at the published version. Use Update Terms to edit the wording.",
+            "ta_IN": "Switch this on to print your standard terms at the bottom of every invoice, sales order and quotation. Choose Add a Note to hold the text inside Odoo, or Add a link to a Web Page to point at the published version. Use Update Terms to edit the wording."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 130,
+          "title": "13 - Customer Invoices: Sales Credit Limit",
+          "title_i18n": {
+            "en_US": "13 - Customer Invoices: Sales Credit Limit",
+            "si_LK": "13 - Customer Invoices: Sales Credit Limit",
+            "ta_IN": "13 - Customer Invoices: Sales Credit Limit"
+          },
+          "trigger": "div.o_setting_box.col-12:nth-of-type(10) > div.o_setting_right_pane > label.o_form_label",
+          "content": "Turn this on to warn users when a customer's total receivable goes past an agreed limit. Set a default limit greater than zero here; individual limits can then be set on each customer record. A simple, effective credit control for a manufacturing business.",
+          "content_i18n": {
+            "en_US": "Turn this on to warn users when a customer's total receivable goes past an agreed limit. Set a default limit greater than zero here; individual limits can then be set on each customer record. A simple, effective credit control for a manufacturing business.",
+            "si_LK": "Turn this on to warn users when a customer's total receivable goes past an agreed limit. Set a default limit greater than zero here; individual limits can then be set on each customer record. A simple, effective credit control for a manufacturing business.",
+            "ta_IN": "Turn this on to warn users when a customer's total receivable goes past an agreed limit. Set a default limit greater than zero here; individual limits can then be set on each customer record. A simple, effective credit control for a manufacturing business."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 140,
+          "title": "14 - Customer Payments section",
+          "title_i18n": {
+            "en_US": "14 - Customer Payments section",
+            "si_LK": "14 - Customer Payments section",
+            "ta_IN": "14 - Customer Payments section"
+          },
+          "trigger": "div.row.mt16:nth-of-type(6) > div.o_setting_box.col-12:nth-of-type(1) > div.o_setting_right_pane > label.o_form_label",
+          "content": "The Customer Payments block controls how money comes in: Invoice Online Payment lets customers pay from the invoice portal, Batch Payments groups several receipts into one deposit to ease bank reconciliation, and QR Codes prints a scannable payment code on the invoice.",
+          "content_i18n": {
+            "en_US": "The Customer Payments block controls how money comes in: Invoice Online Payment lets customers pay from the invoice portal, Batch Payments groups several receipts into one deposit to ease bank reconciliation, and QR Codes prints a scannable payment code on the invoice.",
+            "si_LK": "The Customer Payments block controls how money comes in: Invoice Online Payment lets customers pay from the invoice portal, Batch Payments groups several receipts into one deposit to ease bank reconciliation, and QR Codes prints a scannable payment code on the invoice.",
+            "ta_IN": "The Customer Payments block controls how money comes in: Invoice Online Payment lets customers pay from the invoice portal, Batch Payments groups several receipts into one deposit to ease bank reconciliation, and QR Codes prints a scannable payment code on the invoice."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 150,
+          "title": "15 - Vendor Bills: Purchase Receipt & digitisation",
+          "title_i18n": {
+            "en_US": "15 - Vendor Bills: Purchase Receipt & digitisation",
+            "si_LK": "15 - Vendor Bills: Purchase Receipt & digitisation",
+            "ta_IN": "15 - Vendor Bills: Purchase Receipt & digitisation"
+          },
+          "trigger": "div.row.mt16:nth-of-type(7) > div.o_setting_box.col-12:nth-of-type(1) > div.o_setting_right_pane > label.o_form_label",
+          "content": "Purchase Receipt lets you record an over-the-counter purchase without a formal vendor bill. Just below it, Predict vendor bill product makes Odoo suggest the product on vendor bill lines from what you bought before, which speeds up data entry.",
+          "content_i18n": {
+            "en_US": "Purchase Receipt lets you record an over-the-counter purchase without a formal vendor bill. Just below it, Predict vendor bill product makes Odoo suggest the product on vendor bill lines from what you bought before, which speeds up data entry.",
+            "si_LK": "Purchase Receipt lets you record an over-the-counter purchase without a formal vendor bill. Just below it, Predict vendor bill product makes Odoo suggest the product on vendor bill lines from what you bought before, which speeds up data entry.",
+            "ta_IN": "Purchase Receipt lets you record an over-the-counter purchase without a formal vendor bill. Just below it, Predict vendor bill product makes Odoo suggest the product on vendor bill lines from what you bought before, which speeds up data entry."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 160,
+          "title": "16 - Vendor Payments: Checks",
+          "title_i18n": {
+            "en_US": "16 - Vendor Payments: Checks",
+            "si_LK": "16 - Vendor Payments: Checks",
+            "ta_IN": "16 - Vendor Payments: Checks"
+          },
+          "trigger": "div.row.mt16:nth-of-type(8) > div.o_setting_box.col-12:nth-of-type(1) > div.o_setting_right_pane > label.o_form_label",
+          "content": "Enables cheque payments to vendors and the printing options below - Check Layout, stub and margins. At Jinasena cheques are printed with the custom Dynamic Cheque Print module, so the standard Check Layout is deliberately left as None. Do not change it without asking the ERP team.",
+          "content_i18n": {
+            "en_US": "Enables cheque payments to vendors and the printing options below - Check Layout, stub and margins. At Jinasena cheques are printed with the custom Dynamic Cheque Print module, so the standard Check Layout is deliberately left as None. Do not change it without asking the ERP team.",
+            "si_LK": "Enables cheque payments to vendors and the printing options below - Check Layout, stub and margins. At Jinasena cheques are printed with the custom Dynamic Cheque Print module, so the standard Check Layout is deliberately left as None. Do not change it without asking the ERP team.",
+            "ta_IN": "Enables cheque payments to vendors and the printing options below - Check Layout, stub and margins. At Jinasena cheques are printed with the custom Dynamic Cheque Print module, so the standard Check Layout is deliberately left as None. Do not change it without asking the ERP team."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 170,
+          "title": "17 - Default Accounts: Exchange difference",
+          "title_i18n": {
+            "en_US": "17 - Default Accounts: Exchange difference",
+            "si_LK": "17 - Default Accounts: Exchange difference",
+            "ta_IN": "17 - Default Accounts: Exchange difference"
+          },
+          "trigger": "div.row.mt16:nth-of-type(10) > div.o_setting_box.col-12:nth-of-type(1) > div.o_setting_right_pane > span.o_form_label > span",
+          "content": "Whenever a foreign-currency invoice is paid at a different rate, Odoo posts the difference automatically. Set the journal plus the Gain and Loss accounts here. If these are wrong, foreign-currency settlements land in the wrong P&L line.",
+          "content_i18n": {
+            "en_US": "Whenever a foreign-currency invoice is paid at a different rate, Odoo posts the difference automatically. Set the journal plus the Gain and Loss accounts here. If these are wrong, foreign-currency settlements land in the wrong P&L line.",
+            "si_LK": "Whenever a foreign-currency invoice is paid at a different rate, Odoo posts the difference automatically. Set the journal plus the Gain and Loss accounts here. If these are wrong, foreign-currency settlements land in the wrong P&L line.",
+            "ta_IN": "Whenever a foreign-currency invoice is paid at a different rate, Odoo posts the difference automatically. Set the journal plus the Gain and Loss accounts here. If these are wrong, foreign-currency settlements land in the wrong P&L line."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 180,
+          "title": "18 - Default Accounts: Bank suspense & outstanding accounts",
+          "title_i18n": {
+            "en_US": "18 - Default Accounts: Bank suspense & outstanding accounts",
+            "si_LK": "18 - Default Accounts: Bank suspense & outstanding accounts",
+            "ta_IN": "18 - Default Accounts: Bank suspense & outstanding accounts"
+          },
+          "trigger": "div.row.mt16:nth-of-type(10) > div.o_setting_box.col-12:nth-of-type(2) > div.o_setting_right_pane > span.o_form_label > span",
+          "content": "These four accounts drive bank reconciliation. Bank Suspense holds a statement line until it is matched; Outstanding Receipts and Outstanding Payments hold money that has been registered but has not yet cleared the bank; Internal Transfer is used when moving cash between your own accounts. Never change them once reconciliation has started.",
+          "content_i18n": {
+            "en_US": "These four accounts drive bank reconciliation. Bank Suspense holds a statement line until it is matched; Outstanding Receipts and Outstanding Payments hold money that has been registered but has not yet cleared the bank; Internal Transfer is used when moving cash between your own accounts. Never change them once reconciliation has started.",
+            "si_LK": "These four accounts drive bank reconciliation. Bank Suspense holds a statement line until it is matched; Outstanding Receipts and Outstanding Payments hold money that has been registered but has not yet cleared the bank; Internal Transfer is used when moving cash between your own accounts. Never change them once reconciliation has started.",
+            "ta_IN": "These four accounts drive bank reconciliation. Bank Suspense holds a statement line until it is matched; Outstanding Receipts and Outstanding Payments hold money that has been registered but has not yet cleared the bank; Internal Transfer is used when moving cash between your own accounts. Never change them once reconciliation has started."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 190,
+          "title": "19 - Default Accounts: Deferred entries",
+          "title_i18n": {
+            "en_US": "19 - Default Accounts: Deferred entries",
+            "si_LK": "19 - Default Accounts: Deferred entries",
+            "ta_IN": "19 - Default Accounts: Deferred entries"
+          },
+          "trigger": "div.o_setting_box.col-12:nth-of-type(3) > div.o_setting_right_pane > span.o_form_label > span",
+          "content": "Used when income or cost must be spread over several periods - service contracts, insurance, subscriptions. Set the journal, the Deferred Expense and Deferred Revenue accounts, whether entries are generated on invoice validation, and the Amount Computation basis (here Months).",
+          "content_i18n": {
+            "en_US": "Used when income or cost must be spread over several periods - service contracts, insurance, subscriptions. Set the journal, the Deferred Expense and Deferred Revenue accounts, whether entries are generated on invoice validation, and the Amount Computation basis (here Months).",
+            "si_LK": "Used when income or cost must be spread over several periods - service contracts, insurance, subscriptions. Set the journal, the Deferred Expense and Deferred Revenue accounts, whether entries are generated on invoice validation, and the Amount Computation basis (here Months).",
+            "ta_IN": "Used when income or cost must be spread over several periods - service contracts, insurance, subscriptions. Set the journal, the Deferred Expense and Deferred Revenue accounts, whether entries are generated on invoice validation, and the Amount Computation basis (here Months)."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 200,
+          "title": "20 - Bank & Cash: statement import formats",
+          "title_i18n": {
+            "en_US": "20 - Bank & Cash: statement import formats",
+            "si_LK": "20 - Bank & Cash: statement import formats",
+            "ta_IN": "20 - Bank & Cash: statement import formats"
+          },
+          "trigger": "div.row.mt16:nth-of-type(12) > div.o_setting_box.col-12:nth-of-type(1) > div.o_setting_right_pane > label.o_form_label",
+          "content": "Tick the file formats your banks provide so statements can be imported instead of typed: CSV / XLS / XLSX, QIF, OFX and CAMT.053. Anglo-Saxon Accounting, just below, decides whether cost of goods sold is booked at delivery - a stock valuation decision, not a day-to-day one.",
+          "content_i18n": {
+            "en_US": "Tick the file formats your banks provide so statements can be imported instead of typed: CSV / XLS / XLSX, QIF, OFX and CAMT.053. Anglo-Saxon Accounting, just below, decides whether cost of goods sold is booked at delivery - a stock valuation decision, not a day-to-day one.",
+            "si_LK": "Tick the file formats your banks provide so statements can be imported instead of typed: CSV / XLS / XLSX, QIF, OFX and CAMT.053. Anglo-Saxon Accounting, just below, decides whether cost of goods sold is booked at delivery - a stock valuation decision, not a day-to-day one.",
+            "ta_IN": "Tick the file formats your banks provide so statements can be imported instead of typed: CSV / XLS / XLSX, QIF, OFX and CAMT.053. Anglo-Saxon Accounting, just below, decides whether cost of goods sold is booked at delivery - a stock valuation decision, not a day-to-day one."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 210,
+          "title": "21 - Fiscal Periods: Fiscal Year",
+          "title_i18n": {
+            "en_US": "21 - Fiscal Periods: Fiscal Year",
+            "si_LK": "21 - Fiscal Periods: Fiscal Year",
+            "ta_IN": "21 - Fiscal Periods: Fiscal Year"
+          },
+          "trigger": "div.row.mt16:nth-of-type(13) > div.o_setting_box.col-12:nth-of-type(1) > div.o_setting_right_pane > span.o_form_label > span",
+          "content": "Set the last day and month of your financial year - this drives every period-based report. Fiscal Years lets you define a year that is longer or shorter than twelve months, and the Invoicing Switch Threshold ignores invoices dated before a chosen date. Lock dates, which stop anyone posting into a closed period, are under Accounting > Actions > Lock Dates.",
+          "content_i18n": {
+            "en_US": "Set the last day and month of your financial year - this drives every period-based report. Fiscal Years lets you define a year that is longer or shorter than twelve months, and the Invoicing Switch Threshold ignores invoices dated before a chosen date. Lock dates, which stop anyone posting into a closed period, are under Accounting > Actions > Lock Dates.",
+            "si_LK": "Set the last day and month of your financial year - this drives every period-based report. Fiscal Years lets you define a year that is longer or shorter than twelve months, and the Invoicing Switch Threshold ignores invoices dated before a chosen date. Lock dates, which stop anyone posting into a closed period, are under Accounting > Actions > Lock Dates.",
+            "ta_IN": "Set the last day and month of your financial year - this drives every period-based report. Fiscal Years lets you define a year that is longer or shorter than twelve months, and the Invoicing Switch Threshold ignores invoices dated before a chosen date. Lock dates, which stop anyone posting into a closed period, are under Accounting > Actions > Lock Dates."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 220,
+          "title": "22 - Analytics: cost and budget tracking",
+          "title_i18n": {
+            "en_US": "22 - Analytics: cost and budget tracking",
+            "si_LK": "22 - Analytics: cost and budget tracking",
+            "ta_IN": "22 - Analytics: cost and budget tracking"
+          },
+          "trigger": "div.row.mt16:nth-of-type(14) > div.o_setting_box.col-12:nth-of-type(1) > div.o_setting_right_pane > label.o_form_label",
+          "content": "Analytic Accounting adds a second, management view of cost and revenue by department, project or machine - essential for a manufacturer. Budget Management lets you compare actuals against expected revenue and expense, and Margin Analysis shows margin on sales orders.",
+          "content_i18n": {
+            "en_US": "Analytic Accounting adds a second, management view of cost and revenue by department, project or machine - essential for a manufacturer. Budget Management lets you compare actuals against expected revenue and expense, and Margin Analysis shows margin on sales orders.",
+            "si_LK": "Analytic Accounting adds a second, management view of cost and revenue by department, project or machine - essential for a manufacturer. Budget Management lets you compare actuals against expected revenue and expense, and Margin Analysis shows margin on sales orders.",
+            "ta_IN": "Analytic Accounting adds a second, management view of cost and revenue by department, project or machine - essential for a manufacturer. Budget Management lets you compare actuals against expected revenue and expense, and Margin Analysis shows margin on sales orders."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 230,
+          "title": "23 - Reporting: Add totals below sections",
+          "title_i18n": {
+            "en_US": "23 - Reporting: Add totals below sections",
+            "si_LK": "23 - Reporting: Add totals below sections",
+            "ta_IN": "23 - Reporting: Add totals below sections"
+          },
+          "trigger": "div.row.mt16:nth-of-type(15) > div.o_setting_box.col-12:nth-of-type(1) > div.o_setting_right_pane > label.o_form_label",
+          "content": "A small but useful reporting option - it prints a subtotal under each section of the financial reports, so the Balance Sheet and Profit and Loss read the way accountants expect. Below it, Storno Accounting reverses entries with negative amounts instead of swapping debit and credit.",
+          "content_i18n": {
+            "en_US": "A small but useful reporting option - it prints a subtotal under each section of the financial reports, so the Balance Sheet and Profit and Loss read the way accountants expect. Below it, Storno Accounting reverses entries with negative amounts instead of swapping debit and credit.",
+            "si_LK": "A small but useful reporting option - it prints a subtotal under each section of the financial reports, so the Balance Sheet and Profit and Loss read the way accountants expect. Below it, Storno Accounting reverses entries with negative amounts instead of swapping debit and credit.",
+            "ta_IN": "A small but useful reporting option - it prints a subtotal under each section of the financial reports, so the Balance Sheet and Profit and Loss read the way accountants expect. Below it, Storno Accounting reverses entries with negative amounts instead of swapping debit and credit."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 240,
+          "title": "24 - Save your changes",
+          "title_i18n": {
+            "en_US": "24 - Save your changes",
+            "si_LK": "24 - Save your changes",
+            "ta_IN": "24 - Save your changes"
+          },
+          "trigger": "[data-hotkey=\"s\"]",
+          "content": "That is the required Finance configuration. Nothing you have looked at is stored until you press Save at the top left - Discard throws the changes away. Settings changed here affect the whole company, so agree any change with the Finance Manager and the ERP team before saving.",
+          "content_i18n": {
+            "en_US": "That is the required Finance configuration. Nothing you have looked at is stored until you press Save at the top left - Discard throws the changes away. Settings changed here affect the whole company, so agree any change with the Finance Manager and the ERP team before saving.",
+            "si_LK": "That is the required Finance configuration. Nothing you have looked at is stored until you press Save at the top left - Discard throws the changes away. Settings changed here affect the whole company, so agree any change with the Finance Manager and the ERP team before saving.",
+            "ta_IN": "That is the required Finance configuration. Nothing you have looked at is stored until you press Save at the top left - Discard throws the changes away. Settings changed here affect the whole company, so agree any change with the Finance Manager and the ERP team before saving."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        }
+      ]
+    }
+  ]
+}

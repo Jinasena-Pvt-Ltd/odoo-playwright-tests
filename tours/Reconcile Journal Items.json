@@ -1,0 +1,318 @@
+{
+  "version": 2,
+  "tours": [
+    {
+      "name": "Finance: Reconcile Journal Items ( Customer Invoice and Payment ) - Full Flow",
+      "name_i18n": {
+        "en_US": "Finance: Reconcile Journal Items ( Customer Invoice and Payment ) - Full Flow",
+        "si_LK": "Finance: Reconcile Journal Items ( Customer Invoice and Payment ) - Full Flow",
+        "ta_IN": "Finance: Reconcile Journal Items ( Customer Invoice and Payment ) - Full Flow"
+      },
+      "description": "Step-by-step guide for a new finance user on the Reconcile button in the Accounting menu: opening Accounting > Actions > Reconcile, reading the Unreconciled list, selecting the two opposite lines of one account and partner, and clicking Reconcile. Worked example: customer Engineer - Production, invoice Sales/2026 against payment PBNK1/2026/00001 in account 121000 Account Receivable.",
+      "description_i18n": {
+        "en_US": "Step-by-step guide for a new finance user on the Reconcile button in the Accounting menu: opening Accounting > Actions > Reconcile, reading the Unreconciled list, selecting the two opposite lines of one account and partner, and clicking Reconcile. Worked example: customer Engineer - Production, invoice Sales/2026 against payment PBNK1/2026/00001 in account 121000 Account Receivable.",
+        "si_LK": "Step-by-step guide for a new finance user on the Reconcile button in the Accounting menu: opening Accounting > Actions > Reconcile, reading the Unreconciled list, selecting the two opposite lines of one account and partner, and clicking Reconcile. Worked example: customer Engineer - Production, invoice Sales/2026 against payment PBNK1/2026/00001 in account 121000 Account Receivable.",
+        "ta_IN": "Step-by-step guide for a new finance user on the Reconcile button in the Accounting menu: opening Accounting > Actions > Reconcile, reading the Unreconciled list, selecting the two opposite lines of one account and partner, and clicking Reconcile. Worked example: customer Engineer - Production, invoice Sales/2026 against payment PBNK1/2026/00001 in account 121000 Account Receivable."
+      },
+      "steps": [
+        {
+          "sequence": 10,
+          "title": "Open the Accounting menu",
+          "title_i18n": {
+            "en_US": "Open the Accounting menu",
+            "si_LK": "Open the Accounting menu",
+            "ta_IN": "Open the Accounting menu"
+          },
+          "trigger": "[data-menu-xmlid=\"account.menu_finance_entries\"]",
+          "content": "Click the Accounting menu in the top bar. Every accounting action lives here, including the Reconcile tool we are about to use.",
+          "content_i18n": {
+            "en_US": "Click the Accounting menu in the top bar. Every accounting action lives here, including the Reconcile tool we are about to use.",
+            "si_LK": "Click the Accounting menu in the top bar. Every accounting action lives here, including the Reconcile tool we are about to use.",
+            "ta_IN": "Click the Accounting menu in the top bar. Every accounting action lives here, including the Reconcile tool we are about to use."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 20,
+          "title": "Click Reconcile under Actions",
+          "title_i18n": {
+            "en_US": "Click Reconcile under Actions",
+            "si_LK": "Click Reconcile under Actions",
+            "ta_IN": "Click Reconcile under Actions"
+          },
+          "trigger": "[data-menu-xmlid=\"account_accountant.menu_account_reconcile\"]",
+          "content": "Scroll down the menu to the Actions group and click Reconcile. This opens the list of journal items that are still waiting to be matched.",
+          "content_i18n": {
+            "en_US": "Scroll down the menu to the Actions group and click Reconcile. This opens the list of journal items that are still waiting to be matched.",
+            "si_LK": "Scroll down the menu to the Actions group and click Reconcile. This opens the list of journal items that are still waiting to be matched.",
+            "ta_IN": "Scroll down the menu to the Actions group and click Reconcile. This opens the list of journal items that are still waiting to be matched."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 30,
+          "title": "Check the Unreconciled filter",
+          "title_i18n": {
+            "en_US": "Check the Unreconciled filter",
+            "si_LK": "Check the Unreconciled filter",
+            "ta_IN": "Check the Unreconciled filter"
+          },
+          "trigger": "div.o_searchview_facet.position-relative:nth-of-type(1) > div.o_facet_values.position-relative > small.o_facet_value",
+          "content": "The screen opens with the Unreconciled filter already applied and the lines grouped by Account, then Partner. Only journal items still waiting to be matched are listed here.",
+          "content_i18n": {
+            "en_US": "The screen opens with the Unreconciled filter already applied and the lines grouped by Account, then Partner. Only journal items still waiting to be matched are listed here.",
+            "si_LK": "The screen opens with the Unreconciled filter already applied and the lines grouped by Account, then Partner. Only journal items still waiting to be matched are listed here.",
+            "ta_IN": "The screen opens with the Unreconciled filter already applied and the lines grouped by Account, then Partner. Only journal items still waiting to be matched are listed here."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 40,
+          "title": "Expand the customer group",
+          "title_i18n": {
+            "en_US": "Expand the customer group",
+            "si_LK": "Expand the customer group",
+            "ta_IN": "Expand the customer group"
+          },
+          "trigger": "tr.o_group_has_content.o_group_header:nth-of-type(7) > th.o_group_name.fs-6 > div.d-flex.align-items-center",
+          "content": "Find the account you need to match - here 121000 Account Receivable, holding 1.00 debit (the invoice) and 1.00 credit (the payment). Click the partner line Engineer - Production under it to open the individual journal items. Always reconcile within one account and one partner.",
+          "content_i18n": {
+            "en_US": "Find the account you need to match - here 121000 Account Receivable, holding 1.00 debit (the invoice) and 1.00 credit (the payment). Click the partner line Engineer - Production under it to open the individual journal items. Always reconcile within one account and one partner.",
+            "si_LK": "Find the account you need to match - here 121000 Account Receivable, holding 1.00 debit (the invoice) and 1.00 credit (the payment). Click the partner line Engineer - Production under it to open the individual journal items. Always reconcile within one account and one partner.",
+            "ta_IN": "Find the account you need to match - here 121000 Account Receivable, holding 1.00 debit (the invoice) and 1.00 credit (the payment). Click the partner line Engineer - Production under it to open the individual journal items. Always reconcile within one account and one partner."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 50,
+          "title": "Select the payment line",
+          "title_i18n": {
+            "en_US": "Select the payment line",
+            "si_LK": "Select the payment line",
+            "ta_IN": "Select the payment line"
+          },
+          "trigger": "tr.o_data_row.o_row_draggable:nth-of-type(8) > td.o_list_record_selector.user-select-none > div.o-checkbox.form-check",
+          "content": "Tick the checkbox on the payment line PBNK1/2026/00001 - the 1.00 credit received from the customer.",
+          "content_i18n": {
+            "en_US": "Tick the checkbox on the payment line PBNK1/2026/00001 - the 1.00 credit received from the customer.",
+            "si_LK": "Tick the checkbox on the payment line PBNK1/2026/00001 - the 1.00 credit received from the customer.",
+            "ta_IN": "Tick the checkbox on the payment line PBNK1/2026/00001 - the 1.00 credit received from the customer."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 60,
+          "title": "Select the invoice line",
+          "title_i18n": {
+            "en_US": "Select the invoice line",
+            "si_LK": "Select the invoice line",
+            "ta_IN": "Select the invoice line"
+          },
+          "trigger": "tr.o_data_row.o_row_draggable:nth-of-type(9) > td.o_list_record_selector.user-select-none > div.o-checkbox.form-check",
+          "content": "Now tick the customer invoice line Sales/2026 - the 1.00 debit. Debit and credit must add up to zero for a full match; if they do not, Odoo keeps the difference open as a partial reconciliation.",
+          "content_i18n": {
+            "en_US": "Now tick the customer invoice line Sales/2026 - the 1.00 debit. Debit and credit must add up to zero for a full match; if they do not, Odoo keeps the difference open as a partial reconciliation.",
+            "si_LK": "Now tick the customer invoice line Sales/2026 - the 1.00 debit. Debit and credit must add up to zero for a full match; if they do not, Odoo keeps the difference open as a partial reconciliation.",
+            "ta_IN": "Now tick the customer invoice line Sales/2026 - the 1.00 debit. Debit and credit must add up to zero for a full match; if they do not, Odoo keeps the difference open as a partial reconciliation."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 70,
+          "title": "Click the Reconcile button",
+          "title_i18n": {
+            "en_US": "Click the Reconcile button",
+            "si_LK": "Click the Reconcile button",
+            "ta_IN": "Click the Reconcile button"
+          },
+          "trigger": "button[name=\"action_reconcile\"]",
+          "content": "With both lines ticked, click Reconcile. Odoo matches them, drops the residual to zero, gives them a Matching number and marks the invoice as paid.",
+          "content_i18n": {
+            "en_US": "With both lines ticked, click Reconcile. Odoo matches them, drops the residual to zero, gives them a Matching number and marks the invoice as paid.",
+            "si_LK": "With both lines ticked, click Reconcile. Odoo matches them, drops the residual to zero, gives them a Matching number and marks the invoice as paid.",
+            "ta_IN": "With both lines ticked, click Reconcile. Odoo matches them, drops the residual to zero, gives them a Matching number and marks the invoice as paid."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 80,
+          "title": "Confirm the lines are matched",
+          "title_i18n": {
+            "en_US": "Confirm the lines are matched",
+            "si_LK": "Confirm the lines are matched",
+            "ta_IN": "Confirm the lines are matched"
+          },
+          "trigger": "tr.o_group_header.o_group_open:nth-of-type(6) > th.o_group_name.fs-6 > div.d-flex.align-items-center",
+          "content": "121000 Account Receivable now shows (0) with a zero balance - both lines have left the unreconciled list, which means the match worked.",
+          "content_i18n": {
+            "en_US": "121000 Account Receivable now shows (0) with a zero balance - both lines have left the unreconciled list, which means the match worked.",
+            "si_LK": "121000 Account Receivable now shows (0) with a zero balance - both lines have left the unreconciled list, which means the match worked.",
+            "ta_IN": "121000 Account Receivable now shows (0) with a zero balance - both lines have left the unreconciled list, which means the match worked."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 90,
+          "title": "Remove the Unreconciled filter",
+          "title_i18n": {
+            "en_US": "Remove the Unreconciled filter",
+            "si_LK": "Remove the Unreconciled filter",
+            "ta_IN": "Remove the Unreconciled filter"
+          },
+          "trigger": "div.o_searchview_facet.position-relative:nth-of-type(1) > div.o_facet_values.position-relative > button.o_facet_remove.oi",
+          "content": "Click the x on the Unreconciled filter. The matched invoice and payment do not come back into this list - this screen only ever shows items still waiting to be matched, so an account that has disappeared from here is fully reconciled. To see the Matching number itself, open Accounting > Journal Items.",
+          "content_i18n": {
+            "en_US": "Click the x on the Unreconciled filter. The matched invoice and payment do not come back into this list - this screen only ever shows items still waiting to be matched, so an account that has disappeared from here is fully reconciled. To see the Matching number itself, open Accounting > Journal Items.",
+            "si_LK": "Click the x on the Unreconciled filter. The matched invoice and payment do not come back into this list - this screen only ever shows items still waiting to be matched, so an account that has disappeared from here is fully reconciled. To see the Matching number itself, open Accounting > Journal Items.",
+            "ta_IN": "Click the x on the Unreconciled filter. The matched invoice and payment do not come back into this list - this screen only ever shows items still waiting to be matched, so an account that has disappeared from here is fully reconciled. To see the Matching number itself, open Accounting > Journal Items."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1044 @@
+{
+  "version": 2,
+  "tours": [
+    {
+      "name": "Finance: Reconcile Transactions Using Reconciliation Models ( Setup - Bank Charges Button - Invoice Match ) - Full Flow",
+      "name_i18n": {
+        "en_US": "Finance: Reconcile Transactions Using Reconciliation Models ( Setup - Bank Charges Button - Invoice Match ) - Full Flow",
+        "si_LK": "Finance: Reconcile Transactions Using Reconciliation Models ( Setup - Bank Charges Button - Invoice Match ) - Full Flow",
+        "ta_IN": "Finance: Reconcile Transactions Using Reconciliation Models ( Setup - Bank Charges Button - Invoice Match ) - Full Flow"
+      },
+      "description": "For new users. Shows where reconciliation models live, how to read an existing invoice-matching rule, how to build a Button to generate counterpart entry model for monthly bank charges, and how to use both kinds of model on real Commercial Bank statement lines through to Validate.",
+      "description_i18n": {
+        "en_US": "For new users. Shows where reconciliation models live, how to read an existing invoice-matching rule, how to build a Button to generate counterpart entry model for monthly bank charges, and how to use both kinds of model on real Commercial Bank statement lines through to Validate.",
+        "si_LK": "For new users. Shows where reconciliation models live, how to read an existing invoice-matching rule, how to build a Button to generate counterpart entry model for monthly bank charges, and how to use both kinds of model on real Commercial Bank statement lines through to Validate.",
+        "ta_IN": "For new users. Shows where reconciliation models live, how to read an existing invoice-matching rule, how to build a Button to generate counterpart entry model for monthly bank charges, and how to use both kinds of model on real Commercial Bank statement lines through to Validate."
+      },
+      "steps": [
+        {
+          "sequence": 10,
+          "title": "Open the Configuration menu",
+          "title_i18n": {
+            "en_US": "Open the Configuration menu",
+            "si_LK": "Open the Configuration menu",
+            "ta_IN": "Open the Configuration menu"
+          },
+          "trigger": ".o_menu_sections > .o-dropdown:not(.d-none) > button[data-menu-xmlid=\"account.menu_finance_configuration\"], .o_menu_sections > .o_menu_sections_more:not(.d-none) > button",
+          "content": "Reconciliation Models live under Configuration. If your window is narrow this menu is hidden behind the + button - open it there.",
+          "content_i18n": {
+            "en_US": "Reconciliation Models live under Configuration. If your window is narrow this menu is hidden behind the + button - open it there.",
+            "si_LK": "Reconciliation Models live under Configuration. If your window is narrow this menu is hidden behind the + button - open it there.",
+            "ta_IN": "Reconciliation Models live under Configuration. If your window is narrow this menu is hidden behind the + button - open it there."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 20,
+          "title": "Open Reconciliation Models",
+          "title_i18n": {
+            "en_US": "Open Reconciliation Models",
+            "si_LK": "Open Reconciliation Models",
+            "ta_IN": "Open Reconciliation Models"
+          },
+          "trigger": "[data-menu-xmlid=\"account.action_account_reconcile_model_menu\"]",
+          "content": "Configuration > Banks > Reconciliation Models. This is where every reconciliation rule and button is defined.",
+          "content_i18n": {
+            "en_US": "Configuration > Banks > Reconciliation Models. This is where every reconciliation rule and button is defined.",
+            "si_LK": "Configuration > Banks > Reconciliation Models. This is where every reconciliation rule and button is defined.",
+            "ta_IN": "Configuration > Banks > Reconciliation Models. This is where every reconciliation rule and button is defined."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 30,
+          "title": "The three types of reconciliation model",
+          "title_i18n": {
+            "en_US": "The three types of reconciliation model",
+            "si_LK": "The three types of reconciliation model",
+            "ta_IN": "The three types of reconciliation model"
+          },
+          "trigger": "th.align-middle.o_column_sortable:nth-of-type(4) > div.d-flex > span.d-block.min-w-0",
+          "content": "Look at the Type column. A model is either a BUTTON you press yourself, a RULE that suggests a counterpart entry, or a RULE that matches invoices and bills automatically.",
+          "content_i18n": {
+            "en_US": "Look at the Type column. A model is either a BUTTON you press yourself, a RULE that suggests a counterpart entry, or a RULE that matches invoices and bills automatically.",
+            "si_LK": "Look at the Type column. A model is either a BUTTON you press yourself, a RULE that suggests a counterpart entry, or a RULE that matches invoices and bills automatically.",
+            "ta_IN": "Look at the Type column. A model is either a BUTTON you press yourself, a RULE that suggests a counterpart entry, or a RULE that matches invoices and bills automatically."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 40,
+          "title": "Open the invoice matching rule",
+          "title_i18n": {
+            "en_US": "Open the invoice matching rule",
+            "si_LK": "Open the invoice matching rule",
+            "ta_IN": "Open the invoice matching rule"
+          },
+          "trigger": "tr.o_data_row.o_row_draggable:nth-of-type(1) > td.o_data_cell.cursor-pointer:nth-of-type(3)",
+          "content": "Click Invoices/Bills Perfect Match to see how an automatic matching rule is set up.",
+          "content_i18n": {
+            "en_US": "Click Invoices/Bills Perfect Match to see how an automatic matching rule is set up.",
+            "si_LK": "Click Invoices/Bills Perfect Match to see how an automatic matching rule is set up.",
+            "ta_IN": "Click Invoices/Bills Perfect Match to see how an automatic matching rule is set up."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 50,
+          "title": "Type: Rule to match invoices/bills",
+          "title_i18n": {
+            "en_US": "Type: Rule to match invoices/bills",
+            "si_LK": "Type: Rule to match invoices/bills",
+            "ta_IN": "Type: Rule to match invoices/bills"
+          },
+          "trigger": "div.form-check.o_radio_item:nth-of-type(3) > label.form-check-label.o_form_label",
+          "content": "This type looks for an open invoice or bill that fits the bank line and proposes it as the counterpart. Nothing to click - just read it.",
+          "content_i18n": {
+            "en_US": "This type looks for an open invoice or bill that fits the bank line and proposes it as the counterpart. Nothing to click - just read it.",
+            "si_LK": "This type looks for an open invoice or bill that fits the bank line and proposes it as the counterpart. Nothing to click - just read it.",
+            "ta_IN": "This type looks for an open invoice or bill that fits the bank line and proposes it as the counterpart. Nothing to click - just read it."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 60,
+          "title": "Auto-validate",
+          "title_i18n": {
+            "en_US": "Auto-validate",
+            "si_LK": "Auto-validate",
+            "ta_IN": "Auto-validate"
+          },
+          "trigger": "#auto_reconcile_0",
+          "content": "When Auto-validate is ticked the rule reconciles the bank line on its own, so you never see it in the Reconcile screen. Leave it off if you want to review each match first.",
+          "content_i18n": {
+            "en_US": "When Auto-validate is ticked the rule reconciles the bank line on its own, so you never see it in the Reconcile screen. Leave it off if you want to review each match first.",
+            "si_LK": "When Auto-validate is ticked the rule reconciles the bank line on its own, so you never see it in the Reconcile screen. Leave it off if you want to review each match first.",
+            "ta_IN": "When Auto-validate is ticked the rule reconciles the bank line on its own, so you never see it in the Reconcile screen. Leave it off if you want to review each match first."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 70,
+          "title": "The matching conditions",
+          "title_i18n": {
+            "en_US": "The matching conditions",
+            "si_LK": "The matching conditions",
+            "ta_IN": "The matching conditions"
+          },
+          "trigger": "#match_label_param_0",
+          "content": "Conditions decide when the rule fires: here the bank line label must contain SO, the amount must be within the payment tolerance and the currency must be the same.",
+          "content_i18n": {
+            "en_US": "Conditions decide when the rule fires: here the bank line label must contain SO, the amount must be within the payment tolerance and the currency must be the same.",
+            "si_LK": "Conditions decide when the rule fires: here the bank line label must contain SO, the amount must be within the payment tolerance and the currency must be the same.",
+            "ta_IN": "Conditions decide when the rule fires: here the bank line label must contain SO, the amount must be within the payment tolerance and the currency must be the same."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 80,
+          "title": "Go back to the model list",
+          "title_i18n": {
+            "en_US": "Go back to the model list",
+            "si_LK": "Go back to the model list",
+            "ta_IN": "Go back to the model list"
+          },
+          "trigger": "[data-hotkey=\"b\"]",
+          "content": "Click the Reconciliation Models breadcrumb to return to the list. Now we will create our own model.",
+          "content_i18n": {
+            "en_US": "Click the Reconciliation Models breadcrumb to return to the list. Now we will create our own model.",
+            "si_LK": "Click the Reconciliation Models breadcrumb to return to the list. Now we will create our own model.",
+            "ta_IN": "Click the Reconciliation Models breadcrumb to return to the list. Now we will create our own model."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 90,
+          "title": "Create a new reconciliation model",
+          "title_i18n": {
+            "en_US": "Create a new reconciliation model",
+            "si_LK": "Create a new reconciliation model",
+            "ta_IN": "Create a new reconciliation model"
+          },
+          "trigger": ".o_control_panel_main_buttons",
+          "content": "Click the New button at the top left. We will build a one-click button for the monthly bank charges the bank deducts from the Commercial Bank account.",
+          "content_i18n": {
+            "en_US": "Click the New button at the top left. We will build a one-click button for the monthly bank charges the bank deducts from the Commercial Bank account.",
+            "si_LK": "Click the New button at the top left. We will build a one-click button for the monthly bank charges the bank deducts from the Commercial Bank account.",
+            "ta_IN": "Click the New button at the top left. We will build a one-click button for the monthly bank charges the bank deducts from the Commercial Bank account."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 100,
+          "title": "Name the model",
+          "title_i18n": {
+            "en_US": "Name the model",
+            "si_LK": "Name the model",
+            "ta_IN": "Name the model"
+          },
+          "trigger": "#name_0",
+          "content": "Type a clear name - use: Bank Charges - Commercial Bank. This name is what appears on the button in the Reconcile screen.",
+          "content_i18n": {
+            "en_US": "Type a clear name - use: Bank Charges - Commercial Bank. This name is what appears on the button in the Reconcile screen.",
+            "si_LK": "Type a clear name - use: Bank Charges - Commercial Bank. This name is what appears on the button in the Reconcile screen.",
+            "ta_IN": "Type a clear name - use: Bank Charges - Commercial Bank. This name is what appears on the button in the Reconcile screen."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "required",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "Please type the model name before continuing.",
+          "validation_message_i18n": {
+            "en_US": "Please type the model name before continuing.",
+            "si_LK": "Please type the model name before continuing.",
+            "ta_IN": "Please type the model name before continuing."
+          }
+        },
+        {
+          "sequence": 110,
+          "title": "Keep the type as Button",
+          "title_i18n": {
+            "en_US": "Keep the type as Button",
+            "si_LK": "Keep the type as Button",
+            "ta_IN": "Keep the type as Button"
+          },
+          "trigger": "div.form-check.o_radio_item:nth-of-type(1) > label.form-check-label.o_form_label",
+          "content": "Button to generate counterpart entry is already selected. This type puts a button in the Reconcile screen that posts a ready-made counterpart line in one click.",
+          "content_i18n": {
+            "en_US": "Button to generate counterpart entry is already selected. This type puts a button in the Reconcile screen that posts a ready-made counterpart line in one click.",
+            "si_LK": "Button to generate counterpart entry is already selected. This type puts a button in the Reconcile screen that posts a ready-made counterpart line in one click.",
+            "ta_IN": "Button to generate counterpart entry is already selected. This type puts a button in the Reconcile screen that posts a ready-made counterpart line in one click."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 120,
+          "title": "Limit the button to one journal",
+          "title_i18n": {
+            "en_US": "Limit the button to one journal",
+            "si_LK": "Limit the button to one journal",
+            "ta_IN": "Limit the button to one journal"
+          },
+          "trigger": "#match_journal_ids_0",
+          "content": "In Journals Availability pick Commercial Bank. The button will then only appear when you reconcile that bank journal. Leave it empty to show the button on every journal.",
+          "content_i18n": {
+            "en_US": "In Journals Availability pick Commercial Bank. The button will then only appear when you reconcile that bank journal. Leave it empty to show the button on every journal.",
+            "si_LK": "In Journals Availability pick Commercial Bank. The button will then only appear when you reconcile that bank journal. Leave it empty to show the button on every journal.",
+            "ta_IN": "In Journals Availability pick Commercial Bank. The button will then only appear when you reconcile that bank journal. Leave it empty to show the button on every journal."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 130,
+          "title": "Add the counterpart line",
+          "title_i18n": {
+            "en_US": "Add the counterpart line",
+            "si_LK": "Add the counterpart line",
+            "ta_IN": "Add the counterpart line"
+          },
+          "trigger": "td.o_field_x2many_list_row_add > a",
+          "content": "Counterpart Entries is the journal entry the button will create. Click Add a line to define it.",
+          "content_i18n": {
+            "en_US": "Counterpart Entries is the journal entry the button will create. Click Add a line to define it.",
+            "si_LK": "Counterpart Entries is the journal entry the button will create. Click Add a line to define it.",
+            "ta_IN": "Counterpart Entries is the journal entry the button will create. Click Add a line to define it."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 140,
+          "title": "Choose the expense account",
+          "title_i18n": {
+            "en_US": "Choose the expense account",
+            "si_LK": "Choose the expense account",
+            "ta_IN": "Choose the expense account"
+          },
+          "trigger": "div.o_field_many2one_selection > div.o_input_dropdown > div.o-autocomplete.dropdown > input.o-autocomplete--input.o_input",
+          "content": "Type 72030110 and pick BANK CHARGES. This is the account the charge will be posted to.",
+          "content_i18n": {
+            "en_US": "Type 72030110 and pick BANK CHARGES. This is the account the charge will be posted to.",
+            "si_LK": "Type 72030110 and pick BANK CHARGES. This is the account the charge will be posted to.",
+            "ta_IN": "Type 72030110 and pick BANK CHARGES. This is the account the charge will be posted to."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "required",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "Select the BANK CHARGES account before continuing.",
+          "validation_message_i18n": {
+            "en_US": "Select the BANK CHARGES account before continuing.",
+            "si_LK": "Select the BANK CHARGES account before continuing.",
+            "ta_IN": "Select the BANK CHARGES account before continuing."
+          }
+        },
+        {
+          "sequence": 150,
+          "title": "Amount Type: Percentage of balance",
+          "title_i18n": {
+            "en_US": "Amount Type: Percentage of balance",
+            "si_LK": "Amount Type: Percentage of balance",
+            "ta_IN": "Amount Type: Percentage of balance"
+          },
+          "trigger": "select.o_input.pe-3",
+          "content": "Leave Amount Type on Percentage of balance and Amount on 100. That tells Odoo to move the whole remaining balance of the bank line to this account.",
+          "content_i18n": {
+            "en_US": "Leave Amount Type on Percentage of balance and Amount on 100. That tells Odoo to move the whole remaining balance of the bank line to this account.",
+            "si_LK": "Leave Amount Type on Percentage of balance and Amount on 100. That tells Odoo to move the whole remaining balance of the bank line to this account.",
+            "ta_IN": "Leave Amount Type on Percentage of balance and Amount on 100. That tells Odoo to move the whole remaining balance of the bank line to this account."
+          },
+          "position": "bottom",
+          "run": "select:\"percentage\"",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 160,
+          "title": "Label the journal item",
+          "title_i18n": {
+            "en_US": "Label the journal item",
+            "si_LK": "Label the journal item",
+            "ta_IN": "Label the journal item"
+          },
+          "trigger": "td.o_data_cell.cursor-pointer:nth-of-type(6) > div.o_field_widget.o_field_char > input.o_input.o_field_translate",
+          "content": "Type Bank charges. This text becomes the label on the generated journal item, which makes the entry easy to recognise later.",
+          "content_i18n": {
+            "en_US": "Type Bank charges. This text becomes the label on the generated journal item, which makes the entry easy to recognise later.",
+            "si_LK": "Type Bank charges. This text becomes the label on the generated journal item, which makes the entry easy to recognise later.",
+            "ta_IN": "Type Bank charges. This text becomes the label on the generated journal item, which makes the entry easy to recognise later."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 170,
+          "title": "Save the model",
+          "title_i18n": {
+            "en_US": "Save the model",
+            "si_LK": "Save the model",
+            "ta_IN": "Save the model"
+          },
+          "trigger": ".o_form_button_save",
+          "content": "Click the cloud icon to save. The model is now live and its button will appear in the Reconcile screen of the Commercial Bank journal.",
+          "content_i18n": {
+            "en_US": "Click the cloud icon to save. The model is now live and its button will appear in the Reconcile screen of the Commercial Bank journal.",
+            "si_LK": "Click the cloud icon to save. The model is now live and its button will appear in the Reconcile screen of the Commercial Bank journal.",
+            "ta_IN": "Click the cloud icon to save. The model is now live and its button will appear in the Reconcile screen of the Commercial Bank journal."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 180,
+          "title": "Go to the Accounting Dashboard",
+          "title_i18n": {
+            "en_US": "Go to the Accounting Dashboard",
+            "si_LK": "Go to the Accounting Dashboard",
+            "ta_IN": "Go to the Accounting Dashboard"
+          },
+          "trigger": "[data-menu-xmlid=\"account.menu_board_journal_1\"]",
+          "content": "The model is ready. Now we will use it. Click Dashboard to see the bank journals.",
+          "content_i18n": {
+            "en_US": "The model is ready. Now we will use it. Click Dashboard to see the bank journals.",
+            "si_LK": "The model is ready. Now we will use it. Click Dashboard to see the bank journals.",
+            "ta_IN": "The model is ready. Now we will use it. Click Dashboard to see the bank journals."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 190,
+          "title": "Open Reconcile on the Commercial Bank card",
+          "title_i18n": {
+            "en_US": "Open Reconcile on the Commercial Bank card",
+            "si_LK": "Open Reconcile on the Commercial Bank card",
+            "ta_IN": "Open Reconcile on the Commercial Bank card"
+          },
+          "trigger": "button[name=\"action_open_reconcile\"]",
+          "content": "Find the Commercial Bank card and click its Reconcile button. It shows how many bank lines are still waiting to be matched.",
+          "content_i18n": {
+            "en_US": "Find the Commercial Bank card and click its Reconcile button. It shows how many bank lines are still waiting to be matched.",
+            "si_LK": "Find the Commercial Bank card and click its Reconcile button. It shows how many bank lines are still waiting to be matched.",
+            "ta_IN": "Find the Commercial Bank card and click its Reconcile button. It shows how many bank lines are still waiting to be matched."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 200,
+          "title": "Select the bank charge line",
+          "title_i18n": {
+            "en_US": "Select the bank charge line",
+            "si_LK": "Select the bank charge line",
+            "ta_IN": "Select the bank charge line"
+          },
+          "trigger": ".o_bank_rec_kanban_div",
+          "content": "Scroll this list and click the Monthly Bank Charges line of -25.00, then continue. It is a charge the bank took, so there is no invoice to match it against.",
+          "content_i18n": {
+            "en_US": "Scroll this list and click the Monthly Bank Charges line of -25.00, then continue. It is a charge the bank took, so there is no invoice to match it against.",
+            "si_LK": "Scroll this list and click the Monthly Bank Charges line of -25.00, then continue. It is a charge the bank took, so there is no invoice to match it against.",
+            "ta_IN": "Scroll this list and click the Monthly Bank Charges line of -25.00, then continue. It is a charge the bank took, so there is no invoice to match it against."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 210,
+          "title": "Before: the line sits in Bank Suspense",
+          "title_i18n": {
+            "en_US": "Before: the line sits in Bank Suspense",
+            "si_LK": "Before: the line sits in Bank Suspense",
+            "ta_IN": "Before: the line sits in Bank Suspense"
+          },
+          "trigger": "div[name=\"line_ids\"] table.o_list_table",
+          "content": "Until you tell Odoo what the transaction is, the counterpart is parked in 12090250 BANK SUSPENSE. Our model will replace it.",
+          "content_i18n": {
+            "en_US": "Until you tell Odoo what the transaction is, the counterpart is parked in 12090250 BANK SUSPENSE. Our model will replace it.",
+            "si_LK": "Until you tell Odoo what the transaction is, the counterpart is parked in 12090250 BANK SUSPENSE. Our model will replace it.",
+            "ta_IN": "Until you tell Odoo what the transaction is, the counterpart is parked in 12090250 BANK SUSPENSE. Our model will replace it."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 220,
+          "title": "Click the reconciliation model button",
+          "title_i18n": {
+            "en_US": "Click the reconciliation model button",
+            "si_LK": "Click the reconciliation model button",
+            "ta_IN": "Click the reconciliation model button"
+          },
+          "trigger": ".available_reco_model_ids button.recon_model_button",
+          "content": "This is the model we just created. One click builds the counterpart line for you - no typing of accounts or amounts.",
+          "content_i18n": {
+            "en_US": "This is the model we just created. One click builds the counterpart line for you - no typing of accounts or amounts.",
+            "si_LK": "This is the model we just created. One click builds the counterpart line for you - no typing of accounts or amounts.",
+            "ta_IN": "This is the model we just created. One click builds the counterpart line for you - no typing of accounts or amounts."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 230,
+          "title": "After: the counterpart is ready",
+          "title_i18n": {
+            "en_US": "After: the counterpart is ready",
+            "si_LK": "After: the counterpart is ready",
+            "ta_IN": "After: the counterpart is ready"
+          },
+          "trigger": "div[name=\"line_ids\"] table.o_list_table",
+          "content": "Bank Suspense has been replaced by 72030110 BANK CHARGES for 25.00 with the label Bank charges. Always read this line before validating.",
+          "content_i18n": {
+            "en_US": "Bank Suspense has been replaced by 72030110 BANK CHARGES for 25.00 with the label Bank charges. Always read this line before validating.",
+            "si_LK": "Bank Suspense has been replaced by 72030110 BANK CHARGES for 25.00 with the label Bank charges. Always read this line before validating.",
+            "ta_IN": "Bank Suspense has been replaced by 72030110 BANK CHARGES for 25.00 with the label Bank charges. Always read this line before validating."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 240,
+          "title": "Validate the reconciliation",
+          "title_i18n": {
+            "en_US": "Validate the reconciliation",
+            "si_LK": "Validate the reconciliation",
+            "ta_IN": "Validate the reconciliation"
+          },
+          "trigger": ".o_bank_rec_stats_buttons_aside_left button.btn-primary",
+          "content": "Click Validate. Odoo posts the journal entry and the bank line disappears from the Not Matched list.",
+          "content_i18n": {
+            "en_US": "Click Validate. Odoo posts the journal entry and the bank line disappears from the Not Matched list.",
+            "si_LK": "Click Validate. Odoo posts the journal entry and the bank line disappears from the Not Matched list.",
+            "ta_IN": "Click Validate. Odoo posts the journal entry and the bank line disappears from the Not Matched list."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 250,
+          "title": "One line less to reconcile",
+          "title_i18n": {
+            "en_US": "One line less to reconcile",
+            "si_LK": "One line less to reconcile",
+            "ta_IN": "One line less to reconcile"
+          },
+          "trigger": "div.o_control_panel_main.d-flex > div.o_control_panel_navigation.d-flex > div.o_cp_pager.text-nowrap > nav.o_pager.d-flex > span.o_pager_counter.align-self-center > span.o_pager_value.d-inline-block",
+          "content": "The counter has dropped by one and Odoo has moved on to the next unmatched line. That is the whole button-model flow: select, click the button, validate.",
+          "content_i18n": {
+            "en_US": "The counter has dropped by one and Odoo has moved on to the next unmatched line. That is the whole button-model flow: select, click the button, validate.",
+            "si_LK": "The counter has dropped by one and Odoo has moved on to the next unmatched line. That is the whole button-model flow: select, click the button, validate.",
+            "ta_IN": "The counter has dropped by one and Odoo has moved on to the next unmatched line. That is the whole button-model flow: select, click the button, validate."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 260,
+          "title": "Select a customer receipt line",
+          "title_i18n": {
+            "en_US": "Select a customer receipt line",
+            "si_LK": "Select a customer receipt line",
+            "ta_IN": "Select a customer receipt line"
+          },
+          "trigger": ".o_bank_rec_kanban_div",
+          "content": "Now the other kind of model. In this list click a customer receipt line - for example Cheque Settlement - AAA Trading of 2,800.00 - then continue. This one should be matched to an open invoice, not written off to an expense account.",
+          "content_i18n": {
+            "en_US": "Now the other kind of model. In this list click a customer receipt line - for example Cheque Settlement - AAA Trading of 2,800.00 - then continue. This one should be matched to an open invoice, not written off to an expense account.",
+            "si_LK": "Now the other kind of model. In this list click a customer receipt line - for example Cheque Settlement - AAA Trading of 2,800.00 - then continue. This one should be matched to an open invoice, not written off to an expense account.",
+            "ta_IN": "Now the other kind of model. In this list click a customer receipt line - for example Cheque Settlement - AAA Trading of 2,800.00 - then continue. This one should be matched to an open invoice, not written off to an expense account."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 270,
+          "title": "The invoice matching rule filters the candidates",
+          "title_i18n": {
+            "en_US": "The invoice matching rule filters the candidates",
+            "si_LK": "The invoice matching rule filters the candidates",
+            "ta_IN": "The invoice matching rule filters the candidates"
+          },
+          "trigger": ".o_notebook_content",
+          "content": "Because the bank line carries a partner, the Invoices/Bills matching rule has already narrowed Match Existing Entries down to this customer's open items. Nothing to click here.",
+          "content_i18n": {
+            "en_US": "Because the bank line carries a partner, the Invoices/Bills matching rule has already narrowed Match Existing Entries down to this customer's open items. Nothing to click here.",
+            "si_LK": "Because the bank line carries a partner, the Invoices/Bills matching rule has already narrowed Match Existing Entries down to this customer's open items. Nothing to click here.",
+            "ta_IN": "Because the bank line carries a partner, the Invoices/Bills matching rule has already narrowed Match Existing Entries down to this customer's open items. Nothing to click here."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 280,
+          "title": "Pick the matching invoice",
+          "title_i18n": {
+            "en_US": "Pick the matching invoice",
+            "si_LK": "Pick the matching invoice",
+            "ta_IN": "Pick the matching invoice"
+          },
+          "trigger": ".o_notebook_content table.o_list_table",
+          "content": "In Match Existing Entries click the customer invoice row on the Debtors Ledger Control account whose open amount equals the receipt, then continue. Clicking a candidate adds it to the reconciliation above.",
+          "content_i18n": {
+            "en_US": "In Match Existing Entries click the customer invoice row on the Debtors Ledger Control account whose open amount equals the receipt, then continue. Clicking a candidate adds it to the reconciliation above.",
+            "si_LK": "In Match Existing Entries click the customer invoice row on the Debtors Ledger Control account whose open amount equals the receipt, then continue. Clicking a candidate adds it to the reconciliation above.",
+            "ta_IN": "In Match Existing Entries click the customer invoice row on the Debtors Ledger Control account whose open amount equals the receipt, then continue. Clicking a candidate adds it to the reconciliation above."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 290,
+          "title": "Check the match is complete",
+          "title_i18n": {
+            "en_US": "Check the match is complete",
+            "si_LK": "Check the match is complete",
+            "ta_IN": "Check the match is complete"
+          },
+          "trigger": "div[name=\"line_ids\"] table.o_list_table",
+          "content": "The counterpart is now the invoice FTI/2025/00011 and there is no Open balance line left, so the receipt fully settles the invoice.",
+          "content_i18n": {
+            "en_US": "The counterpart is now the invoice FTI/2025/00011 and there is no Open balance line left, so the receipt fully settles the invoice.",
+            "si_LK": "The counterpart is now the invoice FTI/2025/00011 and there is no Open balance line left, so the receipt fully settles the invoice.",
+            "ta_IN": "The counterpart is now the invoice FTI/2025/00011 and there is no Open balance line left, so the receipt fully settles the invoice."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 300,
+          "title": "Validate the invoice match",
+          "title_i18n": {
+            "en_US": "Validate the invoice match",
+            "si_LK": "Validate the invoice match",
+            "ta_IN": "Validate the invoice match"
+          },
+          "trigger": ".o_bank_rec_stats_buttons_aside_left button.btn-primary",
+          "content": "Click Validate. The receipt is posted against the invoice and the invoice becomes Paid.",
+          "content_i18n": {
+            "en_US": "Click Validate. The receipt is posted against the invoice and the invoice becomes Paid.",
+            "si_LK": "Click Validate. The receipt is posted against the invoice and the invoice becomes Paid.",
+            "ta_IN": "Click Validate. The receipt is posted against the invoice and the invoice becomes Paid."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 310,
+          "title": "Recap - which model to use when",
+          "title_i18n": {
+            "en_US": "Recap - which model to use when",
+            "si_LK": "Recap - which model to use when",
+            "ta_IN": "Recap - which model to use when"
+          },
+          "trigger": "div.o_control_panel_main.d-flex > div.o_control_panel_navigation.d-flex > div.o_cp_pager.text-nowrap > nav.o_pager.d-flex > span.o_pager_counter.align-self-center > span.o_pager_value.d-inline-block",
+          "content": "Use a BUTTON model for recurring costs with no invoice (bank charges, interest, small differences). Use a RULE to match invoices/bills for customer receipts and supplier payments. Use a RULE to suggest a counterpart when part of the line is a fee. Practice on the remaining lines - there is still a Monthly Bank Charges line of -25.00 and a Cheque Settlement - AAA Trading line of 2,800.00 waiting.",
+          "content_i18n": {
+            "en_US": "Use a BUTTON model for recurring costs with no invoice (bank charges, interest, small differences). Use a RULE to match invoices/bills for customer receipts and supplier payments. Use a RULE to suggest a counterpart when part of the line is a fee. Practice on the remaining lines - there is still a Monthly Bank Charges line of -25.00 and a Cheque Settlement - AAA Trading line of 2,800.00 waiting.",
+            "si_LK": "Use a BUTTON model for recurring costs with no invoice (bank charges, interest, small differences). Use a RULE to match invoices/bills for customer receipts and supplier payments. Use a RULE to suggest a counterpart when part of the line is a fee. Practice on the remaining lines - there is still a Monthly Bank Charges line of -25.00 and a Cheque Settlement - AAA Trading line of 2,800.00 waiting.",
+            "ta_IN": "Use a BUTTON model for recurring costs with no invoice (bank charges, interest, small differences). Use a RULE to match invoices/bills for customer receipts and supplier payments. Use a RULE to suggest a counterpart when part of the line is a fee. Practice on the remaining lines - there is still a Monthly Bank Charges line of -25.00 and a Cheque Settlement - AAA Trading line of 2,800.00 waiting."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,648 @@
+{
+  "version": 2,
+  "tours": [
+    {
+      "name": "Finance: Create Fixed Asset - Factory Equipment",
+      "name_i18n": {
+        "en_US": "Finance: Create Fixed Asset - Factory Equipment",
+        "si_LK": "Finance: Create Fixed Asset - Factory Equipment",
+        "ta_IN": "Finance: Create Fixed Asset - Factory Equipment"
+      },
+      "description": "Creates a new Fixed Asset using the Factory Equipments asset model (acquisition cost 100,000, 72-month straight-line depreciation, Fixed Asset account 11010170, Depreciation account 11020170, Expense account 72090050), confirms it, then reviews the Trial Balance and General Ledger to see how the depreciation entries update the ledger balance over time.",
+      "description_i18n": {
+        "en_US": "Creates a new Fixed Asset using the Factory Equipments asset model (acquisition cost 100,000, 72-month straight-line depreciation, Fixed Asset account 11010170, Depreciation account 11020170, Expense account 72090050), confirms it, then reviews the Trial Balance and General Ledger to see how the depreciation entries update the ledger balance over time.",
+        "si_LK": "Creates a new Fixed Asset using the Factory Equipments asset model (acquisition cost 100,000, 72-month straight-line depreciation, Fixed Asset account 11010170, Depreciation account 11020170, Expense account 72090050), confirms it, then reviews the Trial Balance and General Ledger to see how the depreciation entries update the ledger balance over time.",
+        "ta_IN": "Creates a new Fixed Asset using the Factory Equipments asset model (acquisition cost 100,000, 72-month straight-line depreciation, Fixed Asset account 11010170, Depreciation account 11020170, Expense account 72090050), confirms it, then reviews the Trial Balance and General Ledger to see how the depreciation entries update the ledger balance over time."
+      },
+      "steps": [
+        {
+          "sequence": 10,
+          "title": "Open the Accounting Module",
+          "title_i18n": {
+            "en_US": "Open the Accounting Module",
+            "si_LK": "Open the Accounting Module",
+            "ta_IN": "Open the Accounting Module"
+          },
+          "trigger": "[data-menu-xmlid=\"account_accountant.menu_accounting\"]",
+          "content": "Click here to open the Accounting app.",
+          "content_i18n": {
+            "en_US": "Click here to open the Accounting app.",
+            "si_LK": "Click here to open the Accounting app.",
+            "ta_IN": "Click here to open the Accounting app."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 20,
+          "title": "Open Accounting Menu",
+          "title_i18n": {
+            "en_US": "Open Accounting Menu",
+            "si_LK": "Open Accounting Menu",
+            "ta_IN": "Open Accounting Menu"
+          },
+          "trigger": "[data-menu-xmlid=\"account.menu_finance_entries\"]",
+          "content": "Click Accounting to open its dropdown menu, which reveals the Assets item needed for the next step.",
+          "content_i18n": {
+            "en_US": "Click Accounting to open its dropdown menu, which reveals the Assets item needed for the next step.",
+            "si_LK": "Click Accounting to open its dropdown menu, which reveals the Assets item needed for the next step.",
+            "ta_IN": "Click Accounting to open its dropdown menu, which reveals the Assets item needed for the next step."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 30,
+          "title": "Assets",
+          "title_i18n": {
+            "en_US": "Assets",
+            "si_LK": "Assets",
+            "ta_IN": "Assets"
+          },
+          "trigger": "[data-menu-xmlid=\"account_asset.menu_action_account_asset_form\"]",
+          "content": "Navigate to Accounting > Management > Assets to create a new fixed asset.",
+          "content_i18n": {
+            "en_US": "Navigate to Accounting > Management > Assets to create a new fixed asset.",
+            "si_LK": "Navigate to Accounting > Management > Assets to create a new fixed asset.",
+            "ta_IN": "Navigate to Accounting > Management > Assets to create a new fixed asset."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 40,
+          "title": "New",
+          "title_i18n": {
+            "en_US": "New",
+            "si_LK": "New",
+            "ta_IN": "New"
+          },
+          "trigger": "div.d-xl-inline-flex.gap-1 > button.btn.btn-primary",
+          "content": "Click New",
+          "content_i18n": {
+            "en_US": "Click New",
+            "si_LK": "Click New",
+            "ta_IN": "Click New"
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 50,
+          "title": "Enter Asset Name",
+          "title_i18n": {
+            "en_US": "Enter Asset Name",
+            "si_LK": "Enter Asset Name",
+            "ta_IN": "Enter Asset Name"
+          },
+          "trigger": "#name_0",
+          "content": "Enter a name for the new fixed asset, e.g. 'Factory Equipment - New Machine'.",
+          "content_i18n": {
+            "en_US": "Enter a name for the new fixed asset, e.g. 'Factory Equipment - New Machine'.",
+            "si_LK": "Enter a name for the new fixed asset, e.g. 'Factory Equipment - New Machine'.",
+            "ta_IN": "Enter a name for the new fixed asset, e.g. 'Factory Equipment - New Machine'."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 60,
+          "title": "Select Asset Model",
+          "title_i18n": {
+            "en_US": "Select Asset Model",
+            "si_LK": "Select Asset Model",
+            "ta_IN": "Select Asset Model"
+          },
+          "trigger": "#model_id_0",
+          "content": "Click the Asset Model field and choose Factory Equipments - this auto-fills the 72-month duration and the Fixed Asset (11010170), Depreciation (11020170) and Expense (72090050) accounts.",
+          "content_i18n": {
+            "en_US": "Click the Asset Model field and choose Factory Equipments - this auto-fills the 72-month duration and the Fixed Asset (11010170), Depreciation (11020170) and Expense (72090050) accounts.",
+            "si_LK": "Click the Asset Model field and choose Factory Equipments - this auto-fills the 72-month duration and the Fixed Asset (11010170), Depreciation (11020170) and Expense (72090050) accounts.",
+            "ta_IN": "Click the Asset Model field and choose Factory Equipments - this auto-fills the 72-month duration and the Fixed Asset (11010170), Depreciation (11020170) and Expense (72090050) accounts."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "regex",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "^FACTORY EQUIPMENTS$",
+          "validation_message": "Please select \"Factory Equipments\" from the dropdown list before continuing.",
+          "validation_message_i18n": {
+            "en_US": "Please select \"Factory Equipments\" from the dropdown list before continuing.",
+            "si_LK": "Please select \"Factory Equipments\" from the dropdown list before continuing.",
+            "ta_IN": "Please select \"Factory Equipments\" from the dropdown list before continuing."
+          }
+        },
+        {
+          "sequence": 70,
+          "title": "Set Original Value to 100000",
+          "title_i18n": {
+            "en_US": "Set Original Value to 100000",
+            "si_LK": "Set Original Value to 100000",
+            "ta_IN": "Set Original Value to 100000"
+          },
+          "trigger": "#original_value_0",
+          "content": "Enter the acquisition cost of 100,000 as the Original Value for the Factory Equipment asset.",
+          "content_i18n": {
+            "en_US": "Enter the acquisition cost of 100,000 as the Original Value for the Factory Equipment asset.",
+            "si_LK": "Enter the acquisition cost of 100,000 as the Original Value for the Factory Equipment asset.",
+            "ta_IN": "Enter the acquisition cost of 100,000 as the Original Value for the Factory Equipment asset."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 80,
+          "title": "Confirm",
+          "title_i18n": {
+            "en_US": "Confirm",
+            "si_LK": "Confirm",
+            "ta_IN": "Confirm"
+          },
+          "trigger": "div.o_statusbar_buttons.d-flex > button.btn.btn-primary > span",
+          "content": "Click Confirm to post the asset and move it from Draft to Running.",
+          "content_i18n": {
+            "en_US": "Click Confirm to post the asset and move it from Draft to Running.",
+            "si_LK": "Click Confirm to post the asset and move it from Draft to Running.",
+            "ta_IN": "Click Confirm to post the asset and move it from Draft to Running."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 90,
+          "title": "Open More Menu (before Trial Balance)",
+          "title_i18n": {
+            "en_US": "Open More Menu (before Trial Balance)",
+            "si_LK": "Open More Menu (before Trial Balance)",
+            "ta_IN": "Open More Menu (before Trial Balance)"
+          },
+          "trigger": ".o_menu_sections_more button",
+          "content": "Click the + icon to reveal additional top menu items (including Reporting), which are hidden due to limited navbar width.",
+          "content_i18n": {
+            "en_US": "Click the + icon to reveal additional top menu items (including Reporting), which are hidden due to limited navbar width.",
+            "si_LK": "Click the + icon to reveal additional top menu items (including Reporting), which are hidden due to limited navbar width.",
+            "ta_IN": "Click the + icon to reveal additional top menu items (including Reporting), which are hidden due to limited navbar width."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 100,
+          "title": "Trial Balance",
+          "title_i18n": {
+            "en_US": "Trial Balance",
+            "si_LK": "Trial Balance",
+            "ta_IN": "Trial Balance"
+          },
+          "trigger": "[data-menu-xmlid=\"account_reports.menu_action_account_report_coa\"]",
+          "content": "Navigate to Accounting > Reporting > Trial Balance to review the posted balances.",
+          "content_i18n": {
+            "en_US": "Navigate to Accounting > Reporting > Trial Balance to review the posted balances.",
+            "si_LK": "Navigate to Accounting > Reporting > Trial Balance to review the posted balances.",
+            "ta_IN": "Navigate to Accounting > Reporting > Trial Balance to review the posted balances."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 110,
+          "title": "Open Report Options (Trial Balance)",
+          "title_i18n": {
+            "en_US": "Open Report Options (Trial Balance)",
+            "si_LK": "Open Report Options (Trial Balance)",
+            "ta_IN": "Open Report Options (Trial Balance)"
+          },
+          "trigger": "#filter_extra_options button.dropdown-toggle",
+          "content": "Click Options to open the report filter menu.",
+          "content_i18n": {
+            "en_US": "Click Options to open the report filter menu.",
+            "si_LK": "Click Options to open the report filter menu.",
+            "ta_IN": "Click Options to open the report filter menu."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 120,
+          "title": "Include Draft Entries (Trial Balance)",
+          "title_i18n": {
+            "en_US": "Include Draft Entries (Trial Balance)",
+            "si_LK": "Include Draft Entries (Trial Balance)",
+            "ta_IN": "Include Draft Entries (Trial Balance)"
+          },
+          "trigger": "#filter_extra_options .filter_show_draft_hook",
+          "content": "Select Include Draft Entries so this month's depreciation entry - scheduled to auto-post on 31/08/2026 and not yet posted - appears in the report.",
+          "content_i18n": {
+            "en_US": "Select Include Draft Entries so this month's depreciation entry - scheduled to auto-post on 31/08/2026 and not yet posted - appears in the report.",
+            "si_LK": "Select Include Draft Entries so this month's depreciation entry - scheduled to auto-post on 31/08/2026 and not yet posted - appears in the report.",
+            "ta_IN": "Select Include Draft Entries so this month's depreciation entry - scheduled to auto-post on 31/08/2026 and not yet posted - appears in the report."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 130,
+          "title": "Check Trial Balance - Depreciation Provision",
+          "title_i18n": {
+            "en_US": "Check Trial Balance - Depreciation Provision",
+            "si_LK": "Check Trial Balance - Depreciation Provision",
+            "ta_IN": "Check Trial Balance - Depreciation Provision"
+          },
+          "trigger": "tr.line_level_1:nth-of-type(1) > td.line_name.text > div.wrapper > div.content > div.o-dropdown.dropdown > button.dropdown-toggle.btn",
+          "content": "The Trial Balance (with draft entries included) shows the Depreciation account 72090050 and Provision for Depreciation account 11020170 with the scheduled depreciation amount. Note the Fixed Asset account 11010170 does NOT appear here - creating/confirming the asset alone does not journalize the acquisition cost, only a source transaction (vendor bill or manual entry) would debit that account.",
+          "content_i18n": {
+            "en_US": "The Trial Balance (with draft entries included) shows the Depreciation account 72090050 and Provision for Depreciation account 11020170 with the scheduled depreciation amount. Note the Fixed Asset account 11010170 does NOT appear here - creating/confirming the asset alone does not journalize the acquisition cost, only a source transaction (vendor bill or manual entry) would debit that account.",
+            "si_LK": "The Trial Balance (with draft entries included) shows the Depreciation account 72090050 and Provision for Depreciation account 11020170 with the scheduled depreciation amount. Note the Fixed Asset account 11010170 does NOT appear here - creating/confirming the asset alone does not journalize the acquisition cost, only a source transaction (vendor bill or manual entry) would debit that account.",
+            "ta_IN": "The Trial Balance (with draft entries included) shows the Depreciation account 72090050 and Provision for Depreciation account 11020170 with the scheduled depreciation amount. Note the Fixed Asset account 11010170 does NOT appear here - creating/confirming the asset alone does not journalize the acquisition cost, only a source transaction (vendor bill or manual entry) would debit that account."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 140,
+          "title": "Open More Menu (before General Ledger)",
+          "title_i18n": {
+            "en_US": "Open More Menu (before General Ledger)",
+            "si_LK": "Open More Menu (before General Ledger)",
+            "ta_IN": "Open More Menu (before General Ledger)"
+          },
+          "trigger": ".o_menu_sections_more button",
+          "content": "Click the + icon again to reveal the Reporting menu (it collapses after each navigation).",
+          "content_i18n": {
+            "en_US": "Click the + icon again to reveal the Reporting menu (it collapses after each navigation).",
+            "si_LK": "Click the + icon again to reveal the Reporting menu (it collapses after each navigation).",
+            "ta_IN": "Click the + icon again to reveal the Reporting menu (it collapses after each navigation)."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 150,
+          "title": "General Ledger",
+          "title_i18n": {
+            "en_US": "General Ledger",
+            "si_LK": "General Ledger",
+            "ta_IN": "General Ledger"
+          },
+          "trigger": "[data-menu-xmlid=\"account_reports.menu_action_account_report_general_ledger\"]",
+          "content": "Open the General Ledger report under Accounting > Reporting > Audit Reports.",
+          "content_i18n": {
+            "en_US": "Open the General Ledger report under Accounting > Reporting > Audit Reports.",
+            "si_LK": "Open the General Ledger report under Accounting > Reporting > Audit Reports.",
+            "ta_IN": "Open the General Ledger report under Accounting > Reporting > Audit Reports."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 160,
+          "title": "Open Report Options (General Ledger)",
+          "title_i18n": {
+            "en_US": "Open Report Options (General Ledger)",
+            "si_LK": "Open Report Options (General Ledger)",
+            "ta_IN": "Open Report Options (General Ledger)"
+          },
+          "trigger": "#filter_extra_options button.dropdown-toggle",
+          "content": "Click Options to open the report filter menu.",
+          "content_i18n": {
+            "en_US": "Click Options to open the report filter menu.",
+            "si_LK": "Click Options to open the report filter menu.",
+            "ta_IN": "Click Options to open the report filter menu."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 170,
+          "title": "Include Draft Entries (General Ledger)",
+          "title_i18n": {
+            "en_US": "Include Draft Entries (General Ledger)",
+            "si_LK": "Include Draft Entries (General Ledger)",
+            "ta_IN": "Include Draft Entries (General Ledger)"
+          },
+          "trigger": "#filter_extra_options .filter_show_draft_hook",
+          "content": "Select Include Draft Entries so the draft depreciation entry appears here too (report filters reset per-report).",
+          "content_i18n": {
+            "en_US": "Select Include Draft Entries so the draft depreciation entry appears here too (report filters reset per-report).",
+            "si_LK": "Select Include Draft Entries so the draft depreciation entry appears here too (report filters reset per-report).",
+            "ta_IN": "Select Include Draft Entries so the draft depreciation entry appears here too (report filters reset per-report)."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 180,
+          "title": "Expand Depreciation Expense Account",
+          "title_i18n": {
+            "en_US": "Expand Depreciation Expense Account",
+            "si_LK": "Expand Depreciation Expense Account",
+            "ta_IN": "Expand Depreciation Expense Account"
+          },
+          "trigger": "tr.line_level_1:nth-of-type(2) button",
+          "content": "Click to expand the 72090050 Depreciation Expense account and reveal its individual journal lines.",
+          "content_i18n": {
+            "en_US": "Click to expand the 72090050 Depreciation Expense account and reveal its individual journal lines.",
+            "si_LK": "Click to expand the 72090050 Depreciation Expense account and reveal its individual journal lines.",
+            "ta_IN": "Click to expand the 72090050 Depreciation Expense account and reveal its individual journal lines."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 190,
+          "title": "Check General Ledger - New Machine Depreciation Entry",
+          "title_i18n": {
+            "en_US": "Check General Ledger - New Machine Depreciation Entry",
+            "si_LK": "Check General Ledger - New Machine Depreciation Entry",
+            "ta_IN": "Check General Ledger - New Machine Depreciation Entry"
+          },
+          "trigger": "tr.line_level_3:nth-last-of-type(2) > td.line_name.text > div.wrapper",
+          "content": "The General Ledger for account 72090050 (Depreciation Expense) shows the draft journal item for 'Factory Equipment - New Machine: Depreciation', contributing to the account balance for Aug 2026. This is how the ledger balance updates over time: each period's depreciation entry posts (Dr Expense 72090050 / Cr Provision for Depreciation 11020170) once its scheduled date arrives or it is manually posted.",
+          "content_i18n": {
+            "en_US": "The General Ledger for account 72090050 (Depreciation Expense) shows the draft journal item for 'Factory Equipment - New Machine: Depreciation', contributing to the account balance for Aug 2026. This is how the ledger balance updates over time: each period's depreciation entry posts (Dr Expense 72090050 / Cr Provision for Depreciation 11020170) once its scheduled date arrives or it is manually posted.",
+            "si_LK": "The General Ledger for account 72090050 (Depreciation Expense) shows the draft journal item for 'Factory Equipment - New Machine: Depreciation', contributing to the account balance for Aug 2026. This is how the ledger balance updates over time: each period's depreciation entry posts (Dr Expense 72090050 / Cr Provision for Depreciation 11020170) once its scheduled date arrives or it is manually posted.",
+            "ta_IN": "The General Ledger for account 72090050 (Depreciation Expense) shows the draft journal item for 'Factory Equipment - New Machine: Depreciation', contributing to the account balance for Aug 2026. This is how the ledger balance updates over time: each period's depreciation entry posts (Dr Expense 72090050 / Cr Provision for Depreciation 11020170) once its scheduled date arrives or it is manually posted."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        }
+      ]
+    }
+  ]
+}

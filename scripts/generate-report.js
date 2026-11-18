@@ -233,7 +233,8 @@ function loadResults(filePath) {
           // Use full stack when available; fall back to message only
           error = (stack || msg).replace(/\[[0-9;]*m/g, '').trim();
         }
-        map[spec.title] = { status, error };
+        const key = spec.title.replace(/@\S+/g, '').trim();
+        map[key] = { status, error };
       }
       for (const sub of (s.suites || [])) walk(sub);
     }

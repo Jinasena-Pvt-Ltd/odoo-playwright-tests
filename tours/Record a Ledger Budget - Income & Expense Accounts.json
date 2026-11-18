@@ -1,0 +1,1638 @@
+{
+  "version": 2,
+  "tours": [
+    {
+      "name": "Finance: Record a Ledger Budget - Income & Expense Accounts (Full Flow)",
+      "name_i18n": {
+        "en_US": "Finance: Record a Ledger Budget - Income & Expense Accounts (Full Flow)",
+        "si_LK": "Finance: Record a Ledger Budget - Income & Expense Accounts (Full Flow)",
+        "ta_IN": "Finance: Record a Ledger Budget - Income & Expense Accounts (Full Flow)"
+      },
+      "description": "End-to-end guide to recording a General Ledger budget in Odoo: build one Budgetary Position for revenue type accounts and one for expense type accounts, then create the budget with a planned amount per position, save, confirm and review it in Budgets Analysis. Worked example uses FY2028 with hypothetical figures.",
+      "description_i18n": {
+        "en_US": "End-to-end guide to recording a General Ledger budget in Odoo: build one Budgetary Position for revenue type accounts and one for expense type accounts, then create the budget with a planned amount per position, save, confirm and review it in Budgets Analysis. Worked example uses FY2028 with hypothetical figures.",
+        "si_LK": "End-to-end guide to recording a General Ledger budget in Odoo: build one Budgetary Position for revenue type accounts and one for expense type accounts, then create the budget with a planned amount per position, save, confirm and review it in Budgets Analysis. Worked example uses FY2028 with hypothetical figures.",
+        "ta_IN": "End-to-end guide to recording a General Ledger budget in Odoo: build one Budgetary Position for revenue type accounts and one for expense type accounts, then create the budget with a planned amount per position, save, confirm and review it in Budgets Analysis. Worked example uses FY2028 with hypothetical figures."
+      },
+      "steps": [
+        {
+          "sequence": 10,
+          "title": "",
+          "title_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "trigger": "[data-menu-xmlid=\"account_accountant.menu_accounting\"]",
+          "content": "Open the Accounting app. A Ledger budget is built in two stages: first the Budgetary Positions that group the General Ledger accounts, then the Budget itself that carries the planned amounts.",
+          "content_i18n": {
+            "en_US": "Open the Accounting app. A Ledger budget is built in two stages: first the Budgetary Positions that group the General Ledger accounts, then the Budget itself that carries the planned amounts.",
+            "si_LK": "Open the Accounting app. A Ledger budget is built in two stages: first the Budgetary Positions that group the General Ledger accounts, then the Budget itself that carries the planned amounts.",
+            "ta_IN": "Open the Accounting app. A Ledger budget is built in two stages: first the Budgetary Positions that group the General Ledger accounts, then the Budget itself that carries the planned amounts."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 20,
+          "title": "",
+          "title_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "trigger": ".o_menu_sections [data-menu-xmlid=\"account.menu_finance_configuration\"]",
+          "content": "Open the Configuration menu.",
+          "content_i18n": {
+            "en_US": "Open the Configuration menu.",
+            "si_LK": "Open the Configuration menu.",
+            "ta_IN": "Open the Configuration menu."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 30,
+          "title": "",
+          "title_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "trigger": "[data-menu-xmlid=\"account_budget.menu_budget_post_form\"]",
+          "content": "Click Budgetary Positions, under the Management group. A position is simply a named basket of Chart of Accounts lines that the budget will measure actuals against.",
+          "content_i18n": {
+            "en_US": "Click Budgetary Positions, under the Management group. A position is simply a named basket of Chart of Accounts lines that the budget will measure actuals against.",
+            "si_LK": "Click Budgetary Positions, under the Management group. A position is simply a named basket of Chart of Accounts lines that the budget will measure actuals against.",
+            "ta_IN": "Click Budgetary Positions, under the Management group. A position is simply a named basket of Chart of Accounts lines that the budget will measure actuals against."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 40,
+          "title": "",
+          "title_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "trigger": "div.d-xl-inline-flex.gap-1 > button.btn.btn-primary.o_list_button_add",
+          "content": "Click New to create the income side position first.",
+          "content_i18n": {
+            "en_US": "Click New to create the income side position first.",
+            "si_LK": "Click New to create the income side position first.",
+            "ta_IN": "Click New to create the income side position first."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 50,
+          "title": "",
+          "title_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "trigger": ".o_form_view div[name=\"name\"] input",
+          "content": "Type the position name: FY2028 Revenue - Ledger Budget. Name it so that both the period and the side of the P&L are obvious to the next user.",
+          "content_i18n": {
+            "en_US": "Type the position name: FY2028 Revenue - Ledger Budget. Name it so that both the period and the side of the P&L are obvious to the next user.",
+            "si_LK": "Type the position name: FY2028 Revenue - Ledger Budget. Name it so that both the period and the side of the P&L are obvious to the next user.",
+            "ta_IN": "Type the position name: FY2028 Revenue - Ledger Budget. Name it so that both the period and the side of the P&L are obvious to the next user."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 60,
+          "title": "",
+          "title_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "trigger": ".o_form_view td.o_field_x2many_list_row_add > a",
+          "content": "Click Add a line to attach the revenue accounts to this position.",
+          "content_i18n": {
+            "en_US": "Click Add a line to attach the revenue accounts to this position.",
+            "si_LK": "Click Add a line to attach the revenue accounts to this position.",
+            "ta_IN": "Click Add a line to attach the revenue accounts to this position."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 70,
+          "title": "",
+          "title_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "trigger": ".modal .o_searchview_input",
+          "content": "Type 41010010 in the search box. Only pick accounts whose Chart of Accounts type is Income or Other Income - never a balance sheet account, or the budget comparison will be meaningless.",
+          "content_i18n": {
+            "en_US": "Type 41010010 in the search box. Only pick accounts whose Chart of Accounts type is Income or Other Income - never a balance sheet account, or the budget comparison will be meaningless.",
+            "si_LK": "Type 41010010 in the search box. Only pick accounts whose Chart of Accounts type is Income or Other Income - never a balance sheet account, or the budget comparison will be meaningless.",
+            "ta_IN": "Type 41010010 in the search box. Only pick accounts whose Chart of Accounts type is Income or Other Income - never a balance sheet account, or the budget comparison will be meaningless."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 80,
+          "title": "",
+          "title_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "trigger": ".modal .o_searchview_input",
+          "content": "Press Enter to run the search.",
+          "content_i18n": {
+            "en_US": "Press Enter to run the search.",
+            "si_LK": "Press Enter to run the search.",
+            "ta_IN": "Press Enter to run the search."
+          },
+          "position": "bottom",
+          "run": "press Enter",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 90,
+          "title": "",
+          "title_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "trigger": ".modal .o_data_row:nth-of-type(1) .o_list_record_selector input",
+          "content": "Tick the checkbox on 41010010 SALES.",
+          "content_i18n": {
+            "en_US": "Tick the checkbox on 41010010 SALES.",
+            "si_LK": "Tick the checkbox on 41010010 SALES.",
+            "ta_IN": "Tick the checkbox on 41010010 SALES."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 100,
+          "title": "",
+          "title_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "trigger": ".modal .o_searchview_facet .o_facet_remove",
+          "content": "Remove the search facet so you can look up the next account. The account you already ticked stays selected.",
+          "content_i18n": {
+            "en_US": "Remove the search facet so you can look up the next account. The account you already ticked stays selected.",
+            "si_LK": "Remove the search facet so you can look up the next account. The account you already ticked stays selected.",
+            "ta_IN": "Remove the search facet so you can look up the next account. The account you already ticked stays selected."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 110,
+          "title": "",
+          "title_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "trigger": ".modal .o_searchview_input",
+          "content": "Type 41010050 - SERVICE INCOME, the second revenue account for this position.",
+          "content_i18n": {
+            "en_US": "Type 41010050 - SERVICE INCOME, the second revenue account for this position.",
+            "si_LK": "Type 41010050 - SERVICE INCOME, the second revenue account for this position.",
+            "ta_IN": "Type 41010050 - SERVICE INCOME, the second revenue account for this position."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 120,
+          "title": "",
+          "title_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "trigger": ".modal .o_searchview_input",
+          "content": "Press Enter.",
+          "content_i18n": {
+            "en_US": "Press Enter.",
+            "si_LK": "Press Enter.",
+            "ta_IN": "Press Enter."
+          },
+          "position": "bottom",
+          "run": "press Enter",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 130,
+          "title": "",
+          "title_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "trigger": ".modal .o_data_row:nth-of-type(1) .o_list_record_selector input",
+          "content": "Tick the checkbox on 41010050 SERVICE INCOME.",
+          "content_i18n": {
+            "en_US": "Tick the checkbox on 41010050 SERVICE INCOME.",
+            "si_LK": "Tick the checkbox on 41010050 SERVICE INCOME.",
+            "ta_IN": "Tick the checkbox on 41010050 SERVICE INCOME."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 140,
+          "title": "",
+          "title_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "trigger": ".modal footer button.o_select_button",
+          "content": "Click Select to pull both revenue accounts into the position.",
+          "content_i18n": {
+            "en_US": "Click Select to pull both revenue accounts into the position.",
+            "si_LK": "Click Select to pull both revenue accounts into the position.",
+            "ta_IN": "Click Select to pull both revenue accounts into the position."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 150,
+          "title": "",
+          "title_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "trigger": ".o_form_button_save",
+          "content": "Save the position using the cloud icon.",
+          "content_i18n": {
+            "en_US": "Save the position using the cloud icon.",
+            "si_LK": "Save the position using the cloud icon.",
+            "ta_IN": "Save the position using the cloud icon."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 160,
+          "title": "",
+          "title_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "trigger": "li.o_back_button a",
+          "content": "Use the breadcrumb to go back to the Budgetary Positions list. The expense position is created exactly the same way.",
+          "content_i18n": {
+            "en_US": "Use the breadcrumb to go back to the Budgetary Positions list. The expense position is created exactly the same way.",
+            "si_LK": "Use the breadcrumb to go back to the Budgetary Positions list. The expense position is created exactly the same way.",
+            "ta_IN": "Use the breadcrumb to go back to the Budgetary Positions list. The expense position is created exactly the same way."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 170,
+          "title": "",
+          "title_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "trigger": "div.d-xl-inline-flex.gap-1 > button.btn.btn-primary.o_list_button_add",
+          "content": "Click New again, this time for the expense side.",
+          "content_i18n": {
+            "en_US": "Click New again, this time for the expense side.",
+            "si_LK": "Click New again, this time for the expense side.",
+            "ta_IN": "Click New again, this time for the expense side."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 180,
+          "title": "",
+          "title_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "trigger": ".o_form_view div[name=\"name\"] input",
+          "content": "Type the position name: FY2028 Operating Expenses - Ledger Budget.",
+          "content_i18n": {
+            "en_US": "Type the position name: FY2028 Operating Expenses - Ledger Budget.",
+            "si_LK": "Type the position name: FY2028 Operating Expenses - Ledger Budget.",
+            "ta_IN": "Type the position name: FY2028 Operating Expenses - Ledger Budget."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 190,
+          "title": "",
+          "title_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "trigger": ".o_form_view td.o_field_x2many_list_row_add > a",
+          "content": "Click Add a line.",
+          "content_i18n": {
+            "en_US": "Click Add a line.",
+            "si_LK": "Click Add a line.",
+            "ta_IN": "Click Add a line."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 200,
+          "title": "",
+          "title_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "trigger": ".modal .o_searchview_input",
+          "content": "Type 51010010. Only accounts with a Chart of Accounts type of Expenses, Cost of Revenue or Depreciation belong in an expense position.",
+          "content_i18n": {
+            "en_US": "Type 51010010. Only accounts with a Chart of Accounts type of Expenses, Cost of Revenue or Depreciation belong in an expense position.",
+            "si_LK": "Type 51010010. Only accounts with a Chart of Accounts type of Expenses, Cost of Revenue or Depreciation belong in an expense position.",
+            "ta_IN": "Type 51010010. Only accounts with a Chart of Accounts type of Expenses, Cost of Revenue or Depreciation belong in an expense position."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 210,
+          "title": "",
+          "title_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "trigger": ".modal .o_searchview_input",
+          "content": "Press Enter.",
+          "content_i18n": {
+            "en_US": "Press Enter.",
+            "si_LK": "Press Enter.",
+            "ta_IN": "Press Enter."
+          },
+          "position": "bottom",
+          "run": "press Enter",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 220,
+          "title": "",
+          "title_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "trigger": ".modal .o_data_row:nth-of-type(1) .o_list_record_selector input",
+          "content": "Tick the checkbox on 51010010 COST OF GOODS SOLD.",
+          "content_i18n": {
+            "en_US": "Tick the checkbox on 51010010 COST OF GOODS SOLD.",
+            "si_LK": "Tick the checkbox on 51010010 COST OF GOODS SOLD.",
+            "ta_IN": "Tick the checkbox on 51010010 COST OF GOODS SOLD."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 230,
+          "title": "",
+          "title_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "trigger": ".modal .o_searchview_facet .o_facet_remove",
+          "content": "Clear the search facet to look up the next expense account.",
+          "content_i18n": {
+            "en_US": "Clear the search facet to look up the next expense account.",
+            "si_LK": "Clear the search facet to look up the next expense account.",
+            "ta_IN": "Clear the search facet to look up the next expense account."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 240,
+          "title": "",
+          "title_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "trigger": ".modal .o_searchview_input",
+          "content": "Type 51050010 - ELECTRICITY.",
+          "content_i18n": {
+            "en_US": "Type 51050010 - ELECTRICITY.",
+            "si_LK": "Type 51050010 - ELECTRICITY.",
+            "ta_IN": "Type 51050010 - ELECTRICITY."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 250,
+          "title": "",
+          "title_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "trigger": ".modal .o_searchview_input",
+          "content": "Press Enter.",
+          "content_i18n": {
+            "en_US": "Press Enter.",
+            "si_LK": "Press Enter.",
+            "ta_IN": "Press Enter."
+          },
+          "position": "bottom",
+          "run": "press Enter",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 260,
+          "title": "",
+          "title_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "trigger": ".modal .o_data_row:nth-of-type(1) .o_list_record_selector input",
+          "content": "Tick the checkbox on 51050010 ELECTRICITY.",
+          "content_i18n": {
+            "en_US": "Tick the checkbox on 51050010 ELECTRICITY.",
+            "si_LK": "Tick the checkbox on 51050010 ELECTRICITY.",
+            "ta_IN": "Tick the checkbox on 51050010 ELECTRICITY."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 270,
+          "title": "",
+          "title_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "trigger": ".modal footer button.o_select_button",
+          "content": "Click Select to add both expense accounts.",
+          "content_i18n": {
+            "en_US": "Click Select to add both expense accounts.",
+            "si_LK": "Click Select to add both expense accounts.",
+            "ta_IN": "Click Select to add both expense accounts."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 280,
+          "title": "",
+          "title_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "trigger": ".o_form_button_save",
+          "content": "Save. Both budgetary positions now exist and can be reused by any future budget.",
+          "content_i18n": {
+            "en_US": "Save. Both budgetary positions now exist and can be reused by any future budget.",
+            "si_LK": "Save. Both budgetary positions now exist and can be reused by any future budget.",
+            "ta_IN": "Save. Both budgetary positions now exist and can be reused by any future budget."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 290,
+          "title": "",
+          "title_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "trigger": ".o_menu_sections [data-menu-xmlid=\"account.menu_finance_entries\"]",
+          "content": "Open the Accounting menu - the budget record itself lives under Management here.",
+          "content_i18n": {
+            "en_US": "Open the Accounting menu - the budget record itself lives under Management here.",
+            "si_LK": "Open the Accounting menu - the budget record itself lives under Management here.",
+            "ta_IN": "Open the Accounting menu - the budget record itself lives under Management here."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 300,
+          "title": "",
+          "title_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "trigger": "[data-menu-xmlid=\"account_budget.menu_act_crossovered_budget_view\"]",
+          "content": "Click Budgets.",
+          "content_i18n": {
+            "en_US": "Click Budgets.",
+            "si_LK": "Click Budgets.",
+            "ta_IN": "Click Budgets."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 310,
+          "title": "",
+          "title_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "trigger": "div.d-xl-inline-flex.gap-1 > button.btn.btn-primary.o_list_button_add",
+          "content": "Click New to open a blank budget.",
+          "content_i18n": {
+            "en_US": "Click New to open a blank budget.",
+            "si_LK": "Click New to open a blank budget.",
+            "ta_IN": "Click New to open a blank budget."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 320,
+          "title": "",
+          "title_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "trigger": ".o_form_view div[name=\"name\"] input",
+          "content": "Budget Name: Budget 2028 - Ledger (Income & Expense).",
+          "content_i18n": {
+            "en_US": "Budget Name: Budget 2028 - Ledger (Income & Expense).",
+            "si_LK": "Budget Name: Budget 2028 - Ledger (Income & Expense).",
+            "ta_IN": "Budget Name: Budget 2028 - Ledger (Income & Expense)."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 330,
+          "title": "",
+          "title_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "trigger": "div[name=\"date_edit_only\"] div[name=\"date_from\"] input",
+          "content": "Period start date: 01/01/2028.",
+          "content_i18n": {
+            "en_US": "Period start date: 01/01/2028.",
+            "si_LK": "Period start date: 01/01/2028.",
+            "ta_IN": "Period start date: 01/01/2028."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 340,
+          "title": "",
+          "title_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "trigger": "div[name=\"date_edit_only\"] div[name=\"date_to\"] input",
+          "content": "Period end date: 31/12/2028. Only journal items posted inside this window are counted as practical amounts.",
+          "content_i18n": {
+            "en_US": "Period end date: 31/12/2028. Only journal items posted inside this window are counted as practical amounts.",
+            "si_LK": "Period end date: 31/12/2028. Only journal items posted inside this window are counted as practical amounts.",
+            "ta_IN": "Period end date: 31/12/2028. Only journal items posted inside this window are counted as practical amounts."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 350,
+          "title": "",
+          "title_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "trigger": ".o_field_x2many td.o_field_x2many_list_row_add > a",
+          "content": "Click Add a line to enter the income side of the budget.",
+          "content_i18n": {
+            "en_US": "Click Add a line to enter the income side of the budget.",
+            "si_LK": "Click Add a line to enter the income side of the budget.",
+            "ta_IN": "Click Add a line to enter the income side of the budget."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 360,
+          "title": "",
+          "title_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "trigger": ".o_selected_row td[name=\"general_budget_id\"] input",
+          "content": "Budgetary Position: pick FY2028 Revenue - Ledger Budget. Leave Analytic Account empty - this is a ledger budget driven purely by General Ledger accounts, not by analytic distribution.",
+          "content_i18n": {
+            "en_US": "Budgetary Position: pick FY2028 Revenue - Ledger Budget. Leave Analytic Account empty - this is a ledger budget driven purely by General Ledger accounts, not by analytic distribution.",
+            "si_LK": "Budgetary Position: pick FY2028 Revenue - Ledger Budget. Leave Analytic Account empty - this is a ledger budget driven purely by General Ledger accounts, not by analytic distribution.",
+            "ta_IN": "Budgetary Position: pick FY2028 Revenue - Ledger Budget. Leave Analytic Account empty - this is a ledger budget driven purely by General Ledger accounts, not by analytic distribution."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 370,
+          "title": "",
+          "title_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "trigger": ".o_selected_row td[name=\"date_from\"] input",
+          "content": "Line start date: 01/01/2028.",
+          "content_i18n": {
+            "en_US": "Line start date: 01/01/2028.",
+            "si_LK": "Line start date: 01/01/2028.",
+            "ta_IN": "Line start date: 01/01/2028."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 380,
+          "title": "",
+          "title_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "trigger": ".o_selected_row td[name=\"date_to\"] input",
+          "content": "Line end date: 31/12/2028.",
+          "content_i18n": {
+            "en_US": "Line end date: 31/12/2028.",
+            "si_LK": "Line end date: 31/12/2028.",
+            "ta_IN": "Line end date: 31/12/2028."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 390,
+          "title": "",
+          "title_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "trigger": ".o_selected_row td[name=\"planned_amount\"] input",
+          "content": "Planned Amount: 250,000,000. Income is budgeted as a POSITIVE figure.",
+          "content_i18n": {
+            "en_US": "Planned Amount: 250,000,000. Income is budgeted as a POSITIVE figure.",
+            "si_LK": "Planned Amount: 250,000,000. Income is budgeted as a POSITIVE figure.",
+            "ta_IN": "Planned Amount: 250,000,000. Income is budgeted as a POSITIVE figure."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 400,
+          "title": "",
+          "title_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "trigger": ".o_field_x2many td.o_field_x2many_list_row_add > a",
+          "content": "Click Add a line again for the expense side.",
+          "content_i18n": {
+            "en_US": "Click Add a line again for the expense side.",
+            "si_LK": "Click Add a line again for the expense side.",
+            "ta_IN": "Click Add a line again for the expense side."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 410,
+          "title": "",
+          "title_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "trigger": ".o_selected_row td[name=\"general_budget_id\"] input",
+          "content": "Budgetary Position: pick FY2028 Operating Expenses - Ledger Budget.",
+          "content_i18n": {
+            "en_US": "Budgetary Position: pick FY2028 Operating Expenses - Ledger Budget.",
+            "si_LK": "Budgetary Position: pick FY2028 Operating Expenses - Ledger Budget.",
+            "ta_IN": "Budgetary Position: pick FY2028 Operating Expenses - Ledger Budget."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 420,
+          "title": "",
+          "title_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "trigger": ".o_selected_row td[name=\"date_from\"] input",
+          "content": "Line start date: 01/01/2028.",
+          "content_i18n": {
+            "en_US": "Line start date: 01/01/2028.",
+            "si_LK": "Line start date: 01/01/2028.",
+            "ta_IN": "Line start date: 01/01/2028."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 430,
+          "title": "",
+          "title_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "trigger": ".o_selected_row td[name=\"date_to\"] input",
+          "content": "Line end date: 31/12/2028.",
+          "content_i18n": {
+            "en_US": "Line end date: 31/12/2028.",
+            "si_LK": "Line end date: 31/12/2028.",
+            "ta_IN": "Line end date: 31/12/2028."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 440,
+          "title": "",
+          "title_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "trigger": ".o_selected_row td[name=\"planned_amount\"] input",
+          "content": "Planned Amount: -180,000,000. Expenses are budgeted as a NEGATIVE figure, so that plan and actual are compared in the same direction.",
+          "content_i18n": {
+            "en_US": "Planned Amount: -180,000,000. Expenses are budgeted as a NEGATIVE figure, so that plan and actual are compared in the same direction.",
+            "si_LK": "Planned Amount: -180,000,000. Expenses are budgeted as a NEGATIVE figure, so that plan and actual are compared in the same direction.",
+            "ta_IN": "Planned Amount: -180,000,000. Expenses are budgeted as a NEGATIVE figure, so that plan and actual are compared in the same direction."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 450,
+          "title": "",
+          "title_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "trigger": ".o_form_button_save",
+          "content": "Save the budget.",
+          "content_i18n": {
+            "en_US": "Save the budget.",
+            "si_LK": "Save the budget.",
+            "ta_IN": "Save the budget."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 460,
+          "title": "",
+          "title_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "trigger": ".o_field_x2many table thead th[data-name=\"practical_amount\"]",
+          "content": "Read the three computed columns before moving on. Practical Amount is the posted balance on the position's accounts, Theoretical Amount is the plan pro-rated to today, and Achievement is the ratio between them.",
+          "content_i18n": {
+            "en_US": "Read the three computed columns before moving on. Practical Amount is the posted balance on the position's accounts, Theoretical Amount is the plan pro-rated to today, and Achievement is the ratio between them.",
+            "si_LK": "Read the three computed columns before moving on. Practical Amount is the posted balance on the position's accounts, Theoretical Amount is the plan pro-rated to today, and Achievement is the ratio between them.",
+            "ta_IN": "Read the three computed columns before moving on. Practical Amount is the posted balance on the position's accounts, Theoretical Amount is the plan pro-rated to today, and Achievement is the ratio between them."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 470,
+          "title": "",
+          "title_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "trigger": "button[name=\"action_budget_confirm\"]",
+          "content": "Click Confirm to move the budget from Draft to Confirmed. Only then is it treated as an approved plan.",
+          "content_i18n": {
+            "en_US": "Click Confirm to move the budget from Draft to Confirmed. Only then is it treated as an approved plan.",
+            "si_LK": "Click Confirm to move the budget from Draft to Confirmed. Only then is it treated as an approved plan.",
+            "ta_IN": "Click Confirm to move the budget from Draft to Confirmed. Only then is it treated as an approved plan."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 480,
+          "title": "",
+          "title_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "trigger": ".o_menu_sections [data-menu-xmlid=\"account.menu_finance_reports\"]",
+          "content": "Open the Reporting menu.",
+          "content_i18n": {
+            "en_US": "Open the Reporting menu.",
+            "si_LK": "Open the Reporting menu.",
+            "ta_IN": "Open the Reporting menu."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 490,
+          "title": "",
+          "title_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "trigger": "[data-menu-xmlid=\"account_budget.menu_act_crossovered_budget_lines_view\"]",
+          "content": "Click Budgets Analysis to review planned against practical amounts across every budget line.",
+          "content_i18n": {
+            "en_US": "Click Budgets Analysis to review planned against practical amounts across every budget line.",
+            "si_LK": "Click Budgets Analysis to review planned against practical amounts across every budget line.",
+            "ta_IN": "Click Budgets Analysis to review planned against practical amounts across every budget line."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,246 @@
+{
+  "audience": "Accountants who record newly purchased factory machinery as a fixed asset and want to check how it affects the books.",
+  "goal": "Create a **fixed asset** for new factory equipment from the **Factory Equipments** asset model, **Confirm** it so it becomes **Running**, then prove the result in two reports: the **Trial Balance** and the **General Ledger** (with draft entries included).",
+  "before": [
+    "You can open the **Accounting** app and its **Accounting** menu (the Assets screen).",
+    "An asset model called **Factory Equipments** exists. It supplies the 72-month duration and the three accounts: Fixed Asset **11010170**, Depreciation **11020170** and Expense **72090050**.",
+    "You know the purchase cost. This guide uses **100,000**."
+  ],
+  "outcome": [
+    "A new asset exists with status **Running** and an original value of 100,000.",
+    "The Trial Balance and General Ledger show the scheduled **depreciation entry** for the asset, as a draft entry.",
+    "You know how to see draft (not yet posted) entries in a report."
+  ],
+  "notes": [
+    "The screenshots were captured by an automated run on a **test database**. The asset name carries a `[TEST]` tag and a random code so every run creates a new, uniquely named asset.",
+    "The depreciation entry is **scheduled**, not posted: it stays a draft until its date. That is why the reports need **Include Draft Entries** switched on.",
+    "The depreciation amount in the screenshots (729.93) is only part of a month, because the asset was acquired mid-month and depreciation is **based on days per period**. Your figure depends on your acquisition date.",
+    "In the General Ledger screenshots you may see a second, similar line. It comes from an earlier test run that created another asset; only the line carrying **your** asset name is yours.",
+    "Each test run leaves a confirmed asset behind. Cancel or archive test assets on the test database when you no longer need them."
+  ],
+  "phases": [
+    {
+      "title": "Open the Assets screen",
+      "summary": "Go from the Accounting app to the list of fixed assets.",
+      "from": 1,
+      "to": 3,
+      "checkpoint": "The **Assets** list is open, with a **New** button at the top left."
+    },
+    {
+      "title": "Create and confirm the asset",
+      "summary": "Name the asset, pick the model, enter the cost and confirm.",
+      "from": 4,
+      "to": 8,
+      "checkpoint": "The asset is **Running**, with a book value of **100,000**."
+    },
+    {
+      "title": "Check the Trial Balance",
+      "summary": "Open the Trial Balance with draft entries included and find the depreciation accounts.",
+      "from": 9,
+      "to": 13,
+      "checkpoint": "The Trial Balance lists the **Depreciation Expense** and **Provision for Depreciation** accounts with the scheduled amount."
+    },
+    {
+      "title": "Check the General Ledger",
+      "summary": "Open the General Ledger and find the draft depreciation line for your asset.",
+      "from": 14,
+      "to": 19,
+      "checkpoint": "The General Ledger shows the draft depreciation line named after your asset."
+    }
+  ],
+  "glossary": [
+    { "term": "Fixed asset", "meaning": "Something the company owns and uses for years, such as a machine. Its cost is spread over its useful life instead of being expensed at once." },
+    { "term": "Asset model", "meaning": "A template that pre-fills the depreciation method, duration and accounts, so every asset of the same kind is set up the same way." },
+    { "term": "Original value", "meaning": "What the asset cost to acquire." },
+    { "term": "Depreciation", "meaning": "The share of the asset's cost charged to expense each period. Here it runs over 72 months." },
+    { "term": "Provision for Depreciation", "meaning": "The balance-sheet account that collects depreciation charged so far (11020170)." },
+    { "term": "Draft entry", "meaning": "A journal entry that is scheduled but **not posted** yet. It does not count in reports unless you switch on **Include Draft Entries**." },
+    { "term": "Trial Balance", "meaning": "A report listing every account with its debit and credit totals." },
+    { "term": "General Ledger", "meaning": "A report listing every account with the individual journal lines behind its balance." }
+  ],
+  "steps": {
+    "1": {
+      "title": "Open the Accounting app",
+      "kind": "CLICK",
+      "do": "On the Odoo home screen, click the **Accounting** app.",
+      "where": "Odoo home screen > Accounting app",
+      "actions": ["Go to the Odoo home screen.", "Find the **Accounting** icon.", "Click it."],
+      "see": "The Accounting app opens with its menu bar across the top.",
+      "why": "Fixed assets are managed inside the Accounting app."
+    },
+    "2": {
+      "title": "Open the Accounting menu",
+      "kind": "CLICK",
+      "do": "In the top menu bar, click **Accounting**.",
+      "where": "Accounting app > Accounting",
+      "actions": ["Look at the menu bar across the top.", "Click **Accounting** (not the app icon)."],
+      "see": "A drop-down with the Accounting entries, including **Assets**.",
+      "why": "The Assets screen sits in this drop-down, under the Management group.",
+      "tip": "If you cannot see the menu, widen the browser window; narrow windows hide the last entries behind a **+**."
+    },
+    "3": {
+      "title": "Open Assets",
+      "kind": "CLICK",
+      "do": "In the drop-down, click **Assets**.",
+      "where": "Accounting app > Accounting > Management > Assets",
+      "actions": ["Find **Assets** in the Management group.", "Click it.", "Wait for the list to load."],
+      "see": "The **Assets** list showing every existing asset with its model, acquisition date, values and status.",
+      "why": "This list is where every fixed asset is created and followed."
+    },
+    "4": {
+      "title": "Start a new asset",
+      "kind": "CLICK",
+      "do": "Click the purple **New** button at the top left.",
+      "where": "Assets list > New",
+      "actions": ["Find the **New** button next to the title **Assets**.", "Click it."],
+      "see": "An empty asset form with status **Draft**.",
+      "why": "A new asset starts as a Draft. Nothing is posted to the books until you confirm it."
+    },
+    "5": {
+      "title": "Enter the asset name",
+      "kind": "ENTER",
+      "do": "Type a name for the asset in the **Asset Name** field.",
+      "where": "Asset form > Asset Name",
+      "actions": ["Click the large **Asset Name** field at the top of the form.", "Type the name, for example **Factory Equipment - New Machine**."],
+      "enter": [{ "field": "Asset Name", "value": "Factory Equipment - New Machine" }],
+      "see": "Your name appears in large letters at the top of the form.",
+      "why": "The name identifies the asset everywhere, and it is copied into the depreciation entries you check at the end.",
+      "tip": "Use a name that says what and which one it is, so you can find its depreciation lines later."
+    },
+    "6": {
+      "title": "Select the asset model",
+      "kind": "ENTER",
+      "do": "In **Asset Model**, choose **Factory Equipments**.",
+      "where": "Asset form > Asset Model",
+      "actions": ["Click the **Asset Model** field.", "Type **Factory Equipments**.", "Click **FACTORY EQUIPMENTS** in the list."],
+      "enter": [{ "field": "Asset Model", "value": "Factory Equipments" }],
+      "see": "The form fills in by itself: **Duration 72 Months**, Fixed Asset Account **11010170**, Depreciation Account **11020170** and Expense Account **72090050**.",
+      "why": "The model supplies the depreciation settings and accounts, so you do not have to enter them for each machine.",
+      "warning": "Check the three account codes after choosing the model. Wrong accounts mean the depreciation posts to the wrong place."
+    },
+    "7": {
+      "title": "Enter the original value",
+      "kind": "ENTER",
+      "do": "Type **100000** in **Original Value**.",
+      "where": "Asset form > Original Value",
+      "actions": ["Click the **Original Value** field.", "Type **100000**.", "Press **Tab** to confirm the number."],
+      "enter": [{ "field": "Original Value", "value": "100000" }],
+      "see": "The field shows 100,000 and **Book Value** on the right follows it.",
+      "why": "The original value is the acquisition cost. Depreciation is calculated from it over the 72 months.",
+      "tip": "Enter the cost without the currency symbol or thousands separators."
+    },
+    "8": {
+      "title": "Confirm the asset",
+      "kind": "CLICK",
+      "do": "Click **Confirm** at the top left of the form.",
+      "where": "Asset form > Confirm",
+      "actions": ["Find the **Confirm** button above the form.", "Click it.", "Watch the status bar change."],
+      "see": "The status changes from **Draft** to **Running**. **Depreciation Board** appears as a tab, and the chatter logs *Asset created*.",
+      "why": "Confirming starts the depreciation. Odoo creates the schedule of monthly depreciation entries, all as drafts until their date.",
+      "warning": "A running asset cannot simply be edited. To change it later you use **Modify Depreciation**."
+    },
+    "9": {
+      "title": "Find the Reporting menu",
+      "kind": "REVIEW",
+      "do": "Look at the top menu bar and find **Reporting**.",
+      "where": "Top menu bar > Reporting",
+      "actions": ["Look along the top menu bar.", "If **Reporting** is hidden, click the **+** at the end of the bar to reveal it."],
+      "see": "The **Reporting** menu is available (directly, or behind the **+**).",
+      "why": "The reports you need next live under Reporting."
+    },
+    "10": {
+      "title": "Open the Trial Balance",
+      "kind": "CLICK",
+      "do": "Click **Reporting**, then **Trial Balance**.",
+      "where": "Accounting app > Reporting > Trial Balance",
+      "actions": ["Open the **Reporting** menu.", "Click **Trial Balance**.", "Wait for the report to load."],
+      "see": "The **Trial Balance**, listing every account with Initial Balance, current period and End Balance columns.",
+      "why": "The Trial Balance shows whether the new asset and its depreciation reached the right accounts."
+    },
+    "11": {
+      "title": "Open the report options",
+      "kind": "CLICK",
+      "do": "Click the **Options** button at the top of the report.",
+      "where": "Trial Balance > Options",
+      "actions": ["Find **Options** in the row of filters.", "Click it."],
+      "see": "A small menu with report options, including **Include Draft Entries**.",
+      "why": "By default a report counts only **posted** entries. The depreciation is still a draft, so you need an option to show it."
+    },
+    "12": {
+      "title": "Include draft entries",
+      "kind": "CLICK",
+      "do": "Click **Include Draft Entries**.",
+      "where": "Trial Balance > Options > Include Draft Entries",
+      "actions": ["Click **Include Draft Entries** in the menu.", "Wait for the report to reload."],
+      "see": "The button now reads **Options: With Draft Entries** and the report reloads with the scheduled depreciation included.",
+      "why": "The first monthly depreciation entry is scheduled to post automatically at month end. Including drafts lets you see it now."
+    },
+    "13": {
+      "title": "Check the depreciation accounts",
+      "kind": "REVIEW",
+      "do": "Find the **72090050 Depreciation** and **11020170 Provision for Depreciation** accounts.",
+      "where": "Trial Balance > account rows",
+      "actions": ["Scroll down the list of accounts.", "Find **11020170 PROVISION FOR DEPRECIATION - FACTORY EQUIPMENT** (outlined in red).", "Read its credit in the current-period column, then find **72090050** the same way."],
+      "points": ["**72090050** carries the depreciation **expense** (debit).", "**11020170** carries the **provision for depreciation** (credit).", "Both show the same scheduled amount for the period."],
+      "see": "Both accounts show the scheduled depreciation for the new asset in the current period.",
+      "why": "Equal debit and credit on these two accounts confirms the asset is depreciating into the accounts the model set.",
+      "tip": "The Fixed Asset account 11010170 appears too. Its balance only moves once the acquisition entry is posted."
+    },
+    "14": {
+      "title": "Find the Reporting menu again",
+      "kind": "REVIEW",
+      "do": "Look at the top menu bar again and find **Reporting**.",
+      "where": "Top menu bar > Reporting",
+      "actions": ["Look along the top menu bar.", "If **Reporting** is hidden again, click the **+** at the end of the bar."],
+      "see": "The **Reporting** menu is available.",
+      "why": "The menu closes after each navigation, so you open it again for the next report."
+    },
+    "15": {
+      "title": "Open the General Ledger",
+      "kind": "CLICK",
+      "do": "Click **Reporting**, then **General Ledger**.",
+      "where": "Accounting app > Reporting > Audit Reports > General Ledger",
+      "actions": ["Open the **Reporting** menu.", "In the **Audit Reports** group, click **General Ledger**.", "Wait for the report to load."],
+      "see": "The **General Ledger**, listing every account with its totals.",
+      "why": "Where the Trial Balance gives totals, the General Ledger shows the individual journal lines behind them."
+    },
+    "16": {
+      "title": "Open the report options",
+      "kind": "CLICK",
+      "do": "Click the **Options** button at the top of the report.",
+      "where": "General Ledger > Options",
+      "actions": ["Find **Options** in the row of filters.", "Click it."],
+      "see": "The options menu with **Include Draft Entries**.",
+      "why": "Filters reset for each report, so draft entries must be switched on again."
+    },
+    "17": {
+      "title": "Include draft entries",
+      "kind": "CLICK",
+      "do": "Click **Include Draft Entries**.",
+      "where": "General Ledger > Options > Include Draft Entries",
+      "actions": ["Click **Include Draft Entries**.", "Wait for the report to reload."],
+      "see": "The button reads **Options: With Draft Entries**.",
+      "why": "Without this, the draft depreciation line for the new asset would not appear."
+    },
+    "18": {
+      "title": "Expand the depreciation expense account",
+      "kind": "CLICK",
+      "do": "Click **72090050 Depreciation** to expand it.",
+      "where": "General Ledger > 72090050 Depreciation",
+      "actions": ["Find the row for account **72090050**.", "Click its name.", "The journal lines under it appear."],
+      "see": "The account unfolds to show each journal line with its date, communication and amount.",
+      "why": "Expanding an account is how you reach the individual entries behind its balance."
+    },
+    "19": {
+      "title": "Check the depreciation entry",
+      "kind": "REVIEW",
+      "do": "Find the line named after your asset, ending in **: Depreciation**.",
+      "where": "General Ledger > 72090050 > journal lines",
+      "actions": ["Look through the lines under account 72090050.", "Find the line that starts with your asset name (outlined in red).", "Check its date and amount."],
+      "points": ["The line is dated at **month end**.", "Its amount is the depreciation for the part of the month the asset was in use.", "It is a **draft** entry until its date, when it posts automatically."],
+      "see": "A draft depreciation line named after your asset, with its scheduled date and amount.",
+      "why": "This is the end result of the tour: the asset you created has produced its first scheduled depreciation entry in the right account.",
+      "tip": "That completes the tour: create the asset, confirm it, and verify the depreciation in the Trial Balance and General Ledger."
+    }
+  }
+}

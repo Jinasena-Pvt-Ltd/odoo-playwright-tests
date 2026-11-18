@@ -1,0 +1,582 @@
+{
+  "version": 2,
+  "tours": [
+    {
+      "name": "Fixed Assets: Scrap and Sell an Asset",
+      "name_i18n": {
+        "en_US": "Fixed Assets: Scrap and Sell an Asset",
+        "si_LK": "Fixed Assets: Scrap and Sell an Asset",
+        "ta_IN": "Fixed Assets: Scrap and Sell an Asset"
+      },
+      "description": "Walks through selling a fixed asset to a customer: create and confirm a Sales Order, generate and post the Customer Invoice, then use the asset's Modify Asset > Sell action to post the disposal entry and close the asset.",
+      "description_i18n": {
+        "en_US": "Walks through selling a fixed asset to a customer: create and confirm a Sales Order, generate and post the Customer Invoice, then use the asset's Modify Asset > Sell action to post the disposal entry and close the asset.",
+        "si_LK": "Walks through selling a fixed asset to a customer: create and confirm a Sales Order, generate and post the Customer Invoice, then use the asset's Modify Asset > Sell action to post the disposal entry and close the asset.",
+        "ta_IN": "Walks through selling a fixed asset to a customer: create and confirm a Sales Order, generate and post the Customer Invoice, then use the asset's Modify Asset > Sell action to post the disposal entry and close the asset."
+      },
+      "steps": [
+        {
+          "sequence": 10,
+          "title": "Create a new Quotation",
+          "title_i18n": {
+            "en_US": "Create a new Quotation",
+            "si_LK": "Create a new Quotation",
+            "ta_IN": "Create a new Quotation"
+          },
+          "trigger": "div.d-xl-none.o_control_panel_collapsed_create > button.btn.btn-primary:nth-of-type(1)",
+          "content": "Click New to start a fresh Sales Order for selling the fixed asset.",
+          "content_i18n": {
+            "en_US": "Click New to start a fresh Sales Order for selling the fixed asset.",
+            "si_LK": "Click New to start a fresh Sales Order for selling the fixed asset.",
+            "ta_IN": "Click New to start a fresh Sales Order for selling the fixed asset."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 20,
+          "title": "Select the customer",
+          "title_i18n": {
+            "en_US": "Select the customer",
+            "si_LK": "Select the customer",
+            "ta_IN": "Select the customer"
+          },
+          "trigger": "div.o_cell.o_wrap_input > div.o_field_widget.o_required_modifier > div.o_field_many2one_selection > div.o_input_dropdown > div.o-autocomplete.dropdown > input.o-autocomplete--input.o_input",
+          "content": "Type AC005851 and pick Mr Kolitha Thushara from the list.",
+          "content_i18n": {
+            "en_US": "Type AC005851 and pick Mr Kolitha Thushara from the list.",
+            "si_LK": "Type AC005851 and pick Mr Kolitha Thushara from the list.",
+            "ta_IN": "Type AC005851 and pick Mr Kolitha Thushara from the list."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 30,
+          "title": "Sales Project Repair",
+          "title_i18n": {
+            "en_US": "Sales Project Repair",
+            "si_LK": "Sales Project Repair",
+            "ta_IN": "Sales Project Repair"
+          },
+          "trigger": "#x_studio_quotation_type_0",
+          "content": "Select \"Sales\" from the dropdown",
+          "content_i18n": {
+            "en_US": "Select \"Sales\" from the dropdown",
+            "si_LK": "Select \"Sales\" from the dropdown",
+            "ta_IN": "Select \"Sales\" from the dropdown"
+          },
+          "position": "bottom",
+          "run": "select:\"Sales\"",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 40,
+          "title": "Other Info",
+          "title_i18n": {
+            "en_US": "Other Info",
+            "si_LK": "Other Info",
+            "ta_IN": "Other Info"
+          },
+          "trigger": "a[name=\"other_information\"]",
+          "content": "Open the Other Info tab to set the delivery warehouse.",
+          "content_i18n": {
+            "en_US": "Open the Other Info tab to set the delivery warehouse.",
+            "si_LK": "Open the Other Info tab to set the delivery warehouse.",
+            "ta_IN": "Open the Other Info tab to set the delivery warehouse."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 50,
+          "title": "Open the Warehouse field",
+          "title_i18n": {
+            "en_US": "Open the Warehouse field",
+            "si_LK": "Open the Warehouse field",
+            "ta_IN": "Open the Warehouse field"
+          },
+          "trigger": "#warehouse_id_1",
+          "content": "Click the Warehouse field to change it (must match the order's company).",
+          "content_i18n": {
+            "en_US": "Click the Warehouse field to change it (must match the order's company).",
+            "si_LK": "Click the Warehouse field to change it (must match the order's company).",
+            "ta_IN": "Click the Warehouse field to change it (must match the order's company)."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 60,
+          "title": "Set warehouse to Production Warehouse",
+          "title_i18n": {
+            "en_US": "Set warehouse to Production Warehouse",
+            "si_LK": "Set warehouse to Production Warehouse",
+            "ta_IN": "Set warehouse to Production Warehouse"
+          },
+          "trigger": "#warehouse_id_1",
+          "content": "Type Production Warehouse and select Production Warehouse - (PW-JM), which matches the order's company.",
+          "content_i18n": {
+            "en_US": "Type Production Warehouse and select Production Warehouse - (PW-JM), which matches the order's company.",
+            "si_LK": "Type Production Warehouse and select Production Warehouse - (PW-JM), which matches the order's company.",
+            "ta_IN": "Type Production Warehouse and select Production Warehouse - (PW-JM), which matches the order's company."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 70,
+          "title": "Order Lines",
+          "title_i18n": {
+            "en_US": "Order Lines",
+            "si_LK": "Order Lines",
+            "ta_IN": "Order Lines"
+          },
+          "trigger": "a[name=\"order_lines\"]",
+          "content": "Go to the Order Lines tab to add the product.",
+          "content_i18n": {
+            "en_US": "Go to the Order Lines tab to add the product.",
+            "si_LK": "Go to the Order Lines tab to add the product.",
+            "ta_IN": "Go to the Order Lines tab to add the product."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 80,
+          "title": "Add a product",
+          "title_i18n": {
+            "en_US": "Add a product",
+            "si_LK": "Add a product",
+            "ta_IN": "Add a product"
+          },
+          "trigger": "td.o_field_x2many_list_row_add > a:nth-of-type(1)",
+          "content": "Click \"Add a product\" to add an order line.",
+          "content_i18n": {
+            "en_US": "Click \"Add a product\" to add an order line.",
+            "si_LK": "Click \"Add a product\" to add an order line.",
+            "ta_IN": "Click \"Add a product\" to add an order line."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 90,
+          "title": "Confirm",
+          "title_i18n": {
+            "en_US": "Confirm",
+            "si_LK": "Confirm",
+            "ta_IN": "Confirm"
+          },
+          "trigger": "[data-hotkey=\"q\"]",
+          "content": "Click Confirm to turn the quotation into a Sales Order.",
+          "content_i18n": {
+            "en_US": "Click Confirm to turn the quotation into a Sales Order.",
+            "si_LK": "Click Confirm to turn the quotation into a Sales Order.",
+            "ta_IN": "Click Confirm to turn the quotation into a Sales Order."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 100,
+          "title": "Create Invoice",
+          "title_i18n": {
+            "en_US": "Create Invoice",
+            "si_LK": "Create Invoice",
+            "ta_IN": "Create Invoice"
+          },
+          "trigger": "[data-hotkey=\"q\"]",
+          "content": "Click Create Invoice.",
+          "content_i18n": {
+            "en_US": "Click Create Invoice.",
+            "si_LK": "Click Create Invoice.",
+            "ta_IN": "Click Create Invoice."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 110,
+          "title": "Confirm",
+          "title_i18n": {
+            "en_US": "Confirm",
+            "si_LK": "Confirm",
+            "ta_IN": "Confirm"
+          },
+          "trigger": "[data-hotkey=\"q\"]",
+          "content": "Click Confirm to post the customer invoice.",
+          "content_i18n": {
+            "en_US": "Click Confirm to post the customer invoice.",
+            "si_LK": "Click Confirm to post the customer invoice.",
+            "ta_IN": "Click Confirm to post the customer invoice."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 120,
+          "title": "Modify Depreciation",
+          "title_i18n": {
+            "en_US": "Modify Depreciation",
+            "si_LK": "Modify Depreciation",
+            "ta_IN": "Modify Depreciation"
+          },
+          "trigger": "[data-hotkey=\"e\"]",
+          "content": "Click Modify Depreciation to open the disposal/sell wizard.",
+          "content_i18n": {
+            "en_US": "Click Modify Depreciation to open the disposal/sell wizard.",
+            "si_LK": "Click Modify Depreciation to open the disposal/sell wizard.",
+            "ta_IN": "Click Modify Depreciation to open the disposal/sell wizard."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 130,
+          "title": "Select Sell",
+          "title_i18n": {
+            "en_US": "Select Sell",
+            "si_LK": "Select Sell",
+            "ta_IN": "Select Sell"
+          },
+          "trigger": "#radio_field_0_sell",
+          "content": "Choose the Sell action instead of Dispose.",
+          "content_i18n": {
+            "en_US": "Choose the Sell action instead of Dispose.",
+            "si_LK": "Choose the Sell action instead of Dispose.",
+            "ta_IN": "Choose the Sell action instead of Dispose."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 140,
+          "title": "Link the Customer Invoice",
+          "title_i18n": {
+            "en_US": "Link the Customer Invoice",
+            "si_LK": "Link the Customer Invoice",
+            "ta_IN": "Link the Customer Invoice"
+          },
+          "trigger": "#invoice_ids_0",
+          "content": "Type the invoice number FTI/2026/00003 and select it.",
+          "content_i18n": {
+            "en_US": "Type the invoice number FTI/2026/00003 and select it.",
+            "si_LK": "Type the invoice number FTI/2026/00003 and select it.",
+            "ta_IN": "Type the invoice number FTI/2026/00003 and select it."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 150,
+          "title": "Sell",
+          "title_i18n": {
+            "en_US": "Sell",
+            "si_LK": "Sell",
+            "ta_IN": "Sell"
+          },
+          "trigger": "footer > button.btn.btn-primary > span",
+          "content": "Click Sell to create the disposal journal entry.",
+          "content_i18n": {
+            "en_US": "Click Sell to create the disposal journal entry.",
+            "si_LK": "Click Sell to create the disposal journal entry.",
+            "ta_IN": "Click Sell to create the disposal journal entry."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 160,
+          "title": "Post",
+          "title_i18n": {
+            "en_US": "Post",
+            "si_LK": "Post",
+            "ta_IN": "Post"
+          },
+          "trigger": "[data-hotkey=\"q\"]",
+          "content": "Click Post to finalize the asset disposal journal entry.",
+          "content_i18n": {
+            "en_US": "Click Post to finalize the asset disposal journal entry.",
+            "si_LK": "Click Post to finalize the asset disposal journal entry.",
+            "ta_IN": "Click Post to finalize the asset disposal journal entry."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 170,
+          "title": "Asset",
+          "title_i18n": {
+            "en_US": "Asset",
+            "si_LK": "Asset",
+            "ta_IN": "Asset"
+          },
+          "trigger": "button.btn.oe_stat_button > div.o_field_widget.o_readonly_modifier > span",
+          "content": "Open the asset record to confirm it is now Closed with book value Rs 0.",
+          "content_i18n": {
+            "en_US": "Open the asset record to confirm it is now Closed with book value Rs 0.",
+            "si_LK": "Open the asset record to confirm it is now Closed with book value Rs 0.",
+            "ta_IN": "Open the asset record to confirm it is now Closed with book value Rs 0."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        }
+      ]
+    }
+  ]
+}

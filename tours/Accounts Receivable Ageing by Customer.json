@@ -1,0 +1,351 @@
+{
+  "version": 2,
+  "tours": [
+    {
+      "name": "Finance: Accounts Receivable Ageing by Customer ( Didula Power - All Durations ) - Full Flow",
+      "name_i18n": {
+        "en_US": "Finance: Accounts Receivable Ageing by Customer ( Didula Power - All Durations ) - Full Flow",
+        "si_LK": "Finance: Accounts Receivable Ageing by Customer ( Didula Power - All Durations ) - Full Flow",
+        "ta_IN": "Finance: Accounts Receivable Ageing by Customer ( Didula Power - All Durations ) - Full Flow"
+      },
+      "description": "Generate an Accounts Receivable Ageing report for one customer: Accounting > Reporting > Aged Receivable, filter Partners to DIDULA POWER ELECTRICLES (PVT) LIMITED, read the balance across all ageing durations (At Date, 1-30, 31-60, 61-90, 91-120, Older, Total), unfold the customer line to see the underlying entries, and export to PDF or XLSX.",
+      "description_i18n": {
+        "en_US": "Generate an Accounts Receivable Ageing report for one customer: Accounting > Reporting > Aged Receivable, filter Partners to DIDULA POWER ELECTRICLES (PVT) LIMITED, read the balance across all ageing durations (At Date, 1-30, 31-60, 61-90, 91-120, Older, Total), unfold the customer line to see the underlying entries, and export to PDF or XLSX.",
+        "si_LK": "Generate an Accounts Receivable Ageing report for one customer: Accounting > Reporting > Aged Receivable, filter Partners to DIDULA POWER ELECTRICLES (PVT) LIMITED, read the balance across all ageing durations (At Date, 1-30, 31-60, 61-90, 91-120, Older, Total), unfold the customer line to see the underlying entries, and export to PDF or XLSX.",
+        "ta_IN": "Generate an Accounts Receivable Ageing report for one customer: Accounting > Reporting > Aged Receivable, filter Partners to DIDULA POWER ELECTRICLES (PVT) LIMITED, read the balance across all ageing durations (At Date, 1-30, 31-60, 61-90, 91-120, Older, Total), unfold the customer line to see the underlying entries, and export to PDF or XLSX."
+      },
+      "steps": [
+        {
+          "sequence": 10,
+          "title": "Open Accounting app",
+          "title_i18n": {
+            "en_US": "Open Accounting app",
+            "si_LK": "Open Accounting app",
+            "ta_IN": "Open Accounting app"
+          },
+          "trigger": "[data-menu-xmlid=\"account_accountant.menu_accounting\"]",
+          "content": "Click the Accounting app to begin. We will produce an Accounts Receivable Ageing report for a single customer.",
+          "content_i18n": {
+            "en_US": "Click the Accounting app to begin. We will produce an Accounts Receivable Ageing report for a single customer.",
+            "si_LK": "Click the Accounting app to begin. We will produce an Accounts Receivable Ageing report for a single customer.",
+            "ta_IN": "Click the Accounting app to begin. We will produce an Accounts Receivable Ageing report for a single customer."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 20,
+          "title": "Reporting",
+          "title_i18n": {
+            "en_US": "Reporting",
+            "si_LK": "Reporting",
+            "ta_IN": "Reporting"
+          },
+          "trigger": "[data-menu-xmlid=\"account.menu_finance_reports\"]",
+          "content": "Open the Reporting menu. All Accounting reports, including the ageing reports, are listed here.",
+          "content_i18n": {
+            "en_US": "Open the Reporting menu. All Accounting reports, including the ageing reports, are listed here.",
+            "si_LK": "Open the Reporting menu. All Accounting reports, including the ageing reports, are listed here.",
+            "ta_IN": "Open the Reporting menu. All Accounting reports, including the ageing reports, are listed here."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 30,
+          "title": "Aged Receivable",
+          "title_i18n": {
+            "en_US": "Aged Receivable",
+            "si_LK": "Aged Receivable",
+            "ta_IN": "Aged Receivable"
+          },
+          "trigger": "[data-menu-xmlid=\"account_reports.menu_action_account_report_aged_receivable\"]",
+          "content": "Under Partner Reports, click Aged Receivable. This is the Accounts Receivable Ageing report, which buckets every outstanding customer balance by how overdue it is.",
+          "content_i18n": {
+            "en_US": "Under Partner Reports, click Aged Receivable. This is the Accounts Receivable Ageing report, which buckets every outstanding customer balance by how overdue it is.",
+            "si_LK": "Under Partner Reports, click Aged Receivable. This is the Accounts Receivable Ageing report, which buckets every outstanding customer balance by how overdue it is.",
+            "ta_IN": "Under Partner Reports, click Aged Receivable. This is the Accounts Receivable Ageing report, which buckets every outstanding customer balance by how overdue it is."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 40,
+          "title": "As of date - report cut-off",
+          "title_i18n": {
+            "en_US": "As of date - report cut-off",
+            "si_LK": "As of date - report cut-off",
+            "ta_IN": "As of date - report cut-off"
+          },
+          "trigger": "div.filter_date > div.o-dropdown.dropdown > button.dropdown-toggle.btn",
+          "content": "The As of date is the cut-off for the report. Leave it on Today so every ageing duration up to today is included - At Date, 1-30, 31-60, 61-90, 91-120 and Older.",
+          "content_i18n": {
+            "en_US": "The As of date is the cut-off for the report. Leave it on Today so every ageing duration up to today is included - At Date, 1-30, 31-60, 61-90, 91-120 and Older.",
+            "si_LK": "The As of date is the cut-off for the report. Leave it on Today so every ageing duration up to today is included - At Date, 1-30, 31-60, 61-90, 91-120 and Older.",
+            "ta_IN": "The As of date is the cut-off for the report. Leave it on Today so every ageing duration up to today is included - At Date, 1-30, 31-60, 61-90, 91-120 and Older."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 50,
+          "title": "Partners",
+          "title_i18n": {
+            "en_US": "Partners",
+            "si_LK": "Partners",
+            "ta_IN": "Partners"
+          },
+          "trigger": "div.filter_partner > div.o-dropdown.dropdown > button.dropdown-toggle.btn",
+          "content": "Click the Partners filter to narrow the report down to one customer.",
+          "content_i18n": {
+            "en_US": "Click the Partners filter to narrow the report down to one customer.",
+            "si_LK": "Click the Partners filter to narrow the report down to one customer.",
+            "ta_IN": "Click the Partners filter to narrow the report down to one customer."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 60,
+          "title": "Search for the customer",
+          "title_i18n": {
+            "en_US": "Search for the customer",
+            "si_LK": "Search for the customer",
+            "ta_IN": "Search for the customer"
+          },
+          "trigger": "div.dropdown-item:nth-of-type(1) > div.o_input.d-flex > div.o-autocomplete.o_record_autocomplete_with_caret > input.o-autocomplete--input.o_input",
+          "content": "Type Didula power in the Partners box. Partial text is enough - Odoo matches any customer whose name starts with what you type.",
+          "content_i18n": {
+            "en_US": "Type Didula power in the Partners box. Partial text is enough - Odoo matches any customer whose name starts with what you type.",
+            "si_LK": "Type Didula power in the Partners box. Partial text is enough - Odoo matches any customer whose name starts with what you type.",
+            "ta_IN": "Type Didula power in the Partners box. Partial text is enough - Odoo matches any customer whose name starts with what you type."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 70,
+          "title": "DIDULA POWER ELECTRICLES (PVT) LIMITED,",
+          "title_i18n": {
+            "en_US": "DIDULA POWER ELECTRICLES (PVT) LIMITED,",
+            "si_LK": "DIDULA POWER ELECTRICLES (PVT) LIMITED,",
+            "ta_IN": "DIDULA POWER ELECTRICLES (PVT) LIMITED,"
+          },
+          "trigger": "#autocomplete_0_0",
+          "content": "Pick DIDULA POWER ELECTRICLES (PVT) LIMITED from the list. The report reloads immediately for just this customer.",
+          "content_i18n": {
+            "en_US": "Pick DIDULA POWER ELECTRICLES (PVT) LIMITED from the list. The report reloads immediately for just this customer.",
+            "si_LK": "Pick DIDULA POWER ELECTRICLES (PVT) LIMITED from the list. The report reloads immediately for just this customer.",
+            "ta_IN": "Pick DIDULA POWER ELECTRICLES (PVT) LIMITED from the list. The report reloads immediately for just this customer."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 80,
+          "title": "Unfold the customer line",
+          "title_i18n": {
+            "en_US": "Unfold the customer line",
+            "si_LK": "Unfold the customer line",
+            "ta_IN": "Unfold the customer line"
+          },
+          "trigger": "tr.line_level_2 > td.line_name.more > div.wrapper > div.content > div.name",
+          "content": "Click the customer name to unfold it. This closes the filter panel and lists every open invoice and credit note behind the balance, each one sitting in its own ageing bucket.",
+          "content_i18n": {
+            "en_US": "Click the customer name to unfold it. This closes the filter panel and lists every open invoice and credit note behind the balance, each one sitting in its own ageing bucket.",
+            "si_LK": "Click the customer name to unfold it. This closes the filter panel and lists every open invoice and credit note behind the balance, each one sitting in its own ageing bucket.",
+            "ta_IN": "Click the customer name to unfold it. This closes the filter panel and lists every open invoice and credit note behind the balance, each one sitting in its own ageing bucket."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 90,
+          "title": "All ageing durations",
+          "title_i18n": {
+            "en_US": "All ageing durations",
+            "si_LK": "All ageing durations",
+            "ta_IN": "All ageing durations"
+          },
+          "trigger": "th:nth-of-type(8)",
+          "content": "These columns are the ageing durations: At Date (not yet due), 1-30, 31-60, 61-90, 91-120 days overdue, Older, and Total. No extra setting is needed - the report always shows every duration, so read across the row to see how old the customer's balance is.",
+          "content_i18n": {
+            "en_US": "These columns are the ageing durations: At Date (not yet due), 1-30, 31-60, 61-90, 91-120 days overdue, Older, and Total. No extra setting is needed - the report always shows every duration, so read across the row to see how old the customer's balance is.",
+            "si_LK": "These columns are the ageing durations: At Date (not yet due), 1-30, 31-60, 61-90, 91-120 days overdue, Older, and Total. No extra setting is needed - the report always shows every duration, so read across the row to see how old the customer's balance is.",
+            "ta_IN": "These columns are the ageing durations: At Date (not yet due), 1-30, 31-60, 61-90, 91-120 days overdue, Older, and Total. No extra setting is needed - the report always shows every duration, so read across the row to see how old the customer's balance is."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 100,
+          "title": "Export the ageing report",
+          "title_i18n": {
+            "en_US": "Export the ageing report",
+            "si_LK": "Export the ageing report",
+            "ta_IN": "Export the ageing report"
+          },
+          "trigger": "div.d-xl-none.o_control_panel_collapsed_create > button.btn.text-nowrap:nth-of-type(1)",
+          "content": "Use PDF to print or email the ageing report, or XLSX next to it to download it as a spreadsheet. The export keeps the Didula Power filter and all ageing duration columns exactly as shown on screen.",
+          "content_i18n": {
+            "en_US": "Use PDF to print or email the ageing report, or XLSX next to it to download it as a spreadsheet. The export keeps the Didula Power filter and all ageing duration columns exactly as shown on screen.",
+            "si_LK": "Use PDF to print or email the ageing report, or XLSX next to it to download it as a spreadsheet. The export keeps the Didula Power filter and all ageing duration columns exactly as shown on screen.",
+            "ta_IN": "Use PDF to print or email the ageing report, or XLSX next to it to download it as a spreadsheet. The export keeps the Didula Power filter and all ageing duration columns exactly as shown on screen."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        }
+      ]
+    }
+  ]
+}

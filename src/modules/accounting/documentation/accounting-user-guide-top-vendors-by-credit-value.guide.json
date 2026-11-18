@@ -1,0 +1,172 @@
+{
+  "audience": "Accounting users who need to know which vendors Odoo owes the most, for example before a payment run or a month-end review.",
+  "goal": "Produce the exact list of **vendors ranked by credit value**: open **Journal Items**, keep only the **Payable** lines, group them by **Partner**, then sort by the **Credit** column so the largest vendor credits come to the top.",
+  "before": [
+    "You can open the **Accounting** app.",
+    "**Developer mode is on.** The **Journal Items** menu entry is only listed in developer mode (see step 3 for how to switch it on).",
+    "Your journal entries are **posted** — draft entries are not included in this ranking."
+  ],
+  "outcome": [
+    "A list with **one row per vendor**, showing that vendor's total **Debit** and **Credit**.",
+    "The vendors with the **highest credit** are at the top of the list."
+  ],
+  "notes": [
+    "The screenshots were captured on a **test database** with developer mode switched on (the small bug icon and database name in the top bar). Vendor names and amounts are test data and will differ from yours.",
+    "The red banner at the top of the screenshots (\"Database neutralized for testing\") only appears on test databases."
+  ],
+  "phases": [
+    {
+      "title": "Open Journal Items",
+      "summary": "Go to the full list of accounting entry lines.",
+      "from": 1,
+      "to": 3,
+      "checkpoint": "The **Journal Items** list is open and shows every accounting entry line."
+    },
+    {
+      "title": "Keep vendor lines and total them per vendor",
+      "summary": "Filter to Payable lines, then group by Partner so each vendor becomes one row.",
+      "from": 4,
+      "to": 6,
+      "checkpoint": "The search box shows **Payable** and **Partner**, and the list has one row per vendor."
+    },
+    {
+      "title": "Rank the vendors by credit",
+      "summary": "Sort by the Credit column, twice, so the biggest credits are at the top.",
+      "from": 7,
+      "to": 8,
+      "checkpoint": "The vendor with the **highest credit** is at the top of the list."
+    }
+  ],
+  "glossary": [
+    {
+      "term": "Journal Items",
+      "meaning": "The full list of accounting entry lines — every debit and credit that has been recorded, from every journal."
+    },
+    {
+      "term": "Payable",
+      "meaning": "A filter that keeps only the lines on payable accounts, i.e. what you owe to vendors."
+    },
+    {
+      "term": "Partner",
+      "meaning": "The company or person an entry belongs to — here, the vendor."
+    },
+    {
+      "term": "Group By",
+      "meaning": "Collapses the list into one row per value (here per vendor) and shows the totals of the columns for that row."
+    },
+    {
+      "term": "Debit / Credit",
+      "meaning": "The two sides of every entry. On a payable account a vendor bill adds to the **Credit** and a payment shows as a **Debit**, so the Credit total reflects how much has been recorded as owed to that vendor."
+    },
+    {
+      "term": "Developer mode",
+      "meaning": "An extra Odoo mode that shows technical menus and options, including Journal Items. Switch it on by adding **?debug=1** to the address (for example `…/odoo?debug=1`), or from the Settings page."
+    }
+  ],
+  "steps": {
+    "1": {
+      "title": "Open the Accounting app",
+      "kind": "CLICK",
+      "do": "On the Odoo home screen, click the **Accounting** app.",
+      "see": "The Accounting app opens, with its menu bar across the top (Dashboard, Customers, Vendors, Accounting, Reporting …).",
+      "tip": "If your menu bar shows fewer items than the list above, widen the browser window — the remaining items hide behind a **+** at the right end of the bar.",
+      "where": "Odoo home screen > Accounting app",
+      "actions": [
+        "Go to the Odoo home screen (the grid of app icons).",
+        "Find the **Accounting** icon.",
+        "Click it."
+      ]
+    },
+    "2": {
+      "title": "Open the Accounting menu",
+      "kind": "CLICK",
+      "do": "In the top menu bar, click **Accounting**.",
+      "see": "A drop-down opens with the groups Miscellaneous, Journals, Ledgers, Management and Actions.",
+      "where": "Accounting app > Accounting (menu entry)",
+      "actions": [
+        "Look along the top menu bar for **Accounting**.",
+        "Click it to open its drop-down."
+      ]
+    },
+    "3": {
+      "title": "Open Journal Items",
+      "kind": "CLICK",
+      "do": "In the **Miscellaneous** group, click **Journal Items**.",
+      "see": "The Journal Items list opens, showing every accounting entry line.",
+      "warning": "If **Journal Items** is not in the menu, developer mode is off. Add **?debug=1** to the address (for example `…/odoo?debug=1`), reload the page, and open the menu again.",
+      "tip": "Do not click **Purchases** by mistake — it is a different view, with its own filters and grouping.",
+      "where": "Accounting app > Accounting > Miscellaneous > Journal Items",
+      "actions": [
+        "In the drop-down, look at the **Miscellaneous** group at the top.",
+        "Click **Journal Items**.",
+        "If you cannot see it, switch on developer mode first (see the warning below)."
+      ]
+    },
+    "4": {
+      "title": "Open the Filters / Group By panel",
+      "kind": "CLICK",
+      "do": "Click the small **down-arrow** at the right end of the search box to open the **Filters / Group By** panel.",
+      "see": "A panel opens with three columns: **Filters**, **Group By** and **Favorites**.",
+      "tip": "You will use the Filters column in the next step and the Group By column in the one after.",
+      "where": "Journal Items list > search box > down-arrow",
+      "actions": [
+        "Find the search box at the top of the list.",
+        "Click the small **down-arrow** at its right-hand end.",
+        "A panel with **Filters**, **Group By** and **Favorites** opens."
+      ]
+    },
+    "5": {
+      "title": "Filter to Payable lines",
+      "kind": "CLICK",
+      "do": "In the **Filters** column, click **Payable**.",
+      "see": "A **Payable** filter appears in the search box, next to **Posted**. The list now shows only vendor payable lines.",
+      "tip": "**Posted** is applied by default, so only posted entries are counted.",
+      "where": "Search panel > Filters > Payable",
+      "actions": [
+        "In the **Filters** column (left), find **Payable**.",
+        "Click it.",
+        "A **Payable** tag appears in the search box."
+      ]
+    },
+    "6": {
+      "title": "Group the lines by Partner",
+      "kind": "CLICK",
+      "do": "In the **Group By** column, click **Partner**.",
+      "see": "The list collapses into **one row per vendor**, with the number of entry lines in brackets and the vendor's total Debit and Credit.",
+      "warning": "Make sure **Partner** is the only grouping. If another grouping such as **Journal Entry** is also ticked, untick it — otherwise each vendor is split up by entry instead of shown as one total.",
+      "where": "Search panel > Group By > Partner",
+      "actions": [
+        "In the **Group By** column (middle), find **Partner**.",
+        "Click it.",
+        "Check that **Partner** is the only ticked grouping."
+      ]
+    },
+    "7": {
+      "title": "Sort by Credit (first click)",
+      "kind": "CLICK",
+      "do": "Close the panel by clicking anywhere outside it, then click the **Credit** column header **once**.",
+      "see": "An arrow appears on the **Credit** header and the vendors are sorted by credit, **smallest first** — you will see many vendors with a credit of 0.00 at the top.",
+      "tip": "This first click sorts from the smallest value to the largest. You want the opposite, which is the next step.",
+      "where": "Journal Items list > Credit column heading",
+      "actions": [
+        "Click anywhere outside the search panel to close it.",
+        "Find the **Credit** column heading.",
+        "Click it **once**.",
+        "An arrow appears — vendors are now sorted with the smallest credit first."
+      ]
+    },
+    "8": {
+      "title": "Sort by Credit again (second click)",
+      "kind": "CLICK",
+      "do": "Click the **Credit** column header **a second time**.",
+      "see": "The arrow flips and the vendors with the **highest credit** move to the top of the list. That is your ranking.",
+      "tip": "Open a vendor row (click its name) to see the individual entry lines behind its total. A row called **None** is not a vendor — it groups the entry lines that have no partner set.",
+      "where": "Journal Items list > Credit column heading",
+      "actions": [
+        "Click the **Credit** heading a second time.",
+        "The arrow flips.",
+        "The vendors with the largest credit move to the top."
+      ]
+    }
+  }
+}

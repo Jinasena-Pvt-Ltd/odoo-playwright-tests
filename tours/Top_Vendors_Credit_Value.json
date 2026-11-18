@@ -1,0 +1,285 @@
+{
+  "version": 2,
+  "tours": [
+    {
+      "name": "Accounting User Guide - Top Vendors by Credit Value",
+      "name_i18n": {
+        "en_US": "Accounting User Guide - Top Vendors by Credit Value",
+        "si_LK": "Accounting User Guide - Top Vendors by Credit Value",
+        "ta_IN": "Accounting User Guide - Top Vendors by Credit Value"
+      },
+      "description": "How to get the exact list of vendors ranked by credit value: open Journal Items, filter to Payable, group by Partner, then sort by the Credit column to bring the largest vendor credits to the top.",
+      "description_i18n": {
+        "en_US": "How to get the exact list of vendors ranked by credit value: open Journal Items, filter to Payable, group by Partner, then sort by the Credit column to bring the largest vendor credits to the top.",
+        "si_LK": "How to get the exact list of vendors ranked by credit value: open Journal Items, filter to Payable, group by Partner, then sort by the Credit column to bring the largest vendor credits to the top.",
+        "ta_IN": "How to get the exact list of vendors ranked by credit value: open Journal Items, filter to Payable, group by Partner, then sort by the Credit column to bring the largest vendor credits to the top."
+      },
+      "steps": [
+        {
+          "sequence": 10,
+          "title": "Accounting App",
+          "title_i18n": {
+            "en_US": "Accounting App",
+            "si_LK": "Accounting App",
+            "ta_IN": "Accounting App"
+          },
+          "trigger": "[data-menu-xmlid=\"account_accountant.menu_accounting\"]",
+          "content": "Click the Accounting app to open it.",
+          "content_i18n": {
+            "en_US": "Click the Accounting app to open it.",
+            "si_LK": "Click the Accounting app to open it.",
+            "ta_IN": "Click the Accounting app to open it."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 20,
+          "title": "Accounting Menu",
+          "title_i18n": {
+            "en_US": "Accounting Menu",
+            "si_LK": "Accounting Menu",
+            "ta_IN": "Accounting Menu"
+          },
+          "trigger": "[data-menu-xmlid=\"account.menu_finance_entries\"]",
+          "content": "Open the Accounting menu.",
+          "content_i18n": {
+            "en_US": "Open the Accounting menu.",
+            "si_LK": "Open the Accounting menu.",
+            "ta_IN": "Open the Accounting menu."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 30,
+          "title": "Journal Items",
+          "title_i18n": {
+            "en_US": "Journal Items",
+            "si_LK": "Journal Items",
+            "ta_IN": "Journal Items"
+          },
+          "trigger": "a.dropdown-item.o_dropdown_menu_group_entry:nth-of-type(2)",
+          "content": "Click Journal Items to open the full list of accounting entry lines.",
+          "content_i18n": {
+            "en_US": "Click Journal Items to open the full list of accounting entry lines.",
+            "si_LK": "Click Journal Items to open the full list of accounting entry lines.",
+            "ta_IN": "Click Journal Items to open the full list of accounting entry lines."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 40,
+          "title": "Toggle Search Panel",
+          "title_i18n": {
+            "en_US": "Toggle Search Panel",
+            "si_LK": "Toggle Search Panel",
+            "ta_IN": "Toggle Search Panel"
+          },
+          "trigger": "button.dropdown-toggle.o_searchview_dropdown_toggler",
+          "content": "Toggle Search Panel",
+          "content_i18n": {
+            "en_US": "Toggle Search Panel",
+            "si_LK": "Toggle Search Panel",
+            "ta_IN": "Toggle Search Panel"
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 50,
+          "title": "Payable",
+          "title_i18n": {
+            "en_US": "Payable",
+            "si_LK": "Payable",
+            "ta_IN": "Payable"
+          },
+          "trigger": "span.dropdown-item.o_menu_item:nth-of-type(10)",
+          "content": "Under Filters, click Payable to keep only vendor payable lines.",
+          "content_i18n": {
+            "en_US": "Under Filters, click Payable to keep only vendor payable lines.",
+            "si_LK": "Under Filters, click Payable to keep only vendor payable lines.",
+            "ta_IN": "Under Filters, click Payable to keep only vendor payable lines."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 60,
+          "title": "Partner",
+          "title_i18n": {
+            "en_US": "Partner",
+            "si_LK": "Partner",
+            "ta_IN": "Partner"
+          },
+          "trigger": "div.o_dropdown_container.o_group_by_menu > span.dropdown-item.o_menu_item:nth-of-type(3)",
+          "content": "Under Group By, click Partner to total the figures per vendor.",
+          "content_i18n": {
+            "en_US": "Under Group By, click Partner to total the figures per vendor.",
+            "si_LK": "Under Group By, click Partner to total the figures per vendor.",
+            "ta_IN": "Under Group By, click Partner to total the figures per vendor."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 70,
+          "title": "Credit",
+          "title_i18n": {
+            "en_US": "Credit",
+            "si_LK": "Credit",
+            "ta_IN": "Credit"
+          },
+          "trigger": "th.align-middle.o_column_sortable:nth-of-type(10) > div.d-flex.flex-row-reverse > span.d-block.min-w-0",
+          "content": "Click the Credit column header once. This sorts the vendors by credit, smallest first.",
+          "content_i18n": {
+            "en_US": "Click the Credit column header once. This sorts the vendors by credit, smallest first.",
+            "si_LK": "Click the Credit column header once. This sorts the vendors by credit, smallest first.",
+            "ta_IN": "Click the Credit column header once. This sorts the vendors by credit, smallest first."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 80,
+          "title": "Credit",
+          "title_i18n": {
+            "en_US": "Credit",
+            "si_LK": "Credit",
+            "ta_IN": "Credit"
+          },
+          "trigger": "th.align-middle.o_column_sortable:nth-of-type(10) > div.d-flex.flex-row-reverse > span.d-block.min-w-0",
+          "content": "Click the Credit column header a second time. The arrow flips and the vendors with the highest credit move to the top of the list.",
+          "content_i18n": {
+            "en_US": "Click the Credit column header a second time. The arrow flips and the vendors with the highest credit move to the top of the list.",
+            "si_LK": "Click the Credit column header a second time. The arrow flips and the vendors with the highest credit move to the top of the list.",
+            "ta_IN": "Click the Credit column header a second time. The arrow flips and the vendors with the highest credit move to the top of the list."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        }
+      ]
+    }
+  ]
+}

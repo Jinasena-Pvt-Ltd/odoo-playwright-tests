@@ -1,0 +1,1044 @@
+{
+  "version": 2,
+  "tours": [
+    {
+      "name": "Finance: Print a Cheque for a Vendor Payment ( Bill - Cheque Payment - Print ) - Full Flow",
+      "name_i18n": {
+        "en_US": "Finance: Print a Cheque for a Vendor Payment ( Bill - Cheque Payment - Print ) - Full Flow",
+        "si_LK": "Finance: Print a Cheque for a Vendor Payment ( Bill - Cheque Payment - Print ) - Full Flow",
+        "ta_IN": "Finance: Print a Cheque for a Vendor Payment ( Bill - Cheque Payment - Print ) - Full Flow"
+      },
+      "description": "Set up cheque numbering on the Vendor Payment - Commercial bank journal, create and post a vendor bill, register the payment with the Checks payment method, and print the cheque from the payment.",
+      "description_i18n": {
+        "en_US": "Set up cheque numbering on the Vendor Payment - Commercial bank journal, create and post a vendor bill, register the payment with the Checks payment method, and print the cheque from the payment.",
+        "si_LK": "Set up cheque numbering on the Vendor Payment - Commercial bank journal, create and post a vendor bill, register the payment with the Checks payment method, and print the cheque from the payment.",
+        "ta_IN": "Set up cheque numbering on the Vendor Payment - Commercial bank journal, create and post a vendor bill, register the payment with the Checks payment method, and print the cheque from the payment."
+      },
+      "steps": [
+        {
+          "sequence": 10,
+          "title": "Open hidden menus",
+          "title_i18n": {
+            "en_US": "Open hidden menus",
+            "si_LK": "Open hidden menus",
+            "ta_IN": "Open hidden menus"
+          },
+          "trigger": "[data-hotkey=\"5\"]",
+          "content": "Click the ' + ' button in the Accounting menu bar to reveal the hidden menus, including Configuration.",
+          "content_i18n": {
+            "en_US": "Click the ' + ' button in the Accounting menu bar to reveal the hidden menus, including Configuration.",
+            "si_LK": "Click the ' + ' button in the Accounting menu bar to reveal the hidden menus, including Configuration.",
+            "ta_IN": "Click the ' + ' button in the Accounting menu bar to reveal the hidden menus, including Configuration."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 20,
+          "title": "Journals",
+          "title_i18n": {
+            "en_US": "Journals",
+            "si_LK": "Journals",
+            "ta_IN": "Journals"
+          },
+          "trigger": "[data-menu-xmlid=\"account.menu_action_account_journal_form\"]",
+          "content": "Scroll down to the Configuration section and click Journals. The cheque numbering is set on the bank journal you pay vendors from.",
+          "content_i18n": {
+            "en_US": "Scroll down to the Configuration section and click Journals. The cheque numbering is set on the bank journal you pay vendors from.",
+            "si_LK": "Scroll down to the Configuration section and click Journals. The cheque numbering is set on the bank journal you pay vendors from.",
+            "ta_IN": "Scroll down to the Configuration section and click Journals. The cheque numbering is set on the bank journal you pay vendors from."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 30,
+          "title": "Search the bank journal",
+          "title_i18n": {
+            "en_US": "Search the bank journal",
+            "si_LK": "Search the bank journal",
+            "ta_IN": "Search the bank journal"
+          },
+          "trigger": "input.o_searchview_input.o_input",
+          "content": "Type \"Vendor Payment - Commercial\" in the search box and press Enter to filter the journal list.",
+          "content_i18n": {
+            "en_US": "Type \"Vendor Payment - Commercial\" in the search box and press Enter to filter the journal list.",
+            "si_LK": "Type \"Vendor Payment - Commercial\" in the search box and press Enter to filter the journal list.",
+            "ta_IN": "Type \"Vendor Payment - Commercial\" in the search box and press Enter to filter the journal list."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 40,
+          "title": "Vendor Payment - Commercial",
+          "title_i18n": {
+            "en_US": "Vendor Payment - Commercial",
+            "si_LK": "Vendor Payment - Commercial",
+            "ta_IN": "Vendor Payment - Commercial"
+          },
+          "trigger": "td[name=\"name\"]",
+          "content": "Click the Vendor Payment - Commercial journal to open its configuration form.",
+          "content_i18n": {
+            "en_US": "Click the Vendor Payment - Commercial journal to open its configuration form.",
+            "si_LK": "Click the Vendor Payment - Commercial journal to open its configuration form.",
+            "ta_IN": "Click the Vendor Payment - Commercial journal to open its configuration form."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 50,
+          "title": "Outgoing Payments",
+          "title_i18n": {
+            "en_US": "Outgoing Payments",
+            "si_LK": "Outgoing Payments",
+            "ta_IN": "Outgoing Payments"
+          },
+          "trigger": "a[name=\"page_outgoing_payments\"]",
+          "content": "Open the Outgoing Payments tab. Make sure the payment method \"Checks\" is listed here - it is what makes cheque printing available on payments from this journal.",
+          "content_i18n": {
+            "en_US": "Open the Outgoing Payments tab. Make sure the payment method \"Checks\" is listed here - it is what makes cheque printing available on payments from this journal.",
+            "si_LK": "Open the Outgoing Payments tab. Make sure the payment method \"Checks\" is listed here - it is what makes cheque printing available on payments from this journal.",
+            "ta_IN": "Open the Outgoing Payments tab. Make sure the payment method \"Checks\" is listed here - it is what makes cheque printing available on payments from this journal."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 60,
+          "title": "Checks",
+          "title_i18n": {
+            "en_US": "Checks",
+            "si_LK": "Checks",
+            "ta_IN": "Checks"
+          },
+          "trigger": "tr.o_data_row.o_row_draggable:nth-of-type(2) > td.o_data_cell.cursor-pointer:nth-of-type(3)",
+          "content": "The \"Checks\" line must be present in Outgoing Payments. If it is missing, click Add a line and select Checks.",
+          "content_i18n": {
+            "en_US": "The \"Checks\" line must be present in Outgoing Payments. If it is missing, click Add a line and select Checks.",
+            "si_LK": "The \"Checks\" line must be present in Outgoing Payments. If it is missing, click Add a line and select Checks.",
+            "ta_IN": "The \"Checks\" line must be present in Outgoing Payments. If it is missing, click Add a line and select Checks."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 70,
+          "title": "Manual Numbering",
+          "title_i18n": {
+            "en_US": "Manual Numbering",
+            "si_LK": "Manual Numbering",
+            "ta_IN": "Manual Numbering"
+          },
+          "trigger": "#check_manual_sequencing_0",
+          "content": "Tick Manual Numbering so Odoo assigns a running cheque number to every cheque payment from this journal. (If it is already ticked, leave it on and simply click it once to continue.)",
+          "content_i18n": {
+            "en_US": "Tick Manual Numbering so Odoo assigns a running cheque number to every cheque payment from this journal. (If it is already ticked, leave it on and simply click it once to continue.)",
+            "si_LK": "Tick Manual Numbering so Odoo assigns a running cheque number to every cheque payment from this journal. (If it is already ticked, leave it on and simply click it once to continue.)",
+            "ta_IN": "Tick Manual Numbering so Odoo assigns a running cheque number to every cheque payment from this journal. (If it is already ticked, leave it on and simply click it once to continue.)"
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 80,
+          "title": "Next Cheque Number",
+          "title_i18n": {
+            "en_US": "Next Cheque Number",
+            "si_LK": "Next Cheque Number",
+            "ta_IN": "Next Cheque Number"
+          },
+          "trigger": "#check_next_number_0",
+          "content": "Enter the number printed on the next blank cheque leaf in your cheque book. Odoo will use it for the next cheque and then increase it automatically.",
+          "content_i18n": {
+            "en_US": "Enter the number printed on the next blank cheque leaf in your cheque book. Odoo will use it for the next cheque and then increase it automatically.",
+            "si_LK": "Enter the number printed on the next blank cheque leaf in your cheque book. Odoo will use it for the next cheque and then increase it automatically.",
+            "ta_IN": "Enter the number printed on the next blank cheque leaf in your cheque book. Odoo will use it for the next cheque and then increase it automatically."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 90,
+          "title": "Save journal",
+          "title_i18n": {
+            "en_US": "Save journal",
+            "si_LK": "Save journal",
+            "ta_IN": "Save journal"
+          },
+          "trigger": "[data-hotkey=\"s\"]",
+          "content": "Click the cloud icon to save the journal. Cheque numbering is now configured.",
+          "content_i18n": {
+            "en_US": "Click the cloud icon to save the journal. Cheque numbering is now configured.",
+            "si_LK": "Click the cloud icon to save the journal. Cheque numbering is now configured.",
+            "ta_IN": "Click the cloud icon to save the journal. Cheque numbering is now configured."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 100,
+          "title": "Vendors",
+          "title_i18n": {
+            "en_US": "Vendors",
+            "si_LK": "Vendors",
+            "ta_IN": "Vendors"
+          },
+          "trigger": "[data-hotkey=\"3\"]",
+          "content": "Now create the vendor bill. Click the Vendors menu.",
+          "content_i18n": {
+            "en_US": "Now create the vendor bill. Click the Vendors menu.",
+            "si_LK": "Now create the vendor bill. Click the Vendors menu.",
+            "ta_IN": "Now create the vendor bill. Click the Vendors menu."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 110,
+          "title": "Bills",
+          "title_i18n": {
+            "en_US": "Bills",
+            "si_LK": "Bills",
+            "ta_IN": "Bills"
+          },
+          "trigger": "div.o-dropdown--menu.dropdown-menu > a.dropdown-item:nth-of-type(1)",
+          "content": "Click Bills to open the list of vendor bills.",
+          "content_i18n": {
+            "en_US": "Click Bills to open the list of vendor bills.",
+            "si_LK": "Click Bills to open the list of vendor bills.",
+            "ta_IN": "Click Bills to open the list of vendor bills."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 120,
+          "title": "New",
+          "title_i18n": {
+            "en_US": "New",
+            "si_LK": "New",
+            "ta_IN": "New"
+          },
+          "trigger": "div.btn-group.d-xl-none > button.btn.btn-primary:nth-of-type(1)",
+          "content": "Click New to start a new vendor bill.",
+          "content_i18n": {
+            "en_US": "Click New to start a new vendor bill.",
+            "si_LK": "Click New to start a new vendor bill.",
+            "ta_IN": "Click New to start a new vendor bill."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 130,
+          "title": "Select the vendor",
+          "title_i18n": {
+            "en_US": "Select the vendor",
+            "si_LK": "Select the vendor",
+            "ta_IN": "Select the vendor"
+          },
+          "trigger": "div.o_field_widget.o_field_res_partner_many2one > div.o_field_many2one_selection > div.o_input_dropdown > div.o-autocomplete.dropdown > input.o-autocomplete--input.o_input",
+          "content": "Type the vendor name and pick it from the list. For this exercise use MARS ELECTRIC.",
+          "content_i18n": {
+            "en_US": "Type the vendor name and pick it from the list. For this exercise use MARS ELECTRIC.",
+            "si_LK": "Type the vendor name and pick it from the list. For this exercise use MARS ELECTRIC.",
+            "ta_IN": "Type the vendor name and pick it from the list. For this exercise use MARS ELECTRIC."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 140,
+          "title": "Bill Date",
+          "title_i18n": {
+            "en_US": "Bill Date",
+            "si_LK": "Bill Date",
+            "ta_IN": "Bill Date"
+          },
+          "trigger": "#invoice_date_0",
+          "content": "Enter the date on the vendor's invoice. The due date is calculated from it.",
+          "content_i18n": {
+            "en_US": "Enter the date on the vendor's invoice. The due date is calculated from it.",
+            "si_LK": "Enter the date on the vendor's invoice. The due date is calculated from it.",
+            "ta_IN": "Enter the date on the vendor's invoice. The due date is calculated from it."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 150,
+          "title": "Journal",
+          "title_i18n": {
+            "en_US": "Journal",
+            "si_LK": "Journal",
+            "ta_IN": "Journal"
+          },
+          "trigger": "#journal_id_1",
+          "content": "Click the Journal and choose Vendor Bills, so the bill is booked in the normal purchase journal.",
+          "content_i18n": {
+            "en_US": "Click the Journal and choose Vendor Bills, so the bill is booked in the normal purchase journal.",
+            "si_LK": "Click the Journal and choose Vendor Bills, so the bill is booked in the normal purchase journal.",
+            "ta_IN": "Click the Journal and choose Vendor Bills, so the bill is booked in the normal purchase journal."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 160,
+          "title": "Add a line",
+          "title_i18n": {
+            "en_US": "Add a line",
+            "si_LK": "Add a line",
+            "ta_IN": "Add a line"
+          },
+          "trigger": "td.o_field_x2many_list_row_add > a:nth-of-type(1)",
+          "content": "In the Invoice Lines tab click Add a line to enter what you are being billed for.",
+          "content_i18n": {
+            "en_US": "In the Invoice Lines tab click Add a line to enter what you are being billed for.",
+            "si_LK": "In the Invoice Lines tab click Add a line to enter what you are being billed for.",
+            "ta_IN": "In the Invoice Lines tab click Add a line to enter what you are being billed for."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 170,
+          "title": "Line description",
+          "title_i18n": {
+            "en_US": "Line description",
+            "si_LK": "Line description",
+            "ta_IN": "Line description"
+          },
+          "trigger": "textarea.o_input",
+          "content": "Type a description for the line, for example: Electrical spare parts - training bill.",
+          "content_i18n": {
+            "en_US": "Type a description for the line, for example: Electrical spare parts - training bill.",
+            "si_LK": "Type a description for the line, for example: Electrical spare parts - training bill.",
+            "ta_IN": "Type a description for the line, for example: Electrical spare parts - training bill."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 180,
+          "title": "Unit price",
+          "title_i18n": {
+            "en_US": "Unit price",
+            "si_LK": "Unit price",
+            "ta_IN": "Unit price"
+          },
+          "trigger": "td[name=\"price_unit\"]",
+          "content": "Click the Price cell and enter the amount of the bill, for example 25,000.",
+          "content_i18n": {
+            "en_US": "Click the Price cell and enter the amount of the bill, for example 25,000.",
+            "si_LK": "Click the Price cell and enter the amount of the bill, for example 25,000.",
+            "ta_IN": "Click the Price cell and enter the amount of the bill, for example 25,000."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 190,
+          "title": "Confirm",
+          "title_i18n": {
+            "en_US": "Confirm",
+            "si_LK": "Confirm",
+            "ta_IN": "Confirm"
+          },
+          "trigger": "[data-hotkey=\"q\"]",
+          "content": "Click Confirm to post the bill. It moves from Draft to Posted and becomes payable.",
+          "content_i18n": {
+            "en_US": "Click Confirm to post the bill. It moves from Draft to Posted and becomes payable.",
+            "si_LK": "Click Confirm to post the bill. It moves from Draft to Posted and becomes payable.",
+            "ta_IN": "Click Confirm to post the bill. It moves from Draft to Posted and becomes payable."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 200,
+          "title": "Register Payment",
+          "title_i18n": {
+            "en_US": "Register Payment",
+            "si_LK": "Register Payment",
+            "ta_IN": "Register Payment"
+          },
+          "trigger": "[data-hotkey=\"g\"]",
+          "content": "Click Register Payment to open the payment wizard for this bill.",
+          "content_i18n": {
+            "en_US": "Click Register Payment to open the payment wizard for this bill.",
+            "si_LK": "Click Register Payment to open the payment wizard for this bill.",
+            "ta_IN": "Click Register Payment to open the payment wizard for this bill."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 210,
+          "title": "Payment journal",
+          "title_i18n": {
+            "en_US": "Payment journal",
+            "si_LK": "Payment journal",
+            "ta_IN": "Payment journal"
+          },
+          "trigger": "#journal_id_0",
+          "content": "Choose the bank journal the cheque is drawn on - Vendor Payment - Commercial.",
+          "content_i18n": {
+            "en_US": "Choose the bank journal the cheque is drawn on - Vendor Payment - Commercial.",
+            "si_LK": "Choose the bank journal the cheque is drawn on - Vendor Payment - Commercial.",
+            "ta_IN": "Choose the bank journal the cheque is drawn on - Vendor Payment - Commercial."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 220,
+          "title": "Payment Method - Checks",
+          "title_i18n": {
+            "en_US": "Payment Method - Checks",
+            "si_LK": "Payment Method - Checks",
+            "ta_IN": "Payment Method - Checks"
+          },
+          "trigger": "#payment_method_line_id_0",
+          "content": "Change the Payment Method from Manual to Checks. This is the step that turns the payment into a cheque and enables cheque printing.",
+          "content_i18n": {
+            "en_US": "Change the Payment Method from Manual to Checks. This is the step that turns the payment into a cheque and enables cheque printing.",
+            "si_LK": "Change the Payment Method from Manual to Checks. This is the step that turns the payment into a cheque and enables cheque printing.",
+            "ta_IN": "Change the Payment Method from Manual to Checks. This is the step that turns the payment into a cheque and enables cheque printing."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 230,
+          "title": "Create Payment",
+          "title_i18n": {
+            "en_US": "Create Payment",
+            "si_LK": "Create Payment",
+            "ta_IN": "Create Payment"
+          },
+          "trigger": "[data-hotkey=\"q\"]",
+          "content": "Check the amount and payment date, then click Create Payment. The bill is now marked Paid and a cheque payment is created.",
+          "content_i18n": {
+            "en_US": "Check the amount and payment date, then click Create Payment. The bill is now marked Paid and a cheque payment is created.",
+            "si_LK": "Check the amount and payment date, then click Create Payment. The bill is now marked Paid and a cheque payment is created.",
+            "ta_IN": "Check the amount and payment date, then click Create Payment. The bill is now marked Paid and a cheque payment is created."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 240,
+          "title": "Vendors",
+          "title_i18n": {
+            "en_US": "Vendors",
+            "si_LK": "Vendors",
+            "ta_IN": "Vendors"
+          },
+          "trigger": "[data-hotkey=\"3\"]",
+          "content": "The cheque is printed from the payment record. Open the Vendors menu again.",
+          "content_i18n": {
+            "en_US": "The cheque is printed from the payment record. Open the Vendors menu again.",
+            "si_LK": "The cheque is printed from the payment record. Open the Vendors menu again.",
+            "ta_IN": "The cheque is printed from the payment record. Open the Vendors menu again."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 250,
+          "title": "Payments",
+          "title_i18n": {
+            "en_US": "Payments",
+            "si_LK": "Payments",
+            "ta_IN": "Payments"
+          },
+          "trigger": "div.o-dropdown--menu.dropdown-menu > a.dropdown-item:nth-of-type(3)",
+          "content": "Click Payments to open the list of vendor payments.",
+          "content_i18n": {
+            "en_US": "Click Payments to open the list of vendor payments.",
+            "si_LK": "Click Payments to open the list of vendor payments.",
+            "ta_IN": "Click Payments to open the list of vendor payments."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 260,
+          "title": "Open the cheque payment",
+          "title_i18n": {
+            "en_US": "Open the cheque payment",
+            "si_LK": "Open the cheque payment",
+            "ta_IN": "Open the cheque payment"
+          },
+          "trigger": "tr.o_data_row:nth-of-type(1) > td.o_data_cell.cursor-pointer:nth-of-type(4)",
+          "content": "The newest payment is at the top of the list - Payment Method Checks. Click it to open the payment.",
+          "content_i18n": {
+            "en_US": "The newest payment is at the top of the list - Payment Method Checks. Click it to open the payment.",
+            "si_LK": "The newest payment is at the top of the list - Payment Method Checks. Click it to open the payment.",
+            "ta_IN": "The newest payment is at the top of the list - Payment Method Checks. Click it to open the payment."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 270,
+          "title": "Check Number assigned",
+          "title_i18n": {
+            "en_US": "Check Number assigned",
+            "si_LK": "Check Number assigned",
+            "ta_IN": "Check Number assigned"
+          },
+          "trigger": "div[name=\"check_number\"]",
+          "content": "Odoo has taken the next cheque number from the journal sequence and stamped it on this payment. Amount in Words is also filled in for the cheque.",
+          "content_i18n": {
+            "en_US": "Odoo has taken the next cheque number from the journal sequence and stamped it on this payment. Amount in Words is also filled in for the cheque.",
+            "si_LK": "Odoo has taken the next cheque number from the journal sequence and stamped it on this payment. Amount in Words is also filled in for the cheque.",
+            "ta_IN": "Odoo has taken the next cheque number from the journal sequence and stamped it on this payment. Amount in Words is also filled in for the cheque."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 280,
+          "title": "Cheque Number to print",
+          "title_i18n": {
+            "en_US": "Cheque Number to print",
+            "si_LK": "Cheque Number to print",
+            "ta_IN": "Cheque Number to print"
+          },
+          "trigger": "#cheque_number_0",
+          "content": "Enter the number of the physical cheque leaf you are putting into the printer. This is the number that appears on the printed cheque.",
+          "content_i18n": {
+            "en_US": "Enter the number of the physical cheque leaf you are putting into the printer. This is the number that appears on the printed cheque.",
+            "si_LK": "Enter the number of the physical cheque leaf you are putting into the printer. This is the number that appears on the printed cheque.",
+            "ta_IN": "Enter the number of the physical cheque leaf you are putting into the printer. This is the number that appears on the printed cheque."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 290,
+          "title": "Print Cheque",
+          "title_i18n": {
+            "en_US": "Print Cheque",
+            "si_LK": "Print Cheque",
+            "ta_IN": "Print Cheque"
+          },
+          "trigger": "button[name=\"3428\"]",
+          "content": "Click Print Cheque. (The separate Print Check button is the standard Odoo one and only marks the payment as sent - use Print Cheque for the Jinasena cheque layout.)",
+          "content_i18n": {
+            "en_US": "Click Print Cheque. (The separate Print Check button is the standard Odoo one and only marks the payment as sent - use Print Cheque for the Jinasena cheque layout.)",
+            "si_LK": "Click Print Cheque. (The separate Print Check button is the standard Odoo one and only marks the payment as sent - use Print Cheque for the Jinasena cheque layout.)",
+            "ta_IN": "Click Print Cheque. (The separate Print Check button is the standard Odoo one and only marks the payment as sent - use Print Cheque for the Jinasena cheque layout.)"
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 300,
+          "title": "Cheque Format",
+          "title_i18n": {
+            "en_US": "Cheque Format",
+            "si_LK": "Cheque Format",
+            "ta_IN": "Cheque Format"
+          },
+          "trigger": "#cheque_format_id_0",
+          "content": "Select the cheque format that matches the bank's pre-printed cheque leaf, then continue.",
+          "content_i18n": {
+            "en_US": "Select the cheque format that matches the bank's pre-printed cheque leaf, then continue.",
+            "si_LK": "Select the cheque format that matches the bank's pre-printed cheque leaf, then continue.",
+            "ta_IN": "Select the cheque format that matches the bank's pre-printed cheque leaf, then continue."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 310,
+          "title": "Print",
+          "title_i18n": {
+            "en_US": "Print",
+            "si_LK": "Print",
+            "ta_IN": "Print"
+          },
+          "trigger": "button[name=\"action_call_report\"]",
+          "content": "Click Print. Odoo generates the cheque PDF - load the cheque leaf in the printer and print it. The vendor payment is now complete.",
+          "content_i18n": {
+            "en_US": "Click Print. Odoo generates the cheque PDF - load the cheque leaf in the printer and print it. The vendor payment is now complete.",
+            "si_LK": "Click Print. Odoo generates the cheque PDF - load the cheque leaf in the printer and print it. The vendor payment is now complete.",
+            "ta_IN": "Click Print. Odoo generates the cheque PDF - load the cheque leaf in the printer and print it. The vendor payment is now complete."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        }
+      ]
+    }
+  ]
+}

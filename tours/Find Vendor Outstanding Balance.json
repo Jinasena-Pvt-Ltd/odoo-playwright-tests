@@ -1,0 +1,615 @@
+{
+  "version": 2,
+  "tours": [
+    {
+      "name": "Finance: Find Vendor Outstanding Balance (Engineer - Production)",
+      "name_i18n": {
+        "en_US": "Finance: Find Vendor Outstanding Balance (Engineer - Production)",
+        "si_LK": "Finance: Find Vendor Outstanding Balance (Engineer - Production)",
+        "ta_IN": "Finance: Find Vendor Outstanding Balance (Engineer - Production)"
+      },
+      "description": "Locate a vendor's outstanding balance in four ways: the Due smart button on the vendor master record, the Partner Ledger, the Aged Payable report, and the vendor bill list. Worked example uses the vendor Engineer - Production.",
+      "description_i18n": {
+        "en_US": "Locate a vendor's outstanding balance in four ways: the Due smart button on the vendor master record, the Partner Ledger, the Aged Payable report, and the vendor bill list. Worked example uses the vendor Engineer - Production.",
+        "si_LK": "Locate a vendor's outstanding balance in four ways: the Due smart button on the vendor master record, the Partner Ledger, the Aged Payable report, and the vendor bill list. Worked example uses the vendor Engineer - Production.",
+        "ta_IN": "Locate a vendor's outstanding balance in four ways: the Due smart button on the vendor master record, the Partner Ledger, the Aged Payable report, and the vendor bill list. Worked example uses the vendor Engineer - Production."
+      },
+      "steps": [
+        {
+          "sequence": 10,
+          "title": "Open Accounting app",
+          "title_i18n": {
+            "en_US": "Open Accounting app",
+            "si_LK": "Open Accounting app",
+            "ta_IN": "Open Accounting app"
+          },
+          "trigger": "[data-menu-xmlid=\"account_accountant.menu_accounting\"]",
+          "content": "Click the Accounting app. Every vendor outstanding balance is found from here.",
+          "content_i18n": {
+            "en_US": "Click the Accounting app. Every vendor outstanding balance is found from here.",
+            "si_LK": "Click the Accounting app. Every vendor outstanding balance is found from here.",
+            "ta_IN": "Click the Accounting app. Every vendor outstanding balance is found from here."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 20,
+          "title": "Open the Vendors menu",
+          "title_i18n": {
+            "en_US": "Open the Vendors menu",
+            "si_LK": "Open the Vendors menu",
+            "ta_IN": "Open the Vendors menu"
+          },
+          "trigger": "[data-hotkey=\"3\"]",
+          "content": "Open the Vendors menu. This holds the vendor master, bills and payments.",
+          "content_i18n": {
+            "en_US": "Open the Vendors menu. This holds the vendor master, bills and payments.",
+            "si_LK": "Open the Vendors menu. This holds the vendor master, bills and payments.",
+            "ta_IN": "Open the Vendors menu. This holds the vendor master, bills and payments."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 30,
+          "title": "Open Vendors master list",
+          "title_i18n": {
+            "en_US": "Open Vendors master list",
+            "si_LK": "Open Vendors master list",
+            "ta_IN": "Open Vendors master list"
+          },
+          "trigger": "a.dropdown-item:nth-of-type(6)",
+          "content": "Click Vendors. This is the vendor master where every supplier record is kept.",
+          "content_i18n": {
+            "en_US": "Click Vendors. This is the vendor master where every supplier record is kept.",
+            "si_LK": "Click Vendors. This is the vendor master where every supplier record is kept.",
+            "ta_IN": "Click Vendors. This is the vendor master where every supplier record is kept."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 40,
+          "title": "Search the vendor",
+          "title_i18n": {
+            "en_US": "Search the vendor",
+            "si_LK": "Search the vendor",
+            "ta_IN": "Search the vendor"
+          },
+          "trigger": "input.o_searchview_input.o_input",
+          "content": "Type Engineer - Production in the search box and press Enter to filter the vendor master down to this vendor.",
+          "content_i18n": {
+            "en_US": "Type Engineer - Production in the search box and press Enter to filter the vendor master down to this vendor.",
+            "si_LK": "Type Engineer - Production in the search box and press Enter to filter the vendor master down to this vendor.",
+            "ta_IN": "Type Engineer - Production in the search box and press Enter to filter the vendor master down to this vendor."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "required",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "Please type the vendor name to continue.",
+          "validation_message_i18n": {
+            "en_US": "Please type the vendor name to continue.",
+            "si_LK": "Please type the vendor name to continue.",
+            "ta_IN": "Please type the vendor name to continue."
+          }
+        },
+        {
+          "sequence": 50,
+          "title": "Open the vendor record",
+          "title_i18n": {
+            "en_US": "Open the vendor record",
+            "si_LK": "Open the vendor record",
+            "ta_IN": "Open the vendor record"
+          },
+          "trigger": "strong.o_kanban_record_title.oe_partner_heading > span",
+          "content": "Click the Engineer - Production card to open the vendor master record.",
+          "content_i18n": {
+            "en_US": "Click the Engineer - Production card to open the vendor master record.",
+            "si_LK": "Click the Engineer - Production card to open the vendor master record.",
+            "ta_IN": "Click the Engineer - Production card to open the vendor master record."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 60,
+          "title": "Open the More smart buttons",
+          "title_i18n": {
+            "en_US": "Open the More smart buttons",
+            "si_LK": "Open the More smart buttons",
+            "ta_IN": "Open the More smart buttons"
+          },
+          "trigger": "button.dropdown-toggle.o_button_more",
+          "content": "Click More. The accounting smart buttons - Due, Invoiced and Partner Ledger - are grouped here.",
+          "content_i18n": {
+            "en_US": "Click More. The accounting smart buttons - Due, Invoiced and Partner Ledger - are grouped here.",
+            "si_LK": "Click More. The accounting smart buttons - Due, Invoiced and Partner Ledger - are grouped here.",
+            "ta_IN": "Click More. The accounting smart buttons - Due, Invoiced and Partner Ledger - are grouped here."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 70,
+          "title": "Read the Due amount",
+          "title_i18n": {
+            "en_US": "Read the Due amount",
+            "si_LK": "Read the Due amount",
+            "ta_IN": "Read the Due amount"
+          },
+          "trigger": "button[name=\"open_action_followup\"]",
+          "content": "The Due smart button shows the vendor's outstanding balance straight from the master record. Read the figure here, then click it to open the follow-up detail.",
+          "content_i18n": {
+            "en_US": "The Due smart button shows the vendor's outstanding balance straight from the master record. Read the figure here, then click it to open the follow-up detail.",
+            "si_LK": "The Due smart button shows the vendor's outstanding balance straight from the master record. Read the figure here, then click it to open the follow-up detail.",
+            "ta_IN": "The Due smart button shows the vendor's outstanding balance straight from the master record. Read the figure here, then click it to open the follow-up detail."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 80,
+          "title": "Back to the vendor record",
+          "title_i18n": {
+            "en_US": "Back to the vendor record",
+            "si_LK": "Back to the vendor record",
+            "ta_IN": "Back to the vendor record"
+          },
+          "trigger": "li.o_back_button a",
+          "content": "The follow-up screen lists the open items and Total Due. Click the breadcrumb to go back to the vendor record.",
+          "content_i18n": {
+            "en_US": "The follow-up screen lists the open items and Total Due. Click the breadcrumb to go back to the vendor record.",
+            "si_LK": "The follow-up screen lists the open items and Total Due. Click the breadcrumb to go back to the vendor record.",
+            "ta_IN": "The follow-up screen lists the open items and Total Due. Click the breadcrumb to go back to the vendor record."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 90,
+          "title": "Open More again",
+          "title_i18n": {
+            "en_US": "Open More again",
+            "si_LK": "Open More again",
+            "ta_IN": "Open More again"
+          },
+          "trigger": "button.dropdown-toggle.o_button_more",
+          "content": "Open the More smart buttons again to reach the Partner Ledger.",
+          "content_i18n": {
+            "en_US": "Open the More smart buttons again to reach the Partner Ledger.",
+            "si_LK": "Open the More smart buttons again to reach the Partner Ledger.",
+            "ta_IN": "Open the More smart buttons again to reach the Partner Ledger."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 100,
+          "title": "Open the Partner Ledger",
+          "title_i18n": {
+            "en_US": "Open the Partner Ledger",
+            "si_LK": "Open the Partner Ledger",
+            "ta_IN": "Open the Partner Ledger"
+          },
+          "trigger": "#partner_ledger_button",
+          "content": "Click Partner Ledger to see every posted entry for this vendor and the running outstanding balance.",
+          "content_i18n": {
+            "en_US": "Click Partner Ledger to see every posted entry for this vendor and the running outstanding balance.",
+            "si_LK": "Click Partner Ledger to see every posted entry for this vendor and the running outstanding balance.",
+            "ta_IN": "Click Partner Ledger to see every posted entry for this vendor and the running outstanding balance."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 110,
+          "title": "Read the Partner Ledger total",
+          "title_i18n": {
+            "en_US": "Read the Partner Ledger total",
+            "si_LK": "Read the Partner Ledger total",
+            "ta_IN": "Read the Partner Ledger total"
+          },
+          "trigger": "td.o_list_number:nth-of-type(9) > span",
+          "content": "The list is filtered to Partner = Engineer - Production, Posted, Payable or Receivable. The Debit and Credit totals on this row are the vendor's outstanding balance; the difference between them is what is still open.",
+          "content_i18n": {
+            "en_US": "The list is filtered to Partner = Engineer - Production, Posted, Payable or Receivable. The Debit and Credit totals on this row are the vendor's outstanding balance; the difference between them is what is still open.",
+            "si_LK": "The list is filtered to Partner = Engineer - Production, Posted, Payable or Receivable. The Debit and Credit totals on this row are the vendor's outstanding balance; the difference between them is what is still open.",
+            "ta_IN": "The list is filtered to Partner = Engineer - Production, Posted, Payable or Receivable. The Debit and Credit totals on this row are the vendor's outstanding balance; the difference between them is what is still open."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 120,
+          "title": "Open the Reporting menu",
+          "title_i18n": {
+            "en_US": "Open the Reporting menu",
+            "si_LK": "Open the Reporting menu",
+            "ta_IN": "Open the Reporting menu"
+          },
+          "trigger": "[data-menu-xmlid=\"account.menu_finance_reports\"]",
+          "content": "Click Reporting to reach the Aged Payable report, the standard way to see what is outstanding to a vendor by age.",
+          "content_i18n": {
+            "en_US": "Click Reporting to reach the Aged Payable report, the standard way to see what is outstanding to a vendor by age.",
+            "si_LK": "Click Reporting to reach the Aged Payable report, the standard way to see what is outstanding to a vendor by age.",
+            "ta_IN": "Click Reporting to reach the Aged Payable report, the standard way to see what is outstanding to a vendor by age."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 130,
+          "title": "Open Aged Payable",
+          "title_i18n": {
+            "en_US": "Open Aged Payable",
+            "si_LK": "Open Aged Payable",
+            "ta_IN": "Open Aged Payable"
+          },
+          "trigger": "[data-menu-xmlid=\"account_reports.menu_action_account_report_aged_payable\"]",
+          "content": "Under Partner Reports click Aged Payable. It lists every vendor with the amount outstanding split into ageing buckets.",
+          "content_i18n": {
+            "en_US": "Under Partner Reports click Aged Payable. It lists every vendor with the amount outstanding split into ageing buckets.",
+            "si_LK": "Under Partner Reports click Aged Payable. It lists every vendor with the amount outstanding split into ageing buckets.",
+            "ta_IN": "Under Partner Reports click Aged Payable. It lists every vendor with the amount outstanding split into ageing buckets."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 140,
+          "title": "Read the vendor row",
+          "title_i18n": {
+            "en_US": "Read the vendor row",
+            "si_LK": "Read the vendor row",
+            "ta_IN": "Read the vendor row"
+          },
+          "trigger": "tr.line_level_2:not(.total) > td.line_name",
+          "content": "Find the Engineer - Production row and read across to the Total column - that figure is the outstanding payable as at the report date. A negative figure means we are in debit with the vendor (a payment or advance not yet matched to a bill). Click the row name to unfold the individual bills and payments behind it.",
+          "content_i18n": {
+            "en_US": "Find the Engineer - Production row and read across to the Total column - that figure is the outstanding payable as at the report date. A negative figure means we are in debit with the vendor (a payment or advance not yet matched to a bill). Click the row name to unfold the individual bills and payments behind it.",
+            "si_LK": "Find the Engineer - Production row and read across to the Total column - that figure is the outstanding payable as at the report date. A negative figure means we are in debit with the vendor (a payment or advance not yet matched to a bill). Click the row name to unfold the individual bills and payments behind it.",
+            "ta_IN": "Find the Engineer - Production row and read across to the Total column - that figure is the outstanding payable as at the report date. A negative figure means we are in debit with the vendor (a payment or advance not yet matched to a bill). Click the row name to unfold the individual bills and payments behind it."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 150,
+          "title": "Back to the Vendors menu",
+          "title_i18n": {
+            "en_US": "Back to the Vendors menu",
+            "si_LK": "Back to the Vendors menu",
+            "ta_IN": "Back to the Vendors menu"
+          },
+          "trigger": "[data-hotkey=\"3\"]",
+          "content": "Open the Vendors menu again - this time to check the bills behind the balance.",
+          "content_i18n": {
+            "en_US": "Open the Vendors menu again - this time to check the bills behind the balance.",
+            "si_LK": "Open the Vendors menu again - this time to check the bills behind the balance.",
+            "ta_IN": "Open the Vendors menu again - this time to check the bills behind the balance."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 160,
+          "title": "Open Vendor Bills",
+          "title_i18n": {
+            "en_US": "Open Vendor Bills",
+            "si_LK": "Open Vendor Bills",
+            "ta_IN": "Open Vendor Bills"
+          },
+          "trigger": "div.o-dropdown--menu.dropdown-menu > a.dropdown-item:nth-of-type(1)",
+          "content": "Click Bills to open the vendor bill list, where the Amount Due column shows what is still unpaid per bill.",
+          "content_i18n": {
+            "en_US": "Click Bills to open the vendor bill list, where the Amount Due column shows what is still unpaid per bill.",
+            "si_LK": "Click Bills to open the vendor bill list, where the Amount Due column shows what is still unpaid per bill.",
+            "ta_IN": "Click Bills to open the vendor bill list, where the Amount Due column shows what is still unpaid per bill."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 170,
+          "title": "Filter bills by vendor",
+          "title_i18n": {
+            "en_US": "Filter bills by vendor",
+            "si_LK": "Filter bills by vendor",
+            "ta_IN": "Filter bills by vendor"
+          },
+          "trigger": "input.o_searchview_input.o_input",
+          "content": "Type Engineer - Production and press Enter to keep only this vendor's bills.",
+          "content_i18n": {
+            "en_US": "Type Engineer - Production and press Enter to keep only this vendor's bills.",
+            "si_LK": "Type Engineer - Production and press Enter to keep only this vendor's bills.",
+            "ta_IN": "Type Engineer - Production and press Enter to keep only this vendor's bills."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 180,
+          "title": "Check the bills behind the balance",
+          "title_i18n": {
+            "en_US": "Check the bills behind the balance",
+            "si_LK": "Check the bills behind the balance",
+            "ta_IN": "Check the bills behind the balance"
+          },
+          "trigger": "th.align-middle.o_column_sortable:nth-of-type(14) > div.d-flex > span.d-block.min-w-0",
+          "content": "The Payment and Status columns tell you which bills are still open; Total is the amount due on each. If no bills appear, the vendor has no open bills and the balance seen earlier comes from an unmatched payment or advance.",
+          "content_i18n": {
+            "en_US": "The Payment and Status columns tell you which bills are still open; Total is the amount due on each. If no bills appear, the vendor has no open bills and the balance seen earlier comes from an unmatched payment or advance.",
+            "si_LK": "The Payment and Status columns tell you which bills are still open; Total is the amount due on each. If no bills appear, the vendor has no open bills and the balance seen earlier comes from an unmatched payment or advance.",
+            "ta_IN": "The Payment and Status columns tell you which bills are still open; Total is the amount due on each. If no bills appear, the vendor has no open bills and the balance seen earlier comes from an unmatched payment or advance."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        }
+      ]
+    }
+  ]
+}

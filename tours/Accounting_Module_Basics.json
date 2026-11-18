@@ -1,0 +1,648 @@
+{
+  "version": 2,
+  "tours": [
+    {
+      "name": "Finance: Accounting Module Basics",
+      "name_i18n": {
+        "en_US": "Finance: Accounting Module Basics",
+        "si_LK": "Finance: Accounting Module Basics",
+        "ta_IN": "Finance: Accounting Module Basics"
+      },
+      "description": "A beginner walkthrough of the Accounting module for new finance users: opening Finance settings, navigating Accounts Receivable (Customer Invoices & Payments), Accounts Payable (Vendor Bills & Payments), Bank and Cash journals, setting up the Chart of Accounts (General Ledger), viewing the Trial Balance, and posting Journal Entries.",
+      "description_i18n": {
+        "en_US": "A beginner walkthrough of the Accounting module for new finance users: opening Finance settings, navigating Accounts Receivable (Customer Invoices & Payments), Accounts Payable (Vendor Bills & Payments), Bank and Cash journals, setting up the Chart of Accounts (General Ledger), viewing the Trial Balance, and posting Journal Entries.",
+        "si_LK": "A beginner walkthrough of the Accounting module for new finance users: opening Finance settings, navigating Accounts Receivable (Customer Invoices & Payments), Accounts Payable (Vendor Bills & Payments), Bank and Cash journals, setting up the Chart of Accounts (General Ledger), viewing the Trial Balance, and posting Journal Entries.",
+        "ta_IN": "A beginner walkthrough of the Accounting module for new finance users: opening Finance settings, navigating Accounts Receivable (Customer Invoices & Payments), Accounts Payable (Vendor Bills & Payments), Bank and Cash journals, setting up the Chart of Accounts (General Ledger), viewing the Trial Balance, and posting Journal Entries."
+      },
+      "steps": [
+        {
+          "sequence": 10,
+          "title": "Open the Accounting Module",
+          "title_i18n": {
+            "en_US": "Open the Accounting Module",
+            "si_LK": "Open the Accounting Module",
+            "ta_IN": "Open the Accounting Module"
+          },
+          "trigger": "[data-menu-xmlid=\"account_accountant.menu_accounting\"]",
+          "content": "Click here to open the Accounting app. This is where you manage all finance operations: customer invoices (AR), vendor bills (AP), bank transactions, the general ledger and financial reports.",
+          "content_i18n": {
+            "en_US": "Click here to open the Accounting app. This is where you manage all finance operations: customer invoices (AR), vendor bills (AP), bank transactions, the general ledger and financial reports.",
+            "si_LK": "Click here to open the Accounting app. This is where you manage all finance operations: customer invoices (AR), vendor bills (AP), bank transactions, the general ledger and financial reports.",
+            "ta_IN": "Click here to open the Accounting app. This is where you manage all finance operations: customer invoices (AR), vendor bills (AP), bank transactions, the general ledger and financial reports."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 20,
+          "title": "Open Configuration menu",
+          "title_i18n": {
+            "en_US": "Open Configuration menu",
+            "si_LK": "Open Configuration menu",
+            "ta_IN": "Open Configuration menu"
+          },
+          "trigger": ".o_menu_sections [data-menu-xmlid=\"account.menu_finance_configuration\"]:not(.d-none), .o_menu_sections_more button",
+          "content": "Click Configuration in the top menu to open it — Settings lives inside this menu.",
+          "content_i18n": {
+            "en_US": "Click Configuration in the top menu to open it — Settings lives inside this menu.",
+            "si_LK": "Click Configuration in the top menu to open it — Settings lives inside this menu.",
+            "ta_IN": "Click Configuration in the top menu to open it — Settings lives inside this menu."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 30,
+          "title": "Settings",
+          "title_i18n": {
+            "en_US": "Settings",
+            "si_LK": "Settings",
+            "ta_IN": "Settings"
+          },
+          "trigger": "[data-menu-xmlid=\"account.menu_account_config\"]",
+          "content": "Go to Configuration > Settings. This is where the Finance module is set up: fiscal localization, default taxes, currency, invoicing and payment terms, and other company-wide accounting preferences.",
+          "content_i18n": {
+            "en_US": "Go to Configuration > Settings. This is where the Finance module is set up: fiscal localization, default taxes, currency, invoicing and payment terms, and other company-wide accounting preferences.",
+            "si_LK": "Go to Configuration > Settings. This is where the Finance module is set up: fiscal localization, default taxes, currency, invoicing and payment terms, and other company-wide accounting preferences.",
+            "ta_IN": "Go to Configuration > Settings. This is where the Finance module is set up: fiscal localization, default taxes, currency, invoicing and payment terms, and other company-wide accounting preferences."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 40,
+          "title": "Open Customers menu",
+          "title_i18n": {
+            "en_US": "Open Customers menu",
+            "si_LK": "Open Customers menu",
+            "ta_IN": "Open Customers menu"
+          },
+          "trigger": ".o_menu_sections [data-hotkey=\"2\"]",
+          "content": "Click Customers in the top menu to open it — Invoices lives inside this menu.",
+          "content_i18n": {
+            "en_US": "Click Customers in the top menu to open it — Invoices lives inside this menu.",
+            "si_LK": "Click Customers in the top menu to open it — Invoices lives inside this menu.",
+            "ta_IN": "Click Customers in the top menu to open it — Invoices lives inside this menu."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 50,
+          "title": "Invoices",
+          "title_i18n": {
+            "en_US": "Invoices",
+            "si_LK": "Invoices",
+            "ta_IN": "Invoices"
+          },
+          "trigger": "a[data-section=\"1190\"]",
+          "content": "Customers > Invoices is the Accounts Receivable (AR) area. Here you create and manage customer invoices, track what customers owe you, and register incoming payments.",
+          "content_i18n": {
+            "en_US": "Customers > Invoices is the Accounts Receivable (AR) area. Here you create and manage customer invoices, track what customers owe you, and register incoming payments.",
+            "si_LK": "Customers > Invoices is the Accounts Receivable (AR) area. Here you create and manage customer invoices, track what customers owe you, and register incoming payments.",
+            "ta_IN": "Customers > Invoices is the Accounts Receivable (AR) area. Here you create and manage customer invoices, track what customers owe you, and register incoming payments."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 60,
+          "title": "Open Vendors menu",
+          "title_i18n": {
+            "en_US": "Open Vendors menu",
+            "si_LK": "Open Vendors menu",
+            "ta_IN": "Open Vendors menu"
+          },
+          "trigger": ".o_menu_sections [data-hotkey=\"3\"]",
+          "content": "Click Vendors in the top menu to open it — Bills lives inside this menu.",
+          "content_i18n": {
+            "en_US": "Click Vendors in the top menu to open it — Bills lives inside this menu.",
+            "si_LK": "Click Vendors in the top menu to open it — Bills lives inside this menu.",
+            "ta_IN": "Click Vendors in the top menu to open it — Bills lives inside this menu."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 70,
+          "title": "Bills",
+          "title_i18n": {
+            "en_US": "Bills",
+            "si_LK": "Bills",
+            "ta_IN": "Bills"
+          },
+          "trigger": "a[data-section=\"1204\"]",
+          "content": "Vendors > Bills is the Accounts Payable (AP) area. Here you record vendor bills, track what the company owes suppliers, and process outgoing vendor payments.",
+          "content_i18n": {
+            "en_US": "Vendors > Bills is the Accounts Payable (AP) area. Here you record vendor bills, track what the company owes suppliers, and process outgoing vendor payments.",
+            "si_LK": "Vendors > Bills is the Accounts Payable (AP) area. Here you record vendor bills, track what the company owes suppliers, and process outgoing vendor payments.",
+            "ta_IN": "Vendors > Bills is the Accounts Payable (AP) area. Here you record vendor bills, track what the company owes suppliers, and process outgoing vendor payments."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 80,
+          "title": "Open Accounting menu",
+          "title_i18n": {
+            "en_US": "Open Accounting menu",
+            "si_LK": "Open Accounting menu",
+            "ta_IN": "Open Accounting menu"
+          },
+          "trigger": "[data-menu-xmlid=\"account.menu_finance_entries\"]",
+          "content": "Click Accounting in the top menu to open it — Bank and Cash lives inside this menu.",
+          "content_i18n": {
+            "en_US": "Click Accounting in the top menu to open it — Bank and Cash lives inside this menu.",
+            "si_LK": "Click Accounting in the top menu to open it — Bank and Cash lives inside this menu.",
+            "ta_IN": "Click Accounting in the top menu to open it — Bank and Cash lives inside this menu."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 90,
+          "title": "Bank and Cash",
+          "title_i18n": {
+            "en_US": "Bank and Cash",
+            "si_LK": "Bank and Cash",
+            "ta_IN": "Bank and Cash"
+          },
+          "trigger": "a[data-section=\"1219\"]",
+          "content": "Accounting > Bank and Cash journals show all bank and cash transactions. Use this to review deposits, withdrawals and to reconcile your bank statements against accounting records.",
+          "content_i18n": {
+            "en_US": "Accounting > Bank and Cash journals show all bank and cash transactions. Use this to review deposits, withdrawals and to reconcile your bank statements against accounting records.",
+            "si_LK": "Accounting > Bank and Cash journals show all bank and cash transactions. Use this to review deposits, withdrawals and to reconcile your bank statements against accounting records.",
+            "ta_IN": "Accounting > Bank and Cash journals show all bank and cash transactions. Use this to review deposits, withdrawals and to reconcile your bank statements against accounting records."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 100,
+          "title": "Open Accounting menu",
+          "title_i18n": {
+            "en_US": "Open Accounting menu",
+            "si_LK": "Open Accounting menu",
+            "ta_IN": "Open Accounting menu"
+          },
+          "trigger": "[data-menu-xmlid=\"account.menu_finance_entries\"]",
+          "content": "Click Accounting again to open it — Journal Entries lives inside this menu.",
+          "content_i18n": {
+            "en_US": "Click Accounting again to open it — Journal Entries lives inside this menu.",
+            "si_LK": "Click Accounting again to open it — Journal Entries lives inside this menu.",
+            "ta_IN": "Click Accounting again to open it — Journal Entries lives inside this menu."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 110,
+          "title": "Journal Entries",
+          "title_i18n": {
+            "en_US": "Journal Entries",
+            "si_LK": "Journal Entries",
+            "ta_IN": "Journal Entries"
+          },
+          "trigger": "a[data-section=\"1222\"]",
+          "content": "Accounting > Journal Entries is where all financial transactions are posted to the General Ledger, including manual entries. Click New to create an entry, add debit/credit lines, then click Post to confirm it in the books.",
+          "content_i18n": {
+            "en_US": "Accounting > Journal Entries is where all financial transactions are posted to the General Ledger, including manual entries. Click New to create an entry, add debit/credit lines, then click Post to confirm it in the books.",
+            "si_LK": "Accounting > Journal Entries is where all financial transactions are posted to the General Ledger, including manual entries. Click New to create an entry, add debit/credit lines, then click Post to confirm it in the books.",
+            "ta_IN": "Accounting > Journal Entries is where all financial transactions are posted to the General Ledger, including manual entries. Click New to create an entry, add debit/credit lines, then click Post to confirm it in the books."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 120,
+          "title": "Open Configuration menu",
+          "title_i18n": {
+            "en_US": "Open Configuration menu",
+            "si_LK": "Open Configuration menu",
+            "ta_IN": "Open Configuration menu"
+          },
+          "trigger": ".o_menu_sections [data-menu-xmlid=\"account.menu_finance_configuration\"]:not(.d-none), .o_menu_sections_more button",
+          "content": "Click Configuration again to open it — Chart of Accounts lives inside this menu.",
+          "content_i18n": {
+            "en_US": "Click Configuration again to open it — Chart of Accounts lives inside this menu.",
+            "si_LK": "Click Configuration again to open it — Chart of Accounts lives inside this menu.",
+            "ta_IN": "Click Configuration again to open it — Chart of Accounts lives inside this menu."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 130,
+          "title": "Chart of Accounts",
+          "title_i18n": {
+            "en_US": "Chart of Accounts",
+            "si_LK": "Chart of Accounts",
+            "ta_IN": "Chart of Accounts"
+          },
+          "trigger": "[data-menu-xmlid=\"account.menu_action_account_form\"]",
+          "content": "Configuration > Chart of Accounts is where the General Ledger (GL) accounts are set up. Each account has a code, name and type (Asset, Liability, Equity, Income, Expense) that determines how it appears on financial reports.",
+          "content_i18n": {
+            "en_US": "Configuration > Chart of Accounts is where the General Ledger (GL) accounts are set up. Each account has a code, name and type (Asset, Liability, Equity, Income, Expense) that determines how it appears on financial reports.",
+            "si_LK": "Configuration > Chart of Accounts is where the General Ledger (GL) accounts are set up. Each account has a code, name and type (Asset, Liability, Equity, Income, Expense) that determines how it appears on financial reports.",
+            "ta_IN": "Configuration > Chart of Accounts is where the General Ledger (GL) accounts are set up. Each account has a code, name and type (Asset, Liability, Equity, Income, Expense) that determines how it appears on financial reports."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 140,
+          "title": "Open Reporting menu",
+          "title_i18n": {
+            "en_US": "Open Reporting menu",
+            "si_LK": "Open Reporting menu",
+            "ta_IN": "Open Reporting menu"
+          },
+          "trigger": ".o_menu_sections [data-menu-xmlid=\"account.menu_finance_reports\"]:not(.d-none), .o_menu_sections_more button",
+          "content": "Click Reporting in the top menu to open it — Trial Balance lives inside this menu.",
+          "content_i18n": {
+            "en_US": "Click Reporting in the top menu to open it — Trial Balance lives inside this menu.",
+            "si_LK": "Click Reporting in the top menu to open it — Trial Balance lives inside this menu.",
+            "ta_IN": "Click Reporting in the top menu to open it — Trial Balance lives inside this menu."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 150,
+          "title": "Trial Balance",
+          "title_i18n": {
+            "en_US": "Trial Balance",
+            "si_LK": "Trial Balance",
+            "ta_IN": "Trial Balance"
+          },
+          "trigger": "[data-menu-xmlid=\"account_reports.menu_action_account_report_coa\"]",
+          "content": "Reporting > Trial Balance summarizes the debit and credit balance of every GL account for a chosen period, letting you verify the books are balanced before closing.",
+          "content_i18n": {
+            "en_US": "Reporting > Trial Balance summarizes the debit and credit balance of every GL account for a chosen period, letting you verify the books are balanced before closing.",
+            "si_LK": "Reporting > Trial Balance summarizes the debit and credit balance of every GL account for a chosen period, letting you verify the books are balanced before closing.",
+            "ta_IN": "Reporting > Trial Balance summarizes the debit and credit balance of every GL account for a chosen period, letting you verify the books are balanced before closing."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 160,
+          "title": "Open Customers menu",
+          "title_i18n": {
+            "en_US": "Open Customers menu",
+            "si_LK": "Open Customers menu",
+            "ta_IN": "Open Customers menu"
+          },
+          "trigger": ".o_menu_sections [data-hotkey=\"2\"]",
+          "content": "Click Customers again to open it — Payments lives inside this menu.",
+          "content_i18n": {
+            "en_US": "Click Customers again to open it — Payments lives inside this menu.",
+            "si_LK": "Click Customers again to open it — Payments lives inside this menu.",
+            "ta_IN": "Click Customers again to open it — Payments lives inside this menu."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 170,
+          "title": "Payments",
+          "title_i18n": {
+            "en_US": "Payments",
+            "si_LK": "Payments",
+            "ta_IN": "Payments"
+          },
+          "trigger": "a[data-section=\"1192\"]",
+          "content": "Customers > Payments lets you register and view payments received from customers, and match them against open invoices (AR).",
+          "content_i18n": {
+            "en_US": "Customers > Payments lets you register and view payments received from customers, and match them against open invoices (AR).",
+            "si_LK": "Customers > Payments lets you register and view payments received from customers, and match them against open invoices (AR).",
+            "ta_IN": "Customers > Payments lets you register and view payments received from customers, and match them against open invoices (AR)."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 180,
+          "title": "Open Vendors menu",
+          "title_i18n": {
+            "en_US": "Open Vendors menu",
+            "si_LK": "Open Vendors menu",
+            "ta_IN": "Open Vendors menu"
+          },
+          "trigger": ".o_menu_sections [data-hotkey=\"3\"]",
+          "content": "Click Vendors again to open it — Payments lives inside this menu.",
+          "content_i18n": {
+            "en_US": "Click Vendors again to open it — Payments lives inside this menu.",
+            "si_LK": "Click Vendors again to open it — Payments lives inside this menu.",
+            "ta_IN": "Click Vendors again to open it — Payments lives inside this menu."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 190,
+          "title": "Payments",
+          "title_i18n": {
+            "en_US": "Payments",
+            "si_LK": "Payments",
+            "ta_IN": "Payments"
+          },
+          "trigger": "a[data-section=\"1206\"]",
+          "content": "Vendors > Payments lets you register and view payments made to suppliers, matching them against open vendor bills (AP).",
+          "content_i18n": {
+            "en_US": "Vendors > Payments lets you register and view payments made to suppliers, matching them against open vendor bills (AP).",
+            "si_LK": "Vendors > Payments lets you register and view payments made to suppliers, matching them against open vendor bills (AP).",
+            "ta_IN": "Vendors > Payments lets you register and view payments made to suppliers, matching them against open vendor bills (AP)."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        }
+      ]
+    }
+  ]
+}

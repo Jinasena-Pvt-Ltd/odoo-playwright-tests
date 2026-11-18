@@ -1,0 +1,573 @@
+{
+  "audience": "New Finance users who reconcile a bank account in Odoo Accounting.",
+  "goal": "Key two lines from a bank statement into the **Commercial Bank** journal, **reconcile** a customer cheque against the invoice it pays, post a bank charge to the expense account, validate both entries, and finish by proving the closing balance with the **Reconciliation Report**.",
+  "before": [
+    "You can open the **Accounting** app and post bank entries.",
+    "You have the bank statement in front of you: for every line, the date, the narration the bank printed, and the amount.",
+    "A **Commercial Bank** journal exists in Odoo.",
+    "For the cheque: the customer's invoice is posted and still unpaid, and you know its number."
+  ],
+  "outcome": [
+    "Both statement lines are saved and reconciled (each shows a green tick in the list).",
+    "The customer's invoice is shown as paid.",
+    "The bank charge is posted as an expense on **72030110 BANK CHARGES**.",
+    "The Reconciliation Report agrees with the bank statement."
+  ],
+  "notes": [
+    "The screenshots were captured by an automated run on a **test database**. Records created by the run carry a **[TEST]** prefix and a short random code in their label, and the invoice number may differ from the example in the text (**FTI/2026/00355**). Use your own statement values and invoice number.",
+    "The red banner at the top of the screenshots (\"Database neutralized for testing\") only appears on test databases."
+  ],
+  "phases": [
+    {
+      "title": "Find your bank journal",
+      "summary": "Open the Accounting dashboard and locate the right bank card before you touch anything.",
+      "from": 1,
+      "to": 3,
+      "checkpoint": "You can see the **Commercial Bank** card and have read its three figures."
+    },
+    {
+      "title": "Key in the bank statement lines",
+      "summary": "Enter a customer cheque (money in) and a bank charge (money out) exactly as the bank shows them.",
+      "from": 4,
+      "to": 14,
+      "checkpoint": "Two new lines — the **600** cheque receipt and the **−1,500** bank charge — are saved in the Commercial Bank journal."
+    },
+    {
+      "title": "Open the reconciliation workspace",
+      "summary": "Learn the screen where every unmatched bank line is worked through, one at a time.",
+      "from": 15,
+      "to": 19,
+      "checkpoint": "You are on the **Bank Reconciliation** screen with the bank charge selected, and you know why Bank Suspense is shown."
+    },
+    {
+      "title": "Post the bank charge",
+      "summary": "A charge has no invoice behind it, so it is posted straight to an expense account.",
+      "from": 20,
+      "to": 23,
+      "checkpoint": "The bank charge shows a **green tick** — it is reconciled and posted to 72030110 BANK CHARGES."
+    },
+    {
+      "title": "Match the customer cheque to its invoice",
+      "summary": "Replace the holding account with the customer's actual invoice so the invoice is cleared.",
+      "from": 24,
+      "to": 31,
+      "checkpoint": "The cheque receipt is reconciled against the invoice, which is now paid."
+    },
+    {
+      "title": "Prove the balance",
+      "summary": "Open and read the Reconciliation Report that shows the bank account agrees with the bank.",
+      "from": 32,
+      "to": 36,
+      "checkpoint": "You have read the **Reconciliation Report** and, if you wanted one, saved a copy."
+    }
+  ],
+  "glossary": [
+    {
+      "term": "Journal",
+      "meaning": "A book in which Odoo records one kind of transaction. Each bank account has its own bank journal (here **Commercial Bank**)."
+    },
+    {
+      "term": "Bank statement line / transaction",
+      "meaning": "One row on the bank's statement: a date, a narration and an amount. It must exist in Odoo before it can be reconciled."
+    },
+    {
+      "term": "Reconcile",
+      "meaning": "Match a bank line with the accounting entry that explains it (an invoice, a payment or an expense) so that Odoo's balance agrees with the bank's."
+    },
+    {
+      "term": "Bank Suspense",
+      "meaning": "A holding account (**12090250**) that Odoo uses until you say what a bank line really was. Reconciling means replacing it with the correct account or invoice."
+    },
+    {
+      "term": "Partner",
+      "meaning": "The customer or supplier a line belongs to. Setting it makes Odoo offer only that partner's open items."
+    },
+    {
+      "term": "Validate",
+      "meaning": "Posts the journal entry and marks the bank line as matched. **To Check** instead sends the line to a colleague for review."
+    },
+    {
+      "term": "Outstanding payment",
+      "meaning": "A payment already registered in Odoo that has not yet been matched to a bank line."
+    },
+    {
+      "term": "Reconciliation Report",
+      "meaning": "The month-end report that starts from the general-ledger balance and explains the difference to the last bank statement."
+    }
+  ],
+  "steps": {
+    "1": {
+      "kind": "CLICK",
+      "do": "Click **Dashboard** in the top menu bar of the Accounting app.",
+      "see": "A set of cards, one for every journal, including each bank account.",
+      "tip": "If you only see a grid of app icons, you are not inside Accounting yet — open the **Accounting** app first, then click Dashboard.",
+      "where": "Accounting app > Dashboard",
+      "actions": [
+        "Look at the menu bar across the top.",
+        "Click **Dashboard**."
+      ]
+    },
+    "2": {
+      "kind": "REVIEW",
+      "do": "Scroll down and find the card named **Commercial Bank**.",
+      "see": "A card titled **Commercial Bank** with the three figures and the action buttons (New Transaction, Reconcile).",
+      "warning": "Check the name on the card every time. Each bank account has its own card, and reconciling the wrong one posts entries to the wrong account.",
+      "where": "Accounting Dashboard > Commercial Bank card",
+      "actions": [
+        "Scroll down the dashboard to the bank cards.",
+        "Find the card named **Commercial Bank**.",
+        "Read the name carefully before going on."
+      ]
+    },
+    "3": {
+      "kind": "REVIEW",
+      "do": "Read the three figures on the card. You do not need to click anything.",
+      "points": [
+        "**Balance** — what Odoo has posted for this bank account.",
+        "**Last Statement** — the closing balance of the last statement you entered.",
+        "**Payments** — money registered in Odoo that the bank has not shown yet.",
+        "**Reconciliation** is the work of making Balance agree with the real bank statement."
+      ],
+      "where": "Accounting Dashboard > Commercial Bank card",
+      "actions": [
+        "Look at the three figures on the card: Balance, Last Statement and Payments.",
+        "Do not click anything yet."
+      ]
+    },
+    "4": {
+      "kind": "CLICK",
+      "do": "On the Commercial Bank card, click **New Transaction**.",
+      "see": "A **New Transaction** window with Date, Label, Partner, Amount and Journal.",
+      "tip": "Have an electronic statement from the bank? Use **Import File** instead of keying lines by hand.",
+      "where": "Commercial Bank card > New Transaction",
+      "actions": [
+        "On the Commercial Bank card, find the **New Transaction** link.",
+        "Click it.",
+        "A **New Transaction** window opens."
+      ]
+    },
+    "5": {
+      "kind": "ENTER",
+      "do": "Enter the statement date in the **Date** field.",
+      "enter": [
+        {
+          "field": "Date",
+          "value": "Today's date, in the date format your Odoo uses"
+        }
+      ],
+      "tip": "Use the date printed against the line on the bank statement. If the field does not accept what you typed, check the day/month order your Odoo uses.",
+      "where": "New Transaction window > Date",
+      "actions": [
+        "Click the **Date** field.",
+        "Type the statement date (today's date for this exercise) in your Odoo's date format.",
+        "Press **Tab** to confirm it."
+      ]
+    },
+    "6": {
+      "kind": "ENTER",
+      "do": "Type the bank's narration into the **Label** field.",
+      "enter": [
+        {
+          "field": "Label",
+          "value": "Cheque received - Kurunegala Cash Customer"
+        }
+      ],
+      "tip": "Keep the customer name or cheque number in the label. Odoo reads it when it looks for a matching invoice.",
+      "where": "New Transaction window > Label",
+      "actions": [
+        "Click the **Label** field.",
+        "Type the narration exactly as the bank printed it.",
+        "Keep the customer name or cheque number in it."
+      ]
+    },
+    "7": {
+      "kind": "ENTER",
+      "do": "Start typing the customer name in **Partner**, then **pick it from the list**.",
+      "enter": [
+        {
+          "field": "Partner",
+          "value": "KURUNEGALA CASH CUSTOMER"
+        }
+      ],
+      "see": "The full customer name is shown in the Partner field.",
+      "tip": "Typing alone is not enough — choose the name from the dropdown so the partner is really set.",
+      "where": "New Transaction window > Partner",
+      "actions": [
+        "Click the **Partner** field.",
+        "Start typing the customer name.",
+        "Choose the customer from the list that appears."
+      ]
+    },
+    "8": {
+      "kind": "ENTER",
+      "do": "Type the amount in the **Amount** field.",
+      "enter": [
+        {
+          "field": "Amount",
+          "value": "600"
+        }
+      ],
+      "points": [
+        "A **positive** number is money received into the account.",
+        "A **negative** number is money paid out of the account."
+      ],
+      "warning": "Check the sign before you save. A wrong sign is the most common keying mistake on bank statements.",
+      "where": "New Transaction window > Amount",
+      "actions": [
+        "Click the **Amount** field.",
+        "Type **600** — a positive number, because money was received.",
+        "Press **Tab**."
+      ]
+    },
+    "9": {
+      "kind": "REVIEW",
+      "do": "Read the **Journal** field. It should say **Commercial Bank**. Nothing to type.",
+      "see": "Journal: Commercial Bank.",
+      "warning": "A line keyed into the wrong bank journal has to be deleted and entered again, so check it before saving.",
+      "where": "New Transaction window > Journal",
+      "actions": [
+        "Look at the **Journal** field.",
+        "Confirm it says **Commercial Bank**."
+      ]
+    },
+    "10": {
+      "kind": "CLICK",
+      "do": "Click **Save & New**.",
+      "see": "The first line is stored and a blank New Transaction window opens for the next line.",
+      "tip": "A statement usually has several lines. Use **Save & Close** only on the last one.",
+      "where": "New Transaction window > Save & New",
+      "actions": [
+        "Click **Save & New** at the bottom of the window.",
+        "Wait for a blank window to appear for the next line."
+      ]
+    },
+    "11": {
+      "kind": "ENTER",
+      "do": "Check the **Date** of the second line, and correct it if needed.",
+      "enter": [
+        {
+          "field": "Date",
+          "value": "The same statement date as the first line"
+        }
+      ],
+      "tip": "Odoo keeps the date you used last. Confirm it is still the statement date.",
+      "where": "New Transaction window > Date",
+      "actions": [
+        "Look at the **Date** field of the new, blank window.",
+        "Check it is still the statement date; type it again if not."
+      ]
+    },
+    "12": {
+      "kind": "ENTER",
+      "do": "Type the charge description in **Label** and leave **Partner** empty.",
+      "enter": [
+        {
+          "field": "Label",
+          "value": "Bank charges - September"
+        },
+        {
+          "field": "Partner",
+          "value": "(leave empty)"
+        }
+      ],
+      "tip": "A bank charge is not owed to a customer or supplier, so there is no invoice behind it and no partner to set.",
+      "where": "New Transaction window > Label and Partner",
+      "actions": [
+        "Click **Label** and type **Bank charges - September**.",
+        "Leave **Partner** empty."
+      ]
+    },
+    "13": {
+      "kind": "ENTER",
+      "do": "Type the amount as a **negative** number.",
+      "enter": [
+        {
+          "field": "Amount",
+          "value": "-1500"
+        }
+      ],
+      "see": "The amount shows as a negative figure, because money left the account.",
+      "warning": "The minus sign is what tells Odoo the money left the bank account.",
+      "where": "New Transaction window > Amount",
+      "actions": [
+        "Click **Amount**.",
+        "Type **-1500** — with the minus sign, because money left the account.",
+        "Press **Tab**."
+      ]
+    },
+    "14": {
+      "kind": "CLICK",
+      "do": "Click **Save & Close**.",
+      "see": "The window closes. Both transactions are now stored in the Commercial Bank journal, waiting to be reconciled.",
+      "where": "New Transaction window > Save & Close",
+      "actions": [
+        "Check the three fields once more: Date, Label and Amount.",
+        "Click **Save & Close**.",
+        "The window closes."
+      ]
+    },
+    "15": {
+      "kind": "CLICK",
+      "do": "Open the reconciliation workspace for Commercial Bank. If you are still on the dashboard, click **Reconcile** on the card.",
+      "see": "The **Bank Reconciliation** screen, with your unmatched transactions listed on the left.",
+      "tip": "The number on the Reconcile button is how many bank transactions still have no accounting counterpart. Some versions open this screen straight after saving, so you may already be here.",
+      "where": "Accounting Dashboard > Commercial Bank card > Reconcile",
+      "actions": [
+        "If the dashboard is showing, click **Reconcile** on the Commercial Bank card.",
+        "If the **Bank Reconciliation** screen is already open, carry on to the next step."
+      ]
+    },
+    "16": {
+      "kind": "REVIEW",
+      "do": "Look at the filters in the search bar at the top. Nothing to click.",
+      "see": "Journal = **Commercial Bank**, and (when shown) **Not Matched**.",
+      "tip": "So you only see Commercial Bank lines that still need work. Remove the Not Matched filter later to review lines you have already reconciled.",
+      "where": "Bank Reconciliation screen > search bar",
+      "actions": [
+        "Look at the search bar at the top.",
+        "Read the filter tags shown in it."
+      ]
+    },
+    "17": {
+      "kind": "REVIEW",
+      "do": "Look at the **Balance** at the top of the left-hand list.",
+      "tip": "At month end this figure must equal the closing balance printed on the bank statement. That is the proof that your reconciliation is complete.",
+      "where": "Bank Reconciliation screen > left-hand list > Balance",
+      "actions": [
+        "Look at the top of the left-hand list.",
+        "Read the **Balance** figure."
+      ]
+    },
+    "18": {
+      "kind": "REVIEW",
+      "do": "Look at the list of unmatched transactions on the left. The selected line is the one you work on.",
+      "see": "Your two lines — the bank charge (−1,500.00) and the cheque receipt (600.00) — in the list. Select the **bank charge** to continue.",
+      "tip": "You work down this list one line at a time.",
+      "where": "Bank Reconciliation screen > left-hand list",
+      "actions": [
+        "Look at the list on the left.",
+        "Find your two lines: the bank charge (−1,500.00) and the cheque receipt (600.00).",
+        "Click the **bank charge** to select it."
+      ]
+    },
+    "19": {
+      "kind": "REVIEW",
+      "do": "Read the journal entry shown in the top-right panel. Nothing to click.",
+      "points": [
+        "One side is the bank account **12090030 Commercial Bank**.",
+        "The other side is **12090250 BANK SUSPENSE**, a holding account used until you say what the transaction really was.",
+        "**Reconciling means replacing Bank Suspense** with the correct account or invoice."
+      ],
+      "where": "Bank Reconciliation screen > top-right panel",
+      "actions": [
+        "Look at the entry in the top-right panel.",
+        "Find the bank account **12090030 Commercial Bank** and **12090250 BANK SUSPENSE**."
+      ]
+    },
+    "20": {
+      "kind": "CLICK",
+      "do": "Click the **Manual Operations** tab below the entry.",
+      "points": [
+        "**Manual Operations** — post the line straight to an account (used here for the bank charge).",
+        "**Match Existing Entries** — match invoices and payments.",
+        "**Discuss** — leave a note for a colleague on the line."
+      ],
+      "tip": "A bank charge has no invoice to match, which is why Manual Operations is the right tab.",
+      "where": "Bank Reconciliation screen > tabs > Manual Operations",
+      "actions": [
+        "Find the three tabs below the entry.",
+        "Click **Manual Operations**."
+      ]
+    },
+    "21": {
+      "kind": "ENTER",
+      "do": "In the **Account** field, replace **Bank Suspense** with the expense account.",
+      "enter": [
+        {
+          "field": "Account",
+          "value": "72030110 BANK CHARGES"
+        }
+      ],
+      "see": "The Account field now shows 72030110 BANK CHARGES.",
+      "where": "Manual Operations tab > Account",
+      "actions": [
+        "Click the **Account** field and clear it.",
+        "Type **72030110**.",
+        "Choose **BANK CHARGES** from the list."
+      ]
+    },
+    "22": {
+      "kind": "REVIEW",
+      "do": "Read the entry before you validate it. Nothing to click.",
+      "see": "**Commercial Bank** against **72030110 BANK CHARGES** for 1,500.00. Bank Suspense is gone.",
+      "warning": "Read both lines and the amount now. Once you validate, this becomes a posted journal entry.",
+      "where": "Bank Reconciliation screen > top-right panel",
+      "actions": [
+        "Read both lines of the entry.",
+        "Check the account is **72030110 BANK CHARGES** and the amount is 1,500.00."
+      ]
+    },
+    "23": {
+      "kind": "CLICK",
+      "do": "Click **Validate**.",
+      "see": "Odoo posts the entry, the charge shows a green tick, and the next unmatched transaction is selected.",
+      "tip": "Not sure about a line? Click **To Check** instead, so a colleague can review it.",
+      "where": "Bank Reconciliation screen > Validate",
+      "actions": [
+        "Click **Validate** (top left of the entry panel).",
+        "Wait for the green tick to appear next to the bank charge."
+      ]
+    },
+    "24": {
+      "kind": "REVIEW",
+      "do": "Confirm Odoo has moved on to the cheque receipt. Nothing to click.",
+      "see": "The **600.00** receipt from **KURUNEGALA CASH CUSTOMER** is selected, and Odoo has already proposed the customer's receivable account **12020010 DEBTORS LEDGER CONTROL** as the counterpart.",
+      "tip": "Odoo can propose this because the line has a partner — that is why setting the partner in step 7 matters.",
+      "where": "Bank Reconciliation screen > left-hand list",
+      "actions": [
+        "Look at the left-hand list.",
+        "Check the cheque receipt (600.00) is now the selected line.",
+        "Note the account Odoo proposes: **12020010 DEBTORS LEDGER CONTROL**."
+      ]
+    },
+    "25": {
+      "kind": "CLICK",
+      "do": "Click the **Match Existing Entries** tab.",
+      "tip": "Posting to the receivable account alone would leave the customer's invoice still showing as unpaid. Matching the real invoice makes the receipt clear it.",
+      "where": "Bank Reconciliation screen > tabs > Match Existing Entries",
+      "actions": [
+        "Click the **Match Existing Entries** tab below the entry."
+      ]
+    },
+    "26": {
+      "kind": "REVIEW",
+      "do": "Look at the filter shown in the tab's search box. Nothing to click yet.",
+      "see": "The list is filtered to the customer, so you only see that customer's open items.",
+      "tip": "If your invoice does not appear, remove the **Partner** filter and search by invoice number. If the bank line had no partner, search by amount or invoice number instead.",
+      "where": "Match Existing Entries tab > search box",
+      "actions": [
+        "Look at the search box inside the tab.",
+        "Read the filter tag shown there."
+      ]
+    },
+    "27": {
+      "kind": "ENTER",
+      "do": "Type the invoice number the customer is paying into the search box and press **Enter**.",
+      "enter": [
+        {
+          "field": "Search",
+          "value": "FTI/2026/00355 (the number of the invoice your customer is paying)"
+        }
+      ],
+      "tip": "Searching is safer than scrolling when a customer has many open items.",
+      "where": "Match Existing Entries tab > search box",
+      "actions": [
+        "Click the search box in the tab.",
+        "Type the invoice number, for example **FTI/2026/00355**.",
+        "Press **Enter**."
+      ]
+    },
+    "28": {
+      "kind": "CLICK",
+      "do": "Click the invoice's own line — the one on account **12020010 DEBTORS LEDGER** with the invoice number.",
+      "see": "The line is highlighted in the list.",
+      "warning": "The list can also show an **outstanding customer payment** already registered for the same invoice (a different account). Pick that one only if the customer's receipt was already registered as a payment in Odoo — in that case you match the payment line instead of the invoice line.",
+      "where": "Match Existing Entries tab > list",
+      "actions": [
+        "Look at the rows in the list.",
+        "Find the row on account **12020010 DEBTORS LEDGER** that carries your invoice number.",
+        "Click that row."
+      ]
+    },
+    "29": {
+      "kind": "REVIEW",
+      "do": "Check that the invoice is now the counterpart. Nothing to click.",
+      "see": "The suspense proposal is replaced by the invoice's receivable line (**12020010 DEBTORS LEDGER**) for 600.00, with the invoice number underneath. Nothing is left over.",
+      "tip": "If the receipt were smaller than the invoice, Odoo would keep the difference open and the invoice would show as partially paid.",
+      "where": "Bank Reconciliation screen > top-right panel",
+      "actions": [
+        "Look at the entry in the top-right panel.",
+        "Check the receivable line shows your invoice and 600.00, with nothing left over."
+      ]
+    },
+    "30": {
+      "kind": "CLICK",
+      "do": "Click **Validate**.",
+      "see": "Odoo posts the entry, marks the invoice as paid, and the bank line is no longer in the Not Matched list.",
+      "tip": "Odoo can take a few seconds to apply this — wait for the green tick before moving on, and do not click Validate twice.",
+      "where": "Bank Reconciliation screen > Validate",
+      "actions": [
+        "Click **Validate**.",
+        "Wait for the green tick — Odoo can take a few seconds."
+      ]
+    },
+    "31": {
+      "kind": "REVIEW",
+      "do": "Check the result. Nothing to click.",
+      "see": "The counter has dropped by the two lines you reconciled and Odoo moves on to the next unmatched line. If nothing else is waiting, Odoo shows **\"Congrats, you're all done!\"**.",
+      "tip": "In real use, keep working down the list until the counter reaches zero for the statement period.",
+      "where": "Bank Reconciliation screen",
+      "actions": [
+        "Look at the counter at the top, or the message in the middle of the screen.",
+        "Confirm Odoo shows **\"Congrats, you're all done!\"** or moves to the next line."
+      ]
+    },
+    "32": {
+      "kind": "CLICK",
+      "do": "Click **Dashboard** in the top menu to go back to the journal cards.",
+      "tip": "Reconciling is not finished until you can prove the bank account agrees with the bank — the next steps do that.",
+      "where": "Accounting app > Dashboard",
+      "actions": [
+        "Click **Dashboard** in the top menu bar."
+      ]
+    },
+    "33": {
+      "kind": "CLICK",
+      "do": "On the Commercial Bank card, click the **three dots (⋮)** at the top right.",
+      "see": "A menu with the statements, reconciliation models and reports for this bank account.",
+      "where": "Accounting Dashboard > Commercial Bank card > three-dots menu",
+      "actions": [
+        "Find the **Commercial Bank** card.",
+        "Click the **three dots (⋮)** at its top-right corner."
+      ]
+    },
+    "34": {
+      "kind": "CLICK",
+      "do": "Under **Reconciliation**, click **Reconciliation Report**.",
+      "see": "The Reconciliation Report opens.",
+      "tip": "This is the report you print for the auditor and for month end.",
+      "where": "Commercial Bank card menu > Reconciliation > Reconciliation Report",
+      "actions": [
+        "Find the **Reconciliation** group in the menu.",
+        "Click **Reconciliation Report**."
+      ]
+    },
+    "35": {
+      "kind": "REVIEW",
+      "do": "Read the report from top to bottom. Nothing to click.",
+      "points": [
+        "It starts from the balance of the bank account in the **general ledger**.",
+        "Then it shows the **last statement balance**.",
+        "Then every **unreconciled receipt and payment** that explains the difference. Unfold a line to see the transactions behind it."
+      ],
+      "see": "When nothing is left unreconciled, the two balances agree and Commercial Bank is reconciled.",
+      "tip": "Any warnings at the top (for example about unposted entries or an unexplained difference) tell you what still needs attention.",
+      "where": "Reconciliation Report",
+      "actions": [
+        "Read the report from the top down.",
+        "Click the small arrows to unfold any line you want to look into."
+      ]
+    },
+    "36": {
+      "kind": "REVIEW",
+      "do": "To keep a copy, click **PDF** or **XLSX** at the top left of the report.",
+      "see": "A file saved for your month-end folder or for the auditor.",
+      "tip": "That completes the cycle: enter the bank line, match it, validate it, then prove the balance with this report.",
+      "where": "Reconciliation Report > PDF / XLSX",
+      "actions": [
+        "Look at the buttons at the top-left of the report.",
+        "Click **PDF** or **XLSX** to save a copy."
+      ]
+    }
+  }
+}

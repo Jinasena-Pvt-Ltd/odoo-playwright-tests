@@ -1,0 +1,229 @@
+{
+  "audience": "Finance users who need to see how overdue one customer's balance is, for example before a credit review or a collections call.",
+  "goal": "Produce an **Accounts Receivable Ageing** report for a **single customer**: open **Reporting › Aged Receivable**, filter **Partners** to the customer, read the balance across every ageing duration (**At Date, 1-30, 31-60, 61-90, 91-120, Older, Total**), unfold the customer line to see the entries behind it, and export the report to **PDF** or **XLSX**.",
+  "before": [
+    "You can open the **Accounting** app and its **Reporting** menu.",
+    "You know the customer's name (the guide uses **DIDULA POWER ELECTRICLES (PVT) LIMITED**).",
+    "Decide the cut-off date. The guide leaves it on **today**, so every open item up to today is included."
+  ],
+  "outcome": [
+    "The report shows **only the chosen customer**, with the balance split across the ageing columns.",
+    "You have unfolded the customer line and can see each open invoice or credit note in its own ageing column.",
+    "You know where to export the report as a PDF or a spreadsheet."
+  ],
+  "notes": [
+    "The screenshots were captured by an automated run on a **test database**. The customer's entries and amounts are test data and will differ from your live figures. In this data all three entries are dated 01/07/2025, so they all fall in the **Older** column and add up to −1.00.",
+    "The red banner at the top of the screenshots (\"Database neutralized for testing\") only appears on test databases.",
+    "The automated run only checks that the **PDF** and **XLSX** buttons are present — it does not download a file."
+  ],
+  "phases": [
+    {
+      "title": "Open the Aged Receivable report",
+      "summary": "Go from the Accounting app to the ageing report.",
+      "from": 1,
+      "to": 3,
+      "checkpoint": "The **Aged Receivable** report is open, with its filter buttons and the **PDF** / **XLSX** buttons visible."
+    },
+    {
+      "title": "Choose the cut-off date and the customer",
+      "summary": "Check the report date, then narrow the report to one customer.",
+      "from": 4,
+      "to": 7,
+      "checkpoint": "The report shows **only your chosen customer**, as of the date you want."
+    },
+    {
+      "title": "Read and export the ageing",
+      "summary": "Unfold the customer, read the ageing columns, and export the report.",
+      "from": 8,
+      "to": 10,
+      "checkpoint": "You have read the customer's balance across the ageing columns and know where to export it."
+    }
+  ],
+  "glossary": [
+    {
+      "term": "Accounts Receivable Ageing",
+      "meaning": "A report that groups what customers owe you by **how overdue** it is, so you can see which balances are old."
+    },
+    {
+      "term": "As of date",
+      "meaning": "The cut-off date of the report. Items are aged as at this date."
+    },
+    {
+      "term": "At Date",
+      "meaning": "Amounts that are **not yet due** on the report date."
+    },
+    {
+      "term": "1-30, 31-60, 61-90, 91-120",
+      "meaning": "Amounts that are that many **days overdue**."
+    },
+    {
+      "term": "Older",
+      "meaning": "Amounts more than 120 days overdue."
+    },
+    {
+      "term": "Total",
+      "meaning": "The sum of all the columns for the row."
+    },
+    {
+      "term": "Credit balance (negative total)",
+      "meaning": "A negative figure means the customer has paid, or been credited, **more** than they were invoiced — you owe them rather than the other way round."
+    },
+    {
+      "term": "Partner",
+      "meaning": "The customer (or vendor) a journal entry belongs to."
+    }
+  ],
+  "steps": {
+    "1": {
+      "title": "Open the Accounting app",
+      "kind": "CLICK",
+      "do": "On the Odoo home screen, click the **Accounting** app.",
+      "where": "Odoo home screen > Accounting app",
+      "actions": [
+        "Go to the Odoo home screen (the grid of app icons).",
+        "Find the **Accounting** icon.",
+        "Click it."
+      ],
+      "see": "The Accounting app opens with its menu bar across the top (Dashboard, Customers, Vendors, Accounting, Reporting …).",
+      "tip": "You are about to produce an Accounts Receivable Ageing report for one customer.",
+      "why": "Every accounting report lives inside the Accounting app, so this is always the starting point."
+    },
+    "2": {
+      "title": "Open the Reporting menu",
+      "kind": "CLICK",
+      "do": "In the top menu bar, click **Reporting**.",
+      "where": "Accounting app > Reporting",
+      "actions": [
+        "Look at the menu bar across the top.",
+        "Click **Reporting**."
+      ],
+      "see": "A drop-down listing all the Accounting reports, including the ageing reports.",
+      "tip": "If the **Reporting** entry is missing, widen the browser window — the last menu entries hide behind a **+** when the window is narrow.",
+      "why": "The Reporting menu groups all financial reports. The ageing reports sit under Partner Reports."
+    },
+    "3": {
+      "title": "Open Aged Receivable",
+      "kind": "CLICK",
+      "do": "In the **Partner Reports** group, click **Aged Receivable**.",
+      "where": "Accounting app > Reporting > Partner Reports > Aged Receivable",
+      "actions": [
+        "With the Reporting menu open, find the **Partner Reports** group.",
+        "Click **Aged Receivable**.",
+        "Wait for the report to load."
+      ],
+      "see": "The **Aged Receivable** report, with filter buttons across the top (**As of** date, **Account: Receivable**, **Partners**, **Options**) and the **PDF** and **XLSX** buttons at the top left.",
+      "tip": "This report buckets every outstanding customer balance by how overdue it is.",
+      "why": "Aged Receivable lists what customers still owe, split by how long the amount has been overdue. Use it for credit reviews and collection calls."
+    },
+    "4": {
+      "title": "Check the report date",
+      "kind": "REVIEW",
+      "do": "Look at the **As of** date button at the top. Leave it on **today**.",
+      "where": "Aged Receivable report > As of date button",
+      "actions": [
+        "Find the **As of …** button at the top of the report.",
+        "Read the date.",
+        "Leave it as it is (today) unless you need an earlier cut-off."
+      ],
+      "see": "The button shows today's date, so every ageing duration up to today is included.",
+      "tip": "The **As of** date is the cut-off for the whole report. Change it only if you need the ageing as it was on an earlier date — for example at month end.",
+      "why": "Ageing is always measured at a single date. Items are placed in a column according to how many days they are overdue on that date, so changing it changes the buckets."
+    },
+    "5": {
+      "title": "Open the Partners filter",
+      "kind": "CLICK",
+      "do": "Click the **Partners** button at the top of the report.",
+      "where": "Aged Receivable report > Partners",
+      "actions": [
+        "Find the **Partners** button in the row of filters.",
+        "Click it.",
+        "A box opens where you can search for customers."
+      ],
+      "see": "A drop-down with a search box for partners.",
+      "tip": "Leaving Partners empty would show every customer — use this filter to narrow the report to one.",
+      "why": "By default the report lists every customer. Filtering by partner narrows it to the one customer you are interested in."
+    },
+    "6": {
+      "title": "Search for the customer",
+      "kind": "ENTER",
+      "do": "Type the customer's name in the **Partners** search box.",
+      "where": "Aged Receivable report > Partners > search box",
+      "actions": [
+        "Click the search box inside the Partners drop-down.",
+        "Type **Didula power**.",
+        "Wait for the matching customers to appear."
+      ],
+      "enter": [
+        {
+          "field": "Partners",
+          "value": "Didula power"
+        }
+      ],
+      "see": "A list of customers that match what you typed.",
+      "tip": "Part of the name is enough — you do not need to type it in full.",
+      "why": "The search matches any part of the customer name, so a short fragment is enough. Typing does not filter the report yet; you must pick a result in the next step."
+    },
+    "7": {
+      "title": "Choose the customer",
+      "kind": "CLICK",
+      "do": "In the list, click **DIDULA POWER ELECTRICLES (PVT) LIMITED**.",
+      "where": "Aged Receivable report > Partners > search results",
+      "actions": [
+        "Find **DIDULA POWER ELECTRICLES (PVT) LIMITED** in the list of matches.",
+        "Click it.",
+        "Wait a moment — the report reloads."
+      ],
+      "see": "The report now shows **only this customer**, and the customer's name appears as a line under the **Aged Receivable** total.",
+      "warning": "Check the name before you click. Several customers can have similar names, and picking the wrong one gives you somebody else's figures.",
+      "why": "Picking the customer applies the filter and reloads the report. Check the report shows exactly one customer line before continuing."
+    },
+    "8": {
+      "title": "Unfold the customer line",
+      "kind": "CLICK",
+      "do": "Click the customer's name to **unfold** it.",
+      "where": "Aged Receivable report > customer line",
+      "actions": [
+        "Find the customer's name in the report (in bold, with **Open** and **Journal Items** buttons next to it).",
+        "Click the name.",
+        "The line unfolds and the filter panel closes."
+      ],
+      "see": "Under the customer's line, **every open invoice and credit note** behind the balance, each one in its own ageing column.",
+      "tip": "Use **Open** to go to the customer, or **Journal Items** to see the accounting lines in full.",
+      "why": "The customer line only shows totals. Unfolding it lists each open invoice or credit note so you can see which items make up each ageing column."
+    },
+    "9": {
+      "title": "Read the ageing columns",
+      "kind": "REVIEW",
+      "do": "Read **across the row** to see how old the customer's balance is.",
+      "where": "Aged Receivable report > column headings",
+      "actions": [
+        "Look at the column headings above the figures.",
+        "Read them from left to right: **At Date, 1-30, 31-60, 61-90, 91-120, Older, Total**.",
+        "Find which column each of the customer's amounts sits in."
+      ],
+      "points": [
+        "**At Date** — not yet due.",
+        "**1-30 … 91-120** — that many days overdue.",
+        "**Older** — more than 120 days overdue.",
+        "**Total** — the sum of the row."
+      ],
+      "see": "Every ageing duration is shown. No extra setting is needed — the report always includes all of them.",
+      "tip": "A negative **Total** is a credit balance: the customer has paid or been credited more than was invoiced.",
+      "why": "The columns run from not yet due (At Date) to more than 120 days overdue (Older). A balance sitting far to the right is the most overdue and the most urgent to collect."
+    },
+    "10": {
+      "title": "Export the report",
+      "kind": "CLICK",
+      "do": "To keep a copy, click **PDF** or **XLSX** at the top left of the report.",
+      "where": "Aged Receivable report > PDF / XLSX",
+      "actions": [
+        "Look at the buttons at the top-left of the report.",
+        "Click **PDF** to print or email the report.",
+        "Or click **XLSX** to download it as a spreadsheet."
+      ],
+      "see": "A file download. The export keeps the customer filter and all the ageing columns exactly as shown on screen.",
+      "tip": "That completes the tour: open the report, filter to one customer, read the ageing, and export it.",
+      "why": "Exporting keeps the filter and columns you see on screen, so the file matches what you reviewed. Use PDF for sharing and XLSX for further analysis."
+    }
+  }
+}

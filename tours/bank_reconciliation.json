@@ -1,0 +1,1209 @@
+{
+  "version": 2,
+  "tours": [
+    {
+      "name": "Finance: Bank Reconciliation - Commercial Bank ( Statement - Match - Validate ) - Full Flow",
+      "name_i18n": {
+        "en_US": "Finance: Bank Reconciliation - Commercial Bank ( Statement - Match - Validate ) - Full Flow",
+        "si_LK": "Finance: Bank Reconciliation - Commercial Bank ( Statement - Match - Validate ) - Full Flow",
+        "ta_IN": "Finance: Bank Reconciliation - Commercial Bank ( Statement - Match - Validate ) - Full Flow"
+      },
+      "description": "For a new Finance user: key bank statement lines into the Commercial Bank journal, reconcile a customer cheque against its invoice, post a bank charge through Manual Operations, validate both entries, and prove the closing balance with the Reconciliation Report.",
+      "description_i18n": {
+        "en_US": "For a new Finance user: key bank statement lines into the Commercial Bank journal, reconcile a customer cheque against its invoice, post a bank charge through Manual Operations, validate both entries, and prove the closing balance with the Reconciliation Report.",
+        "si_LK": "For a new Finance user: key bank statement lines into the Commercial Bank journal, reconcile a customer cheque against its invoice, post a bank charge through Manual Operations, validate both entries, and prove the closing balance with the Reconciliation Report.",
+        "ta_IN": "For a new Finance user: key bank statement lines into the Commercial Bank journal, reconcile a customer cheque against its invoice, post a bank charge through Manual Operations, validate both entries, and prove the closing balance with the Reconciliation Report."
+      },
+      "steps": [
+        {
+          "sequence": 10,
+          "title": "Open the Accounting Dashboard",
+          "title_i18n": {
+            "en_US": "Open the Accounting Dashboard",
+            "si_LK": "Open the Accounting Dashboard",
+            "ta_IN": "Open the Accounting Dashboard"
+          },
+          "trigger": "[data-menu-xmlid=\"account.menu_board_journal_1\"]",
+          "content": "Bank reconciliation always starts here. Click Dashboard - Odoo shows one card for every journal, including each bank account.",
+          "content_i18n": {
+            "en_US": "Bank reconciliation always starts here. Click Dashboard - Odoo shows one card for every journal, including each bank account.",
+            "si_LK": "Bank reconciliation always starts here. Click Dashboard - Odoo shows one card for every journal, including each bank account.",
+            "ta_IN": "Bank reconciliation always starts here. Click Dashboard - Odoo shows one card for every journal, including each bank account."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 20,
+          "title": "Find the Commercial Bank card",
+          "title_i18n": {
+            "en_US": "Find the Commercial Bank card",
+            "si_LK": "Find the Commercial Bank card",
+            "ta_IN": "Find the Commercial Bank card"
+          },
+          "trigger": ".o_kanban_record:has(button[name=\"action_open_reconcile\"]) a[name=\"open_action\"]",
+          "content": "Scroll down the dashboard to the card named Commercial Bank. Every bank account has its own card - always check the name before you start, so you do not reconcile the wrong account.",
+          "content_i18n": {
+            "en_US": "Scroll down the dashboard to the card named Commercial Bank. Every bank account has its own card - always check the name before you start, so you do not reconcile the wrong account.",
+            "si_LK": "Scroll down the dashboard to the card named Commercial Bank. Every bank account has its own card - always check the name before you start, so you do not reconcile the wrong account.",
+            "ta_IN": "Scroll down the dashboard to the card named Commercial Bank. Every bank account has its own card - always check the name before you start, so you do not reconcile the wrong account."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 30,
+          "title": "Read the three figures on the card",
+          "title_i18n": {
+            "en_US": "Read the three figures on the card",
+            "si_LK": "Read the three figures on the card",
+            "ta_IN": "Read the three figures on the card"
+          },
+          "trigger": "a[name=\"action_open_bank_balance_in_gl\"]",
+          "content": "Balance is what Odoo has posted for this bank account. Last Statement is the closing balance of the last statement you entered. Payments is money registered in Odoo but not yet seen on the bank. Reconciliation is the work of making Balance agree with the real bank statement.",
+          "content_i18n": {
+            "en_US": "Balance is what Odoo has posted for this bank account. Last Statement is the closing balance of the last statement you entered. Payments is money registered in Odoo but not yet seen on the bank. Reconciliation is the work of making Balance agree with the real bank statement.",
+            "si_LK": "Balance is what Odoo has posted for this bank account. Last Statement is the closing balance of the last statement you entered. Payments is money registered in Odoo but not yet seen on the bank. Reconciliation is the work of making Balance agree with the real bank statement.",
+            "ta_IN": "Balance is what Odoo has posted for this bank account. Last Statement is the closing balance of the last statement you entered. Payments is money registered in Odoo but not yet seen on the bank. Reconciliation is the work of making Balance agree with the real bank statement."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 40,
+          "title": "Click New Transaction to enter a bank line",
+          "title_i18n": {
+            "en_US": "Click New Transaction to enter a bank line",
+            "si_LK": "Click New Transaction to enter a bank line",
+            "ta_IN": "Click New Transaction to enter a bank line"
+          },
+          "trigger": ".o_kanban_record:has(button[name=\"action_open_reconcile\"]) a[name=\"action_new_transaction\"]",
+          "content": "A transaction must exist in Odoo before it can be reconciled. Import File loads the bank's electronic statement; New Transaction is how you key in a line by hand from a paper statement. We will key one in.",
+          "content_i18n": {
+            "en_US": "A transaction must exist in Odoo before it can be reconciled. Import File loads the bank's electronic statement; New Transaction is how you key in a line by hand from a paper statement. We will key one in.",
+            "si_LK": "A transaction must exist in Odoo before it can be reconciled. Import File loads the bank's electronic statement; New Transaction is how you key in a line by hand from a paper statement. We will key one in.",
+            "ta_IN": "A transaction must exist in Odoo before it can be reconciled. Import File loads the bank's electronic statement; New Transaction is how you key in a line by hand from a paper statement. We will key one in."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 50,
+          "title": "Set the transaction date",
+          "title_i18n": {
+            "en_US": "Set the transaction date",
+            "si_LK": "Set the transaction date",
+            "ta_IN": "Set the transaction date"
+          },
+          "trigger": "#date_0",
+          "content": "Type the date shown against the transaction on the bank statement - for this exercise use today's date. The date decides the accounting period, so never leave the default date in place.",
+          "content_i18n": {
+            "en_US": "Type the date shown against the transaction on the bank statement - for this exercise use today's date. The date decides the accounting period, so never leave the default date in place.",
+            "si_LK": "Type the date shown against the transaction on the bank statement - for this exercise use today's date. The date decides the accounting period, so never leave the default date in place.",
+            "ta_IN": "Type the date shown against the transaction on the bank statement - for this exercise use today's date. The date decides the accounting period, so never leave the default date in place."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "date",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 60,
+          "title": "Type the Label from the statement",
+          "title_i18n": {
+            "en_US": "Type the Label from the statement",
+            "si_LK": "Type the Label from the statement",
+            "ta_IN": "Type the Label from the statement"
+          },
+          "trigger": "#payment_ref_0",
+          "content": "Copy the narration the bank printed, for example Cheque received - Kurunegala Cash Customer. Odoo reads this label when it looks for a matching invoice, so keep the customer name or cheque number in it.",
+          "content_i18n": {
+            "en_US": "Copy the narration the bank printed, for example Cheque received - Kurunegala Cash Customer. Odoo reads this label when it looks for a matching invoice, so keep the customer name or cheque number in it.",
+            "si_LK": "Copy the narration the bank printed, for example Cheque received - Kurunegala Cash Customer. Odoo reads this label when it looks for a matching invoice, so keep the customer name or cheque number in it.",
+            "ta_IN": "Copy the narration the bank printed, for example Cheque received - Kurunegala Cash Customer. Odoo reads this label when it looks for a matching invoice, so keep the customer name or cheque number in it."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "required",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 70,
+          "title": "Choose the Partner",
+          "title_i18n": {
+            "en_US": "Choose the Partner",
+            "si_LK": "Choose the Partner",
+            "ta_IN": "Choose the Partner"
+          },
+          "trigger": "#partner_id_0",
+          "content": "Start typing the customer or supplier name and pick it from the list - here KURUNEGALA CASH CUSTOMER. Setting the partner is the single biggest time saver: Odoo will then only offer that partner's open invoices when you reconcile.",
+          "content_i18n": {
+            "en_US": "Start typing the customer or supplier name and pick it from the list - here KURUNEGALA CASH CUSTOMER. Setting the partner is the single biggest time saver: Odoo will then only offer that partner's open invoices when you reconcile.",
+            "si_LK": "Start typing the customer or supplier name and pick it from the list - here KURUNEGALA CASH CUSTOMER. Setting the partner is the single biggest time saver: Odoo will then only offer that partner's open invoices when you reconcile.",
+            "ta_IN": "Start typing the customer or supplier name and pick it from the list - here KURUNEGALA CASH CUSTOMER. Setting the partner is the single biggest time saver: Odoo will then only offer that partner's open invoices when you reconcile."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 80,
+          "title": "Enter the Amount with the correct sign",
+          "title_i18n": {
+            "en_US": "Enter the Amount with the correct sign",
+            "si_LK": "Enter the Amount with the correct sign",
+            "ta_IN": "Enter the Amount with the correct sign"
+          },
+          "trigger": "#amount_0",
+          "content": "Type the amount the way the bank shows it: a POSITIVE figure for money received into the account, a NEGATIVE figure for money paid out. For this cheque receipt type 600.",
+          "content_i18n": {
+            "en_US": "Type the amount the way the bank shows it: a POSITIVE figure for money received into the account, a NEGATIVE figure for money paid out. For this cheque receipt type 600.",
+            "si_LK": "Type the amount the way the bank shows it: a POSITIVE figure for money received into the account, a NEGATIVE figure for money paid out. For this cheque receipt type 600.",
+            "ta_IN": "Type the amount the way the bank shows it: a POSITIVE figure for money received into the account, a NEGATIVE figure for money paid out. For this cheque receipt type 600."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "float",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 90,
+          "title": "Check the Journal says Commercial Bank",
+          "title_i18n": {
+            "en_US": "Check the Journal says Commercial Bank",
+            "si_LK": "Check the Journal says Commercial Bank",
+            "ta_IN": "Check the Journal says Commercial Bank"
+          },
+          "trigger": "a.o_form_uri",
+          "content": "Because you opened the dialog from the Commercial Bank card, the Journal is already Commercial Bank. Read it once before saving - a line keyed into the wrong bank journal has to be deleted and re-entered.",
+          "content_i18n": {
+            "en_US": "Because you opened the dialog from the Commercial Bank card, the Journal is already Commercial Bank. Read it once before saving - a line keyed into the wrong bank journal has to be deleted and re-entered.",
+            "si_LK": "Because you opened the dialog from the Commercial Bank card, the Journal is already Commercial Bank. Read it once before saving - a line keyed into the wrong bank journal has to be deleted and re-entered.",
+            "ta_IN": "Because you opened the dialog from the Commercial Bank card, the Journal is already Commercial Bank. Read it once before saving - a line keyed into the wrong bank journal has to be deleted and re-entered."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 100,
+          "title": "Save and New to key the next statement line",
+          "title_i18n": {
+            "en_US": "Save and New to key the next statement line",
+            "si_LK": "Save and New to key the next statement line",
+            "ta_IN": "Save and New to key the next statement line"
+          },
+          "trigger": "button[name=\"action_save_new\"]",
+          "content": "A bank statement usually has several lines. Save & New stores this receipt and gives you a blank line straight away. Use Save & Close only on the last line of the statement.",
+          "content_i18n": {
+            "en_US": "A bank statement usually has several lines. Save & New stores this receipt and gives you a blank line straight away. Use Save & Close only on the last line of the statement.",
+            "si_LK": "A bank statement usually has several lines. Save & New stores this receipt and gives you a blank line straight away. Use Save & Close only on the last line of the statement.",
+            "ta_IN": "A bank statement usually has several lines. Save & New stores this receipt and gives you a blank line straight away. Use Save & Close only on the last line of the statement."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 110,
+          "title": "Second line - date",
+          "title_i18n": {
+            "en_US": "Second line - date",
+            "si_LK": "Second line - date",
+            "ta_IN": "Second line - date"
+          },
+          "trigger": "#date_0",
+          "content": "Now key the second line of the statement - a charge the bank took from the account. Odoo keeps the date you used last, so confirm it is still the statement date.",
+          "content_i18n": {
+            "en_US": "Now key the second line of the statement - a charge the bank took from the account. Odoo keeps the date you used last, so confirm it is still the statement date.",
+            "si_LK": "Now key the second line of the statement - a charge the bank took from the account. Odoo keeps the date you used last, so confirm it is still the statement date.",
+            "ta_IN": "Now key the second line of the statement - a charge the bank took from the account. Odoo keeps the date you used last, so confirm it is still the statement date."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "date",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 120,
+          "title": "Second line - label the bank charge",
+          "title_i18n": {
+            "en_US": "Second line - label the bank charge",
+            "si_LK": "Second line - label the bank charge",
+            "ta_IN": "Second line - label the bank charge"
+          },
+          "trigger": "#payment_ref_0",
+          "content": "Type Bank charges - September. Leave Partner empty: a bank charge is not owed to a customer or a supplier, so there is no invoice behind it.",
+          "content_i18n": {
+            "en_US": "Type Bank charges - September. Leave Partner empty: a bank charge is not owed to a customer or a supplier, so there is no invoice behind it.",
+            "si_LK": "Type Bank charges - September. Leave Partner empty: a bank charge is not owed to a customer or a supplier, so there is no invoice behind it.",
+            "ta_IN": "Type Bank charges - September. Leave Partner empty: a bank charge is not owed to a customer or a supplier, so there is no invoice behind it."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "required",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 130,
+          "title": "Second line - negative amount",
+          "title_i18n": {
+            "en_US": "Second line - negative amount",
+            "si_LK": "Second line - negative amount",
+            "ta_IN": "Second line - negative amount"
+          },
+          "trigger": "#amount_0",
+          "content": "Type -1500. The minus sign tells Odoo money left the bank account. Getting the sign wrong is the most common keying mistake on bank statements.",
+          "content_i18n": {
+            "en_US": "Type -1500. The minus sign tells Odoo money left the bank account. Getting the sign wrong is the most common keying mistake on bank statements.",
+            "si_LK": "Type -1500. The minus sign tells Odoo money left the bank account. Getting the sign wrong is the most common keying mistake on bank statements.",
+            "ta_IN": "Type -1500. The minus sign tells Odoo money left the bank account. Getting the sign wrong is the most common keying mistake on bank statements."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "float",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 140,
+          "title": "Save and Close the last line",
+          "title_i18n": {
+            "en_US": "Save and Close the last line",
+            "si_LK": "Save and Close the last line",
+            "ta_IN": "Save and Close the last line"
+          },
+          "trigger": "[data-hotkey=\"q\"]",
+          "content": "That was the last line of the statement, so click Save & Close. Both transactions now sit in the Commercial Bank journal waiting to be reconciled.",
+          "content_i18n": {
+            "en_US": "That was the last line of the statement, so click Save & Close. Both transactions now sit in the Commercial Bank journal waiting to be reconciled.",
+            "si_LK": "That was the last line of the statement, so click Save & Close. Both transactions now sit in the Commercial Bank journal waiting to be reconciled.",
+            "ta_IN": "That was the last line of the statement, so click Save & Close. Both transactions now sit in the Commercial Bank journal waiting to be reconciled."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 150,
+          "title": "Click Reconcile to open the matching screen",
+          "title_i18n": {
+            "en_US": "Click Reconcile to open the matching screen",
+            "si_LK": "Click Reconcile to open the matching screen",
+            "ta_IN": "Click Reconcile to open the matching screen"
+          },
+          "trigger": "button[name=\"action_open_reconcile\"]",
+          "content": "The number on this button is how many bank transactions still have no accounting counterpart. Click it to open the reconciliation workspace for Commercial Bank.",
+          "content_i18n": {
+            "en_US": "The number on this button is how many bank transactions still have no accounting counterpart. Click it to open the reconciliation workspace for Commercial Bank.",
+            "si_LK": "The number on this button is how many bank transactions still have no accounting counterpart. Click it to open the reconciliation workspace for Commercial Bank.",
+            "ta_IN": "The number on this button is how many bank transactions still have no accounting counterpart. Click it to open the reconciliation workspace for Commercial Bank."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 160,
+          "title": "Understand the two filters",
+          "title_i18n": {
+            "en_US": "Understand the two filters",
+            "si_LK": "Understand the two filters",
+            "ta_IN": "Understand the two filters"
+          },
+          "trigger": ".o_cp_searchview .o_searchview_facet:nth-of-type(2)",
+          "content": "Odoo opens this screen with two filters: Journal = Commercial Bank, and Not Matched. So you are only looking at Commercial Bank transactions that still need work. Remove Not Matched later if you want to review lines you have already reconciled.",
+          "content_i18n": {
+            "en_US": "Odoo opens this screen with two filters: Journal = Commercial Bank, and Not Matched. So you are only looking at Commercial Bank transactions that still need work. Remove Not Matched later if you want to review lines you have already reconciled.",
+            "si_LK": "Odoo opens this screen with two filters: Journal = Commercial Bank, and Not Matched. So you are only looking at Commercial Bank transactions that still need work. Remove Not Matched later if you want to review lines you have already reconciled.",
+            "ta_IN": "Odoo opens this screen with two filters: Journal = Commercial Bank, and Not Matched. So you are only looking at Commercial Bank transactions that still need work. Remove Not Matched later if you want to review lines you have already reconciled."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 170,
+          "title": "The running bank balance",
+          "title_i18n": {
+            "en_US": "The running bank balance",
+            "si_LK": "The running bank balance",
+            "ta_IN": "The running bank balance"
+          },
+          "trigger": "span.btn.flex-fill",
+          "content": "This is the balance Odoo holds for Commercial Bank after the lines you keyed in. At the end of the month this figure must equal the closing balance printed on the bank statement - that is the proof your reconciliation is complete.",
+          "content_i18n": {
+            "en_US": "This is the balance Odoo holds for Commercial Bank after the lines you keyed in. At the end of the month this figure must equal the closing balance printed on the bank statement - that is the proof your reconciliation is complete.",
+            "si_LK": "This is the balance Odoo holds for Commercial Bank after the lines you keyed in. At the end of the month this figure must equal the closing balance printed on the bank statement - that is the proof your reconciliation is complete.",
+            "ta_IN": "This is the balance Odoo holds for Commercial Bank after the lines you keyed in. At the end of the month this figure must equal the closing balance printed on the bank statement - that is the proof your reconciliation is complete."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 180,
+          "title": "The list of unmatched transactions",
+          "title_i18n": {
+            "en_US": "The list of unmatched transactions",
+            "si_LK": "The list of unmatched transactions",
+            "ta_IN": "The list of unmatched transactions"
+          },
+          "trigger": ".o_bank_rec_kanban_div",
+          "content": "Every bank line waiting to be reconciled is listed here, newest first, with the two lines you just keyed at the top. Odoo has already selected the first one - Bank charges - September, -1,500.00. You work down this list one line at a time.",
+          "content_i18n": {
+            "en_US": "Every bank line waiting to be reconciled is listed here, newest first, with the two lines you just keyed at the top. Odoo has already selected the first one - Bank charges - September, -1,500.00. You work down this list one line at a time.",
+            "si_LK": "Every bank line waiting to be reconciled is listed here, newest first, with the two lines you just keyed at the top. Odoo has already selected the first one - Bank charges - September, -1,500.00. You work down this list one line at a time.",
+            "ta_IN": "Every bank line waiting to be reconciled is listed here, newest first, with the two lines you just keyed at the top. Odoo has already selected the first one - Bank charges - September, -1,500.00. You work down this list one line at a time."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 190,
+          "title": "Where the money is parked before matching",
+          "title_i18n": {
+            "en_US": "Where the money is parked before matching",
+            "si_LK": "Where the money is parked before matching",
+            "ta_IN": "Where the money is parked before matching"
+          },
+          "trigger": "div[name=\"line_ids\"] table.o_list_table",
+          "content": "The top panel is the journal entry Odoo will post. One side is the bank account 12090030 Commercial Bank; the other side is 12090250 BANK SUSPENSE, a holding account used until you tell Odoo what the transaction really was. Reconciling means replacing Bank Suspense with the correct account or invoice.",
+          "content_i18n": {
+            "en_US": "The top panel is the journal entry Odoo will post. One side is the bank account 12090030 Commercial Bank; the other side is 12090250 BANK SUSPENSE, a holding account used until you tell Odoo what the transaction really was. Reconciling means replacing Bank Suspense with the correct account or invoice.",
+            "si_LK": "The top panel is the journal entry Odoo will post. One side is the bank account 12090030 Commercial Bank; the other side is 12090250 BANK SUSPENSE, a holding account used until you tell Odoo what the transaction really was. Reconciling means replacing Bank Suspense with the correct account or invoice.",
+            "ta_IN": "The top panel is the journal entry Odoo will post. One side is the bank account 12090030 Commercial Bank; the other side is 12090250 BANK SUSPENSE, a holding account used until you tell Odoo what the transaction really was. Reconciling means replacing Bank Suspense with the correct account or invoice."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 200,
+          "title": "Open the Manual Operations tab",
+          "title_i18n": {
+            "en_US": "Open the Manual Operations tab",
+            "si_LK": "Open the Manual Operations tab",
+            "ta_IN": "Open the Manual Operations tab"
+          },
+          "trigger": "a[name=\"manual_operations_tab\"]",
+          "content": "A bank charge has no invoice to match, so use Manual Operations. This tab lets you post the transaction straight to an expense account. Match Existing Entries is for invoices and payments; Discuss is for leaving a note to a colleague on the line.",
+          "content_i18n": {
+            "en_US": "A bank charge has no invoice to match, so use Manual Operations. This tab lets you post the transaction straight to an expense account. Match Existing Entries is for invoices and payments; Discuss is for leaving a note to a colleague on the line.",
+            "si_LK": "A bank charge has no invoice to match, so use Manual Operations. This tab lets you post the transaction straight to an expense account. Match Existing Entries is for invoices and payments; Discuss is for leaving a note to a colleague on the line.",
+            "ta_IN": "A bank charge has no invoice to match, so use Manual Operations. This tab lets you post the transaction straight to an expense account. Match Existing Entries is for invoices and payments; Discuss is for leaving a note to a colleague on the line."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 210,
+          "title": "Replace Bank Suspense with the expense account",
+          "title_i18n": {
+            "en_US": "Replace Bank Suspense with the expense account",
+            "si_LK": "Replace Bank Suspense with the expense account",
+            "ta_IN": "Replace Bank Suspense with the expense account"
+          },
+          "trigger": "div.o_cell.o_wrap_input > div.o_field_widget.o_field_many2one > div.o_field_many2one_selection > div.o_input_dropdown > div.o-autocomplete.dropdown > input.o-autocomplete--input.o_input",
+          "content": "Clear the Account field and type the account the charge belongs to - here 72030110 BANK CHARGES - then pick it from the list. This is the step that turns a bank movement into a real expense in the accounts.",
+          "content_i18n": {
+            "en_US": "Clear the Account field and type the account the charge belongs to - here 72030110 BANK CHARGES - then pick it from the list. This is the step that turns a bank movement into a real expense in the accounts.",
+            "si_LK": "Clear the Account field and type the account the charge belongs to - here 72030110 BANK CHARGES - then pick it from the list. This is the step that turns a bank movement into a real expense in the accounts.",
+            "ta_IN": "Clear the Account field and type the account the charge belongs to - here 72030110 BANK CHARGES - then pick it from the list. This is the step that turns a bank movement into a real expense in the accounts."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 220,
+          "title": "Read the entry before you validate",
+          "title_i18n": {
+            "en_US": "Read the entry before you validate",
+            "si_LK": "Read the entry before you validate",
+            "ta_IN": "Read the entry before you validate"
+          },
+          "trigger": "div[name=\"line_ids\"] table.o_list_table",
+          "content": "Bank Suspense is gone: the entry is now Commercial Bank against 72030110 BANK CHARGES for 1,500.00. Always read both lines and the amount here - once you validate, this becomes a posted journal entry.",
+          "content_i18n": {
+            "en_US": "Bank Suspense is gone: the entry is now Commercial Bank against 72030110 BANK CHARGES for 1,500.00. Always read both lines and the amount here - once you validate, this becomes a posted journal entry.",
+            "si_LK": "Bank Suspense is gone: the entry is now Commercial Bank against 72030110 BANK CHARGES for 1,500.00. Always read both lines and the amount here - once you validate, this becomes a posted journal entry.",
+            "ta_IN": "Bank Suspense is gone: the entry is now Commercial Bank against 72030110 BANK CHARGES for 1,500.00. Always read both lines and the amount here - once you validate, this becomes a posted journal entry."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 230,
+          "title": "Validate the bank charge",
+          "title_i18n": {
+            "en_US": "Validate the bank charge",
+            "si_LK": "Validate the bank charge",
+            "ta_IN": "Validate the bank charge"
+          },
+          "trigger": ".o_bank_rec_stats_buttons_aside_left button.btn-primary",
+          "content": "Click Validate. Odoo posts the journal entry, marks the bank line as matched and jumps to the next unmatched transaction. Use To Check instead if you are unsure and want a colleague to review it.",
+          "content_i18n": {
+            "en_US": "Click Validate. Odoo posts the journal entry, marks the bank line as matched and jumps to the next unmatched transaction. Use To Check instead if you are unsure and want a colleague to review it.",
+            "si_LK": "Click Validate. Odoo posts the journal entry, marks the bank line as matched and jumps to the next unmatched transaction. Use To Check instead if you are unsure and want a colleague to review it.",
+            "ta_IN": "Click Validate. Odoo posts the journal entry, marks the bank line as matched and jumps to the next unmatched transaction. Use To Check instead if you are unsure and want a colleague to review it."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 240,
+          "title": "Odoo moves to the next transaction",
+          "title_i18n": {
+            "en_US": "Odoo moves to the next transaction",
+            "si_LK": "Odoo moves to the next transaction",
+            "ta_IN": "Odoo moves to the next transaction"
+          },
+          "trigger": ".o_bank_rec_kanban_div",
+          "content": "The charge has gone from the list and the cheque receipt of 600.00 from KURUNEGALA CASH CUSTOMER is now selected. Because the line has a partner, Odoo has already proposed the customer's receivable account 12020010 DEBTORS LEDGER CONTROL as the counterpart.",
+          "content_i18n": {
+            "en_US": "The charge has gone from the list and the cheque receipt of 600.00 from KURUNEGALA CASH CUSTOMER is now selected. Because the line has a partner, Odoo has already proposed the customer's receivable account 12020010 DEBTORS LEDGER CONTROL as the counterpart.",
+            "si_LK": "The charge has gone from the list and the cheque receipt of 600.00 from KURUNEGALA CASH CUSTOMER is now selected. Because the line has a partner, Odoo has already proposed the customer's receivable account 12020010 DEBTORS LEDGER CONTROL as the counterpart.",
+            "ta_IN": "The charge has gone from the list and the cheque receipt of 600.00 from KURUNEGALA CASH CUSTOMER is now selected. Because the line has a partner, Odoo has already proposed the customer's receivable account 12020010 DEBTORS LEDGER CONTROL as the counterpart."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 250,
+          "title": "Open Match Existing Entries",
+          "title_i18n": {
+            "en_US": "Open Match Existing Entries",
+            "si_LK": "Open Match Existing Entries",
+            "ta_IN": "Open Match Existing Entries"
+          },
+          "trigger": "a[name=\"amls_tab\"]",
+          "content": "Posting to the receivable account alone would leave the customer's invoice still showing as unpaid. Instead open Match Existing Entries and tick the actual invoice, so the receipt clears it.",
+          "content_i18n": {
+            "en_US": "Posting to the receivable account alone would leave the customer's invoice still showing as unpaid. Instead open Match Existing Entries and tick the actual invoice, so the receipt clears it.",
+            "si_LK": "Posting to the receivable account alone would leave the customer's invoice still showing as unpaid. Instead open Match Existing Entries and tick the actual invoice, so the receipt clears it.",
+            "ta_IN": "Posting to the receivable account alone would leave the customer's invoice still showing as unpaid. Instead open Match Existing Entries and tick the actual invoice, so the receipt clears it."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 260,
+          "title": "Odoo pre-filters by partner",
+          "title_i18n": {
+            "en_US": "Odoo pre-filters by partner",
+            "si_LK": "Odoo pre-filters by partner",
+            "ta_IN": "Odoo pre-filters by partner"
+          },
+          "trigger": ".tab-pane.active .o_searchview_facet",
+          "content": "The tab is already filtered to KURUNEGALA CASH CUSTOMER, so you only see that customer's open items. If the bank line had no partner, remove this filter and search by amount or invoice number instead.",
+          "content_i18n": {
+            "en_US": "The tab is already filtered to KURUNEGALA CASH CUSTOMER, so you only see that customer's open items. If the bank line had no partner, remove this filter and search by amount or invoice number instead.",
+            "si_LK": "The tab is already filtered to KURUNEGALA CASH CUSTOMER, so you only see that customer's open items. If the bank line had no partner, remove this filter and search by amount or invoice number instead.",
+            "ta_IN": "The tab is already filtered to KURUNEGALA CASH CUSTOMER, so you only see that customer's open items. If the bank line had no partner, remove this filter and search by amount or invoice number instead."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 270,
+          "title": "Search for the invoice being paid",
+          "title_i18n": {
+            "en_US": "Search for the invoice being paid",
+            "si_LK": "Search for the invoice being paid",
+            "ta_IN": "Search for the invoice being paid"
+          },
+          "trigger": ".tab-pane.active input.o_searchview_input",
+          "content": "Type the invoice number the customer is paying - for this exercise FTI/2026/00355 - and press Enter. Searching is safer than scrolling when a customer has many open items.",
+          "content_i18n": {
+            "en_US": "Type the invoice number the customer is paying - for this exercise FTI/2026/00355 - and press Enter. Searching is safer than scrolling when a customer has many open items.",
+            "si_LK": "Type the invoice number the customer is paying - for this exercise FTI/2026/00355 - and press Enter. Searching is safer than scrolling when a customer has many open items.",
+            "ta_IN": "Type the invoice number the customer is paying - for this exercise FTI/2026/00355 - and press Enter. Searching is safer than scrolling when a customer has many open items."
+          },
+          "position": "bottom",
+          "run": "edit",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 280,
+          "title": "Click the invoice line to match it",
+          "title_i18n": {
+            "en_US": "Click the invoice line to match it",
+            "si_LK": "Click the invoice line to match it",
+            "ta_IN": "Click the invoice line to match it"
+          },
+          "trigger": ".tab-pane.active tr.o_data_row",
+          "content": "Two open items are listed: the receivable line of invoice FTI/2026/00355, and an outstanding customer payment already registered in Odoo. Click the FTI/2026/00355 line - the cheque is settling that invoice. Rule of thumb: if the receipt was already registered as a payment in Odoo, match the payment line instead.",
+          "content_i18n": {
+            "en_US": "Two open items are listed: the receivable line of invoice FTI/2026/00355, and an outstanding customer payment already registered in Odoo. Click the FTI/2026/00355 line - the cheque is settling that invoice. Rule of thumb: if the receipt was already registered as a payment in Odoo, match the payment line instead.",
+            "si_LK": "Two open items are listed: the receivable line of invoice FTI/2026/00355, and an outstanding customer payment already registered in Odoo. Click the FTI/2026/00355 line - the cheque is settling that invoice. Rule of thumb: if the receipt was already registered as a payment in Odoo, match the payment line instead.",
+            "ta_IN": "Two open items are listed: the receivable line of invoice FTI/2026/00355, and an outstanding customer payment already registered in Odoo. Click the FTI/2026/00355 line - the cheque is settling that invoice. Rule of thumb: if the receipt was already registered as a payment in Odoo, match the payment line instead."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 290,
+          "title": "The invoice is now the counterpart",
+          "title_i18n": {
+            "en_US": "The invoice is now the counterpart",
+            "si_LK": "The invoice is now the counterpart",
+            "ta_IN": "The invoice is now the counterpart"
+          },
+          "trigger": "div[name=\"line_ids\"] table.o_list_table",
+          "content": "The suspense proposal has been replaced by the receivable line of FTI/2026/00355 for 600.00, and the invoice reference is shown underneath. Nothing is left over, so the invoice will be fully paid. If the receipt were smaller than the invoice, Odoo would keep the difference open and the invoice would show as partially paid.",
+          "content_i18n": {
+            "en_US": "The suspense proposal has been replaced by the receivable line of FTI/2026/00355 for 600.00, and the invoice reference is shown underneath. Nothing is left over, so the invoice will be fully paid. If the receipt were smaller than the invoice, Odoo would keep the difference open and the invoice would show as partially paid.",
+            "si_LK": "The suspense proposal has been replaced by the receivable line of FTI/2026/00355 for 600.00, and the invoice reference is shown underneath. Nothing is left over, so the invoice will be fully paid. If the receipt were smaller than the invoice, Odoo would keep the difference open and the invoice would show as partially paid.",
+            "ta_IN": "The suspense proposal has been replaced by the receivable line of FTI/2026/00355 for 600.00, and the invoice reference is shown underneath. Nothing is left over, so the invoice will be fully paid. If the receipt were smaller than the invoice, Odoo would keep the difference open and the invoice would show as partially paid."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 300,
+          "title": "Validate the customer receipt",
+          "title_i18n": {
+            "en_US": "Validate the customer receipt",
+            "si_LK": "Validate the customer receipt",
+            "ta_IN": "Validate the customer receipt"
+          },
+          "trigger": ".o_bank_rec_stats_buttons_aside_left button.btn-primary",
+          "content": "Click Validate. Odoo posts the entry, marks invoice FTI/2026/00355 as paid and takes the bank line off the Not Matched list.",
+          "content_i18n": {
+            "en_US": "Click Validate. Odoo posts the entry, marks invoice FTI/2026/00355 as paid and takes the bank line off the Not Matched list.",
+            "si_LK": "Click Validate. Odoo posts the entry, marks invoice FTI/2026/00355 as paid and takes the bank line off the Not Matched list.",
+            "ta_IN": "Click Validate. Odoo posts the entry, marks invoice FTI/2026/00355 as paid and takes the bank line off the Not Matched list."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 310,
+          "title": "Two lines fewer to reconcile",
+          "title_i18n": {
+            "en_US": "Two lines fewer to reconcile",
+            "si_LK": "Two lines fewer to reconcile",
+            "ta_IN": "Two lines fewer to reconcile"
+          },
+          "trigger": ".o_control_panel_navigation .o_pager_value",
+          "content": "The counter has dropped by the two lines you reconciled and Odoo has moved on to the next unmatched transaction. Work down the list until the counter reaches zero for the statement period.",
+          "content_i18n": {
+            "en_US": "The counter has dropped by the two lines you reconciled and Odoo has moved on to the next unmatched transaction. Work down the list until the counter reaches zero for the statement period.",
+            "si_LK": "The counter has dropped by the two lines you reconciled and Odoo has moved on to the next unmatched transaction. Work down the list until the counter reaches zero for the statement period.",
+            "ta_IN": "The counter has dropped by the two lines you reconciled and Odoo has moved on to the next unmatched transaction. Work down the list until the counter reaches zero for the statement period."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 320,
+          "title": "Go back to the Dashboard to prove the work",
+          "title_i18n": {
+            "en_US": "Go back to the Dashboard to prove the work",
+            "si_LK": "Go back to the Dashboard to prove the work",
+            "ta_IN": "Go back to the Dashboard to prove the work"
+          },
+          "trigger": "[data-menu-xmlid=\"account.menu_board_journal_1\"]",
+          "content": "Reconciling is not finished until you can prove the bank account agrees with the bank. Go back to Dashboard to open the Reconciliation Report for Commercial Bank.",
+          "content_i18n": {
+            "en_US": "Reconciling is not finished until you can prove the bank account agrees with the bank. Go back to Dashboard to open the Reconciliation Report for Commercial Bank.",
+            "si_LK": "Reconciling is not finished until you can prove the bank account agrees with the bank. Go back to Dashboard to open the Reconciliation Report for Commercial Bank.",
+            "ta_IN": "Reconciling is not finished until you can prove the bank account agrees with the bank. Go back to Dashboard to open the Reconciliation Report for Commercial Bank."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 330,
+          "title": "Open the card menu",
+          "title_i18n": {
+            "en_US": "Open the card menu",
+            "si_LK": "Open the card menu",
+            "ta_IN": "Open the card menu"
+          },
+          "trigger": ".o_kanban_record:has(button[name=\"action_open_reconcile\"]) button.dropdown-toggle",
+          "content": "Click the three dots on the top right of the Commercial Bank card. This menu holds everything else you need for this bank account - statements, reconciliation models and the reports.",
+          "content_i18n": {
+            "en_US": "Click the three dots on the top right of the Commercial Bank card. This menu holds everything else you need for this bank account - statements, reconciliation models and the reports.",
+            "si_LK": "Click the three dots on the top right of the Commercial Bank card. This menu holds everything else you need for this bank account - statements, reconciliation models and the reports.",
+            "ta_IN": "Click the three dots on the top right of the Commercial Bank card. This menu holds everything else you need for this bank account - statements, reconciliation models and the reports."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 340,
+          "title": "Open the Reconciliation Report",
+          "title_i18n": {
+            "en_US": "Open the Reconciliation Report",
+            "si_LK": "Open the Reconciliation Report",
+            "ta_IN": "Open the Reconciliation Report"
+          },
+          "trigger": "a[name=\"3163\"]",
+          "content": "Under Reconciliation click Reconciliation Report. This is the report you print for the auditor and for month end.",
+          "content_i18n": {
+            "en_US": "Under Reconciliation click Reconciliation Report. This is the report you print for the auditor and for month end.",
+            "si_LK": "Under Reconciliation click Reconciliation Report. This is the report you print for the auditor and for month end.",
+            "ta_IN": "Under Reconciliation click Reconciliation Report. This is the report you print for the auditor and for month end."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 350,
+          "title": "Read the Reconciliation Report",
+          "title_i18n": {
+            "en_US": "Read the Reconciliation Report",
+            "si_LK": "Read the Reconciliation Report",
+            "ta_IN": "Read the Reconciliation Report"
+          },
+          "trigger": "tr.line_level_0 > td.line_name",
+          "content": "The report starts from the balance of the bank account in the general ledger, then shows the last statement balance and every unreconciled receipt and payment that explains the difference. Unfold each line to see the transactions behind it. When nothing is left unreconciled, the two balances agree and Commercial Bank is reconciled.",
+          "content_i18n": {
+            "en_US": "The report starts from the balance of the bank account in the general ledger, then shows the last statement balance and every unreconciled receipt and payment that explains the difference. Unfold each line to see the transactions behind it. When nothing is left unreconciled, the two balances agree and Commercial Bank is reconciled.",
+            "si_LK": "The report starts from the balance of the bank account in the general ledger, then shows the last statement balance and every unreconciled receipt and payment that explains the difference. Unfold each line to see the transactions behind it. When nothing is left unreconciled, the two balances agree and Commercial Bank is reconciled.",
+            "ta_IN": "The report starts from the balance of the bank account in the general ledger, then shows the last statement balance and every unreconciled receipt and payment that explains the difference. Unfold each line to see the transactions behind it. When nothing is left unreconciled, the two balances agree and Commercial Bank is reconciled."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 360,
+          "title": "Export the report for the month-end file",
+          "title_i18n": {
+            "en_US": "Export the report for the month-end file",
+            "si_LK": "Export the report for the month-end file",
+            "ta_IN": "Export the report for the month-end file"
+          },
+          "trigger": ".o_control_panel_main_buttons",
+          "content": "PDF and XLSX save the report for your month-end file or for the auditor. That completes the cycle: enter the bank line, match it, validate it, then prove the balance with this report.",
+          "content_i18n": {
+            "en_US": "PDF and XLSX save the report for your month-end file or for the auditor. That completes the cycle: enter the bank line, match it, validate it, then prove the balance with this report.",
+            "si_LK": "PDF and XLSX save the report for your month-end file or for the auditor. That completes the cycle: enter the bank line, match it, validate it, then prove the balance with this report.",
+            "ta_IN": "PDF and XLSX save the report for your month-end file or for the auditor. That completes the cycle: enter the bank line, match it, validate it, then prove the balance with this report."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": true,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        }
+      ]
+    }
+  ]
+}

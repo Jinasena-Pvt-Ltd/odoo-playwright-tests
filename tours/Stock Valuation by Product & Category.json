@@ -1,0 +1,747 @@
+{
+  "version": 2,
+  "tours": [
+    {
+      "name": "Inventory User Guide - Stock Valuation by Product & Category",
+      "name_i18n": {
+        "en_US": "Inventory User Guide - Stock Valuation by Product & Category",
+        "si_LK": "Inventory User Guide - Stock Valuation by Product & Category",
+        "ta_IN": "Inventory User Guide - Stock Valuation by Product & Category"
+      },
+      "description": "How to check inventory valuation in Odoo: open the Stock Valuation report and group it by product category and product, read the Total Value, check a product's cost, review the costing method, inventory valuation mode and stock valuation account on the product category, and view unit cost and total value per category in the Stock report.",
+      "description_i18n": {
+        "en_US": "How to check inventory valuation in Odoo: open the Stock Valuation report and group it by product category and product, read the Total Value, check a product's cost, review the costing method, inventory valuation mode and stock valuation account on the product category, and view unit cost and total value per category in the Stock report.",
+        "si_LK": "How to check inventory valuation in Odoo: open the Stock Valuation report and group it by product category and product, read the Total Value, check a product's cost, review the costing method, inventory valuation mode and stock valuation account on the product category, and view unit cost and total value per category in the Stock report.",
+        "ta_IN": "How to check inventory valuation in Odoo: open the Stock Valuation report and group it by product category and product, read the Total Value, check a product's cost, review the costing method, inventory valuation mode and stock valuation account on the product category, and view unit cost and total value per category in the Stock report."
+      },
+      "steps": [
+        {
+          "sequence": 10,
+          "title": "Reporting",
+          "title_i18n": {
+            "en_US": "Reporting",
+            "si_LK": "Reporting",
+            "ta_IN": "Reporting"
+          },
+          "trigger": "[data-menu-xmlid=\"stock.menu_warehouse_report\"]",
+          "content": "Open the Reporting menu in Inventory.",
+          "content_i18n": {
+            "en_US": "Open the Reporting menu in Inventory.",
+            "si_LK": "Open the Reporting menu in Inventory.",
+            "ta_IN": "Open the Reporting menu in Inventory."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 20,
+          "title": "Valuation",
+          "title_i18n": {
+            "en_US": "Valuation",
+            "si_LK": "Valuation",
+            "ta_IN": "Valuation"
+          },
+          "trigger": "[data-menu-xmlid=\"stock_account.menu_valuation\"]",
+          "content": "Click Valuation to open the Stock Valuation report.",
+          "content_i18n": {
+            "en_US": "Click Valuation to open the Stock Valuation report.",
+            "si_LK": "Click Valuation to open the Stock Valuation report.",
+            "ta_IN": "Click Valuation to open the Stock Valuation report."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 30,
+          "title": "Toggle Search Panel",
+          "title_i18n": {
+            "en_US": "Toggle Search Panel",
+            "si_LK": "Toggle Search Panel",
+            "ta_IN": "Toggle Search Panel"
+          },
+          "trigger": "button.dropdown-toggle.o_searchview_dropdown_toggler",
+          "content": "Open the search panel to change the filters and grouping.",
+          "content_i18n": {
+            "en_US": "Open the search panel to change the filters and grouping.",
+            "si_LK": "Open the search panel to change the filters and grouping.",
+            "ta_IN": "Open the search panel to change the filters and grouping."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 40,
+          "title": "Product",
+          "title_i18n": {
+            "en_US": "Product",
+            "si_LK": "Product",
+            "ta_IN": "Product"
+          },
+          "trigger": "div.o_dropdown_container.o_group_by_menu > span.dropdown-item.o_menu_item:nth-of-type(1)",
+          "content": "Click Product to switch off the default grouping by product.",
+          "content_i18n": {
+            "en_US": "Click Product to switch off the default grouping by product.",
+            "si_LK": "Click Product to switch off the default grouping by product.",
+            "ta_IN": "Click Product to switch off the default grouping by product."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 50,
+          "title": "Product Category",
+          "title_i18n": {
+            "en_US": "Product Category",
+            "si_LK": "Product Category",
+            "ta_IN": "Product Category"
+          },
+          "trigger": "div.o_dropdown_container.o_group_by_menu > span.dropdown-item.o_menu_item:nth-of-type(2)",
+          "content": "Click Product Category to group the stock value by category.",
+          "content_i18n": {
+            "en_US": "Click Product Category to group the stock value by category.",
+            "si_LK": "Click Product Category to group the stock value by category.",
+            "ta_IN": "Click Product Category to group the stock value by category."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 60,
+          "title": "Product",
+          "title_i18n": {
+            "en_US": "Product",
+            "si_LK": "Product",
+            "ta_IN": "Product"
+          },
+          "trigger": "div.o_dropdown_container.o_group_by_menu > span.dropdown-item.o_menu_item:nth-of-type(1)",
+          "content": "Click Product again to add a second level, so you get category first, then product.",
+          "content_i18n": {
+            "en_US": "Click Product again to add a second level, so you get category first, then product.",
+            "si_LK": "Click Product again to add a second level, so you get category first, then product.",
+            "ta_IN": "Click Product again to add a second level, so you get category first, then product."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 70,
+          "title": "FG-DO-01 (24)",
+          "title_i18n": {
+            "en_US": "FG-DO-01 (24)",
+            "si_LK": "FG-DO-01 (24)",
+            "ta_IN": "FG-DO-01 (24)"
+          },
+          "trigger": "th.o_group_name.fs-6 > div.d-flex.align-items-center",
+          "content": "Expand a category to see the products inside it and their values.",
+          "content_i18n": {
+            "en_US": "Expand a category to see the products inside it and their values.",
+            "si_LK": "Expand a category to see the products inside it and their values.",
+            "ta_IN": "Expand a category to see the products inside it and their values."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 80,
+          "title": "Total Value",
+          "title_i18n": {
+            "en_US": "Total Value",
+            "si_LK": "Total Value",
+            "ta_IN": "Total Value"
+          },
+          "trigger": "th.align-middle.o_column_sortable:nth-of-type(12) > div.d-flex.flex-row-reverse > span.d-block.min-w-0",
+          "content": "Read the stock value here: Total Value is the accounting value of the stock for each category and product.",
+          "content_i18n": {
+            "en_US": "Read the stock value here: Total Value is the accounting value of the stock for each category and product.",
+            "si_LK": "Read the stock value here: Total Value is the accounting value of the stock for each category and product.",
+            "ta_IN": "Read the stock value here: Total Value is the accounting value of the stock for each category and product."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 90,
+          "title": "Products",
+          "title_i18n": {
+            "en_US": "Products",
+            "si_LK": "Products",
+            "ta_IN": "Products"
+          },
+          "trigger": "[data-menu-xmlid=\"stock.menu_stock_inventory_control\"]",
+          "content": "Open the Products menu.",
+          "content_i18n": {
+            "en_US": "Open the Products menu.",
+            "si_LK": "Open the Products menu.",
+            "ta_IN": "Open the Products menu."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 100,
+          "title": "Products",
+          "title_i18n": {
+            "en_US": "Products",
+            "si_LK": "Products",
+            "ta_IN": "Products"
+          },
+          "trigger": "a.dropdown-item:nth-of-type(2)",
+          "content": "Click Products to open the product list.",
+          "content_i18n": {
+            "en_US": "Click Products to open the product list.",
+            "si_LK": "Click Products to open the product list.",
+            "ta_IN": "Click Products to open the product list."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 110,
+          "title": "CENTRIC TYPE PUMPING UNIT 10CJ 024S",
+          "title_i18n": {
+            "en_US": "CENTRIC TYPE PUMPING UNIT 10CJ 024S",
+            "si_LK": "CENTRIC TYPE PUMPING UNIT 10CJ 024S",
+            "ta_IN": "CENTRIC TYPE PUMPING UNIT 10CJ 024S"
+          },
+          "trigger": "tr.o_data_row.o_row_draggable:nth-of-type(7) > td.o_data_cell.cursor-pointer:nth-of-type(5)",
+          "content": "Open the product whose stock value you want to check.",
+          "content_i18n": {
+            "en_US": "Open the product whose stock value you want to check.",
+            "si_LK": "Open the product whose stock value you want to check.",
+            "ta_IN": "Open the product whose stock value you want to check."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 120,
+          "title": "0.0000",
+          "title_i18n": {
+            "en_US": "0.0000",
+            "si_LK": "0.0000",
+            "ta_IN": "0.0000"
+          },
+          "trigger": "#standard_price_0",
+          "content": "Value of the product (automatically computed in AVCO).\n        Used to value the product when the purchase cost is not known (e.g. inventory adjustment).\n        Used to compute margins on sale orders.",
+          "content_i18n": {
+            "en_US": "Value of the product (automatically computed in AVCO).\n        Used to value the product when the purchase cost is not known (e.g. inventory adjustment).\n        Used to compute margins on sale orders.",
+            "si_LK": "Value of the product (automatically computed in AVCO).\n        Used to value the product when the purchase cost is not known (e.g. inventory adjustment).\n        Used to compute margins on sale orders.",
+            "ta_IN": "Value of the product (automatically computed in AVCO).\n        Used to value the product when the purchase cost is not known (e.g. inventory adjustment).\n        Used to compute margins on sale orders."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 130,
+          "title": "Configuration",
+          "title_i18n": {
+            "en_US": "Configuration",
+            "si_LK": "Configuration",
+            "ta_IN": "Configuration"
+          },
+          "trigger": "[data-menu-xmlid=\"stock.menu_stock_config_settings\"]",
+          "content": "Open the Configuration menu.",
+          "content_i18n": {
+            "en_US": "Open the Configuration menu.",
+            "si_LK": "Open the Configuration menu.",
+            "ta_IN": "Open the Configuration menu."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 140,
+          "title": "Product Categories",
+          "title_i18n": {
+            "en_US": "Product Categories",
+            "si_LK": "Product Categories",
+            "ta_IN": "Product Categories"
+          },
+          "trigger": "[data-menu-xmlid=\"stock.menu_product_category_config_stock\"]",
+          "content": "Click Product Categories.",
+          "content_i18n": {
+            "en_US": "Click Product Categories.",
+            "si_LK": "Click Product Categories.",
+            "ta_IN": "Click Product Categories."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 150,
+          "title": "FG-4W-23",
+          "title_i18n": {
+            "en_US": "FG-4W-23",
+            "si_LK": "FG-4W-23",
+            "ta_IN": "FG-4W-23"
+          },
+          "trigger": "tr.o_data_row:nth-of-type(9) > td.o_data_cell.cursor-pointer:nth-of-type(2)",
+          "content": "Open the product category to see how its stock is valued.",
+          "content_i18n": {
+            "en_US": "Open the product category to see how its stock is valued.",
+            "si_LK": "Open the product category to see how its stock is valued.",
+            "ta_IN": "Open the product category to see how its stock is valued."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 160,
+          "title": "Standard Price First In First Out (FIFO)",
+          "title_i18n": {
+            "en_US": "Standard Price First In First Out (FIFO)",
+            "si_LK": "Standard Price First In First Out (FIFO)",
+            "ta_IN": "Standard Price First In First Out (FIFO)"
+          },
+          "trigger": "#property_cost_method_0",
+          "content": "Standard Price: The products are valued at their standard cost defined on the product.\n        Average Cost (AVCO): The products are valued at weighted average cost.\n        First In First Out (FIFO): The products are valued supposing those that enter the company first will also leave it first.",
+          "content_i18n": {
+            "en_US": "Standard Price: The products are valued at their standard cost defined on the product.\n        Average Cost (AVCO): The products are valued at weighted average cost.\n        First In First Out (FIFO): The products are valued supposing those that enter the company first will also leave it first.",
+            "si_LK": "Standard Price: The products are valued at their standard cost defined on the product.\n        Average Cost (AVCO): The products are valued at weighted average cost.\n        First In First Out (FIFO): The products are valued supposing those that enter the company first will also leave it first.",
+            "ta_IN": "Standard Price: The products are valued at their standard cost defined on the product.\n        Average Cost (AVCO): The products are valued at weighted average cost.\n        First In First Out (FIFO): The products are valued supposing those that enter the company first will also leave it first."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 170,
+          "title": "Manual Automated",
+          "title_i18n": {
+            "en_US": "Manual Automated",
+            "si_LK": "Manual Automated",
+            "ta_IN": "Manual Automated"
+          },
+          "trigger": "#property_valuation_1",
+          "content": "Manual: The accounting entries to value the inventory are not posted automatically.\n        Automated: An accounting entry is automatically created to value the inventory when a product enters or leaves the company.",
+          "content_i18n": {
+            "en_US": "Manual: The accounting entries to value the inventory are not posted automatically.\n        Automated: An accounting entry is automatically created to value the inventory when a product enters or leaves the company.",
+            "si_LK": "Manual: The accounting entries to value the inventory are not posted automatically.\n        Automated: An accounting entry is automatically created to value the inventory when a product enters or leaves the company.",
+            "ta_IN": "Manual: The accounting entries to value the inventory are not posted automatically.\n        Automated: An accounting entry is automatically created to value the inventory when a product enters or leaves the company."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 180,
+          "title": "ST003 INVENTORY - FINISHED GOODS",
+          "title_i18n": {
+            "en_US": "ST003 INVENTORY - FINISHED GOODS",
+            "si_LK": "ST003 INVENTORY - FINISHED GOODS",
+            "ta_IN": "ST003 INVENTORY - FINISHED GOODS"
+          },
+          "trigger": "#property_stock_valuation_account_id_0",
+          "content": "When automated inventory valuation is enabled on a product, this account will hold the current value of the products.",
+          "content_i18n": {
+            "en_US": "When automated inventory valuation is enabled on a product, this account will hold the current value of the products.",
+            "si_LK": "When automated inventory valuation is enabled on a product, this account will hold the current value of the products.",
+            "ta_IN": "When automated inventory valuation is enabled on a product, this account will hold the current value of the products."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 190,
+          "title": "Reporting",
+          "title_i18n": {
+            "en_US": "Reporting",
+            "si_LK": "Reporting",
+            "ta_IN": "Reporting"
+          },
+          "trigger": "[data-menu-xmlid=\"stock.menu_warehouse_report\"]",
+          "content": "Open the Reporting menu again.",
+          "content_i18n": {
+            "en_US": "Open the Reporting menu again.",
+            "si_LK": "Open the Reporting menu again.",
+            "ta_IN": "Open the Reporting menu again."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 200,
+          "title": "Stock",
+          "title_i18n": {
+            "en_US": "Stock",
+            "si_LK": "Stock",
+            "ta_IN": "Stock"
+          },
+          "trigger": "[data-menu-xmlid=\"stock.menu_product_stock\"]",
+          "content": "Click Stock to open the on-hand report, which shows unit cost and total value.",
+          "content_i18n": {
+            "en_US": "Click Stock to open the on-hand report, which shows unit cost and total value.",
+            "si_LK": "Click Stock to open the on-hand report, which shows unit cost and total value.",
+            "ta_IN": "Click Stock to open the on-hand report, which shows unit cost and total value."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 210,
+          "title": "Toggle Search Panel",
+          "title_i18n": {
+            "en_US": "Toggle Search Panel",
+            "si_LK": "Toggle Search Panel",
+            "ta_IN": "Toggle Search Panel"
+          },
+          "trigger": "button.dropdown-toggle.o_searchview_dropdown_toggler",
+          "content": "Open the search panel here as well.",
+          "content_i18n": {
+            "en_US": "Open the search panel here as well.",
+            "si_LK": "Open the search panel here as well.",
+            "ta_IN": "Open the search panel here as well."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        },
+        {
+          "sequence": 220,
+          "title": "Product Category",
+          "title_i18n": {
+            "en_US": "Product Category",
+            "si_LK": "Product Category",
+            "ta_IN": "Product Category"
+          },
+          "trigger": "div.o_dropdown_container.o_group_by_menu > span.dropdown-item.o_menu_item:nth-of-type(2)",
+          "content": "Group by Product Category to read unit cost and total value for each category.",
+          "content_i18n": {
+            "en_US": "Group by Product Category to read unit cost and total value for each category.",
+            "si_LK": "Group by Product Category to read unit cost and total value for each category.",
+            "ta_IN": "Group by Product Category to read unit cost and total value for each category."
+          },
+          "position": "bottom",
+          "run": "click",
+          "is_check": false,
+          "validation_type": "none",
+          "description": "",
+          "description_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          },
+          "validation_regex": "",
+          "validation_message": "",
+          "validation_message_i18n": {
+            "en_US": "",
+            "si_LK": "",
+            "ta_IN": ""
+          }
+        }
+      ]
+    }
+  ]
+}

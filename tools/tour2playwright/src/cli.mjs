@@ -22,7 +22,7 @@ import { spawnSync } from "node:child_process";
 import "./env.mjs";
 import { loadTours } from "./loadTours.mjs";
 import { genSpec } from "./genSpec.mjs";
-import { genManuals } from "./genManual.mjs";
+import { genManuals, loadGuide } from "./genManual.mjs";
 import { REPO_ROOT, GENERATED_DIR, assertModuleExists, specsDirFor, docsDirFor } from "./names.mjs";
 
 function usage(msg) {
@@ -87,7 +87,10 @@ function doManual(domain, exportFile) {
   const docsDir = docsDirFor(domain);
   ensureDir(docsDir);
   for (const tour of tours) {
-    const files = genManuals(tour);
+    // Optional enrichment: <docs dir>/<slug>.guide.json (see genManual.mjs). Absent = plain manual.
+    const guide = loadGuide(docsDir, tour.slug);
+    if (guide) console.log(`  guide   ${path.relative(REPO_ROOT, path.join(docsDir, tour.slug + ".guide.json"))}`);
+    const files = genManuals(tour, guide);
     for (const { filename, content } of files) {
       const outPath = path.join(docsDir, filename);
       fs.writeFileSync(outPath, content, "utf8");
