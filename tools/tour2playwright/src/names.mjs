@@ -25,9 +25,24 @@ export function assertModuleExists(domain) {
   }
 }
 
+/** Test steps a tour can be generated into (folder + describe tag), per the 7-step convention. */
+export const STEPS = {
+  config: "01-config",
+  business: "02-business",
+  reporting: "03-reporting",
+  permissions: "04-permissions",
+  validations: "05-validations",
+  edge: "06-edge-cases",
+  archive: "07-archive",
+};
+
+export function assertStep(step) {
+  if (!STEPS[step]) throw new Error(`Unknown --step "${step}". Use one of: ${Object.keys(STEPS).join(", ")}.`);
+}
+
 /** Where generated Playwright specs for this domain are written. */
-export function specsDirFor(domain) {
-  return path.join(REPO_ROOT, "src", "modules", domain, "tests", "02-business");
+export function specsDirFor(domain, step = "business") {
+  return path.join(REPO_ROOT, "src", "modules", domain, "tests", STEPS[step]);
 }
 
 /** Where generated HTML manuals for this domain are written. */

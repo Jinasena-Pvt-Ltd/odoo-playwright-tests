@@ -37,12 +37,16 @@ export function selectorToLocator(selector) {
     tail += method;
   };
 
+  // Odoo clicks the dropdown container; Playwright clicks its centre, which can land on
+  // "Search More...". Target the first suggestion instead.
+  sel = sel.replace(/\.o-autocomplete--dropdown-menu\s*$/, ".o-autocomplete--dropdown-menu .o-autocomplete--dropdown-item");
+
   // :first / :last
-  sel = sel.replace(/:first\b/g, () => {
+  sel = sel.replace(/:first(?![-\w])/g, () => {
     applyTail(".first()");
     return "";
   });
-  sel = sel.replace(/:last\b/g, () => {
+  sel = sel.replace(/:last(?![-\w])/g, () => {
     applyTail(".last()");
     return "";
   });
@@ -111,6 +115,12 @@ export function parseRun(run, isCheck) {
   const raw = (run == null ? "click" : String(run)).trim();
   if (!raw || raw === "click") return { kind: "click", value: "" };
 
+  // Value-less recorder steps: the guide asks the user to type/choose/pick,
+  // so the test supplies a sample (see actionFor).
+  if (/^(?:edit|edit-any|text)$/i.test(raw)) return { kind: "edit-bare", value: "" };
+  if (/^select(?:-any)?$/i.test(raw)) return { kind: "select-bare", value: "" };
+  if (/^apply-picker$/i.test(raw)) return { kind: "picker", value: "" };
+
   // "edit VALUE" / "text VALUE"  → fill
   let m = raw.match(/^(?:edit|text|edit_input)\s+([\s\S]+)$/i);
   if (m) return { kind: "fill", value: m[1] };
@@ -158,6 +168,22 @@ export function actionFor(locExpr, step) {
         code: `await loc.selectOption({ label: ${jsString(value)} }).catch(() => loc.selectOption(${jsString(value)}));`,
         todos,
       };
+    case "edit-bare": {
+      const v = sampleValue(step);
+      // Many2one fields: clicking opens the suggestions; the next step picks one.
+      if (v == null) return { code: `await loc.click();`, todos };
+      const tab = /press tab/i.test(step.content) ? `
+      await loc.press("Tab");` : "";
+      return { code: `await loc.fill(${v});${tab}`, todos };
+    }
+    case "select-bare": {
+      const m = step.content.match(/(By \w+)/);
+      const pick = m ? `{ label: ${jsString(m[1])} }` : `{ index: 1 }`;
+      return { code: `await loc.selectOption(${pick}).catch(() => loc.selectOption({ index: 1 }));`, todos };
+    }
+    case "picker":
+      // shortcut: accepts the picker's preselected date/time, pick a specific one if a test needs it.
+      return { code: `await loc.getByRole("button", { name: "Apply" }).click();`, todos };
     case "check":
       return { code: `await loc.check();`, todos };
     case "uncheck":
@@ -176,4 +202,16 @@ export function actionFor(locExpr, step) {
         todos,
       };
   }
+}
+
+/** JS expression for a sample value typed into a value-less `edit` step, or null for many2one pickers. */
+function sampleValue(step) {
+  if (/first letters/i.test(step.content)) return null;
+  const field = (step.trigger.match(/\[name="(\w+)"\]/) || [])[1] || "";
+  if (/email/.test(field)) return `uniqueEmail("tour")`;
+  if (/hours/.test(field)) return jsString("40");
+  if (/days/.test(field)) return jsString("1");
+  if (/amount|wage/.test(field)) return jsString("100");
+  if (field === "code") return `uniqueRef("TST").replace(/\\W/g, "")`;
+  return `uniqueName("Tour")`;
 }
