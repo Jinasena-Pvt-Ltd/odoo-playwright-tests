@@ -192,7 +192,7 @@
   </div>
   <div class="nav-section">
     <div class="nav-module-label"><span class="mod-dot" style="background:#64748b"></span>sales</div>
-    <a class="nav-item" href="#sales-config"><span class="nav-dot green"></span>Config<span class="nav-count">17/17</span></a>
+    <a class="nav-item" href="#sales-config"><span class="nav-dot green"></span>Config<span class="nav-count">25/25</span></a>
     <a class="nav-item" href="#sales-business"><span class="nav-dot green"></span>Business<span class="nav-count">66/66</span></a>
     <a class="nav-item" href="#sales-reporting"><span class="nav-dot green"></span>Reporting<span class="nav-count">18/18</span></a>
     <a class="nav-item" href="#sales-permissions"><span class="nav-dot green"></span>Permissions<span class="nav-count">7/7</span></a>
@@ -216,16 +216,16 @@
     <div class="hero-top">
       <div>
         <div class="hero-title">odoo-playwright-tests — Master E2E Report</div>
-        <div class="hero-sub">1 Modules · 129 tests · 2026-11-18</div>
+        <div class="hero-sub">1 Modules · 137 tests · 2026-11-18</div>
       </div>
       <div class="hero-badge">Auto-generated</div>
     </div>
     <div class="hero-stats">
       <div class="hero-stat"><div class="num">1</div><div class="lbl">Modules</div></div>
       <div class="hero-divider"></div>
-      <div class="hero-stat"><div class="num">129</div><div class="lbl">Total Tests</div></div>
+      <div class="hero-stat"><div class="num">137</div><div class="lbl">Total Tests</div></div>
       <div class="hero-divider"></div>
-      <div class="hero-stat"><div class="num green">128</div><div class="lbl">Passed</div></div>
+      <div class="hero-stat"><div class="num green">136</div><div class="lbl">Passed</div></div>
       <div class="hero-divider"></div>
       <div class="hero-stat"><div class="num red">0</div><div class="lbl">Failed</div></div>
       <div class="hero-divider"></div>
@@ -233,7 +233,7 @@
       
     </div>
     <div class="hero-bar-wrap">
-      <div class="hero-bar-label"><span>Pass rate (of tests that ran)</span><span>100% · 128/128</span></div>
+      <div class="hero-bar-label"><span>Pass rate (of tests that ran)</span><span>100% · 136/136</span></div>
       <div class="hero-bar-bg"><div class="hero-bar-fill" style="width:100%"></div></div>
     </div>
   </div>
@@ -244,17 +244,17 @@
       <div class="module-card-name">sales</div>
       <div class="module-card-sub"></div>
       <div class="module-card-stats">
-        <span class="p">✔ 128</span>
+        <span class="p">✔ 136</span>
         <span class="s">⏭ 1</span>
         
-        <span class="t">of 129</span>
+        <span class="t">of 137</span>
       </div>
       <div class="module-mini-bar">
         <div class="seg-pass" style="width:99%"></div>
         <div class="seg-skip" style="width:1%"></div>
         <div class="seg-fail" style="width:0%"></div>
       </div>
-      <div style="font-size:0.68rem;color:var(--muted);margin-top:6px;">18 spec files</div>
+      <div style="font-size:0.68rem;color:var(--muted);margin-top:6px;">19 spec files</div>
     </div>
   </div>
 
@@ -265,9 +265,9 @@
       <span class="mod-header-icon">📦</span>
       <div>
         <div class="mod-header-title">sales</div>
-        <div class="mod-header-meta">src/modules/sales/ · 18 spec files · 129 tests</div>
+        <div class="mod-header-meta">src/modules/sales/ · 19 spec files · 137 tests</div>
       </div>
-      <div class="mod-header-pills"><span class="pill green">128 passed</span> <span class="pill purple">1 skipped</span></div>
+      <div class="mod-header-pills"><span class="pill green">136 passed</span> <span class="pill purple">1 skipped</span></div>
     </div>
     
     
@@ -275,10 +275,200 @@
       <div class="suite-hdr">
         <span class="suite-hdr-icon">⚙️</span>
         <span class="suite-hdr-title">Config</span>
+        <span class="pill green">25 passed</span>
+        <span class="suite-hdr-file">2 files</span>
+      </div>
+      
+      <div class="suite-hdr" style="margin-top:4px;">
+        <span class="suite-hdr-icon">⚙️</span>
+        <span class="suite-hdr-title">sales.config-validations</span>
+        <span class="pill green">8 passed</span>
+        <span class="suite-hdr-file">sales.config-validations.spec.ts</span>
+      </div>
+      <div class="test-list">
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">payment term: a blank name cannot be saved</span><div class="test-row-tags"><span class="tag ui">UI</span><span class="tag rpc">RPC</span></div><details class="code-snippet"><summary></summary><pre class="code">      test(`${form.label}: a blank name cannot be saved`, async ({ page, rpc }) =&gt; {
+        const before = await totalRecords(rpc, form.model);
+        await openNewForm(page, form);
+        await page.locator('.o_form_button_save:visible').first().click();
+
+        // Odoo highlights the empty mandatory field and stays on the unsaved form
+        await expect(page.locator('.o_field_invalid').first(), 'the empty name should be flagged as invalid').toBeVisible({ timeout: 20_000 });
+        expect(await totalRecords(rpc, form.model), 'no record should be created from a blank form').toBe(before);
+      });
+
+      if (form.requiredExtras.length) {
+        test(`${form.label}: the other mandatory fields are flagged when only the name is filled`, async ({ page, rpc }) =&gt; {
+          const name = uniqueName(`Validation ${form.label}`);
+          stray.push({ model: form.model, field: form.nameField, name });
+          const before = await totalRecords(rpc, form.model);
+
+          await openNewForm(page, form);
+          await page.locator(form.nameInput).fill(name);
+          await page.locator('.o_form_button_save:visible').first().click();
+
+          for (const field of form.requiredExtras) {
+            await expect(page.locator(`[name=&quot;${field}&quot;].o_field_invalid, [name=&quot;${field}&quot;] .o_field_invalid`).first(),</pre></details></div>
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">sales team: a blank name cannot be saved</span><div class="test-row-tags"><span class="tag ui">UI</span><span class="tag rpc">RPC</span></div><details class="code-snippet"><summary></summary><pre class="code">      test(`${form.label}: a blank name cannot be saved`, async ({ page, rpc }) =&gt; {
+        const before = await totalRecords(rpc, form.model);
+        await openNewForm(page, form);
+        await page.locator('.o_form_button_save:visible').first().click();
+
+        // Odoo highlights the empty mandatory field and stays on the unsaved form
+        await expect(page.locator('.o_field_invalid').first(), 'the empty name should be flagged as invalid').toBeVisible({ timeout: 20_000 });
+        expect(await totalRecords(rpc, form.model), 'no record should be created from a blank form').toBe(before);
+      });
+
+      if (form.requiredExtras.length) {
+        test(`${form.label}: the other mandatory fields are flagged when only the name is filled`, async ({ page, rpc }) =&gt; {
+          const name = uniqueName(`Validation ${form.label}`);
+          stray.push({ model: form.model, field: form.nameField, name });
+          const before = await totalRecords(rpc, form.model);
+
+          await openNewForm(page, form);
+          await page.locator(form.nameInput).fill(name);
+          await page.locator('.o_form_button_save:visible').first().click();
+
+          for (const field of form.requiredExtras) {
+            await expect(page.locator(`[name=&quot;${field}&quot;].o_field_invalid, [name=&quot;${field}&quot;] .o_field_invalid`).first(),</pre></details></div>
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">customer group: a blank name cannot be saved</span><div class="test-row-tags"><span class="tag ui">UI</span><span class="tag rpc">RPC</span></div><details class="code-snippet"><summary></summary><pre class="code">      test(`${form.label}: a blank name cannot be saved`, async ({ page, rpc }) =&gt; {
+        const before = await totalRecords(rpc, form.model);
+        await openNewForm(page, form);
+        await page.locator('.o_form_button_save:visible').first().click();
+
+        // Odoo highlights the empty mandatory field and stays on the unsaved form
+        await expect(page.locator('.o_field_invalid').first(), 'the empty name should be flagged as invalid').toBeVisible({ timeout: 20_000 });
+        expect(await totalRecords(rpc, form.model), 'no record should be created from a blank form').toBe(before);
+      });
+
+      if (form.requiredExtras.length) {
+        test(`${form.label}: the other mandatory fields are flagged when only the name is filled`, async ({ page, rpc }) =&gt; {
+          const name = uniqueName(`Validation ${form.label}`);
+          stray.push({ model: form.model, field: form.nameField, name });
+          const before = await totalRecords(rpc, form.model);
+
+          await openNewForm(page, form);
+          await page.locator(form.nameInput).fill(name);
+          await page.locator('.o_form_button_save:visible').first().click();
+
+          for (const field of form.requiredExtras) {
+            await expect(page.locator(`[name=&quot;${field}&quot;].o_field_invalid, [name=&quot;${field}&quot;] .o_field_invalid`).first(),</pre></details></div>
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">customer group: the other mandatory fields are flagged when only the name is filled</span><div class="test-row-tags"><span class="tag ui">UI</span><span class="tag rpc">RPC</span></div><details class="code-snippet"><summary></summary><pre class="code">      test(`${form.label}: a blank name cannot be saved`, async ({ page, rpc }) =&gt; {
+        const before = await totalRecords(rpc, form.model);
+        await openNewForm(page, form);
+        await page.locator('.o_form_button_save:visible').first().click();
+
+        // Odoo highlights the empty mandatory field and stays on the unsaved form
+        await expect(page.locator('.o_field_invalid').first(), 'the empty name should be flagged as invalid').toBeVisible({ timeout: 20_000 });
+        expect(await totalRecords(rpc, form.model), 'no record should be created from a blank form').toBe(before);
+      });
+
+      if (form.requiredExtras.length) {
+        test(`${form.label}: the other mandatory fields are flagged when only the name is filled`, async ({ page, rpc }) =&gt; {
+          const name = uniqueName(`Validation ${form.label}`);
+          stray.push({ model: form.model, field: form.nameField, name });
+          const before = await totalRecords(rpc, form.model);
+
+          await openNewForm(page, form);
+          await page.locator(form.nameInput).fill(name);
+          await page.locator('.o_form_button_save:visible').first().click();
+
+          for (const field of form.requiredExtras) {
+            await expect(page.locator(`[name=&quot;${field}&quot;].o_field_invalid, [name=&quot;${field}&quot;] .o_field_invalid`).first(),</pre></details></div>
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">pricelist: a blank name cannot be saved</span><div class="test-row-tags"><span class="tag ui">UI</span><span class="tag rpc">RPC</span></div><details class="code-snippet"><summary></summary><pre class="code">      test(`${form.label}: a blank name cannot be saved`, async ({ page, rpc }) =&gt; {
+        const before = await totalRecords(rpc, form.model);
+        await openNewForm(page, form);
+        await page.locator('.o_form_button_save:visible').first().click();
+
+        // Odoo highlights the empty mandatory field and stays on the unsaved form
+        await expect(page.locator('.o_field_invalid').first(), 'the empty name should be flagged as invalid').toBeVisible({ timeout: 20_000 });
+        expect(await totalRecords(rpc, form.model), 'no record should be created from a blank form').toBe(before);
+      });
+
+      if (form.requiredExtras.length) {
+        test(`${form.label}: the other mandatory fields are flagged when only the name is filled`, async ({ page, rpc }) =&gt; {
+          const name = uniqueName(`Validation ${form.label}`);
+          stray.push({ model: form.model, field: form.nameField, name });
+          const before = await totalRecords(rpc, form.model);
+
+          await openNewForm(page, form);
+          await page.locator(form.nameInput).fill(name);
+          await page.locator('.o_form_button_save:visible').first().click();
+
+          for (const field of form.requiredExtras) {
+            await expect(page.locator(`[name=&quot;${field}&quot;].o_field_invalid, [name=&quot;${field}&quot;] .o_field_invalid`).first(),</pre></details></div>
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">pricelist: the other mandatory fields are flagged when only the name is filled</span><div class="test-row-tags"><span class="tag ui">UI</span><span class="tag rpc">RPC</span></div><details class="code-snippet"><summary></summary><pre class="code">      test(`${form.label}: a blank name cannot be saved`, async ({ page, rpc }) =&gt; {
+        const before = await totalRecords(rpc, form.model);
+        await openNewForm(page, form);
+        await page.locator('.o_form_button_save:visible').first().click();
+
+        // Odoo highlights the empty mandatory field and stays on the unsaved form
+        await expect(page.locator('.o_field_invalid').first(), 'the empty name should be flagged as invalid').toBeVisible({ timeout: 20_000 });
+        expect(await totalRecords(rpc, form.model), 'no record should be created from a blank form').toBe(before);
+      });
+
+      if (form.requiredExtras.length) {
+        test(`${form.label}: the other mandatory fields are flagged when only the name is filled`, async ({ page, rpc }) =&gt; {
+          const name = uniqueName(`Validation ${form.label}`);
+          stray.push({ model: form.model, field: form.nameField, name });
+          const before = await totalRecords(rpc, form.model);
+
+          await openNewForm(page, form);
+          await page.locator(form.nameInput).fill(name);
+          await page.locator('.o_form_button_save:visible').first().click();
+
+          for (const field of form.requiredExtras) {
+            await expect(page.locator(`[name=&quot;${field}&quot;].o_field_invalid, [name=&quot;${field}&quot;] .o_field_invalid`).first(),</pre></details></div>
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">product: a blank name cannot be saved</span><div class="test-row-tags"><span class="tag ui">UI</span><span class="tag rpc">RPC</span></div><details class="code-snippet"><summary></summary><pre class="code">      test(`${form.label}: a blank name cannot be saved`, async ({ page, rpc }) =&gt; {
+        const before = await totalRecords(rpc, form.model);
+        await openNewForm(page, form);
+        await page.locator('.o_form_button_save:visible').first().click();
+
+        // Odoo highlights the empty mandatory field and stays on the unsaved form
+        await expect(page.locator('.o_field_invalid').first(), 'the empty name should be flagged as invalid').toBeVisible({ timeout: 20_000 });
+        expect(await totalRecords(rpc, form.model), 'no record should be created from a blank form').toBe(before);
+      });
+
+      if (form.requiredExtras.length) {
+        test(`${form.label}: the other mandatory fields are flagged when only the name is filled`, async ({ page, rpc }) =&gt; {
+          const name = uniqueName(`Validation ${form.label}`);
+          stray.push({ model: form.model, field: form.nameField, name });
+          const before = await totalRecords(rpc, form.model);
+
+          await openNewForm(page, form);
+          await page.locator(form.nameInput).fill(name);
+          await page.locator('.o_form_button_save:visible').first().click();
+
+          for (const field of form.requiredExtras) {
+            await expect(page.locator(`[name=&quot;${field}&quot;].o_field_invalid, [name=&quot;${field}&quot;] .o_field_invalid`).first(),</pre></details></div>
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">product: the other mandatory fields are flagged when only the name is filled</span><div class="test-row-tags"><span class="tag ui">UI</span><span class="tag rpc">RPC</span></div><details class="code-snippet"><summary></summary><pre class="code">      test(`${form.label}: a blank name cannot be saved`, async ({ page, rpc }) =&gt; {
+        const before = await totalRecords(rpc, form.model);
+        await openNewForm(page, form);
+        await page.locator('.o_form_button_save:visible').first().click();
+
+        // Odoo highlights the empty mandatory field and stays on the unsaved form
+        await expect(page.locator('.o_field_invalid').first(), 'the empty name should be flagged as invalid').toBeVisible({ timeout: 20_000 });
+        expect(await totalRecords(rpc, form.model), 'no record should be created from a blank form').toBe(before);
+      });
+
+      if (form.requiredExtras.length) {
+        test(`${form.label}: the other mandatory fields are flagged when only the name is filled`, async ({ page, rpc }) =&gt; {
+          const name = uniqueName(`Validation ${form.label}`);
+          stray.push({ model: form.model, field: form.nameField, name });
+          const before = await totalRecords(rpc, form.model);
+
+          await openNewForm(page, form);
+          await page.locator(form.nameInput).fill(name);
+          await page.locator('.o_form_button_save:visible').first().click();
+
+          for (const field of form.requiredExtras) {
+            await expect(page.locator(`[name=&quot;${field}&quot;].o_field_invalid, [name=&quot;${field}&quot;] .o_field_invalid`).first(),</pre></details></div>
+      </div>
+      <div class="suite-hdr" style="margin-top:16px;">
+        <span class="suite-hdr-icon">⚙️</span>
+        <span class="suite-hdr-title">sales.config</span>
         <span class="pill green">17 passed</span>
         <span class="suite-hdr-file">sales.config.spec.ts</span>
       </div>
-      
       <div class="test-list">
         <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">1. Payment Terms list opens from Accounting &gt; Configuration</span><div class="test-row-tags"><span class="tag smoke">@smoke</span><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('1. Payment Terms list opens from Accounting &gt; Configuration @smoke', async ({ page }) =&gt; {
     await openPaymentTerms(page);

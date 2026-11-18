@@ -1298,5 +1298,85 @@
   "title": "sales team: archive hides it, unarchive brings it back",
   "file": "sales.archive.spec.ts",
   "placeholder": false
+ },
+ {
+  "key": "admin|sales|config|Configuration field validations › payment term form|payment term: a blank name cannot be saved",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "config",
+  "describe": "Configuration field validations › payment term form",
+  "title": "payment term: a blank name cannot be saved",
+  "file": "sales.config-validations.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|config|Configuration field validations › sales team form|sales team: a blank name cannot be saved",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "config",
+  "describe": "Configuration field validations › sales team form",
+  "title": "sales team: a blank name cannot be saved",
+  "file": "sales.config-validations.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|config|Configuration field validations › customer group form|customer group: a blank name cannot be saved",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "config",
+  "describe": "Configuration field validations › customer group form",
+  "title": "customer group: a blank name cannot be saved",
+  "file": "sales.config-validations.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|config|Configuration field validations › customer group form|customer group: the other mandatory fields are flagged when only the name is filled",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "config",
+  "describe": "Configuration field validations › customer group form",
+  "title": "customer group: the other mandatory fields are flagged when only the name is filled",
+  "file": "sales.config-validations.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|config|Configuration field validations › pricelist form|pricelist: a blank name cannot be saved",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "config",
+  "describe": "Configuration field validations › pricelist form",
+  "title": "pricelist: a blank name cannot be saved",
+  "file": "sales.config-validations.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|config|Configuration field validations › pricelist form|pricelist: the other mandatory fields are flagged when only the name is filled",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "config",
+  "describe": "Configuration field validations › pricelist form",
+  "title": "pricelist: the other mandatory fields are flagged when only the name is filled",
+  "file": "sales.config-validations.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|config|Configuration field validations › product form|product: a blank name cannot be saved",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "config",
+  "describe": "Configuration field validations › product form",
+  "title": "product: a blank name cannot be saved",
+  "file": "sales.config-validations.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|config|Configuration field validations › product form|product: the other mandatory fields are flagged when only the name is filled",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "config",
+  "describe": "Configuration field validations › product form",
+  "title": "product: the other mandatory fields are flagged when only the name is filled",
+  "file": "sales.config-validations.spec.ts",
+  "placeholder": false
  }
 ]

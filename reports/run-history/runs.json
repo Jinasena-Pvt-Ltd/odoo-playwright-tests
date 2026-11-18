@@ -5539,5 +5539,58 @@
     "error": ""
    }
   }
+ },
+ {
+  "id": "2026-11-18T05:07:23.252Z",
+  "startedAt": "2026-11-18T05:07:23.252Z",
+  "label": "Config: field validations",
+  "note": "Configuration field validation tests (blank name, mandatory extras)",
+  "results": {
+   "setup|setup|setup||authenticate: auth-storage/admin.json": {
+    "status": "passed",
+    "durationMs": 22555,
+    "error": ""
+   },
+   "admin|sales|config|Configuration field validations › payment term form|payment term: a blank name cannot be saved": {
+    "status": "passed",
+    "durationMs": 15935,
+    "error": ""
+   },
+   "admin|sales|config|Configuration field validations › sales team form|sales team: a blank name cannot be saved": {
+    "status": "passed",
+    "durationMs": 14519,
+    "error": ""
+   },
+   "admin|sales|config|Configuration field validations › customer group form|customer group: a blank name cannot be saved": {
+    "status": "passed",
+    "durationMs": 17345,
+    "error": ""
+   },
+   "admin|sales|config|Configuration field validations › customer group form|customer group: the other mandatory fields are flagged when only the name is filled": {
+    "status": "passed",
+    "durationMs": 16988,
+    "error": ""
+   },
+   "admin|sales|config|Configuration field validations › pricelist form|pricelist: a blank name cannot be saved": {
+    "status": "passed",
+    "durationMs": 13389,
+    "error": ""
+   },
+   "admin|sales|config|Configuration field validations › pricelist form|pricelist: the other mandatory fields are flagged when only the name is filled": {
+    "status": "passed",
+    "durationMs": 15692,
+    "error": ""
+   },
+   "admin|sales|config|Configuration field validations › product form|product: a blank name cannot be saved": {
+    "status": "passed",
+    "durationMs": 21263,
+    "error": ""
+   },
+   "admin|sales|config|Configuration field validations › product form|product: the other mandatory fields are flagged when only the name is filled": {
+    "status": "passed",
+    "durationMs": 13423,
+    "error": ""
+   }
+  }
  }
 ]
