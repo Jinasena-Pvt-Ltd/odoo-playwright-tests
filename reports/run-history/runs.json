@@ -10,41 +10,6 @@
     "durationMs": 18207,
     "error": ""
    },
-   "admin|sales|config|Sales Configuration Setup|placeholder — replace with real test": {
-    "status": "skipped",
-    "durationMs": 721,
-    "error": ""
-   },
-   "admin|sales|business|Sales Business Logic|placeholder — replace with real test": {
-    "status": "skipped",
-    "durationMs": 919,
-    "error": ""
-   },
-   "admin|sales|reporting|Sales Reporting|placeholder — replace with real test": {
-    "status": "skipped",
-    "durationMs": 1033,
-    "error": ""
-   },
-   "admin|sales|permissions|Sales User Permissions|placeholder — replace with real test": {
-    "status": "skipped",
-    "durationMs": 909,
-    "error": ""
-   },
-   "admin|sales|validations|Sales Field Validations|placeholder — replace with real test": {
-    "status": "skipped",
-    "durationMs": 989,
-    "error": ""
-   },
-   "admin|sales|edge|Sales Edge Cases|placeholder — replace with real test": {
-    "status": "skipped",
-    "durationMs": 958,
-    "error": ""
-   },
-   "admin|sales|archive|Sales Archive & Cleanup|placeholder — replace with real test": {
-    "status": "skipped",
-    "durationMs": 974,
-    "error": ""
-   },
    "admin|sales|business|Credit order, bank guarantee customer: validity notification, invoice and cash receipt|1. quotation: Credit order for the bank guarantee customer": {
     "status": "passed",
     "durationMs": 18379,
@@ -436,41 +401,6 @@
    "setup|setup|setup||authenticate: auth-storage/admin.json": {
     "status": "passed",
     "durationMs": 14253,
-    "error": ""
-   },
-   "admin|sales|config|Sales Configuration Setup|placeholder — replace with real test": {
-    "status": "skipped",
-    "durationMs": 838,
-    "error": ""
-   },
-   "admin|sales|business|Sales Business Logic|placeholder — replace with real test": {
-    "status": "skipped",
-    "durationMs": 879,
-    "error": ""
-   },
-   "admin|sales|reporting|Sales Reporting|placeholder — replace with real test": {
-    "status": "skipped",
-    "durationMs": 952,
-    "error": ""
-   },
-   "admin|sales|permissions|Sales User Permissions|placeholder — replace with real test": {
-    "status": "skipped",
-    "durationMs": 962,
-    "error": ""
-   },
-   "admin|sales|validations|Sales Field Validations|placeholder — replace with real test": {
-    "status": "skipped",
-    "durationMs": 955,
-    "error": ""
-   },
-   "admin|sales|edge|Sales Edge Cases|placeholder — replace with real test": {
-    "status": "skipped",
-    "durationMs": 946,
-    "error": ""
-   },
-   "admin|sales|archive|Sales Archive & Cleanup|placeholder — replace with real test": {
-    "status": "skipped",
-    "durationMs": 982,
     "error": ""
    },
    "admin|sales|business|Credit order, bank guarantee customer: validity notification, invoice and cash receipt|1. quotation: Credit order for the bank guarantee customer": {
@@ -866,41 +796,6 @@
     "durationMs": 11906,
     "error": ""
    },
-   "admin|sales|config|Sales Configuration Setup|placeholder — replace with real test": {
-    "status": "skipped",
-    "durationMs": 1163,
-    "error": ""
-   },
-   "admin|sales|business|Sales Business Logic|placeholder — replace with real test": {
-    "status": "skipped",
-    "durationMs": 924,
-    "error": ""
-   },
-   "admin|sales|reporting|Sales Reporting|placeholder — replace with real test": {
-    "status": "skipped",
-    "durationMs": 877,
-    "error": ""
-   },
-   "admin|sales|permissions|Sales User Permissions|placeholder — replace with real test": {
-    "status": "skipped",
-    "durationMs": 981,
-    "error": ""
-   },
-   "admin|sales|validations|Sales Field Validations|placeholder — replace with real test": {
-    "status": "skipped",
-    "durationMs": 1108,
-    "error": ""
-   },
-   "admin|sales|edge|Sales Edge Cases|placeholder — replace with real test": {
-    "status": "skipped",
-    "durationMs": 740,
-    "error": ""
-   },
-   "admin|sales|archive|Sales Archive & Cleanup|placeholder — replace with real test": {
-    "status": "skipped",
-    "durationMs": 1035,
-    "error": ""
-   },
    "admin|sales|business|Credit order, bank guarantee customer: validity notification, invoice and cash receipt|1. quotation: Credit order for the bank guarantee customer": {
     "status": "passed",
     "durationMs": 21360,
@@ -1284,54 +1179,6 @@
   }
  },
  {
-  "id": "2026-11-05T08:01:38.502Z",
-  "startedAt": "2026-11-05T08:01:38.502Z",
-  "label": "31st run",
-  "note": "",
-  "results": {
-   "setup|setup|setup||authenticate: auth-storage/admin.json": {
-    "status": "passed",
-    "durationMs": 13937,
-    "error": ""
-   },
-   "admin|sales|business|Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt|1. quotation: Credit order for the overdue customer": {
-    "status": "passed",
-    "durationMs": 30925,
-    "error": ""
-   },
-   "admin|sales|business|Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt|2. gating: Confirm is blocked and the overdue details are viewable": {
-    "status": "passed",
-    "durationMs": 11610,
-    "error": ""
-   },
-   "admin|sales|business|Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt|3. approvals: overdue + credit limit approvals, then confirm → Sales Order": {
-    "status": "passed",
-    "durationMs": 29685,
-    "error": ""
-   },
-   "admin|sales|business|Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt|4. delivery: validate → Done": {
-    "status": "passed",
-    "durationMs": 13131,
-    "error": ""
-   },
-   "admin|sales|business|Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt|5. invoice: create and confirm → Posted": {
-    "status": "passed",
-    "durationMs": 12335,
-    "error": ""
-   },
-   "admin|sales|business|Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt|6. payment: find the order in Sales Orders, open its invoice and register the full cash payment": {
-    "status": "passed",
-    "durationMs": 16320,
-    "error": ""
-   },
-   "admin|sales|business|Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt|7. trace: payment → Sales Orders smart button leads back to 1 source order": {
-    "status": "passed",
-    "durationMs": 8051,
-    "error": ""
-   }
-  }
- },
- {
   "id": "2026-11-05T07:54:50.028Z",
   "startedAt": "2026-11-05T07:54:50.028Z",
   "label": "31st run",
@@ -1525,6 +1372,54 @@
   }
  },
  {
+  "id": "2026-11-05T08:01:38.502Z",
+  "startedAt": "2026-11-05T08:01:38.502Z",
+  "label": "31st run",
+  "note": "",
+  "results": {
+   "setup|setup|setup||authenticate: auth-storage/admin.json": {
+    "status": "passed",
+    "durationMs": 13937,
+    "error": ""
+   },
+   "admin|sales|business|Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt|1. quotation: Credit order for the overdue customer": {
+    "status": "passed",
+    "durationMs": 30925,
+    "error": ""
+   },
+   "admin|sales|business|Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt|2. gating: Confirm is blocked and the overdue details are viewable": {
+    "status": "passed",
+    "durationMs": 11610,
+    "error": ""
+   },
+   "admin|sales|business|Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt|3. approvals: overdue + credit limit approvals, then confirm → Sales Order": {
+    "status": "passed",
+    "durationMs": 29685,
+    "error": ""
+   },
+   "admin|sales|business|Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt|4. delivery: validate → Done": {
+    "status": "passed",
+    "durationMs": 13131,
+    "error": ""
+   },
+   "admin|sales|business|Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt|5. invoice: create and confirm → Posted": {
+    "status": "passed",
+    "durationMs": 12335,
+    "error": ""
+   },
+   "admin|sales|business|Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt|6. payment: find the order in Sales Orders, open its invoice and register the full cash payment": {
+    "status": "passed",
+    "durationMs": 16320,
+    "error": ""
+   },
+   "admin|sales|business|Credit order, overdue customer: overdue + credit limit approval, invoice and cash receipt|7. trace: payment → Sales Orders smart button leads back to 1 source order": {
+    "status": "passed",
+    "durationMs": 8051,
+    "error": ""
+   }
+  }
+ },
+ {
   "id": "2026-11-05T08:44:23.472Z",
   "startedAt": "2026-11-05T08:44:23.472Z",
   "label": "31st run",
@@ -1533,41 +1428,6 @@
    "setup|setup|setup||authenticate: auth-storage/admin.json": {
     "status": "passed",
     "durationMs": 11091,
-    "error": ""
-   },
-   "admin|sales|config|Sales Configuration Setup|placeholder — replace with real test": {
-    "status": "skipped",
-    "durationMs": 944,
-    "error": ""
-   },
-   "admin|sales|business|Sales Business Logic|placeholder — replace with real test": {
-    "status": "skipped",
-    "durationMs": 929,
-    "error": ""
-   },
-   "admin|sales|reporting|Sales Reporting|placeholder — replace with real test": {
-    "status": "skipped",
-    "durationMs": 888,
-    "error": ""
-   },
-   "admin|sales|permissions|Sales User Permissions|placeholder — replace with real test": {
-    "status": "skipped",
-    "durationMs": 980,
-    "error": ""
-   },
-   "admin|sales|validations|Sales Field Validations|placeholder — replace with real test": {
-    "status": "skipped",
-    "durationMs": 993,
-    "error": ""
-   },
-   "admin|sales|edge|Sales Edge Cases|placeholder — replace with real test": {
-    "status": "skipped",
-    "durationMs": 922,
-    "error": ""
-   },
-   "admin|sales|archive|Sales Archive & Cleanup|placeholder — replace with real test": {
-    "status": "skipped",
-    "durationMs": 1003,
     "error": ""
    },
    "admin|sales|business|Credit order, bank guarantee customer: validity notification, invoice and cash receipt|1. quotation: Credit order for the bank guarantee customer": {
@@ -3239,41 +3099,6 @@
     "durationMs": 16302,
     "error": ""
    },
-   "admin|sales|config|Sales Configuration Setup|placeholder — replace with real test": {
-    "status": "skipped",
-    "durationMs": 824,
-    "error": ""
-   },
-   "admin|sales|business|Sales Business Logic|placeholder — replace with real test": {
-    "status": "skipped",
-    "durationMs": 1006,
-    "error": ""
-   },
-   "admin|sales|reporting|Sales Reporting|placeholder — replace with real test": {
-    "status": "skipped",
-    "durationMs": 901,
-    "error": ""
-   },
-   "admin|sales|permissions|Sales User Permissions|placeholder — replace with real test": {
-    "status": "skipped",
-    "durationMs": 960,
-    "error": ""
-   },
-   "admin|sales|validations|Sales Field Validations|placeholder — replace with real test": {
-    "status": "skipped",
-    "durationMs": 973,
-    "error": ""
-   },
-   "admin|sales|edge|Sales Edge Cases|placeholder — replace with real test": {
-    "status": "skipped",
-    "durationMs": 957,
-    "error": ""
-   },
-   "admin|sales|archive|Sales Archive & Cleanup|placeholder — replace with real test": {
-    "status": "skipped",
-    "durationMs": 977,
-    "error": ""
-   },
    "admin|sales|business|Credit order, bank guarantee customer: validity notification, invoice and cash receipt|1. quotation: Credit order for the bank guarantee customer": {
     "status": "passed",
     "durationMs": 17903,
@@ -3808,41 +3633,6 @@
    "setup|setup|setup||authenticate: auth-storage/admin.json": {
     "status": "passed",
     "durationMs": 16863,
-    "error": ""
-   },
-   "admin|sales|config|Sales Configuration Setup|placeholder — replace with real test": {
-    "status": "skipped",
-    "durationMs": 1113,
-    "error": ""
-   },
-   "admin|sales|business|Sales Business Logic|placeholder — replace with real test": {
-    "status": "skipped",
-    "durationMs": 1010,
-    "error": ""
-   },
-   "admin|sales|reporting|Sales Reporting|placeholder — replace with real test": {
-    "status": "skipped",
-    "durationMs": 970,
-    "error": ""
-   },
-   "admin|sales|permissions|Sales User Permissions|placeholder — replace with real test": {
-    "status": "skipped",
-    "durationMs": 1111,
-    "error": ""
-   },
-   "admin|sales|validations|Sales Field Validations|placeholder — replace with real test": {
-    "status": "skipped",
-    "durationMs": 993,
-    "error": ""
-   },
-   "admin|sales|edge|Sales Edge Cases|placeholder — replace with real test": {
-    "status": "skipped",
-    "durationMs": 888,
-    "error": ""
-   },
-   "admin|sales|archive|Sales Archive & Cleanup|placeholder — replace with real test": {
-    "status": "skipped",
-    "durationMs": 1064,
     "error": ""
    },
    "admin|sales|business|Credit order, bank guarantee customer: validity notification, invoice and cash receipt|1. quotation: Credit order for the bank guarantee customer": {
@@ -4382,10 +4172,1372 @@
   }
  },
  {
-  "id": "2026-11-10T03:41:22.175Z",
-  "startedAt": "2026-11-10T03:41:22.175Z",
+  "id": "2026-11-13T10:54:38.467Z",
+  "startedAt": "2026-11-13T10:54:38.467Z",
+  "label": "Config: payment terms",
+  "note": "Payment terms tour (tour_export 23): 4 config tests replace the Config placeholder",
+  "results": {
+   "setup|setup|setup||authenticate: auth-storage/admin.json": {
+    "status": "passed",
+    "durationMs": 19282,
+    "error": ""
+   },
+   "admin|sales|config|Sales Configuration Setup|1. Payment Terms list opens from Accounting > Configuration": {
+    "status": "passed",
+    "durationMs": 13197,
+    "error": ""
+   },
+   "admin|sales|config|Sales Configuration Setup|2. a new payment term can be created and saved": {
+    "status": "passed",
+    "durationMs": 11725,
+    "error": ""
+   },
+   "admin|sales|config|Sales Configuration Setup|3. a saved payment term shows in the Payment Terms list": {
+    "status": "passed",
+    "durationMs": 11295,
+    "error": ""
+   },
+   "admin|sales|config|Sales Configuration Setup|4. a payment term can be assigned to a customer": {
+    "status": "passed",
+    "durationMs": 15050,
+    "error": ""
+   }
+  }
+ },
+ {
+  "id": "2026-11-13T11:02:50.207Z",
+  "startedAt": "2026-11-13T11:02:50.207Z",
   "label": "31st run",
   "note": "",
-  "results": {}
+  "results": {
+   "setup|setup|setup||authenticate: auth-storage/admin.json": {
+    "status": "passed",
+    "durationMs": 17204,
+    "error": ""
+   },
+   "admin|sales|config|Sales Teams Configuration|1. Sales Teams list opens from Sales > Configuration": {
+    "status": "passed",
+    "durationMs": 8442,
+    "error": ""
+   },
+   "admin|sales|config|Sales Teams Configuration|2. a new sales team can be created and saved": {
+    "status": "passed",
+    "durationMs": 11610,
+    "error": ""
+   },
+   "admin|sales|config|Sales Teams Configuration|3. a saved sales team shows in the Sales Teams list": {
+    "status": "passed",
+    "durationMs": 11493,
+    "error": ""
+   }
+  }
+ },
+ {
+  "id": "2026-11-16T05:39:47.829Z",
+  "startedAt": "2026-11-16T05:39:47.829Z",
+  "label": "Config: customer groups + pricelists",
+  "note": "Customer Groups (tour 25) and Pricelists (tour 27) config tests on the new upgrade-testing build",
+  "results": {
+   "setup|setup|setup||authenticate: auth-storage/admin.json": {
+    "status": "passed",
+    "durationMs": 19315,
+    "error": ""
+   },
+   "admin|sales|config|Customer Groups Configuration|1. Customer Groups list opens from Sales > Configuration": {
+    "status": "failed",
+    "durationMs": 122316,
+    "error": "Test timeout of 120000ms exceeded."
+   },
+   "admin|sales|config|Customer Groups Configuration|2. a new customer group can be created and saved": {
+    "status": "failed",
+    "durationMs": 121735,
+    "error": "Test timeout of 120000ms exceeded."
+   },
+   "admin|sales|config|Customer Groups Configuration|3. a saved customer group shows in the Customer Groups list": {
+    "status": "failed",
+    "durationMs": 121797,
+    "error": "Test timeout of 120000ms exceeded."
+   },
+   "admin|sales|config|Customer Groups Configuration|4. a customer group can be chosen on a customer": {
+    "status": "failed",
+    "durationMs": 123652,
+    "error": "Test timeout of 120000ms exceeded."
+   },
+   "admin|sales|config|Pricelists Configuration|1. Pricelists list opens from Sales > Products": {
+    "status": "passed",
+    "durationMs": 15126,
+    "error": ""
+   },
+   "admin|sales|config|Pricelists Configuration|2. a pricelist with a product price rule can be created and saved": {
+    "status": "failed",
+    "durationMs": 123189,
+    "error": "Test timeout of 120000ms exceeded."
+   },
+   "admin|sales|config|Pricelists Configuration|3. a saved pricelist shows in the Pricelists list": {
+    "status": "passed",
+    "durationMs": 16969,
+    "error": ""
+   }
+  }
+ },
+ {
+  "id": "2026-11-16T05:51:56.986Z",
+  "startedAt": "2026-11-16T05:51:56.986Z",
+  "label": "Config: customer groups + pricelists (fixed)",
+  "note": "Customer Groups (tour 25) and Pricelists (tour 27) config tests, selectors fixed for the new build",
+  "results": {
+   "setup|setup|setup||authenticate: auth-storage/admin.json": {
+    "status": "passed",
+    "durationMs": 12561,
+    "error": ""
+   },
+   "admin|sales|config|Customer Groups Configuration|1. Customer Groups list opens from Sales > Configuration": {
+    "status": "passed",
+    "durationMs": 11432,
+    "error": ""
+   },
+   "admin|sales|config|Customer Groups Configuration|2. a new customer group can be created and saved": {
+    "status": "failed",
+    "durationMs": 44818,
+    "error": "Error: the customer group should exist in Odoo after Save"
+   },
+   "admin|sales|config|Customer Groups Configuration|3. a saved customer group shows in the Customer Groups list": {
+    "status": "passed",
+    "durationMs": 17794,
+    "error": ""
+   },
+   "admin|sales|config|Customer Groups Configuration|4. a customer group can be chosen on a customer": {
+    "status": "passed",
+    "durationMs": 19546,
+    "error": ""
+   },
+   "admin|sales|config|Pricelists Configuration|1. Pricelists list opens from Sales > Products": {
+    "status": "passed",
+    "durationMs": 17569,
+    "error": ""
+   },
+   "admin|sales|config|Pricelists Configuration|2. a pricelist with a product price rule can be created and saved": {
+    "status": "failed",
+    "durationMs": 91554,
+    "error": "Test timeout of 90000ms exceeded."
+   },
+   "admin|sales|config|Pricelists Configuration|3. a saved pricelist shows in the Pricelists list": {
+    "status": "passed",
+    "durationMs": 13468,
+    "error": ""
+   }
+  }
+ },
+ {
+  "id": "2026-11-16T05:56:22.499Z",
+  "startedAt": "2026-11-16T05:56:22.499Z",
+  "label": "Config: customer groups + pricelists (fixed 2)",
+  "note": "",
+  "results": {
+   "setup|setup|setup||authenticate: auth-storage/admin.json": {
+    "status": "passed",
+    "durationMs": 18573,
+    "error": ""
+   },
+   "admin|sales|config|Customer Groups Configuration|1. Customer Groups list opens from Sales > Configuration": {
+    "status": "passed",
+    "durationMs": 9188,
+    "error": ""
+   },
+   "admin|sales|config|Customer Groups Configuration|2. a new customer group can be created and saved": {
+    "status": "failed",
+    "durationMs": 44786,
+    "error": "Error: the customer group should exist in Odoo after Save"
+   },
+   "admin|sales|config|Customer Groups Configuration|3. a saved customer group shows in the Customer Groups list": {
+    "status": "passed",
+    "durationMs": 12672,
+    "error": ""
+   },
+   "admin|sales|config|Customer Groups Configuration|4. a customer group can be chosen on a customer": {
+    "status": "passed",
+    "durationMs": 16975,
+    "error": ""
+   },
+   "admin|sales|config|Pricelists Configuration|1. Pricelists list opens from Sales > Products": {
+    "status": "passed",
+    "durationMs": 13737,
+    "error": ""
+   },
+   "admin|sales|config|Pricelists Configuration|2. a pricelist with a product price rule can be created and saved": {
+    "status": "failed",
+    "durationMs": 48603,
+    "error": "Error: the pricelist should exist in Odoo after Save"
+   },
+   "admin|sales|config|Pricelists Configuration|3. a saved pricelist shows in the Pricelists list": {
+    "status": "passed",
+    "durationMs": 15189,
+    "error": ""
+   }
+  }
+ },
+ {
+  "id": "2026-11-16T06:31:53.442Z",
+  "startedAt": "2026-11-16T06:31:53.442Z",
+  "label": "Config: customer groups + pricelists (fixed 3)",
+  "note": "",
+  "results": {
+   "setup|setup|setup||authenticate: auth-storage/admin.json": {
+    "status": "passed",
+    "durationMs": 23197,
+    "error": ""
+   },
+   "admin|sales|config|Customer Groups Configuration|1. Customer Groups list opens from Sales > Configuration": {
+    "status": "passed",
+    "durationMs": 7978,
+    "error": ""
+   },
+   "admin|sales|config|Customer Groups Configuration|2. a new customer group can be created and saved": {
+    "status": "failed",
+    "durationMs": 48597,
+    "error": "Error: the customer group should exist in Odoo after Save"
+   },
+   "admin|sales|config|Customer Groups Configuration|3. a saved customer group shows in the Customer Groups list": {
+    "status": "passed",
+    "durationMs": 12765,
+    "error": ""
+   },
+   "admin|sales|config|Customer Groups Configuration|4. a customer group can be chosen on a customer": {
+    "status": "passed",
+    "durationMs": 18671,
+    "error": ""
+   },
+   "admin|sales|config|Pricelists Configuration|1. Pricelists list opens from Sales > Products": {
+    "status": "passed",
+    "durationMs": 17139,
+    "error": ""
+   },
+   "admin|sales|config|Pricelists Configuration|2. a pricelist with a product price rule can be created and saved": {
+    "status": "failed",
+    "durationMs": 97163,
+    "error": "Test timeout of 90000ms exceeded."
+   },
+   "admin|sales|config|Pricelists Configuration|3. a saved pricelist shows in the Pricelists list": {
+    "status": "passed",
+    "durationMs": 15293,
+    "error": ""
+   }
+  }
+ },
+ {
+  "id": "2026-11-16T06:36:49.837Z",
+  "startedAt": "2026-11-16T06:36:49.837Z",
+  "label": "Config: groups, pricelists, products",
+  "note": "Customer Groups (25), Pricelists (27), Products (28) config tests",
+  "results": {
+   "setup|setup|setup||authenticate: auth-storage/admin.json": {
+    "status": "passed",
+    "durationMs": 9782,
+    "error": ""
+   },
+   "admin|sales|config|Customer Groups Configuration|1. Customer Groups list opens from Sales > Configuration": {
+    "status": "passed",
+    "durationMs": 10307,
+    "error": ""
+   },
+   "admin|sales|config|Customer Groups Configuration|2. a new customer group can be created and saved": {
+    "status": "failed",
+    "durationMs": 46503,
+    "error": "Error: the customer group should exist in Odoo after Save"
+   },
+   "admin|sales|config|Customer Groups Configuration|3. a saved customer group shows in the Customer Groups list": {
+    "status": "passed",
+    "durationMs": 34937,
+    "error": ""
+   },
+   "admin|sales|config|Customer Groups Configuration|4. a customer group can be chosen on a customer": {
+    "status": "passed",
+    "durationMs": 38638,
+    "error": ""
+   },
+   "admin|sales|config|Pricelists Configuration|1. Pricelists list opens from Sales > Products": {
+    "status": "passed",
+    "durationMs": 54290,
+    "error": ""
+   },
+   "admin|sales|config|Pricelists Configuration|2. a pricelist with a product price rule can be created and saved": {
+    "status": "passed",
+    "durationMs": 39154,
+    "error": ""
+   },
+   "admin|sales|config|Pricelists Configuration|3. a saved pricelist shows in the Pricelists list": {
+    "status": "passed",
+    "durationMs": 60176,
+    "error": ""
+   },
+   "admin|sales|config|Products Configuration|1. Products list opens from Sales > Products": {
+    "status": "passed",
+    "durationMs": 37143,
+    "error": ""
+   },
+   "admin|sales|config|Products Configuration|2. a new product can be created and saved": {
+    "status": "failed",
+    "durationMs": 45671,
+    "error": "Error: the product should exist in Odoo after Save"
+   },
+   "admin|sales|config|Products Configuration|3. a saved product shows in the Products list": {
+    "status": "passed",
+    "durationMs": 17288,
+    "error": ""
+   }
+  }
+ },
+ {
+  "id": "2026-11-16T06:44:00.453Z",
+  "startedAt": "2026-11-16T06:44:00.453Z",
+  "label": "Config: groups, pricelists, products (fixed)",
+  "note": "Customer Groups (25), Pricelists (27), Products (28) config tests",
+  "results": {
+   "setup|setup|setup||authenticate: auth-storage/admin.json": {
+    "status": "passed",
+    "durationMs": 9089,
+    "error": ""
+   },
+   "admin|sales|config|Customer Groups Configuration|1. Customer Groups list opens from Sales > Configuration": {
+    "status": "passed",
+    "durationMs": 7109,
+    "error": ""
+   },
+   "admin|sales|config|Customer Groups Configuration|2. a new customer group can be created and saved": {
+    "status": "failed",
+    "durationMs": 584865,
+    "error": "Test timeout of 90000ms exceeded."
+   },
+   "admin|sales|config|Customer Groups Configuration|3. a saved customer group shows in the Customer Groups list": {
+    "status": "passed",
+    "durationMs": 14569,
+    "error": ""
+   },
+   "admin|sales|config|Customer Groups Configuration|4. a customer group can be chosen on a customer": {
+    "status": "passed",
+    "durationMs": 14154,
+    "error": ""
+   },
+   "admin|sales|config|Pricelists Configuration|1. Pricelists list opens from Sales > Products": {
+    "status": "passed",
+    "durationMs": 16326,
+    "error": ""
+   },
+   "admin|sales|config|Pricelists Configuration|2. a pricelist with a product price rule can be created and saved": {
+    "status": "passed",
+    "durationMs": 12462,
+    "error": ""
+   },
+   "admin|sales|config|Pricelists Configuration|3. a saved pricelist shows in the Pricelists list": {
+    "status": "passed",
+    "durationMs": 11398,
+    "error": ""
+   },
+   "admin|sales|config|Products Configuration|1. Products list opens from Sales > Products": {
+    "status": "passed",
+    "durationMs": 13619,
+    "error": ""
+   },
+   "admin|sales|config|Products Configuration|2. a new product can be created and saved": {
+    "status": "passed",
+    "durationMs": 22548,
+    "error": ""
+   },
+   "admin|sales|config|Products Configuration|3. a saved product shows in the Products list": {
+    "status": "passed",
+    "durationMs": 16369,
+    "error": ""
+   }
+  }
+ },
+ {
+  "id": "2026-11-16T06:56:26.424Z",
+  "startedAt": "2026-11-16T06:56:26.424Z",
+  "label": "Config: customer group create (rerun)",
+  "note": "",
+  "results": {
+   "setup|setup|setup||authenticate: auth-storage/admin.json": {
+    "status": "passed",
+    "durationMs": 15329,
+    "error": ""
+   },
+   "admin|sales|config|Customer Groups Configuration|1. Customer Groups list opens from Sales > Configuration": {
+    "status": "passed",
+    "durationMs": 6637,
+    "error": ""
+   },
+   "admin|sales|config|Customer Groups Configuration|2. a new customer group can be created and saved": {
+    "status": "passed",
+    "durationMs": 14269,
+    "error": ""
+   },
+   "admin|sales|config|Customer Groups Configuration|3. a saved customer group shows in the Customer Groups list": {
+    "status": "passed",
+    "durationMs": 18500,
+    "error": ""
+   },
+   "admin|sales|config|Customer Groups Configuration|4. a customer group can be chosen on a customer": {
+    "status": "passed",
+    "durationMs": 13053,
+    "error": ""
+   }
+  }
+ },
+ {
+  "id": "2026-11-16T09:38:51.166Z",
+  "startedAt": "2026-11-16T09:38:51.166Z",
+  "label": "Reporting: sales, invoices, invoice lines",
+  "note": "Reporting tours 29/30/31 replace the Reporting placeholder",
+  "results": {
+   "setup|setup|setup||authenticate: auth-storage/admin.json": {
+    "status": "passed",
+    "durationMs": 20597,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Sales|Sales: opens from Sales > Reporting and shows a view": {
+    "status": "passed",
+    "durationMs": 10391,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Sales|Sales: every view-switcher button opens without an error": {
+    "status": "failed",
+    "durationMs": 122914,
+    "error": "Test timeout of 120000ms exceeded."
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Sales|Sales: a filter can be applied and removed": {
+    "status": "passed",
+    "durationMs": 10556,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Invoices|Invoices: opens from Sales > Reporting and shows a view": {
+    "status": "passed",
+    "durationMs": 9094,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Invoices|Invoices: every view-switcher button opens without an error": {
+    "status": "failed",
+    "durationMs": 121885,
+    "error": "Test timeout of 120000ms exceeded."
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Invoices|Invoices: a filter can be applied and removed": {
+    "status": "passed",
+    "durationMs": 13879,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Sales Invoice Lines|Sales Invoice Lines: opens from Sales > Reporting and shows a view": {
+    "status": "passed",
+    "durationMs": 11253,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Sales Invoice Lines|Sales Invoice Lines: every view-switcher button opens without an error": {
+    "status": "failed",
+    "durationMs": 121726,
+    "error": "Test timeout of 120000ms exceeded."
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Sales Invoice Lines|Sales Invoice Lines: a filter can be applied and removed": {
+    "status": "passed",
+    "durationMs": 68461,
+    "error": ""
+   }
+  }
+ },
+ {
+  "id": "2026-11-16T09:47:59.489Z",
+  "startedAt": "2026-11-16T09:47:59.489Z",
+  "label": "Reporting: sales, invoices, invoice lines (fixed)",
+  "note": "Reporting tours 29/30/31 replace the Reporting placeholder",
+  "results": {
+   "setup|setup|setup||authenticate: auth-storage/admin.json": {
+    "status": "passed",
+    "durationMs": 15480,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Sales|Sales: opens from Sales > Reporting and shows a view": {
+    "status": "passed",
+    "durationMs": 8013,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Sales|Sales: every view-switcher button opens without an error": {
+    "status": "skipped",
+    "durationMs": 9927,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Sales|Sales: a filter can be applied and removed": {
+    "status": "passed",
+    "durationMs": 16890,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Invoices|Invoices: opens from Sales > Reporting and shows a view": {
+    "status": "passed",
+    "durationMs": 8635,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Invoices|Invoices: every view-switcher button opens without an error": {
+    "status": "passed",
+    "durationMs": 8772,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Invoices|Invoices: a filter can be applied and removed": {
+    "status": "passed",
+    "durationMs": 10844,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Sales Invoice Lines|Sales Invoice Lines: opens from Sales > Reporting and shows a view": {
+    "status": "passed",
+    "durationMs": 9150,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Sales Invoice Lines|Sales Invoice Lines: every view-switcher button opens without an error": {
+    "status": "passed",
+    "durationMs": 14695,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Sales Invoice Lines|Sales Invoice Lines: a filter can be applied and removed": {
+    "status": "passed",
+    "durationMs": 9781,
+    "error": ""
+   }
+  }
+ },
+ {
+  "id": "2026-11-16T10:02:49.487Z",
+  "startedAt": "2026-11-16T10:02:49.487Z",
+  "label": "Reporting: view switch wait fix",
+  "note": "",
+  "results": {
+   "setup|setup|setup||authenticate: auth-storage/admin.json": {
+    "status": "passed",
+    "durationMs": 12858,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Sales|Sales: opens from Sales > Reporting and shows a view": {
+    "status": "passed",
+    "durationMs": 7579,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Sales|Sales: every view-switcher button opens without an error": {
+    "status": "failed",
+    "durationMs": 151748,
+    "error": "Test timeout of 150000ms exceeded."
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Sales|Sales: a filter can be applied and removed": {
+    "status": "passed",
+    "durationMs": 15633,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Invoices|Invoices: opens from Sales > Reporting and shows a view": {
+    "status": "passed",
+    "durationMs": 9712,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Invoices|Invoices: every view-switcher button opens without an error": {
+    "status": "passed",
+    "durationMs": 7645,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Invoices|Invoices: a filter can be applied and removed": {
+    "status": "passed",
+    "durationMs": 9498,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Sales Invoice Lines|Sales Invoice Lines: opens from Sales > Reporting and shows a view": {
+    "status": "passed",
+    "durationMs": 9073,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Sales Invoice Lines|Sales Invoice Lines: every view-switcher button opens without an error": {
+    "status": "passed",
+    "durationMs": 8931,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Sales Invoice Lines|Sales Invoice Lines: a filter can be applied and removed": {
+    "status": "passed",
+    "durationMs": 13089,
+    "error": ""
+   }
+  }
+ },
+ {
+  "id": "2026-11-16T10:07:25.711Z",
+  "startedAt": "2026-11-16T10:07:25.711Z",
+  "label": "Reporting: view switch by name",
+  "note": "",
+  "results": {
+   "setup|setup|setup||authenticate: auth-storage/admin.json": {
+    "status": "passed",
+    "durationMs": 18278,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Sales|Sales: opens from Sales > Reporting and shows a view": {
+    "status": "passed",
+    "durationMs": 8600,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Sales|Sales: every view-switcher button opens without an error": {
+    "status": "failed",
+    "durationMs": 151713,
+    "error": "Test timeout of 150000ms exceeded."
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Sales|Sales: a filter can be applied and removed": {
+    "status": "passed",
+    "durationMs": 19852,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Invoices|Invoices: opens from Sales > Reporting and shows a view": {
+    "status": "passed",
+    "durationMs": 10855,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Invoices|Invoices: every view-switcher button opens without an error": {
+    "status": "passed",
+    "durationMs": 13433,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Invoices|Invoices: a filter can be applied and removed": {
+    "status": "passed",
+    "durationMs": 11834,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Sales Invoice Lines|Sales Invoice Lines: opens from Sales > Reporting and shows a view": {
+    "status": "passed",
+    "durationMs": 10507,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Sales Invoice Lines|Sales Invoice Lines: every view-switcher button opens without an error": {
+    "status": "passed",
+    "durationMs": 17521,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Sales Invoice Lines|Sales Invoice Lines: a filter can be applied and removed": {
+    "status": "passed",
+    "durationMs": 11213,
+    "error": ""
+   }
+  }
+ },
+ {
+  "id": "2026-11-16T10:12:30.106Z",
+  "startedAt": "2026-11-16T10:12:30.106Z",
+  "label": "Reporting: view switch robust",
+  "note": "",
+  "results": {
+   "setup|setup|setup||authenticate: auth-storage/admin.json": {
+    "status": "passed",
+    "durationMs": 15981,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Sales|Sales: opens from Sales > Reporting and shows a view": {
+    "status": "passed",
+    "durationMs": 10185,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Sales|Sales: every view-switcher button opens without an error": {
+    "status": "passed",
+    "durationMs": 12693,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Sales|Sales: a filter can be applied and removed": {
+    "status": "passed",
+    "durationMs": 10868,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Invoices|Invoices: opens from Sales > Reporting and shows a view": {
+    "status": "passed",
+    "durationMs": 10988,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Invoices|Invoices: every view-switcher button opens without an error": {
+    "status": "passed",
+    "durationMs": 14239,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Invoices|Invoices: a filter can be applied and removed": {
+    "status": "passed",
+    "durationMs": 10112,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Sales Invoice Lines|Sales Invoice Lines: opens from Sales > Reporting and shows a view": {
+    "status": "passed",
+    "durationMs": 9684,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Sales Invoice Lines|Sales Invoice Lines: every view-switcher button opens without an error": {
+    "status": "passed",
+    "durationMs": 14532,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Sales Invoice Lines|Sales Invoice Lines: a filter can be applied and removed": {
+    "status": "passed",
+    "durationMs": 10409,
+    "error": ""
+   }
+  }
+ },
+ {
+  "id": "2026-11-16T10:15:37.672Z",
+  "startedAt": "2026-11-16T10:15:37.672Z",
+  "label": "Reporting: customers, salespersons, products",
+  "note": "Reporting tours 32/33/34 (35 is a duplicate of 32)",
+  "results": {
+   "setup|setup|setup||authenticate: auth-storage/admin.json": {
+    "status": "passed",
+    "durationMs": 11952,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Customers|Customers: opens from Sales > Reporting and shows a view": {
+    "status": "passed",
+    "durationMs": 8999,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Customers|Customers: every view-switcher button opens without an error": {
+    "status": "passed",
+    "durationMs": 11164,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Customers|Customers: a filter can be applied and removed": {
+    "status": "passed",
+    "durationMs": 11987,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Salespersons|Salespersons: opens from Sales > Reporting and shows a view": {
+    "status": "passed",
+    "durationMs": 9923,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Salespersons|Salespersons: every view-switcher button opens without an error": {
+    "status": "passed",
+    "durationMs": 10016,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Salespersons|Salespersons: a filter can be applied and removed": {
+    "status": "skipped",
+    "durationMs": 11622,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Products|Products: opens from Sales > Reporting and shows a view": {
+    "status": "passed",
+    "durationMs": 8554,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Products|Products: every view-switcher button opens without an error": {
+    "status": "passed",
+    "durationMs": 11174,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Products|Products: a filter can be applied and removed": {
+    "status": "passed",
+    "durationMs": 14435,
+    "error": ""
+   }
+  }
+ },
+ {
+  "id": "2026-11-16T10:18:00.294Z",
+  "startedAt": "2026-11-16T10:18:00.294Z",
+  "label": "Reporting: salespersons filter wait",
+  "note": "",
+  "results": {
+   "setup|setup|setup||authenticate: auth-storage/admin.json": {
+    "status": "passed",
+    "durationMs": 15165,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Salespersons|Salespersons: opens from Sales > Reporting and shows a view": {
+    "status": "passed",
+    "durationMs": 9284,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Salespersons|Salespersons: every view-switcher button opens without an error": {
+    "status": "skipped",
+    "durationMs": 10259,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Salespersons|Salespersons: a filter can be applied and removed": {
+    "status": "passed",
+    "durationMs": 11696,
+    "error": ""
+   }
+  }
+ },
+ {
+  "id": "2026-11-16T10:36:56.844Z",
+  "startedAt": "2026-11-16T10:36:56.844Z",
+  "label": "Reporting: all six report tours",
+  "note": "Reporting tours 29-34 (35 duplicates 32)",
+  "results": {
+   "setup|setup|setup||authenticate: auth-storage/admin.json": {
+    "status": "passed",
+    "durationMs": 19616,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Sales|Sales: opens from Sales > Reporting and shows a view": {
+    "status": "passed",
+    "durationMs": 12239,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Sales|Sales: every view-switcher button opens without an error": {
+    "status": "passed",
+    "durationMs": 8590,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Sales|Sales: a filter can be applied and removed": {
+    "status": "passed",
+    "durationMs": 12466,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Invoices|Invoices: opens from Sales > Reporting and shows a view": {
+    "status": "passed",
+    "durationMs": 8598,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Invoices|Invoices: every view-switcher button opens without an error": {
+    "status": "passed",
+    "durationMs": 9686,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Invoices|Invoices: a filter can be applied and removed": {
+    "status": "passed",
+    "durationMs": 9208,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Customers|Customers: opens from Sales > Reporting and shows a view": {
+    "status": "passed",
+    "durationMs": 9123,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Customers|Customers: every view-switcher button opens without an error": {
+    "status": "passed",
+    "durationMs": 17502,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Customers|Customers: a filter can be applied and removed": {
+    "status": "passed",
+    "durationMs": 9300,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Salespersons|Salespersons: opens from Sales > Reporting and shows a view": {
+    "status": "passed",
+    "durationMs": 7312,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Salespersons|Salespersons: every view-switcher button opens without an error": {
+    "status": "passed",
+    "durationMs": 11404,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Salespersons|Salespersons: a filter can be applied and removed": {
+    "status": "passed",
+    "durationMs": 9797,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Products|Products: opens from Sales > Reporting and shows a view": {
+    "status": "passed",
+    "durationMs": 7744,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Products|Products: every view-switcher button opens without an error": {
+    "status": "passed",
+    "durationMs": 8371,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Products|Products: a filter can be applied and removed": {
+    "status": "passed",
+    "durationMs": 8533,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Sales Invoice Lines|Sales Invoice Lines: opens from Sales > Reporting and shows a view": {
+    "status": "passed",
+    "durationMs": 6701,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Sales Invoice Lines|Sales Invoice Lines: every view-switcher button opens without an error": {
+    "status": "passed",
+    "durationMs": 10879,
+    "error": ""
+   },
+   "admin|sales|reporting|Sales Reporting › Report: Sales Invoice Lines|Sales Invoice Lines: a filter can be applied and removed": {
+    "status": "passed",
+    "durationMs": 9835,
+    "error": ""
+   }
+  }
+ },
+ {
+  "id": "2026-11-17T05:59:05.777Z",
+  "startedAt": "2026-11-17T05:59:05.777Z",
+  "label": "Permissions: admin-only audit",
+  "note": "Permissions placeholder replaced by admin-only security audit (groups, ACLs, record rules)",
+  "results": {
+   "setup|setup|setup||authenticate: auth-storage/admin.json": {
+    "status": "passed",
+    "durationMs": 17531,
+    "error": ""
+   },
+   "admin|sales|permissions|Sales User Permissions|1. every custom Sales group exists": {
+    "status": "passed",
+    "durationMs": 2270,
+    "error": ""
+   },
+   "admin|sales|permissions|Sales User Permissions|2. every approver group has at least one user": {
+    "status": "passed",
+    "durationMs": 742,
+    "error": ""
+   },
+   "admin|sales|permissions|Sales User Permissions|3. sales order access rights: Administrator full, Own Documents cannot delete, Read-only cannot write": {
+    "status": "passed",
+    "durationMs": 1389,
+    "error": ""
+   },
+   "admin|sales|permissions|Sales User Permissions|4. the View Only group has no create, edit or delete right": {
+    "status": "failed",
+    "durationMs": 961,
+    "error": "Error: View Only must not be able to change any model"
+   },
+   "admin|sales|permissions|Sales User Permissions|5. sales orders are protected by record rules; Own Documents Only is limited to own orders": {
+    "status": "passed",
+    "durationMs": 1290,
+    "error": ""
+   },
+   "admin|sales|permissions|Sales User Permissions|6. admin can open Sales > Configuration > Settings": {
+    "status": "passed",
+    "durationMs": 18991,
+    "error": ""
+   },
+   "admin|sales|permissions|Sales User Permissions|7. security audit: attach the CRUD matrix of every group on sale.order": {
+    "status": "passed",
+    "durationMs": 1082,
+    "error": ""
+   }
+  }
+ },
+ {
+  "id": "2026-11-17T06:27:04.203Z",
+  "startedAt": "2026-11-17T06:27:04.203Z",
+  "label": "Permissions: re-check",
+  "note": "",
+  "results": {
+   "setup|setup|setup||authenticate: auth-storage/admin.json": {
+    "status": "passed",
+    "durationMs": 31230,
+    "error": ""
+   },
+   "admin|sales|permissions|Sales User Permissions|1. every custom Sales group exists": {
+    "status": "passed",
+    "durationMs": 2274,
+    "error": ""
+   },
+   "admin|sales|permissions|Sales User Permissions|2. every approver group has at least one user": {
+    "status": "passed",
+    "durationMs": 962,
+    "error": ""
+   },
+   "admin|sales|permissions|Sales User Permissions|3. sales order access rights: Administrator full, Own Documents cannot delete, Read-only cannot write": {
+    "status": "passed",
+    "durationMs": 1042,
+    "error": ""
+   },
+   "admin|sales|permissions|Sales User Permissions|4. the View Only group has no create, edit or delete right": {
+    "status": "failed",
+    "durationMs": 1287,
+    "error": "Error: View Only must not be able to change any model"
+   },
+   "admin|sales|permissions|Sales User Permissions|5. sales orders are protected by record rules; Own Documents Only is limited to own orders": {
+    "status": "passed",
+    "durationMs": 946,
+    "error": ""
+   },
+   "admin|sales|permissions|Sales User Permissions|6. admin can open Sales > Configuration > Settings": {
+    "status": "failed",
+    "durationMs": 155314,
+    "error": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://jinasena-upgrade-testing-41986565.dev.odoo.com/web"
+   },
+   "admin|sales|permissions|Sales User Permissions|7. security audit: attach the CRUD matrix of every group on sale.order": {
+    "status": "passed",
+    "durationMs": 2487,
+    "error": ""
+   }
+  }
+ },
+ {
+  "id": "2026-11-17T06:30:58.362Z",
+  "startedAt": "2026-11-17T06:30:58.362Z",
+  "label": "Permissions: settings re-check",
+  "note": "",
+  "results": {
+   "setup|setup|setup||authenticate: auth-storage/admin.json": {
+    "status": "passed",
+    "durationMs": 13140,
+    "error": ""
+   },
+   "admin|sales|permissions|Sales User Permissions|6. admin can open Sales > Configuration > Settings": {
+    "status": "passed",
+    "durationMs": 18494,
+    "error": ""
+   }
+  }
+ },
+ {
+  "id": "2026-11-17T09:20:27.279Z",
+  "startedAt": "2026-11-17T09:20:27.279Z",
+  "label": "Permissions: View Only allow-list",
+  "note": "Sales Model Debug is intentionally editable by View Only",
+  "results": {
+   "setup|setup|setup||authenticate: auth-storage/admin.json": {
+    "status": "passed",
+    "durationMs": 24402,
+    "error": ""
+   },
+   "admin|sales|permissions|Sales User Permissions|1. every custom Sales group exists": {
+    "status": "passed",
+    "durationMs": 1049,
+    "error": ""
+   },
+   "admin|sales|permissions|Sales User Permissions|2. every approver group has at least one user": {
+    "status": "passed",
+    "durationMs": 920,
+    "error": ""
+   },
+   "admin|sales|permissions|Sales User Permissions|3. sales order access rights: Administrator full, Own Documents cannot delete, Read-only cannot write": {
+    "status": "passed",
+    "durationMs": 874,
+    "error": ""
+   },
+   "admin|sales|permissions|Sales User Permissions|4. the View Only group has no create, edit or delete right": {
+    "status": "passed",
+    "durationMs": 1058,
+    "error": ""
+   },
+   "admin|sales|permissions|Sales User Permissions|5. sales orders are protected by record rules; Own Documents Only is limited to own orders": {
+    "status": "passed",
+    "durationMs": 990,
+    "error": ""
+   },
+   "admin|sales|permissions|Sales User Permissions|6. admin can open Sales > Configuration > Settings": {
+    "status": "passed",
+    "durationMs": 15210,
+    "error": ""
+   },
+   "admin|sales|permissions|Sales User Permissions|7. security audit: attach the CRUD matrix of every group on sale.order": {
+    "status": "passed",
+    "durationMs": 1427,
+    "error": ""
+   }
+  }
+ },
+ {
+  "id": "2026-11-17T09:32:48.723Z",
+  "startedAt": "2026-11-17T09:32:48.723Z",
+  "label": "Archive: archive and restore",
+  "note": "Archive placeholder replaced by archive/unarchive tests (customer, product, pricelist, payment term, sales team)",
+  "results": {
+   "setup|setup|setup||authenticate: auth-storage/admin.json": {
+    "status": "passed",
+    "durationMs": 23581,
+    "error": ""
+   },
+   "admin|sales|archive|Sales Archive & Cleanup|customer: archive hides it, unarchive brings it back": {
+    "status": "passed",
+    "durationMs": 26792,
+    "error": ""
+   },
+   "admin|sales|archive|Sales Archive & Cleanup|product: archive hides it, unarchive brings it back": {
+    "status": "passed",
+    "durationMs": 25995,
+    "error": ""
+   },
+   "admin|sales|archive|Sales Archive & Cleanup|pricelist: archive hides it, unarchive brings it back": {
+    "status": "passed",
+    "durationMs": 23605,
+    "error": ""
+   },
+   "admin|sales|archive|Sales Archive & Cleanup|payment term: archive hides it, unarchive brings it back": {
+    "status": "passed",
+    "durationMs": 24790,
+    "error": ""
+   },
+   "admin|sales|archive|Sales Archive & Cleanup|sales team: archive hides it, unarchive brings it back": {
+    "status": "passed",
+    "durationMs": 28801,
+    "error": ""
+   }
+  }
+ },
+ {
+  "id": "2026-11-18T03:26:07.612Z",
+  "startedAt": "2026-11-18T03:26:07.612Z",
+  "label": "Configuration: re-run",
+  "note": "Configuration step re-run headed",
+  "results": {
+   "setup|setup|setup||authenticate: auth-storage/admin.json": {
+    "status": "passed",
+    "durationMs": 29834,
+    "error": ""
+   },
+   "admin|sales|config|Sales Configuration Setup|1. Payment Terms list opens from Accounting > Configuration": {
+    "status": "passed",
+    "durationMs": 11865,
+    "error": ""
+   },
+   "admin|sales|config|Sales Configuration Setup|2. a new payment term can be created and saved": {
+    "status": "passed",
+    "durationMs": 17320,
+    "error": ""
+   },
+   "admin|sales|config|Sales Configuration Setup|3. a saved payment term shows in the Payment Terms list": {
+    "status": "passed",
+    "durationMs": 14262,
+    "error": ""
+   },
+   "admin|sales|config|Sales Configuration Setup|4. a payment term can be assigned to a customer": {
+    "status": "passed",
+    "durationMs": 17321,
+    "error": ""
+   },
+   "admin|sales|config|Sales Teams Configuration|1. Sales Teams list opens from Sales > Configuration": {
+    "status": "passed",
+    "durationMs": 14469,
+    "error": ""
+   },
+   "admin|sales|config|Sales Teams Configuration|2. a new sales team can be created and saved": {
+    "status": "passed",
+    "durationMs": 15606,
+    "error": ""
+   },
+   "admin|sales|config|Sales Teams Configuration|3. a saved sales team shows in the Sales Teams list": {
+    "status": "passed",
+    "durationMs": 14171,
+    "error": ""
+   },
+   "admin|sales|config|Customer Groups Configuration|1. Customer Groups list opens from Sales > Configuration": {
+    "status": "passed",
+    "durationMs": 17586,
+    "error": ""
+   },
+   "admin|sales|config|Customer Groups Configuration|2. a new customer group can be created and saved": {
+    "status": "passed",
+    "durationMs": 14226,
+    "error": ""
+   },
+   "admin|sales|config|Customer Groups Configuration|3. a saved customer group shows in the Customer Groups list": {
+    "status": "passed",
+    "durationMs": 17586,
+    "error": ""
+   },
+   "admin|sales|config|Customer Groups Configuration|4. a customer group can be chosen on a customer": {
+    "status": "passed",
+    "durationMs": 17516,
+    "error": ""
+   },
+   "admin|sales|config|Pricelists Configuration|1. Pricelists list opens from Sales > Products": {
+    "status": "passed",
+    "durationMs": 13350,
+    "error": ""
+   },
+   "admin|sales|config|Pricelists Configuration|2. a pricelist with a product price rule can be created and saved": {
+    "status": "passed",
+    "durationMs": 17914,
+    "error": ""
+   },
+   "admin|sales|config|Pricelists Configuration|3. a saved pricelist shows in the Pricelists list": {
+    "status": "passed",
+    "durationMs": 13075,
+    "error": ""
+   },
+   "admin|sales|config|Products Configuration|1. Products list opens from Sales > Products": {
+    "status": "passed",
+    "durationMs": 23763,
+    "error": ""
+   },
+   "admin|sales|config|Products Configuration|2. a new product can be created and saved": {
+    "status": "passed",
+    "durationMs": 15945,
+    "error": ""
+   },
+   "admin|sales|config|Products Configuration|3. a saved product shows in the Products list": {
+    "status": "passed",
+    "durationMs": 14855,
+    "error": ""
+   }
+  }
+ },
+ {
+  "id": "2026-11-18T03:55:04.180Z",
+  "startedAt": "2026-11-18T03:55:04.180Z",
+  "label": "Config: payment term test 4 without skip",
+  "note": "Test 4 creates its own Customer Group when none exists (no skip)",
+  "results": {
+   "setup|setup|setup||authenticate: auth-storage/admin.json": {
+    "status": "passed",
+    "durationMs": 20698,
+    "error": ""
+   },
+   "admin|sales|config|Sales Configuration Setup|1. Payment Terms list opens from Accounting > Configuration": {
+    "status": "passed",
+    "durationMs": 8777,
+    "error": ""
+   },
+   "admin|sales|config|Sales Configuration Setup|2. a new payment term can be created and saved": {
+    "status": "passed",
+    "durationMs": 13483,
+    "error": ""
+   },
+   "admin|sales|config|Sales Configuration Setup|3. a saved payment term shows in the Payment Terms list": {
+    "status": "passed",
+    "durationMs": 18521,
+    "error": ""
+   },
+   "admin|sales|config|Sales Configuration Setup|4. a payment term can be assigned to a customer": {
+    "status": "passed",
+    "durationMs": 15525,
+    "error": ""
+   }
+  }
+ },
+ {
+  "id": "2026-11-18T04:03:43.032Z",
+  "startedAt": "2026-11-18T04:03:43.032Z",
+  "label": "Config: pricelist test without skip",
+  "note": "Pricelist test creates its own product when the named one is missing (no skip)",
+  "results": {
+   "setup|setup|setup||authenticate: auth-storage/admin.json": {
+    "status": "passed",
+    "durationMs": 46008,
+    "error": ""
+   },
+   "admin|sales|config|Pricelists Configuration|1. Pricelists list opens from Sales > Products": {
+    "status": "passed",
+    "durationMs": 11237,
+    "error": ""
+   },
+   "admin|sales|config|Pricelists Configuration|2. a pricelist with a product price rule can be created and saved": {
+    "status": "passed",
+    "durationMs": 16684,
+    "error": ""
+   },
+   "admin|sales|config|Pricelists Configuration|3. a saved pricelist shows in the Pricelists list": {
+    "status": "passed",
+    "durationMs": 19631,
+    "error": ""
+   }
+  }
+ },
+ {
+  "id": "2026-11-18T04:08:24.982Z",
+  "startedAt": "2026-11-18T04:08:24.982Z",
+  "label": "Validations: no skip guard",
+  "note": "Blank-field validation tests without the field-not-shown skip",
+  "results": {
+   "setup|setup|setup||authenticate: auth-storage/admin.json": {
+    "status": "passed",
+    "durationMs": 20415,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Customer cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 24047,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Order Payment Type cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 26805,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Quotation Type cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 23023,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Payment Terms cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 25989,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Salesperson cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 25882,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Sales Team cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 26080,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Warehouse cannot be saved (Cash)": {
+    "status": "passed",
+    "durationMs": 21440,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Credit quotation: required fields|blank Customer cannot be saved (Credit)": {
+    "status": "passed",
+    "durationMs": 27896,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Credit quotation: required fields|blank Order Payment Type cannot be saved (Credit)": {
+    "status": "passed",
+    "durationMs": 25790,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › Credit quotation: required fields|blank Payment Terms cannot be saved (Credit)": {
+    "status": "passed",
+    "durationMs": 18738,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › order lines: confirm blocked for invalid lines|quotation with zero quantity cannot be confirmed": {
+    "status": "skipped",
+    "durationMs": 0,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › order lines: confirm blocked for invalid lines|quotation with zero unit price cannot be confirmed": {
+    "status": "skipped",
+    "durationMs": 0,
+    "error": ""
+   }
+  }
+ },
+ {
+  "id": "2026-11-18T04:13:15.942Z",
+  "startedAt": "2026-11-18T04:13:15.942Z",
+  "label": "Validations: order-line tests",
+  "note": "Order-line validation tests (RUN_SALES_FLOWS=true)",
+  "results": {
+   "setup|setup|setup||authenticate: auth-storage/admin.json": {
+    "status": "passed",
+    "durationMs": 13155,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › order lines: confirm blocked for invalid lines|quotation with zero quantity cannot be confirmed": {
+    "status": "passed",
+    "durationMs": 30391,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › order lines: confirm blocked for invalid lines|quotation with zero unit price cannot be confirmed": {
+    "status": "passed",
+    "durationMs": 25191,
+    "error": ""
+   }
+  }
+ },
+ {
+  "id": "2026-11-18T04:17:30.211Z",
+  "startedAt": "2026-11-18T04:17:30.211Z",
+  "label": "Validations: order-line rerun",
+  "note": "",
+  "results": {
+   "setup|setup|setup||authenticate: auth-storage/admin.json": {
+    "status": "passed",
+    "durationMs": 9647,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › order lines: confirm blocked for invalid lines|quotation with zero quantity cannot be confirmed": {
+    "status": "passed",
+    "durationMs": 18172,
+    "error": ""
+   },
+   "admin|sales|validations|Sales quotation validations › order lines: confirm blocked for invalid lines|quotation with zero unit price cannot be confirmed": {
+    "status": "passed",
+    "durationMs": 28830,
+    "error": ""
+   }
+  }
  }
 ]

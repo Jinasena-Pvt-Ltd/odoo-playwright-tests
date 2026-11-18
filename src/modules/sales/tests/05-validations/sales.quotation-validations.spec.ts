@@ -55,7 +55,7 @@ test.describe('Sales quotation validations @module:sales @step:validations', () 
           const result = await blankFieldAndTrySave(page, f);
 
           if (result === 'saved') created.push(await currentQuotationNumber(page));
-          if (result === 'field-not-shown') test.skip(true, `${f.label} is not shown on the form in this configuration`);
+          // a field that is not shown on the form cannot be saved blank either → no skip; the outcome is recorded below
 
           test.info().annotations.push({ type: 'outcome', description: `${f.label}: ${result}` });
           await test.step(`Odoo blocks the save when ${f.label} is blank (result: ${result})`, async () => {

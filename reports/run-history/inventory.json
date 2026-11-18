@@ -10,26 +10,6 @@
   "placeholder": false
  },
  {
-  "key": "admin|sales|config|Sales Configuration Setup|placeholder — replace with real test",
-  "project": "admin",
-  "mod": "sales",
-  "stepKey": "config",
-  "describe": "Sales Configuration Setup",
-  "title": "placeholder — replace with real test",
-  "file": "sales.config.spec.ts",
-  "placeholder": true
- },
- {
-  "key": "admin|sales|business|Sales Business Logic|placeholder — replace with real test",
-  "project": "admin",
-  "mod": "sales",
-  "stepKey": "business",
-  "describe": "Sales Business Logic",
-  "title": "placeholder — replace with real test",
-  "file": "sales.business.spec.ts",
-  "placeholder": true
- },
- {
   "key": "admin|sales|business|Sales credit order with serial product|precondition: credit customer is set to Credit and has no overdue invoices",
   "project": "admin",
   "mod": "sales",
@@ -108,26 +88,6 @@
   "title": "line, untaxed and total amounts follow the quantity × price arithmetic",
   "file": "sales.quotation-calculations.spec.ts",
   "placeholder": false
- },
- {
-  "key": "admin|sales|reporting|Sales Reporting|placeholder — replace with real test",
-  "project": "admin",
-  "mod": "sales",
-  "stepKey": "reporting",
-  "describe": "Sales Reporting",
-  "title": "placeholder — replace with real test",
-  "file": "sales.reports.spec.ts",
-  "placeholder": true
- },
- {
-  "key": "admin|sales|permissions|Sales User Permissions|placeholder — replace with real test",
-  "project": "admin",
-  "mod": "sales",
-  "stepKey": "permissions",
-  "describe": "Sales User Permissions",
-  "title": "placeholder — replace with real test",
-  "file": "sales.permissions.spec.ts",
-  "placeholder": true
  },
  {
   "key": "admin|sales|validations|Sales quotation validations › Cash quotation: required fields|blank Customer cannot be saved (Cash)",
@@ -250,16 +210,6 @@
   "placeholder": false
  },
  {
-  "key": "admin|sales|validations|Sales Field Validations|placeholder — replace with real test",
-  "project": "admin",
-  "mod": "sales",
-  "stepKey": "validations",
-  "describe": "Sales Field Validations",
-  "title": "placeholder — replace with real test",
-  "file": "sales.validations.spec.ts",
-  "placeholder": true
- },
- {
   "key": "admin|sales|edge|Sales credit limit control|within the credit limit: Confirm is available, no approval needed",
   "project": "admin",
   "mod": "sales",
@@ -297,16 +247,6 @@
   "describe": "Sales Edge Cases",
   "title": "placeholder — replace with real test",
   "file": "sales.edge-cases.spec.ts",
-  "placeholder": true
- },
- {
-  "key": "admin|sales|archive|Sales Archive & Cleanup|placeholder — replace with real test",
-  "project": "admin",
-  "mod": "sales",
-  "stepKey": "archive",
-  "describe": "Sales Archive & Cleanup",
-  "title": "placeholder — replace with real test",
-  "file": "sales.archive.spec.ts",
   "placeholder": true
  },
  {
@@ -887,6 +827,476 @@
   "describe": "Credit order, bank guarantee customer: validity notification, invoice and cash receipt",
   "title": "3. approvals and confirm: any approval the order needs, then Confirm → Sales Order",
   "file": "sales.bank-guarantee-approval.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|config|Sales Configuration Setup|1. Payment Terms list opens from Accounting > Configuration",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "config",
+  "describe": "Sales Configuration Setup",
+  "title": "1. Payment Terms list opens from Accounting > Configuration",
+  "file": "sales.config.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|config|Sales Configuration Setup|2. a new payment term can be created and saved",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "config",
+  "describe": "Sales Configuration Setup",
+  "title": "2. a new payment term can be created and saved",
+  "file": "sales.config.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|config|Sales Configuration Setup|3. a saved payment term shows in the Payment Terms list",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "config",
+  "describe": "Sales Configuration Setup",
+  "title": "3. a saved payment term shows in the Payment Terms list",
+  "file": "sales.config.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|config|Sales Configuration Setup|4. a payment term can be assigned to a customer",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "config",
+  "describe": "Sales Configuration Setup",
+  "title": "4. a payment term can be assigned to a customer",
+  "file": "sales.config.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|config|Sales Teams Configuration|1. Sales Teams list opens from Sales > Configuration",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "config",
+  "describe": "Sales Teams Configuration",
+  "title": "1. Sales Teams list opens from Sales > Configuration",
+  "file": "sales.config.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|config|Sales Teams Configuration|2. a new sales team can be created and saved",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "config",
+  "describe": "Sales Teams Configuration",
+  "title": "2. a new sales team can be created and saved",
+  "file": "sales.config.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|config|Sales Teams Configuration|3. a saved sales team shows in the Sales Teams list",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "config",
+  "describe": "Sales Teams Configuration",
+  "title": "3. a saved sales team shows in the Sales Teams list",
+  "file": "sales.config.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|config|Customer Groups Configuration|1. Customer Groups list opens from Sales > Configuration",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "config",
+  "describe": "Customer Groups Configuration",
+  "title": "1. Customer Groups list opens from Sales > Configuration",
+  "file": "sales.config.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|config|Customer Groups Configuration|2. a new customer group can be created and saved",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "config",
+  "describe": "Customer Groups Configuration",
+  "title": "2. a new customer group can be created and saved",
+  "file": "sales.config.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|config|Customer Groups Configuration|3. a saved customer group shows in the Customer Groups list",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "config",
+  "describe": "Customer Groups Configuration",
+  "title": "3. a saved customer group shows in the Customer Groups list",
+  "file": "sales.config.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|config|Customer Groups Configuration|4. a customer group can be chosen on a customer",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "config",
+  "describe": "Customer Groups Configuration",
+  "title": "4. a customer group can be chosen on a customer",
+  "file": "sales.config.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|config|Pricelists Configuration|1. Pricelists list opens from Sales > Products",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "config",
+  "describe": "Pricelists Configuration",
+  "title": "1. Pricelists list opens from Sales > Products",
+  "file": "sales.config.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|config|Pricelists Configuration|2. a pricelist with a product price rule can be created and saved",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "config",
+  "describe": "Pricelists Configuration",
+  "title": "2. a pricelist with a product price rule can be created and saved",
+  "file": "sales.config.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|config|Pricelists Configuration|3. a saved pricelist shows in the Pricelists list",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "config",
+  "describe": "Pricelists Configuration",
+  "title": "3. a saved pricelist shows in the Pricelists list",
+  "file": "sales.config.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|config|Products Configuration|1. Products list opens from Sales > Products",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "config",
+  "describe": "Products Configuration",
+  "title": "1. Products list opens from Sales > Products",
+  "file": "sales.config.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|config|Products Configuration|2. a new product can be created and saved",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "config",
+  "describe": "Products Configuration",
+  "title": "2. a new product can be created and saved",
+  "file": "sales.config.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|config|Products Configuration|3. a saved product shows in the Products list",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "config",
+  "describe": "Products Configuration",
+  "title": "3. a saved product shows in the Products list",
+  "file": "sales.config.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|reporting|Sales Reporting › Report: Sales|Sales: opens from Sales > Reporting and shows a view",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "reporting",
+  "describe": "Sales Reporting › Report: Sales",
+  "title": "Sales: opens from Sales > Reporting and shows a view",
+  "file": "sales.reports.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|reporting|Sales Reporting › Report: Sales|Sales: every view-switcher button opens without an error",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "reporting",
+  "describe": "Sales Reporting › Report: Sales",
+  "title": "Sales: every view-switcher button opens without an error",
+  "file": "sales.reports.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|reporting|Sales Reporting › Report: Sales|Sales: a filter can be applied and removed",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "reporting",
+  "describe": "Sales Reporting › Report: Sales",
+  "title": "Sales: a filter can be applied and removed",
+  "file": "sales.reports.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|reporting|Sales Reporting › Report: Invoices|Invoices: opens from Sales > Reporting and shows a view",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "reporting",
+  "describe": "Sales Reporting › Report: Invoices",
+  "title": "Invoices: opens from Sales > Reporting and shows a view",
+  "file": "sales.reports.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|reporting|Sales Reporting › Report: Invoices|Invoices: every view-switcher button opens without an error",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "reporting",
+  "describe": "Sales Reporting › Report: Invoices",
+  "title": "Invoices: every view-switcher button opens without an error",
+  "file": "sales.reports.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|reporting|Sales Reporting › Report: Invoices|Invoices: a filter can be applied and removed",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "reporting",
+  "describe": "Sales Reporting › Report: Invoices",
+  "title": "Invoices: a filter can be applied and removed",
+  "file": "sales.reports.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|reporting|Sales Reporting › Report: Sales Invoice Lines|Sales Invoice Lines: opens from Sales > Reporting and shows a view",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "reporting",
+  "describe": "Sales Reporting › Report: Sales Invoice Lines",
+  "title": "Sales Invoice Lines: opens from Sales > Reporting and shows a view",
+  "file": "sales.reports.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|reporting|Sales Reporting › Report: Sales Invoice Lines|Sales Invoice Lines: every view-switcher button opens without an error",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "reporting",
+  "describe": "Sales Reporting › Report: Sales Invoice Lines",
+  "title": "Sales Invoice Lines: every view-switcher button opens without an error",
+  "file": "sales.reports.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|reporting|Sales Reporting › Report: Sales Invoice Lines|Sales Invoice Lines: a filter can be applied and removed",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "reporting",
+  "describe": "Sales Reporting › Report: Sales Invoice Lines",
+  "title": "Sales Invoice Lines: a filter can be applied and removed",
+  "file": "sales.reports.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|reporting|Sales Reporting › Report: Customers|Customers: opens from Sales > Reporting and shows a view",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "reporting",
+  "describe": "Sales Reporting › Report: Customers",
+  "title": "Customers: opens from Sales > Reporting and shows a view",
+  "file": "sales.reports.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|reporting|Sales Reporting › Report: Customers|Customers: every view-switcher button opens without an error",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "reporting",
+  "describe": "Sales Reporting › Report: Customers",
+  "title": "Customers: every view-switcher button opens without an error",
+  "file": "sales.reports.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|reporting|Sales Reporting › Report: Customers|Customers: a filter can be applied and removed",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "reporting",
+  "describe": "Sales Reporting › Report: Customers",
+  "title": "Customers: a filter can be applied and removed",
+  "file": "sales.reports.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|reporting|Sales Reporting › Report: Salespersons|Salespersons: opens from Sales > Reporting and shows a view",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "reporting",
+  "describe": "Sales Reporting › Report: Salespersons",
+  "title": "Salespersons: opens from Sales > Reporting and shows a view",
+  "file": "sales.reports.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|reporting|Sales Reporting › Report: Salespersons|Salespersons: every view-switcher button opens without an error",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "reporting",
+  "describe": "Sales Reporting › Report: Salespersons",
+  "title": "Salespersons: every view-switcher button opens without an error",
+  "file": "sales.reports.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|reporting|Sales Reporting › Report: Salespersons|Salespersons: a filter can be applied and removed",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "reporting",
+  "describe": "Sales Reporting › Report: Salespersons",
+  "title": "Salespersons: a filter can be applied and removed",
+  "file": "sales.reports.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|reporting|Sales Reporting › Report: Products|Products: opens from Sales > Reporting and shows a view",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "reporting",
+  "describe": "Sales Reporting › Report: Products",
+  "title": "Products: opens from Sales > Reporting and shows a view",
+  "file": "sales.reports.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|reporting|Sales Reporting › Report: Products|Products: every view-switcher button opens without an error",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "reporting",
+  "describe": "Sales Reporting › Report: Products",
+  "title": "Products: every view-switcher button opens without an error",
+  "file": "sales.reports.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|reporting|Sales Reporting › Report: Products|Products: a filter can be applied and removed",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "reporting",
+  "describe": "Sales Reporting › Report: Products",
+  "title": "Products: a filter can be applied and removed",
+  "file": "sales.reports.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|permissions|Sales User Permissions|1. every custom Sales group exists",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "permissions",
+  "describe": "Sales User Permissions",
+  "title": "1. every custom Sales group exists",
+  "file": "sales.permissions.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|permissions|Sales User Permissions|2. every approver group has at least one user",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "permissions",
+  "describe": "Sales User Permissions",
+  "title": "2. every approver group has at least one user",
+  "file": "sales.permissions.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|permissions|Sales User Permissions|3. sales order access rights: Administrator full, Own Documents cannot delete, Read-only cannot write",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "permissions",
+  "describe": "Sales User Permissions",
+  "title": "3. sales order access rights: Administrator full, Own Documents cannot delete, Read-only cannot write",
+  "file": "sales.permissions.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|permissions|Sales User Permissions|4. the View Only group has no create, edit or delete right",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "permissions",
+  "describe": "Sales User Permissions",
+  "title": "4. the View Only group has no create, edit or delete right",
+  "file": "sales.permissions.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|permissions|Sales User Permissions|5. sales orders are protected by record rules; Own Documents Only is limited to own orders",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "permissions",
+  "describe": "Sales User Permissions",
+  "title": "5. sales orders are protected by record rules; Own Documents Only is limited to own orders",
+  "file": "sales.permissions.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|permissions|Sales User Permissions|6. admin can open Sales > Configuration > Settings",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "permissions",
+  "describe": "Sales User Permissions",
+  "title": "6. admin can open Sales > Configuration > Settings",
+  "file": "sales.permissions.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|permissions|Sales User Permissions|7. security audit: attach the CRUD matrix of every group on sale.order",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "permissions",
+  "describe": "Sales User Permissions",
+  "title": "7. security audit: attach the CRUD matrix of every group on sale.order",
+  "file": "sales.permissions.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|archive|Sales Archive & Cleanup|customer: archive hides it, unarchive brings it back",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "archive",
+  "describe": "Sales Archive & Cleanup",
+  "title": "customer: archive hides it, unarchive brings it back",
+  "file": "sales.archive.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|archive|Sales Archive & Cleanup|product: archive hides it, unarchive brings it back",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "archive",
+  "describe": "Sales Archive & Cleanup",
+  "title": "product: archive hides it, unarchive brings it back",
+  "file": "sales.archive.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|archive|Sales Archive & Cleanup|pricelist: archive hides it, unarchive brings it back",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "archive",
+  "describe": "Sales Archive & Cleanup",
+  "title": "pricelist: archive hides it, unarchive brings it back",
+  "file": "sales.archive.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|archive|Sales Archive & Cleanup|payment term: archive hides it, unarchive brings it back",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "archive",
+  "describe": "Sales Archive & Cleanup",
+  "title": "payment term: archive hides it, unarchive brings it back",
+  "file": "sales.archive.spec.ts",
+  "placeholder": false
+ },
+ {
+  "key": "admin|sales|archive|Sales Archive & Cleanup|sales team: archive hides it, unarchive brings it back",
+  "project": "admin",
+  "mod": "sales",
+  "stepKey": "archive",
+  "describe": "Sales Archive & Cleanup",
+  "title": "sales team: archive hides it, unarchive brings it back",
+  "file": "sales.archive.spec.ts",
   "placeholder": false
  }
 ]

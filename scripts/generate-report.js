@@ -222,8 +222,12 @@ function parseTests(content) {
     const pm     = look.match(/async\s*\(\{([^}]*)\}/);
     const params = pm ? pm[1] : '';
 
-    // Body — next 50 lines
-    const bodyLines = lines.slice(i + 1, i + 51);
+    // Body — up to 50 lines, but only this test's own lines: stop at the next test / describe / hook
+    // (otherwise a test.skip(...) guard of the NEXT test leaks into this one's skip note)
+    const NEXT_BLOCK = /^\s*test(?:\.(?:skip|only|fixme|describe|beforeEach|afterEach|beforeAll|afterAll))?\s*\(/;
+    let end = i + 1;
+    while (end < lines.length && end < i + 51 && !NEXT_BLOCK.test(lines[end])) end++;
+    const bodyLines = lines.slice(i + 1, end);
     const body      = bodyLines.join('\n');
 
     // Extract skip reason from body: test.skip(true, 'reason')

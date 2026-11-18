@@ -192,7 +192,7 @@
   </div>
   <div class="nav-section">
     <div class="nav-module-label"><span class="mod-dot" style="background:#64748b"></span>sales</div>
-    <a class="nav-item" href="#sales-config"><span class="nav-dot amber"></span>Config<span class="nav-count skip">0p 1s</span></a>
+    <a class="nav-item" href="#sales-config"><span class="nav-dot green"></span>Config<span class="nav-count">7/7</span></a>
     <a class="nav-item" href="#sales-business"><span class="nav-dot amber"></span>Business<span class="nav-count skip">66p 1s</span></a>
     <a class="nav-item" href="#sales-reporting"><span class="nav-dot amber"></span>Reporting<span class="nav-count skip">0p 1s</span></a>
     <a class="nav-item" href="#sales-permissions"><span class="nav-dot amber"></span>Permissions<span class="nav-count skip">0p 1s</span></a>
@@ -216,24 +216,24 @@
     <div class="hero-top">
       <div>
         <div class="hero-title">odoo-playwright-tests — Master E2E Report</div>
-        <div class="hero-sub">1 Modules · 88 tests · 2026-11-13</div>
+        <div class="hero-sub">1 Modules · 94 tests · 2026-11-13</div>
       </div>
       <div class="hero-badge">Auto-generated</div>
     </div>
     <div class="hero-stats">
       <div class="hero-stat"><div class="num">1</div><div class="lbl">Modules</div></div>
       <div class="hero-divider"></div>
-      <div class="hero-stat"><div class="num">88</div><div class="lbl">Total Tests</div></div>
+      <div class="hero-stat"><div class="num">94</div><div class="lbl">Total Tests</div></div>
       <div class="hero-divider"></div>
-      <div class="hero-stat"><div class="num green">81</div><div class="lbl">Passed</div></div>
+      <div class="hero-stat"><div class="num green">88</div><div class="lbl">Passed</div></div>
       <div class="hero-divider"></div>
       <div class="hero-stat"><div class="num red">0</div><div class="lbl">Failed</div></div>
       <div class="hero-divider"></div>
-      <div class="hero-stat"><div class="num purple">7</div><div class="lbl">Skipped (SaaS)</div></div>
+      <div class="hero-stat"><div class="num purple">6</div><div class="lbl">Skipped (SaaS)</div></div>
       
     </div>
     <div class="hero-bar-wrap">
-      <div class="hero-bar-label"><span>Pass rate (of tests that ran)</span><span>100% · 81/81</span></div>
+      <div class="hero-bar-label"><span>Pass rate (of tests that ran)</span><span>100% · 88/88</span></div>
       <div class="hero-bar-bg"><div class="hero-bar-fill" style="width:100%"></div></div>
     </div>
   </div>
@@ -244,14 +244,14 @@
       <div class="module-card-name">sales</div>
       <div class="module-card-sub"></div>
       <div class="module-card-stats">
-        <span class="p">✔ 81</span>
-        <span class="s">⏭ 7</span>
+        <span class="p">✔ 88</span>
+        <span class="s">⏭ 6</span>
         
-        <span class="t">of 88</span>
+        <span class="t">of 94</span>
       </div>
       <div class="module-mini-bar">
-        <div class="seg-pass" style="width:92%"></div>
-        <div class="seg-skip" style="width:8%"></div>
+        <div class="seg-pass" style="width:94%"></div>
+        <div class="seg-skip" style="width:6%"></div>
         <div class="seg-fail" style="width:0%"></div>
       </div>
       <div style="font-size:0.68rem;color:var(--muted);margin-top:6px;">20 spec files</div>
@@ -265,9 +265,9 @@
       <span class="mod-header-icon">📦</span>
       <div>
         <div class="mod-header-title">sales</div>
-        <div class="mod-header-meta">src/modules/sales/ · 20 spec files · 88 tests</div>
+        <div class="mod-header-meta">src/modules/sales/ · 20 spec files · 94 tests</div>
       </div>
-      <div class="mod-header-pills"><span class="pill green">81 passed</span> <span class="pill purple">7 skipped</span></div>
+      <div class="mod-header-pills"><span class="pill green">88 passed</span> <span class="pill purple">6 skipped</span></div>
     </div>
     
     
@@ -275,12 +275,12 @@
       <div class="suite-hdr">
         <span class="suite-hdr-icon">⚙️</span>
         <span class="suite-hdr-title">Config</span>
-        <span class="pill purple">1 skipped</span>
+        <span class="pill green">7 passed</span>
         <span class="suite-hdr-file">sales.config.spec.ts</span>
       </div>
       
       <div class="test-list">
-        <div class="test-row skip"><span class="test-row-icon">⏭</span><span class="test-row-name">placeholder — replace with real test</span><span class="test-row-note">Not yet implemented — placeholder test</span><div class="test-row-tags"><span class="tag smoke">@smoke</span><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('1. Payment Terms list opens from Accounting &gt; Configuration @smoke', async ({ page }) =&gt; {
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">1. Payment Terms list opens from Accounting &gt; Configuration</span><span class="test-row-note">No active Customer Group for the company — cannot save a customer</span><div class="test-row-tags"><span class="tag smoke">@smoke</span><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('1. Payment Terms list opens from Accounting &gt; Configuration @smoke', async ({ page }) =&gt; {
     await openPaymentTerms(page);
     await expect(page.locator('.o_breadcrumb, .breadcrumb').first()).toContainText(/payment terms/i);
     await expect(page.locator('.o_list_view')).toBeVisible();
@@ -302,6 +302,127 @@
     termIds.push(id as number);
 
     await openPaymentTerms(page);</pre></details></div>
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">2. a new payment term can be created and saved</span><span class="test-row-note">No active Customer Group for the company — cannot save a customer</span><div class="test-row-tags"><span class="tag ui">UI</span><span class="tag rpc">RPC</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('2. a new payment term can be created and saved', async ({ page, rpc }) =&gt; {
+    const name = uniqueName('Payment Term');
+    await openPaymentTerms(page);
+    await createTermByUi(page, name);
+
+    const rows = await rpc.searchRead&lt;{ id: number; name: string }&gt;(TERM_MODEL, [['name', '=', name]], ['name']);
+    termIds.push(...rows.map(r =&gt; r.id));
+    expect(rows, 'the payment term should exist in Odoo after Save').toHaveLength(1);
+  });
+
+  test('3. a saved payment term shows in the Payment Terms list', async ({ page, rpc }) =&gt; {
+    const name = uniqueName('Payment Term');
+    const id = await rpc.create(TERM_MODEL, { name });
+    termIds.push(id as number);
+
+    await openPaymentTerms(page);
+    await page.locator('.o_searchview_input').fill(name);
+    await page.keyboard.press('Enter');
+    await expect(page.locator('.o_data_row', { hasText: name })).toHaveCount(1);
+  });
+
+  test('4. a payment term can be assigned to a customer', async ({ page, rpc }) =&gt; {</pre></details></div>
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">3. a saved payment term shows in the Payment Terms list</span><span class="test-row-note">No active Customer Group for the company — cannot save a customer</span><div class="test-row-tags"><span class="tag ui">UI</span><span class="tag rpc">RPC</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('3. a saved payment term shows in the Payment Terms list', async ({ page, rpc }) =&gt; {
+    const name = uniqueName('Payment Term');
+    const id = await rpc.create(TERM_MODEL, { name });
+    termIds.push(id as number);
+
+    await openPaymentTerms(page);
+    await page.locator('.o_searchview_input').fill(name);
+    await page.keyboard.press('Enter');
+    await expect(page.locator('.o_data_row', { hasText: name })).toHaveCount(1);
+  });
+
+  test('4. a payment term can be assigned to a customer', async ({ page, rpc }) =&gt; {
+    const termName = uniqueName('Payment Term');
+    const termId = await rpc.create(TERM_MODEL, { name: termName }) as number;
+    termIds.push(termId);
+    // Customer Group and Payment Type are required (Studio) fields on the customer form → fill them so Save works
+    const [co] = await rpc.searchRead&lt;{ id: number }&gt;('res.company', [['name', '=', COMPANY]], ['id'], { limit: 1 });
+    if (!co) throw new Error(`Company &quot;${COMPANY}&quot; not found.`);
+    const groups = await rpc.searchRead&lt;{ id: number; x_studio_company_id: [number, string] | false }&gt;(
+      'x_customer_group', [['x_active', '=', true]], ['x_studio_company_id'], { order: 'id' });
+    const group = groups.find(g =&gt; g.x_studio_company_id &amp;&amp; g.x_studio_company_id[0] === co.id);
+    if (!group) test.skip(true, 'No active Customer Group for the company — cannot save a customer');</pre></details></div>
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">4. a payment term can be assigned to a customer</span><span class="test-row-note">No active Customer Group for the company — cannot save a customer</span><div class="test-row-tags"><span class="tag ui">UI</span><span class="tag rpc">RPC</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('4. a payment term can be assigned to a customer', async ({ page, rpc }) =&gt; {
+    const termName = uniqueName('Payment Term');
+    const termId = await rpc.create(TERM_MODEL, { name: termName }) as number;
+    termIds.push(termId);
+    // Customer Group and Payment Type are required (Studio) fields on the customer form → fill them so Save works
+    const [co] = await rpc.searchRead&lt;{ id: number }&gt;('res.company', [['name', '=', COMPANY]], ['id'], { limit: 1 });
+    if (!co) throw new Error(`Company &quot;${COMPANY}&quot; not found.`);
+    const groups = await rpc.searchRead&lt;{ id: number; x_studio_company_id: [number, string] | false }&gt;(
+      'x_customer_group', [['x_active', '=', true]], ['x_studio_company_id'], { order: 'id' });
+    const group = groups.find(g =&gt; g.x_studio_company_id &amp;&amp; g.x_studio_company_id[0] === co.id);
+    if (!group) test.skip(true, 'No active Customer Group for the company — cannot save a customer');
+    // RPC-created partners get no receivable/payable accounts (the form then cannot be saved) → copy them from a known customer
+    const refName = process.env.FLOW_CONTROL_CUSTOMER ?? 'abc';
+    const [ref] = await rpc.callMethod&lt;Array&lt;Record&lt;string, unknown&gt;&gt;&gt;('res.partner', 'search_read',
+      [[['name', '=', refName]]], {
+        fields: ['property_account_receivable_id', 'property_account_payable_id'], limit: 1,
+        context: { allowed_company_ids: [co.id], company_id: co.id },
+      }).catch(() =&gt; []);
+    const idOf = (v: unknown) =&gt; (Array.isArray(v) ? (v[0] as number) : false);
+    const partnerId = await rpc.callMethod&lt;number&gt;('res.partner', 'create', [{
+      name: uniqueName('Config Customer'), customer_rank: 1, x_studio_customer_group: group!.id, x_studio_payment_method: 'Cash',
+      ...(ref ? {</pre></details></div>
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">1. Sales Teams list opens from Sales &gt; Configuration</span><div class="test-row-tags"><span class="tag smoke">@smoke</span><span class="tag ui">UI</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('1. Sales Teams list opens from Sales &gt; Configuration @smoke', async ({ page }) =&gt; {
+    await openSalesTeams(page);
+    await expect(page.locator('.o_breadcrumb, .breadcrumb').first()).toContainText(/sales teams/i);
+  });
+
+  test('2. a new sales team can be created and saved', async ({ page, rpc }) =&gt; {
+    const name = uniqueName('Sales Team');
+    await openSalesTeams(page);
+    await page.locator('button.o_list_button_add:visible, button.o-kanban-button-new:visible').first().click();
+    await page.locator('#name_0').fill(name);
+    await page.locator('#name_0').press('Enter'); // the tour presses Enter after typing the name
+    const save = page.locator('.o_form_button_save:visible').first();
+    if (await save.isEnabled({ timeout: 3_000 }).catch(() =&gt; false)) await save.click();
+
+    await expect.poll(async () =&gt; {
+      const rows = await rpc.searchRead&lt;{ id: number }&gt;('crm.team', [['name', '=', name]], ['id']);
+      teamIds.push(...rows.map(r =&gt; r.id).filter(id =&gt; !teamIds.includes(id)));
+      return rows.length;
+    }, { timeout: 30_000, message: 'the sales team should exist in Odoo after Save' }).toBe(1);
+    await expect(page.locator('.o_form_view')).toContainText(name);
+  });
+</pre></details></div>
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">2. a new sales team can be created and saved</span><div class="test-row-tags"><span class="tag ui">UI</span><span class="tag rpc">RPC</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('2. a new sales team can be created and saved', async ({ page, rpc }) =&gt; {
+    const name = uniqueName('Sales Team');
+    await openSalesTeams(page);
+    await page.locator('button.o_list_button_add:visible, button.o-kanban-button-new:visible').first().click();
+    await page.locator('#name_0').fill(name);
+    await page.locator('#name_0').press('Enter'); // the tour presses Enter after typing the name
+    const save = page.locator('.o_form_button_save:visible').first();
+    if (await save.isEnabled({ timeout: 3_000 }).catch(() =&gt; false)) await save.click();
+
+    await expect.poll(async () =&gt; {
+      const rows = await rpc.searchRead&lt;{ id: number }&gt;('crm.team', [['name', '=', name]], ['id']);
+      teamIds.push(...rows.map(r =&gt; r.id).filter(id =&gt; !teamIds.includes(id)));
+      return rows.length;
+    }, { timeout: 30_000, message: 'the sales team should exist in Odoo after Save' }).toBe(1);
+    await expect(page.locator('.o_form_view')).toContainText(name);
+  });
+
+  test('3. a saved sales team shows in the Sales Teams list', async ({ page, rpc }) =&gt; {
+    const name = uniqueName('Sales Team');
+    teamIds.push(await rpc.create('crm.team', { name }) as number);
+
+    await openSalesTeams(page);</pre></details></div>
+        <div class="test-row pass"><span class="test-row-icon">✅</span><span class="test-row-name">3. a saved sales team shows in the Sales Teams list</span><div class="test-row-tags"><span class="tag ui">UI</span><span class="tag rpc">RPC</span></div><details class="code-snippet"><summary></summary><pre class="code">  test('3. a saved sales team shows in the Sales Teams list', async ({ page, rpc }) =&gt; {
+    const name = uniqueName('Sales Team');
+    teamIds.push(await rpc.create('crm.team', { name }) as number);
+
+    await openSalesTeams(page);
+    await page.locator('.o_searchview_input').fill(name);
+    await page.keyboard.press('Enter');
+    await expect(page.locator('.o_kanban_record, .o_data_row').filter({ hasText: name })).toHaveCount(1);
+  });
+});
+</pre></details></div>
       </div>
     </div>
 

@@ -44,7 +44,7 @@ const STEP_FOLDER: Record<string, string> = {
   '01-config': 'config', '02-business': 'business', '03-reporting': 'reporting', '04-permissions': 'permissions',
   '05-validations': 'validations', '06-edge-cases': 'edge', '07-archive': 'archive',
 };
-const MAX_RUNS_KEPT = 30;
+const MAX_RUNS_KEPT = 300; // was 30 — small per-step runs were pushing the older full-suite results out of the history
 
 const strip = (s: string): string => s.replace(/\u001b\[[0-9;]*m/g, '').replace(/\[[0-9;]*m/g, '');
 const norm = (s: string): Status => (s === 'passed' ? 'passed' : s === 'skipped' ? 'skipped' : 'failed');
