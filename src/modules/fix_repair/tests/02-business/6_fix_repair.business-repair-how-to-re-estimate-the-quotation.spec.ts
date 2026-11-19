@@ -196,6 +196,14 @@ test.describe('Fix Repair - How to Re-Estimate the Repair Quotation @module:fix_
       await b.click();
       await page.waitForTimeout(1_500);
     };
+    // Search the open product catalogue for the spare part (waits for the search box, unlike isVisible({ timeout })).
+    const filterCatalog = async () => {
+      const search = page.locator('.o_kanban_renderer input.o_searchview_input, .modal .o_searchview_input').first();
+      await search.waitFor({ state: 'visible', timeout: 15_000 });
+      await search.fill(FIX_REPAIR_TEST_CONFIG.quotationProductSearchTerm);
+      await search.press('Enter');
+      await page.waitForTimeout(1_500);
+    };
     // Task -> Products catalog: raise the first line's quantity by one.
     const raiseQuantity = async (slugProducts: string, slugPlus: string, slugBack: string) => {
       const products = page.locator('.modal:visible button[name="action_fsm_view_material"]').first();
@@ -203,6 +211,9 @@ test.describe('Fix Repair - How to Re-Estimate the Repair Quotation @module:fix_
       await shot(slugProducts, products);
       await products.click();
       await page.waitForTimeout(2_000);
+      // The catalogue opens unfiltered (first 40 of ~7000 products); narrow it to the spare part so
+      // that its quantity buttons are on screen.
+      await filterCatalog();
       const plusBtn = page.locator('div.o_product_catalog_quantity button:visible').last();
       await expect(plusBtn).toBeVisible({ timeout: 15_000 });
       await shot(slugPlus, plusBtn);
@@ -480,12 +491,7 @@ test.describe('Fix Repair - How to Re-Estimate the Repair Quotation @module:fix_
     await page.waitForTimeout(1_500);
 
     // 30. Add the spare part
-    const catalogSearch = page.locator('.o_kanban_renderer input.o_searchview_input, .modal .o_searchview_input').first();
-    if (await catalogSearch.isVisible({ timeout: 3_000 }).catch(() => false)) {
-      await catalogSearch.fill(FIX_REPAIR_TEST_CONFIG.quotationProductSearchTerm);
-      await catalogSearch.press('Enter');
-      await page.waitForTimeout(1_000);
-    }
+    await filterCatalog();
     const partCard = page.locator('.o_kanban_record', { hasText: FIX_REPAIR_TEST_CONFIG.quotationProductSearchTerm }).first();
     const addBtn = partCard.getByRole('button', { name: 'Add' });
     await page.locator('.o_kanban_record').first().waitFor({ state: 'visible', timeout: 20_000 }).catch(() => undefined);

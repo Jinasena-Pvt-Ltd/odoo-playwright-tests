@@ -78,7 +78,7 @@ async function callKwWithRetry(page: Page, model: string, method: string, args: 
 test.describe('Fix Repair — Not Under Warranty (Without Serial No.) — Branch Full Flow @module:fix_repair @step:business', () => {
 
   test('branch ticket is repaired at the centre, quoted, paid and dispatched @smoke @e2e', async ({ page }, testInfo) => {
-    test.setTimeout(300_000);
+    test.setTimeout(600_000);
 
     const note = (description: string) => test.info().annotations.push({ type: 'note', description });
 

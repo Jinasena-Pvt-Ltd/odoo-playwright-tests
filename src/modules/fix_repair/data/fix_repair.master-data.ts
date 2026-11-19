@@ -1,4 +1,42 @@
+import * as fs from 'fs';
+import * as os from 'os';
+import * as path from 'path';
 import { today } from '../../../core/utils/DateHelper';
+
+/**
+ * Pictures for the "Take a Picture" uploads: whatever PNG or JPEG is on the Desktop (checked by
+ * its file header, so a renamed text file is not used), sorted by name. The warranty card takes
+ * the first, the repair image the second when there is one. Nothing is hardcoded: with no picture
+ * on the Desktop, a test that uploads one stops with a message saying so.
+ */
+function desktopImages(): string[] {
+  const dirs = [path.join(os.homedir(), 'Desktop'), path.join(os.homedir(), 'OneDrive', 'Desktop')];
+  const isImage = (file: string) => {
+    try {
+      const head = Buffer.alloc(8);
+      const fd = fs.openSync(file, 'r');
+      fs.readSync(fd, head, 0, 8, 0);
+      fs.closeSync(fd);
+      const jpeg = head[0] === 0xff && head[1] === 0xd8 && head[2] === 0xff;
+      const png = head.equals(Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]));
+      return jpeg || png;
+    } catch {
+      return false;
+    }
+  };
+  return dirs
+    .filter((dir) => fs.existsSync(dir))
+    .flatMap((dir) => fs.readdirSync(dir).filter((f) => /\.(jpe?g|png)$/i.test(f)).sort().map((f) => path.join(dir, f)))
+    .filter(isImage);
+}
+
+const DESKTOP_IMAGES = desktopImages();
+
+function desktopImage(index: number): string {
+  const file = DESKTOP_IMAGES[index] ?? DESKTOP_IMAGES[0];
+  if (!file) throw new Error(`No PNG or JPEG picture on the Desktop (${path.join(os.homedir(), 'Desktop')}) to upload`);
+  return file;
+}
 
 /** Static test configuration for the fix_repair module */
 export const FIX_REPAIR_TEST_CONFIG = {
@@ -15,7 +53,7 @@ export const FIX_REPAIR_TEST_CONFIG = {
   // unique substring is used.
   repairTypeUnderWarrantyExternal: 'External not RUG',
   serialNumberExample: '0630_001',
-  warrantyCardImagePath: 'images/WarrantyCard.jpg',
+  get warrantyCardImagePath() { return desktopImage(0); },
   jobLocationFactory: 'Factory Repair',
   jobLocationCentre: 'Centre Repair',
   returnReceiptLocationExample: 'BR-AM/Stock',
@@ -43,7 +81,7 @@ export const FIX_REPAIR_TEST_CONFIG = {
   diagnosisSubReason: 'Hi Voltage',
   diagnosisResolution: 'Reject',
   diagnosisRepairStage: '1-REP-REC',
-  repairImagePath: 'images/CrownRegency.jpg',
+  get repairImagePath() { return desktopImage(1); },
   // Spare part added to the repair quotation via the task's "Products"
   // catalog — [02BB 023] BALL BEARING 6202-2RS, has stock on this instance.
   quotationProductSearchTerm: '02BB 023',
