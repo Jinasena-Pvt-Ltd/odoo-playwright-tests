@@ -15,7 +15,6 @@ import { Page } from '@playwright/test';
 import { test, expect } from '../../../../core/fixtures/index';
 import { FixRepairTicketPage } from '../../pages/FixRepairTicketPage';
 import { FIX_REPAIR_TEST_CONFIG } from '../../data/fix_repair.master-data';
-import { isVisibleWhenIdle } from '../../../../core/utils/OdooIdle';
 
 // Several workflow buttons ("Confirm", "Validate", "Register Payment") are
 // hidden on this instance by the Fix-Repair Studio views even though the
@@ -41,13 +40,13 @@ async function gotoRecord(page: Page, model: string, id: number) {
 async function closeStrayDialogs(page: Page, attempts = 3) {
   for (let i = 0; i < attempts; i++) {
     const dialog = page.locator('.modal.show, .o_technical_modal').first();
-    if (!(await isVisibleWhenIdle(dialog).catch(() => false))) return;
+    if (!(await dialog.isVisible({ timeout: 1_000 }).catch(() => false))) return;
 
     // These "technical" action dialogs are often opened with keyboard
     // dismissal disabled, so Escape alone silently does nothing — click the
     // dialog's own Close control first and only fall back to Escape.
     const closeButton = dialog.locator('button[aria-label="Close"], .btn-close, button:has-text("Close")').first();
-    if (await isVisibleWhenIdle(closeButton).catch(() => false)) {
+    if (await closeButton.isVisible({ timeout: 1_000 }).catch(() => false)) {
       await closeButton.click({ force: true }).catch(() => undefined);
     } else {
       await page.keyboard.press('Escape');
@@ -137,8 +136,9 @@ test.describe('Fix Repair — Not Under Warranty (Without Serial No.) @module:fi
 
     // The ticket has no user-fillable title — its name is server-assigned via
     // sequence the moment it is first saved, which "Assign to Me" triggers.
-    const assignVisible = await isVisibleWhenIdle(page
-      .locator('div.o_statusbar_buttons button', { hasText: 'Assign to Me' }))
+    const assignVisible = await page
+      .locator('div.o_statusbar_buttons button', { hasText: 'Assign to Me' })
+      .isVisible({ timeout: 5_000 })
       .catch(() => false);
     if (!assignVisible) {
       test.skip(true, 'Assign to Me not available — ticket may already be assigned or the button label differs on this instance');
@@ -154,8 +154,9 @@ test.describe('Fix Repair — Not Under Warranty (Without Serial No.) @module:fi
       .waitFor({ state: 'hidden', timeout: 10_000 });
     await shot('04-assigned-to-me.png');
 
-    const repairTypeVisible = await isVisibleWhenIdle(page
-      .locator('.o_field_widget[name="ticket_type_id"]'))
+    const repairTypeVisible = await page
+      .locator('.o_field_widget[name="ticket_type_id"]')
+      .isVisible({ timeout: 3_000 })
       .catch(() => false);
     if (!repairTypeVisible) {
       test.skip(true, 'ticket_type_id field not present — Fix Repair Studio customization not installed on this instance');
@@ -164,16 +165,18 @@ test.describe('Fix Repair — Not Under Warranty (Without Serial No.) @module:fi
     await ticketPage.repairType.setValue(FIX_REPAIR_TEST_CONFIG.repairTypeNotUnderWarrantyNoSerial);
     await shot('05-repair-type-selected.png');
 
-    const returnReceiptVisible = await isVisibleWhenIdle(page
-      .locator('.o_field_widget[name="x_studio_return_receipt_location"]'))
+    const returnReceiptVisible = await page
+      .locator('.o_field_widget[name="x_studio_return_receipt_location"]')
+      .isVisible({ timeout: 3_000 })
       .catch(() => false);
     if (returnReceiptVisible) {
       await ticketPage.returnReceiptLocation.setValue(FIX_REPAIR_TEST_CONFIG.returnReceiptLocationExample);
       await shot('06-return-receipt-location-set.png');
     }
 
-    const jobLocationVisible = await isVisibleWhenIdle(page
-      .locator('.o_field_widget[name="x_studio_job_location"]'))
+    const jobLocationVisible = await page
+      .locator('.o_field_widget[name="x_studio_job_location"]')
+      .isVisible({ timeout: 3_000 })
       .catch(() => false);
     if (jobLocationVisible) {
       await ticketPage.jobLocation.selectByLabel(FIX_REPAIR_TEST_CONFIG.jobLocationFactory);
@@ -193,8 +196,9 @@ test.describe('Fix Repair — Not Under Warranty (Without Serial No.) @module:fi
     // instance (Data.txt) — not "pick whatever's first", which proved racy
     // (the dropdown can re-render between reading an option's text and
     // clicking it, sometimes leaving the field unset).
-    const customerVisible = await isVisibleWhenIdle(page
-      .locator('.o_field_widget[name="partner_id"]'))
+    const customerVisible = await page
+      .locator('.o_field_widget[name="partner_id"]')
+      .isVisible({ timeout: 3_000 })
       .catch(() => false);
     if (customerVisible) {
       await ticketPage.customer.setValue(FIX_REPAIR_TEST_CONFIG.customerExample);
@@ -205,8 +209,9 @@ test.describe('Fix Repair — Not Under Warranty (Without Serial No.) @module:fi
       await shot('09-customer-selected.png');
     }
 
-    const productVisible = await isVisibleWhenIdle(page
-      .locator('.o_field_widget[name="product_id"]'))
+    const productVisible = await page
+      .locator('.o_field_widget[name="product_id"]')
+      .isVisible({ timeout: 3_000 })
       .catch(() => false);
     if (productVisible) {
       // Search by the short product code, not the full bracketed display
@@ -216,8 +221,9 @@ test.describe('Fix Repair — Not Under Warranty (Without Serial No.) @module:fi
       await shot('10-product-selected.png');
     }
 
-    const repairReasonVisible = await isVisibleWhenIdle(page
-      .locator('.o_field_widget[name="x_studio_repair_reason"]'))
+    const repairReasonVisible = await page
+      .locator('.o_field_widget[name="x_studio_repair_reason"]')
+      .isVisible({ timeout: 3_000 })
       .catch(() => false);
     if (repairReasonVisible) {
       await ticketPage.repairReason.addItem(FIX_REPAIR_TEST_CONFIG.repairReasonExample);
@@ -225,8 +231,9 @@ test.describe('Fix Repair — Not Under Warranty (Without Serial No.) @module:fi
       await shot('11-repair-reason-selected.png');
     }
 
-    const createSerialVisible = await isVisibleWhenIdle(page
-      .locator('button[name="action_create_repair_serial"]'))
+    const createSerialVisible = await page
+      .locator('button[name="action_create_repair_serial"]')
+      .isVisible({ timeout: 5_000 })
       .catch(() => false);
     if (!createSerialVisible) {
       test.info().annotations.push({
@@ -293,8 +300,9 @@ test.describe('Fix Repair — Not Under Warranty (Without Serial No.) @module:fi
       test.info().annotations.push({ type: 'note', description: `No return picking found on ticket ${ticketName || '(unknown)'}  — Send to Factory may not become available.` });
     }
 
-    const sendToFactoryVisible = await isVisibleWhenIdle(page
-      .locator('div.o_statusbar_buttons button', { hasText: 'Send to Factory' }))
+    const sendToFactoryVisible = await page
+      .locator('div.o_statusbar_buttons button', { hasText: 'Send to Factory' })
+      .isVisible({ timeout: 10_000 })
       .catch(() => false);
     if (!sendToFactoryVisible) {
       test.info().annotations.push({
@@ -308,8 +316,9 @@ test.describe('Fix Repair — Not Under Warranty (Without Serial No.) @module:fi
     await page.waitForTimeout(1_500);
     await shot('15-sent-to-factory.png');
 
-    const receivedAtFactoryVisible = await isVisibleWhenIdle(page
-      .locator('div.o_statusbar_buttons button', { hasText: 'Received at Factory' }))
+    const receivedAtFactoryVisible = await page
+      .locator('div.o_statusbar_buttons button', { hasText: 'Received at Factory' })
+      .isVisible({ timeout: 5_000 })
       .catch(() => false);
     if (!receivedAtFactoryVisible) {
       test.info().annotations.push({ type: 'note', description: 'Received at Factory button not visible.' });
@@ -319,8 +328,9 @@ test.describe('Fix Repair — Not Under Warranty (Without Serial No.) @module:fi
     await page.waitForTimeout(1_500);
     await shot('16-received-at-factory.png');
 
-    const planInterventionVisible = await isVisibleWhenIdle(page
-      .locator('div.o_statusbar_buttons button', { hasText: 'Plan Intervention' }))
+    const planInterventionVisible = await page
+      .locator('div.o_statusbar_buttons button', { hasText: 'Plan Intervention' })
+      .isVisible({ timeout: 5_000 })
       .catch(() => false);
     if (!planInterventionVisible) {
       test.info().annotations.push({ type: 'note', description: 'Plan Intervention button not visible.' });
@@ -333,7 +343,7 @@ test.describe('Fix Repair — Not Under Warranty (Without Serial No.) @module:fi
     // confirmed to exist on this instance (Data.txt), rather than "whatever's
     // first" — deterministic and reproducible.
     const diagnosisTab = page.getByRole('tab', { name: 'Repair Diagnosis' });
-    if (await isVisibleWhenIdle(diagnosisTab).catch(() => false)) {
+    if (await diagnosisTab.isVisible({ timeout: 5_000 }).catch(() => false)) {
       await diagnosisTab.click();
       await page.getByText('Add a line').click();
       await page.waitForTimeout(500);
@@ -348,7 +358,7 @@ test.describe('Fix Repair — Not Under Warranty (Without Serial No.) @module:fi
         const cell = diagnosisTable.locator(`[name="${fieldName}"]`).first();
         await cell.click();
         const input = cell.locator('input').first();
-        if (await isVisibleWhenIdle(input).catch(() => false)) {
+        if (await input.isVisible({ timeout: 1_000 }).catch(() => false)) {
           await input.fill(searchText);
         }
         const dropdown = page
@@ -384,7 +394,7 @@ test.describe('Fix Repair — Not Under Warranty (Without Serial No.) @module:fi
     // input elsewhere on the page (e.g. chatter attachments) — scope to the
     // first image field's own container instead.
     const repairImageTab = page.getByRole('tab', { name: 'Repair Image' });
-    if (await isVisibleWhenIdle(repairImageTab).catch(() => false)) {
+    if (await repairImageTab.isVisible({ timeout: 5_000 }).catch(() => false)) {
       await repairImageTab.click();
       await page.waitForTimeout(500);
       const fileInput = page.locator('.o_field_widget[name="x_studio_repair_image_01"] input[type="file"]').first();
@@ -404,7 +414,7 @@ test.describe('Fix Repair — Not Under Warranty (Without Serial No.) @module:fi
     const productsButton = page
       .locator('button[name="action_fsm_view_material"]')
       .or(page.locator('.o_button_box button', { hasText: 'Products' }));
-    if (await isVisibleWhenIdle(productsButton.first()).catch(() => false)) {
+    if (await productsButton.first().isVisible({ timeout: 5_000 }).catch(() => false)) {
       await productsButton.first().click();
       await page.waitForTimeout(1_500);
       await shot('20-products-catalog.png');
@@ -412,7 +422,7 @@ test.describe('Fix Repair — Not Under Warranty (Without Serial No.) @module:fi
       // Search the catalog for the spare part used on this quotation (from
       // Data.txt) so the right part is added regardless of catalog ordering.
       const catalogSearch = page.locator('.o_kanban_renderer input.o_searchview_input, .modal .o_searchview_input').first();
-      if (await catalogSearch.waitFor({ state: 'visible', timeout: 15_000 }).then(() => true).catch(() => false)) {
+      if (await catalogSearch.isVisible({ timeout: 3_000 }).catch(() => false)) {
         await catalogSearch.fill(FIX_REPAIR_TEST_CONFIG.quotationProductSearchTerm);
         await catalogSearch.press('Enter');
         await page.waitForTimeout(1_000);
@@ -422,7 +432,7 @@ test.describe('Fix Repair — Not Under Warranty (Without Serial No.) @module:fi
         .locator('.o_kanban_record', { hasText: FIX_REPAIR_TEST_CONFIG.quotationProductSearchTerm })
         .first();
       const addBtn = partCard.getByRole('button', { name: 'Add' });
-      if (await isVisibleWhenIdle(addBtn).catch(() => false)) {
+      if (await addBtn.isVisible({ timeout: 5_000 }).catch(() => false)) {
         await addBtn.click();
         await page.waitForTimeout(1_000);
         await shot('21-part-added.png');
@@ -432,7 +442,7 @@ test.describe('Fix Repair — Not Under Warranty (Without Serial No.) @module:fi
 
       // Close the product catalog back to the task.
       const closeBtn = page.locator('button.btn-close, .modal button[aria-label="Close"]').first();
-      if (await isVisibleWhenIdle(closeBtn).catch(() => false)) {
+      if (await closeBtn.isVisible({ timeout: 3_000 }).catch(() => false)) {
         await closeBtn.click();
         await page.waitForTimeout(1_000);
       }
@@ -442,12 +452,12 @@ test.describe('Fix Repair — Not Under Warranty (Without Serial No.) @module:fi
       // the task via its "Tasks" stat button, where a "Sales Order" stat
       // button now appears (it renders once the task has priced order lines).
       const tasksButton = page.locator('button.oe_stat_button:visible', { hasText: 'Tasks' }).first();
-      if (await isVisibleWhenIdle(tasksButton).catch(() => false)) {
+      if (await tasksButton.isVisible({ timeout: 5_000 }).catch(() => false)) {
         await tasksButton.click();
         await page.waitForTimeout(1_500);
 
         const salesOrderButton = page.locator('button.oe_stat_button:visible', { hasText: 'Sales Order' }).first();
-        if (await isVisibleWhenIdle(salesOrderButton).catch(() => false)) {
+        if (await salesOrderButton.isVisible({ timeout: 5_000 }).catch(() => false)) {
           await salesOrderButton.click();
           await page.waitForTimeout(1_500);
           await shot('23-sales-order-quotation.png');
@@ -482,14 +492,14 @@ test.describe('Fix Repair — Not Under Warranty (Without Serial No.) @module:fi
             try {
               // Step 1: "Send by Email" on the quotation.
               const sendByEmailButton = page.locator('.modal button:visible', { hasText: 'Send by Email' }).first();
-              if (await isVisibleWhenIdle(sendByEmailButton).catch(() => false)) {
+              if (await sendByEmailButton.isVisible({ timeout: 5_000 }).catch(() => false)) {
                 await sendByEmailButton.click();
                 await page.waitForTimeout(1_500);
                 await shot('23b-send-by-email-composer.png');
 
                 // Step 2: confirm the composer dialog with "Send".
                 const sendButton = page.locator('.o_mail_composer_form_view button:visible, .modal button:visible', { hasText: /^Send$/ }).first();
-                if (await isVisibleWhenIdle(sendButton).catch(() => false)) {
+                if (await sendButton.isVisible({ timeout: 5_000 }).catch(() => false)) {
                   await sendButton.click();
                   await page.waitForTimeout(2_000);
                 }
@@ -499,7 +509,7 @@ test.describe('Fix Repair — Not Under Warranty (Without Serial No.) @module:fi
                 // portal access URL via RPC and navigating there directly.
                 let portalUrl: string | undefined;
                 const viewQuotationLink = page.locator('a:visible', { hasText: 'View Quotation' }).first();
-                if (await isVisibleWhenIdle(viewQuotationLink).catch(() => false)) {
+                if (await viewQuotationLink.isVisible({ timeout: 5_000 }).catch(() => false)) {
                   portalUrl = await viewQuotationLink.getAttribute('href') ?? undefined;
                 }
                 if (!portalUrl) {
@@ -518,7 +528,7 @@ test.describe('Fix Repair — Not Under Warranty (Without Serial No.) @module:fi
 
                   // Step 4: "Accept & Sign" on the public portal page.
                   const acceptSignButton = portalPage.locator('button:visible', { hasText: 'Accept & Sign' }).or(portalPage.locator('a:visible', { hasText: 'Accept & Sign' })).first();
-                  if (await isVisibleWhenIdle(acceptSignButton).catch(() => false)) {
+                  if (await acceptSignButton.isVisible({ timeout: 8_000 }).catch(() => false)) {
                     await acceptSignButton.click();
                     await portalPage.waitForTimeout(1_500);
                     await shot('23d-validate-order-signature.png', portalPage);
@@ -530,7 +540,7 @@ test.describe('Fix Repair — Not Under Warranty (Without Serial No.) @module:fi
                     // closing it mid-request would cancel the submission.
                     const signatureModal = portalPage.locator('.modal:visible, .o_portal_sign_modal:visible').first();
                     const finalAcceptSignButton = signatureModal.locator('button:visible', { hasText: 'Accept & Sign' }).first();
-                    if (await isVisibleWhenIdle(finalAcceptSignButton).catch(() => false)) {
+                    if (await finalAcceptSignButton.isVisible({ timeout: 5_000 }).catch(() => false)) {
                       await finalAcceptSignButton.click();
                       await signatureModal.waitFor({ state: 'hidden', timeout: 15_000 }).catch(() => undefined);
                       await portalPage.waitForTimeout(2_000);
@@ -578,7 +588,7 @@ test.describe('Fix Repair — Not Under Warranty (Without Serial No.) @module:fi
             const createInvoiceButton = page.locator('button:visible', { hasText: 'Create Invoice' }).first();
             const actionMenu = page.locator('button.dropdown-toggle', { hasText: 'Action' }).first();
             let invoiceFlowStarted = false;
-            if (await isVisibleWhenIdle(createInvoiceButton).catch(() => false)) {
+            if (await createInvoiceButton.isVisible({ timeout: 5_000 }).catch(() => false)) {
               // The control panel bar can visually overlap the header
               // buttons for a moment right after this reload (a layout
               // reflow quirk, not a real overlay) and fail the normal
@@ -590,10 +600,10 @@ test.describe('Fix Repair — Not Under Warranty (Without Serial No.) @module:fi
               // which skips only the stability check, not the click itself.
               await createInvoiceButton.click({ force: true, timeout: 10_000 });
               invoiceFlowStarted = true;
-            } else if (await isVisibleWhenIdle(actionMenu).catch(() => false)) {
+            } else if (await actionMenu.isVisible({ timeout: 3_000 }).catch(() => false)) {
               await actionMenu.click();
               const createInvoiceItem = page.getByRole('menuitem', { name: 'Create Invoice' }).first();
-              if (await isVisibleWhenIdle(createInvoiceItem).catch(() => false)) {
+              if (await createInvoiceItem.isVisible({ timeout: 3_000 }).catch(() => false)) {
                 await createInvoiceItem.click();
                 invoiceFlowStarted = true;
               }
@@ -608,7 +618,7 @@ test.describe('Fix Repair — Not Under Warranty (Without Serial No.) @module:fi
                 .locator('.modal:visible button', { hasText: 'Create' })
                 .or(page.locator('.modal:visible button', { hasText: 'Create Draft Invoice' }))
                 .first();
-              if (await isVisibleWhenIdle(wizardConfirm).catch(() => false)) {
+              if (await wizardConfirm.isVisible({ timeout: 3_000 }).catch(() => false)) {
                 await wizardConfirm.click();
                 await page.waitForTimeout(1_500);
               }
@@ -722,7 +732,7 @@ test.describe('Fix Repair — Not Under Warranty (Without Serial No.) @module:fi
                       await gotoRecord(page, 'project.task', taskId);
                       await page.waitForTimeout(1_500);
                       const markDoneButton = page.locator('button:visible', { hasText: 'Mark as done' }).first();
-                      if (await isVisibleWhenIdle(markDoneButton).catch(() => false)) {
+                      if (await markDoneButton.isVisible({ timeout: 5_000 }).catch(() => false)) {
                         await markDoneButton.click();
                         await page.waitForTimeout(1_500);
                         legIndex += 1;
@@ -734,14 +744,14 @@ test.describe('Fix Repair — Not Under Warranty (Without Serial No.) @module:fi
                       await gotoRecord(page, 'helpdesk.ticket', ticketId);
                       await page.waitForTimeout(1_500);
                       const sendToSalesCentreButton = page.locator('div.o_statusbar_buttons button:visible', { hasText: 'Send to Sales Centre' }).first();
-                      if (await isVisibleWhenIdle(sendToSalesCentreButton).catch(() => false)) {
+                      if (await sendToSalesCentreButton.isVisible({ timeout: 5_000 }).catch(() => false)) {
                         await sendToSalesCentreButton.click();
                         await page.waitForTimeout(1_500);
                         legIndex += 1;
                         await shot(`${legIndex}-sent-to-sales-centre.png`);
 
                         const receivedAtSalesCentreButton = page.locator('div.o_statusbar_buttons button:visible', { hasText: 'Received at Sales Centre' }).first();
-                        if (await isVisibleWhenIdle(receivedAtSalesCentreButton).catch(() => false)) {
+                        if (await receivedAtSalesCentreButton.isVisible({ timeout: 5_000 }).catch(() => false)) {
                           await receivedAtSalesCentreButton.click();
                           await page.waitForTimeout(1_500);
                           legIndex += 1;
@@ -760,11 +770,11 @@ test.describe('Fix Repair — Not Under Warranty (Without Serial No.) @module:fi
                       await gotoRecord(page, 'project.task', taskId);
                       await page.waitForTimeout(1_500);
                       const invoicesButton = page.locator('button.oe_stat_button:visible', { hasText: 'Invoices' }).first();
-                      if (await isVisibleWhenIdle(invoicesButton).catch(() => false)) {
+                      if (await invoicesButton.isVisible({ timeout: 5_000 }).catch(() => false)) {
                         await invoicesButton.click();
                         await page.waitForTimeout(1_500);
                         const registerBalanceButton = page.locator('button:visible', { hasText: 'Register Payment' }).first();
-                        if (await isVisibleWhenIdle(registerBalanceButton).catch(() => false)) {
+                        if (await registerBalanceButton.isVisible({ timeout: 5_000 }).catch(() => false)) {
                           await registerBalanceButton.click();
                           await page.waitForTimeout(1_000);
 
@@ -775,14 +785,14 @@ test.describe('Fix Repair — Not Under Warranty (Without Serial No.) @module:fi
                           // the same dropdown classes as Many2OneField.
                           const paymentModal = page.locator('.modal:visible').last();
                           const journalField = paymentModal.locator('.o_field_widget[name="journal_id"] input').first();
-                          if (await isVisibleWhenIdle(journalField).catch(() => false)) {
+                          if (await journalField.isVisible({ timeout: 3_000 }).catch(() => false)) {
                             await journalField.fill('Commercial Bank');
                             const dropdown = page.locator('.o_field_many2one_dropdown, .ui-autocomplete, .o-dropdown--menu, .o-autocomplete--dropdown-menu').first();
                             await dropdown.waitFor({ state: 'visible', timeout: 8_000 }).catch(() => {});
                             const journalOption = page
                               .locator('.o_field_many2one_dropdown .o_menu_item, .ui-autocomplete .ui-menu-item, .o-dropdown--menu .o_menu_item, .o-autocomplete--dropdown-item', { hasText: 'Commercial Bank' })
                               .first();
-                            if (await isVisibleWhenIdle(journalOption).catch(() => false)) {
+                            if (await journalOption.isVisible({ timeout: 3_000 }).catch(() => false)) {
                               await journalOption.click();
                             } else {
                               test.info().annotations.push({ type: 'note', description: 'Commercial Bank option not found in Journal dropdown for balance payment.' });
@@ -793,7 +803,7 @@ test.describe('Fix Repair — Not Under Warranty (Without Serial No.) @module:fi
                           legIndex += 1;
                           await shot(`${legIndex}-balance-payment-wizard.png`);
                           const createPaymentButton = page.locator('.modal:visible button', { hasText: 'Create Payment' }).first();
-                          if (await isVisibleWhenIdle(createPaymentButton).catch(() => false)) {
+                          if (await createPaymentButton.isVisible({ timeout: 3_000 }).catch(() => false)) {
                             await createPaymentButton.click();
                             await page.waitForTimeout(1_500);
 
@@ -802,10 +812,10 @@ test.describe('Fix Repair — Not Under Warranty (Without Serial No.) @module:fi
                             // with an "Invalid Operation" dialog — surface
                             // it clearly instead of silently continuing.
                             const invalidOpDialog = page.locator('.modal:visible', { hasText: 'Invalid Operation' }).first();
-                            if (await isVisibleWhenIdle(invalidOpDialog).catch(() => false)) {
+                            if (await invalidOpDialog.isVisible({ timeout: 2_000 }).catch(() => false)) {
                               test.info().annotations.push({ type: 'note', description: 'Balance payment failed with "Invalid Operation" — Journal was likely not switched to Commercial Bank.' });
                               const closeInvalidOp = invalidOpDialog.locator('button', { hasText: 'Close' }).first();
-                              if (await isVisibleWhenIdle(closeInvalidOp).catch(() => false)) {
+                              if (await closeInvalidOp.isVisible({ timeout: 2_000 }).catch(() => false)) {
                                 await closeInvalidOp.click();
                                 await page.waitForTimeout(500);
                               }
@@ -832,12 +842,12 @@ test.describe('Fix Repair — Not Under Warranty (Without Serial No.) @module:fi
                       await gotoRecord(page, 'helpdesk.ticket', ticketId);
                       await page.waitForTimeout(1_500);
                       const dispatchButton = page.locator('div.o_statusbar_buttons button:visible', { hasText: 'Dispatch' }).first();
-                      let dispatchButtonVisible = await isVisibleWhenIdle(dispatchButton).catch(() => false);
+                      let dispatchButtonVisible = await dispatchButton.isVisible({ timeout: 5_000 }).catch(() => false);
                       for (let attempt = 0; attempt < 3 && !dispatchButtonVisible; attempt++) {
                         await page.waitForTimeout(3_000);
                         await page.reload();
                         await page.waitForTimeout(1_500);
-                        dispatchButtonVisible = await isVisibleWhenIdle(dispatchButton).catch(() => false);
+                        dispatchButtonVisible = await dispatchButton.isVisible({ timeout: 5_000 }).catch(() => false);
                       }
                       if (dispatchButtonVisible) {
                         await dispatchButton.click();
@@ -846,7 +856,7 @@ test.describe('Fix Repair — Not Under Warranty (Without Serial No.) @module:fi
                         await shot(`${legIndex}-dispatch-returned-picking.png`);
 
                         const validateDispatchButton = page.locator('.modal:visible button, button:visible', { hasText: 'Validate' }).first();
-                        if (await isVisibleWhenIdle(validateDispatchButton).catch(() => false)) {
+                        if (await validateDispatchButton.isVisible({ timeout: 5_000 }).catch(() => false)) {
                           await validateDispatchButton.click();
                           await page.waitForTimeout(1_500);
                           legIndex += 1;

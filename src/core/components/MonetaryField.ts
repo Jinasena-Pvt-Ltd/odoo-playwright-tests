@@ -1,5 +1,4 @@
 import { Page } from '@playwright/test';
-import { isVisibleWhenIdle } from '../utils/OdooIdle';
 
 export class MonetaryField {
   constructor(
@@ -15,7 +14,7 @@ export class MonetaryField {
 
   async getValue(): Promise<number> {
     const input = this.page.locator(`.o_field_widget[name="${this.fieldName}"] input`).first();
-    if (await isVisibleWhenIdle(input).catch(() => false)) {
+    if (await input.isVisible({ timeout: 300 }).catch(() => false)) {
       const raw = await input.inputValue();
       return this.parseAmount(raw);
     }

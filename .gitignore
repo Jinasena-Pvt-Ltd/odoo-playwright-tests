@@ -11,5 +11,3 @@ playwright-report/
 .claude/hooks/branch.txt
 Tour/
 images/
-.trial-src*/
-run-logs/

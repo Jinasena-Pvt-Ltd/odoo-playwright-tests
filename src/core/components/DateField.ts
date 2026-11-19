@@ -1,5 +1,4 @@
 import { Page } from '@playwright/test';
-import { isVisibleWhenIdle } from '../utils/OdooIdle';
 
 export class DateField {
   constructor(
@@ -19,7 +18,7 @@ export class DateField {
 
   async getValue(): Promise<string> {
     const input = this.page.locator(`.o_field_widget[name="${this.fieldName}"] input`).first();
-    if (await isVisibleWhenIdle(input).catch(() => false)) {
+    if (await input.isVisible({ timeout: 300 }).catch(() => false)) {
       return input.inputValue();
     }
     const widget = this.page.locator(`.o_field_widget[name="${this.fieldName}"]`).first();

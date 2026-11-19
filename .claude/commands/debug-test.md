@@ -43,7 +43,7 @@ Fixes:
 - Add `{ timeout: 8_000 }` on the specific locator call
 - Wrap config-dependent elements in a graceful skip:
   ```typescript
-  const visible = await isVisibleWhenIdle(page.locator('button', { hasText: 'X' })).catch(() => false);
+  const visible = await page.locator('button', { hasText: 'X' }).isVisible({ timeout: 3_000 }).catch(() => false);
   if (!visible) test.skip(true, 'X not available in this configuration');
   ```
 

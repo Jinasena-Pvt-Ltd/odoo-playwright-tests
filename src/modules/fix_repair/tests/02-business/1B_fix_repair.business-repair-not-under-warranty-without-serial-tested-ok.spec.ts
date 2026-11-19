@@ -20,7 +20,6 @@ import { Page, Locator } from '@playwright/test';
 import { test, expect } from '../../../../core/fixtures/index';
 import { FixRepairTicketPage } from '../../pages/FixRepairTicketPage';
 import { FIX_REPAIR_TEST_CONFIG } from '../../data/fix_repair.master-data';
-import { isVisibleWhenIdle } from '../../../../core/utils/OdooIdle';
 
 async function gotoRecord(page: Page, model: string, id: number) {
   const url = new URL(page.url());
@@ -33,9 +32,9 @@ async function gotoRecord(page: Page, model: string, id: number) {
 async function closeStrayDialogs(page: Page, attempts = 3) {
   for (let i = 0; i < attempts; i++) {
     const dialog = page.locator('.modal.show, .o_technical_modal').first();
-    if (!(await isVisibleWhenIdle(dialog).catch(() => false))) return;
+    if (!(await dialog.isVisible({ timeout: 1_000 }).catch(() => false))) return;
     const closeButton = dialog.locator('button[aria-label="Close"], .btn-close, button:has-text("Close")').first();
-    if (await isVisibleWhenIdle(closeButton).catch(() => false)) {
+    if (await closeButton.isVisible({ timeout: 1_000 }).catch(() => false)) {
       await closeButton.click({ force: true }).catch(() => undefined);
     } else {
       await page.keyboard.press('Escape');
@@ -75,7 +74,7 @@ test.describe('Fix Repair — Not Under Warranty (Without Serial No.) — Tested
       let boxed: Locator | undefined;
       if (target) {
         const el = target.first();
-        if (await isVisibleWhenIdle(el).catch(() => false)) {
+        if (await el.isVisible({ timeout: 3_000 }).catch(() => false)) {
           await el.evaluate((e) => {
             const h = e as HTMLElement;
             h.setAttribute('data-prev-outline', h.style.outline);
@@ -99,7 +98,7 @@ test.describe('Fix Repair — Not Under Warranty (Without Serial No.) — Tested
     const statusBtn = (label: string) => page.locator('div.o_statusbar_buttons button:visible', { hasText: label }).first();
     let ticketIdForPoll = 0;
     const waitForStatusBtn = async (label: string) => {
-      let visible = await isVisibleWhenIdle(statusBtn(label)).catch(() => false);
+      let visible = await statusBtn(label).isVisible({ timeout: 5_000 }).catch(() => false);
       for (let i = 0; i < 6 && !visible; i++) {
         await page.waitForTimeout(3_000);
         await closeStrayDialogs(page);
@@ -107,7 +106,7 @@ test.describe('Fix Repair — Not Under Warranty (Without Serial No.) — Tested
         // A hash-only change does not reload the record; force a full reload.
         await page.reload();
         await page.waitForTimeout(1_500);
-        visible = await isVisibleWhenIdle(statusBtn(label)).catch(() => false);
+        visible = await statusBtn(label).isVisible({ timeout: 5_000 }).catch(() => false);
       }
       expect(visible, `${label} button visible`).toBeTruthy();
     };
@@ -132,7 +131,7 @@ test.describe('Fix Repair — Not Under Warranty (Without Serial No.) — Tested
     await ticketPage.clickNewTicket();
 
     // 4. Assign to Me
-    if (!(await isVisibleWhenIdle(statusBtn('Assign to Me')).catch(() => false))) {
+    if (!(await statusBtn('Assign to Me').isVisible({ timeout: 5_000 }).catch(() => false))) {
       test.skip(true, 'Assign to Me not available on this instance');
       return;
     }
@@ -141,7 +140,7 @@ test.describe('Fix Repair — Not Under Warranty (Without Serial No.) — Tested
     await page.locator('div.o_statusbar_buttons button', { hasText: 'Assign to Me' }).waitFor({ state: 'hidden', timeout: 10_000 });
 
     // 5. Type
-    if (!(await isVisibleWhenIdle(field('ticket_type_id')).catch(() => false))) {
+    if (!(await field('ticket_type_id').isVisible({ timeout: 3_000 }).catch(() => false))) {
       test.skip(true, 'Fix Repair Studio customization not installed on this instance');
       return;
     }
@@ -173,7 +172,7 @@ test.describe('Fix Repair — Not Under Warranty (Without Serial No.) — Tested
 
     // 11. Create Serial No
     const createSerial = page.locator('button[name="action_create_repair_serial"]');
-    if (!(await isVisibleWhenIdle(createSerial).catch(() => false))) {
+    if (!(await createSerial.isVisible({ timeout: 5_000 }).catch(() => false))) {
       test.info().annotations.push({ type: 'note', description: 'Create Serial No not shown.' });
       expect(await createSerial.isVisible()).toBeTruthy();
     }
@@ -259,7 +258,7 @@ test.describe('Fix Repair — Not Under Warranty (Without Serial No.) — Tested
 
     // 21. Back (to the ticket)
     const backBtn = page.locator('button[name="action_wizard_back"]:visible, button:visible:text-is("Back")').first();
-    if (await isVisibleWhenIdle(backBtn).catch(() => false)) {
+    if (await backBtn.isVisible({ timeout: 5_000 }).catch(() => false)) {
       await shot('21-back.png', backBtn);
       await backBtn.click();
       await page.waitForTimeout(1_500);
@@ -297,9 +296,9 @@ test.describe('Fix Repair — Not Under Warranty (Without Serial No.) — Tested
 
     // 26. Close — back to the ticket view
     const closeX = page.locator('.modal:visible button.btn-close').first();
-    const close = (await isVisibleWhenIdle(closeX).catch(() => false)) ? closeX : page.locator('button[name="action_wizard_back"]:visible').first();
+    const close = (await closeX.isVisible({ timeout: 3_000 }).catch(() => false)) ? closeX : page.locator('button[name="action_wizard_back"]:visible').first();
     await shot('26-close.png', close);
-    if (await isVisibleWhenIdle(close).catch(() => false)) await close.click();
+    if (await close.isVisible({ timeout: 3_000 }).catch(() => false)) await close.click();
     await page.waitForTimeout(1_000);
     await closeStrayDialogs(page);
     await gotoRecord(page, 'helpdesk.ticket', ticketId);

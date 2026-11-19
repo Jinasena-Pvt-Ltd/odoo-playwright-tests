@@ -52,7 +52,7 @@ src/
 │   ├── components/ CharField, Many2OneField, Many2ManyField, DateField, SelectionField, BooleanToggle, MonetaryField, StatusBar
 │   ├── fixtures/   index.ts, base.fixtures.ts, auth.setup.ts, masterData.fixtures.ts
 │   ├── reporters/  ValidationTableReporter.ts
-│   └── utils/      RandomDataGenerator, DateHelper, NumberHelper, TestLogger, ReportAttachment, OdooIdle
+│   └── utils/      RandomDataGenerator, DateHelper, NumberHelper, TestLogger, ReportAttachment
 └── modules/
     └── <domain>/                  # One directory per Odoo module
         ├── pages/                 FormPage, ListPage, KanbanPage
@@ -147,16 +147,10 @@ const name = uniqueName('My Record'); // → "[TEST] My Record AB1C2D3E"
 ### Graceful Skipping
 
 ```typescript
-import { isVisibleWhenIdle } from '../../../../core/utils/OdooIdle';
-
-const visible = await isVisibleWhenIdle(page.locator('button', { hasText: 'Confirm' })).catch(() => false);
+const visible = await page.locator('button', { hasText: 'Confirm' })
+  .isVisible({ timeout: 3_000 }).catch(() => false);
 if (!visible) test.skip(true, 'Confirm not available in this configuration');
 ```
-
-Do not use `locator.isVisible({ timeout })`: Playwright ignores the timeout and answers at once,
-so a button that appears after Odoo's pending RPC returns is reported as missing.
-`isVisibleWhenIdle` first waits until Odoo is idle (no RPC in flight, no loading indicator or
-blocked UI) and then checks; `waitForOdooIdle(page)` is the same wait on its own.
 
 ---
 

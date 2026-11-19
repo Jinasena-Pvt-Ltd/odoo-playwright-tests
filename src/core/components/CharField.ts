@@ -1,5 +1,4 @@
 import { Page } from '@playwright/test';
-import { isVisibleWhenIdle } from '../utils/OdooIdle';
 
 export class CharField {
   constructor(
@@ -16,7 +15,7 @@ export class CharField {
   async getValue(): Promise<string> {
     // In edit mode: return input value; in read mode: return span text
     const input = this.page.locator(`.o_field_widget[name="${this.fieldName}"] input`).first();
-    if (await isVisibleWhenIdle(input).catch(() => false)) {
+    if (await input.isVisible({ timeout: 300 }).catch(() => false)) {
       return input.inputValue();
     }
     const widget = this.page.locator(`.o_field_widget[name="${this.fieldName}"]`).first();

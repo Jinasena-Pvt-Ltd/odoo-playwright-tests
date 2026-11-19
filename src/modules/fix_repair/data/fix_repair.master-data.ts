@@ -43,7 +43,7 @@ export const FIX_REPAIR_TEST_CONFIG = {
   diagnosisSubReason: 'Hi Voltage',
   diagnosisResolution: 'Reject',
   diagnosisRepairStage: '1-REP-REC',
-  repairImagePath: 'images/CrownRegency.jpg',
+  repairImagePath: 'images/WaterPump.jpg',
   // Spare part added to the repair quotation via the task's "Products"
   // catalog — [02BB 023] BALL BEARING 6202-2RS, has stock on this instance.
   quotationProductSearchTerm: '02BB 023',

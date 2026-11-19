@@ -194,7 +194,7 @@ If you have an Odoo Tour Recorder JSON export, hand it to Claude — the `tour2p
 | Skipping UI steps because "RPC is faster" | Tests must use the browser — RPC is not a substitute |
 | Hardcoding names in form fills | Use `uniqueName('...')` so test data is identifiable and unique |
 | Creating test data in `beforeAll` via form | Use a dedicated config test in `01-config/` or the UI `beforeEach` |
-| `expect(btn).toBeVisible()` for config-dependent UI | `isVisibleWhenIdle(locator).catch(()=>false)` + `test.skip()` |
+| `expect(btn).toBeVisible()` for config-dependent UI | `isVisible({timeout:3_000}).catch(()=>false)` + `test.skip()` |
 | `test.skip(true)` with no reason | Always: `test.skip(true, 'reason')` |
 | Spec at `tests/` root | Must be inside `01-config/` through `07-archive/` |
 
@@ -582,9 +582,8 @@ const name = uniqueName('My Record'); // → "[TEST] My Record AB1C2D3E"
 ### Graceful Skipping
 
 ```typescript
-// isVisibleWhenIdle (core/utils/OdooIdle): waits until Odoo is idle, then checks.
-// locator.isVisible({ timeout }) ignores its timeout and answers at once.
-const visible = await isVisibleWhenIdle(page.locator('button', { hasText: 'Confirm' })).catch(() => false);
+const visible = await page.locator('button', { hasText: 'Confirm' })
+  .isVisible({ timeout: 3_000 }).catch(() => false);
 if (!visible) test.skip(true, 'Confirm not available in this configuration');
 ```
 
@@ -839,7 +838,7 @@ test.describe('<Suite Name> @module:<module> @step:<step>', () => {
   test('<validation behavior>', async ({ page }) => {
     const formPage = new <RelevantFormPage>(page);
     await formPage.navigate();
-    const visible = await isVisibleWhenIdle(page.locator('button', { hasText: '<Button>' })).catch(() => false);
+    const visible = await page.locator('button', { hasText: '<Button>' }).isVisible({ timeout: 3_000 }).catch(() => false);
     if (!visible) { test.skip(true, '<Button> not available in this Odoo configuration'); return; }
   });
 });
@@ -930,7 +929,7 @@ grep -r "<test name>" src/modules --include="*.spec.ts" -l
 **A — Locator Timeout** (`TimeoutError`, `element not found`)
 - Wrap config-dependent elements in graceful skip:
   ```typescript
-  const visible = await isVisibleWhenIdle(page.locator('button', { hasText: 'X' })).catch(() => false);
+  const visible = await page.locator('button', { hasText: 'X' }).isVisible({ timeout: 3_000 }).catch(() => false);
   if (!visible) test.skip(true, 'X not available in this configuration');
   ```
 - Add `{ timeout: 8_000 }` on specific locators

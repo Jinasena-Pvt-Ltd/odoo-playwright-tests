@@ -43,8 +43,7 @@ For each file, evaluate every item below. Report each as:
 - `[FAIL]` if a test throws or uses `expect(visible).toBe(true)` to assert that a config-dependent element is present — use `test.skip(true, 'reason')` instead.
 - `[FAIL]` if `test.skip(true)` is called without a second string argument explaining why — the reason string is mandatory, not optional.
 - `[WARN]` if `test.skip()` is called with a non-descriptive reason like `'TODO'` or `'skip'`.
-- `[PASS]` if the correct pattern is used: `const visible = await isVisibleWhenIdle(locator).catch(() => false); if (!visible) test.skip(true, '...');`
-- `[FAIL]` if `locator.isVisible({ timeout })` is used: Playwright ignores that timeout and answers at once; use `isVisibleWhenIdle` (core/utils/OdooIdle).
+- `[PASS]` if the correct pattern is used: `const visible = await locator.isVisible({ timeout: 3_000 }).catch(() => false); if (!visible) test.skip(true, '...');`
 
 ### 5. UI Interaction Required
 - `[FAIL]` if a test bypasses the UI to set up or assert data state via RPC.
