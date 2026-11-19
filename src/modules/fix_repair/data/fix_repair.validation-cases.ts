@@ -12,12 +12,12 @@ export const FIX_REPAIR_MANDATORY_FIELDS: Array<{
   expectedError: string;
 }> = [
   { module: 'Repair ticket', field: 'Customer', attemptedValue: 'partner_id', expectedError: 'Customer' },
-  { module: 'Repair ticket', field: 'Repair Reason', attemptedValue: 'x_studio_repair_reason', expectedError: 'Repair Reason' },
+  { module: 'Repair ticket', field: 'Repair Reason', attemptedValue: 'repair_reason', expectedError: 'Repair Reason' },
   { module: 'Repair ticket', field: 'Product', attemptedValue: 'product_id', expectedError: 'Product' },
   {
     module: 'Repair ticket',
     field: 'Return Receipt Location',
-    attemptedValue: 'x_studio_return_receipt_location',
+    attemptedValue: 'return_receipt_location',
     expectedError: 'Return Receipt Location',
   },
 ];

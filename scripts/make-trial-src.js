@@ -2,7 +2,10 @@
 /**
  * Build .trial-src/: a copy of src/ with Clear-DB's Studio technical names translated to the names of the
  * Odoo "Rename-HelpdeskRepair" trial (scripts/trial-names.json), so the same tests run against a database
- * installed from that trial. src/ itself is not changed and keeps testing Clear-DB.
+ * installed from that trial. src/ itself is not changed.
+ *
+ * On repair-strict, src/modules/fix_repair and the PLM spec already use the new-install (Rename-All) names, so
+ * they run there with the normal playwright.config.ts; this script leaves them unchanged.
  *
  * Tests find Odoo fields by technical name (`.o_field_widget[name="x_studio_repair_reason"]`), so a renamed
  * field is not found and the step is skipped. Same token rule as the Odoo rename: a name is replaced only as a

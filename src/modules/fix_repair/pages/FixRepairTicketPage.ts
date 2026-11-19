@@ -32,9 +32,9 @@ export class FixRepairTicketPage extends BaseFormPage {
     this.repairType = new Many2OneField(page, 'ticket_type_id');
     this.customer = new Many2OneField(page, 'partner_id');
     this.product = new Many2OneField(page, 'product_id');
-    this.returnReceiptLocation = new Many2OneField(page, 'x_studio_return_receipt_location');
-    this.jobLocation = new SelectionField(page, 'x_studio_job_location');
-    this.repairReason = new Many2ManyField(page, 'x_studio_repair_reason');
+    this.returnReceiptLocation = new Many2OneField(page, 'return_receipt_location');
+    this.jobLocation = new SelectionField(page, 'job_location');
+    this.repairReason = new Many2ManyField(page, 'repair_reason');
   }
 
   /**

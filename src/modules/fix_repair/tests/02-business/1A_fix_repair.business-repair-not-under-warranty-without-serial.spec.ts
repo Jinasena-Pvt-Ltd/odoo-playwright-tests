@@ -165,7 +165,7 @@ test.describe('Fix Repair — Not Under Warranty (Without Serial No.) @module:fi
     await shot('05-repair-type-selected.png');
 
     const returnReceiptVisible = await isVisibleWhenIdle(page
-      .locator('.o_field_widget[name="x_studio_return_receipt_location"]'))
+      .locator('.o_field_widget[name="return_receipt_location"]'))
       .catch(() => false);
     if (returnReceiptVisible) {
       await ticketPage.returnReceiptLocation.setValue(FIX_REPAIR_TEST_CONFIG.returnReceiptLocationExample);
@@ -173,7 +173,7 @@ test.describe('Fix Repair — Not Under Warranty (Without Serial No.) @module:fi
     }
 
     const jobLocationVisible = await isVisibleWhenIdle(page
-      .locator('.o_field_widget[name="x_studio_job_location"]'))
+      .locator('.o_field_widget[name="job_location"]'))
       .catch(() => false);
     if (jobLocationVisible) {
       await ticketPage.jobLocation.selectByLabel(FIX_REPAIR_TEST_CONFIG.jobLocationFactory);
@@ -217,7 +217,7 @@ test.describe('Fix Repair — Not Under Warranty (Without Serial No.) @module:fi
     }
 
     const repairReasonVisible = await isVisibleWhenIdle(page
-      .locator('.o_field_widget[name="x_studio_repair_reason"]'))
+      .locator('.o_field_widget[name="repair_reason"]'))
       .catch(() => false);
     if (repairReasonVisible) {
       await ticketPage.repairReason.addItem(FIX_REPAIR_TEST_CONFIG.repairReasonExample);
@@ -338,8 +338,8 @@ test.describe('Fix Repair — Not Under Warranty (Without Serial No.) @module:fi
       await page.getByText('Add a line').click();
       await page.waitForTimeout(500);
 
-      const diagnosisTable = page.locator('[name="x_studio_diagnosis_ids"]');
-      await diagnosisTable.locator('[name="x_studio_description"] input, [name="x_studio_description"] textarea')
+      const diagnosisTable = page.locator('[name="diagnosis_ids"]');
+      await diagnosisTable.locator('[name="description"] input, [name="description"] textarea')
         .first().fill('Engine diagnosis');
       await page.keyboard.press('Tab');
       await page.waitForTimeout(300);
@@ -366,12 +366,12 @@ test.describe('Fix Repair — Not Under Warranty (Without Serial No.) @module:fi
         await page.waitForTimeout(400);
       }
 
-      await pickInCell('x_studio_diagnosis_area', FIX_REPAIR_TEST_CONFIG.diagnosisArea);
-      await pickInCell('x_studio_diagnosis_code', FIX_REPAIR_TEST_CONFIG.diagnosisCode);
-      await pickInCell('x_studio_reason', FIX_REPAIR_TEST_CONFIG.diagnosisReason);
-      await pickInCell('x_studio_sub_reason', FIX_REPAIR_TEST_CONFIG.diagnosisSubReason);
-      await pickInCell('x_studio_resolution', FIX_REPAIR_TEST_CONFIG.diagnosisResolution);
-      await pickInCell('x_studio_repair_stage', FIX_REPAIR_TEST_CONFIG.diagnosisRepairStage);
+      await pickInCell('diagnosis_area', FIX_REPAIR_TEST_CONFIG.diagnosisArea);
+      await pickInCell('diagnosis_code', FIX_REPAIR_TEST_CONFIG.diagnosisCode);
+      await pickInCell('reason', FIX_REPAIR_TEST_CONFIG.diagnosisReason);
+      await pickInCell('sub_reason', FIX_REPAIR_TEST_CONFIG.diagnosisSubReason);
+      await pickInCell('resolution', FIX_REPAIR_TEST_CONFIG.diagnosisResolution);
+      await pickInCell('repair_stage', FIX_REPAIR_TEST_CONFIG.diagnosisRepairStage);
       await page.waitForTimeout(500);
       await shot('18-repair-diagnosis-recorded.png');
     } else {
@@ -379,7 +379,7 @@ test.describe('Fix Repair — Not Under Warranty (Without Serial No.) @module:fi
     }
 
     // Repair Image: at least one photo of the item being repaired. This task
-    // template has two separate image slots (x_studio_repair_image_01/02);
+    // template has two separate image slots (repair_image_01/02);
     // a generic `input[type="file"]` first-match grabs an unrelated hidden
     // input elsewhere on the page (e.g. chatter attachments) — scope to the
     // first image field's own container instead.
@@ -387,7 +387,7 @@ test.describe('Fix Repair — Not Under Warranty (Without Serial No.) @module:fi
     if (await isVisibleWhenIdle(repairImageTab).catch(() => false)) {
       await repairImageTab.click();
       await page.waitForTimeout(500);
-      const fileInput = page.locator('.o_field_widget[name="x_studio_repair_image_01"] input[type="file"]').first();
+      const fileInput = page.locator('.o_field_widget[name="repair_image_01"] input[type="file"]').first();
       const imagePath = path.resolve(process.cwd(), FIX_REPAIR_TEST_CONFIG.repairImagePath);
       await fileInput.setInputFiles(imagePath);
       await page.waitForTimeout(1_500);

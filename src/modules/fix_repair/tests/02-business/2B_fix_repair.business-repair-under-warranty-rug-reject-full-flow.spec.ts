@@ -253,16 +253,16 @@ test.describe('Fix Repair - Under Warranty - RUG (Reject) - Factory Full Flow @m
     await page.waitForTimeout(1_000);
 
     // 6. Return Receipt Location
-    await shot('06-return-receipt.png', field('x_studio_return_receipt_location'));
+    await shot('06-return-receipt.png', field('return_receipt_location'));
     await ticketPage.returnReceiptLocation.setValue(FIX_REPAIR_TEST_CONFIG.returnReceiptLocationExample);
 
     // 7. Repair Reason
-    await shot('07-repair-reason.png', field('x_studio_repair_reason'));
+    await shot('07-repair-reason.png', field('repair_reason'));
     await ticketPage.repairReason.addItem(FIX_REPAIR_TEST_CONFIG.repairReasonExample);
     await page.waitForTimeout(1_000);
 
     // 8. Job Location = Factory Repair
-    await shot('08-job-location.png', field('x_studio_job_location'));
+    await shot('08-job-location.png', field('job_location'));
     await ticketPage.jobLocation.selectByLabel(FIX_REPAIR_TEST_CONFIG.jobLocationFactory);
 
     // 9. Customer
@@ -292,7 +292,7 @@ test.describe('Fix Repair - Under Warranty - RUG (Reject) - Factory Full Flow @m
       .map((l) => l.name)
       .sort()[0] ?? FIX_REPAIR_TEST_CONFIG.serialNumberExample;
     note(`serial number used: ${serialNo}`);
-    const serialField = field('x_studio_serial_no');
+    const serialField = field('serial_no');
     await expect(serialField).toBeVisible({ timeout: 8_000 });
     await shot('10-serial-no.png', serialField);
     // The autocomplete occasionally re-renders under the click and leaves the
@@ -321,7 +321,7 @@ test.describe('Fix Repair - Under Warranty - RUG (Reject) - Factory Full Flow @m
     await page.waitForTimeout(800);
 
     // 12. Attach the warranty card image
-    const warrantyField = field('x_studio_warranty_card');
+    const warrantyField = field('warranty_card');
     await expect(warrantyField).toBeVisible({ timeout: 8_000 });
     await shot('12-warranty-card-image.png', warrantyField);
     await warrantyField.locator('input[type="file"]').first().setInputFiles(path.resolve(process.cwd(), FIX_REPAIR_TEST_CONFIG.warrantyCardImagePath));
@@ -419,8 +419,8 @@ test.describe('Fix Repair - Under Warranty - RUG (Reject) - Factory Full Flow @m
     await shot('21-add-line.png', addLine);
     await addLine.click();
     await page.waitForTimeout(500);
-    const diagnosisTable = page.locator('[name="x_studio_diagnosis_ids"]');
-    await diagnosisTable.locator('[name="x_studio_description"] input, [name="x_studio_description"] textarea').first().fill('Engine diagnosis');
+    const diagnosisTable = page.locator('[name="diagnosis_ids"]');
+    await diagnosisTable.locator('[name="description"] input, [name="description"] textarea').first().fill('Engine diagnosis');
     await page.keyboard.press('Tab');
     await page.waitForTimeout(300);
 
@@ -432,12 +432,12 @@ test.describe('Fix Repair - Under Warranty - RUG (Reject) - Factory Full Flow @m
       if (await isVisibleWhenIdle(input).catch(() => false)) await input.fill(searchText);
       await pickOption(searchText);
     };
-    await pickInCell('22-diagnosis-area.png', 'x_studio_diagnosis_area', FIX_REPAIR_TEST_CONFIG.diagnosisArea);
-    await pickInCell('23-diagnosis-code.png', 'x_studio_diagnosis_code', FIX_REPAIR_TEST_CONFIG.diagnosisCode);
-    await pickInCell('24-diagnosis-reason.png', 'x_studio_reason', FIX_REPAIR_TEST_CONFIG.diagnosisReason);
-    await pickInCell('25-diagnosis-sub-reason.png', 'x_studio_sub_reason', FIX_REPAIR_TEST_CONFIG.diagnosisSubReason);
-    await pickInCell('26-diagnosis-resolution.png', 'x_studio_resolution', FIX_REPAIR_TEST_CONFIG.diagnosisResolution);
-    await pickInCell('27-diagnosis-repair-stage.png', 'x_studio_repair_stage', FIX_REPAIR_TEST_CONFIG.diagnosisRepairStage);
+    await pickInCell('22-diagnosis-area.png', 'diagnosis_area', FIX_REPAIR_TEST_CONFIG.diagnosisArea);
+    await pickInCell('23-diagnosis-code.png', 'diagnosis_code', FIX_REPAIR_TEST_CONFIG.diagnosisCode);
+    await pickInCell('24-diagnosis-reason.png', 'reason', FIX_REPAIR_TEST_CONFIG.diagnosisReason);
+    await pickInCell('25-diagnosis-sub-reason.png', 'sub_reason', FIX_REPAIR_TEST_CONFIG.diagnosisSubReason);
+    await pickInCell('26-diagnosis-resolution.png', 'resolution', FIX_REPAIR_TEST_CONFIG.diagnosisResolution);
+    await pickInCell('27-diagnosis-repair-stage.png', 'repair_stage', FIX_REPAIR_TEST_CONFIG.diagnosisRepairStage);
     await page.waitForTimeout(500);
 
     // 28. Repair Image tab
@@ -447,7 +447,7 @@ test.describe('Fix Repair - Under Warranty - RUG (Reject) - Factory Full Flow @m
     await page.waitForTimeout(500);
 
     // 29. Take a Picture (upload)
-    const imageField = field('x_studio_repair_image_01');
+    const imageField = field('repair_image_01');
     await shot('29-take-picture.png', imageField);
     await imageField.locator('input[type="file"]').first().setInputFiles(path.resolve(process.cwd(), FIX_REPAIR_TEST_CONFIG.repairImagePath));
     await page.waitForTimeout(1_500);
@@ -784,9 +784,9 @@ test.describe('Fix Repair - Under Warranty - RUG (Reject) - Factory Full Flow @m
     await page.screenshot({ path: testInfo.outputPath('77-final-ticket.png'), fullPage: true });
 
     // The item has been dispatched: receipt and dispatch pickings are done.
-    const [tkRead] = await callKw(page, 'helpdesk.ticket', 'read', [[ticketId], ['repair_picking_ids', 'x_studio_rug_approval_status']]);
+    const [tkRead] = await callKw(page, 'helpdesk.ticket', 'read', [[ticketId], ['repair_picking_ids', 'rug_approval_status']]);
     const states = await callKw(page, 'stock.picking', 'read', [tkRead.repair_picking_ids, ['name', 'state']]);
-    note(`repair pickings: ${JSON.stringify(states)}; RUG status: ${tkRead.x_studio_rug_approval_status}`);
+    note(`repair pickings: ${JSON.stringify(states)}; RUG status: ${tkRead.rug_approval_status}`);
     expect(states.filter((p: { state: string }) => p.state === 'done').length, 'receipt and dispatch pickings done').toBeGreaterThanOrEqual(2);
   });
 });

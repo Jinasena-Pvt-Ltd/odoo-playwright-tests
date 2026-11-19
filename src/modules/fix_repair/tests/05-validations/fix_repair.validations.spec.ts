@@ -63,7 +63,7 @@ test.describe('Fix Repair Field Validations @module:fix_repair @step:validations
       const message = await saveExpectingInvalid(page);
       expect(message, `"${c.expectedError}" listed in the notification`).toContain(c.expectedError);
       await expect(field(page, c.attemptedValue)).toHaveClass(/o_field_invalid/);
-      await expect(field(page, 'x_studio_serial_no'), 'Serial No not required without a serial').not.toHaveClass(/o_field_invalid/);
+      await expect(field(page, 'serial_no'), 'Serial No not required without a serial').not.toHaveClass(/o_field_invalid/);
     });
   }
 
@@ -73,7 +73,7 @@ test.describe('Fix Repair Field Validations @module:fix_repair @step:validations
     await waitForOdooIdle(page);
     const message = await saveExpectingInvalid(page);
     expect(message).toContain('Serial');
-    await expect(field(page, 'x_studio_serial_no')).toHaveClass(/o_field_invalid/);
+    await expect(field(page, 'serial_no')).toHaveClass(/o_field_invalid/);
   });
 
   test('the ticket number is read-only and the stage bar is not clickable', async ({ page }) => {
@@ -106,11 +106,11 @@ test.describe('Fix Repair Field Validations @module:fix_repair @step:validations
   test('a repair catalogue record needs a Name (Resolutions)', async ({ page }) => {
     await page.goto('/web#action=Fix-repair.action_resolutions');
     await page.locator('.o_list_button_add:visible').first().click();
-    await page.locator('.o_field_widget[name="x_name"]').first().waitFor({ state: 'visible', timeout: 30_000 });
+    await page.locator('.o_field_widget[name="name"]').first().waitFor({ state: 'visible', timeout: 30_000 });
     await waitForOdooIdle(page);
     const message = await saveExpectingInvalid(page);
     // The Name field of this catalogue is labelled "Resolution".
     expect(message).toContain('Resolution');
-    await expect(field(page, 'x_name')).toHaveClass(/o_field_invalid/);
+    await expect(field(page, 'name')).toHaveClass(/o_field_invalid/);
   });
 });

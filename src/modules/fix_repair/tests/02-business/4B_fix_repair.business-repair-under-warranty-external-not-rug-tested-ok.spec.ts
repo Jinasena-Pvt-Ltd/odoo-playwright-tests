@@ -255,16 +255,16 @@ test.describe('Fix Repair - Under Warranty - External not RUG - Factory Tested O
     await page.waitForTimeout(1_000);
 
     // 6. Return Receipt Location
-    await shot('return-receipt', field('x_studio_return_receipt_location'));
+    await shot('return-receipt', field('return_receipt_location'));
     await ticketPage.returnReceiptLocation.setValue(FIX_REPAIR_TEST_CONFIG.returnReceiptLocationExample);
 
     // 7. Repair Reason
-    await shot('repair-reason', field('x_studio_repair_reason'));
+    await shot('repair-reason', field('repair_reason'));
     await ticketPage.repairReason.addItem(FIX_REPAIR_TEST_CONFIG.repairReasonExample);
     await page.waitForTimeout(1_000);
 
     // 8. Job Location = Factory Repair
-    await shot('job-location', field('x_studio_job_location'));
+    await shot('job-location', field('job_location'));
     await ticketPage.jobLocation.selectByLabel(FIX_REPAIR_TEST_CONFIG.jobLocationFactory);
 
     // 9. Customer
@@ -294,7 +294,7 @@ test.describe('Fix Repair - Under Warranty - External not RUG - Factory Tested O
       .map((l) => l.name)
       .sort()[0] ?? FIX_REPAIR_TEST_CONFIG.serialNumberExample;
     note(`serial number used: ${serialNo}`);
-    const serialField = field('x_studio_serial_no');
+    const serialField = field('serial_no');
     await expect(serialField).toBeVisible({ timeout: 8_000 });
     await shot('serial-no', serialField);
     // The autocomplete occasionally re-renders under the click and leaves the

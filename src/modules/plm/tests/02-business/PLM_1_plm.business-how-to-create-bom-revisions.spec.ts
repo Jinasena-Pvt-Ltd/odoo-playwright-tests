@@ -107,7 +107,7 @@ test.describe('PLM - How to Create BOM Revisions @module:plm @step:business', ()
     const ecoName = uniqueName('M-JMC10D-V1.0');
     const comps: { id: number }[] = await callKw(page, 'product.product', 'search_read', [[['default_code', 'in', ['04WE 004', '08BV 052']]], ['id']], { limit: 2 });
     expect(comps.length, 'two existing components found').toBe(2);
-    const tmplId: number = await callKw(page, 'product.template', 'create', [{ name: productName, default_code: 'TEST-JMC10D', detailed_type: 'product', x_studio_item_approved: true, barcode: `TST${Date.now()}` }]);
+    const tmplId: number = await callKw(page, 'product.template', 'create', [{ name: productName, default_code: 'TEST-JMC10D', detailed_type: 'product', item_approved: true, barcode: `TST${Date.now()}` }]);
     const bomId: number = await callKw(page, 'mrp.bom', 'create', [{
       product_tmpl_id: tmplId,
       product_qty: 1,

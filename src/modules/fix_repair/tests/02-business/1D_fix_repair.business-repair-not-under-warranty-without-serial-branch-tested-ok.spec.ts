@@ -245,16 +245,16 @@ test.describe('Fix Repair — Not Under Warranty (Without Serial No.) — Branch
     await ticketPage.repairType.setValue(FIX_REPAIR_TEST_CONFIG.repairTypeNotUnderWarrantyNoSerial);
 
     // 6. Return Receipt Location
-    await shot('06-return-receipt.png', field('x_studio_return_receipt_location'));
+    await shot('06-return-receipt.png', field('return_receipt_location'));
     await ticketPage.returnReceiptLocation.setValue(FIX_REPAIR_TEST_CONFIG.returnReceiptLocationExample);
 
     // 7. Repair Reason
-    await shot('07-repair-reason.png', field('x_studio_repair_reason'));
+    await shot('07-repair-reason.png', field('repair_reason'));
     await ticketPage.repairReason.addItem(FIX_REPAIR_TEST_CONFIG.repairReasonLowPressure);
     await page.waitForTimeout(1_000);
 
     // 8. Job Location = Centre Repair (branch variant)
-    await shot('08-job-location.png', field('x_studio_job_location'));
+    await shot('08-job-location.png', field('job_location'));
     await ticketPage.jobLocation.selectByLabel(FIX_REPAIR_TEST_CONFIG.jobLocationCentre);
 
     // 9. Customer
@@ -379,7 +379,7 @@ test.describe('Fix Repair — Not Under Warranty (Without Serial No.) — Branch
     await gotoRecord(page, 'helpdesk.ticket', ticketId);
     await page.waitForTimeout(1_500);
 
-    // The tour's last two steps (#x_studio_vendor_group dropdown + pick) are not
+    // The tour's last two steps (#vendor_group dropdown + pick) are not
     // reproducible on the ticket: the Vendor Group field does not exist on
     // helpdesk.ticket (only on res.partner / res.users, and it is not shown on
     // the customer's form), so they are treated as recorder artefacts.

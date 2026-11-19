@@ -259,16 +259,16 @@ test.describe('Fix Repair - Not Under Warranty (With Serial No) - Branch Full Fl
     await page.waitForTimeout(1_000);
 
     // 6. Return Receipt Location
-    await shot('return-receipt', field('x_studio_return_receipt_location'));
+    await shot('return-receipt', field('return_receipt_location'));
     await ticketPage.returnReceiptLocation.setValue(FIX_REPAIR_TEST_CONFIG.returnReceiptLocationExample);
 
     // 7. Repair Reason
-    await shot('repair-reason', field('x_studio_repair_reason'));
+    await shot('repair-reason', field('repair_reason'));
     await ticketPage.repairReason.addItem(FIX_REPAIR_TEST_CONFIG.repairReasonExample);
     await page.waitForTimeout(1_000);
 
     // 8. Job Location = Centre Repair
-    await shot('job-location', field('x_studio_job_location'));
+    await shot('job-location', field('job_location'));
     await ticketPage.jobLocation.selectByLabel(FIX_REPAIR_TEST_CONFIG.jobLocationCentre);
 
     // 9. Customer
@@ -298,7 +298,7 @@ test.describe('Fix Repair - Not Under Warranty (With Serial No) - Branch Full Fl
       .map((l) => l.name)
       .sort()[0] ?? FIX_REPAIR_TEST_CONFIG.serialNumberExample;
     note(`serial number used: ${serialNo}`);
-    const serialField = field('x_studio_serial_no');
+    const serialField = field('serial_no');
     await expect(serialField).toBeVisible({ timeout: 8_000 });
     await shot('serial-no', serialField);
     // The autocomplete occasionally re-renders under the click and leaves the
@@ -393,8 +393,8 @@ test.describe('Fix Repair - Not Under Warranty (With Serial No) - Branch Full Fl
     await shot('add-line', addLine);
     await addLine.click();
     await page.waitForTimeout(500);
-    const diagnosisTable = page.locator('[name="x_studio_diagnosis_ids"]');
-    await diagnosisTable.locator('[name="x_studio_description"] input, [name="x_studio_description"] textarea').first().fill('Engine diagnosis');
+    const diagnosisTable = page.locator('[name="diagnosis_ids"]');
+    await diagnosisTable.locator('[name="description"] input, [name="description"] textarea').first().fill('Engine diagnosis');
     await page.keyboard.press('Tab');
     await page.waitForTimeout(300);
 
@@ -406,12 +406,12 @@ test.describe('Fix Repair - Not Under Warranty (With Serial No) - Branch Full Fl
       if (await isVisibleWhenIdle(input).catch(() => false)) await input.fill(searchText);
       await pickOption(searchText);
     };
-    await pickInCell('diagnosis-area', 'x_studio_diagnosis_area', FIX_REPAIR_TEST_CONFIG.diagnosisArea);
-    await pickInCell('diagnosis-code', 'x_studio_diagnosis_code', FIX_REPAIR_TEST_CONFIG.diagnosisCode);
-    await pickInCell('diagnosis-reason', 'x_studio_reason', FIX_REPAIR_TEST_CONFIG.diagnosisReason);
-    await pickInCell('diagnosis-sub-reason', 'x_studio_sub_reason', FIX_REPAIR_TEST_CONFIG.diagnosisSubReason);
-    await pickInCell('diagnosis-resolution', 'x_studio_resolution', FIX_REPAIR_TEST_CONFIG.diagnosisResolution);
-    await pickInCell('diagnosis-repair-stage', 'x_studio_repair_stage', FIX_REPAIR_TEST_CONFIG.diagnosisRepairStage);
+    await pickInCell('diagnosis-area', 'diagnosis_area', FIX_REPAIR_TEST_CONFIG.diagnosisArea);
+    await pickInCell('diagnosis-code', 'diagnosis_code', FIX_REPAIR_TEST_CONFIG.diagnosisCode);
+    await pickInCell('diagnosis-reason', 'reason', FIX_REPAIR_TEST_CONFIG.diagnosisReason);
+    await pickInCell('diagnosis-sub-reason', 'sub_reason', FIX_REPAIR_TEST_CONFIG.diagnosisSubReason);
+    await pickInCell('diagnosis-resolution', 'resolution', FIX_REPAIR_TEST_CONFIG.diagnosisResolution);
+    await pickInCell('diagnosis-repair-stage', 'repair_stage', FIX_REPAIR_TEST_CONFIG.diagnosisRepairStage);
     await page.waitForTimeout(500);
 
     // 26. Repair Image tab
@@ -421,7 +421,7 @@ test.describe('Fix Repair - Not Under Warranty (With Serial No) - Branch Full Fl
     await page.waitForTimeout(500);
 
     // 27. Take a Picture (upload)
-    const imageField = field('x_studio_repair_image_01');
+    const imageField = field('repair_image_01');
     await shot('take-picture', imageField);
     await imageField.locator('input[type="file"]').first().setInputFiles(path.resolve(process.cwd(), FIX_REPAIR_TEST_CONFIG.repairImagePath));
     await page.waitForTimeout(1_500);

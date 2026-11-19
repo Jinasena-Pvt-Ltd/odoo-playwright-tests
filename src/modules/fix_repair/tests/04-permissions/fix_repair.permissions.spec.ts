@@ -119,12 +119,12 @@ test.describe('Fix Repair User Permissions @module:fix_repair @step:permissions'
       expect(await homeMenuHas(page, 'helpdesk.menu_helpdesk_root'), 'Helpdesk app shown').toBe(true);
       await openResolutionsList(page);
       await page.locator('.o_list_button_add:visible').first().click();
-      const nameInput = page.locator('.o_field_widget[name="x_name"] input').first();
+      const nameInput = page.locator('.o_field_widget[name="name"] input').first();
       await nameInput.waitFor({ state: 'visible', timeout: 15_000 });
       await nameInput.fill(name);
       await page.locator('.o_list_button_save:visible, .o_form_button_save:visible').first().click();
       await waitForOdooIdle(page);
-      const created = await rpc.callMethod<number[]>('x_resolutions', 'search', [[['x_name', '=', name]]], ALL_COMPANIES);
+      const created = await rpc.callMethod<number[]>('resolutions', 'search', [[['name', '=', name]]], ALL_COMPANIES);
       expect(created.length, 'record created by the Helpdesk user').toBe(1);
 
       const row = page.locator('.o_data_row', { hasText: name }).first();
@@ -134,12 +134,12 @@ test.describe('Fix Repair User Permissions @module:fix_repair @step:permissions'
       await page.locator('.modal .btn-primary', { hasText: /Delete|Ok/ }).first().click();
       await waitForOdooIdle(page);
       expect(
-        (await rpc.callMethod<number[]>('x_resolutions', 'search', [[['x_name', '=', name]]], ALL_COMPANIES)).length,
+        (await rpc.callMethod<number[]>('resolutions', 'search', [[['name', '=', name]]], ALL_COMPANIES)).length,
         'record deleted by the Helpdesk user',
       ).toBe(0);
     } finally {
-      const left = await rpc.callMethod<number[]>('x_resolutions', 'search', [[['x_name', '=', name]]], ALL_COMPANIES).catch(() => []);
-      if (left.length) await rpc.unlink('x_resolutions', left).catch(() => undefined);
+      const left = await rpc.callMethod<number[]>('resolutions', 'search', [[['name', '=', name]]], ALL_COMPANIES).catch(() => []);
+      if (left.length) await rpc.unlink('resolutions', left).catch(() => undefined);
       await page.context().close();
       await archiveUser(rpc, user.id);
     }
@@ -155,12 +155,12 @@ test.describe('Fix Repair User Permissions @module:fix_repair @step:permissions'
     );
     const everywhere = { context: { active_test: true, allowed_company_ids: admin.company_ids } };
     const visibleForJam = await rpc.callMethod<number>(
-      'x_resolutions',
+      'resolutions',
       'search_count',
-      [['|', ['x_studio_company_id', '=', jam], ['x_studio_company_id', '=', false]]],
+      [['|', ['accounting_company_id', '=', jam], ['accounting_company_id', '=', false]]],
       everywhere,
     );
-    const total = await rpc.callMethod<number>('x_resolutions', 'search_count', [[]], everywhere);
+    const total = await rpc.callMethod<number>('resolutions', 'search_count', [[]], everywhere);
     test.skip(total === visibleForJam, 'every Resolutions record is JAM or shared; nothing to hide');
 
     const user = await ensureUser(rpc, 'helpdesk');

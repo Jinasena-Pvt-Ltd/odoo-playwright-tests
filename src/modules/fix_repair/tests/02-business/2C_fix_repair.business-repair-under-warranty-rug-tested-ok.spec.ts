@@ -212,16 +212,16 @@ test.describe('Fix Repair - Under Warranty - RUG - Factory Tested OK @module:fix
     await page.waitForTimeout(1_000);
 
     // 6. Return Receipt Location
-    await shot('06-return-receipt.png', field('x_studio_return_receipt_location'));
+    await shot('06-return-receipt.png', field('return_receipt_location'));
     await ticketPage.returnReceiptLocation.setValue(FIX_REPAIR_TEST_CONFIG.returnReceiptLocationExample);
 
     // 7. Repair Reason
-    await shot('07-repair-reason.png', field('x_studio_repair_reason'));
+    await shot('07-repair-reason.png', field('repair_reason'));
     await ticketPage.repairReason.addItem(FIX_REPAIR_TEST_CONFIG.repairReasonExample);
     await page.waitForTimeout(1_000);
 
     // 8. Job Location = Factory Repair
-    await shot('08-job-location.png', field('x_studio_job_location'));
+    await shot('08-job-location.png', field('job_location'));
     await ticketPage.jobLocation.selectByLabel(FIX_REPAIR_TEST_CONFIG.jobLocationFactory);
 
     // 9. Customer
@@ -251,7 +251,7 @@ test.describe('Fix Repair - Under Warranty - RUG - Factory Tested OK @module:fix
       .map((l) => l.name)
       .sort()[0] ?? FIX_REPAIR_TEST_CONFIG.serialNumberExample;
     note(`serial number used: ${serialNo}`);
-    const serialField = field('x_studio_serial_no');
+    const serialField = field('serial_no');
     await expect(serialField).toBeVisible({ timeout: 8_000 });
     await shot('10-serial-no.png', serialField);
     // The autocomplete occasionally re-renders under the click and leaves the
@@ -280,7 +280,7 @@ test.describe('Fix Repair - Under Warranty - RUG - Factory Tested OK @module:fix
     await page.waitForTimeout(800);
 
     // 12. Attach the warranty card image
-    const warrantyField = field('x_studio_warranty_card');
+    const warrantyField = field('warranty_card');
     await expect(warrantyField).toBeVisible({ timeout: 8_000 });
     await shot('12-warranty-card-image.png', warrantyField);
     await warrantyField.locator('input[type="file"]').first().setInputFiles(path.resolve(process.cwd(), FIX_REPAIR_TEST_CONFIG.warrantyCardImagePath));
@@ -497,9 +497,9 @@ test.describe('Fix Repair - Under Warranty - RUG - Factory Tested OK @module:fix
     await page.screenshot({ path: testInfo.outputPath('34-final-ticket.png'), fullPage: true });
 
     // The item has been dispatched: receipt and dispatch pickings are done.
-    const [tkRead] = await callKw(page, 'helpdesk.ticket', 'read', [[ticketId], ['repair_picking_ids', 'x_studio_rug_approval_status']]);
+    const [tkRead] = await callKw(page, 'helpdesk.ticket', 'read', [[ticketId], ['repair_picking_ids', 'rug_approval_status']]);
     const states = await callKw(page, 'stock.picking', 'read', [tkRead.repair_picking_ids, ['name', 'state']]);
-    note(`repair pickings: ${JSON.stringify(states)}; RUG status: ${tkRead.x_studio_rug_approval_status}`);
+    note(`repair pickings: ${JSON.stringify(states)}; RUG status: ${tkRead.rug_approval_status}`);
     expect(states.filter((p: { state: string }) => p.state === 'done').length, 'receipt and dispatch pickings done').toBeGreaterThanOrEqual(2);
   });
 });
